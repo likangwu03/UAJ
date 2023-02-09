@@ -9,7 +9,7 @@ GameObject::GameObject(Scene* scene, _ecs::id_type grp) : scene(scene), alive(tr
 
 GameObject::~GameObject() {
 	for(auto& i : components) {
-		delete i.first;
+		delete i.second;
 	}
 }
 
@@ -21,11 +21,11 @@ GameObject::~GameObject() {
 
 void GameObject::refresh() {
 	components.erase(
-		std::remove_if(components.begin(), components.end(), [](std::pair<Component*, _ecs::id_type> comp) {
-			if(comp.first->isAlive()) {
+		std::remove_if(components.begin(), components.end(), [](std::pair<_ecs::id_type, Component*> comp) {
+			if(comp.second->isAlive()) {
 				return false;
 			} else {
-				delete comp.first;
+				delete comp.second;
 				return true;
 			}
 			}),
@@ -33,9 +33,9 @@ void GameObject::refresh() {
 }
 
 void GameObject::update() {
-	for(auto& i : components) i.first->update();
+	for(auto& i : components) i.second->update();
 }
 
 void GameObject::render() {
-	for(auto& i : components) i.first->render();
+	for(auto& i : components) i.second->render();
 }

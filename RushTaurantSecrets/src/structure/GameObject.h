@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <unordered_map>
 #include "Structure_def.h"
 
 class Component;
@@ -7,7 +7,7 @@ class Scene;
 
 class GameObject {
 protected:
-	std::vector<std::pair<Component*, _ecs::id_type>> components;
+	std::unordered_map<_ecs::id_type, Component*> components;
 	Scene* scene;
 	bool alive;
 public:
@@ -23,16 +23,19 @@ public:
 
 	template<typename Comp>
 	void addComponent(Comp* comp) {
-		components.push_back(std::pair<Component*, _ecs::id_type>(comp, Comp::id));
+		auto it = components.find(Comp::id);
+		if(it != components.end()) {
+			delete it->second;
+		}
+		components[Comp::id] = comp;
 	}
 	
 	template<typename Comp>
 	Comp* getComponent() {
-		for(auto& i : components) {
-			if(i.second == Comp::id) return dynamic_cast<Comp*>(i.first);
+		auto it = components.find(Comp::id);
+		if(it == components.end()) {
+			return nullptr;
 		}
-		return nullptr;
+		return it->second;
 	}
-
-	
 };
