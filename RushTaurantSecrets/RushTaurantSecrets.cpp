@@ -7,13 +7,7 @@
 //#include <SDL_ttf.h>
 //#include <box2d/b2_collision.h>
 
-/*int main(int argc, char* argv[]) {
-{
-
-	std::cout << "Hello World!\n";
-	return 0;
-}*/
-
+#include "src/tilemap/MapGenerator.h"
 using namespace std;
 
 using uint = unsigned int;
@@ -36,12 +30,18 @@ void firstTest() {
 		SDL_RenderPresent(renderer);
 		SDL_Delay(5000);
 	}
+
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
 int main(int argc, char* argv[]) {
+	// Check Memory Leaks
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+
 	firstTest();
 	return 0;
 }
