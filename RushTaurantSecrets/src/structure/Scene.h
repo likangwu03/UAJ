@@ -19,4 +19,5 @@ public:
 
 	inline void update();
 	inline void render();
+	void handleEvents();
 };
