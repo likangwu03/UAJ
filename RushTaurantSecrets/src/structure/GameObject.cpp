@@ -20,16 +20,7 @@ GameObject::~GameObject() {
 }//*/
 
 void GameObject::refresh() {
-	components.erase(
-		std::remove_if(components.begin(), components.end(), [](std::pair<_ecs::id_type, Component*> comp) {
-			if(comp.second->isAlive()) {
-				return false;
-			} else {
-				delete comp.second;
-				return true;
-			}
-			}),
-		components.end());
+	// Borrar si !component->isAlive()
 }
 
 void GameObject::update() {
