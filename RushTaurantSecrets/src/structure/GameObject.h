@@ -22,13 +22,12 @@ public:
 	inline void render();
 	inline void handleEvents();
 
-	template<typename Comp>
-	void addComponent(Comp* comp) {
-		auto it = components.find(Comp::id);
+	void addComponent(Component* comp, _ecs::id_type id) {
+		auto it = components.find(id);
 		if(it != components.end()) {
 			delete it->second;
 		}
-		components[Comp::id] = comp;
+		components[id] = comp;
 	}
 	
 	template<typename Comp>

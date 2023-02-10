@@ -10,7 +10,7 @@ protected:
 public:
 	static constexpr _ecs::id_type id = _ecs::cmp_INVALID;
 
-	Component(GameObject* parent);
+	Component(GameObject* parent, _ecs::id_type id);
 	virtual ~Component() { }
 
 	inline bool isAlive() { return alive; }
