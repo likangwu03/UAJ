@@ -6,6 +6,7 @@ namespace _ecs {
 
 	// Components
 	enum _cmp_id : id_type {
+		cmp_TRANSFORM,
 
 		// Do not erase pls
 		cmp_INVALID
