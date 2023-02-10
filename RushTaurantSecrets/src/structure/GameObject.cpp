@@ -20,16 +20,13 @@ GameObject::~GameObject() {
 }//*/
 
 void GameObject::refresh() {
-	components.erase(
-		std::remove_if(components.begin(), components.end(), [](std::pair<_ecs::id_type, Component*> comp) {
-			if(comp.second->isAlive()) {
-				return false;
-			} else {
-				delete comp.second;
-				return true;
-			}
-			}),
-		components.end());
+	auto it = components.begin();
+	while(it != components.end()) {
+		if(!it->second->isAlive()) {
+			delete it->second;
+			it = components.erase(it);
+		} else ++it;
+	}
 }
 
 void GameObject::update() {
@@ -38,4 +35,8 @@ void GameObject::update() {
 
 void GameObject::render() {
 	for(auto& i : components) i.second->render();
+}
+
+void GameObject::handleEvents() {
+	for(auto& i : components) i.second->handleEvents();
 }

@@ -20,6 +20,7 @@ public:
 
 	inline void update();
 	inline void render();
+	inline void handleEvents();
 
 	template<typename Comp>
 	void addComponent(Comp* comp) {

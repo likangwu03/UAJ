@@ -34,3 +34,7 @@ void Scene::update() {
 void Scene::render() {
 	for(auto& i : objects) i->render();
 }
+
+void Scene::handleEvents() {
+	for(auto& i : objects) i->handleEvents();
+}
