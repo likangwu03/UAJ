@@ -20,7 +20,13 @@ GameObject::~GameObject() {
 }//*/
 
 void GameObject::refresh() {
-	// Borrar si !component->isAlive()
+	auto it = components.begin();
+	while(it != components.end()) {
+		if(!it->second->isAlive()) {
+			delete it->second;
+			it = components.erase(it);
+		} else ++it;
+	}
 }
 
 void GameObject::update() {
@@ -29,4 +35,8 @@ void GameObject::update() {
 
 void GameObject::render() {
 	for(auto& i : components) i.second->render();
+}
+
+void GameObject::handleEvents() {
+	for(auto& i : components) i.second->handleEvents();
 }
