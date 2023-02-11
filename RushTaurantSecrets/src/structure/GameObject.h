@@ -16,11 +16,11 @@ public:
 
 	//void changeScene(Scene* scene);
 	void refresh();
-	inline bool isAlive() { return alive; }
+	 bool isAlive() { return alive; }
 
-	inline void update();
-	inline void render();
-	inline void handleEvents();
+	 void update();
+	 void render();
+	 void handleEvents();
 
 	void addComponent(Component* comp, _ecs::id_type id) {
 		auto it = components.find(id);

@@ -35,7 +35,8 @@ namespace _ecs {
 		ALBONDIGAS,
 		ESTAGUETI,
 		BURGUER,
-		RAMEN
+		RAMEN,
+		NONE_DISH
 
 	};
 	enum _ingredients_id : id_type {
@@ -62,7 +63,8 @@ namespace _ecs {
 		POLLO,
 		GAMBAS,
 		SALMON,
-		CARNE
+		CARNE,
+		NONE_ING
 	};
 
 	struct DishInfo {

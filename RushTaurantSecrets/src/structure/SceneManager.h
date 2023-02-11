@@ -6,9 +6,9 @@ using namespace std;
 class SceneManager:public Singleton<SceneManager> {
 public:
 	enum SceneName{Menu,Restaurant,Panty,SuperMarket};
-private:
 	//crea menu
 	SceneManager() {};
+private:
 	
 	list<Scene*> Scenes;
 

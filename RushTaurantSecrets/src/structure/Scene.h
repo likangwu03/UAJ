@@ -17,7 +17,7 @@ public:
 	void refresh();
 	inline const std::vector<GameObject*>& getGroup(_ecs::id_type grp) { return objGroups[grp]; }
 
-	inline void update();
-	inline void render();
-	inline void handleEvents();
+	 void update();
+	 void render();
+	 void handleEvents();
 };

@@ -52,7 +52,7 @@ public:
 	// some singletons need to be initialised with some parameters, we
 	// can call this method at the beginning of the program.
 	template<typename ...Targs>
-	inline static T* init(Targs &&...args) {
+	 static T* init(Targs &&...args) {
 		assert(instance_.get() == nullptr);
 		instance_.reset(new T(std::forward<Targs>(args)...));
 		return instance_.get();
