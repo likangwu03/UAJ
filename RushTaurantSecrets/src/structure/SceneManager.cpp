@@ -1,25 +1,46 @@
 #include "SceneManager.h"
-
+SceneManager::SceneManager() {
+	act = MAINMENU;
+	change = act;
+	setScene();
+}
 void SceneManager::update() {
-	for (auto s : currentScenes) {
-		s->update();
-	}
+	currentScene->update();
 }
 void SceneManager::render() {
-	for (auto s : currentScenes) {
-		s->render();
-	}
+	currentScene->render();
 }
 void SceneManager::handleEvents() {
-	for (auto s : currentScenes) {
-		s->handleEvents();
-	}
+	currentScene->render();
 }
 void SceneManager::refresh() {
-	for (auto s : currentScenes) {
-		s->refresh();
-	}
+	currentScene->refresh();
 }
-void SceneManager::ChangeScene() {
 
+void SceneManager::clear() {
+	currentScene = nullptr;
+	for (auto scene : Scenes) {
+		delete scene;
+	}
+	Scenes.clear();
+}
+
+void SceneManager::setScene() {
+	switch (change)
+	{
+	case SceneManager::MAINMENU:
+		clear();
+		currentScene = new MainMenu();
+		Scenes.push_back(currentScene);
+		break;
+	case SceneManager::RESTAURANT:
+
+		break;
+	case SceneManager::PANTRY:
+		break;
+	case SceneManager::SUPERMARKET:
+		break;
+	default:
+		break;
+	}
 }
