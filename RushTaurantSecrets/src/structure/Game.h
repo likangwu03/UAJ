@@ -11,13 +11,13 @@ class Game:public Singleton<Game> {
 private:
 	SceneManager* sceneManager;
 	InputHandler* ih;
+	SDLUtils* sdl;
 	bool exit;
 public:
-	void init();
 	void run();
 private:
 	Game();
-	~Game() {};
+	//~Game() {};
 	void refresh();
 	void render();
 	void update();

@@ -1,15 +1,11 @@
 #include "Game.h"
 
 Game::Game() {
+	sdl=SDLUtils::init("Rush Taurant Secrets", 1280, 720,"prueba.json");
 	exit = false;
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
 }
-void Game::init() {
-	sdlutils().init("Rush Taurant Secrets", 1280, 720);
-
-}
-
 void Game::run() {
 	uint32_t startTime, frameTime;
 	while (!exit) {
@@ -40,7 +36,9 @@ void Game::run() {
 
 
 void Game::render() {
+	sdl->clearRenderer();
 	sceneManager->render();
+	sdl->presentRenderer();
 }
 void Game::update() {
 	sceneManager->update();

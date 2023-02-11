@@ -17,6 +17,11 @@ void SceneManager::refresh() {
 	currentScene->refresh();
 }
 
+void SceneManager::ChangeScene(SceneName scene)
+{
+	change = scene;
+}
+
 void SceneManager::clear() {
 	currentScene = nullptr;
 	for (auto scene : Scenes) {

@@ -9,8 +9,8 @@ class Scene {
 protected:
 	std::vector<GameObject*> objects;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
-public:
 	Scene();
+public:
 	virtual ~Scene();
 
 	void addObject(GameObject* object, _ecs::id_type grp);

@@ -11,22 +11,23 @@ class SceneManager:public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;
 public:
 	enum SceneName{MAINMENU,RESTAURANT,PANTRY,SUPERMARKET};
+private:
 	//crea menu
 	SceneManager();
-private:
 	//lista de escenas que vamos a usar
 	list<Scene*> Scenes;
-	//escenas que estar activa
+	//escenas que estar activa (jugador)
 	Scene* currentScene;
 	SceneName act;
 	SceneName change;
 
 public:
+	~SceneManager() { clear(); }
 	void update();
 	void handleEvents();
 	void render();
 	void refresh();
-	void ChangeScene(SceneName scene) { change = scene; }
+	void ChangeScene(SceneName scene);
 private:
 	void setScene();
 	void clear();
