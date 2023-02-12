@@ -1,7 +1,7 @@
 #pragma once
 #include "../structure/GameObject.h"
 #include "../structure/Scene.h"
-
+#include "../sdlutils/Texture.h"
 
 // iconos que aparecen en la UI
 class Icon : public GameObject
