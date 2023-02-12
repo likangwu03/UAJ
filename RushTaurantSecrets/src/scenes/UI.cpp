@@ -2,7 +2,6 @@
 
 UI::UI() : Scene() {
 	// se añaden los iconos a la lista de gameObjects
-	// CAMBIAR NÚMEROS DE ARRAYS DE TEXTURAS
 	// icono de dinero
 	objects.push_back(new Icon(this, 10, 50, texturesUI[0]));
 	// icono del menú de pausa
@@ -15,3 +14,11 @@ UI::UI() : Scene() {
 	// cambiar por un getter para obtener el dinero
 	money = 0;
 }
+
+void UI::textures() {
+	for (int i = 0; i < NUM_UI_TEXT; ++i) {
+		const TextureDescription& desc = TEXT_DESCRIPT[i];
+		texturesUI[i] = new Texture(renderer, desc.filename);
+}
+
+	// se pintan cuando se llama al render de todos los GameObjects
