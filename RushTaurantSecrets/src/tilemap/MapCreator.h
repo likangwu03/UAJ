@@ -27,10 +27,9 @@ public:
 	MapCreator(const string& filePath, SDL_Renderer* renderer);
 	~MapCreator();
 
+	void render();
 
 private:
 	void loadMapDims();
-	void loadMapTiles();
-
-	void render();
+	void loadTilesets();
 };

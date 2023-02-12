@@ -90,6 +90,10 @@ public:
 		render(src, dest, rotation);
 	}
 
+
+	SDL_Texture* getTexture() const { return texture_;  }
+
+
 private:
 
 	// Construct from text
