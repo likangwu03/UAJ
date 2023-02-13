@@ -8,7 +8,7 @@ private:
 	InputHandler* ih;
 
 public:
-	MainMenu():Scene() {
+	MainMenu() : Scene() {
 
 		ih = InputHandler::instance();
 		new prueba(this);

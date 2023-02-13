@@ -8,6 +8,7 @@ namespace _ecs {
 	enum _cmp_id : id_type {
 		cmp_TRANSFORM,
 		cmp_IMAGE,
+		cmp_DESK,
 
 		// Do not erase pls
 		cmp_INVALID
@@ -18,6 +19,7 @@ namespace _ecs {
 	enum _grp_id : id_type {
 		grp_GENERAL,
 		grp_CUSTOMERS,
+		grp_INTERACTABLE,
 
 		// Do not erase pls
 		grp_INVALID
