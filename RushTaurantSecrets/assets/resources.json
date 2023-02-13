@@ -1,20 +1,40 @@
 {
   "images": [
     {
-      "id": "Jugador_idle",
-      "file": "./Sprites/Jugador/Player_idle.png"
-    },
-    {
-      "id": "Jugador_correr",
-      "file": "./Sprites/Jugador/Player_run.png"
-    },
-    {
       "id": "HUEVO_FRITO",
-      "file": "./assets/Sprites/Food/Dishes/friedegg.png"
+      "file": "assets/Sprites/Food/Dishes/friedegg.png"
     },
     {
       "id": "PAN",
-      "file": "./assets/Sprites/Food/Dishes/bread.png"
+      "file": "assets/Sprites/Food/Dishes/bread.png"
+    },
+    {
+      "id": "MONEY_ICON",
+      "file": "assets/UI/money_icon.png"
+    },
+    {
+      "id": "PAUSE_BUTTON",
+      "file": "assets/UI/pause_button.png"
+    },
+    {
+      "id": "DAILY_MENU",
+      "file": "assets/UI/daily_menu.png"
+    },
+    {
+      "id": "BASKET_YELLOW",
+      "file": "assets/UI/basket_yellow.png"
+    },
+    {
+      "id": "TARGET_ICON",
+      "file": "assets/UI/target_icon.png"
+    },
+    {
+      "id": "REPUTATION_ICON",
+      "file": "assets/UI/reputation_icon.png"
+    },
+    {
+      "id": "INVENTORY_ICON",
+      "file": "assets/UI/inventory.png"
     }
   ]
 }

@@ -21,6 +21,7 @@ namespace _ecs {
 		grp_GENERAL,
 		grp_CUSTOMERS,
 		grp_INTERACTABLE,
+		grp_ICONS,
 
 		// Do not erase pls
 		grp_INVALID

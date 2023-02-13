@@ -1,13 +1,14 @@
 #pragma once
-#include "../scenes/UI.h"
-#include "../objects/Inventory.h"
+#include "../structure/Scene.h"
+//#include "../objects/Inventory.h"
 
 // UI del restaurante -- hereda de la clase UI principal
-class UIRestaurant : public UI
+class UIRestaurant : public Scene
 {
 private:
 	//Inventory inventory;
 public:
-	UIRestaurant();
+	UIRestaurant() : Scene() {
+	}
 };
 

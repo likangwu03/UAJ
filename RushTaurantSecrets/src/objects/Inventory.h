@@ -1,6 +1,7 @@
 #pragma once
 #include "../structure/Food_def.h"
 #include "../gameObjects/CookingMachine.h"
+#include <vector>
 
 class Inventory
 {
@@ -17,12 +18,15 @@ private:
 	}*/
 
 	// vector de 3 ingredientes
-	vector<_ecs::_dish_id> dishes[3];
+	vector<_ecs::_dish_id> dishes;
+	// determina si el contenido del vector de platos es válido o no
+	vector<bool> dishesBool;
 	CookingMachine* cookingMachine;
 
 public:
-	Inventory(CookingMachine* cM) : cookingMachine(cM) {};
+	Inventory(CookingMachine* cM);
 	void takeDish(_ecs::_dish_id newDish);
 	void freeDish(int num);
+	int freeSpace();
 };
 

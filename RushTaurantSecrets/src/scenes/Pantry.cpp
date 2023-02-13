@@ -3,12 +3,12 @@
 
 void Pantry::linkRestaurant(Restaurant* rest) {
 	this->rest = rest;
-	ui = rest->getUI();
+	//ui = rest->getUI();
 }
 
 void Pantry::render() {
 	Scene::render();
-	ui->render();
+	//ui->render();
 }
 
 void Pantry::update() {
@@ -18,5 +18,5 @@ void Pantry::update() {
 
 void Pantry::handleEvents() {
 	Scene::handleEvents();
-	ui->handleEvents();
+	//ui->handleEvents();
 }

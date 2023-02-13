@@ -1,10 +1,29 @@
 #pragma once
-#include "../scenes/UI.h"
+#include "../structure/Scene.h"
+#include "../sdlutils/SDLUtils.h"
+#include "../structure/GameObject.h"
 
-// UI del supermercado -- hereda de la clase UI principal
-class UIMarket : public UI
+// UI del supermercado
+class UIMarket : public Scene
 {
+private:
+	SDLUtils* sdl;
+
 public:
-	UIMarket();
+	// constructora
+	UIMarket() : Scene() {
+		sdl = SDLUtils::instance();
+		// construcción de entidades de la clase y sus componentes
+		// icono de dinero
+		GameObject* moneyIcon = new GameObject(this, _ecs::grp_ICONS);
+
+		// icono de cesta
+
+		// icono de pausa
+
+		// icono de menú
+
+		// texto de dinero
+	}
 };
 
