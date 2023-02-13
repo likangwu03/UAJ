@@ -1,13 +1,13 @@
 {
   "images": [
-    //{
-    //  "id": "Jugador_idle",
-    //  "file": "./Sprites/Jugador/Player_idle.png"
-    //},
-    //{
-    //  "id": "Jugador_correr",
-    //  "file": "./Sprites/Jugador/Player_run.png"
-    //},
+    {
+      "id": "Jugador_idle",
+      "file": "./Sprites/Jugador/Player_idle.png"
+    },
+    {
+      "id": "Jugador_correr",
+      "file": "./Sprites/Jugador/Player_run.png"
+    },
     {
       "id": "HUEVO_FRITO",
       "file": "./assets/Sprites/Food/Dishes/friedegg.png"
