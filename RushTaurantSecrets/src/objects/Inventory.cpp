@@ -1,6 +1,6 @@
 #include "Inventory.h"
 
-Inventory* Inventory::_instance = nullptr;
+//Inventory* Inventory::_instance = nullptr;
 
 // si la CookingMachine ha terminado (y hay espacio en el inventario), recoge el plato
 void Inventory::takeDish(_ecs::_dish_id newDish) {
@@ -8,7 +8,7 @@ void Inventory::takeDish(_ecs::_dish_id newDish) {
 }
 
 // libera el espacio indicado (num) ya sea para tirar el plato, dárselo a un cliente...
-int Inventory::freeDish(int num) {
+void Inventory::freeDish(int num) {
 	if (!dishes[num].empty()) {
 		// TO-DO borrar primera posición 
 		for (int i = num; i < 2; i++) {

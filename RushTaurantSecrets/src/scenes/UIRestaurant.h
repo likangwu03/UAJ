@@ -6,7 +6,7 @@
 class UIRestaurant : public UI
 {
 private:
-	Inventory inventory;
+	//Inventory inventory;
 public:
 	UIRestaurant();
 };
