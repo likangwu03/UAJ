@@ -33,5 +33,9 @@ public:
 	//recoger el plato
 	_ecs::_dish_id pickDish();
 
+	// informa de si el plato que se está cocinando ya está terminado
+	// (información para el inventario, para recoger o no el plato)
+	bool isFinished();
+
 };
 

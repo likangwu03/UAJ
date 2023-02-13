@@ -18,12 +18,18 @@ const int NUM_UI_TEXT = 20;
 // es una escena que se superpone a la escena que esté presente en el momento
 class UI : public Scene
 {
-private:
+protected:
 	const TextureDescription TEXT_DESCRIPT[NUM_UI_TEXT] = {
-		{"../../assets/UI/money_icon.png"}, {"../../assets/UI/pause_button.png"}, {"../../assets/UI/daily_menu.png"}
+		{"../../assets/UI/money_icon.png"}, {"../../assets/UI/pause_button.png"}, {"../../assets/UI/daily_menu.png"},
+		{"../../assets/UI/basket_yellow.png"}, {"../../assets/UI/target_icon.png"}, {"../../assets/UI/reputation_icon.png"},
+		{"../../assets/UI/inventory.png"}
 	};
 	// iconos en común que aparecen en todas las UIs
 	int money; // dinero del jugador
+	Uint8 r, g, b, a;
+	string moneyText; // dinero del jugador
+	Font* moneyFont;
+	//Font moneyFont("hamish.ttf", 18);
 	Texture* texturesUI[NUM_UI_TEXT]; // CAMBIAR TAMAÑO
 	SDL_Renderer* renderer;
 

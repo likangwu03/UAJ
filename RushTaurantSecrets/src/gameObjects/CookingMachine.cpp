@@ -22,3 +22,7 @@ _ecs::_dish_id CookingMachine::pickDish() {
 	return dish_aux;
 }
 
+bool CookingMachine::isFinished() {
+	if (state == 2) return true;
+	else return false;
+}

@@ -13,6 +13,13 @@ UI::UI() : Scene() {
 
 	// cambiar por un getter para obtener el dinero
 	money = 0;
+
+	moneyText = (char*)money;
+
+	r = 253; g = 216; b = 112; a = 255;
+
+	// renderizado de dinero actual
+	// moneyFont->renderText(moneyText, SDL_Color(r, g, b, a)); // da error ?¿
 }
 
 void UI::textures() {
