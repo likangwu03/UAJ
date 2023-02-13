@@ -14,9 +14,3 @@ UIRestaurant::UIRestaurant() : UI() {
 	objects.push_back(new Icon(this, 10, 50, texturesUI[6]));
 
 }
-
-// pasar a clase Inventory
-// si la CookingMachine ha terminado (y hay espacio en el inventario), recoge el plato
-void UIRestaurant::takeDish(_ecs::_dish_id newDish) {
-	if (cookingMachine->isFinished()) dishes->push_back(newDish);
-}
