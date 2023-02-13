@@ -29,7 +29,7 @@ public:
 	void refresh();
 	void ChangeScene(SceneName scene);
 
-	Scene* getCurrentScene () const {
+	Scene* getCurrentScene() const {
 		return currentScene;
 	}
 

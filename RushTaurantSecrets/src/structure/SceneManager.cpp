@@ -4,21 +4,25 @@ SceneManager::SceneManager() {
 	change = act;
 	setScene();
 }
+
 void SceneManager::update() {
+	if (change != act) setScene();
 	currentScene->update();
 }
+
 void SceneManager::render() {
 	currentScene->render();
 }
+
 void SceneManager::handleEvents() {
 	currentScene->render();
 }
+
 void SceneManager::refresh() {
 	currentScene->refresh();
 }
 
-void SceneManager::ChangeScene(SceneName scene)
-{
+void SceneManager::ChangeScene(SceneName scene) {
 	change = scene;
 }
 
@@ -31,8 +35,7 @@ void SceneManager::clear() {
 }
 
 void SceneManager::setScene() {
-	switch (change)
-	{
+	switch(change) {
 	case SceneManager::MAINMENU:
 		clear();
 		currentScene = new MainMenu();

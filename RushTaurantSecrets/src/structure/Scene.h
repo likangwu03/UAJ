@@ -7,7 +7,6 @@ class GameObject;
 
 class Scene {
 protected:
-	std::vector<GameObject*> objects;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 	Scene();
 public:
@@ -17,7 +16,7 @@ public:
 	void refresh();
 	inline const std::vector<GameObject*>& getGroup(_ecs::id_type grp) { return objGroups[grp]; }
 
-	 void update();
-	 void render();
-	 void handleEvents();
+	virtual void update();
+	virtual void render();
+	virtual void handleEvents();
 };
