@@ -3,7 +3,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "SceneManager.h"
-#include "../objects/CustomerManager.h"
+#include "../objects/CostumerManager.h"
 const uint32_t FRAME_RATE = 25;  //luego a def.h
 
 
@@ -14,7 +14,7 @@ private:
 	InputHandler* ih;
 	SDLUtils* sdl;
 	bool exit;
-	CustomerManager* c;
+	CostumerManager* c;
 public:
 	void run();
 private:

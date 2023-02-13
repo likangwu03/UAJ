@@ -10,12 +10,12 @@ class SDLUtils;
 
 using namespace std;
 
-class CustomerManager {
+class CostumerManager {
 private:
-	Scene* scene = nullptr;
+	Scene* scene = nullptr;	// puntero a la escena que pertenece
 	SDLUtils* sdl = nullptr;
-	deque<GameObject*> entrada;
-	int offset = 0;
+	deque<GameObject*> entrada;	// cola con la entrada
+	int offset = 0;	// offset para que los clientes que vengan a continuación se coloquen detrás
 
 	void createCustomer(Vector origin, Vector end);
 
@@ -24,7 +24,7 @@ private:
 	void recolocate();
 
 public:
-	CustomerManager(Scene* scene);
+	CostumerManager(Scene* scene);
 
 	void addCustomerFrequently();
 };

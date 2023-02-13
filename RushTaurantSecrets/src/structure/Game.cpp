@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "../../src/tilemap/MapCreator.h"
 #include "../structure/Structure_def.h"
-#include "../objects/CustomerManager.h"
 
 Game::Game() {
 	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720,"prueba.json");
@@ -15,7 +14,7 @@ Game::Game() {
 	new Image(customer, &((*sdl).images().at("prueba")));
 	*/
 
-	c = new CustomerManager(sceneManager->getCurrentScene());
+	c = new CostumerManager(sceneManager->getCurrentScene());
 
 }
 void Game::run() {

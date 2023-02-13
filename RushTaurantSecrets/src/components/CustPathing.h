@@ -8,16 +8,17 @@
 
 using namespace std;
 
+// cuadrante al que se dirige
 enum Quadrant {First, Second, Third, Fourth, Yn, Yp, Xp, Xn};
 
 class CustPathing : public Transform {
 private:
-	Vector origin;
+	Vector origin;	
 	Vector end;
-	Vector dir;
-	float speed = 0;
-	float t = 0;
-	Quadrant q = First;
+	Vector dir;	// dirección de la recta que recorrer
+	float speed = 0;	// velocidad en ir de un punto a otro
+	float t = 0;	// calcular puntos de la recta
+	Quadrant q = First;	// cuadrante al que se dirige
 
 	// hallar punto de una recta
 	Vector pointStraight(float t) {
@@ -26,7 +27,8 @@ private:
 	}
 
 	// se determina el cuadrante hacia donde se dirige
-	void detQuad() {
+	// están invertidos resepcto a cómo siempre
+	void detQuad(Vector dir) {
 		if (dir.getX() > 0 && dir.getY() < 0) {
 			q = First;
 		}
@@ -39,6 +41,7 @@ private:
 		else if (dir.getX() > 0 && dir.getY() > 0) {
 			q = Fourth;
 		}
+		// ejes y
 		else if (dir.getX() == 0) {
 			if (dir.getY() < 0) {
 				q = Yn;
@@ -47,6 +50,7 @@ private:
 				q = Yp;
 			}
 		}
+		// eje x
 		else if (dir.getY() == 0) {
 			if (dir.getX() < 0) {
 				q = Xn;
@@ -57,23 +61,26 @@ private:
 		}
 	}
 
+	void calDir() {
+		dir = end - origin;
+		detQuad(dir);
+	}
+
 public:
 	CustPathing(GameObject* parent, Vector origin, Vector end, float speed, float width = 0, float height = 0) :
 		Transform(parent, origin, Vector::zero, width, height, 0), origin(origin), end(end), speed(speed) {
 		// se calcula el vector director de la recta
-		dir = end - origin;
-		detQuad();
+		calDir();
 	}
 
-	// establece un nuevo camino
+	// se establece un nuevo camino
 	void newPath(Vector end) {
-		this->origin = pos;
+		origin = pos;
 		this->end = end;
-		dir = end - origin;
-		detQuad();
+		calDir();
 	}
 
-	// dependiendo del cuadrante hacia donde se diriga se comprueba si ha llegado o no
+	// dependiendo del cuadrante hacia donde se dirija se comprueba si ha llegado o no
 	bool hasArrived() {
 		switch (q) {
 		case First:
