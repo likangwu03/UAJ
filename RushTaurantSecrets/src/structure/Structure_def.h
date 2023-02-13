@@ -7,6 +7,7 @@ namespace _ecs {
 	// Components
 	enum _cmp_id : id_type {
 		cmp_TRANSFORM,
+		cmp_IMAGE,
 
 		// Do not erase pls
 		cmp_INVALID
@@ -16,6 +17,7 @@ namespace _ecs {
 	// Groups
 	enum _grp_id : id_type {
 		grp_GENERAL,
+		grp_CUSTOMERS,
 
 		// Do not erase pls
 		grp_INVALID

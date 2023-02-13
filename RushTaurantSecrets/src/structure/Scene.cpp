@@ -14,12 +14,14 @@ void Scene::addObject(GameObject* object, _ecs::id_type grp) {
 	objGroups[grp].push_back(object);
 }
 
+// falta por añadir que se elimine del grupo (array de vectores)
 void Scene::refresh() {
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), [](GameObject* obj) {
-			if(obj->isAlive()) {
+			if (obj->isAlive()) {
 				return false;
-			} else {
+			}
+			else {
 				delete obj;
 				return true;
 			}

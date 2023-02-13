@@ -4,13 +4,14 @@
 #include "../structure/Structure_def.h"
 
 class Transform : public Component {
-private:
+protected:
 	Vector pos, vel;
 	float w, h, r;
 public:
 	constexpr static _ecs::id_type id = _ecs::cmp_TRANSFORM;
 
-	Transform(GameObject* parent, Vector const& pos = Vector::zero, float width = 0, float height = 0, float rotation = 0) : Component(parent, id), pos(pos), vel(), w(width), h(height), r(rotation) { }
+	Transform(GameObject* parent, Vector const& pos = Vector::zero, Vector const& vel = Vector::zero, float width = 0, float height = 0, float rotation = 0) 
+		: Component(parent, id), pos(pos), vel(vel), w(width), h(height), r(rotation) { }
 	virtual ~Transform() { }
 	inline Vector getPos() const { return pos; };
 	inline Vector getVel() const { return vel; };
@@ -21,5 +22,5 @@ public:
 	inline void setVel(Vector const& vel) { this->vel = vel; }
 	inline void setRot(float rot) { r = rot; }
 
-	void update() { pos = pos + vel; };
+	virtual void update() { pos = pos + vel; };
 };

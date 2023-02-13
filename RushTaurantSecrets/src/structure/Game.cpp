@@ -1,11 +1,22 @@
 #include "Game.h"
 #include "../../src/tilemap/MapCreator.h"
+#include "../structure/Structure_def.h"
+#include "../objects/CustomerManager.h"
 
 Game::Game() {
 	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720,"prueba.json");
 	exit = false;
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
+
+	/*
+	GameObject* customer = new GameObject(sceneManager->getCurrentScene(), _ecs::grp_CUSTOMERS);
+	new CustPathing(customer, Vector(1000, 500), Vector(800, 300), 3, 50, 50);
+	new Image(customer, &((*sdl).images().at("prueba")));
+	*/
+
+	c = new CustomerManager(sceneManager->getCurrentScene());
+
 }
 void Game::run() {
 	//MapCreator* map = new MapCreator("./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
@@ -18,6 +29,7 @@ void Game::run() {
 		ih->refresh();
 		handleEvents();
 		update();
+		c->addCustomerFrequently();
 		refresh();
 		render();
 		frameTime = SDL_GetTicks() - startTime;

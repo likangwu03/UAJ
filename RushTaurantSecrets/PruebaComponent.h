@@ -12,5 +12,8 @@ public:
 	virtual void render() {
 		t->render(100, 100);
 	}
+
+	virtual void update() { }
+	virtual void handleEvents() { }
 };
 

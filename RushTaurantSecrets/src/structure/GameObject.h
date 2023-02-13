@@ -16,26 +16,30 @@ public:
 
 	//void changeScene(Scene* scene);
 	void refresh();
-	 bool isAlive() { return alive; }
+	bool isAlive() { return alive; }
 
-	 void update();
-	 void render();
-	 void handleEvents();
+	void setAlive(bool alive) {
+		this->alive = alive;
+	}
+
+	void update();
+	void render();
+	void handleEvents();
 
 	void addComponent(Component* comp, _ecs::id_type id) {
 		auto it = components.find(id);
-		if(it != components.end()) {
+		if (it != components.end()) {
 			delete it->second;
 		}
 		components[id] = comp;
 	}
-	
+
 	template<typename Comp>
 	Comp* getComponent() {
 		auto it = components.find(Comp::id);
-		if(it == components.end()) {
+		if (it == components.end()) {
 			return nullptr;
 		}
-		return it->second;
+		return static_cast<Comp*>(it->second);
 	}
 };

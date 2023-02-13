@@ -28,6 +28,11 @@ public:
 	void render();
 	void refresh();
 	void ChangeScene(SceneName scene);
+
+	Scene* getCurrentScene () const {
+		return currentScene;
+	}
+
 private:
 	void setScene();
 	void clear();
