@@ -19,6 +19,7 @@ void UI::textures() {
 	for (int i = 0; i < NUM_UI_TEXT; ++i) {
 		const TextureDescription& desc = TEXT_DESCRIPT[i];
 		texturesUI[i] = new Texture(renderer, desc.filename);
+	}
 }
 
 	// se pintan cuando se llama al render de todos los GameObjects
