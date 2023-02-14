@@ -5,6 +5,7 @@
 #include "../scenes/MainMenu.h"
 #include "../scenes/Pantry.h"
 #include "../scenes/Restaurant.h"
+#include "../scenes/UIRestaurant.h"
 
 
 using namespace std;

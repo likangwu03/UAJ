@@ -55,8 +55,8 @@ void SceneManager::setScene() {
 	case SceneManager::RESTAURANT: {
 		if (act == MAINMENU) {
 			//creacion de restaurant y pantry
-			//UIRestaurant* uiRest = new UIRestaurant();
-			Restaurant* rest = new Restaurant();  //poner uiRest aqui 
+			UIRestaurant* uiRest = new UIRestaurant();
+			Restaurant* rest = new Restaurant(uiRest);
 			Pantry* pantry = new Pantry();
 			rest->linkPantry(pantry);
 			pantry->linkRestaurant(rest);

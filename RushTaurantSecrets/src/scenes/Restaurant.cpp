@@ -8,7 +8,7 @@ void Restaurant::linkPantry(Pantry* pantry) {
 
 void Restaurant::render() {
 	Scene::render();
-	//ui->render();
+	ui->render();
 }
 
 void Restaurant::update() {
