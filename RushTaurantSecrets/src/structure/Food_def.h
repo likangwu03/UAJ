@@ -37,10 +37,9 @@ namespace _ecs {
 		BURGUER,
 		RAMEN,
 		NONE_DISH
-
 	};
 	enum _ingredients_id : id_type {
-		HARINA,
+		HARINA=29,
 		HUEVO,
 		PATATA,
 		CHOCOLATE,
