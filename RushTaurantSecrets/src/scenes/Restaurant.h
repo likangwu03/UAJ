@@ -9,8 +9,9 @@ private:
 	Pantry* pantry;
 	UIRestaurant* ui;
 public:
-	Restaurant(UIRestaurant* restUI) : pantry(nullptr), ui(restUI) { }
-	UIRestaurant* getUI() { return ui; }
+	Restaurant(UIRestaurant* restUI=nullptr) : pantry(nullptr), ui(restUI) { }
+	//UIRestaurant* getUI() { return ui; }
+	Pantry* getPantry() { return pantry; }
 	void linkPantry(Pantry* pantry);
 	void render();
 	void update();

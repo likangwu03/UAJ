@@ -13,4 +13,5 @@ public:
 	void render();
 	void update();
 	void handleEvents();
+	Restaurant* getRestaurant() { return rest; }
 };

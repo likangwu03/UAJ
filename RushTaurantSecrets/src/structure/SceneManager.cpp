@@ -2,11 +2,20 @@
 SceneManager::SceneManager() {
 	act = MAINMENU;
 	change = act;
-	setScene();
+	/*setScene();*/
+	//clear();
+	currentScene = new MainMenu();
+	Scenes.push_back(currentScene);
+	//currentScene = Scenes.back();
 }
 
 void SceneManager::update() {
-	if (change != act) setScene();
+	if (change != act) {
+		setScene();
+		currentScene = Scenes.back();
+		act = change;
+		cout << act << endl;
+	}
 	currentScene->update();
 }
 
@@ -15,7 +24,7 @@ void SceneManager::render() {
 }
 
 void SceneManager::handleEvents() {
-	currentScene->render();
+	currentScene->handleEvents();
 }
 
 void SceneManager::refresh() {
@@ -33,19 +42,42 @@ void SceneManager::clear() {
 	}
 	Scenes.clear();
 }
-
 void SceneManager::setScene() {
+	Scene* aux;
 	switch(change) {
 	case SceneManager::MAINMENU:
+		/*aux = *Scenes.begin();
+		Scenes.clear();
+		Scenes.push_back(aux);*/
 		clear();
-		currentScene = new MainMenu();
-		Scenes.push_back(currentScene);
+		Scenes.push_back(new MainMenu());
 		break;
-	case SceneManager::RESTAURANT:
+	case SceneManager::RESTAURANT: {
+		if (act == MAINMENU) {
+			//creacion de restaurant y pantry
+			//UIRestaurant* uiRest = new UIRestaurant();
+			Restaurant* rest = new Restaurant();  //poner uiRest aqui 
+			Pantry* pantry = new Pantry();
+			rest->linkPantry(pantry);
+			pantry->linkRestaurant(rest);
+			Scenes.push_back(rest);
+		}
+		else if (act == PANTRY) {
+			Scene* aux = Scenes.back();
+			Scenes.pop_back();
+			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
+		}
+		else if (act == SUPERMARKET) {
 
-		break;
-	case SceneManager::PANTRY:
-		break;
+		}
+		}break;
+	case SceneManager::PANTRY: {
+		if (act == RESTAURANT) {
+			Scene* aux = Scenes.back();
+			Scenes.pop_back();
+			Scenes.push_back(static_cast<Restaurant*>(aux)->getPantry());
+		}
+		}break;
 	case SceneManager::SUPERMARKET:
 		break;
 	default:

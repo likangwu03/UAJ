@@ -2,13 +2,15 @@
 #include <vector>
 #include <array>
 #include "Structure_def.h"
-
+#include "../sdlutils/InputHandler.h"
 class GameObject;
 
 class Scene {
 protected:
+	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 	Scene();
+
 public:
 	virtual ~Scene();
 

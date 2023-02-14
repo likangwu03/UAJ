@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 Scene::Scene() {
-
+	ih = InputHandler::instance();
 }
 
 Scene::~Scene() {

@@ -1,5 +1,6 @@
 #include "Pantry.h"
 #include "Restaurant.h"
+#include "../structure/SceneManager.h"
 
 void Pantry::linkRestaurant(Restaurant* rest) {
 	this->rest = rest;
@@ -17,6 +18,14 @@ void Pantry::update() {
 }
 
 void Pantry::handleEvents() {
-	Scene::handleEvents();
-	//ui->handleEvents();
+	if (ih->isKeyDown(SDLK_1)) {
+		SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+	}
+	else if (ih->isKeyDown(SDLK_2)) {
+		SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
+	}
+	else {
+		Scene::handleEvents();
+		//ui->handleEvents();
+	}
 }

@@ -21,4 +21,6 @@ public:
 		map = new GameObject(this);
 		MapCreator* mpCrt = new MapCreator(map, "./assets/tilemaps/test.tmx", sdlutils().renderer());
 	}
+	virtual void handleEvents();
+	
 };

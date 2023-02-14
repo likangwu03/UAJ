@@ -6,6 +6,7 @@
 #include "../scenes/Pantry.h"
 #include "../scenes/Restaurant.h"
 
+
 using namespace std;
 class SceneManager:public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;

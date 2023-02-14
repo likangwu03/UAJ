@@ -6,14 +6,14 @@ Game::Game() {
 	exit = false;
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
-
+	sdl->showCursor();
 	/*
 	GameObject* customer = new GameObject(sceneManager->getCurrentScene(), _ecs::grp_CUSTOMERS);
 	new CustPathing(customer, Vector(1000, 500), Vector(800, 300), 3, 50, 50);
 	new Image(customer, &((*sdl).images().at("prueba")));
 	*/
 
-	c = new CostumerManager(sceneManager->getCurrentScene());
+	//c = new CostumerManager(sceneManager->getCurrentScene());
 
 }
 void Game::run() {
@@ -24,7 +24,7 @@ void Game::run() {
 		ih->refresh();
 		handleEvents();
 		update();
-		c->addCustomerFrequently();
+		//c->addCustomerFrequently();
 		refresh();
 		render();
 
