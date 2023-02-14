@@ -18,8 +18,8 @@ public:
 		ih = InputHandler::instance();
 		test = new prueba(this);
 
-		map = new GameObject(this);
-		MapCreator* mpCrt = new MapCreator(map, "./assets/tilemaps/test.tmx", sdlutils().renderer());
+		//map = new GameObject(this);
+		//MapCreator* mpCrt = new MapCreator(map, "./assets/tilemaps/test.tmx", sdlutils().renderer());
 	}
 	virtual void handleEvents();
 	

@@ -1,24 +1,22 @@
 #include "Animator.h"
 
-void Animator::addAnimation(Texture* t, int w, int h, int n)
+void Animator::addAnimation(Texture* t, int n)
 {
-	Anim a(t, w, h, n);
+	Anim a{t, n};
 	animations.push_back(a);
 }
 
 void Animator::updateAnim()
 {
-	lastFrame = sdlutils().currRealTime();
+	sqr.x = count * sqr.w;
+
 	count++;
 
-	if (sdlutils().currRealTime() - lastFrame > frameRate) {
+	if (count >= animations[currentAnim].second)
+		count = 0;
+}
 
-		lastFrame = sdlutils().currRealTime();
-
-		animations[currentAnim].sqrx = count * animations[currentAnim].width;
-		count++;
-
-		if (count * animations[currentAnim].sqrx > animations[currentAnim].maxFrames)
-			count = 0;
-	}
+void Animator::setCurrentAnim(const int n)
+{
+	currentAnim = n;
 }

@@ -10,11 +10,27 @@
     },
     {
       "id": "HUEVO_FRITO",
-      "file": "assets/Sprites/Food/Dishes/friedegg.png"
+      "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
     },
     {
       "id": "PAN",
-      "file": "assets/Sprites/Food/Dishes/bread.png"
+      "file": "assets/Sprites/Food/Dishes/PAN.png"
+    },
+    {
+      "id": "MERMELADA",
+      "file": "assets/Sprites/Food/Dishes/MERMELADA.png"
+    },
+    {
+      "id": "PAN_AJO",
+      "file": "assets/Sprites/Food/Dishes/PAN_AJO.png"
+    },
+    {
+      "id": "FRENCH_FRIES",
+      "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png"
+    },
+    {
+      "id": "PANCAKE",
+      "file": "assets/Sprites/Food/Dishes/PANCAKE.png"
     },
     {
       "id": "MERMELADA",
