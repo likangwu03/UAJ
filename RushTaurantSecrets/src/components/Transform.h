@@ -10,7 +10,7 @@ protected:
 public:
 	constexpr static _ecs::id_type id = _ecs::cmp_TRANSFORM;
 
-	Transform(GameObject* parent, Vector const& pos = Vector::zero, Vector const& vel = Vector::zero, float width = 0, float height = 0, float rotation = 0) 
+	Transform(GameObject* parent, Vector const& pos = Vector(0, 0), Vector const& vel = Vector(0, 0), float width = 0, float height = 0, float rotation = 0)
 		: Component(parent, id), pos(pos), vel(vel), w(width), h(height), r(rotation) { }
 	virtual ~Transform() { }
 	inline Vector getPos() const { return pos; };

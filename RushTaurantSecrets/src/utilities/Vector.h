@@ -32,7 +32,7 @@ public:
 	inline float magnitude() const { return sqrtf(powf(x, 2) + powf(y, 2)); }
 	inline Vector getNormalized() const {
 		float mag = magnitude();
-		return mag == 0 ? Vector::zero : *this / mag;
+		return mag == 0 ? Vector(0, 0) : *this / mag;
 	}
 	inline void normalize() { *this = getNormalized(); }
 	// Rotar en sentido horario
@@ -45,8 +45,10 @@ public:
 	inline float angle() { return atanf(y / x) * 180 / PI; }
 };
 
+/*
 const Vector Vector::zero = Vector();
 const Vector Vector::right = Vector(1, 0);
 const Vector Vector::down = Vector(0, 1);
 const Vector Vector::left = Vector(-1, 0);
 const Vector Vector::up = Vector(0, -1);
+*/

@@ -68,7 +68,7 @@ private:
 
 public:
 	CustPathing(GameObject* parent, Vector origin, Vector end, float speed, float width = 0, float height = 0) :
-		Transform(parent, origin, Vector::zero, width, height, 0), origin(origin), end(end), speed(speed) {
+		Transform(parent, origin, Vector(0, 0), width, height, 0), origin(origin), end(end), speed(speed) {
 		// se calcula el vector director de la recta
 		calDir();
 	}
