@@ -8,6 +8,8 @@ namespace _ecs {
 	enum _cmp_id : id_type {
 		cmp_TRANSFORM,
 		cmp_IMAGE,
+		cmp_MAPCREATOR,
+		cmp_MAPRENDER,
 		cmp_DESK,
 		cmp_ANIMATOR,
 

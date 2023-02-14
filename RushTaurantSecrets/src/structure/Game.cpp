@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "../../src/tilemap/MapCreator.h"
 #include "../structure/Structure_def.h"
 
 Game::Game() {
@@ -18,19 +17,17 @@ Game::Game() {
 
 }
 void Game::run() {
-	//MapCreator* map = new MapCreator("./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
-
 	uint32_t startTime, frameTime;
 	while (!exit) {
-		//map->render();
-
 		startTime = sdlutils().currRealTime();  //SDL_GetTicks(); 
+		
 		ih->refresh();
 		handleEvents();
 		update();
 		c->addCustomerFrequently();
 		refresh();
 		render();
+
 		frameTime = SDL_GetTicks() - startTime;
 		if (frameTime < FRAME_RATE)
 			SDL_Delay(FRAME_RATE - frameTime);
@@ -60,7 +57,7 @@ void Game::update() {
 	sceneManager->update();
 }
 void Game::handleEvents() {
-	if (ih->closeWindowEvent()) {
+	if (ih->closeWindowEvent() || ih->isKeyDown(SDLK_ESCAPE)) {
 		exit = true;
 	}
 	else {

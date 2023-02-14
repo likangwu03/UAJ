@@ -2,16 +2,16 @@
 <tileset version="1.9" tiledversion="1.9.2" name="comida" tilewidth="48" tileheight="96" tilecount="38" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="6">
-  <image width="31" height="30" source="../../../../../../../Desktop/Assets/cabbage.png"/>
+  <image width="32" height="32" source="../Sprites/Food/Ingredients/cabbage.png"/>
  </tile>
  <tile id="7">
-  <image width="34" height="33" source="../../../../../../../Desktop/Assets/white_cheese_piece_p.png"/>
+  <image width="32" height="32" source="../Sprites/Food/Ingredients/white_cheese_p.png"/>
  </tile>
  <tile id="8">
-  <image width="34" height="27" source="../../../../../../../Desktop/Assets/85_roastedchicken.png"/>
+  <image width="32" height="32" source="../Sprites/Food/Dishes/85_roastedchicken.png"/>
  </tile>
  <tile id="9">
-  <image width="30" height="25" source="../../../../../../../Desktop/Assets/potato.png"/>
+  <image width="32" height="32" source="../Sprites/Food/Ingredients/potato.png"/>
  </tile>
  <tile id="16">
   <image width="48" height="96" source="../others/Group 1.png"/>
@@ -113,6 +113,6 @@
   <image width="48" height="50" source="../others/3.png"/>
  </tile>
  <tile id="59">
-  <image source="../../../../../../../Desktop/Assets/cartel/cabbage_p.png"/>
+  <image width="32" height="32" source="../Sprites/Food/Ingredients/cabbage_p.png"/>
  </tile>
 </tileset>
