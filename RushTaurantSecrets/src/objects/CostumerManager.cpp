@@ -7,7 +7,7 @@
 void CostumerManager::createCustomer(Vector origin, Vector end) {
 	GameObject* customer = new GameObject(scene, _ecs::grp_CUSTOMERS);
 	new CustPathing(customer, origin, end, 3, 50, 50);
-	new Image(customer, &((*sdl).images().at("prueba")));
+	new Image(customer, &((*sdl).images().at("MERMELADA")));
 
 	entrada.push_front(customer);
 }

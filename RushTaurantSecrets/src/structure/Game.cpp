@@ -2,7 +2,7 @@
 #include "../structure/Structure_def.h"
 
 Game::Game() {
-	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720,"prueba.json");
+	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720, "assets/resources.json");
 	exit = false;
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
