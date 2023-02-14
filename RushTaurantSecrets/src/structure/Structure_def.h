@@ -12,7 +12,7 @@ namespace _ecs {
 		cmp_MAPRENDER,
 		cmp_DESK,
 		cmp_ANIMATOR,
-
+		cmp_CLIENTSTATE,
 		// Do not erase pls
 		cmp_INVALID
 	};
