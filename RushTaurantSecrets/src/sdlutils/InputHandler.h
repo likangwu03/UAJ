@@ -12,7 +12,7 @@
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 
-const int JOYSTICK_DEAD_ZONE = 8000;
+
 
 class InputHandler : public Singleton<InputHandler> {
 
@@ -41,6 +41,8 @@ public:
 	// update the state with a new event
 	inline void update(const SDL_Event& event) {
 		switch (event.type) {
+		case SDL_JOYAXISMOTION:
+			joystickEvent(event);
 		case SDL_KEYDOWN:
 			onKeyDown(event);
 			break;
@@ -59,8 +61,6 @@ public:
 		case SDL_WINDOWEVENT:
 			handleWindowEvent(event);
 			break;
-		case SDL_JOYAXISMOTION:
-			joystickEvent(event);
 		default:
 			break;
 		}
@@ -124,15 +124,23 @@ public:
 
 	// controller (mando)
 
-	inline bool controllerXEvent() {
+	inline bool getControllerXEvent() {
 		return isControllerEventX;
 	}
 
-	inline bool controllerYEvent() {
+	inline bool getControllerYEvent() {
 		return isControllerEventY;
 	}
 
-	inline std::pair<float, float> controllerInput() {
+	inline void setControllerXEvent(bool set) {
+		isControllerEventX = set;
+	}
+
+	inline void setControllerYEvent(bool set) {
+		isControllerEventY = set;
+	}
+
+	inline float controllerInput() {
 		return controllerI;
 	}
 
@@ -233,17 +241,13 @@ private:
 	}
 
 	inline void joystickEvent(const SDL_Event& event) {
-		switch (event.jaxis.axis) {
-		case 0:
-			controllerI.first = event.jaxis.axis;
+		if (event.jaxis.axis == 0) {
+			controllerI = event.jaxis.value;
 			isControllerEventX = true;
-			break;
-		case 1:
-			controllerI.second = event.jaxis.axis;
+		}
+		else if (event.jaxis.axis == 1) {
+			controllerI = event.jaxis.value;
 			isControllerEventY = true;
-			break;
-		default:
-			break;
 		}
 	}
 
@@ -254,7 +258,7 @@ private:
 	bool isMouseButtonEvent_;
 	bool isControllerEventX;
 	bool isControllerEventY;
-	std::pair<float, float> controllerI;
+	float controllerI;
 	std::pair<Sint32, Sint32> mousePos_;
 	std::array<bool, 3> mbState_;
 	const Uint8* kbState_;

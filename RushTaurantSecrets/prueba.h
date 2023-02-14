@@ -4,17 +4,23 @@
 #include "src/structure/Structure_def.h"
 #include "src/sdlutils/SDLUtils.h"
 #include "src/components/Animator.h"
+#include "src/components/PlayerMovementController.h"
+
 class Scene;
 class prueba:public GameObject
 {
+private:
+	Texture* tex;
 public:
 	prueba(Scene* scene) :GameObject(scene) {
 		auto& sdl = *SDLUtils::instance();
 
-		//new Transform(this, Vector(100, 100));
+		//tex = &(sdl.images().at("MERMELADA"));
+		//new PruebaComponent( tex, this,_ecs::cmp_IMAGE);
+
 		new Animator(this, &(sdl.images().at("Player_run")), 6);
-		//new PruebaComponent( &(sdl.images().at("prueba")), this,_ecs::cmp_TRANSFORM);
+		new Transform(this, Vector(100, 100), Vector(0, 0), 20, 20, 0);
+		new PlayerMovementController(this, 2);	
 	};
-	
 };
 

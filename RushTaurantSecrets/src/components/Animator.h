@@ -4,6 +4,8 @@
 #include "../structure/Structure_def.h"
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../structure/GameObject.h"
+#include "../components/Transform.h"
 
 using namespace std;
 using Anim = std::pair<Texture*, int>;
@@ -49,8 +51,8 @@ public:
 	virtual void render()
 	{
 		SDL_Rect temp;
-		temp.x = 600;
-		temp.y = 300;
+		temp.x = parent->getComponent<Transform>()->getPos().getX();
+		temp.y = parent->getComponent<Transform>()->getPos().getY();
 		temp.w = sqr.w;
 		temp.h = sqr.h;
 

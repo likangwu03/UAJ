@@ -42,5 +42,5 @@ public:
 private:
 	void loadMapDims();
 	void loadTilesets();
-	 void render();
+	void render();
 };
