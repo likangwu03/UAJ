@@ -11,7 +11,8 @@ public:
 	prueba(Scene* scene) :GameObject(scene) {
 		auto& sdl = *SDLUtils::instance();
 
-		new Animator(this, &(sdl.images().at("prueba")), 6);
+		//new Transform(this, Vector(100, 100));
+		new Animator(this, &(sdl.images().at("Player_run")), 6);
 		//new PruebaComponent( &(sdl.images().at("prueba")), this,_ecs::cmp_TRANSFORM);
 	};
 	
