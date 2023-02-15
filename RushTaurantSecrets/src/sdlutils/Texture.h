@@ -100,10 +100,10 @@ public:
 
 	inline void renderFrame(const SDL_Rect& dest, int col, int row) {
 		SDL_Rect src;
-		src.x = dest.w * col;
-		src.y = dest.h * row;
-		src.w = dest.w;
-		src.h = dest.h;
+		src.x = fw_ * col;
+		src.y = fh_ * row;
+		src.w = fw_;
+		src.h = fh_;
 		render(src, dest);
 	}
 

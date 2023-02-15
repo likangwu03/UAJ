@@ -3,80 +3,80 @@
     {
       "id": "Player_1",
       "file": "assets/Sprites/Player/Player_sprite_1.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Player_2",
       "file": "assets/Sprites/Player/Player_sprite_1.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_1",
       "file": "assets/Sprites/Customers/Customer_sprite_1.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_2",
       "file": "assets/Sprites/Customers/Customer_sprite_2.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_3",
       "file": "assets/Sprites/Customers/Customer_sprite_3.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_4",
       "file": "assets/Sprites/Customers/Customer_sprite_4.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_5",
       "file": "assets/Sprites/Customers/Customer_sprite_5.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_6",
       "file": "assets/Sprites/Customers/Customer_sprite_6.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_7",
       "file": "assets/Sprites/Customers/Customer_sprite_7.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Customer_8",
       "file": "assets/Sprites/Customers/Customer_sprite_8.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Thief_1",
       "file": "assets/Sprites/Thieves/Thief_sprite_1.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Thief_2",
       "file": "assets/Sprites/Thieves/Thief_sprite_2.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "Thief_3",
       "file": "assets/Sprites/Thieves/Thief_sprite_3.png",
-      "cols": 20,
-      "fils": 56
+      "cols": 56,
+      "rows": 20
     },
     {
       "id": "0",
