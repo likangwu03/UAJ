@@ -8,26 +8,24 @@
 #include "../components/Transform.h"
 
 using namespace std;
-using Anim = std::pair<Texture*, int>;
-
 class Animator : public Component
 {
-	Anim animation;
-
+	Texture* texture;
 	int currentAnim;
-	int count;
-	float lastFrame;
+	int initFrame;
+	int endFrame;
+	int currFrame;
+	float lastTic;
 	float frameRate;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 
-	Animator(GameObject* parent, Texture* t, int endFrame) : Component(parent, id){
-		animation = { t, endFrame };
+	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim = 0) : Component(parent, id) {
+		texture = t;
 		//fila de la animacion
-		currentAnim = 0;
-		count = 0;
-		lastFrame = sdlutils().currRealTime();
+		setCurrentAnim(iniFrame, endFrame, currAnim);
+		lastTic = sdlutils().currRealTime();
 		frameRate = 100;
 		/*
 		sqr.x = 0;
@@ -36,22 +34,25 @@ public:
 		sqr.h = 32;
 		*/
 	};
-	Animator(GameObject* parent, Texture* t, int endFrame, int currAnim) : Component(parent, id) {
-		animation = { t, endFrame };
-		// fila de la animacion
-		currentAnim = currAnim;
-		count = 0;
-		lastFrame = sdlutils().currRealTime();
-		frameRate = 100;
-	};
-	~Animator() {};
+	virtual ~Animator() {};
 
-	void updateAnim();
-	void setCurrentAnim(int n, const int nframes);
+	void updateAnim() {
+		++currFrame;
+
+		if (currFrame >= endFrame)
+			currFrame = initFrame;
+	}
+	void setCurrentAnim(int iniFram, int endFram, int currAnim = 0)
+	{
+		currentAnim = currAnim;
+		endFrame = endFram;
+		initFrame = iniFram;
+		currFrame = iniFram;
+	}
 
 	void update() {
-		if (sdlutils().currRealTime() - lastFrame > frameRate) {
-			lastFrame = sdlutils().currRealTime();
+		if (sdlutils().currRealTime() - lastTic > frameRate) {
+			lastTic = sdlutils().currRealTime();
 			updateAnim();
 		}
 	}
@@ -60,11 +61,10 @@ public:
 		SDL_Rect temp;
 		temp.x = parent->getComponent<Transform>()->getPos().getX();
 		temp.y = parent->getComponent<Transform>()->getPos().getY();
-		temp.w = animation.first->fwidth();	// 48
-		temp.h = animation.first->fheight();	// 96
+		temp.w = 48;
+		temp.h = 96;
 
 		// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
-		animation.first->renderFrame(temp, count, currentAnim);
+		texture->renderFrame(temp, currFrame, currentAnim);
 	};
 };
-
