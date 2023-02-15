@@ -10,6 +10,7 @@
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
     resizeFactor = 0.75;
+    offsetX = 0.9; offsetY = 1.2;
 
     loadMapDims();
 
@@ -131,7 +132,7 @@ void MapCreator::render() {
                             // Tile del tileset
                             SDL_Rect srcRect = { tilesetRegionX, tilesetRegionY, tileW, tileH };
                             // Parte del mapa en el que se va a dibujar el tile
-                            SDL_Rect destRect = { tileX, tileY, tileInWindowW, tileInWindowH };
+                            SDL_Rect destRect = { tileX - offsetX * tileW, tileY - offsetY * tileH, tileInWindowW, tileInWindowH };
 
                             // Dibuja el el tile del tileset (tilesets[tilesetID) srcRect en la posición destRect
                             tilesets[tilesetID]->render(srcRect, destRect);

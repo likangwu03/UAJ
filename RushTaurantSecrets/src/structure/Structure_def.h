@@ -16,6 +16,7 @@ namespace _ecs {
 		cmp_COOKMACHINE,
 		cmp_DISHCOMB,
 		cmp_INVENTORY,
+		cmp_MOVEMENT,
 
 		// Do not erase pls
 		cmp_INVALID
@@ -46,6 +47,10 @@ namespace _ecs {
 		hdr_REPUTATION,
 		hdr_TARGET,
 		hdr_MONEY,
+		hdr_MONEY_TEXT,
+		hdr_MENU,
+		hdr_PAUSE,
+		hdr_BASKET,
 		hdr_PRUEBA,
 		
 		// Do not erase pls

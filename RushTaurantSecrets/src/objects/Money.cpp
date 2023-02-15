@@ -1,5 +1,9 @@
 #include "Money.h"
 
+Money::Money() {
+	initMoney(100);
+}
+
 // inicializa la cantidad de dinero inicial
 void Money::initMoney(int num) {
 	amount = num;

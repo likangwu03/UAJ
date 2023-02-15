@@ -38,17 +38,11 @@ public:
 	};
 	Animator(GameObject* parent, Texture* t, int endFrame, int currAnim) : Component(parent, id) {
 		animation = { t, endFrame };
-		//fila de la animacion
+		// fila de la animacion
 		currentAnim = currAnim;
 		count = 0;
 		lastFrame = sdlutils().currRealTime();
 		frameRate = 100;
-		/*
-		sqr.x = 0;
-		sqr.y = 0;
-		sqr.w = 16;
-		sqr.h = 32;
-		*/
 	};
 	~Animator() {};
 
@@ -66,8 +60,8 @@ public:
 		SDL_Rect temp;
 		temp.x = parent->getComponent<Transform>()->getPos().getX();
 		temp.y = parent->getComponent<Transform>()->getPos().getY();
-		temp.w = 48;
-		temp.h = 96;
+		temp.w = animation.first->fwidth();	// 48
+		temp.h = animation.first->fheight();	// 96
 
 		// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 		animation.first->renderFrame(temp, count, currentAnim);

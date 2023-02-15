@@ -16,6 +16,7 @@ void Restaurant::update() {
 	Scene::update();
 	if(pantry!=nullptr)
 	pantry->Scene::update();
+	ui->update();
 }
 
 void Restaurant::handleEvents() {
