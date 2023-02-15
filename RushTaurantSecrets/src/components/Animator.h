@@ -12,7 +12,7 @@ using Anim = std::pair<Texture*, int>;
 
 class Animator : public Component
 {
-	vector<Anim> animations;
+	Anim animation;
 
 	int currentAnim;
 	int count;
@@ -23,7 +23,8 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 
 	Animator(GameObject* parent, Texture* t, int endFrame) : Component(parent, id){
-		addAnimation(t, endFrame);
+		animation = { t, endFrame };
+		//fila de la animacion
 		currentAnim = 0;
 		count = 0;
 		lastFrame = sdlutils().currRealTime();
@@ -34,13 +35,25 @@ public:
 		sqr.w = 16;
 		sqr.h = 32;
 		*/
-		cout << "anim created" << endl;
+	};
+	Animator(GameObject* parent, Texture* t, int endFrame, int currAnim) : Component(parent, id) {
+		animation = { t, endFrame };
+		//fila de la animacion
+		currentAnim = currAnim;
+		count = 0;
+		lastFrame = sdlutils().currRealTime();
+		frameRate = 100;
+		/*
+		sqr.x = 0;
+		sqr.y = 0;
+		sqr.w = 16;
+		sqr.h = 32;
+		*/
 	};
 	~Animator() {};
 
-	void addAnimation(Texture* t, int endFrame);
 	void updateAnim();
-	void setCurrentAnim(int n);
+	void setCurrentAnim(int n, const int nframes);
 
 	void update() {
 		if (sdlutils().currRealTime() - lastFrame > frameRate) {
@@ -53,11 +66,11 @@ public:
 		SDL_Rect temp;
 		temp.x = parent->getComponent<Transform>()->getPos().getX();
 		temp.y = parent->getComponent<Transform>()->getPos().getY();
-		temp.w = animations[currentAnim].first->fwidth();
-		temp.h = animations[currentAnim].first->fheight();
+		temp.w = 48;
+		temp.h = 96;
 
 		// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
-		animations[currentAnim].first->renderFrame(temp, count, 0);
+		animation.first->renderFrame(temp, count, currentAnim);
 	};
 };
 

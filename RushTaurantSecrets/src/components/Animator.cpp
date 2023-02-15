@@ -1,20 +1,16 @@
 #include "Animator.h"
 
-void Animator::addAnimation(Texture* t, int endFrame)
-{
-	Anim a{t, endFrame};
-	animations.push_back(a);
-}
-
 void Animator::updateAnim()
 {
 	++count;
 
-	if (count >= animations[currentAnim].second)
+	if (count >= animation.second)
 		count = 0;
 }
 
-void Animator::setCurrentAnim(const int n)
+void Animator::setCurrentAnim(const int n, const int nframes)
 {
 	currentAnim = n;
+	animation.second = nframes;
+	count = 0;
 }
