@@ -46,6 +46,9 @@ namespace _ecs {
 		hdr_REPUTATION,
 		hdr_TARGET,
 		hdr_MONEY,
+		hdr_MENU,
+		hdr_PAUSE,
+		hdr_BASKET,
 		hdr_PRUEBA,
 		
 		// Do not erase pls
