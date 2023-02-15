@@ -3,6 +3,7 @@
 #include "../../prueba.h"
 #include "../../src/components/MapCreator.h"
 #include "../structure/Structure_def.h"
+#include "../../src/gameObjects/Client.h"
 
 #include "../components/ClientState.h"
 #include "../structure/Food_def.h"
@@ -26,6 +27,7 @@ public:
 		
 
 		test = new prueba(this);
+		test2 = new Client(this);
 
 		
 		client = new GameObject(this);
@@ -42,6 +44,7 @@ public:
 
 		new ClientState(client, menu);
 		
-		
+		this->addObject(test, _ecs::grp_PLAYER, _ecs::hdr_PLAYER);
+		this->addObject(test2, _ecs::grp_CUSTOMERS, _ecs::hdr_CUSTOMER);
 	}
 };

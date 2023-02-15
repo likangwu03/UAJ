@@ -55,6 +55,7 @@ public:
 			lastTic = sdlutils().currRealTime();
 			updateAnim();
 		}
+
 	}
 	virtual void render()
 	{

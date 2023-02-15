@@ -4,6 +4,7 @@
 
 GameObject::GameObject(Scene* scene, _ecs::_grp_id grp, _ecs::_hdr_id handler) : scene(scene), alive(true) {
 	scene->addObject(this, grp, handler);
+	orientation = south;
 }
 
 GameObject::~GameObject() {
