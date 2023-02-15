@@ -20,7 +20,7 @@ public:
 		MapCreator* mpCrt = new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
 		
 		
-		this->addObject(test, 0);
+		//this->addObject(test, 0);
 	}
 	virtual void handleEvents();	
 };
