@@ -7,7 +7,6 @@
 #include <array>
 #include <vector>
 #include "../utilities/Vector.h"
-
 #include "../utils/Singleton.h"
 
 // Instead of a Singleton class, we could make it part of
@@ -42,6 +41,10 @@ public:
 	// update the state with a new event
 	inline void update(const SDL_Event& event) {
 		switch (event.type) {
+		case SDL_JOYBUTTONDOWN:
+			joybuttonDownEvent(event);
+		case SDL_JOYBUTTONUP:
+			joybuttonUpEvent(event);
 		case SDL_JOYAXISMOTION:
 			joystickEvent(event);
 		case SDL_KEYDOWN:
@@ -125,6 +128,11 @@ public:
 
 	// controller (mando)
 
+	bool getButtonState(int joy, int buttonNumber)
+	{
+		return m_buttonStates[joy][buttonNumber];
+	}
+
 	int xvalue(int joy, int stick)
 	{
 		if (m_joystickValues.size() > 0)
@@ -173,6 +181,13 @@ public:
 					m_joysticks.push_back(joy);
 					m_joystickValues.push_back(std::make_pair(new
 						Vector(0, 0), new Vector(0, 0))); // add our pair
+
+					std::vector<bool> cButtons;
+					for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
+					{
+						cButtons.push_back(false);
+					}
+					m_buttonStates.push_back(cButtons);
 				}
 				else
 				{
@@ -252,6 +267,22 @@ private:
 		}
 	}
 
+	inline void joybuttonDownEvent(const SDL_Event& event) {
+		if (event.type == SDL_JOYBUTTONDOWN)
+		{
+			int whichOne = event.jaxis.which;
+			m_buttonStates[whichOne][event.jbutton.button] = true;
+		}
+	}
+
+	inline void joybuttonUpEvent(const SDL_Event& event) {
+		if (event.type == SDL_JOYBUTTONUP)
+		{
+			int whichOne = event.jaxis.which;
+			m_buttonStates[whichOne][event.jbutton.button] = false;
+		}
+	}
+
 	inline void joystickEvent(const SDL_Event& event) {
 		int whichOne = event.jaxis.which;
 		// left stick move left or right
@@ -290,6 +321,7 @@ private:
 
 	std::vector<SDL_Joystick*> m_joysticks;
 	std::vector<std::pair<Vector*, Vector*>> m_joystickValues;
+	std::vector<std::vector<bool>> m_buttonStates;
 	bool m_bJoysticksInitialised = false;
 
 	bool isCloseWindoEvent_;
