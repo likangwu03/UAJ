@@ -20,7 +20,7 @@ public:
 
 		new Animator(this, &(sdl.images().at("Player_run")), 6);
 		new Transform(this, Vector(100, 100), Vector(0, 0), 20, 20, 0);
-		new PlayerMovementController(this, 2);	
+		//new PlayerMovementController(this, 2);	
 	};
 };
 

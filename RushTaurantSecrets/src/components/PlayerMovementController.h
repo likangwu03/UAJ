@@ -16,7 +16,7 @@ private:
 	Transform* transform = nullptr;
 	InputHandler* input;
 public:
-	PlayerMovementController(GameObject* parent, _ecs::id_type id) : Component(parent, id) {
+	PlayerMovementController(GameObject* parent, _ecs::_cmp_id id) : Component(parent, id) {
 		transform = parent->getComponent<Transform>();
 		input = InputHandler::instance();
 		input->initialiseJoysticks();

@@ -1,6 +1,7 @@
+#include "DishCombComp.h"
 
-#include "DishCombinator.h"
-DishCombinator::DishCombinator() {
+
+DishCombComp::DishCombComp(GameObject* parent) :Component(parent, id) {
 	for (auto d : _ecs::Dishes) {
 		//vuelta atras
 		vector<bool>used(d.ingredients.size(), false);
@@ -9,7 +10,7 @@ DishCombinator::DishCombinator() {
 	}
 }
 
-void DishCombinator::auxCombinator(int n, int m, int k, vector<_ecs::_ingredients_id>& soluc, vector<bool>& used,
+void DishCombComp::auxCombinator(int n, int m, int k, vector<_ecs::_ingredients_id>& soluc, vector<bool>& used,
 	_ecs::_dish_id id, vector<_ecs::_ingredients_id>& ing) {
 	for (int i = 0; i < m; ++i) {
 		soluc[k] = (_ecs::_ingredients_id)ing[i];
@@ -25,7 +26,7 @@ void DishCombinator::auxCombinator(int n, int m, int k, vector<_ecs::_ingredient
 	}
 }
 
-pair<_ecs::_dish_id, bool> DishCombinator::existDish(const vector<_ecs::_ingredients_id> ing) {
+pair<_ecs::_dish_id, bool> DishCombComp::existDish(const vector<_ecs::_ingredients_id> ing) {
 	auto it = dishes.find(ing);
 	if (it == dishes.end()) return { _ecs::NONE_DISH,false };
 	else return { it->second,true };

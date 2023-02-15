@@ -21,7 +21,7 @@ class Animator : public Component
 	SDL_Rect sqr;
 
 public:
-	constexpr static _ecs::id_type id = _ecs::cmp_ANIMATOR;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 	//constexpr static _ecs::id_type id = _ecs::cmp_TRANSFORM;
 
 	Animator(GameObject* parent, Texture* t, const int n) : Component(parent, id){

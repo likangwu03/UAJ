@@ -1,8 +1,6 @@
-#include "Inventory.h"
+#include "InventoryComp.h"
 
-//Inventory* Inventory::_instance = nullptr;
-
-Inventory::Inventory(CookingMachine* cM) : cookingMachine(cM) {
+InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	dishes.reserve(3);
 	dishesBool.reserve(3);
 	// inicializa el vector de booleanos
@@ -11,21 +9,18 @@ Inventory::Inventory(CookingMachine* cM) : cookingMachine(cM) {
 	}
 }
 
-// si la CookingMachine ha terminado (y hay espacio en el inventario), recoge el plato
-void Inventory::takeDish(_ecs::_dish_id newDish) {
-	// comprueba que la cooking machine ha terminado
-	if (cookingMachine->isFinished()) {
-		// comprueba que hay espacio libre en el inventario
-		int place = freeSpace();
-		if (place != -1) {
-			dishes[place] = newDish;
-			dishesBool[place] = true;
-		}
+// si hay espacio en el inventario, recoge el plato (suponiendo que previamente ya se ha comprobado si cookingMachine est¨¢ listo en otra clase)
+void InventoryComp::takeDish(_ecs::_dish_id newDish) {
+	// comprueba que hay espacio libre en el inventario
+	int place = freeSpace();
+	if (place != -1) {
+		dishes[place] = newDish;
+		dishesBool[place] = true;
 	}
 }
 
 // libera el espacio indicado (num) ya sea para tirar el plato, dárselo a un cliente...
-void Inventory::freeDish(int num) {
+void InventoryComp::freeDish(int num) {
 	// sólo libera el plato si existe
 	// !! pensar en mantener esta implementación o cambiar para sólo seleccionar los huecos cubiertos
 	if (dishesBool[num] == true) {
@@ -40,7 +35,7 @@ void Inventory::freeDish(int num) {
 }
 
 // devuelve la primera posición libre; si no hay espacio libre, devuelve -1
-int Inventory::freeSpace() {
+int InventoryComp::freeSpace() {
 	int i = 0;
 	bool encontrado = false;
 	while (i < 3 && !encontrado) {

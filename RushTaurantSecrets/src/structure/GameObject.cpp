@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include "Component.h"
 
-GameObject::GameObject(Scene* scene, _ecs::id_type grp) : scene(scene), alive(true) {
+GameObject::GameObject(Scene* scene, _ecs::_grp_id grp) : scene(scene), alive(true) {
 	scene->addObject(this, grp);
 	components.reserve(_ecs::cmpNum);
 }

@@ -13,7 +13,7 @@ using namespace std;
 using uint = unsigned int;
 
 class MapCreator : public Component {
-	constexpr static _ecs::id_type id = _ecs::cmp_MAPCREATOR;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_MAPCREATOR;
 
 private:
 	double resizeFactor;

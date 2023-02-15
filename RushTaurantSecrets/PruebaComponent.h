@@ -10,7 +10,7 @@ private:
 	Transform* transform = nullptr;
 	Texture* t;
 public:
-	PruebaComponent(Texture* _t,GameObject* parent, _ecs::id_type id):Component(parent, id),t(_t) {
+	PruebaComponent(Texture* _t,GameObject* parent, _ecs::_cmp_id id):Component(parent, id),t(_t) {
 		transform = parent->getComponent<Transform>();
 	}
 	virtual void render() {

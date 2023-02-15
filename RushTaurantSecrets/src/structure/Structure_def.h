@@ -13,6 +13,10 @@ namespace _ecs {
 		cmp_DESK,
 		cmp_ANIMATOR,
 		cmp_CLIENTSTATE,
+		cmp_COOKMACHINE,
+		cmp_DISHCOMB,
+		cmp_INVENTORY,
+
 		// Do not erase pls
 		cmp_INVALID
 	};
@@ -21,8 +25,10 @@ namespace _ecs {
 	// Groups
 	enum _grp_id : id_type {
 		grp_GENERAL,
+		grp_PLAYER,
 		grp_CUSTOMERS,
 		grp_INTERACTABLE,
+		grp_HUD,
 		grp_ICONS,
 
 		// Do not erase pls
@@ -32,7 +38,8 @@ namespace _ecs {
 
 	// Handlers
 	enum _hdr_id : id_type {
-
+		hdr_PLAYER,
+		hdr_DISHCOMB,
 		// Do not erase pls
 		hdr_INVALID
 	};

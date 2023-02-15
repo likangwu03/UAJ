@@ -1,4 +1,4 @@
-#include "Scene.h"
+﻿#include "Scene.h"
 #include "GameObject.h"
 
 Scene::Scene() {
@@ -11,11 +11,12 @@ Scene::~Scene() {
 	}
 }
 
-void Scene::addObject(GameObject* object, _ecs::id_type grp) {
+void Scene::addObject(GameObject* object, _ecs::_grp_id grp) {
 	objGroups[grp].push_back(object);
+
 }
 
-// falta por a�adir que se elimine del grupo (array de vectores)
+// falta por a馻dir que se elimine del grupo (array de vectores)
 void Scene::refresh() {
 	for (int n = 0; n < _ecs::grpNum; n++) {
 		objGroups[n].erase(
