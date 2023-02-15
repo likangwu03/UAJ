@@ -18,6 +18,7 @@ namespace _ecs {
 		cmp_INVENTORY,
 		cmp_MOVEMENT,
 
+		cmp_CLIENTINTABLE,
 		// Do not erase pls
 		cmp_INVALID
 	};
