@@ -175,6 +175,7 @@ private:
 	void closeSDLExtensions(); // free resources the
 	void loadReasources(std::string filename); // load resources from the json file
 
+
 	std::string windowTitle_; // window title
 	int width_; // window width
 	int height_; // window height
@@ -196,6 +197,21 @@ private:
 
 	RandomNumberGenerator random_; // (pseudo) random numbers generator
 	VirtualTimer timer_; // virtual timer
+
+
+	
+	
+	// Unordered map de tilesets cargados
+	std::unordered_map<std::string, Texture*> tilesets_;
+	
+	// Función que carga los tilesets del archivo "assets/tilesets.json"
+	// y los almacena en tilesets_
+	void loadTilesets();
+
+public:
+		// Función que devuelve el unordered map de tilesets cargados
+		std::unordered_map<std::string, Texture*> getLoadedTilesets();
+
 };
 
 // This macro defines a compact way for using the singleton SDLUtils, instead of

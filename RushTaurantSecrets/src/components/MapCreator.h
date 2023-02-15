@@ -25,19 +25,10 @@ private:
 	double tileInWindowW, tileInWindowH;
 	map<uint, Texture*> tilesets;
 	SDL_Texture* bg;
-	Texture* testTexture;
 
 public:
 	MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer);
 	~MapCreator();
-
-	Map* getTileMap() { return tileMap; }
-	int getRows() { return rows; }
-	int getCols() { return cols; }
-	int getTileW() { return tileW; }
-	int getTileH() { return tileH; }
-	map<uint, Texture*> getTilesets() { return tilesets; }
-	SDL_Renderer* getRenderer() { return renderer; }
 
 private:
 	void loadMapDims();

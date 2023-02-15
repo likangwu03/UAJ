@@ -1,0 +1,48 @@
+{
+  "images": [
+    {
+      "id": "1_Generic_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png"
+    },
+    {
+      "id": "2_LivingRoom_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png"
+    },
+    {
+      "id": "9_Fishing_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png"
+    },
+    {
+      "id": "12_Kitchen_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/12_Kitchen_48x48.png"
+    },
+    {
+      "id": "14_Basement_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/14_Basement_48x48.png"
+    },
+    {
+      "id": "16_Grocery_store_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png"
+    },
+    {
+      "id": "19_Hospital_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/19_Hospital_48x48.png"
+    },
+    {
+      "id": "22_Museum_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/22_Museum_48x48.png"
+    },
+    {
+      "id": "24_Ice_Cream_Shop_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png"
+    },
+    {
+      "id": "atlas",
+      "file": "assets/Sprites/Restaurant/atlas.png"
+    },
+    {
+      "id": "Room_Builder_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Room_Builder_48x48.png"
+    }
+  ]
+}

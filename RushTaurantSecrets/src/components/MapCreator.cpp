@@ -6,8 +6,10 @@
 #include "./tmxlite/ObjectGroup.hpp"
 #include "./tmxlite/Tileset.hpp"
 
+#include "../sdlutils/SDLUtils.h"
+
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
-    resizeFactor = 0.5;
+    resizeFactor = 0.75;
 
     loadMapDims();
 
@@ -23,7 +25,6 @@ MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer*
 
 MapCreator::~MapCreator() {
     if (tileMap != nullptr) delete tileMap;
-    delete testTexture;
 }
 
 
@@ -48,9 +49,6 @@ void MapCreator::loadMapDims() {
     int height = rows * tileH;
     bg = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
 
-
-
-    testTexture = new Texture(renderer, "assets/Sprites/Restaurant/atlas.png");
 }
 
 
@@ -58,13 +56,19 @@ void MapCreator::loadTilesets() {
     // Lee los tilesets del tilemap y los recorre
     auto mapTileSets = tileMap->getTilesets();
     for (auto& ts : mapTileSets) {
-        // Lee la ID del tileset, la convierte a uint y busca su textura precargada
-        string tilesetID = ts.getName();
-        Texture* tileTexture = testTexture;
-            //tilesets.find(tilesetID)->second;
+        // Lee el nombre del tileset
+        string tilesetName = ts.getName();
+        // Tilesets precargados
+        auto preloadedTiles = sdlutils().getLoadedTilesets();
+        // Posición del tileset buscado en los tilesets precargados
+        auto preloadedTexture = preloadedTiles.find(tilesetName);
 
-        // Guarda la textura precargada en los tilesets del mapa
-        tilesets.insert({ts.getFirstGID(), tileTexture });
+        // Si el tileset buscado está en los tilesets precargados,
+        if (preloadedTexture != preloadedTiles.end()) {
+            // Guarda la textura precargada en los tilesets del mapa,
+            // siendo su key la ID del primer tile que haya en el tileset
+            tilesets.insert({ts.getFirstGID(), preloadedTexture->second});
+        }
     }
 
 }
@@ -84,8 +88,7 @@ void MapCreator::render() {
             // Se recorre todo el mapa 
             for (int rw = 0; rw < rows; rw++) {
                 // Además, si no existe tileset para el tile, pasa a la siguiente casilla
-                for (int cl = 0; cl < cols && !found; cl++) {
-                    found = false;
+                for (int cl = 0; cl < cols; cl++) {
                     // Se obtiene la ID del tile en el mapa y se
                     // usa para obtener la ID del tile en el tileset
                     int tileInTilemap = cl + rw * cols;
@@ -93,6 +96,7 @@ void MapCreator::render() {
 
                     // Si la casilla no está vacía
                     if (tileID != 0) {
+                        found = false;
                         // Recorre los tilesets cargados y busca el primero que
                         // el ID más cercano y <= al ID del tile
                         int tilesetFile = 0, tilesetID = -1;
