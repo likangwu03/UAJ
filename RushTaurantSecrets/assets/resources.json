@@ -2,107 +2,153 @@
   "images": [
     {
       "id": "Player_run",
-      "file": "assets/Sprites/Player/Player_run.png"
+      "file": "assets/Sprites/Player/Player_run.png",
+      "cols": 24,
+      "rows": 1
     },
     {
       "id": "Player_idle",
-      "file": "assets/Sprites/Player/Player_idle.png"
+      "file": "assets/Sprites/Player/Player_idle.png",
+      "cols": 4,
+      "rows": 1
     },
     {
       "id": "HUEVO_FRITO",
-      "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
+      "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "PAN",
-      "file": "assets/Sprites/Food/Dishes/PAN.png"
+      "file": "assets/Sprites/Food/Dishes/PAN.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "MERMELADA",
-      "file": "assets/Sprites/Food/Dishes/MERMELADA.png"
+      "file": "assets/Sprites/Food/Dishes/MERMELADA.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "PAN_AJO",
-      "file": "assets/Sprites/Food/Dishes/PAN_AJO.png"
+      "file": "assets/Sprites/Food/Dishes/PAN_AJO.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "FRENCH_FRIES",
-      "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png"
+      "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "PANCAKE",
-      "file": "assets/Sprites/Food/Dishes/PANCAKE.png"
-    },
-    {
-      "id": "MERMELADA",
-      "file": "assets/Sprites/Food/Dishes/marmelade.png"
+      "file": "assets/Sprites/Food/Dishes/PANCAKE.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "MONEY_ICON",
-      "file": "assets/Sprites/UI/money_icon.png"
+      "file": "assets/Sprites/UI/money_icon.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "PAUSE_BUTTON",
-      "file": "assets/Sprites/UI/pause_button.png"
+      "file": "assets/Sprites/UI/pause_button.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "DAILY_MENU",
-      "file": "assets/Sprites/UI/daily_menu.png"
+      "file": "assets/Sprites/UI/daily_menu.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "BASKET_YELLOW",
-      "file": "assets/Sprites/UI/basket_yellow.png"
+      "file": "assets/Sprites/UI/basket_yellow.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "TARGET_ICON",
-      "file": "assets/Sprites/UI/target_icon.png"
+      "file": "assets/Sprites/UI/target_icon.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "REPUTATION_ICON",
-      "file": "assets/Sprites/UI/reputation_icon.png"
+      "file": "assets/Sprites/UI/reputation_icon.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "INVENTORY_ICON",
-      "file": "assets/Sprites/UI/inventory.png"
+      "file": "assets/Sprites/UI/inventory.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "1_Generic_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "2_LivingRoom_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "7_Art_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/7_Art_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/7_Art_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "9_Fishing_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "12_Kitchen_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/12_Kitchen_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/12_Kitchen_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "14_Basement_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/14_Basement_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/14_Basement_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "16_Grocery_store_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "19_Hospital_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/19_Hospital_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/19_Hospital_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "22_Museum_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/22_Museum_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/22_Museum_48x48.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "24_Ice_Cream_Shop_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png"
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png",
+      "cols": 1,
+      "rows": 1
     }
   ]
 }
