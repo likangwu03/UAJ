@@ -6,13 +6,14 @@
 #include <SDL.h>
 #include <array>
 #include <vector>
+#include "../utilities/Vector.h"
 
 #include "../utils/Singleton.h"
 
 // Instead of a Singleton class, we could make it part of
 // SDLUtils as well.
 
-
+const int JOYSTICK_DEAD_ZONE = 10000;
 
 class InputHandler : public Singleton<InputHandler> {
 
@@ -124,24 +125,36 @@ public:
 
 	// controller (mando)
 
-	inline bool getControllerXEvent() {
-		return isControllerEventX;
+	int xvalue(int joy, int stick)
+	{
+		if (m_joystickValues.size() > 0)
+		{
+			if (stick == 1)
+			{
+				return m_joystickValues[joy].first->getX();
+			}
+			else if (stick == 2)
+			{
+				return m_joystickValues[joy].second->getX();
+			}
+		}
+		return 0;
 	}
 
-	inline bool getControllerYEvent() {
-		return isControllerEventY;
-	}
-
-	inline void setControllerXEvent(bool set) {
-		isControllerEventX = set;
-	}
-
-	inline void setControllerYEvent(bool set) {
-		isControllerEventY = set;
-	}
-
-	inline float controllerInput() {
-		return controllerI;
+	int yvalue(int joy, int stick)
+	{
+		if (m_joystickValues.size() > 0)
+		{
+			if (stick == 1)
+			{
+				return m_joystickValues[joy].first->getY();
+			}
+			else if (stick == 2)
+			{
+				return m_joystickValues[joy].second->getY();
+			}
+		}
+		return 0;
 	}
 
 	void initialiseJoysticks() {
@@ -158,6 +171,8 @@ public:
 				if (SDL_JoystickGetAttached(joy) == 1) // nueva alternativa a SDL_JoystickOpened a partir de SDL 2.0
 				{
 					m_joysticks.push_back(joy);
+					m_joystickValues.push_back(std::make_pair(new
+						Vector(0, 0), new Vector(0, 0))); // add our pair
 				}
 				else
 				{
@@ -189,9 +204,6 @@ public:
 	}
 
 private:
-
-	std::vector<SDL_Joystick*> m_joysticks;
-	bool m_bJoysticksInitialised = false;
 
 	InputHandler() {
 		kbState_ = SDL_GetKeyboardState(0);
@@ -241,15 +253,44 @@ private:
 	}
 
 	inline void joystickEvent(const SDL_Event& event) {
-		if (event.jaxis.axis == 0) {
-			controllerI = event.jaxis.value;
-			isControllerEventX = true;
+		int whichOne = event.jaxis.which;
+		// left stick move left or right
+		if (event.jaxis.axis == 0)
+		{
+			if (event.jaxis.value > JOYSTICK_DEAD_ZONE)
+			{
+				m_joystickValues[whichOne].first->setX(1);
+			}
+			else if (event.jaxis.value < -JOYSTICK_DEAD_ZONE)
+			{
+				m_joystickValues[whichOne].first->setX(-1);
+			}
+			else
+			{
+				m_joystickValues[whichOne].first->setX(0);
+			}
 		}
-		else if (event.jaxis.axis == 1) {
-			controllerI = event.jaxis.value;
-			isControllerEventY = true;
+		// left stick move up or down
+		if (event.jaxis.axis == 1)
+		{
+			if (event.jaxis.value > JOYSTICK_DEAD_ZONE)
+			{
+				m_joystickValues[whichOne].first->setY(1);
+			}
+			else if (event.jaxis.value < -JOYSTICK_DEAD_ZONE)
+			{
+				m_joystickValues[whichOne].first->setY(-1);
+			}
+			else
+			{
+				m_joystickValues[whichOne].first->setY(0);
+			}
 		}
 	}
+
+	std::vector<SDL_Joystick*> m_joysticks;
+	std::vector<std::pair<Vector*, Vector*>> m_joystickValues;
+	bool m_bJoysticksInitialised = false;
 
 	bool isCloseWindoEvent_;
 	bool isKeyUpEvent_;

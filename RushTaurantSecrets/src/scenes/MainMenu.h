@@ -23,6 +23,6 @@ public:
 		
 		
 		
-		//this->addObject(test, 0);
+		this->addObject(test, _ecs::grp_PLAYER, _ecs::hdr_PLAYER);
 	}
 };

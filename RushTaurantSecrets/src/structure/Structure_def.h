@@ -16,6 +16,7 @@ namespace _ecs {
 		cmp_COOKMACHINE,
 		cmp_DISHCOMB,
 		cmp_INVENTORY,
+		cmp_MOVEMENT,
 
 		// Do not erase pls
 		cmp_INVALID
