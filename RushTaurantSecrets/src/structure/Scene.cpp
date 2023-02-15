@@ -11,13 +11,20 @@ Scene::~Scene() {
 	}
 }
 
-void Scene::addObject(GameObject* object, _ecs::_grp_id grp) {
+void Scene::addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler) {
 	objGroups[grp].push_back(object);
-
+	handlers[handler] = object;
 }
 
-// falta por a馻dir que se elimine del grupo (array de vectores)
 void Scene::refresh() {
+	// sacar el objeto de los handlers
+	for (int i = 0; i < _ecs::hdrNum; ++i) {
+		if (handlers[i] != nullptr && !handlers[i]->isAlive()) {
+			handlers[i] = nullptr;
+		}
+	}
+
+	// sacar el objeto de los grupos y eliminarlo
 	for (int n = 0; n < _ecs::grpNum; n++) {
 		objGroups[n].erase(
 			std::remove_if(objGroups[n].begin(), objGroups[n].end(), [](GameObject* obj) {

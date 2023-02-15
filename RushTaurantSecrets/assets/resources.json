@@ -2,51 +2,35 @@
   "images": [
     {
       "id": "Player_run",
-      "file": "assets/Sprites/Player/Player_run.png",
-      "cols": 24,
-      "rows": 1
+      "file": "assets/Sprites/Player/Player_run.png"
     },
     {
       "id": "Player_idle",
-      "file": "assets/Sprites/Player/Player_idle.png",
-      "cols": 4,
-      "rows": 1
+      "file": "assets/Sprites/Player/Player_idle.png"
     },
     {
       "id": "0",
-      "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png",
-      "cols": 1,
-      "rows": 1
+      "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
     },
     {
       "id": "1",
-      "file": "assets/Sprites/Food/Dishes/PAN.png",
-      "cols": 1,
-      "rows": 1
+      "file": "assets/Sprites/Food/Dishes/PAN.png"
     },
     {
       "id": "0",
-      "file": "assets/Sprites/Food/Dishes/MERMELADA.png",
-      "cols": 1,
-      "rows": 1
+      "file": "assets/Sprites/Food/Dishes/MERMELADA.png"
     },
     {
       "id": "3",
-      "file": "assets/Sprites/Food/Dishes/PAN_AJO.png",
-      "cols": 1,
-      "rows": 1
+      "file": "assets/Sprites/Food/Dishes/PAN_AJO.png"
     },
     {
       "id": "4",
-      "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png",
-      "cols": 1,
-      "rows": 1
+      "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png"
     },
     {
       "id": "5",
-      "file": "assets/Sprites/Food/Dishes/PANCAKE.png",
-      "cols": 1,
-      "rows": 1
+      "file": "assets/Sprites/Food/Dishes/PANCAKE.png"
     },
     {
       "id": "6",

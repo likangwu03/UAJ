@@ -9,14 +9,17 @@ class Scene {
 protected:
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
+	// se utiliza para conectar objetos de una misma escena
+	std::array<GameObject*, _ecs::hdrNum> handlers;
 	Scene();
 
 public:
 	virtual ~Scene();
 
-	void addObject(GameObject* object, _ecs::_grp_id grp);
+	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 	void refresh();
 	inline const std::vector<GameObject*>& getGroup(_ecs::_grp_id grp) { return objGroups[grp]; }
+	inline GameObject* getGameObject(_ecs::_hdr_id handler) { return handlers[handler]; }
 
 	virtual void update();
 	virtual void render();

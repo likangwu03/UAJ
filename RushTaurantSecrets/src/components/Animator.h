@@ -18,29 +18,29 @@ class Animator : public Component
 	int count;
 	float lastFrame;
 	float frameRate;
-	SDL_Rect sqr;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
-	//constexpr static _ecs::id_type id = _ecs::cmp_TRANSFORM;
 
-	Animator(GameObject* parent, Texture* t, const int n) : Component(parent, id){
-		addAnimation(t, n);
+	Animator(GameObject* parent, Texture* t, int endFrame) : Component(parent, id){
+		addAnimation(t, endFrame);
 		currentAnim = 0;
 		count = 0;
 		lastFrame = sdlutils().currRealTime();
 		frameRate = 100;
+		/*
 		sqr.x = 0;
 		sqr.y = 0;
 		sqr.w = 16;
 		sqr.h = 32;
+		*/
 		cout << "anim created" << endl;
 	};
 	~Animator() {};
 
-	void addAnimation(Texture* t, int n);
+	void addAnimation(Texture* t, int endFrame);
 	void updateAnim();
-	void setCurrentAnim(const int n);
+	void setCurrentAnim(int n);
 
 	void update() {
 		if (sdlutils().currRealTime() - lastFrame > frameRate) {
@@ -53,10 +53,11 @@ public:
 		SDL_Rect temp;
 		temp.x = parent->getComponent<Transform>()->getPos().getX();
 		temp.y = parent->getComponent<Transform>()->getPos().getY();
-		temp.w = sqr.w;
-		temp.h = sqr.h;
+		temp.w = animations[currentAnim].first->fwidth();
+		temp.h = animations[currentAnim].first->fheight();
 
-		animations[currentAnim].first->render(sqr, temp);
+		// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
+		animations[currentAnim].first->renderFrame(temp, count, 0);
 	};
 };
 

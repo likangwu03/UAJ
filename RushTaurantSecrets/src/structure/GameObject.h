@@ -10,8 +10,9 @@ protected:
 	std::unordered_map<_ecs::_cmp_id, Component*> components;
 	Scene* scene;
 	bool alive;
+
 public:
-	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL);
+	GameObject(Scene* scene, _ecs::_hdr_id handler, _ecs::_grp_id grp = _ecs::grp_GENERAL);
 	virtual ~GameObject();
 
 	//void changeScene(Scene* scene);

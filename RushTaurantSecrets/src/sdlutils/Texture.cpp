@@ -10,6 +10,8 @@ Texture& Texture::operator=(Texture &&other) noexcept {
 	other.renderer_ = nullptr;
 	width_ = other.width_;
 	height_ = other.height_;
+	fw_ = other.fw_;
+	fh_ = other.fh_;
 
 	return *this;
 }
@@ -21,9 +23,11 @@ Texture::Texture(Texture &&other) noexcept {
 	other.renderer_ = nullptr;
 	width_ = other.width_;
 	height_ = other.height_;
+	fw_ = other.fw_;
+	fh_ = other.fh_;
 }
 
-Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
+Texture::Texture(SDL_Renderer *renderer, const std::string &fileName, int numCols, int numRows) {
 	assert(renderer != nullptr);
 
 	SDL_Surface *surface = IMG_Load(fileName.c_str());
@@ -38,6 +42,9 @@ Texture::Texture(SDL_Renderer *renderer, const std::string &fileName) {
 
 	width_ = surface->w;
 	height_ = surface->h;
+	// tamaños frames
+	fw_ = width_ / numCols;
+	fh_ = height_ / numRows;
 	renderer_ = renderer;
 
 	SDL_FreeSurface(surface);

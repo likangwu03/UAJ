@@ -40,6 +40,14 @@ namespace _ecs {
 	enum _hdr_id : id_type {
 		hdr_PLAYER,
 		hdr_DISHCOMB,
+		hdr_CUSTOMER,
+		hdr_INVENTORY,
+		hdr_MONEY_ICON,
+		hdr_REPUTATION,
+		hdr_TARGET,
+		hdr_MONEY,
+		hdr_PRUEBA,
+		
 		// Do not erase pls
 		hdr_INVALID
 	};

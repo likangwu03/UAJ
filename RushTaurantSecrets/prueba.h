@@ -12,7 +12,7 @@ class prueba:public GameObject
 private:
 	Texture* tex;
 public:
-	prueba(Scene* scene) :GameObject(scene) {
+	prueba(Scene* scene) :GameObject(scene, _ecs::hdr_PRUEBA) {
 		auto& sdl = *SDLUtils::instance();
 
 		//tex = &(sdl.images().at("MERMELADA"));

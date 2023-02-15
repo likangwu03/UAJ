@@ -15,7 +15,7 @@ public:
 		sdl = SDLUtils::instance();
 		// construcción de entidades de la clase y sus componentes
 		// icono de dinero
-		GameObject* moneyIcon = new GameObject(this, _ecs::grp_ICONS);
+		GameObject* moneyIcon = new GameObject(this, _ecs::hdr_MONEY_ICON, _ecs::grp_ICONS);
 
 		// icono de cesta
 

@@ -170,10 +170,12 @@ void SDLUtils::loadReasources(std::string filename) {
 					JSONObject vObj = v->AsObject();
 					std::string key = vObj["id"]->AsString();
 					std::string file = vObj["file"]->AsString();
+					int cols = vObj["cols"] == nullptr ? 1 : vObj["cols"]->AsNumber();
+					int rows = vObj["rows"] == nullptr ? 1 : vObj["rows"]->AsNumber();
 #ifdef _DEBUG
 					std::cout << "Loading image with id: " << key << std::endl;
 #endif
-					images_.emplace(key, Texture(renderer(), file));
+					images_.emplace(key, Texture(renderer(), file, cols, rows));
 				} else {
 					throw "'images' array in '" + filename
 							+ "' includes and invalid value";

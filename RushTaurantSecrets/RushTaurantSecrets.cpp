@@ -18,7 +18,8 @@
 //	SDL_Renderer* renderer = nullptr;
 //	const uint winWidth = 800;
 //	const uint winHeight = 600;
-//	SDL_Init(SDL_INIT_EVERYTHING);
+//	SDL_
+// (SDL_INIT_EVERYTHING);
 //	window = SDL_CreateWindow("First test with SDL", SDL_WINDOWPOS_CENTERED,
 //		SDL_WINDOWPOS_CENTERED, winWidth, winHeight, SDL_WINDOW_SHOWN);
 //	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);

@@ -22,7 +22,7 @@ public:
 	Texture(Texture &&other) noexcept;
 
 	// Construct from image
-	Texture(SDL_Renderer *renderer, const std::string &fileName);
+	Texture(SDL_Renderer *renderer, const std::string &fileName, int numCols = 1, int numRows = 1);
 
 	// Construct from text
 	Texture(SDL_Renderer *renderer, const std::string &text, const Font &font,
@@ -44,6 +44,14 @@ public:
 
 	inline int height() const {
 		return height_;
+	}
+
+	inline int fwidth() const {
+		return fw_;
+	}
+
+	inline int fheight() const {
+		return fh_;
 	}
 
 	// This rendering method corresponds to method SDL_RenderCopyEx.
@@ -90,6 +98,14 @@ public:
 		render(src, dest, rotation);
 	}
 
+	inline void renderFrame(const SDL_Rect& dest, int col, int row) {
+		SDL_Rect src;
+		src.x = fw_ * col;
+		src.y = fh_ * row;
+		src.w = fw_;
+		src.h = fh_;
+		render(src, dest);
+	}
 
 	SDL_Texture* getTexture() const { return texture_;  }
 
@@ -105,4 +121,6 @@ private:
 	SDL_Renderer *renderer_;
 	int width_;
 	int height_;
+	int fw_;
+	int fh_;
 };

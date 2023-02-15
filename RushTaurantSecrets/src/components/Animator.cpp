@@ -1,16 +1,14 @@
 #include "Animator.h"
 
-void Animator::addAnimation(Texture* t, int n)
+void Animator::addAnimation(Texture* t, int endFrame)
 {
-	Anim a{t, n};
+	Anim a{t, endFrame};
 	animations.push_back(a);
 }
 
 void Animator::updateAnim()
 {
-	sqr.x = count * sqr.w;
-
-	count++;
+	++count;
 
 	if (count >= animations[currentAnim].second)
 		count = 0;

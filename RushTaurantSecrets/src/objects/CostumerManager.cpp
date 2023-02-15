@@ -5,7 +5,7 @@
 #include "../components/CustPathing.h"
 
 void CostumerManager::createCustomer(Vector origin, Vector end) {
-	GameObject* customer = new GameObject(scene, _ecs::grp_CUSTOMERS);
+	GameObject* customer = new GameObject(scene, _ecs::hdr_CUSTOMER, _ecs::grp_CUSTOMERS);
 	new CustPathing(customer, origin, end, 3, 50, 50);
 	new Image(customer, &((*sdl).images().at("MERMELADA")));
 

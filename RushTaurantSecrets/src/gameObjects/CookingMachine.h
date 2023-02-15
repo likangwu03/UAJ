@@ -7,7 +7,7 @@ class CookingMachine:public GameObject
 {
 public:
 
-	CookingMachine(Scene* scene) :GameObject(scene, _ecs::grp_INTERACTABLE) {
+	CookingMachine(Scene* scene) :GameObject(scene, _ecs::hdr_DISHCOMB, _ecs::grp_INTERACTABLE) {
 		new CookingMachineComp(this);
 	};
 };

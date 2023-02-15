@@ -7,15 +7,8 @@ Game::Game() {
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
 	sdl->showCursor();
-	/*
-	GameObject* customer = new GameObject(sceneManager->getCurrentScene(), _ecs::grp_CUSTOMERS);
-	new CustPathing(customer, Vector(1000, 500), Vector(800, 300), 3, 50, 50);
-	new Image(customer, &((*sdl).images().at("prueba")));
-	*/
-
-	//c = new CostumerManager(sceneManager->getCurrentScene());
-
 }
+
 void Game::run() {
 	uint32_t startTime, frameTime;
 	while (!exit) {
@@ -24,7 +17,6 @@ void Game::run() {
 		ih->refresh();
 		handleEvents();
 		update();
-		//c->addCustomerFrequently();
 		refresh();
 		render();
 
@@ -50,6 +42,11 @@ void Game::run() {
 
 void Game::render() {
 	sdl->clearRenderer();
+	SDL_Rect destRect;
+	destRect.x = 600;
+	destRect.y = 600;
+	destRect.w = 100;
+	destRect.h = 100;
 	sceneManager->render();
 	sdl->presentRenderer();
 }
