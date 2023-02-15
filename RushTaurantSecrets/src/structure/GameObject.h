@@ -24,7 +24,7 @@ public:
 	}
 
 	virtual void update();
-	void render();
+	virtual void render();
 	void handleEvents();
 
 	void addComponent(Component* comp, _ecs::_cmp_id id) {
