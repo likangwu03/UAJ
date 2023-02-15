@@ -5,7 +5,7 @@
 class Inventory:public GameObject
 {
 public:
-	Inventory(Scene* scene):GameObject(scene, _ecs::hdr_INVENTORY, _ecs::grp_HUD) {
+	Inventory(Scene* scene):GameObject(scene, _ecs::grp_HUD, _ecs::hdr_INVENTORY) {
 		new InventoryComp(this);
 		//hay que añadir otros componentes para renderizar el inventario,etc...
 	};

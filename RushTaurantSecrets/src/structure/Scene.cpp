@@ -13,7 +13,7 @@ Scene::~Scene() {
 
 void Scene::addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler) {
 	objGroups[grp].push_back(object);
-	handlers[handler] = object;
+	if(handler != _ecs::hdr_INVALID) handlers[handler] = object;
 }
 
 void Scene::refresh() {

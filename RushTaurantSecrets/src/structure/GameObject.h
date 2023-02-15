@@ -12,7 +12,7 @@ protected:
 	bool alive;
 
 public:
-	GameObject(Scene* scene, _ecs::_hdr_id handler, _ecs::_grp_id grp = _ecs::grp_GENERAL);
+	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
 	virtual ~GameObject();
 
 	//void changeScene(Scene* scene);

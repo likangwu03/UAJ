@@ -1,6 +1,6 @@
 #pragma once
 #include <math.h>
-#define PI 3.14159265358979323846264338327950288f
+constexpr float PI = 3.14159265358979323846264338327950288f;
 
 class Vector {
 private:
@@ -44,11 +44,3 @@ public:
 	inline void rotate(float degrees) { *this = getRotated(degrees); }
 	inline float angle() { return atanf(y / x) * 180 / PI; }
 };
-
-/*
-const Vector Vector::zero = Vector();
-const Vector Vector::right = Vector(1, 0);
-const Vector Vector::down = Vector(0, 1);
-const Vector Vector::left = Vector(-1, 0);
-const Vector Vector::up = Vector(0, -1);
-*/

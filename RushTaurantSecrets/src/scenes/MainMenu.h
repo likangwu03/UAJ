@@ -18,7 +18,7 @@ public:
 		test = new prueba(this);
 
 		
-		map = new GameObject(this, _ecs::hdr_PRUEBA);
+		map = new GameObject(this, grp_GENERAL, _ecs::hdr_PRUEBA);
 		MapCreator* mpCrt = new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
 		
 		

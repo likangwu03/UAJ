@@ -3,7 +3,7 @@
 
 class ClientState : public Component {
 public:
-	constexpr static _ecs::id_type id = _ecs::cmp_CLIENTSTATE;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
 	ClientState(GameObject* parent) : Component(parent, id), state(START) { }
 
 	enum States {
