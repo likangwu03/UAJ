@@ -23,7 +23,7 @@ public:
 		this->alive = alive;
 	}
 
-	void update();
+	virtual void update();
 	void render();
 	void handleEvents();
 

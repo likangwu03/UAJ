@@ -6,13 +6,13 @@
 #include "../components/Image.h"
 #include "../objects/Money.h" // cambiar cuando se cambie la clase Money
 #include <string>
-//#include "../objects/Inventory.h"
+#include "../gameObjects/Inventory.h"
 
 // UI del restaurante 
 class UIRestaurant : public Scene
 {
 private:
-	//Inventory inventory;
+	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt = new Money();
 

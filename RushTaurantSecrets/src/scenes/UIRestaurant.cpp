@@ -21,10 +21,13 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Transform(menu, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), 50, 50, 0);
 	new Image(menu, &((*sdl).images().at("DAILY_MENU")));
 
-	// inventario
+	// inventario (fondo)
 	GameObject* inv = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_INVENTORY);
 	new Transform(inv, Vector(20, sdl->height() - 244), Vector(0, 0), 80, 224, 0);
 	new Image(inv, &((*sdl).images().at("INVENTORY_ICON")));
+
+	// inventario (platos)
+	inventory = new Inventory(this);
 
 	// icono de menú de pausa
 	GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
@@ -43,5 +46,6 @@ void UIRestaurant::showMoneyText() {
 }
 
 void UIRestaurant::update() {
+	Scene::update();
 	showMoneyText();
 }
