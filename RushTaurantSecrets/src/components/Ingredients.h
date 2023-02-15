@@ -2,29 +2,30 @@
 #include "../structure/Food_def.h"
 #include "../structure/Component.h"
 #include "../sdlutils/SDLUtils.h"
-#include <vector>
+#include "../structure/GameObject.h"
+#include "../components/Transform.h"
 
-using namespace _ecs;
 using namespace std;
 
-class Transform;
-class GameObject;
-
+// no hace falta inicializar el vector (se puede borrar)
 const int NUM_INGREDIENTS_IN_INVENTARY = 4;
 
 class Ingredients: public Component {
 private:
-	//lista de ingredientes
-	vector<_ingredients_id> ingredients[NUM_INGREDIENTS_IN_INVENTARY];
+	// vector de ingredientes
+	vector<_ecs::_ingredients_id> ingredients;
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
 	Texture* texture;
 	Transform* transform;
 	SDLUtils* sdl;
 
 public:
-	Ingredients(GameObject* parent);
-	void addIngredient(_ingredients_id ing);
-	void removeLastIngredient(_ingredients_id ing);
+	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
+		transform = parent->getComponent<Transform>();
+	}
+
+	void addIngredient(_ecs::_ingredients_id ingr);
+	void removeLastIngredient();
 	void removeAllIngredients();
 	void removeWhenExit();
 	void render();

@@ -1,26 +1,15 @@
 #include "Ingredients.h"
-#include "../components/Transform.h"
-#include "../structure/GameObject.h"
-
-using namespace _ecs;
-
-Ingredients::Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
-	transform = parent->getComponent<Transform>();
-}
 
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
-	for (int i = 0; i < ingredients->size();++i) {
-		ingredients->push_back(ingr);
-	}
-	
+	ingredients.push_back(ingr);
 }
 
-void Ingredients::removeLastIngredient(_ingredients_id ing) {
-	ingredients->pop_back();
+void Ingredients::removeLastIngredient() {
+	ingredients.pop_back();
 }
 
 void Ingredients::removeAllIngredients() {
-	
+
 }
 
 void Ingredients::removeWhenExit() {
@@ -28,14 +17,17 @@ void Ingredients::removeWhenExit() {
 }
 
 void Ingredients::render() {
+	// rectángulo en el mundo donde se va a colocar la textura
 	SDL_Rect dest;
 	dest.x = transform->getPos().getX();
 	dest.y = transform->getPos().getY();
 	dest.w = transform->getW();
 	dest.h = transform->getH();
-	
+
+	// se pintan todas las texturas que hay en el vector
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
-		texture = &((*sdl).images().at(to_string(*it)));
+		_ecs::_ingredients_id ingr = *it;
+		texture = &((*sdl).images().at(to_string(ingr)));
 		texture->render(dest);
 	}
 }
