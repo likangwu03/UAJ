@@ -33,5 +33,15 @@ UIRestaurant::UIRestaurant() : Scene() {
 }
 
 void UIRestaurant::showMoneyText() {
+	GameObject* moneyText = new GameObject(this, _ecs::hdr_MONEY_TEXT, _ecs::grp_ICONS);
+	Font* f = new Font("assets/Fonts/Hamish.ttf", 50);
+	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
+	int intMoney = moneyTxt->getMoney();
+	std::string strMoney = std::to_string(intMoney);
+	Texture* text = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
+	new Image(moneyText, text);
+}
 
+void UIRestaurant::update() {
+	showMoneyText();
 }
