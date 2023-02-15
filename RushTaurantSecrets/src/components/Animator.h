@@ -4,6 +4,8 @@
 #include "../structure/Structure_def.h"
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../structure/GameObject.h"
+#include "../components/Transform.h"
 
 using namespace std;
 using Anim = std::pair<Texture*, int>;
@@ -19,7 +21,7 @@ class Animator : public Component
 	SDL_Rect sqr;
 
 public:
-	constexpr static _ecs::id_type id = _ecs::cmp_ANIMATOR;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 	//constexpr static _ecs::id_type id = _ecs::cmp_TRANSFORM;
 
 	Animator(GameObject* parent, Texture* t, const int n) : Component(parent, id){
@@ -49,8 +51,8 @@ public:
 	virtual void render()
 	{
 		SDL_Rect temp;
-		temp.x = 600;
-		temp.y = 300;
+		temp.x = parent->getComponent<Transform>()->getPos().getX();
+		temp.y = parent->getComponent<Transform>()->getPos().getY();
 		temp.w = sqr.w;
 		temp.h = sqr.h;
 

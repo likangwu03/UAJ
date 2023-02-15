@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="16" nextobjectid="1">
- <tileset firstgid="1" source="Exterior.tsx"/>
+ <tileset firstgid="1" source="atlas.tsx"/>
  <tileset firstgid="1537" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="9821" source="16_Grocery_store_48x48.tsx"/>
  <tileset firstgid="11069" source=":/automap-tiles.tsx"/>
- <tileset firstgid="11074" source="comida.tsx"/>
+ <tileset firstgid="11074" source="food.tsx"/>
  <tileset firstgid="11134" source="22_Museum_48x48.tsx"/>
  <tileset firstgid="13086" source="14_Basement_48x48.tsx"/>
  <tileset firstgid="13886" source="9_Fishing_48x48.tsx"/>

@@ -8,9 +8,9 @@ protected:
 	GameObject* parent;
 	bool alive;
 public:
-	static constexpr _ecs::id_type id = _ecs::cmp_INVALID;
+	static constexpr _ecs::_cmp_id id = _ecs::cmp_INVALID;
 
-	Component(GameObject* parent, _ecs::id_type id);
+	Component(GameObject* parent, _ecs::_cmp_id id);
 	virtual ~Component() { }
 
 	inline bool isAlive() { return alive; }

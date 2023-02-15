@@ -13,40 +13,232 @@
       "rows": 1
     },
     {
-      "id": "HUEVO_FRITO",
+      "id": "0",
       "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png",
       "cols": 1,
       "rows": 1
     },
     {
-      "id": "PAN",
+      "id": "1",
       "file": "assets/Sprites/Food/Dishes/PAN.png",
       "cols": 1,
       "rows": 1
     },
     {
-      "id": "MERMELADA",
+      "id": "0",
       "file": "assets/Sprites/Food/Dishes/MERMELADA.png",
       "cols": 1,
       "rows": 1
     },
     {
-      "id": "PAN_AJO",
+      "id": "3",
       "file": "assets/Sprites/Food/Dishes/PAN_AJO.png",
       "cols": 1,
       "rows": 1
     },
     {
-      "id": "FRENCH_FRIES",
+      "id": "4",
       "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png",
       "cols": 1,
       "rows": 1
     },
     {
-      "id": "PANCAKE",
+      "id": "5",
       "file": "assets/Sprites/Food/Dishes/PANCAKE.png",
       "cols": 1,
       "rows": 1
+    },
+    {
+      "id": "6",
+      "file": "assets/Sprites/Food/Dishes/TARTA_FRESA.png"
+    },
+    {
+      "id": "7",
+      "file": "assets/Sprites/Food/Dishes/TARTA_CHOC.png"
+    },
+    {
+      "id": "8",
+      "file": "assets/Sprites/Food/Dishes/TARTA_FRAM.png"
+    },
+    {
+      "id": "9",
+      "file": "assets/Sprites/Food/Dishes/GALLETAS.png"
+    },
+    {
+      "id": "10",
+      "file": "assets/Sprites/Food/Dishes/OMELETTE.png"
+    },
+    {
+      "id": "11",
+      "file": "assets/Sprites/Food/Dishes/TARTA_MAN.png"
+    },
+    {
+      "id": "12",
+      "file": "assets/Sprites/Food/Dishes/TARTA_QUESO.png"
+    },
+    {
+      "id": "13",
+      "file": "assets/Sprites/Food/Dishes/BURRITO.png"
+    },
+    {
+      "id": "14",
+      "file": "assets/Sprites/Food/Dishes/PURE.png"
+    },
+    {
+      "id": "15",
+      "file": "assets/Sprites/Food/Dishes/HELADO.png"
+    },
+    {
+      "id": "16",
+      "file": "assets/Sprites/Food/Dishes/NACHOS.png"
+    },
+    {
+      "id": "17",
+      "file": "assets/Sprites/Food/Dishes/HOTDOG.png"
+    },
+    {
+      "id": "18",
+      "file": "assets/Sprites/Food/Dishes/SANDWICH.png"
+    },
+    {
+      "id": "19",
+      "file": "assets/Sprites/Food/Dishes/SUSHI.png"
+    },
+    {
+      "id": "20",
+      "file": "assets/Sprites/Food/Dishes/CURRY_ARROZ.png"
+    },
+    {
+      "id": "21",
+      "file": "assets/Sprites/Food/Dishes/PIZZA.png"
+    },
+    {
+      "id": "22",
+      "file": "assets/Sprites/Food/Dishes/POLLO_ASADO.png"
+    },
+    {
+      "id": "23",
+      "file": "assets/Sprites/Food/Dishes/FILETE.png"
+    },
+    {
+      "id": "24",
+      "file": "assets/Sprites/Food/Dishes/ALBONDIGAS.png"
+    },
+    {
+      "id": "25",
+      "file": "assets/Sprites/Food/Dishes/ESPAGUETI.png"
+    },
+    {
+      "id": "26",
+      "file": "assets/Sprites/Food/Dishes/BURGUER.png"
+    },
+    {
+      "id": "27",
+      "file": "assets/Sprites/Food/Dishes/RAMEN.png"
+    },
+    {
+      "id": "28",
+      "file": "assets/Sprites/Food/Dishes/NONE_DISH.png"
+    },
+    {
+      "id": "29",
+      "file": "assets/Sprites/Food/Ingredients/HARINA.png"
+    },
+    {
+      "id": "30",
+      "file": "assets/Sprites/Food/Ingredients/HUEVO.png"
+    },
+    {
+      "id": "31",
+      "file": "assets/Sprites/Food/Ingredients/PATATA.png"
+    },
+    {
+      "id": "32",
+      "file": "assets/Sprites/Food/Ingredients/CHOCOLATE.png"
+    },
+    {
+      "id": "33",
+      "file": "assets/Sprites/Food/Ingredients/LECHUGA.png"
+    },
+    {
+      "id": "34",
+      "file": "assets/Sprites/Food/Ingredients/MAIZ.png"
+    },
+    {
+      "id": "35",
+      "file": "assets/Sprites/Food/Ingredients/FRESA.png"
+    },
+    {
+      "id": "36",
+      "file": "assets/Sprites/Food/Ingredients/ZANAHORIA.png"
+    },
+    {
+      "id": "37",
+      "file": "assets/Sprites/Food/Ingredients/AJO.png"
+    },
+    {
+      "id": "38",
+      "file": "assets/Sprites/Food/Ingredients/LECHE.png"
+    },
+    {
+      "id": "39",
+      "file": "assets/Sprites/Food/Ingredients/ARROZ.png"
+    },
+    {
+      "id": "40",
+      "file": "assets/Sprites/Food/Ingredients/TOMATE.png"
+    },
+    {
+      "id": "41",
+      "file": "assets/Sprites/Food/Ingredients/MANZANA.png"
+    },
+    {
+      "id": "42",
+      "file": "assets/Sprites/Food/Ingredients/MANTEQUILLA.png"
+    },
+    {
+      "id": "43",
+      "file": "assets/Sprites/Food/Ingredients/FRAMBUESA.png"
+    },
+    {
+      "id": "44",
+      "file": "assets/Sprites/Food/Ingredients/MOSTAZA.png"
+    },
+    {
+      "id": "45",
+      "file": "assets/Sprites/Food/Ingredients/FIDEOS.png"
+    },
+    {
+      "id": "46",
+      "file": "assets/Sprites/Food/Ingredients/CURRY.png"
+    },
+    {
+      "id": "47",
+      "file": "assets/Sprites/Food/Ingredients/QUESO.png"
+    },
+    {
+      "id": "48",
+      "file": "assets/Sprites/Food/Ingredients/SALCHICHA.png"
+    },
+    {
+      "id": "49",
+      "file": "assets/Sprites/Food/Ingredients/POLLO.png"
+    },
+    {
+      "id": "50",
+      "file": "assets/Sprites/Food/Ingredients/GAMBAS.png"
+    },
+    {
+      "id": "51",
+      "file": "assets/Sprites/Food/Ingredients/SALMON.png"
+    },
+    {
+      "id": "52",
+      "file": "assets/Sprites/Food/Ingredients/CARNE.png"
+    },
+    {
+      "id": "53",
+      "file": "assets/Sprites/Food/Ingredients/NONE_ING.png"
     },
     {
       "id": "MONEY_ICON",

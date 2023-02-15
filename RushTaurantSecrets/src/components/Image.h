@@ -13,7 +13,7 @@ private:
 	Texture* texture = nullptr;
 
 public:
-	constexpr static _ecs::id_type id = _ecs::cmp_IMAGE;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_IMAGE;
 
 	Image(GameObject* parent, Texture* texture) : Component(parent, id), texture(texture) {
 		// importante que se añada el Transform antes de Image porque sino no se va a encontrar la ref

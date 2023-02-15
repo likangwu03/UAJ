@@ -30,9 +30,11 @@ SDLUtils::SDLUtils(std::string windowTitle, int width, int height,
 		std::string filename) :
 		SDLUtils(windowTitle, width, height) {
 	loadReasources(filename);
+	loadTilesets();
 }
 
 SDLUtils::~SDLUtils() {
+	for (auto ts : tilesets_) delete ts.second;
 	closeSDLExtensions();
 	closeWindow();
 }
@@ -269,6 +271,48 @@ void SDLUtils::loadReasources(std::string filename) {
 	}
 
 }
+
+
+void SDLUtils::loadTilesets() {
+	std::string filename = "assets/tilesets.json";
+	std::unique_ptr<JSONValue> jValueRoot2(JSON::ParseFromFile(filename));
+
+	if (jValueRoot2 == nullptr || !jValueRoot2->IsObject()) {
+		throw "Something went wrong while load/parsing '" + filename + "'";
+	}
+
+	JSONObject root = jValueRoot2->AsObject();
+	JSONValue* jValue = nullptr;
+
+	// load images
+	jValue = root["images"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			tilesets_.reserve(jValue->AsArray().size()); // reserve enough space to avoid resizing
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string key = vObj["id"]->AsString();
+					std::string file = vObj["file"]->AsString();
+#ifdef _DEBUG
+					std::cout << "Loading image with id: " << key << std::endl;
+#endif
+					tilesets_.emplace(key, new Texture(renderer(), file));
+				}
+				else {
+					throw "'images' array in '" + filename
+						+ "' includes and invalid value";
+				}
+			}
+		}
+		else {
+			throw "'images' is not an array in '" + filename + "'";
+		}
+	}
+}
+
+std::unordered_map<std::string, Texture*> SDLUtils::getLoadedTilesets() { return tilesets_; }
+
 
 void SDLUtils::closeSDLExtensions() {
 

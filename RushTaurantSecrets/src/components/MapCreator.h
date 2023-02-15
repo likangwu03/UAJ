@@ -13,7 +13,7 @@ using namespace std;
 using uint = unsigned int;
 
 class MapCreator : public Component {
-	constexpr static _ecs::id_type id = _ecs::cmp_MAPCREATOR;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_MAPCREATOR;
 
 private:
 	double resizeFactor;
@@ -25,22 +25,13 @@ private:
 	double tileInWindowW, tileInWindowH;
 	map<uint, Texture*> tilesets;
 	SDL_Texture* bg;
-	Texture* testTexture;
 
 public:
 	MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer);
 	~MapCreator();
 
-	Map* getTileMap() { return tileMap; }
-	int getRows() { return rows; }
-	int getCols() { return cols; }
-	int getTileW() { return tileW; }
-	int getTileH() { return tileH; }
-	map<uint, Texture*> getTilesets() { return tilesets; }
-	SDL_Renderer* getRenderer() { return renderer; }
-
 private:
 	void loadMapDims();
 	void loadTilesets();
-	 void render();
+	void render();
 };

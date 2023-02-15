@@ -7,11 +7,11 @@ class Scene;
 
 class GameObject {
 protected:
-	std::unordered_map<_ecs::id_type, Component*> components;
+	std::unordered_map<_ecs::_cmp_id, Component*> components;
 	Scene* scene;
 	bool alive;
 public:
-	GameObject(Scene* scene, _ecs::id_type grp = _ecs::grp_GENERAL);
+	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL);
 	virtual ~GameObject();
 
 	//void changeScene(Scene* scene);
@@ -26,7 +26,7 @@ public:
 	void render();
 	void handleEvents();
 
-	void addComponent(Component* comp, _ecs::id_type id) {
+	void addComponent(Component* comp, _ecs::_cmp_id id) {
 		auto it = components.find(id);
 		if (it != components.end()) {
 			delete it->second;
@@ -35,7 +35,7 @@ public:
 	}
 
 	template<typename Comp>
-	Comp* getComponent() {
+	inline Comp* getComponent() {
 		auto it = components.find(Comp::id);
 		if (it == components.end()) {
 			return nullptr;
