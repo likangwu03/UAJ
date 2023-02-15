@@ -4,24 +4,30 @@
 #include "../../src/components/MapCreator.h"
 #include "../structure/Structure_def.h"
 
+#include "../components/ClientState.h"
+#include "../components/ClientInTableState.h"
+
 class MainMenu : public Scene {
 private:
 	InputHandler* ih;
 	GameObject* map;
 	GameObject* test;
 	GameObject* player;
+	GameObject* client;
 
 public:
 	MainMenu() : Scene() {
 
 		ih = InputHandler::instance();
-		test = new prueba(this);
 
+		map = new GameObject(this);
+		new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
+		test = new prueba(this);
 		
-		map = new GameObject(this, grp_GENERAL, _ecs::hdr_PRUEBA);
-		MapCreator* mpCrt = new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
-		
-		
+		client = new GameObject(this);
+		ClientState* clSt = new ClientState(client);
+		new ClientInTableState(client, clSt);
+
 		
 		this->addObject(test, _ecs::grp_PLAYER, _ecs::hdr_PLAYER);
 	}

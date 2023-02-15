@@ -1,6 +1,7 @@
 #pragma once
 #include "../structure/Component.h"
 #include <vector>
+class Transform;
 
 class DeskComp : public Component {
 private:

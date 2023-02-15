@@ -11,7 +11,8 @@ public:
 		ENTRANCE, // Esperar a que le asignen
 		ASSIGNED, // Caminar hacia mesa
 		THINKING, // Pensando su pedido
-		ORDERING, // Esperando su pedido
+		TAKEMYORDER, // Esperando a que le tomen nota
+		ORDERED, // Esperando su pedido
 		EATING,   // Comiendo
 		REGISTER, // Caminando a la caja
 		PAYING,   // Esperando a que le cobren
