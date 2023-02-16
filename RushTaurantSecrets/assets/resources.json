@@ -337,6 +337,12 @@
       "rows": 1
     },
     {
+      "id": "BUBBLE_ICON",
+      "file": "assets/Sprites/UI/cocina_nube.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "1_Generic_48x48",
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png",
       "cols": 1,

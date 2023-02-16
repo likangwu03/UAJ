@@ -15,10 +15,7 @@ void DishCombinator::auxCombinator(int n, int m, int k, vector<_ecs::_ingredient
 		soluc[k] = (_ecs::_ingredients_id)ing[i];
 		if (!used[i]) {
 			used[i] = true;
-			if (k == n - 1) {
-				dishes.insert({ soluc,id });
-
-			}
+			if (k == n - 1) dishes.insert({ soluc,id });
 			else auxCombinator(n, m, k + 1, soluc, used, id, ing);
 			used[i] = false;
 		}
