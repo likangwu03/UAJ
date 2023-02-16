@@ -29,6 +29,6 @@ public:
 		new ClientInTableState(client, clSt);
 
 		
-		this->addObject(test, _ecs::grp_PLAYER, _ecs::hdr_PLAYER);
+		
 	}
 };

@@ -1,6 +1,10 @@
 #include "InventoryComp.h"
 
 InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
+	
+	sdl = SDLUtils::instance();
+	ih = InputHandler::instance();
+
 	dishes.reserve(3);
 	dishesBool.reserve(3);
 	// inicializa el vector de booleanos
@@ -28,18 +32,18 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 	}
 }
 
-// libera el espacio indicado (num) ya sea para tirar el plato, dárselo a un cliente...
-void InventoryComp::freeDish(int num) {
+// libera el espacio seg¨²n casilla seleccionado previamente ya sea para tirar el plato, dárselo a un cliente...
+void InventoryComp::freeDish() {
 	// sólo libera el plato si existe
 	// !! pensar en mantener esta implementación o cambiar para sólo seleccionar los huecos cubiertos
-	if (dishesBool[num] == true) {
+	if (dishesBool[cellSelected] == true) {
 		// si hay más de un plato
-		if (num >= 1) {
-			for (int i = 0; i < num - 1; i++) {
+		if (cellSelected >= 1) {
+			for (int i = 0; i < cellSelected - 1; i++) {
 				dishes[i] = dishes[i + 1];
 			}
 		}
-		dishesBool[num] = false;
+		dishesBool[cellSelected] = false;
 	}
 }
 
@@ -76,7 +80,7 @@ void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
 void InventoryComp::render() {
 	// recorre la lista de platos para renderizarlos
 	for (int i = 0; i < 3; i++) {
-		// si el plato está en el inventario, se renderiza
+		// si el plato est?en el inventario, se renderiza
 		if (dishesBool[i] == true) {
 			int x, y;
 			setPosition(i, x, y);

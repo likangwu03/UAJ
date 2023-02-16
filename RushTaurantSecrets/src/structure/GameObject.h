@@ -23,6 +23,8 @@ public:
 		this->alive = alive;
 	}
 
+	Scene* getScene() { return scene; }
+
 	virtual void update();
 	virtual void render();
 	void handleEvents();
@@ -43,4 +45,6 @@ public:
 		}
 		return static_cast<Comp*>(it->second);
 	}
+
+
 };

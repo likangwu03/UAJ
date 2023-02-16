@@ -12,9 +12,9 @@ protected:
 	// se utiliza para conectar objetos de una misma escena
 	std::array<GameObject*, _ecs::hdrNum> handlers;
 	Scene();
-
 public:
 	virtual ~Scene();
+	Scene* getUI() { return nullptr; };
 
 	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 	void refresh();

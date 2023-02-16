@@ -18,6 +18,7 @@ private:
 
 public:
 	UIRestaurant();
+	Inventory* getInventory() { return inventory; };
 	void showMoneyText();
 	void update();
 };
