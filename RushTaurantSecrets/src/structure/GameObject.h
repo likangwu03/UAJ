@@ -5,17 +5,11 @@
 class Component;
 class Scene;
 
-enum GOOrientation {
-	north, east, west, south
-};
-
 class GameObject {
 protected:
 	std::unordered_map<_ecs::_cmp_id, Component*> components;
 	Scene* scene;
 	bool alive;
-
-	GOOrientation orientation;
 
 public:
 	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
@@ -27,14 +21,6 @@ public:
 
 	void setAlive(bool alive) {
 		this->alive = alive;
-	}
-
-	GOOrientation getOrientation() {
-		return orientation;
-	}
-
-	void setOrientation(GOOrientation o) {
-		this->orientation = o;
 	}
 
 	virtual Scene* getScene() { return scene; }
