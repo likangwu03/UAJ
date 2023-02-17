@@ -23,7 +23,7 @@ public:
 		this->alive = alive;
 	}
 
-	Scene* getScene() { return scene; }
+	virtual Scene* getScene() { return scene; }
 
 	virtual void update();
 	virtual void render();

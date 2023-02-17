@@ -14,7 +14,7 @@ protected:
 	Scene();
 public:
 	virtual ~Scene();
-	Scene* getUI() { return nullptr; };
+	virtual Scene* getUI() { return nullptr; };
 
 	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 	void refresh();
