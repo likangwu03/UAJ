@@ -27,8 +27,6 @@ public:
 		
 
 		test = new prueba(this);
-		test2 = new Client(this);
-
 		
 		client = new GameObject(this);
 		// Menú del día aleatorio (genera un número de platos aleatorio entre 1-5 platos, lo
@@ -44,7 +42,5 @@ public:
 
 		new ClientState(client, menu);
 		
-		this->addObject(test, _ecs::grp_PLAYER, _ecs::hdr_PLAYER);
-		this->addObject(test2, _ecs::grp_CUSTOMERS, _ecs::hdr_CUSTOMER);
 	}
 };

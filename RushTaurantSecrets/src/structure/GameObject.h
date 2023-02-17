@@ -29,6 +29,14 @@ public:
 		this->alive = alive;
 	}
 
+	GOOrientation getOrientation() {
+		return orientation;
+	}
+
+	void setOrientation(GOOrientation o) {
+		this->orientation = o;
+	}
+
 	virtual Scene* getScene() { return scene; }
 
 	virtual void update();
