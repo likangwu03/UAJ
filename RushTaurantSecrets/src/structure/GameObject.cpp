@@ -7,7 +7,7 @@ GameObject::GameObject(Scene* scene, _ecs::_grp_id grp, _ecs::_hdr_id handler) :
 }
 
 GameObject::~GameObject() {
-	for(auto& i : components) {
+	for (auto& i : components) {
 		delete i.second;
 	}
 }
@@ -20,22 +20,26 @@ GameObject::~GameObject() {
 
 void GameObject::refresh() {
 	auto it = components.begin();
-	while(it != components.end()) {
-		if(!it->second->isAlive()) {
+	while (it != components.end()) {
+		if (!it->second->isAlive()) {
 			delete it->second;
 			it = components.erase(it);
-		} else ++it;
+		}
+		else ++it;
 	}
 }
 
 void GameObject::update() {
-	for(auto& i : components) i.second->update();
+	for (auto& i : components)
+		if (i.second->isActive())i.second->update();
 }
 
 void GameObject::render() {
-	for(auto& i : components) i.second->render();
+	for (auto& i : components)
+		if (i.second->isActive())i.second->render();
 }
 
 void GameObject::handleEvents() {
-	for(auto& i : components) i.second->handleEvents();
+	for (auto& i : components)
+		if (i.second->isActive())i.second->handleEvents();
 }

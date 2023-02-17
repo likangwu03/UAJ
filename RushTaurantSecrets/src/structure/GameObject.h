@@ -60,5 +60,12 @@ public:
 		return static_cast<Comp*>(it->second);
 	}
 
+	template<typename Comp>
+	inline void setActive(bool b) {
+		auto it = components.find(Comp::id);
+		if (it == components.end())return;
+		it->second->setActive(b);
+	}
+
 
 };
