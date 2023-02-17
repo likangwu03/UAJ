@@ -2,9 +2,8 @@
 #include "Scene.h"
 #include "Component.h"
 
-GameObject::GameObject(Scene* scene, _ecs::_grp_id grp, _ecs::_hdr_id handler) : scene(scene), alive(true) {
+GameObject::GameObject(Scene* scene, _ecs::_grp_id grp, _ecs::_hdr_id handler) : scene(scene), alive(true), orientation(east) {
 	scene->addObject(this, grp, handler);
-	orientation = south;
 }
 
 GameObject::~GameObject() {
