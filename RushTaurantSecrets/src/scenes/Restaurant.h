@@ -13,7 +13,6 @@ private:
 	Pantry* pantry;
 	DishCombinator* dc;
 	UIRestaurant* ui;
-	SDLUtils* sdl = SDLUtils::instance();
 public:
 	Restaurant(UIRestaurant* restUI = nullptr) : pantry(nullptr), ui(restUI),dc(DishCombinator::init()) { /*init();*/ }
 	UIRestaurant* getUI() { return ui; }

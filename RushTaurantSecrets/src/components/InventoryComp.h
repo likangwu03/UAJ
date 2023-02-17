@@ -25,6 +25,8 @@ private:
 	// métodos privados
 	void renderDish(int xD, int yD, _ecs::_dish_id dishID);
 	void setPosition(int i, int& x, int& y);
+	int firstDishL(int num);
+	int firstDishR(int num);
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INVENTORY;

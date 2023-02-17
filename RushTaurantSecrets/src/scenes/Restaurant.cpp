@@ -46,6 +46,4 @@ void Restaurant::init() {
 
 	// objetos interactuables
 	Bin* bin = new Bin(this, Vector(200, 200));
-	// icono temporal, cambiar cuando se haya implementado la animación de la papelera
-	new Image(bin, &((*sdl).images().at("MONEY_ICON")));
 }

@@ -33,6 +33,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
 	new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
 	new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
+	
 }
 
 void UIRestaurant::showMoneyText() {

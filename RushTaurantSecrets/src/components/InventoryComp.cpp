@@ -11,7 +11,7 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	for (int i = 0; i < 3; i++) {
 		dishesBool.push_back(false);
 	}
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) {	
 		dishes.push_back(_ecs::ALBONDIGAS);
 	}
 	dishH = 60; dishW = 60;
@@ -19,8 +19,8 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	cellSelected = -1;
 
 	// prueba--borrar luego
-	//dishesBool[0] = true;
-	//dishesBool[1] = true;
+	dishesBool[0] = true;
+	dishesBool[1] = true;
 	//dishesBool[2] = true;
 }
 
@@ -36,17 +36,8 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 
 // libera el espacio seg¨²n casilla seleccionado previamente ya sea para tirar el plato, dárselo a un cliente...
 void InventoryComp::freeDish() {
-	// sólo libera el plato si existe
-	// !! pensar en mantener esta implementación o cambiar para sólo seleccionar los huecos cubiertos
-	if (dishesBool[cellSelected] == true) {
-		// si hay más de un plato
-		if (cellSelected >= 1) {
-			for (int i = 0; i < cellSelected - 1; i++) {
-				dishes[i] = dishes[i + 1];
-			}
-		}
-		dishesBool[cellSelected] = false;
-	}
+	dishesBool[cellSelected] = false;
+	firstDishR(cellSelected);
 }
 
 // devuelve la primera posición libre; si no hay espacio libre, devuelve -1
@@ -107,7 +98,10 @@ void InventoryComp::setCell(char key) {
 	// si no hay ninguna celda seleccionada, selecciona la primera celda libre
 	if (cellSelected == -1) freeSpace();
 	else {
-		// ...
+		// si se ha pulsado la tecla izquierda
+		if (key == 'l') cellSelected = firstDishL(cellSelected);
+		// si se ha pulsado la tecla derecha
+		else if (key == 'r') cellSelected = firstDishR(cellSelected);
 	}
 }
 
@@ -118,4 +112,34 @@ void InventoryComp::handleEvents() {
 	// flecha derecha
 	else if (ih->isKeyDown(SDLK_RIGHT))
 		setCell('r');
+}
+
+// busca la siguiente posición ocupada en el inventario a la izquierda de la casilla seleccionada
+int InventoryComp::firstDishL(int num) {
+	int i = 0;
+	int n = num;
+	while (i < 3) {
+		// si el índice del inventario es 0
+		if (n == 0) n = 2;
+		else n--;
+
+		if (dishesBool[n] == true) return true;
+		++i;
+	}
+	return num;
+}
+
+// busca la siguiente posición ocupada en el inventario a la derecha de la casilla seleccionada
+int InventoryComp::firstDishR(int num) {
+	int i = 0;
+	int n = num;
+	while (i < 3) {
+		// si el índice del inventario es 0
+		if (n == 2) n = 0;
+		else n++;
+
+		if (dishesBool[n] == true) return true;
+		++i;
+	}
+	return num;
 }

@@ -7,6 +7,7 @@
 #include "../objects/Money.h" // cambiar cuando se cambie la clase Money
 #include <string>
 #include "../gameObjects/Inventory.h"
+#include "../gameObjects/Bin.h"
 
 // UI del restaurante 
 class UIRestaurant : public Scene
