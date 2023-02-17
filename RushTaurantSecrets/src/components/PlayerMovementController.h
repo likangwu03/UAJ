@@ -134,7 +134,6 @@ public:
 	}
 
 	bool isMoving() {
-		std::cout << moving << std::endl;
 		return moving;
 	}
 };
