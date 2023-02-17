@@ -18,6 +18,8 @@ namespace _ecs {
 		cmp_INVENTORY,
 		cmp_MOVEMENT,
 		cmp_INGREDIENTS,
+		cmp_COLLISIONS,
+		cmp_TRIGGER,
 		cmp_BIN,
 		
 
@@ -36,6 +38,8 @@ namespace _ecs {
 		grp_INTERACTABLE,
 		grp_HUD,
 		grp_ICONS,
+		grp_COLLISIONS,
+
 
 		// Do not erase pls
 		grp_INVALID
