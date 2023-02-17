@@ -9,7 +9,7 @@ class Player :public GameObject
 {
 public:
 	Player(Scene * scene) :GameObject(scene, _ecs::grp_PLAYER, _ecs::hdr_PLAYER) {
-	new Ingredients(this);
+	//new Ingredients(this);
 
 	//auto& sdl = *SDLUtils::instance();
 	//new CookingMachineComp(this);
