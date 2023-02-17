@@ -2,8 +2,9 @@
 #include "../structure/Scene.h"
 #include "../structure/GameObject.h"
 #include "../components/Image.h"
-#include "../components/CustPathing.h"
+#include "../components/StraightMovement.h"
 
+/*
 void CostumerManager::createCustomer(Vector origin, Vector end) {
 	GameObject* customer = new GameObject(scene, _ecs::grp_CUSTOMERS, _ecs::hdr_CUSTOMER);
 	new CustPathing(customer, origin, end, 3, 50, 50);
@@ -47,3 +48,4 @@ void CostumerManager::addCustomerFrequently() {
 		}
 	}
 }
+*/

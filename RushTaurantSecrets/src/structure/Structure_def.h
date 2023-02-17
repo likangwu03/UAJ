@@ -21,6 +21,7 @@ namespace _ecs {
 		cmp_COLLISIONS,
 		cmp_TRIGGER,
 		cmp_BIN,
+		cmp_STRAIGHT_MOVEMENT,
 		
 
 
@@ -33,7 +34,7 @@ namespace _ecs {
 	enum _grp_id : id_type {
 		grp_GENERAL,
 		grp_PLAYER,
-		grp_CUSTOMERS,
+		grp_CLIENTS,
 		grp_INTERACTABLE,
 		grp_HUD,
 		grp_ICONS,

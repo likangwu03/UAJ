@@ -7,7 +7,7 @@
 CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 	grp_Player = scene_->getGroup(_ecs::grp_PLAYER);
 	grup_Collisions= scene_->getGroup(_ecs::grp_COLLISIONS);
-	grp_Customers = scene_->getGroup(_ecs::grp_CUSTOMERS);
+	grp_Customers = scene_->getGroup(_ecs::grp_CLIENTS);
 	grp_Interactable = scene_->getGroup(_ecs::grp_INTERACTABLE);
 }
 
