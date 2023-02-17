@@ -2,6 +2,8 @@
 #include "../structure/Structure_def.h"
 
 Game::Game() {
+	srand(time(NULL));
+
 	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720, "assets/resources.json");
 	exit = false;
 	sceneManager = SceneManager::instance();

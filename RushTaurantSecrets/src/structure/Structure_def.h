@@ -24,7 +24,6 @@ namespace _ecs {
 		
 
 
-		cmp_CLIENTINTABLE,
 		// Do not erase pls
 		cmp_INVALID
 	};
