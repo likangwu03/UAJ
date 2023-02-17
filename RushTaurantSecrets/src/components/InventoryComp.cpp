@@ -16,10 +16,12 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	}
 	dishH = 60; dishW = 60;
 
+	cellSelected = -1;
+
 	// prueba--borrar luego
-	dishesBool[0] = true;
-	dishesBool[1] = true;
-	dishesBool[2] = true;
+	//dishesBool[0] = true;
+	//dishesBool[1] = true;
+	//dishesBool[2] = true;
 }
 
 // si hay espacio en el inventario, recoge el plato (suponiendo que previamente ya se ha comprobado si cookingMachine est¨¢ listo en otra clase)
@@ -99,4 +101,21 @@ void InventoryComp::setPosition(int i, int& x, int& y) {
 	else { // i == 2
 		x = 30; y = 626;
 	}
+}
+
+void InventoryComp::setCell(char key) {
+	// si no hay ninguna celda seleccionada, selecciona la primera celda libre
+	if (cellSelected == -1) freeSpace();
+	else {
+		// ...
+	}
+}
+
+void InventoryComp::handleEvents() {
+	// flecha izquierda
+	if (ih->isKeyDown(SDLK_LEFT))
+		setCell('l');
+	// flecha derecha
+	else if (ih->isKeyDown(SDLK_RIGHT))
+		setCell('r');
 }

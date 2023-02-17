@@ -18,6 +18,7 @@ namespace _ecs {
 		cmp_INVENTORY,
 		cmp_MOVEMENT,
 		cmp_INGREDIENTS,
+		cmp_BIN,
 		
 
 
@@ -55,6 +56,7 @@ namespace _ecs {
 		hdr_MENU,
 		hdr_PAUSE,
 		hdr_BASKET,
+		hdr_BIN,
 		hdr_PRUEBA,
 		
 		// Do not erase pls
