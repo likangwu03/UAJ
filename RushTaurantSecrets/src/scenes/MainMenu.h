@@ -6,8 +6,8 @@
 #include "../../src/gameObjects/Client.h"
 #include "../components/Image.h"
 #include "../components/StraightMovement.h"
-
 #include "../components/ClientState.h"
+#include "../components/Animator.h"
 #include "../structure/Food_def.h"
 #include <set>
 class MainMenu : public Scene {
@@ -48,7 +48,7 @@ public:
 
 		GameObject* customer = new GameObject(this, _ecs::grp_CLIENTS);
 		new Transform(customer, Vector(), Vector(0, 0), 50, 50);
-		new Image(customer, &((*sdl).images().at(to_string(5))));
+		new Animator(customer, &((*sdl).images().at("Customer_2")), 0, 6, 1);
 		float offset = 200;
 		vector<Vector> points;
 		points.push_back(Vector(sdl->width() / 2, sdl->height() / 2));

@@ -8,8 +8,6 @@
 
 using namespace std;
 
-enum Direction{Left, Right, Up, Down};
-
 class StraightMovement : public Component {
 private:
 	Transform* transform;
@@ -19,7 +17,6 @@ private:
 	float speed;	// velocidad en ir de un punto a otro
 	Vector act;
 	float offsetZone;	// tiene que ser un número pequeño
-	Direction direction;
 
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STRAIGHT_MOVEMENT;
 
@@ -30,33 +27,20 @@ private:
 		return transform->getPos() + dir * t;
 	}
 
-	bool hasArrived() const {
-		float posX = transform->getPos().getX();
-		float posY = transform->getPos().getY();
-		// se comprueba que el cliente ha llegado a una zona próxima al punto final
-		if (posX + offsetZone >= end.getX() && posX - offsetZone <= end.getX()
-			&& posY + offsetZone >= end.getY() && posY - offsetZone <= end.getY()) {
-			// se soluciona el error
-			transform->setPos(end);
-			return true;
-		}
-		return false;
-	}
-
 	void calculateDir() {
 		Vector pos = transform->getPos();
 		Vector dir = end - pos;
 		if (dir.getX() > 0) {
-			direction = Right;
+			parent->setOrientation(east);
 		}
 		else if (dir.getX() < 0) {
-			direction = Left;
+			parent->setOrientation(west);
 		}
 		else if (dir.getY() > 0) {
-			direction = Down;
+			parent->setOrientation(south);
 		}
 		else if (dir.getY() < 0) {
-			direction = Up;
+			parent->setOrientation(north);
 		}
 	}
 
@@ -68,9 +52,18 @@ public:
 		++cont;
 		newPath(points[cont], 2);
 	}
-
-	Direction getDir() const {
-		return direction;
+	
+	bool hasArrived() const {
+		float posX = transform->getPos().getX();
+		float posY = transform->getPos().getY();
+		// se comprueba que el cliente ha llegado a una zona próxima al punto final
+		if (posX + offsetZone >= end.getX() && posX - offsetZone <= end.getX()
+			&& posY + offsetZone >= end.getY() && posY - offsetZone <= end.getY()) {
+			// se soluciona el error
+			transform->setPos(end);
+			return true;
+		}
+		return false;
 	}
 
 	// se establece un nuevo camino
