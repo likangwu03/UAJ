@@ -2,6 +2,7 @@
 #include "Pantry.h"
 #include "../structure/SceneManager.h"
 #include "../components/CookingMachineComp.h"
+
 void Restaurant::linkPantry(Pantry* pantry) {
 	this->pantry = pantry;
 }
@@ -42,4 +43,9 @@ void Restaurant::init() {
 	pair<_ecs::_dish_id, bool> aux = getHandler(_ecs::hdr_PLAYER)->getComponent<CookingMachineComp>()->canFormDish(ing);
 	cout << (int)aux.first << endl;
 	*/
+
+	// objetos interactuables
+	Bin* bin = new Bin(this, Vector(200, 200));
+	// icono temporal, cambiar cuando se haya implementado la animación de la papelera
+	new Image(bin, &((*sdl).images().at("MONEY_ICON")));
 }

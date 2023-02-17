@@ -4,6 +4,7 @@
 #include "../gameObjects/Player.h"
 #include "../structure/DishCombinator.h"
 #include "../gameObjects/CookingMachine.h"
+#include "../gameObjects/Bin.h"
 //#include "../gameObjects/Inventory.h" //de momento est¨¢ aqu¨ª, no s¨¦ si moverlo a UI
 
 class Pantry;
@@ -12,6 +13,7 @@ private:
 	Pantry* pantry;
 	DishCombinator* dc;
 	UIRestaurant* ui;
+	SDLUtils* sdl = SDLUtils::instance();
 public:
 	Restaurant(UIRestaurant* restUI = nullptr) : pantry(nullptr), ui(restUI),dc(DishCombinator::init()) { /*init();*/ }
 	UIRestaurant* getUI() { return ui; }
