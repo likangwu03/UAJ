@@ -34,4 +34,5 @@ private:
 	void loadMapDims();
 	void loadTilesets();
 	void render();
+	void createObject();
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <SDL_rect.h>
 using namespace std;
 class Scene;
 class GameObject;
@@ -13,12 +14,13 @@ private:
 	vector<GameObject*> grp_Interactable;
 public:
 	CollisionsManager(Scene* scene);
-	
+	void update();
+private:
 	void Collision();
 	void Overlap();
 
-	void hasCollision(GameObject* object);
+	//void hasCollision(GameObject* object);
 
-	void hasOverlap(GameObject* object);
+	//void hasOverlap(GameObject* object);
 
 };

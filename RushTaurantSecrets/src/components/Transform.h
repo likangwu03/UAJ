@@ -21,6 +21,7 @@ public:
 
 	inline void setVel(Vector const& vel) { this->vel = vel; }
 	inline void setRot(float rot) { r = rot; }
+	inline void setPos(Vector const& pos) { this->pos = pos; }
 
 	virtual void update() { pos = pos + vel; };
 };

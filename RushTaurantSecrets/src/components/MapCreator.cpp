@@ -7,6 +7,8 @@
 #include "./tmxlite/Tileset.hpp"
 
 #include "../sdlutils/SDLUtils.h"
+#include "../structure/Scene.h"
+#include "../structure/GameObject.h"
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
     resizeFactor = 0.75;
@@ -146,3 +148,21 @@ void MapCreator::render() {
     }
     SDL_SetRenderTarget(renderer, nullptr);
 };
+
+
+void MapCreator::createObject() {
+    //layers
+    Scene* scene = parent->getScene();
+    auto& layers = tileMap->getLayers();
+    for (auto& layer : layers) {
+        if (layer->getType() == Layer::Type::Object) {
+            auto& objs = static_cast<tmx::ObjectGroup*>(layer.get())->getObjects();
+            for (auto& obj : objs) {
+                auto& aabb = obj.getAABB();
+                string name = obj.getName();
+                vector<tmx::Property> p = obj.getProperties();
+
+            }
+        }
+    }
+}
