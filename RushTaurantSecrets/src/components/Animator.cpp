@@ -6,10 +6,10 @@ Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, i
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 	lastTic = sdlutils().currRealTime();
 	frameRate = 100;
-	parentOrientation = parent->getOrientation();
-	currOrientation = parent->getOrientation();
 	plTf = parent->getComponent<Transform>();
 	plMov = parent->getComponent<PlayerMovementController>();
+	parentOrientation = plTf->getOrientation();
+	currOrientation = parentOrientation;
 };
 
 Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim = 0, int frRate) : Component(parent, id), sdl(SDLUtils::instance()) {
@@ -49,23 +49,25 @@ void Animator::setAble(bool b) {
 }
 void Animator::update() {
 	if (able) {
-		if (plMov != nullptr) {
-			if (!plMov->isMoving()) currentAnim = 1;
-			else currentAnim = 2;
+		if (!plTf->isStatic()) {
+			if (plTf->getMovState() == idle) currentAnim = 1;
+			else if (plTf->getMovState() == walking) currentAnim = 2;
+			else if(plTf->getMovState() == sitting) currentAnim = 3;
 		}
-		parentOrientation = parent->getOrientation();
+
+		parentOrientation = plTf->getOrientation();
 		if (currOrientation != parentOrientation) {
 			currOrientation = parentOrientation;
 			if (currOrientation == east) {
 				setCurrentAnim(0, 6, currentAnim);
 			}
-			else if (parent->getOrientation() == north) {
+			else if (plTf->getOrientation() == north) {
 				setCurrentAnim(6, 12, currentAnim);
 			}
-			else if (parent->getOrientation() == west) {
+			else if (plTf->getOrientation() == west) {
 				setCurrentAnim(12, 18, currentAnim);
 			}
-			else if (parent->getOrientation() == south) {
+			else if (plTf->getOrientation() == south) {
 				setCurrentAnim(18, 24, currentAnim);
 			}
 		}

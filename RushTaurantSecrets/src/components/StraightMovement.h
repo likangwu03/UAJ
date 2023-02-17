@@ -30,17 +30,19 @@ private:
 	void calculateDir() {
 		Vector pos = transform->getPos();
 		Vector dir = end - pos;
+
+		transform->setMovState(walking);
 		if (dir.getX() > 0) {
-			parent->setOrientation(east);
+			transform->setOrientation(east);
 		}
 		else if (dir.getX() < 0) {
-			parent->setOrientation(west);
+			transform->setOrientation(west);
 		}
 		else if (dir.getY() > 0) {
-			parent->setOrientation(south);
+			transform->setOrientation(south);
 		}
 		else if (dir.getY() < 0) {
-			parent->setOrientation(north);
+			transform->setOrientation(north);
 		}
 	}
 
@@ -61,6 +63,7 @@ public:
 			&& posY + offsetZone >= end.getY() && posY - offsetZone <= end.getY()) {
 			// se soluciona el error
 			transform->setPos(end);
+			transform->setMovState(idle);
 			return true;
 		}
 		return false;
