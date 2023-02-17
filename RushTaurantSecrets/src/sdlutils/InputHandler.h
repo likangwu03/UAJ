@@ -128,6 +128,10 @@ public:
 
 	// controller (mando)
 
+	int numButtons() {
+		return numB;
+	}
+
 	bool getButtonState(int joy, int buttonNumber)
 	{
 		return m_buttonStates[joy][buttonNumber];
@@ -185,6 +189,7 @@ public:
 					std::vector<bool> cButtons;
 					for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
 					{
+						numB++;
 						cButtons.push_back(false);
 					}
 					m_buttonStates.push_back(cButtons);
@@ -319,6 +324,7 @@ private:
 		}
 	}
 
+	int numB = 0;
 	std::vector<SDL_Joystick*> m_joysticks;
 	std::vector<std::pair<Vector*, Vector*>> m_joystickValues;
 	std::vector<std::vector<bool>> m_buttonStates;
