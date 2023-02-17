@@ -17,7 +17,7 @@ public:
 
 		//tex = &(sdl.images().at("MERMELADA"));
 		//new PruebaComponent( tex, this,_ecs::cmp_IMAGE);
-		new Transform(this, Vector(100, 100), Vector(0, 0), 20, 20, 0);
+		new Transform(this, Vector(100, 100), Vector(0, 0), 48, 96, 0);
 		new PlayerMovementController(this);
 		new Animator(this, &(sdl.images().at("Player_1")), 0, 6, 2);		
 	};
