@@ -3,6 +3,7 @@
 #include "../../prueba.h"
 #include "../../src/components/MapCreator.h"
 #include "../structure/Structure_def.h"
+#include "../../src/gameObjects/Client.h"
 
 #include "../components/ClientState.h"
 #include "../structure/Food_def.h"
@@ -26,7 +27,6 @@ public:
 		
 
 		test = new prueba(this);
-
 		
 		client = new GameObject(this);
 		// Menú del día aleatorio (genera un número de platos aleatorio entre 1-5 platos, lo
@@ -41,7 +41,6 @@ public:
 		for (auto i = aux.begin(); i != aux.end(); ++i) menu.push_back(*i);
 
 		new ClientState(client, menu);
-		
 		
 	}
 };
