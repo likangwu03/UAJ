@@ -16,7 +16,6 @@ public:
 	
 	virtual void isOverlapping();
 private:
-	SDLUtils* sdl;
 	InventoryComp* inventory;
 	CookingMachineComp* cook;
 };
