@@ -407,6 +407,12 @@
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png",
       "cols": 1,
       "rows": 1
+    },
+    {
+      "id": "BIN",
+      "file": "assets/Sprites/Restaurant/bin.png",
+      "cols": 1,
+      "rows": 1
     }
   ]
 }
