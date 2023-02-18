@@ -98,6 +98,7 @@ public:
 	}
 
 	inline bool isKeyDown(SDL_Keycode key) {
+
 		return isKeyDown(SDL_GetScancodeFromKey(key));
 	}
 
