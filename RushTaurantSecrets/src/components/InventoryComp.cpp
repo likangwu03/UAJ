@@ -17,10 +17,11 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	dishH = 60; dishW = 60;
 
 	cellSelected = -1;
-
+	cellsOcuppied = 0;
 	// prueba--borrar luego
 	dishesBool[0] = true;
 	dishesBool[1] = true;
+	cellsOcuppied = 2;
 	//dishesBool[2] = true;
 }
 
@@ -31,6 +32,7 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 	if (place != -1) {
 		dishes[place] = newDish;
 		dishesBool[place] = true;
+		++cellsOcuppied;
 	}
 }
 
@@ -38,6 +40,7 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 void InventoryComp::freeDish() {
 	dishesBool[cellSelected] = false;
 	firstDishR(cellSelected);
+	--cellsOcuppied;
 }
 
 // devuelve la primera posición libre; si no hay espacio libre, devuelve -1

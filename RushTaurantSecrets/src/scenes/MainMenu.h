@@ -37,8 +37,8 @@ public:
 		test = new prueba(this);
 
 		client = new GameObject(this);
-		// Menú del día aleatorio (genera un número de platos aleatorio entre 1-5 platos, lo
-		// rellena con platos diferentes entre sí, y los pasa a un vector para poder acceder a ellos)
+		// Men?del día aleatorio (genera un número de platos aleatorio entre 1-5 platos, lo
+		// rellena con platos diferentes entre s? y los pasa a un vector para poder acceder a ellos)
 		/*set<int> aux;
 		int auxSize = rand() % 5 + 1;
 		for (int i = 0; i < auxSize; i++) {

@@ -5,7 +5,6 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
 #include "../structure/GameObject.h"
-#include "../sdlutils/Texture.h"
 #include "../components/PlayerMovementController.h"
 using namespace std;
 class Animator : public Component
@@ -22,6 +21,10 @@ private:
 	int currFrame;
 	float lastTic;
 	int frameRate;
+
+	float width;
+	float height;
+
 	SDLUtils* sdl;
 	GOOrientation parentOrientation;
 	GOOrientation currOrientation;
@@ -30,11 +33,12 @@ private:
 	PlayerMovementController* plMov;
 
 	float resizeFactor;
+	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h );
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 
-	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate = FRAMERATE);
-	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate = FRAMERATE);
+	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE,float w= 0,float h=0);
+	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE, float w = 0, float h = 0);
 	
 	/*mover al siguiente frame*/
 	void updateAnim();

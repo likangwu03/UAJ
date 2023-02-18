@@ -129,7 +129,7 @@ public:
 			transform->setMovState(idle);
 		}	
 		if(!input->joysticksInitialised())
-			input->refresh();
+			//input->refresh(); comentado temporalmente
 		transform->setVel(speed);
 		if (input->joysticksInitialised()) {
 			speed = Vector(0, 0);
