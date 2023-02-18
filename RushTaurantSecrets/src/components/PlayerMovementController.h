@@ -28,9 +28,10 @@ public:
 	~PlayerMovementController() { 
 		input->clean();
 	}
-	virtual void handleEvents() {
+	virtual void handleEvents() {	
 		if (input->joysticksInitialised())
 		{
+			input->refresh();
 			// eje x mando 1
 			if (input->xvalue(0, 1) > 0 || input->xvalue(0, 1) < 0) {
 				speed.setX(offset * input->xvalue(0,1));
@@ -120,55 +121,62 @@ public:
 				transform->setOrientation(east);
 				transform->setMovState(walking);
 			}
-
 		}
 	}
 	virtual void update() {
-		if (input->joysticksInitialised() || (!nonKeyPressed() && input->keyUpEvent())) {
+		if (!nonKeyPressed() && input->keyUpEvent()) {
 			speed = Vector(0, 0);
 			transform->setMovState(idle);
 		}	
-		input->refresh();
+		if(!input->joysticksInitialised())
+			input->refresh();
 		transform->setVel(speed);
+		if (input->joysticksInitialised()) {
+			speed = Vector(0, 0);
+		}
 	}
 
 	bool nonKeyPressed() {
-		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-		bool pressed = false;
-		if (currentKeyStates[SDL_SCANCODE_D])
-		{
-			speed = Vector(0, 0);
-			speed.setX(offset);
-			transform->setOrientation(east);
-			transform->setMovState(walking);
-			pressed = true;
+		if (!input->joysticksInitialised()) {
+			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+			bool pressed = false;
+			if (currentKeyStates[SDL_SCANCODE_D])
+			{
+				speed = Vector(0, 0);
+				speed.setX(offset);
+				transform->setOrientation(east);
+				transform->setMovState(walking);
+				pressed = true;
+			}
+			if (currentKeyStates[SDL_SCANCODE_S])
+			{
+				speed = Vector(0, 0);
+				speed.setY(offset);
+				transform->setOrientation(south);
+				transform->setMovState(walking);
+				pressed = true;
+			}
+			if (currentKeyStates[SDL_SCANCODE_A])
+			{
+				speed = Vector(0, 0);
+				speed.setX(-offset);
+				transform->setOrientation(west);
+				transform->setMovState(walking);
+				pressed = true;
+			}
+			if (currentKeyStates[SDL_SCANCODE_W])
+			{
+				speed = Vector(0, 0);
+				speed.setY(-offset);
+				transform->setOrientation(north);
+				transform->setMovState(walking);
+				pressed = true;
+			}
+			//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
+			return pressed;
 		}
-		if (currentKeyStates[SDL_SCANCODE_S])
-		{
-			speed = Vector(0, 0);
-			speed.setY(offset);
-			transform->setOrientation(south);
-			transform->setMovState(walking);
-			pressed = true;
-		}
-		if (currentKeyStates[SDL_SCANCODE_A])
-		{
-			speed = Vector(0, 0);
-			speed.setX(-offset);
-			transform->setOrientation(west);
-			transform->setMovState(walking);
-			pressed = true;
-		}
-		if (currentKeyStates[SDL_SCANCODE_W])
-		{
-			speed = Vector(0, 0);
-			speed.setY(-offset);
-			transform->setOrientation(north);
-			transform->setMovState(walking);
-			pressed = true;
-		}	
-		//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
-		return pressed;
+		else
+			return true;
 	}
 };
 
