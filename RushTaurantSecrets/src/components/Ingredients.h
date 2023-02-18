@@ -6,6 +6,7 @@
 #include "../components/Transform.h"
 
 using namespace std;
+using namespace _ecs;
 
 // no hace falta inicializar el vector (se puede borrar)
 const int NUM_INGREDIENTS_IN_INVENTARY = 4;
@@ -14,14 +15,15 @@ class Ingredients: public Component {
 	const float ING_HEIGTH = 50;
 	const float ING_WIDTH = 50;
 	const float ING_POSX = 50;
-	//constante que parametriza a qué altura sobre el jugador se sitúan los ingredientes
+	//constante que parametriza a quï¿½ altura sobre el jugador se sitï¿½an los ingredientes
 	const float ING_POSY = 30;
 	//constante que deja un espacio entre ingredientes
 	const float ING_DISPX = 20;
 
 private:
+	const int MAX_INGREDIENTS = 4;
 	// vector de ingredientes
-	vector<_ecs::_ingredients_id> ingredients;
+	vector<_ecs::_ingredients_id> ingredients = { QUESO,HARINA,HUEVO }; //para demo, luego se borra; 
 	Texture* texture;
 	Transform* transform;
 	SDLUtils* sdl;
@@ -32,7 +34,7 @@ public:
 		transform = parent->getComponent<Transform>();
 	}
 	//devuelve por ref
-	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; }; 
+	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; };
 	void addIngredient(_ecs::_ingredients_id ingr);
 	void removeLastIngredient();
 	void removeAllIngredients();

@@ -1,7 +1,8 @@
 #include "Ingredients.h"
 
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
-	ingredients.push_back(ingr);
+	if (ingredients.size() <= MAX_INGREDIENTS)
+		ingredients.push_back(ingr);
 }
 
 void Ingredients::removeLastIngredient() {
@@ -22,6 +23,7 @@ void Ingredients::removeWhenExit() {
 }
 
 void Ingredients::render() {
+
 	// rectángulo en el mundo donde se va a colocar la textura
 	SDL_Rect dest;
 	dest.x = transform->getPos().getX() + ING_POSX;
@@ -37,4 +39,5 @@ void Ingredients::render() {
 		texture = &((*sdl).images().at(to_string(ingr)));
 		texture->render(dest);
 	}
+	
 }
