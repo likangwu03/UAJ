@@ -4,6 +4,7 @@
 #include "../structure/Component.h"
 #include "../sdlutils/InputHandler.h"
 #include "../structure/GameObject.h"
+#include "../structure/Structure_def.h"
 #include "Transform.h"
 
 
