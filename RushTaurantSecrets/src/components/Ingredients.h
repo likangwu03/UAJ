@@ -11,6 +11,14 @@ using namespace std;
 const int NUM_INGREDIENTS_IN_INVENTARY = 4;
 
 class Ingredients: public Component {
+	const float ING_HEIGTH = 50;
+	const float ING_WIDTH = 50;
+	const float ING_POSX = 50;
+	//constante que parametriza a qué altura sobre el jugador se sitúan los ingredientes
+	const float ING_POSY = 30;
+	//constante que deja un espacio entre ingredientes
+	const float ING_DISPX = 20;
+
 private:
 	// vector de ingredientes
 	vector<_ecs::_ingredients_id> ingredients;
