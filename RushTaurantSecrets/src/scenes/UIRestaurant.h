@@ -20,6 +20,7 @@ private:
 public:
 	UIRestaurant();
 	Inventory* getInventory() { return inventory; };
+	Money* getMoney() { return moneyTxt; };
 	void showMoneyText();
 	void update();
 };
