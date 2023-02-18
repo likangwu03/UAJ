@@ -9,7 +9,12 @@ void Ingredients::removeLastIngredient() {
 }
 
 void Ingredients::removeAllIngredients() {
-
+	//no es un for porque, a pesar de saber las vueltas que da, se va reduciendo el tamaño del vector
+	int i = ingredients.size(); //i vale 5 (el numero de ingredientes maximo que se puede llevar) o menos si no esta lleno el vector
+	while (i != 0) {
+		ingredients.pop_back();
+		--i;
+	}
 }
 
 void Ingredients::removeWhenExit() {
