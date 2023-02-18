@@ -28,6 +28,8 @@ private:
 
 	Transform* plTf;
 	PlayerMovementController* plMov;
+
+	float resizeFactor;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 

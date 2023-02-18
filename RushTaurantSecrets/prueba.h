@@ -20,7 +20,7 @@ public:
 		new Transform(this, Vector(100,200), Vector(0, 0), 48, 96, 0);
 		new PlayerMovementController(this);
 		new Animator(this, &(sdl.images().at("Player_1")), 0, 6, 2);	
-		new CollisionComp(this, { 0,48 },48 ,48);
+		new CollisionComp(this, { 0,48 },48 * sdlutils().getResizeFactor(),48 * sdlutils().getResizeFactor());
 	};
 };
 

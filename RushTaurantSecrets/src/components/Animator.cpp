@@ -10,6 +10,7 @@ Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, i
 	plMov = parent->getComponent<PlayerMovementController>();
 	parentOrientation = plTf->getOrientation();
 	currOrientation = parentOrientation;
+	resizeFactor = sdlutils().getResizeFactor();
 };
 
 Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim = 0, int frRate) : Component(parent, id), sdl(SDLUtils::instance()) {
@@ -83,8 +84,8 @@ void Animator::render()
 		SDL_Rect temp;
 		temp.x = plTf->getPos().getX();
 		temp.y = plTf->getPos().getY();
-		temp.w = 48;
-		temp.h = 96;
+		temp.w = 48 * resizeFactor;
+		temp.h = 96 * resizeFactor;
 		// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 		texture->renderFrame(temp, currFrame, currentAnim);
 	}

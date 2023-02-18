@@ -31,6 +31,7 @@ SDLUtils::SDLUtils(std::string windowTitle, int width, int height,
 		SDLUtils(windowTitle, width, height) {
 	loadReasources(filename);
 	loadTilesets();
+	resizeFactor = 0.75;
 }
 
 SDLUtils::~SDLUtils() {
