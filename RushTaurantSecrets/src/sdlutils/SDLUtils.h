@@ -208,10 +208,13 @@ private:
 	// y los almacena en tilesets_
 	void loadTilesets();
 
+	float resizeFactor;
 public:
 		// Función que devuelve el unordered map de tilesets cargados
 		std::unordered_map<std::string, Texture*> getLoadedTilesets();
 
+		void setResizeFactor(float n) { resizeFactor = n; }
+		float getResizeFactor() { return resizeFactor; }
 };
 
 // This macro defines a compact way for using the singleton SDLUtils, instead of

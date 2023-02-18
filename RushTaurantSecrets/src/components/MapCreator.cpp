@@ -12,7 +12,7 @@
 #include "../gameObjects/CollisionObject.h"
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
-	resizeFactor = 0.75;
+	resizeFactor = sdlutils().getResizeFactor();
 	offsetX = 0.9; offsetY = 1.2;
 
 	loadMapDims();

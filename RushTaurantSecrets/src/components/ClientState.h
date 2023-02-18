@@ -11,7 +11,7 @@ class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
 	ClientState(GameObject* parent, const vector<int> menu) : Component(parent, id), 
-		state(START), happiness(100), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(-1) { }
+		state(START), happiness(100), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(-1), dishChanged(false) { }
 
 	enum States {
 		START,    // Caminar hasta mostrador
@@ -38,6 +38,7 @@ private:
 
 	vector<int> availableDishes;
 	int orderedDish;
+	bool dishChanged;
 
 public:
 
@@ -107,6 +108,19 @@ public:
 		timer = 0;
 		lastTick = SDL_GetTicks();
 	}
+
+
+	void changeDish() {
+		if (!dishChanged) {
+			int lastDish = orderedDish;
+			while (lastDish == orderedDish) {
+				int rndDish = rand() % availableDishes.size();
+				orderedDish = availableDishes[rndDish];
+			}
+		}
+		else state = OUT;
+	}
+
 
 
 	void handleEvents() {
