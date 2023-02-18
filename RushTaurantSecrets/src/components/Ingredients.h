@@ -4,12 +4,12 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
+#include <vector>
+#include <utility>
 
 using namespace std;
 using namespace _ecs;
 
-//maximo de ingredientes que se pueden llevar en el inventario
-const int NUM_INGREDIENTS_IN_INVENTARY = 4;
 
 class Ingredients: public Component {
 	const float ING_HEIGTH = 50;
@@ -22,15 +22,26 @@ class Ingredients: public Component {
 private:
 	const int MAX_INGREDIENTS = 4;
 	// vector de ingredientes
-	vector<_ecs::_ingredients_id> ingredients = { QUESO,HARINA,HUEVO }; //para demo, luego se borra; 
+	vector<_ecs::_ingredients_id> ingredients;
 	Texture* texture;
 	Transform* transform;
 	SDLUtils* sdl;
+	//vector de coordenadas de ingredientes para renderizarlos
+	vector<pair<float, float>> coord;
+	// rectángulo en el mundo donde se va a colocar la textura
+	SDL_Rect dest;
+
+	void debug(); //provisional
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
 	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
 		transform = parent->getComponent<Transform>();
+		coord.resize(1);
+		//para demo, luego se borra; 
+		addIngredient(QUESO);
+		addIngredient(HARINA);
+		addIngredient(HUEVO);
 	}
 	//devuelve por ref
 	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; };
