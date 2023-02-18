@@ -18,6 +18,7 @@ void Restaurant::update() {
 	if(pantry!=nullptr)
 	pantry->Scene::update();
 	ui->update();
+	cm->update();
 }
 
 void Restaurant::handleEvents() {
@@ -34,16 +35,16 @@ void Restaurant::handleEvents() {
 
 }
 void Restaurant::init() {
+	
+	cm = new CollisionsManager(this);
+	ui = new UIRestaurant();
 	new Player(this);
+	
+	// Tilemap de prueba
+	map = new GameObject(this);
+	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
 
-	/* prueba, luego se borra
-	vector<_ecs::_ingredients_id> ing = { _ecs::HARINA,QUESO,HUEVO };
-	auto aux1=new CookingMachine(this);
-	setHandler(_ecs::hdr_PLAYER, aux1);
-	pair<_ecs::_dish_id, bool> aux = getHandler(_ecs::hdr_PLAYER)->getComponent<CookingMachineComp>()->canFormDish(ing);
-	cout << (int)aux.first << endl;
-	*/
-
+	
 	// objetos interactuables
-	new Bin(this, Vector(1100, 70));
+	//new Bin(this, Vector(1100, 70));
 }

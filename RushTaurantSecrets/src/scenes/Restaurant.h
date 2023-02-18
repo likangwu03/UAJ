@@ -5,6 +5,7 @@
 #include "../structure/DishCombinator.h"
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/Bin.h"
+#include "../structure/CollisionsManager.h"
 //#include "../gameObjects/Inventory.h" //de momento est¨¢ aqu¨ª, no s¨¦ si moverlo a UI
 
 class Pantry;
@@ -13,6 +14,8 @@ private:
 	Pantry* pantry;
 	DishCombinator* dc;
 	UIRestaurant* ui;
+	CollisionsManager* cm;
+	GameObject* map;
 public:
 	Restaurant(UIRestaurant* restUI = nullptr) : pantry(nullptr), ui(restUI),dc(DishCombinator::init()) { init(); }
 	UIRestaurant* getUI() { return ui; }
