@@ -28,10 +28,20 @@ void Ingredients::removeWhenExit() {
 	removeAllIngredients();
 }
 
+////Para numero de ingredientes pares
+//SDL_Rect Ingredients::createRectEvens() {
+//
+//}
+//
+////Para numero de ingredientes impares
+//SDL_Rect Ingredients::createRectOdds() {
+//	
+//}
+
 void Ingredients::render() {
 	// rectángulo en el mundo donde se va a colocar la textura
 	SDL_Rect dest;
-	dest.x = transform->getPos().getX() + ING_POSX;
+	dest.x = transform->getPos().getX();
 	dest.y = transform->getPos().getY() - ING_POSY;
 	//dest.w = transform->getW();
 	//dest.h = transform->getH();
@@ -42,6 +52,18 @@ void Ingredients::render() {
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
-		texture->render(dest);
+		texture->render(dest.x, dest.y);
+
+		if (ingredients.size() > 0) {
+			float i = -0.5;
+			for (auto it2 = ingredients.begin(); it2 != ingredients.end() - 1; ++it2) {
+				texture->render(dest.x - i * ING_DISPX, dest.y);
+				i -= -0.5;
+			}
+		}
+		
+		
 	}
+
+	
 }

@@ -54,6 +54,14 @@ public:
 		return fh_;
 	}
 
+	void setHeigth(int h) {
+		height_ = h;
+	}
+
+	void setWidth(int w) {
+		width_ = w;
+	}
+
 	// This rendering method corresponds to method SDL_RenderCopyEx.
 	//
 	// Renders part of the texture (src) to a destination rectangle (dest)

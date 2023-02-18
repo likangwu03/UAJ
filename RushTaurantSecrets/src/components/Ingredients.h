@@ -8,17 +8,16 @@
 using namespace std;
 using namespace _ecs;
 
-// no hace falta inicializar el vector (se puede borrar)
+//maximo de ingredientes que se pueden llevar en el inventario
 const int NUM_INGREDIENTS_IN_INVENTARY = 4;
 
 class Ingredients: public Component {
 	const float ING_HEIGTH = 50;
 	const float ING_WIDTH = 50;
-	const float ING_POSX = 50;
 	//constante que parametriza a qu� altura sobre el jugador se sit�an los ingredientes
 	const float ING_POSY = 30;
 	//constante que deja un espacio entre ingredientes
-	const float ING_DISPX = 20;
+	const float ING_DISPX = 50;
 
 private:
 	const int MAX_INGREDIENTS = 4;
