@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="20" nextobjectid="36">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="40">
  <tileset firstgid="1" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="8285" source="atlas.tsx"/>
  <tileset firstgid="9821" source="12_Kitchen_48x48.tsx"/>
@@ -243,5 +243,8 @@
   <object id="33" x="365.293" y="747.858" width="85.3333" height="80.1801"/>
   <object id="34" x="701.671" y="748.356" width="85.3333" height="80.1801"/>
   <object id="35" x="1036.53" y="736.509" width="85.3333" height="80.1801"/>
+ </objectgroup>
+ <objectgroup id="20" name="obj">
+  <object id="38" name="CookingMachine" x="1347.47" y="200.197" width="44.6667" height="67.8333"/>
  </objectgroup>
 </map>

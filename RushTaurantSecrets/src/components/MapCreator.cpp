@@ -10,6 +10,7 @@
 #include "../structure/Scene.h"
 #include "../structure/GameObject.h"
 #include "../gameObjects/CollisionObject.h"
+#include "../gameObjects/CookingMachine.h"
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
 	resizeFactor = sdlutils().getResizeFactor();
@@ -163,7 +164,14 @@ void MapCreator::createObject() {
 				auto& aabb = obj.getAABB();
 				string name = obj.getName();
 				vector<tmx::Property> p = obj.getProperties();
-				new CollisionObject(scene, { aabb.left*(float) resizeFactor -(float)offsetX*tileW,aabb.top*(float)resizeFactor-(float)offsetY*tileH}, aabb.width * resizeFactor, aabb.height * resizeFactor);
+				if (name == "") {
+					new CollisionObject(scene, { aabb.left * (float)resizeFactor - (float)offsetX * tileW,aabb.top * (float)resizeFactor - (float)offsetY * tileH },
+						aabb.width * resizeFactor, aabb.height * resizeFactor);
+				}
+				if (name == "CookingMachine") {
+					new CookingMachine(scene, { aabb.left * (float)resizeFactor - (float)offsetX * tileW,aabb.top * (float)resizeFactor - (float)offsetY * tileH },
+						aabb.width * resizeFactor, aabb.height * resizeFactor);
+				}
 			};
 
 		}
