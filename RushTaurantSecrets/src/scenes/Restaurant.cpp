@@ -45,5 +45,5 @@ void Restaurant::init() {
 	*/
 
 	// objetos interactuables
-	Bin* bin = new Bin(this, Vector(200, 200));
+	new Bin(this, Vector(1100, 70));
 }
