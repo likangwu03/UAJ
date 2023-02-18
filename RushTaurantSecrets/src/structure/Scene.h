@@ -19,7 +19,7 @@ public:
 
 	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 	void refresh();
-	inline const std::vector<GameObject*>& getGroup(_ecs::_grp_id grp) { return objGroups[grp]; }
+	inline std::vector<GameObject*>* getGroup(_ecs::_grp_id grp) { return &objGroups[grp]; }
 	inline GameObject* getGameObject(_ecs::_hdr_id handler) { return handlers[handler]; }
 
 	virtual void update();
