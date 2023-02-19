@@ -14,7 +14,6 @@
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
 	resizeFactor = sdlutils().getResizeFactor();
-	offsetX = 0.9; offsetY = 1.2;
 
 	loadMapDims();
 
@@ -137,7 +136,7 @@ void MapCreator::render() {
 							// Tile del tileset
 							SDL_Rect srcRect = { tilesetRegionX, tilesetRegionY, tileW, tileH };
 							// Parte del mapa en el que se va a dibujar el tile
-							SDL_Rect destRect = { tileX - offsetX * tileW, tileY - offsetY * tileH, tileInWindowW, tileInWindowH };
+							SDL_Rect destRect = { tileX, tileY, tileInWindowW, tileInWindowH };
 
 							// Dibuja el el tile del tileset (tilesets[tilesetID) srcRect en la posición destRect
 							tilesets[tilesetID]->render(srcRect, destRect);
@@ -165,11 +164,11 @@ void MapCreator::createObject() {
 				string name = obj.getName();
 				vector<tmx::Property> p = obj.getProperties();
 				if (name == "") {
-					new CollisionObject(scene, { aabb.left * (float)resizeFactor - (float)offsetX * tileW,aabb.top * (float)resizeFactor - (float)offsetY * tileH },
+					new CollisionObject(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor},
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
 				if (name == "CookingMachine") {
-					new CookingMachine(scene, { aabb.left * (float)resizeFactor - (float)offsetX * tileW,aabb.top * (float)resizeFactor - (float)offsetY * tileH },
+					new CookingMachine(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
 			};

@@ -31,7 +31,7 @@ SDLUtils::SDLUtils(std::string windowTitle, int width, int height,
 		SDLUtils(windowTitle, width, height) {
 	loadReasources(filename);
 	loadTilesets();
-	resizeFactor = 0.75;
+	resizeFactor = 0.6666666667;
 }
 
 SDLUtils::~SDLUtils() {
@@ -57,7 +57,7 @@ void SDLUtils::initWindow() {
 	// Create window
 	window_ = SDL_CreateWindow(windowTitle_.c_str(),
 	SDL_WINDOWPOS_UNDEFINED,
-	SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
+	SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
 	assert(window_ != nullptr);
 
 #ifdef _DEBUG
@@ -67,6 +67,10 @@ void SDLUtils::initWindow() {
 	renderer_ = SDL_CreateRenderer(window_, -1,
 			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	assert(renderer_ != nullptr);
+
+	// Permite escalar el tamaño de la ventana sin descuadrar todo el mapa
+	SDL_RenderSetLogicalSize(renderer_, width_, height_);
+
 
 	// hide cursor by default
 	hideCursor();
