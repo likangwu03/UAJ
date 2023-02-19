@@ -95,8 +95,8 @@ private:
 		}
 	}
 
-	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients) 
-		: Manager(parent), menu(menu), timer(frequencyClients), speed(2), lastClientTime(0), assignedCustomer(false) {
+	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients) 
+		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), lastClientTime(0), assignedCustomer(false) {
 		scene = parent->getScene();
 		clients = scene->getGroup(_ecs::grp_CLIENTS);
 		sdl = SDLUtils::instance();
