@@ -1,7 +1,7 @@
 #pragma once
 #include "../components/TriggerComp.h"
 #include "../components/InventoryComp.h"
-#include "../scenes/UIRestaurant.h"
+//#include "../scenes/UIRestaurant.h"
 
 class BinTriggerComp : public TriggerComp
 {

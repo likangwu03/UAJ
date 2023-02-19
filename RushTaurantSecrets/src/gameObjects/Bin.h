@@ -15,6 +15,6 @@ public:
 		new Transform(this, pos, Vector(0, 0), w, h, 0);
 		//new BinComponent(this, pos);
 		new Image(this, &((*sdl).images().at("BIN")));
-		new BinTriggerComp(this, pos, w, h);
+		new BinTriggerComp(this, {0,0}, w, h);
 	}
 };
