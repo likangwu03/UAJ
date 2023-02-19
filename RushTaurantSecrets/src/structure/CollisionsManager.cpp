@@ -20,51 +20,62 @@ void CollisionsManager::update() {
 void CollisionsManager::Collision() {
 	for (auto player : *grp_Player) {
 		CollisionComp* objCol = player->getComponent<CollisionComp>();
-		Vector dir = player->getComponent<Transform>()->getVel();
-		SDL_FRect playerRect = objCol->getRect();
-		playerRect.x += dir.getX();
-		playerRect.y += dir.getY();
-		for (auto col : *grup_Collisions) {
-			Transform* colT = col->getComponent<Transform>();
-			SDL_FRect colRect = { colT->getPos().getX(),colT->getPos().getY(),colT->getW(),colT->getH() };
-			if (SDL_HasIntersectionF(&playerRect, &colRect)) {
-				objCol->Collision(col);
+		if (objCol != nullptr) {
+			Vector dir = player->getComponent<Transform>()->getVel();
+			SDL_FRect playerRect = objCol->getRect();
+			playerRect.x += dir.getX();
+			playerRect.y += dir.getY();
+			for (auto col : *grup_Collisions) {
+				Transform* colT = col->getComponent<Transform>();
+				SDL_FRect colRect = { colT->getPos().getX(),colT->getPos().getY(),colT->getW(),colT->getH() };
+				if (SDL_HasIntersectionF(&playerRect, &colRect)) {
+					objCol->Collision(col);
+				}
 			}
-		}
-		for (auto p : *grp_Player) {
-			if (player != p) {
-				SDL_FRect pRect = p->getComponent<CollisionComp>()->getRect();
-				if (SDL_HasIntersectionF(&playerRect, &pRect)) {
-					objCol->Collision(p);
+			for (auto p : *grp_Player) {
+				if (player != p) {
+					SDL_FRect pRect = p->getComponent<CollisionComp>()->getRect();
+					if (SDL_HasIntersectionF(&playerRect, &pRect)) {
+						objCol->Collision(p);
+					}
 				}
 			}
 		}
+		
 	}
 }
 void CollisionsManager::Overlap() {
 	for (auto player : *grp_Player) {
 		CollisionComp* objCol = player->getComponent<CollisionComp>();
-		SDL_FRect playerRect = objCol->getRect();
-		for (auto customer : *grp_Clients) {
-			TriggerComp* customerTrigger = customer->getComponent<TriggerComp>();
-			SDL_FRect customerRect = customerTrigger->getRect();
-			if (SDL_HasIntersectionF(&playerRect, &customerRect)) {
-				customerTrigger->Overlap(player);
+		if (objCol != nullptr) {
+
+			SDL_FRect playerRect = objCol->getRect();
+			for (auto customer : *grp_Clients) {
+				TriggerComp* customerTrigger = customer->getComponent<TriggerComp>();
+				if (customerTrigger != nullptr) {
+					SDL_FRect customerRect = customerTrigger->getRect();
+					if (SDL_HasIntersectionF(&playerRect, &customerRect)) {
+						customerTrigger->Overlap(player);
+					}
+					else {
+						customerTrigger->Overlap(nullptr);
+					}
+				}				
 			}
-			else {
-				customerTrigger->Overlap(nullptr);
+			for (auto interactive : *grp_Interactable) {
+				TriggerComp* interactiveTrigger = interactive->getComponent<TriggerComp>();
+				if (interactiveTrigger != nullptr) {
+					SDL_FRect interactiveRect = interactiveTrigger->getRect();
+					if (SDL_HasIntersectionF(&playerRect, &interactiveRect)) {
+						interactiveTrigger->Overlap(player);
+					}
+					else {
+						interactiveTrigger->Overlap(nullptr);
+					}
+				}
 			}
 		}
-		for (auto interactive : *grp_Interactable) {
-			TriggerComp* interactiveTrigger = interactive->getComponent<TriggerComp>();
-			SDL_FRect interactiveRect = interactiveTrigger->getRect();
-			if (SDL_HasIntersectionF(&playerRect, &interactiveRect)) {
-				interactiveTrigger->Overlap(player);
-			}
-			else {
-				interactiveTrigger->Overlap(nullptr);
-			}
-		}
+
 	}
 
 
