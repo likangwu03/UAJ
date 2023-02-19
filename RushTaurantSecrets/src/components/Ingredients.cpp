@@ -78,5 +78,5 @@ void Ingredients::debug() {
 	bool func = false;
 	if (ingredients.size() == coord.size()) func = true;
 
-	cout << func;
+	//cout << func;
 }

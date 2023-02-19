@@ -14,7 +14,7 @@ void SceneManager::update() {
 		setScene();
 		currentScene = Scenes.back();
 		act = change;
-		cout << act << endl;
+		//cout << act << endl;
 	}
 	currentScene->update();
 }
