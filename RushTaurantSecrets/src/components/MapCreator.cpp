@@ -171,6 +171,10 @@ void MapCreator::createObject() {
 					new CookingMachine(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
+				if (name == "Bin") {
+					new Bin(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
+						aabb.width * resizeFactor, aabb.height * resizeFactor);
+				}
 			};
 
 		}
