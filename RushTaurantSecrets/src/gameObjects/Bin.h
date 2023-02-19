@@ -10,8 +10,8 @@ class Bin : public GameObject
 private:
 	SDLUtils* sdl = SDLUtils::instance();
 public:
-	Bin(Scene* scene, Vector pos) :GameObject(scene, _ecs::grp_INTERACTABLE, _ecs::hdr_BIN) {
-		new Transform(this, pos, Vector(0, 0), 37, 46, 0);
+	Bin(Scene* scene, Vector pos, float w, float h) :GameObject(scene, _ecs::grp_INTERACTABLE, _ecs::hdr_BIN) {
+		new Transform(this, pos, Vector(0, 0), w, h, 0);
 		new BinComponent(this, pos);
 		new Image(this, &((*sdl).images().at("BIN")));
 	}

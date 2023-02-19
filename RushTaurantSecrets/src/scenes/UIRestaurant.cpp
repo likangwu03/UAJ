@@ -34,7 +34,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
 	new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
 
-	Bin* bin = new Bin(this, Vector(1108, 125));
+	//Bin* bin = new Bin(this, Vector(1108, 125), 37, 46);
 }
 
 void UIRestaurant::showMoneyText() {
