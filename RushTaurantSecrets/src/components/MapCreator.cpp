@@ -11,6 +11,7 @@
 #include "../structure/GameObject.h"
 #include "../gameObjects/CollisionObject.h"
 #include "../gameObjects/CookingMachine.h"
+#include "../gameObjects/CashRegister.h"
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
 	resizeFactor = sdlutils().getResizeFactor();
@@ -68,7 +69,7 @@ void MapCreator::loadTilesets() {
 		// Posición del tileset buscado en los tilesets precargados
 		auto preloadedTexture = preloadedTiles.find(tilesetName);
 
-		// Si el tileset buscado está en los tilesets precargados,
+		// Si el tileset buscado est?en los tilesets precargados,
 		if (preloadedTexture != preloadedTiles.end()) {
 			// Guarda la textura precargada en los tilesets del mapa,
 			// siendo su key la ID del primer tile que haya en el tileset
@@ -99,7 +100,7 @@ void MapCreator::render() {
 					int tileInTilemap = cl + rw * cols;
 					int tileID = tiles[tileInTilemap].ID;
 
-					// Si la casilla no está vacía
+					// Si la casilla no est?vacía
 					if (tileID != 0) {
 						found = false;
 						// Recorre los tilesets cargados y busca el primero que
@@ -124,7 +125,7 @@ void MapCreator::render() {
 							int tilesetCols = tilesetW / tileW;
 							int tilesetRows = tilesetH / tileH;
 
-							// Se calcula la zona del tileset en la que está el tile a dibujar
+							// Se calcula la zona del tileset en la que est?el tile a dibujar
 							int tilesetRegionX = (tileID % tilesetCols) * tileW;
 							int tilesetRegionY = (tileID / tilesetCols) * tileH;
 
@@ -167,12 +168,16 @@ void MapCreator::createObject() {
 					new CollisionObject(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor},
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
-				if (name == "CookingMachine") {
+				else if (name == "CookingMachine") {
 					new CookingMachine(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
-				if (name == "Bin") {
+				else if (name == "Bin") {
 					new Bin(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
+						aabb.width * resizeFactor, aabb.height * resizeFactor);
+				}
+				else if (name == "CashRegister") {
+					new CashRegister(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
 			};
