@@ -16,7 +16,7 @@ void ClientTrigger::isOverlapping()
 		case ClientState::ORDERED:
 			//temporal, no comprueba si esta el plato que quiere, solo comprueba que el jugador tenga platos
 			if (inventory->freeSpace() != 0) {
-				//inventory->freeDish();
+				inventory->freeDish();
 				clientState->getServed();
 			}
 			break;

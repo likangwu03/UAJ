@@ -33,6 +33,7 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 		dishes[place] = newDish;
 		dishesBool[place] = true;
 		++cellsOcuppied;
+		cellSelected = place;
 	}
 }
 
