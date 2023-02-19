@@ -12,13 +12,13 @@ using namespace _ecs;
 
 
 class Ingredients: public Component {
-	const float ING_HEIGTH = 50;
-	const float ING_WIDTH = 50;
+	const float ING_HEIGTH = 48;
+	const float ING_WIDTH = 48;
 	//constante que parametriza a qu� altura sobre el jugador se sit�an los ingredientes
-	const float ING_POSY = 30;
+	const float ING_POSY = 50;
 	//constante que deja un espacio entre ingredientes cuando estos se renderizan
 	const float ING_OFFSET = 50;
-	//Constante que marca el centro del jugador en su posición X
+	
 
 private:
 	const int MAX_INGREDIENTS = 4;
