@@ -16,8 +16,8 @@ class Ingredients: public Component {
 	const float ING_WIDTH = 50;
 	//constante que parametriza a qu� altura sobre el jugador se sit�an los ingredientes
 	const float ING_POSY = 30;
-	//constante que deja un espacio entre ingredientes
-	const float ING_DISPX = 50;
+	//constante que deja un espacio entre ingredientes cuando estos se renderizan
+	const float ING_OFFSET = 50;
 
 private:
 	const int MAX_INGREDIENTS = 4;
@@ -37,11 +37,12 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
 	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
 		transform = parent->getComponent<Transform>();
-		coord.resize(1);
+		//coord.resize(1);
+		coord = { { 0,0 } };
 		//para demo, luego se borra; 
 		addIngredient(QUESO);
-		addIngredient(HARINA);
-		addIngredient(HUEVO);
+		//addIngredient(HARINA);
+		//addIngredient(HUEVO);
 	}
 	//devuelve por ref
 	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; };

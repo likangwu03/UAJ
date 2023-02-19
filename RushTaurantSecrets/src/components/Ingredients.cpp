@@ -6,21 +6,23 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	}
 	ingredients.push_back(ingr);
 	
-	dest.x = coord[ingredients.size() - 1].first + ING_DISPX / 2;
-	dest.y = coord[ingredients.size() - 1].second;
-	coord.push_back({ dest.x, dest.y });
-	for (int i = 0; i < coord.size(); ++i) {
-		coord[i].first -= 0.5 * ING_DISPX;
-		coord[i].second = transform->getPos().getY() - ING_POSY;
+	int i = 0;
+	for (i = 0;i < coord.size();++i) {
+		coord[i].first -= ING_OFFSET / 2;
+		coord[i].second = 0;
 	}
+	//Nuevas coordenadas del nuevo ingrediente
+	coord.push_back({ coord[i-1].first, coord[i-1].second});
+	coord[i].first += ING_OFFSET;
+	
 }
 
 void Ingredients::removeLastIngredient() {
 	ingredients.pop_back();
 	
 	for (int i = 0; i < coord.size(); ++i) {
-		coord[i].first += 0.5 * ING_DISPX;
-		coord[i].second = transform->getPos().getY() - ING_POSY;
+		coord[i].first += 0.5 * ING_OFFSET;
+		coord[i].second = 0;
 	}
 	coord.pop_back();
 	
@@ -44,6 +46,10 @@ void Ingredients::render() {
 	dest.w = ING_WIDTH;
 	dest.h = ING_HEIGTH;
 	debug();
+	for (int i = 0; i < coord.size();++i) {
+		coord[i].first += transform->getPos().getX();
+		coord[i].second += transform->getPos().getY() - ING_POSY;
+	}
 	// se pintan todas las texturas que hay en el vector
 	int i = 0;
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
