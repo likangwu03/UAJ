@@ -41,7 +41,7 @@ void Restaurant::init() {
 
 	// menu
 	vector<_ecs::_dish_id> menu;
-	menu.push_back(_ecs::HUEVO_FRITO);
+	menu.push_back(_ecs::TARTA_QUESO);
 	menu.push_back(_ecs::PANCAKE);
 	// manager de clientes
 	GameObject* managerContainer = new GameObject(this);
