@@ -2,7 +2,7 @@
 <tileset version="1.9" tiledversion="1.9.2" name="food" tilewidth="48" tileheight="96" tilecount="38" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="6">
-  <image width="32" height="32" source="../Sprites/Food/Ingredients/cabbage.png"/>
+  <image width="48" height="48" source="../others/cabbage (2).png"/>
  </tile>
  <tile id="7">
   <image width="32" height="32" source="../Sprites/Food/Ingredients/white_cheese_p.png"/>
@@ -11,7 +11,7 @@
   <image width="32" height="32" source="../Sprites/Food/Dishes/85_roastedchicken.png"/>
  </tile>
  <tile id="9">
-  <image width="32" height="32" source="../Sprites/Food/Ingredients/potato.png"/>
+  <image width="32" height="32" source="../Sprites/Food/Ingredients/potato_p.png"/>
  </tile>
  <tile id="16">
   <image width="48" height="96" source="../others/Group 1.png"/>

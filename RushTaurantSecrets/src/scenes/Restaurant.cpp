@@ -6,6 +6,8 @@
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
 
+#include "../components/MapCreator.h"
+
 void Restaurant::linkPantry(Pantry* pantry) {
 	this->pantry = pantry;
 }
@@ -61,4 +63,24 @@ void Restaurant::init() {
 	
 	// objetos interactuables
 	//new Bin(this, Vector(1100, 70));
+
+
+	// Men?del día aleatorio (genera un número de platos aleatorio entre 1-5 platos, lo
+		// rellena con platos diferentes entre s? y los pasa a un vector para poder acceder a ellos)
+		// Menú del día aleatorio (genera un número de platos aleatorio entre 1-5 platos, lo
+		// rellena con platos diferentes entre sí, y los pasa a un vector para poder acceder a ellos)
+		/*set<int> aux;
+		int auxSize = rand() % 5 + 1;
+		for (int i = 0; i < auxSize; i++) {
+			if (!aux.insert(rand() % _ecs::NONE_DISH).second)
+				i--;
+		}*/
+		/*vector<int> menu;
+		for (auto i = aux.begin(); i != aux.end(); ++i) menu.push_back(*i);
+
+		new ClientState(client, menu);
+
+		SDLUtils* sdl = SDLUtils::instance();
+		*/
+
 }

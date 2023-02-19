@@ -24,6 +24,7 @@ namespace _ecs {
 		cmp_STRAIGHT_MOVEMENT,
 		cmp_CLIENT_MOVEMENT,
 		cmp_CLIENTS_MANAGER,
+		cmp_BUTTON,
 		
 
 

@@ -4,7 +4,7 @@ SceneManager::SceneManager() {
 	change = act;
 	/*setScene();*/
 	//clear();
-	currentScene = new Restaurant();
+	currentScene = new MainMenu(this);
 	Scenes.push_back(currentScene);
 	//currentScene = Scenes.back();
 }
@@ -50,7 +50,7 @@ void SceneManager::setScene() {
 		Scenes.clear();
 		Scenes.push_back(aux);*/
 		clear();
-		Scenes.push_back(new MainMenu());
+		Scenes.push_back(new MainMenu(this));
 		break;
 	case SceneManager::RESTAURANT: {
 		if (act == MAINMENU) {
