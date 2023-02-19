@@ -1,25 +1,48 @@
 #include "Ingredients.h"
 
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
-	if (ingredients.size() == NUM_INGREDIENTS_IN_INVENTARY) {
+	if (ingredients.size() == MAX_INGREDIENTS) {
 		removeLastIngredient(); //elimina el ultimo ingrediente añadido
-		ingredients.push_back(ingr); //en su lugar añade el nuevo ingrediente
 	}
-	else {
-		ingredients.push_back(ingr);
-	}
+	ingredients.push_back(ingr);
 	
+	if (ingredients.size() > 1){
+		int i = 0;
+		for (i = 0;i < coord.size();++i) {
+			coord[i].first -= ING_OFFSET / 2;
+			coord[i].second = 0;
+		}
+		//Nuevas coordenadas del nuevo ingrediente
+		coord.push_back({ coord[i - 1].first, coord[i - 1].second });
+		coord[i].first += ING_OFFSET;
+	}
+	//int i = 0;
+	//for (i = 0;i < coord.size();++i) {
+	//	coord[i].first -= ING_OFFSET / 2;
+	//	coord[i].second = 0;
+	//}
+	////Nuevas coordenadas del nuevo ingrediente
+	//coord.push_back({ coord[i-1].first, coord[i-1].second});
+	//coord[i].first += ING_OFFSET;
+	//
 }
 
 void Ingredients::removeLastIngredient() {
 	ingredients.pop_back();
+	
+	for (int i = 0; i < coord.size(); ++i) {
+		coord[i].first += 0.5 * ING_OFFSET;
+		coord[i].second = 0;
+	}
+	coord.pop_back();
+	
 }
 
 void Ingredients::removeAllIngredients() {
 	//no es un for porque, a pesar de saber las vueltas que da, se va reduciendo el tamaño del vector
 	int i = ingredients.size(); //i vale 5 (el numero de ingredientes maximo que se puede llevar) o menos si no esta lleno el vector
 	while (i != 0) {
-		ingredients.pop_back();
+		removeLastIngredient();
 		--i;
 	}
 }
@@ -28,42 +51,32 @@ void Ingredients::removeWhenExit() {
 	removeAllIngredients();
 }
 
-////Para numero de ingredientes pares
-//SDL_Rect Ingredients::createRectEvens() {
-//
-//}
-//
-////Para numero de ingredientes impares
-//SDL_Rect Ingredients::createRectOdds() {
-//	
-//}
-
 void Ingredients::render() {
-	// rectángulo en el mundo donde se va a colocar la textura
-	SDL_Rect dest;
-	dest.x = transform->getPos().getX();
-	dest.y = transform->getPos().getY() - ING_POSY;
-	//dest.w = transform->getW();
-	//dest.h = transform->getH();
+	
 	dest.w = ING_WIDTH;
 	dest.h = ING_HEIGTH;
-
+	debug();
+	for (int i = 0; i < coord.size();++i) {
+		coord[i].first += transform->getPos().getX();
+		coord[i].second += transform->getPos().getY() - ING_POSY;
+	}
 	// se pintan todas las texturas que hay en el vector
+	int i = 0;
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
-		texture->render(dest.x, dest.y);
+		dest.x = coord[i].first;
+		dest.y = coord[i].second;
 
-		if (ingredients.size() > 0) {
-			float i = -0.5;
-			for (auto it2 = ingredients.begin(); it2 != ingredients.end() - 1; ++it2) {
-				texture->render(dest.x - i * ING_DISPX, dest.y);
-				i -= -0.5;
-			}
-		}
-		
-		
+		texture->render(dest);
+
+		++i;
 	}
+}
 
-	
+void Ingredients::debug() {
+	bool func = false;
+	if (ingredients.size() == coord.size()) func = true;
+
+	cout << func;
 }

@@ -16,6 +16,6 @@ public:
 		new CollisionComp(this, { 0,48 * sdlutils().getResizeFactor() }, 48 * sdlutils().getResizeFactor(), 48 * sdlutils().getResizeFactor());
 		new Animator(this, "Player_1", 6, 2);
 		new Ingredients(this);
-}
+	}
 };
 
