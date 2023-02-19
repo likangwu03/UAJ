@@ -37,6 +37,7 @@ namespace _ecs {
 		grp_GENERAL,
 		grp_PLAYER,
 		grp_CLIENTS,
+		grp_RENDERTOP,
 		grp_INTERACTABLE,
 		grp_HUD,
 		grp_ICONS,

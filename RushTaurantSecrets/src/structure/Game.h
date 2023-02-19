@@ -14,6 +14,10 @@ private:
 	SDLUtils* sdl;
 	bool exit;
 public:
+	Game(Game&) = delete;
+	Game(Game&&) = delete;
+	Game& operator=(Game&) = delete;
+	Game& operator=(Game&&) = delete;
 	void run();
 private:
 	Game();

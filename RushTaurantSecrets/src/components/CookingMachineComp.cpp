@@ -18,14 +18,14 @@ void CookingMachineComp::cook(_ecs::_dish_id d) {
 	cookingTime = _ecs::Dishes[d].cookingTime;
 	cont = sdl->currRealTime();
 	state = cooking;
-	cout << "true" << endl;
 	anim->setActive(true);
 }
 
 void CookingMachineComp::finishCooking() {
 	state = finished;
 	anim->setActive(false);
-	cout << "false" << endl;
+	textures.dishTex = &((*sdl).images().at(to_string(dish)));
+
 }
 
 _ecs::_dish_id CookingMachineComp::pickDish() {
@@ -38,7 +38,6 @@ _ecs::_dish_id CookingMachineComp::pickDish() {
 
 void CookingMachineComp::update() {
 	if (state == cooking && sdl->currRealTime() - cont >= cookingTime * 1000) {
-		cout << sdl->currRealTime() - cont << endl;
 		finishCooking();
 	}
 }
@@ -60,7 +59,6 @@ void CookingMachineComp::render() {
 		textures.bubble->render(dest);
 		//dish
 		if (dish != _ecs::NONE_DISH) {
-			textures.dishTex = &((*sdl).images().at(to_string(dish)));
 			dest.x = (dest.x+ BUBBLE_WIDTH/2) - DISH_WIDTH/2+DISH_OFFSETX;
 			dest.y = dest.y + BUBBLE_HEIGHT / 2 - DISH_HEIGHT / 2 + DISH_OFFSETX;
 			dest.w = DISH_WIDTH;

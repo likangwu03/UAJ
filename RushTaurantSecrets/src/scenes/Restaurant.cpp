@@ -52,9 +52,12 @@ void Restaurant::init() {
 	menu.push_back(_ecs::HUEVO_FRITO);
 	menu.push_back(_ecs::PANCAKE);
 	GameObject* managerContainer = new GameObject(this);
-	// new ClientsManager(managerContainer, menu, 5 * 1000, 2);
 	ClientsManager::init(managerContainer, menu, 5 * 1000);
-
+	/*
+	// Tilemap de prueba
+	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(mapTop, "./assets/tilemaps/restaurant_top.tmx", sdlutils().renderer());
+	*/
 	
 	// objetos interactuables
 	//new Bin(this, Vector(1100, 70));
