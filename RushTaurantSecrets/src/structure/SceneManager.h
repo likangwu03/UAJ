@@ -24,6 +24,10 @@ private:
 	SceneName change;
 
 public:
+	SceneManager(SceneManager&) = delete;
+	SceneManager(SceneManager&&) = delete;
+	SceneManager& operator=(SceneManager&) = delete;
+	SceneManager& operator=(SceneManager&&) = delete;
 	~SceneManager() { clear(); }
 	void update();
 	void handleEvents();
