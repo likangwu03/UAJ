@@ -11,7 +11,6 @@ void ClientTrigger::isOverlapping()
 			ClientsManager::get()->assignFirstClient(randomTable());
 			break;
 		case ClientState::TAKEMYORDER:
-			std::cout << "Aaaaaa" << std::endl;
 			clientState->takeOrder();
 			break;
 		case ClientState::ORDERED:
@@ -19,7 +18,6 @@ void ClientTrigger::isOverlapping()
 			if (inventory->freeSpace() != 0) {
 				//inventory->freeDish();
 				clientState->getServed();
-				std::cout << "nam nam" << std::endl;
 			}
 			break;
 		default:
