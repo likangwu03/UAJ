@@ -16,6 +16,11 @@ private:
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt = new Money();
+	Font* f;
+	GameObject* moneyText;
+	Texture* moneyTextTexture;
+	Image* moneyTextImage;
+	int intMoney;
 
 public:
 	UIRestaurant();
@@ -23,5 +28,6 @@ public:
 	Money* getMoney() { return moneyTxt; };
 	void showMoneyText();
 	void update();
+	void deleteMoneyText();
 };
 

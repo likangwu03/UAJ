@@ -19,9 +19,9 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	cellSelected = -1;
 	cellsOcuppied = 0;
 	// prueba--borrar luego
-	dishesBool[0] = true;
-	dishesBool[1] = true;
-	cellsOcuppied = 2;
+	//dishesBool[0] = true;
+	//dishesBool[1] = true;
+	//cellsOcuppied = 2;
 	//dishesBool[2] = true;
 }
 

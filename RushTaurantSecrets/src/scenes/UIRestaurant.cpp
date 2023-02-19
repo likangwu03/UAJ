@@ -34,20 +34,32 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
 	new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
 
-	//Bin* bin = new Bin(this, Vector(1108, 125), 37, 46);
+	// gestión de la cantidad de dinero
+	f = new Font("assets/Fonts/Hamish.ttf", 50);
+	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
+	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
+	intMoney = moneyTxt->getMoney();
+	std::string strMoney = std::to_string(intMoney);
+	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
+	moneyTextImage = new Image(moneyText, moneyTextTexture);
 }
 
 void UIRestaurant::showMoneyText() {
-	GameObject* moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
-	Font* f = new Font("assets/Fonts/Hamish.ttf", 50);
-	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
-	int intMoney = moneyTxt->getMoney();
-	std::string strMoney = std::to_string(intMoney);
-	Texture* text = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
-	new Image(moneyText, text);
+	// si la cantidad de dinero ha variado, lo muestra por pantalla
+	if (intMoney != moneyTxt->getMoney()) {
+		intMoney = moneyTxt->getMoney();
+		std::string strMoney = std::to_string(intMoney);
+		delete(moneyTextTexture);
+		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
+		moneyTextImage->setTexture(moneyTextTexture);
+	}
 }
 
 void UIRestaurant::update() {
 	Scene::update();
 	showMoneyText();
+}
+
+void UIRestaurant::deleteMoneyText() {
+
 }
