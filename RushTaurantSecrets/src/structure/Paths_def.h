@@ -8,7 +8,7 @@ using namespace std;
 namespace _ecs {
 	using id_type = uint8_t;
 
-	const id_type NUM_PATHS = 10;
+	const id_type NUM_PATHS = 22;
 
 	enum _path_id : id_type {
 		ARRIVE_TABLE_1,
@@ -17,9 +17,21 @@ namespace _ecs {
 		ARRIVE_TABLE_2,
 		PAY_TABLE_2,
 		OUT_TABLE_2,
+		ARRIVE_TABLE_3,
+		PAY_TABLE_3,
+		OUT_TABLE_3,
 		ARRIVE_TABLE_4,
 		PAY_TABLE_4,
 		OUT_TABLE_4,
+		ARRIVE_TABLE_5,
+		PAY_TABLE_5,
+		OUT_TABLE_5,
+		ARRIVE_TABLE_6,
+		PAY_TABLE_6,
+		OUT_TABLE_6,
+		ARRIVE_TABLE_7,
+		PAY_TABLE_7,
+		OUT_TABLE_7,
 		PAY_AND_LEAVE
 	};
 
@@ -30,9 +42,21 @@ namespace _ecs {
 		{"ARRIVE_TABLE_2",_path_id::ARRIVE_TABLE_2},
 		{"PAY_TABLE_2",_path_id::PAY_TABLE_2},
 		{"OUT_TABLE_2",_path_id::OUT_TABLE_2},
+		{"ARRIVE_TABLE_3",_path_id::ARRIVE_TABLE_3},
+		{"PAY_TABLE_3", _path_id::PAY_TABLE_3},
+		{"OUT_TABLE_3", _path_id::OUT_TABLE_3},
 		{"ARRIVE_TABLE_4", _path_id::ARRIVE_TABLE_4},
 		{"PAY_TABLE_4",_path_id::PAY_TABLE_4},
-		{"OUT_TABLE_4",_path_id::OUT_TABLE_4}
+		{"OUT_TABLE_4",_path_id::OUT_TABLE_4},
+		{"ARRIVE_TABLE_5",_path_id::ARRIVE_TABLE_5},
+		{"PAY_TABLE_5", _path_id::PAY_TABLE_5},
+		{"OUT_TABLE_5", _path_id::OUT_TABLE_5},
+		{"ARRIVE_TABLE_6",_path_id::ARRIVE_TABLE_6},
+		{"PAY_TABLE_6", _path_id::PAY_TABLE_6},
+		{"OUT_TABLE_6", _path_id::OUT_TABLE_6},
+		{"ARRIVE_TABLE_7",_path_id::ARRIVE_TABLE_7},
+		{"PAY_TABLE_7", _path_id::PAY_TABLE_7},
+		{"OUT_TABLE_7", _path_id::OUT_TABLE_7},
 	};
 
 	struct Route {
@@ -67,10 +91,26 @@ namespace _ecs {
 		{{Vector(27, 12), Vector(17, 12), Vector(17, 15)}, west },	// mesa
 		{{Vector(17, 12), Vector(21, 12), Vector(21, 10), CASH_REGISTER}},	// pagar
 		{{Vector(17, 12), Vector(27, 12), ENTRY, OUT}},	// marcharse mesa
+		// mesa 3 silla derecha
+		{{Vector(27, 12), Vector(10, 12), Vector(10, 15)}, west },	// mesa
+		{{Vector(10, 12), Vector(21, 12), Vector(21, 10), CASH_REGISTER}},	// pagar
+		{{Vector(10, 12), Vector(27, 12), ENTRY, OUT}},	// marcharse mesa
 		// mesa 4 silla derecha
 		{{Vector(27, 11), Vector(19, 11), Vector(19, 9)}, west},	// mesa
 		{{Vector(19, 10), CASH_REGISTER}},	// pagar
 		{{Vector(19, 11), Vector(27, 11), ENTRY, OUT}},	// marcharse mesa
+		// mesa 5 silla derecha
+		{{Vector(27, 12), Vector(12, 12), Vector(12, 9)}, west },	// mesa
+		{{Vector(12, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
+		{{Vector(12, 12), Vector(27, 12), ENTRY, OUT}},	// marcharse mesa
+		// mesa 6 silla derecha
+		{{Vector(27, 11), Vector(20, 11), Vector(20, 6), Vector(15, 6), Vector(15, 4)}, west},	// mesa
+		{{Vector(15, 6), Vector(20, 6), Vector(20, 10), CASH_REGISTER}},	// pagar
+		{{Vector(15, 6), Vector(20, 6), Vector(20, 11), Vector(27, 11), ENTRY, OUT}},	// marcharse mesa
+		// mesa 7 silla izquierda
+		{{Vector(27, 12), Vector(6, 12), Vector(6, 4)}, east },	// mesa
+		{{Vector(6, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
+		{{Vector(6, 12), Vector(27, 12), ENTRY, OUT}},	// marcharse mesa
 		// marcharse haciendo cola en la caja
 		{{Vector(26, 15), OUT}}
 	};

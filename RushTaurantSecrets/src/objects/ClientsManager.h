@@ -103,10 +103,7 @@ private:
 	}
 
 	int test() const {
-		int table = sdl->rand().nextInt(1, 5);
-		if (table == 3) {
-			table = 4;
-		}
+		int table = sdl->rand().nextInt(6, 8);
 		return table;
 	}
 
@@ -204,19 +201,23 @@ public:
 		// se añade con frecuencia un cliente
 		addFrequently();
 
+		/*
 		// TESTEO
-		//if (entrance.size() == TEST_ENTRANCE) {
-		//	assignFirstClient(test());
-		//}
+		if (entrance.size() == TEST_ENTRANCE) {
+			assignFirstClient(test());
+		}
+		*/
 
 		firstClientAssigned();
 
 		checkCashRegister();
 
+		/*
 		// TESTEO
-		//if (pay.size() >= TEST_PAY) {
-		//	collectAndLeave();
-		//}
+		if (pay.size() >= TEST_PAY) {
+			collectAndLeave();
+		}
+		*/
 
 		checkHappinessEntrance();
 

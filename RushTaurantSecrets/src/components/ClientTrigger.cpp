@@ -28,9 +28,5 @@ void ClientTrigger::isOverlapping()
 
 int ClientTrigger::randomTable()
 {
-	int table = SDLUtils::instance()->rand().nextInt(1, 5);
-	if (table == 3) {
-		table = 4;
-	}
-	return table;
+	return SDLUtils::instance()->rand().nextInt(1, 8);
 }
