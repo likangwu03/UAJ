@@ -4,7 +4,7 @@
 #include "../structure/Structure_def.h"
 
 enum GOOrientation {
-	north, east, west, south
+	north, east, west, south, none
 };
 
 enum movementState {

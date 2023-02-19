@@ -13,8 +13,8 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_COOKMACHINE;
 private:
 	const int 
-		BUBBLE_OFFSETX = -2,
-		BUBBLE_OFFSETY = -48,
+		BUBBLE_OFFSETX = -4,
+		BUBBLE_OFFSETY = -60,
 		BUBBLE_WIDTH = 41,
 		BUBBLE_HEIGHT = 48,
 		DISH_OFFSETX = -1, //respecto de bubble

@@ -2,6 +2,9 @@
 #include "Pantry.h"
 #include "../structure/SceneManager.h"
 #include "../components/CookingMachineComp.h"
+#include "../gameObjects/Client.h"
+#include "../structure/Paths_def.h"
+#include "../objects/ClientsManager.h"
 
 void Restaurant::linkPantry(Pantry* pantry) {
 	this->pantry = pantry;
@@ -35,6 +38,14 @@ void Restaurant::handleEvents() {
 
 }
 void Restaurant::init() {
+
+	// menu
+	vector<_ecs::_dish_id> menu;
+	menu.push_back(_ecs::HUEVO_FRITO);
+	menu.push_back(_ecs::PANCAKE);
+	// manager de clientes
+	GameObject* managerContainer = new GameObject(this);
+	ClientsManager::init(managerContainer, menu, 6 * 1000, 2);
 	
 	cm = new CollisionsManager(this);
 	ui = new UIRestaurant();
@@ -44,6 +55,9 @@ void Restaurant::init() {
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
 
+	// Tilemap de prueba
+	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(mapTop, "./assets/tilemaps/restaurant_top.tmx", sdlutils().renderer());
 	
 	// objetos interactuables
 	//new Bin(this, Vector(1100, 70));

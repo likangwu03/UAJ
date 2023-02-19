@@ -1,16 +1,16 @@
 #include "Animator.h"
 
-Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) : Component(parent, id), sdl(SDLUtils::instance()) {
+Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h,Vector pos) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = t;
-	init(iniFrame, endFrame, currAnim, frRate, w, h);
+	init(iniFrame, endFrame, currAnim, frRate, w, h,pos);
 };
 
-Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) : Component(parent, id), sdl(SDLUtils::instance()) {
+Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h,Vector pos) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = &((*sdl).images().at(s));
-	init(iniFrame, endFrame, currAnim, frRate, w, h);
+	init(iniFrame, endFrame, currAnim, frRate, w, h,pos);
 };
 
-void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) {
+void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float w, float h,Vector p) {
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 	lastTic = sdlutils().currRealTime();
 	frameRate = 100;
@@ -28,6 +28,9 @@ void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float 
 		width = w;
 		height = h;
 	}
+	//si no le dan pos, se coge del transform
+	if (pos.getX() == -1 && pos.getY() == -1) pos = plTf->getPos();
+	else pos = p;
 };
 
 /*mover al siguiente frame*/
@@ -56,11 +59,12 @@ void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, in
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 
+
 void Animator::update() {
 	if (!plTf->isStatic()) {
 		if (plTf->getMovState() == idle) currentAnim = 1;
 		else if (plTf->getMovState() == walking) currentAnim = 2;
-		else if (plTf->getMovState() == sitting) currentAnim = 3;
+		else if (plTf->getMovState() == sitting) currentAnim = 4;
 	}
 
 	parentOrientation = plTf->getOrientation();
@@ -73,28 +77,37 @@ void Animator::update() {
 			setCurrentAnim(6, 12, currentAnim);
 		}
 		else if (plTf->getOrientation() == west) {
-			setCurrentAnim(12, 18, currentAnim);
+			// las animaciones de sentado mirando hacia la izquierda están en otros frames
+			if (currentAnim == 4) {
+				setCurrentAnim(6, 12, currentAnim);
+			}
+			else {
+				setCurrentAnim(12, 18, currentAnim);
+			}
 		}
 		else if (plTf->getOrientation() == south) {
 			setCurrentAnim(18, 24, currentAnim);
 		}
 	}
+
 	if (sdlutils().currRealTime() - lastTic > frameRate) {
 		lastTic = sdlutils().currRealTime();
 		updateAnim();
 	}
-
 }
 
-void Animator::render()
-{
-
+void Animator::render() {
 	SDL_Rect temp;
-	temp.x = plTf->getPos().getX();
-	temp.y = plTf->getPos().getY();
+	if(plTf->isStatic()) {
+		temp.x = pos.getX();
+		temp.y = pos.getY();
+	}
+	else { //si no es est¨¢tico, seguir¨¢ siempre al transform
+		temp.x = plTf->getPos().getX();
+		temp.y = plTf->getPos().getY();
+	}
 	temp.w = width * resizeFactor;
 	temp.h = height * resizeFactor;
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 	texture->renderFrame(temp, currFrame, currentAnim);
-
 };

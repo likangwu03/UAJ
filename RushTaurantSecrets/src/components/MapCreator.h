@@ -14,9 +14,8 @@ using uint = unsigned int;
 
 class MapCreator : public Component {
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MAPCREATOR;
-
 private:
-	double resizeFactor, offsetX, offsetY;
+	float resizeFactor;
 
 	SDL_Renderer* renderer;
 	Map* tileMap;

@@ -1,16 +1,16 @@
 #pragma once
 #include "../structure/Component.h"
+#include "../structure/Food_def.h"
 #include <SDL.h>
 
 // Temporal
 #include "../sdlutils/InputHandler.h"
 using namespace std;
 
-
 class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
-	ClientState(GameObject* parent, const vector<int> menu) : Component(parent, id), 
+	ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id), 
 		state(START), happiness(100), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(-1), dishChanged(false) { }
 
 	enum States {
@@ -21,7 +21,9 @@ public:
 		TAKEMYORDER, // Esperando a que le tomen nota
 		ORDERED,  // Esperando su pedido
 		EATING,   // Comiendo
+		FINISH_EAT,	// Ha terminado de comer
 		REGISTER, // Caminando a la caja
+		CASH_REGISTER,	// Ha llegado a la caja
 		PAYING,   // Esperando a que le cobren
 		OUT       // Saliendo del local
 	};
@@ -36,7 +38,7 @@ private:
 	const float DECREASE = 0.05;
 	float happiness, timer, lastTick;
 
-	vector<int> availableDishes;
+	vector<_ecs::_dish_id> availableDishes;
 	int orderedDish;
 	bool dishChanged;
 
@@ -67,12 +69,12 @@ public:
 			#ifdef _DEBUG
 				cout << "I know what I want to eat" << endl;
 			#endif
-				state = TAKEMYORDER;
+				state = EATING;	// TAKEMYORDER
 				timer = 0;
 			}
 			// Si está comiendo y termina de comer, pasa al estado de caminar hacia la caja
 			else if (state == EATING && timer >= EATINGTIME) {
-				state = REGISTER;
+				state = FINISH_EAT;
 			#ifdef _DEBUG
 				cout << "I'm done eating" << endl;
 			#endif
@@ -87,7 +89,7 @@ public:
 	// disponibles en el menú del día y cambia el estado a ORDERED
 	void takeOrder() {
 		int rndDish = rand() % availableDishes.size();
-		orderedDish = availableDishes[rndDish];
+		orderedDish = (int)availableDishes[rndDish];
 
 	#ifdef _DEBUG
 		cout << "Order taken, I want " << orderedDish << endl;
@@ -120,8 +122,6 @@ public:
 		}
 		else state = OUT;
 	}
-
-
 
 	void handleEvents() {
 		if (InputHandler::instance()->isKeyDown(SDLK_SPACE)) {

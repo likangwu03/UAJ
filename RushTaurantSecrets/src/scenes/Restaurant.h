@@ -16,6 +16,8 @@ private:
 	UIRestaurant* ui;
 	CollisionsManager* cm;
 	GameObject* map;
+	GameObject* mapTop;
+
 public:
 	Restaurant(UIRestaurant* restUI = nullptr) : pantry(nullptr), ui(restUI),dc(DishCombinator::init()) { init(); }
 	UIRestaurant* getUI() { return ui; }
@@ -24,5 +26,6 @@ public:
 	void render();
 	void update();
 	void handleEvents();
-	void init(); //de momento est¨¢ como un m¨¦todo aparte y no se ha llamado, sirve para crear los objects necesarios
+	// sirve para crear los objetos necesarios
+	void init();
 };

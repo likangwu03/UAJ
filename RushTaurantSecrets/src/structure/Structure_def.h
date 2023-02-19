@@ -22,6 +22,8 @@ namespace _ecs {
 		cmp_TRIGGER,
 		cmp_BIN,
 		cmp_STRAIGHT_MOVEMENT,
+		cmp_CLIENT_MOVEMENT,
+		cmp_CLIENTS_MANAGER,
 		
 
 
@@ -35,6 +37,7 @@ namespace _ecs {
 		grp_GENERAL,
 		grp_PLAYER,
 		grp_CLIENTS,
+		grp_RENDERTOP,
 		grp_INTERACTABLE,
 		grp_HUD,
 		grp_ICONS,
