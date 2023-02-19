@@ -175,6 +175,10 @@ void MapCreator::createObject() {
 					new Bin(scene, { aabb.left * (float)resizeFactor - (float)offsetX * tileW,aabb.top * (float)resizeFactor - (float)offsetY * tileH },
 						aabb.width * resizeFactor, aabb.height * resizeFactor);
 				}
+				if (name == "Bin") {
+					new Bin(scene, { aabb.left * (float)resizeFactor - (float)offsetX * tileW,aabb.top * (float)resizeFactor - (float)offsetY * tileH },
+						aabb.width * resizeFactor, aabb.height * resizeFactor);
+				}
 			};
 
 		}
