@@ -33,7 +33,7 @@ private:
 	const int MAX_CLIENTS = 6;
 	const int MAX_ENTRANCE = 3;
 
-	// testeo
+	// TESTEO
 	const int TEST_ENTRANCE = 3;
 	const int TEST_PAY = 4;
 
@@ -71,7 +71,7 @@ private:
 
 	void createClient() {
 		string sprite = "Customer_" + to_string(sdl->rand().nextInt(1, 9));
-		entrance.push_back(new Client(scene, sprite, _ecs::OUT, menu, entrance.size(), speed));
+		entrance.push_back(new Client(scene, sprite, relativeToGlobal(_ecs::OUT), menu, entrance.size(), speed));
 	}
 
 	// se comprueba si algún cliente ha llegado a la caja registrado y se añade a la cola de pagar
@@ -95,7 +95,7 @@ private:
 		}
 	}
 
-	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients) 
+	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients)
 		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), lastClientTime(0), assignedCustomer(false) {
 		scene = parent->getScene();
 		clients = scene->getGroup(_ecs::grp_CLIENTS);
@@ -108,6 +108,46 @@ private:
 			table = 4;
 		}
 		return table;
+	}
+
+	Vector relativeToGlobal(const Vector& point) {
+		int fWidth = sdl->width() / 40;
+		int fHeight = sdl->height() / 23;
+		return Vector(point.getX() * fWidth, point.getY() * fHeight);
+	}
+
+	// comprobar si alguien en la cola de la caja se tiene que marchar
+	void checkHappinessEntrance() {
+		bool found = false;
+		auto it = entrance.begin();
+		while (it != entrance.end() && !found) {
+			Client* client = (*it);
+			if (client->getComponent<ClientMovement>()->hasAbandonedEntrance()) {
+				it = entrance.erase(it);
+				recolocateEntranceAll(it);
+				found = true;
+			}
+			if (it != entrance.end()) {
+				++it;
+			}
+		}
+	}
+
+	// funciona igual que en la cola de entrada, pero para la caja
+	void checkHappinessPay() {
+		bool found = false;
+		auto it = pay.begin();
+		while (it != pay.end() && !found) {
+			Client* client = (*it);
+			if (client->getComponent<ClientMovement>()->hasAbandonedPay()) {
+				it = pay.erase(it);
+				recolocatePayAll(it);
+				found = true;
+			}
+			if (it != pay.end()) {
+				++it;
+			}
+		}
 	}
 public:
 
@@ -164,18 +204,22 @@ public:
 		// se añade con frecuencia un cliente
 		addFrequently();
 
-		// testo
+		// TESTEO
 		if (entrance.size() == TEST_ENTRANCE) {
 			assignFirstClient(test());
 		}
-		
+
 		firstClientAssigned();
 
 		checkCashRegister();
 
-		// testeo
+		// TESTEO
 		if (pay.size() >= TEST_PAY) {
 			collectAndLeave();
 		}
+
+		checkHappinessEntrance();
+
+		checkHappinessPay();
 	}
 };

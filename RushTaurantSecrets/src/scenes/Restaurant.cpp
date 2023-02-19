@@ -38,6 +38,14 @@ void Restaurant::handleEvents() {
 
 }
 void Restaurant::init() {
+
+	// menu
+	vector<_ecs::_dish_id> menu;
+	menu.push_back(_ecs::HUEVO_FRITO);
+	menu.push_back(_ecs::PANCAKE);
+	// manager de clientes
+	GameObject* managerContainer = new GameObject(this);
+	ClientsManager::init(managerContainer, menu, 6 * 1000, 2);
 	
 	cm = new CollisionsManager(this);
 	ui = new UIRestaurant();
@@ -46,13 +54,6 @@ void Restaurant::init() {
 	// Tilemap de prueba
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
-
-	// menu
-	vector<_ecs::_dish_id> menu;
-	menu.push_back(_ecs::HUEVO_FRITO);
-	menu.push_back(_ecs::PANCAKE);
-	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu, 5 * 1000, 2);
 
 	// Tilemap de prueba
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);

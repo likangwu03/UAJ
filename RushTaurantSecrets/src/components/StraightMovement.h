@@ -23,6 +23,7 @@ private:
 	Vector end;
 	float speed;	// velocidad en ir de un punto a otro
 	float offsetZone;	// tiene que ser un número pequeño
+	SDLUtils* sdl;
 
 	// recorrer recta
 	Vector pointStraight(float t) {
@@ -72,28 +73,42 @@ private:
 		transform->setMovState(walking);
 	}
 
+	vector<Vector> relativeToGlobal(const vector<Vector>& points) {
+		vector<Vector> aux;
+		int fWidth = sdl->width() / 40;
+		int fHeight = sdl->height() / 23;
+		for (int i = 0; i < points.size(); ++i) {
+			int x = points[i].getX();
+			int y = points[i].getY();
+			aux.push_back(Vector(x * fWidth, y * fHeight));
+		}
+		return aux;
+	}
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STRAIGHT_MOVEMENT;
 
 	StraightMovement(GameObject* parent, float speed) :
 		Component(parent, id), offsetZone(2), speed(speed) {
+		sdl = SDLUtils::instance();
 		path.cont = 0;
 		transform = parent->getComponent<Transform>();
 	}
 
 	void addPath(const vector<Vector>& points) {
-		// this->speed = speed;
+		vector<Vector> aux = relativeToGlobal(points);
+
 		// si ha terminado de recorrer el camino, cambia otro
 		if (hasFinishedPath()) {
-			path.points = points;
+			path.points = aux;
 			path.cont = 0;
 			newStraight(path.points[path.cont]);
 		}
 		// si no lo ha terminado de recorrer, el camino nuevo se añade al actual
 		// solo va a sucede cuando se recoloquen clientes
 		else {
-			path.points.reserve(path.points.size() + points.size());
-			path.points.insert(path.points.end(), points.begin(), points.end());
+			path.points.reserve(path.points.size() + aux.size());
+			path.points.insert(path.points.end(), aux.begin(), aux.end());
 		}
 	}
 

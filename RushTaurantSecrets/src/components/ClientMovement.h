@@ -13,6 +13,7 @@ private:
 	ClientState* clientState;
 	StraightMovement* straightMovement;
 	Transform* transform;
+	SDLUtils* sdl;
 	int assignedTable;
 	int posEntrance;
 	int posPay;
@@ -25,11 +26,10 @@ private:
 		}
 	}
 
-	void colocateEntrance() const {
-		// se calcula el camino
+	void colocateEntrance() {
 		Vector entrance = _ecs::ENTRY;
-		// dependiendo de la pos en la entrada donde esté se coloca en un lugar o en otro
-		entrance.setX(entrance.getX() + transform->getW() * posEntrance);
+		// se calcula a partir de su pos en la cola de entrada
+		entrance.setX(entrance.getX() + posEntrance);
 		// se mueve
 		straightMovement->addPath(vector<Vector>{entrance});
 	}
@@ -41,22 +41,11 @@ private:
 	}
 
 	void colocatePay() {
-		// se obtiene la primera posición
 		Vector posRegister = _ecs::CASH_REGISTER;
-		// se calcula a partir de ella la pos que le corresponde en la cola
-		posRegister.setX(posRegister.getX() + transform->getW() * posPay);
+		// se calcula a partir de su pos en la cola de la caja
+		posRegister.setX(posRegister.getX() + posPay);
 		// se mueve
 		straightMovement->addPath(vector<Vector>{posRegister});
-		/*
-		// se calcula el camino
-		vector<Vector> payPath = tableRoute("PAY").points;
-		Vector posRegister = _ecs::CASH_REGISTER;
-		// dependiendo de la pos en la caja donde esté se coloca en un lugar o en otro
-		posRegister.setX(posRegister.getX() + transform->getW() * posPay);
-		payPath[payPath.size() - 1] = posRegister;
-		// se mueve
-		straightMovement->addPath(payPath, SPEED);
-		*/
 	}
 
 	// ha abandonado la entrada
@@ -74,21 +63,28 @@ private:
 		posPay = -1;
 	}
 
-	// ha abandonado la cola de pagar sin pagar
+	// ha abandonado la cola de la caja sin pagar
 	void abandonPay() {
+		int fh = sdl->height() / 20;
+
 		// se calcula el camino de salida
-		float yExit = _ecs::OUT.getY();
-		// se calcula el primer punto
-		Vector firstPoint = Vector(transform->getPos().getX(), yExit);
 		vector<Vector> leave;
+
+		// primer punto
+		int fWidth = sdl->width() / 40;
+		int xExit = transform->getPos().getX() / fWidth;
+		int yExit = _ecs::OUT.getY();
+		Vector firstPoint = Vector(xExit, yExit);
 		leave.push_back(firstPoint);
+
 		// se añade el punto de afuera
 		leave.push_back(_ecs::OUT);
+
 		straightMovement->addPath(leave);
 	}
 
 	// el cliente está quieto
-	// se establece su nuevo, su orientación y la animación a ejecutar
+	// se establece su nuevo estado, su orientación y la animación a ejecutar
 	void stationary(ClientState::States state, GOOrientation orientation, movementState mov) {
 		clientState->setState(state);
 		transform->setOrientation(orientation);
@@ -99,6 +95,7 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENT_MOVEMENT;
 
 	ClientMovement(GameObject* parent, int posEntrance) : Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1) {
+		sdl = SDLUtils::instance();
 		clientState = parent->getComponent<ClientState>();
 		straightMovement = parent->getComponent<StraightMovement>();
 		transform = parent->getComponent<Transform>();
@@ -133,9 +130,17 @@ public:
 	}
 
 	void payAndLeave() {
-		outPay();
 		clientState->setState(ClientState::OUT);
 		straightMovement->addPath(_ecs::paths[_ecs::PAY_AND_LEAVE].points);
+		outPay();
+	}
+
+	bool hasAbandonedEntrance() const {
+		return clientState->getState() == ClientState::OUT && posEntrance != -1;
+	}
+
+	bool hasAbandonedPay() const {
+		return clientState->getState() == ClientState::OUT && posPay != -1;
 	}
 
 	void update() {
@@ -159,7 +164,6 @@ public:
 			}
 			break;
 		case ClientState::FINISH_EAT:
-			// colocatePay();
 			colocateCashRegister();
 			clientState->setState(ClientState::REGISTER);
 			break;

@@ -7,7 +7,6 @@
 #include "../sdlutils/InputHandler.h"
 using namespace std;
 
-
 class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
@@ -123,8 +122,6 @@ public:
 		}
 		else state = OUT;
 	}
-
-
 
 	void handleEvents() {
 		if (InputHandler::instance()->isKeyDown(SDLK_SPACE)) {
