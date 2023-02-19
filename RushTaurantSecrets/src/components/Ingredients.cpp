@@ -9,13 +9,15 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	if (ingredients.size() > 1){
 		int i = 0;
 		for (i = 0;i < coord.size();++i) {
-			coord[i].first -= ING_OFFSET / 2;
+			coord[i].first -= (0.5*ING_OFFSET);
 			coord[i].second = 0;
 		}
 		//Nuevas coordenadas del nuevo ingrediente
 		coord.push_back({ coord[i - 1].first, coord[i - 1].second });
 		coord[i].first += ING_OFFSET;
 	}
+
+	//No quitar hasta que render ingredientes este probado
 	//int i = 0;
 	//for (i = 0;i < coord.size();++i) {
 	//	coord[i].first -= ING_OFFSET / 2;
@@ -31,7 +33,7 @@ void Ingredients::removeLastIngredient() {
 	ingredients.pop_back();
 	
 	for (int i = 0; i < coord.size(); ++i) {
-		coord[i].first += 0.5 * ING_OFFSET;
+		coord[i].first += (0.5 * ING_OFFSET);
 		coord[i].second = 0;
 	}
 	coord.pop_back();
@@ -56,21 +58,29 @@ void Ingredients::render() {
 	dest.w = ING_WIDTH;
 	dest.h = ING_HEIGTH;
 	debug();
+	float player_offset = (transform->getPos().getX()) / 2;
+	//Se añade las coordenadas del jugador sobre las coordenadas centradas en 0,0 para que pasen a estar sobre el player
 	for (int i = 0; i < coord.size();++i) {
 		coord[i].first += transform->getPos().getX();
-		coord[i].second += transform->getPos().getY() - ING_POSY;
+		coord[i].second += (transform->getPos().getY() - ING_POSY);
 	}
 	// se pintan todas las texturas que hay en el vector
-	int i = 0;
+	int k = 0;
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
-		dest.x = coord[i].first;
-		dest.y = coord[i].second;
+		dest.x = coord[k].first;
+		dest.y = coord[k].second;
 
 		texture->render(dest);
 
-		++i;
+		++k;
+	}
+	//Se eliminan las coordenadas del player para que las coordenadas vuelvan a ser sobre 0,0 y no se se haga una suma
+	//sobre la anterior en cada tick y que salgan de la pantalla
+	for (int i = 0; i < coord.size();++i) {
+		coord[i].first -= transform->getPos().getX();
+		coord[i].second -= (transform->getPos().getY() - ING_POSY);
 	}
 }
 
