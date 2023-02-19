@@ -44,6 +44,9 @@ void Restaurant::init() {
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
 
+	// Tilemap de prueba
+	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(mapTop, "./assets/tilemaps/restaurant_top.tmx", sdlutils().renderer());
 	
 	// objetos interactuables
 	//new Bin(this, Vector(1100, 70));

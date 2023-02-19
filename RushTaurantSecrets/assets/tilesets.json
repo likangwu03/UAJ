@@ -9,6 +9,14 @@
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png"
     },
     {
+      "id": "3_Bathroom_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/3_Bathroom_48x48.png"
+    },
+    {
+      "id": "5_Classroom_and_library_48x48",
+      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/5_Classroom_and_library_48x48.png"
+    },
+    {
       "id": "9_Fishing_48x48",
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png"
     },
@@ -23,10 +31,6 @@
     {
       "id": "16_Grocery_store_48x48",
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png"
-    },
-    {
-      "id": "19_Hospital_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/19_Hospital_48x48.png"
     },
     {
       "id": "22_Museum_48x48",
