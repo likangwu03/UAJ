@@ -24,5 +24,6 @@ public:
 	void render();
 	void update();
 	void handleEvents();
-	void init(); //de momento est¨¢ como un m¨¦todo aparte y no se ha llamado, sirve para crear los objects necesarios
+	// sirve para crear los objetos necesarios
+	void init();
 };

@@ -23,8 +23,9 @@ protected:
 	GameObject* other_;
 	
 	bool overlap_;
-	TriggerComp(GameObject* parent, Vector pos_, float width_, float height_);
 public:
+	// cambiar a protected
+	TriggerComp(GameObject* parent, Vector pos_, float width_, float height_);
 	bool IsOverLap() { return overlap_; }
 	SDL_FRect getRect();
 	//llamado por CollisionsManager

@@ -2,6 +2,9 @@
 #include "Pantry.h"
 #include "../structure/SceneManager.h"
 #include "../components/CookingMachineComp.h"
+#include "../gameObjects/Client.h"
+#include "../structure/Paths_def.h"
+#include "../objects/ClientsManager.h"
 
 void Restaurant::linkPantry(Pantry* pantry) {
 	this->pantry = pantry;
@@ -43,6 +46,14 @@ void Restaurant::init() {
 	// Tilemap de prueba
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
+
+	// menu
+	vector<_ecs::_dish_id> menu;
+	menu.push_back(_ecs::HUEVO_FRITO);
+	menu.push_back(_ecs::PANCAKE);
+	GameObject* managerContainer = new GameObject(this);
+	// new ClientsManager(managerContainer, menu, 5 * 1000, 2);
+	ClientsManager::init(managerContainer, menu, 5 * 1000);
 
 	
 	// objetos interactuables

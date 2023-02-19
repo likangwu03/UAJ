@@ -3,14 +3,16 @@
 
 template<typename Comp>
 class Manager : public Component {
+	friend Comp;
 private:
 	static Comp* instance;
 protected:
 	Manager(GameObject* parent) : Component(parent, Comp::id) { }
 public:
-	static Comp* init(GameObject* parent) {
+	template<typename ...Ts >
+	static Comp* init(GameObject* parent, Ts&& ...args) {
 		if(instance == nullptr) {
-			instance = new Comp(parent);
+			instance = new Comp(parent, forward<Ts>(args)...);
 		}
 		return instance;
 	}

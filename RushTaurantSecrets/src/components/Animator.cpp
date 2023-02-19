@@ -56,11 +56,14 @@ void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, in
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 
+void Animator::setAble(bool b) {
+	able = b;
+}
 void Animator::update() {
 	if (!plTf->isStatic()) {
 		if (plTf->getMovState() == idle) currentAnim = 1;
 		else if (plTf->getMovState() == walking) currentAnim = 2;
-		else if (plTf->getMovState() == sitting) currentAnim = 3;
+		else if (plTf->getMovState() == sitting) currentAnim = 4;
 	}
 
 	parentOrientation = plTf->getOrientation();
@@ -73,22 +76,26 @@ void Animator::update() {
 			setCurrentAnim(6, 12, currentAnim);
 		}
 		else if (plTf->getOrientation() == west) {
-			setCurrentAnim(12, 18, currentAnim);
+			// las animaciones de sentado mirando hacia la izquierda están en otros frames
+			if (currentAnim == 4) {
+				setCurrentAnim(6, 12, currentAnim);
+			}
+			else {
+				setCurrentAnim(12, 18, currentAnim);
+			}
 		}
 		else if (plTf->getOrientation() == south) {
 			setCurrentAnim(18, 24, currentAnim);
 		}
 	}
+
 	if (sdlutils().currRealTime() - lastTic > frameRate) {
 		lastTic = sdlutils().currRealTime();
 		updateAnim();
 	}
-
 }
 
-void Animator::render()
-{
-
+void Animator::render() {
 	SDL_Rect temp;
 	temp.x = plTf->getPos().getX();
 	temp.y = plTf->getPos().getY();
@@ -96,5 +103,4 @@ void Animator::render()
 	temp.h = height * resizeFactor;
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 	texture->renderFrame(temp, currFrame, currentAnim);
-
 };

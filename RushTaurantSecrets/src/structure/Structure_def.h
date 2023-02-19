@@ -22,6 +22,8 @@ namespace _ecs {
 		cmp_TRIGGER,
 		cmp_BIN,
 		cmp_STRAIGHT_MOVEMENT,
+		cmp_CLIENT_MOVEMENT,
+		cmp_CLIENTS_MANAGER,
 		
 
 
