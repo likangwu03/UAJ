@@ -6,15 +6,25 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	}
 	ingredients.push_back(ingr);
 	
-	int i = 0;
-	for (i = 0;i < coord.size();++i) {
-		coord[i].first -= ING_OFFSET / 2;
-		coord[i].second = 0;
+	if (ingredients.size() > 1){
+		int i = 0;
+		for (i = 0;i < coord.size();++i) {
+			coord[i].first -= ING_OFFSET / 2;
+			coord[i].second = 0;
+		}
+		//Nuevas coordenadas del nuevo ingrediente
+		coord.push_back({ coord[i - 1].first, coord[i - 1].second });
+		coord[i].first += ING_OFFSET;
 	}
-	//Nuevas coordenadas del nuevo ingrediente
-	coord.push_back({ coord[i-1].first, coord[i-1].second});
-	coord[i].first += ING_OFFSET;
-	
+	//int i = 0;
+	//for (i = 0;i < coord.size();++i) {
+	//	coord[i].first -= ING_OFFSET / 2;
+	//	coord[i].second = 0;
+	//}
+	////Nuevas coordenadas del nuevo ingrediente
+	//coord.push_back({ coord[i-1].first, coord[i-1].second});
+	//coord[i].first += ING_OFFSET;
+	//
 }
 
 void Ingredients::removeLastIngredient() {
@@ -55,8 +65,10 @@ void Ingredients::render() {
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
+		dest.x = coord[i].first;
+		dest.y = coord[i].second;
 
-		texture->render(coord[i].first, coord[i].second);
+		texture->render(dest);
 
 		++i;
 	}
