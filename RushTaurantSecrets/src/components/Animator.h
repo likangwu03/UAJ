@@ -12,7 +12,6 @@ class Animator : public Component
 	static const int FRAMERATE = 100;
 private:
 	Texture* texture;
-	bool able;
 	//fila de la anim
 	int currentAnim;
 	int initFrame;
@@ -24,6 +23,7 @@ private:
 
 	float width;
 	float height;
+	Vector pos;
 
 	SDLUtils* sdl;
 	GOOrientation parentOrientation;
@@ -33,12 +33,12 @@ private:
 	PlayerMovementController* plMov;
 
 	float resizeFactor;
-	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h );
+	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h,Vector p );
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
 
-	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE,float w= 0,float h=0);
-	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE, float w = 0, float h = 0);
+	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE,float w= 0,float h=0, Vector pos = (-1, -1));
+	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE,float w = 0, float h = 0, Vector pos = (-1, -1));
 	
 	/*mover al siguiente frame*/
 	void updateAnim();
@@ -50,8 +50,13 @@ public:
 	void setTexture(string s, int iniFrame, int endFrame, int currAnim, int frRate = FRAMERATE);
 	/*cambiar de frameRate*/
 	void setframeRate(int frRate) { frameRate = frRate; };
-	/*cambiar si se puede renderizar y acutalizar*/
-	void setAble(bool b);
+	
+	/*cambiar de pos*/
+	void setPos(Vector pos);
+	/*cambiar de ancho*/
+	void setW(float w);
+	/*cambiar de alto*/
+	void setH(float h);
 
 	virtual void update();
 	virtual void render();

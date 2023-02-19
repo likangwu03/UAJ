@@ -1,16 +1,16 @@
 #include "Animator.h"
 
-Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) : Component(parent, id), sdl(SDLUtils::instance()) {
+Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h,Vector pos) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = t;
-	init(iniFrame, endFrame, currAnim, frRate, w, h);
+	init(iniFrame, endFrame, currAnim, frRate, w, h,pos);
 };
 
-Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) : Component(parent, id), sdl(SDLUtils::instance()) {
+Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h,Vector pos) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = &((*sdl).images().at(s));
-	init(iniFrame, endFrame, currAnim, frRate, w, h);
+	init(iniFrame, endFrame, currAnim, frRate, w, h,pos);
 };
 
-void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) {
+void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float w, float h,Vector p) {
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 	lastTic = sdlutils().currRealTime();
 	frameRate = 100;
@@ -28,6 +28,9 @@ void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float 
 		width = w;
 		height = h;
 	}
+	//si no le dan pos, se coge del transform
+	if (pos.getX() == -1 && pos.getY() == -1) pos = plTf->getPos();
+	else pos = p;
 };
 
 /*mover al siguiente frame*/
@@ -56,9 +59,7 @@ void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, in
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 
-void Animator::setAble(bool b) {
-	able = b;
-}
+
 void Animator::update() {
 	if (!plTf->isStatic()) {
 		if (plTf->getMovState() == idle) currentAnim = 1;
@@ -97,8 +98,14 @@ void Animator::update() {
 
 void Animator::render() {
 	SDL_Rect temp;
-	temp.x = plTf->getPos().getX();
-	temp.y = plTf->getPos().getY();
+	if(plTf->isStatic()) {
+		temp.x = pos.getX();
+		temp.y = pos.getY();
+	}
+	else { //si no es est¨¢tico, seguir¨¢ siempre al transform
+		temp.x = plTf->getPos().getX();
+		temp.y = plTf->getPos().getY();
+	}
 	temp.w = width * resizeFactor;
 	temp.h = height * resizeFactor;
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
