@@ -8,7 +8,7 @@ using namespace std;
 namespace _ecs {
 	using id_type = uint8_t;
 
-	const id_type NUM_PATHS = 22;
+	const id_type NUM_TABLES = 7;
 
 	enum _path_id : id_type {
 		ARRIVE_TABLE_1,
@@ -70,19 +70,11 @@ namespace _ecs {
 	const Vector OUT = Vector(40, 15);
 	// pos caja registradora
 	const Vector CASH_REGISTER = Vector(26, 10);
-	/*
-	// entrada
-	const Vector ENTRY = Vector(950, 470);
-	// fuera
-	const Vector OUT = Vector(1300, 470);
-	// pos caja registradora
-	const Vector CASH_REGISTER = Vector(900, 290);
-	*/
 
 	// array de vectores
 	// cada vector es uno de los paths posibles
 	// a la hora de pagar lo importante es que entra desde la izq con un Vector(x, 290)
-	static Route paths[NUM_PATHS] = {
+	static Route paths[NUM_TABLES * 3 + 1] = {
 		// mesa 1 silla izquierda
 		{{Vector(27, 11), Vector(20, 11), Vector(20, 15)}, east },	// mesa
 		{{Vector(20, 10), CASH_REGISTER}},	// pagar
@@ -114,20 +106,4 @@ namespace _ecs {
 		// marcharse haciendo cola en la caja
 		{{Vector(26, 15), OUT}}
 	};
-	/* static Route paths[NUM_PATHS] = {
-		// mesa 1 silla izquierda
-		{{Vector(950, 360), Vector(675, 360), Vector(675, 465)}, east },	// mesa
-		{{Vector(675, 290), CASH_REGISTER}},	// pagar
-		{{Vector(675, 360), Vector(950, 360), Vector(950, 470), OUT}},	// marcharse mesa
-		// mesa 2 silla derecha
-		{{Vector(950, 360), Vector(565, 360), Vector(565, 465)}, west },	// mesa
-		{{Vector(565, 360), Vector(700, 360), Vector(700, 290), CASH_REGISTER}},	// pagar
-		{{Vector(565, 360), Vector(950, 360), Vector(950, 470), OUT}},	// marcharse mesa
-		// mesa 4 silla derecha
-		{{Vector(950, 360), Vector(635, 360), Vector(635, 250)}, west},	// mesa
-		{{Vector(635, 290), CASH_REGISTER}},	// pagar
-		{{Vector(635, 360), Vector(950, 360), Vector(950, 470), OUT}},	// marcharse mesa
-		{{Vector(900, 470), OUT}}			// marcharse pagando
-	};
-	*/
 };

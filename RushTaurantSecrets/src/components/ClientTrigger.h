@@ -5,6 +5,7 @@
 #include "../components/Ingredients.h"
 #include "../components/TriggerComp.h"
 #include "../components/ClientState.h"
+#include "../structure/Paths_def.h"
 class ClientTrigger : public TriggerComp
 {
 	ClientState* clientState;

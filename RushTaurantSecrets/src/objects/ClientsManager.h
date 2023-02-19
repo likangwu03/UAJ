@@ -16,6 +16,12 @@ class ClientsManager : public Manager<ClientsManager> {
 	friend Manager<ClientsManager>;
 
 private:
+	const int MAX_ENTRANCE = 3;
+
+	// TESTEO
+	const int TEST_ENTRANCE = 3;
+	const int TEST_PAY = 4;
+
 	// cola con la entrada
 	list<Client*> entrance;
 	// cola con la caja de pagar
@@ -28,17 +34,13 @@ private:
 	float lastClientTime;
 	float timer;
 	float speed;
+	int maxClients;
 	bool assignedCustomer;
+	bool tables[_ecs::NUM_TABLES];
 
-	const int MAX_CLIENTS = 6;
-	const int MAX_ENTRANCE = 3;
-
-	// TESTEO
-	const int TEST_ENTRANCE = 3;
-	const int TEST_PAY = 4;
 
 	void addFrequently() {
-		if (clients->size() < MAX_CLIENTS && entrance.size() < MAX_ENTRANCE) {
+		if (clients->size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 			float time = sdl->currRealTime() - lastClientTime;
 			if (time > timer) {
 				lastClientTime = sdl->currRealTime();
@@ -95,11 +97,14 @@ private:
 		}
 	}
 
-	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients)
-		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), lastClientTime(0), assignedCustomer(false) {
+	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
+		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), lastClientTime(0), assignedCustomer(false), maxClients(maxClients) {
 		scene = parent->getScene();
 		clients = scene->getGroup(_ecs::grp_CLIENTS);
 		sdl = SDLUtils::instance();
+		for (int i = 0; i < _ecs::NUM_TABLES; ++i) {
+			tables[i] = false;
+		}
 	}
 
 	int test() const {
@@ -146,6 +151,44 @@ private:
 			}
 		}
 	}
+
+	bool isTableFull(int table) const {
+		return tables[table - 1];
+	}
+
+	bool checkFirstTableEmpty(int& table) {
+		bool found = false;
+		int i = 0;
+		while( i < _ecs::NUM_TABLES && !found) {
+			if (!tables[i]) {
+				found = true;
+				table = i + 1;
+			}
+			++i;
+		}
+		return found;
+	}
+
+	void assignTable(int table, Client* firstEntrance) {
+		// se marca que la mesa está ocupada
+		tables[table - 1] = true;
+		// se le asigna una mesa
+		firstEntrance->getComponent<ClientMovement>()->assignTable(table);
+		assignedCustomer = true;
+	}
+
+	// comprobar si algún cliente ha abandonado una mesa o si ha terminado de comer para marcarla como desocupada
+	void checkTables() {
+		for (int i = 0; i < clients->size(); ++i) {
+			GameObject* g = (*clients)[i];
+			ClientMovement* m = g->getComponent<ClientMovement>();
+			if (g->getComponent<ClientState>()->getState() == ClientState::FINISH_EAT ||
+				(m->hasAbandonedTable())) {
+				tables[m->getAssignedTable() - 1] = false;
+			}
+		}
+	}
+
 public:
 
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_CLIENTS_MANAGER;
@@ -176,10 +219,17 @@ public:
 			// se comprueba que el cliente está en la entrada
 			ClientState::States clientState = firstEntrance->getComponent<ClientState>()->getState();
 			if (clientState == ClientState::ENTRANCE) {
-				// se le asigna una mesa
-				firstEntrance->getComponent<ClientMovement>()->assignTable(table);
-				assignedCustomer = true;
-				return true;
+				if (!isTableFull(table)) {
+					assignTable(table, firstEntrance);
+					return true;
+				}
+				else {
+					int table = -1;
+					if (checkFirstTableEmpty(table)) {
+						assignTable(table, firstEntrance);
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -220,6 +270,8 @@ public:
 		*/
 
 		checkHappinessEntrance();
+
+		checkTables();
 
 		checkHappinessPay();
 	}

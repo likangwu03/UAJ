@@ -143,6 +143,14 @@ public:
 		return clientState->getState() == ClientState::OUT && posPay != -1;
 	}
 
+	bool hasAbandonedTable() const {
+		return clientState->getState() == ClientState::OUT && assignedTable != -1;
+	}
+
+	int getAssignedTable() const {
+		return assignedTable;
+	}
+
 	void update() {
 		ClientState::States currentState;
 		currentState = clientState->getState();

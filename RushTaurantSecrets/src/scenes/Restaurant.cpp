@@ -47,7 +47,7 @@ void Restaurant::init() {
 	menu.push_back(_ecs::PANCAKE);
 	// manager de clientes
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu, 6 * 1000, 2);
+	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 10);
 	
 	cm = new CollisionsManager(this);
 	ui = new UIRestaurant();

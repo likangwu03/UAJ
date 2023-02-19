@@ -28,5 +28,5 @@ void ClientTrigger::isOverlapping()
 
 int ClientTrigger::randomTable()
 {
-	return SDLUtils::instance()->rand().nextInt(1, 8);
+	return SDLUtils::instance()->rand().nextInt(1, _ecs::NUM_TABLES + 1);
 }
