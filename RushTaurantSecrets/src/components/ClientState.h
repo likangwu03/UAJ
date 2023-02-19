@@ -69,7 +69,7 @@ public:
 			#ifdef _DEBUG
 				cout << "I know what I want to eat" << endl;
 			#endif
-				state = EATING;	// TAKEMYORDER
+				state = TAKEMYORDER;
 				timer = 0;
 			}
 			// Si está comiendo y termina de comer, pasa al estado de caminar hacia la caja
@@ -124,12 +124,12 @@ public:
 	}
 
 	void handleEvents() {
-		if (InputHandler::instance()->isKeyDown(SDLK_SPACE)) {
-			if (state == TAKEMYORDER)
-				takeOrder();
-			else if (state == ORDERED)
-				getServed();
-		}
+		//if (InputHandler::instance()->isKeyDown(SDLK_SPACE)) {
+		//	if (state == TAKEMYORDER)
+		//		takeOrder();
+		//	else if (state == ORDERED)
+		//		getServed();
+		//}
 	}
 
 };

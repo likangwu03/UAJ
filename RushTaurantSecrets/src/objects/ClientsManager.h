@@ -205,18 +205,18 @@ public:
 		addFrequently();
 
 		// TESTEO
-		if (entrance.size() == TEST_ENTRANCE) {
-			assignFirstClient(test());
-		}
+		//if (entrance.size() == TEST_ENTRANCE) {
+		//	assignFirstClient(test());
+		//}
 
 		firstClientAssigned();
 
 		checkCashRegister();
 
 		// TESTEO
-		if (pay.size() >= TEST_PAY) {
-			collectAndLeave();
-		}
+		//if (pay.size() >= TEST_PAY) {
+		//	collectAndLeave();
+		//}
 
 		checkHappinessEntrance();
 

@@ -2,10 +2,11 @@
 #include "../structure/GameObject.h"
 #include "../components/Animator.h"
 #include "../components/StraightMovement.h"
-#include "../components/TriggerComp.h"
 #include "../components/ClientState.h"
 #include "../structure/Food_def.h"
 #include "../components/ClientMovement.h"
+#include "../components/ClientTrigger.h"
+
 
 class Client : public GameObject {
 public:
@@ -14,8 +15,8 @@ public:
 		Transform* t = new Transform(this, origin, Vector(0, 0), 48, 96);
 		new Animator(this, &((*sdl).images().at(sprite)), 0, 6, 1);
 		new StraightMovement(this, speed);
-		new TriggerComp(this, Vector(0, 48), 48 * sdl->getResizeFactor(), 48 * sdl->getResizeFactor());
 		new ClientState(this, menu);
 		new ClientMovement(this, posEntrance);
+		new ClientTrigger(this, Vector(0, 0), 48, 96);
 	}
 };
