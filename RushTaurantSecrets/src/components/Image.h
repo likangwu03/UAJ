@@ -23,6 +23,8 @@ public:
 		assert(texture != nullptr);
 	}
 
+	void setTexture(Texture* t) { texture = t; }
+
 	virtual void render() {
 		SDL_Rect dest;
 		dest.x = transform->getPos().getX();
