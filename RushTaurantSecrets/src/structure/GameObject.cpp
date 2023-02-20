@@ -12,6 +12,14 @@ GameObject::~GameObject() {
 	}
 }
 
+void GameObject::addComponent(Component* comp, _ecs::_cmp_id id) {
+	auto it = components.find(id);
+	if(it != components.end()) {
+		delete it->second;
+	}
+	components[id] = comp;
+}
+
 /*void GameObject::changeScene(Scene* scene) {
 	//this->scene->removeObject(this);
 	//scene->addObject(this);

@@ -14,5 +14,5 @@ public:
 
 	bool assignClients(GameObject* first, GameObject* second = nullptr, GameObject* third = nullptr, GameObject* fourth = nullptr);
 
-	bool recieveDish(GameObject* dish);
+	bool receiveDish(GameObject* dish);
 };

@@ -52,11 +52,11 @@ public:
 	void setframeRate(int frRate) { frameRate = frRate; };
 	
 	/*cambiar de pos*/
-	void setPos(Vector pos);
+	void setPos(Vector pos) { this->pos = pos; }
 	/*cambiar de ancho*/
-	void setW(float w);
+	void setW(float w) { width = w; }
 	/*cambiar de alto*/
-	void setH(float h);
+	void setH(float h) { height = h; }
 
 	virtual void update();
 	virtual void render();

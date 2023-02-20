@@ -6,6 +6,9 @@ class Component;
 class Scene;
 
 class GameObject {
+private:
+	friend class Component;
+	void addComponent(Component* comp, _ecs::_cmp_id id);
 protected:
 	std::unordered_map<_ecs::_cmp_id, Component*> components;
 	Scene* scene;
@@ -19,23 +22,13 @@ public:
 	void refresh();
 	bool isAlive() { return alive; }
 
-	void setAlive(bool alive) {
-		this->alive = alive;
-	}
+	void setAlive(bool alive) { this->alive = alive; }
 
 	virtual Scene* getScene() { return scene; }
 
 	virtual void update();
 	virtual void render();
 	void handleEvents();
-
-	void addComponent(Component* comp, _ecs::_cmp_id id) {
-		auto it = components.find(id);
-		if (it != components.end()) {
-			delete it->second;
-		}
-		components[id] = comp;
-	}
 
 	template<typename Comp>
 	inline Comp* getComponent() {
@@ -52,6 +45,4 @@ public:
 		if (it == components.end())return;
 		it->second->setActive(b);
 	}
-
-
 };

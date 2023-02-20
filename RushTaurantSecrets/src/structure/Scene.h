@@ -6,6 +6,9 @@
 class GameObject;
 using namespace _ecs;
 class Scene {
+private:
+	friend class GameObject;
+	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 protected:
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
@@ -17,7 +20,6 @@ public:
 	virtual Scene* getUI() { return nullptr; };
 	
 
-	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 	void refresh();
 	inline std::vector<GameObject*>* getGroup(_ecs::_grp_id grp) { return &objGroups[grp]; }
 	inline GameObject* getGameObject(_ecs::_hdr_id handler) { return handlers[handler]; }

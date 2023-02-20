@@ -31,7 +31,7 @@ bool DeskComp::assignClients(GameObject* first, GameObject* second, GameObject* 
 	return true;
 }
 
-bool DeskComp::recieveDish(GameObject* dish) {
+bool DeskComp::receiveDish(GameObject* dish) {
 	auto it = assigned.begin();
 	bool served = false;
 	while(it != assigned.end() && !served) {
