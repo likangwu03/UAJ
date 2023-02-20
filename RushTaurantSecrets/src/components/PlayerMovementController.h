@@ -30,7 +30,8 @@ public:
 	PlayerMovementController(GameObject* parent) : Component(parent, id) {
 		transform = parent->getComponent<Transform>();
 		input = InputHandler::instance();
-		input->initialiseJoysticks(_joy);
+		if(input->joysticksInitialised())
+			input->initialiseJoysticks(_joy);
 		controller = SDL_JoystickName(_joy);
 	}
 	~PlayerMovementController() { 
@@ -44,7 +45,8 @@ public:
 		{
 			input->refresh();
 			// eje x mando 1
-			if (input->xvalue(0, 1) > 0 || input->xvalue(0, 1) < 0) {
+			if ((input->xvalue(0, 1) > 0 || input->xvalue(0, 1) < 0) && !input->keyDownEvent()) {
+				std::cout << "hola" << std::endl;
 				speed.setX(offset * input->xvalue(0,1));
 				transform->setMovState(walking);
 				if (input->xvalue(0, 1) < 0)
@@ -53,7 +55,8 @@ public:
 					transform->setOrientation(east);
 			}
 			// eje y mando 1
-			else if (input->yvalue(0, 1) > 0 || input->yvalue(0, 1) < 0) {
+			else if (input->yvalue(0, 1) > 0 || input->yvalue(0, 1) < 0 && !input->keyDownEvent()) {
+				std::cout << "hola" << std::endl;
 				speed.setY(offset * input->yvalue(0,1));
 				transform->setMovState(walking);
 				if (input->yvalue(0, 1) < 0)
@@ -92,7 +95,7 @@ public:
 					transform->setMovState(walking);
 					speed.setY(offset);
 					transform->setOrientation(south);
-				}
+				}		
 				input->setFalseJoyhat();
 			}
 			else {
@@ -120,8 +123,7 @@ public:
 					speed.setY(offset);
 					transform->setOrientation(south);
 				}
-			}
-			
+			}		
 			//// eje x mando 2
 			//else if (input->xvalue(0, 2) > 0 || input->xvalue(0, 2) < 0)
 			//{
@@ -171,7 +173,7 @@ public:
 			transform->setMovState(idle);
 		}	
 		transform->setVel(speed);
-		if (input->joysticksInitialised()) {
+		if (input->joysticksInitialised()) {		
 			speed = Vector(0, 0);
 		}
 	}

@@ -2,7 +2,7 @@
 
 void CookingMachineTrigger::isOverlapping() {
 	
-	if (!ih->isKeyDown(SDLK_SPACE)) return;
+	if (!ih->isKeyDown(SDLK_SPACE) && !ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
 
 	CookingMachineComp::State s = cook->getState();
 	pair<_ecs::_dish_id, bool>aux;

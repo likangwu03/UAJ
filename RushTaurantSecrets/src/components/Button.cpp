@@ -9,6 +9,9 @@ Button::Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(
 	texture = new Texture(sdlutils().renderer(), "./assets/Sprites/UI/PlayButton.png", 2, 2);
 	dest = { (1280 / 2) - (BUTTON_W * 4 / 2), 400, BUTTON_W * 4, BUTTON_H * 4 };
 
+	// se inicializa el mando
+	InputHandler::instance()->initialiseJoysticks(_joy);
+
 }
 
 Button::~Button() {
@@ -25,12 +28,19 @@ void Button::handleEvents() {
 	SDL_GetMouseState(&x, &y);
 	SDL_Rect mouseRect = { x, y, 1, 1 };
 
+	
+
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		frame = 1;
-
-		if (InputHandler::instance()->mouseButtonEvent()) {
+		if (InputHandler::instance()->getMouseButtonState(InputHandler::instance()->LEFT)) {
 			callback(sceneManager);
 		}
+	}
+	else if (InputHandler::instance()->joysticksInitialised()) {
+		if (InputHandler::instance()->getButtonState(0,SDL_CONTROLLER_BUTTON_A)) {
+			frame = 1;
+			callback(sceneManager);
+		}		
 	}
 	else frame = 0;
 }

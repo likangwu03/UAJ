@@ -301,7 +301,7 @@ private:
 		if (event.jhat.value & SDL_HAT_LEFT)
 		{
 			m_joyhat[3] = true;
-		}
+		}	
 	}
 
 	inline void joybuttonDownEvent(const SDL_Event& event) {

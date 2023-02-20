@@ -26,4 +26,6 @@ private:
 	SDL_Rect src, dest;
 
 	SceneManager* sceneManager;
+
+	SDL_Joystick* _joy;
 };

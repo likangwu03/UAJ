@@ -3,7 +3,7 @@
 
 void ClientTrigger::isOverlapping()
 {
-	if (ih->isKeyDown(SDLK_SPACE)) {
+	if (ih->isKeyDown(SDLK_SPACE) || ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
 		ClientState::States state = clientState->getState();
 		switch (state)
 		{
