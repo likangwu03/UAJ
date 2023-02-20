@@ -30,7 +30,7 @@ public:
 	PlayerMovementController(GameObject* parent) : Component(parent, id) {
 		transform = parent->getComponent<Transform>();
 		input = InputHandler::instance();
-		if(input->joysticksInitialised())
+		if(!input->joysticksInitialised())
 			input->initialiseJoysticks(_joy);
 		controller = SDL_JoystickName(_joy);
 	}
@@ -66,23 +66,25 @@ public:
 				transform->setMovState(idle);
 			}
 			if (std::string(controller) == "Controller (Xbox One For Windows)") {
-				// derecha
-				if (input->getHatState(RIGHT)) {
-					moveRight();
+				if (input->getHatEvent()) {
+					// derecha
+					if (input->getHatState(RIGHT)) {
+						moveRight();
+					}
+					// izquierda
+					if (input->getHatState(LEFT)) {
+						moveLeft();
+					}
+					// arriba		
+					if (input->getHatState(UP)) {
+						moveUp();
+					}
+					// abajo
+					if (input->getHatState(DOWN)) {
+						moveDown();
+					}
 				}
-				// izquierda
-				if (input->getHatState(LEFT)) {
-					moveLeft();
-				}
-				// arriba		
-				if (input->getHatState(UP)) {
-					moveUp();
-				}
-				// abajo
-				if (input->getHatState(DOWN)) {
-					moveDown();
-				}		
-				input->setFalseJoyhat();
+				else input->setFalseJoyhat();
 			}
 			else {
 				// derecha
@@ -153,9 +155,9 @@ public:
 	}
 
 	bool nonKeyPressed() {
+		bool pressed = false;
 		if (!input->joysticksInitialised()) {
 			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-			bool pressed = false;
 			if (currentKeyStates[SDL_SCANCODE_D])
 			{
 				moveRight();
@@ -177,6 +179,33 @@ public:
 				pressed = true;
 			}
 			//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
+			return pressed;
+		}
+		else if (std::string(controller) == "Controller (Xbox One For Windows)") {
+			if (input->getHatEvent()) {
+				// abajo
+				if (input->getHatState(DOWN)) {
+					moveDown();
+					pressed = true;
+				}
+				// arriba		
+				if (input->getHatState(UP)) {
+					moveUp();
+					pressed = true;
+				}
+				// izquierda
+				if (input->getHatState(LEFT)) {
+					moveLeft();
+					pressed = true;
+				}
+				// derecha
+				if (input->getHatState(RIGHT)) {
+					moveRight();
+					pressed = true;
+				}
+			}
+			else
+				input->setFalseJoyhat();
 			return pressed;
 		}
 		else

@@ -41,14 +41,12 @@ public:
 	// update the state with a new event
 	inline void update(const SDL_Event& event) {
 		switch (event.type) {
-		case SDL_JOYHATMOTION:
-			joyhatEvent(event);
 		case SDL_JOYBUTTONDOWN:
 			joybuttonDownEvent(event);
 		case SDL_JOYBUTTONUP:
 			joybuttonUpEvent(event);
 		case SDL_JOYAXISMOTION:
-			joystickEvent(event);
+			joystickEvent(event);	
 		case SDL_KEYDOWN:
 			onKeyDown(event);
 			break;
@@ -67,6 +65,8 @@ public:
 		case SDL_WINDOWEVENT:
 			handleWindowEvent(event);
 			break;
+		case SDL_JOYHATMOTION:
+			joyhatEvent(event);
 		default:
 			break;
 		}
@@ -144,9 +144,14 @@ public:
 		return m_joyhat[i];
 	}
 
+	bool getHatEvent() {
+		return isHatEvent;
+	}
+
 	void setFalseJoyhat() {
 		for (int i = 0; i < m_joyhat.size(); i++)
 			m_joyhat[i] = false;
+		isHatEvent = false;
 	}
 
 	int xvalue(int joy, int stick)
@@ -214,7 +219,7 @@ public:
 			}
 			SDL_JoystickEventState(SDL_ENABLE);
 			m_bJoysticksInitialised = true;
-			std::cout << "Initialised " << m_joysticks.size() << "joystick(s)";
+			std::cout << "Initialised " << m_joysticks.size() << "joystick(s)" << std::endl;
 		}
 		else
 		{
@@ -234,6 +239,7 @@ public:
 				SDL_JoystickClose(m_joysticks[i]);
 			}
 		}
+		m_bJoysticksInitialised = false;
 	}
 
 private:
@@ -286,22 +292,30 @@ private:
 	}
 
 	inline void joyhatEvent(const SDL_Event& event) {
-		if (event.jhat.value & SDL_HAT_UP)
+		isHatEvent = true;
+		if (event.jhat.value == SDL_HAT_UP)
 		{
 			m_joyhat[0] = true;
 		}
-		if (event.jhat.value & SDL_HAT_DOWN)
+		if (event.jhat.value == SDL_HAT_DOWN)
 		{
 			m_joyhat[1] = true;
 		}
-		if (event.jhat.value & SDL_HAT_RIGHT)
+		if (event.jhat.value == SDL_HAT_RIGHT)
 		{
 			m_joyhat[2] = true;
 		}
-		if (event.jhat.value & SDL_HAT_LEFT)
+		if (event.jhat.value == SDL_HAT_LEFT)
 		{
 			m_joyhat[3] = true;
-		}	
+		}
+		if (event.jhat.value == SDL_HAT_CENTERED) {
+			setFalseJoyhat();
+		}
+	}
+
+	inline void joyhatState() {
+		
 	}
 
 	inline void joybuttonDownEvent(const SDL_Event& event) {
@@ -362,6 +376,7 @@ private:
 	std::vector<std::vector<bool>> m_buttonStates;
 	bool m_bJoysticksInitialised = false;
 
+	bool isHatEvent = false;
 	std::array<bool, 4> m_joyhat {false, false, false, false};
 
 	bool isCloseWindoEvent_;

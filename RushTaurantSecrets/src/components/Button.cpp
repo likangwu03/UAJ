@@ -39,6 +39,7 @@ void Button::handleEvents() {
 	else if (InputHandler::instance()->joysticksInitialised()) {
 		if (InputHandler::instance()->getButtonState(0,SDL_CONTROLLER_BUTTON_A)) {
 			frame = 1;
+			InputHandler::instance()->clean();
 			callback(sceneManager);
 		}		
 	}
