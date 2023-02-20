@@ -3,7 +3,7 @@
 
 void ClientTrigger::isOverlapping()
 {
-	if (ih->isKeyDown(SDLK_SPACE) || ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
+	if (ih->isKeyDown(SDLK_SPACE) || inputMando()) {
 		ClientState::States state = clientState->getState();
 		switch (state)
 		{
@@ -29,4 +29,13 @@ void ClientTrigger::isOverlapping()
 int ClientTrigger::randomTable()
 {
 	return SDLUtils::instance()->rand().nextInt(1, _ecs::NUM_TABLES + 1);
+}
+
+bool ClientTrigger::inputMando() {
+	if (ih->joysticksInitialised()) {
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))
+			return true;
+	}
+	else
+		return false;
 }

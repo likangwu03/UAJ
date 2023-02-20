@@ -20,5 +20,7 @@ public:
 	virtual void isOverlapping();
 
 	int randomTable();
+
+	bool inputMando();
 };
 

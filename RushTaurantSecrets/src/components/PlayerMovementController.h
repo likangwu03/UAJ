@@ -46,7 +46,6 @@ public:
 			input->refresh();
 			// eje x mando 1
 			if ((input->xvalue(0, 1) > 0 || input->xvalue(0, 1) < 0) && !input->keyDownEvent()) {
-				std::cout << "hola" << std::endl;
 				speed.setX(offset * input->xvalue(0,1));
 				transform->setMovState(walking);
 				if (input->xvalue(0, 1) < 0)
@@ -56,7 +55,6 @@ public:
 			}
 			// eje y mando 1
 			else if (input->yvalue(0, 1) > 0 || input->yvalue(0, 1) < 0 && !input->keyDownEvent()) {
-				std::cout << "hola" << std::endl;
 				speed.setY(offset * input->yvalue(0,1));
 				transform->setMovState(walking);
 				if (input->yvalue(0, 1) < 0)
@@ -70,31 +68,19 @@ public:
 			if (std::string(controller) == "Controller (Xbox One For Windows)") {
 				// derecha
 				if (input->getHatState(RIGHT)) {
-					speed = Vector(0, 0);
-					transform->setMovState(walking);
-					speed.setX(offset);
-					transform->setOrientation(east);
+					moveRight();
 				}
 				// izquierda
 				if (input->getHatState(LEFT)) {
-					speed = Vector(0, 0);
-					transform->setMovState(walking);
-					speed.setX(-offset);
-					transform->setOrientation(west);
+					moveLeft();
 				}
 				// arriba		
 				if (input->getHatState(UP)) {
-					speed = Vector(0, 0);
-					transform->setMovState(walking);
-					speed.setY(-offset);
-					transform->setOrientation(north);
+					moveUp();
 				}
 				// abajo
 				if (input->getHatState(DOWN)) {
-					speed = Vector(0, 0);
-					transform->setMovState(walking);
-					speed.setY(offset);
-					transform->setOrientation(south);
+					moveDown();
 				}		
 				input->setFalseJoyhat();
 			}
@@ -139,31 +125,19 @@ public:
 			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 			// arriba
 			if (input->isKeyDown(SDL_SCANCODE_W)) {
-				speed = Vector(0, 0);
-				speed.setY(-offset);
-				transform->setOrientation(north);
-				transform->setMovState(walking);
+				moveUp();
 			}
 			// izquierda
 			if (input->isKeyDown(SDL_SCANCODE_A)) {
-				speed = Vector(0, 0);
-				speed.setX(-offset);
-				transform->setOrientation(west);
-				transform->setMovState(walking);
+				moveLeft();
 			}
 			// abajo
 			if (input->isKeyDown(SDL_SCANCODE_S)) {
-				speed = Vector(0, 0);
-				speed.setY(offset);
-				transform->setOrientation(south);
-				transform->setMovState(walking);
+				moveDown();
 			}
 			// derecha
 			if (input->isKeyDown(SDL_SCANCODE_D)) {
-				speed = Vector(0, 0);
-				speed.setX(offset);
-				transform->setOrientation(east);
-				transform->setMovState(walking);
+				moveRight();
 			}
 		}
 	}
@@ -184,34 +158,22 @@ public:
 			bool pressed = false;
 			if (currentKeyStates[SDL_SCANCODE_D])
 			{
-				speed = Vector(0, 0);
-				speed.setX(offset);
-				transform->setOrientation(east);
-				transform->setMovState(walking);
+				moveRight();
 				pressed = true;
 			}
 			if (currentKeyStates[SDL_SCANCODE_S])
 			{
-				speed = Vector(0, 0);
-				speed.setY(offset);
-				transform->setOrientation(south);
-				transform->setMovState(walking);
+				moveDown();
 				pressed = true;
 			}
 			if (currentKeyStates[SDL_SCANCODE_A])
 			{
-				speed = Vector(0, 0);
-				speed.setX(-offset);
-				transform->setOrientation(west);
-				transform->setMovState(walking);
+				moveLeft();
 				pressed = true;
 			}
 			if (currentKeyStates[SDL_SCANCODE_W])
 			{
-				speed = Vector(0, 0);
-				speed.setY(-offset);
-				transform->setOrientation(north);
-				transform->setMovState(walking);
+				moveUp();
 				pressed = true;
 			}
 			//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
@@ -220,6 +182,36 @@ public:
 		else
 			return true;
 	}
+
+	void moveUp() {
+		speed = Vector(0, 0);
+		speed.setY(-offset);
+		transform->setOrientation(north);
+		transform->setMovState(walking);
+	}
+
+	void moveDown() {
+		speed = Vector(0, 0);
+		speed.setY(offset);
+		transform->setOrientation(south);
+		transform->setMovState(walking);
+	}
+
+	void moveRight() {
+		speed = Vector(0, 0);
+		speed.setX(offset);
+		transform->setOrientation(east);
+		transform->setMovState(walking);
+	}
+
+	void moveLeft() {
+		speed = Vector(0, 0);
+		speed.setX(-offset);
+		transform->setOrientation(west);
+		transform->setMovState(walking);
+	}
 };
+
+
 
 
