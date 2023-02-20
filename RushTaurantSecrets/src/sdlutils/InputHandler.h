@@ -41,6 +41,8 @@ public:
 	// update the state with a new event
 	inline void update(const SDL_Event& event) {
 		switch (event.type) {
+		case SDL_JOYHATMOTION:
+			joyhatEvent(event);
 		case SDL_JOYBUTTONDOWN:
 			joybuttonDownEvent(event);
 		case SDL_JOYBUTTONUP:
@@ -138,6 +140,15 @@ public:
 		return m_buttonStates[joy][buttonNumber];
 	}
 
+	bool getHatState(int i) {
+		return m_joyhat[i];
+	}
+
+	void setFalseJoyhat() {
+		for (int i = 0; i < m_joyhat.size(); i++)
+			m_joyhat[i] = false;
+	}
+
 	int xvalue(int joy, int stick)
 	{
 		if (m_joystickValues.size() > 0)
@@ -170,7 +181,7 @@ public:
 		return 0;
 	}
 
-	void initialiseJoysticks() {
+	void initialiseJoysticks(SDL_Joystick*& _joy) {
 
 		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
 		{
@@ -181,6 +192,7 @@ public:
 			for (int i = 0; i < SDL_NumJoysticks(); i++)
 			{
 				SDL_Joystick* joy = SDL_JoystickOpen(i);
+				_joy = joy;
 				if (SDL_JoystickGetAttached(joy) == 1) // nueva alternativa a SDL_JoystickOpened a partir de SDL 2.0
 				{
 					m_joysticks.push_back(joy);
@@ -273,13 +285,32 @@ private:
 		}
 	}
 
+	inline void joyhatEvent(const SDL_Event& event) {
+		if (event.jhat.value & SDL_HAT_UP)
+		{
+			m_joyhat[0] = true;
+		}
+		if (event.jhat.value & SDL_HAT_DOWN)
+		{
+			m_joyhat[1] = true;
+		}
+		if (event.jhat.value & SDL_HAT_RIGHT)
+		{
+			m_joyhat[2] = true;
+		}
+		if (event.jhat.value & SDL_HAT_LEFT)
+		{
+			m_joyhat[3] = true;
+		}
+	}
+
 	inline void joybuttonDownEvent(const SDL_Event& event) {
 		if (event.type == SDL_JOYBUTTONDOWN)
 		{
 			int whichOne = event.jaxis.which;
 			m_buttonStates[whichOne][event.jbutton.button] = true;
 		}
-	}
+	}	
 
 	inline void joybuttonUpEvent(const SDL_Event& event) {
 		if (event.type == SDL_JOYBUTTONUP)
@@ -330,6 +361,8 @@ private:
 	std::vector<std::pair<Vector*, Vector*>> m_joystickValues;
 	std::vector<std::vector<bool>> m_buttonStates;
 	bool m_bJoysticksInitialised = false;
+
+	std::array<bool, 4> m_joyhat {false, false, false, false};
 
 	bool isCloseWindoEvent_;
 	bool isKeyUpEvent_;

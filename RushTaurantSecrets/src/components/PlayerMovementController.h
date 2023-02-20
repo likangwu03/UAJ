@@ -6,7 +6,9 @@
 #include "../structure/GameObject.h"
 #include "../structure/Structure_def.h"
 #include "Transform.h"
+#include <string>
 
+enum DPAD_XBOX { UP, DOWN, RIGHT, LEFT};
 
 class PlayerMovementController : public Component
 {
@@ -14,6 +16,10 @@ private:
 	int offset = 6;
 	Vector speed = (0,0);
 	Vector aux = speed;
+
+	SDL_Joystick* _joy;
+	const char* controller;
+	SDL_GameController* gamecont = nullptr;
 
 	Transform* transform = nullptr;
 	InputHandler* input;
@@ -24,12 +30,16 @@ public:
 	PlayerMovementController(GameObject* parent) : Component(parent, id) {
 		transform = parent->getComponent<Transform>();
 		input = InputHandler::instance();
-		input->initialiseJoysticks();
+		input->initialiseJoysticks(_joy);
+		controller = SDL_JoystickName(_joy);
 	}
 	~PlayerMovementController() { 
 		input->clean();
 	}
 	virtual void handleEvents() {	
+		// Descomentar si se quiere comprobar el binding de un mando
+		/*gamecont = SDL_GameControllerOpen(0);
+		std::cout << SDL_GameControllerMapping(gamecont) << std::endl;*/
 		if (input->joysticksInitialised())
 		{
 			input->refresh();
@@ -54,7 +64,38 @@ public:
 			else if (input->xvalue(0, 1) == 0 && input->yvalue(0, 1) == 0) {
 				transform->setMovState(idle);
 			}
-			if (input->numButtons() >= 11) {
+			if (std::string(controller) == "Controller (Xbox One For Windows)") {
+				// derecha
+				if (input->getHatState(RIGHT)) {
+					speed = Vector(0, 0);
+					transform->setMovState(walking);
+					speed.setX(offset);
+					transform->setOrientation(east);
+				}
+				// izquierda
+				if (input->getHatState(LEFT)) {
+					speed = Vector(0, 0);
+					transform->setMovState(walking);
+					speed.setX(-offset);
+					transform->setOrientation(west);
+				}
+				// arriba		
+				if (input->getHatState(UP)) {
+					speed = Vector(0, 0);
+					transform->setMovState(walking);
+					speed.setY(-offset);
+					transform->setOrientation(north);
+				}
+				// abajo
+				if (input->getHatState(DOWN)) {
+					speed = Vector(0, 0);
+					transform->setMovState(walking);
+					speed.setY(offset);
+					transform->setOrientation(south);
+				}
+				input->setFalseJoyhat();
+			}
+			else {
 				// derecha
 				if (input->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) {
 					transform->setMovState(walking);
@@ -129,8 +170,6 @@ public:
 			speed = Vector(0, 0);
 			transform->setMovState(idle);
 		}	
-		if(!input->joysticksInitialised())
-			//input->refresh(); comentado temporalmente
 		transform->setVel(speed);
 		if (input->joysticksInitialised()) {
 			speed = Vector(0, 0);
