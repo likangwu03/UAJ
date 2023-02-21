@@ -28,7 +28,6 @@ protected:
 	SDLUtils* sdl;
 	Transform* plTf;
 
-	float resizeFactor;
 	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h);
 
 	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate,float w,float h,_ecs:: _cmp_id id);

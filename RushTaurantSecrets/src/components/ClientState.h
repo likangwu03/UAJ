@@ -12,11 +12,7 @@ using namespace _ecs;
 class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
-	ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id), 
-		state(START), happiness(80), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>())
-	{ 
-		render->clientStateIsReady(); //decirle que ya est¨¢ creado
-	}
+	ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu);
 
 	enum States {
 		START,    // Caminar hasta mostrador
@@ -33,8 +29,8 @@ public:
 		OUT       // Saliendo del local
 	};
 
-	States getState() const { return state; }
-	void setState(States state) { this->state = state; }
+	States getState() const;
+	void setState(States state);
 
 private:
 	States state;
@@ -50,98 +46,18 @@ private:
 
 public:
 
-	void update() {
-		// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
-		if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING) {
-			happiness -= DECREASE;
+	void update();
+	void takeOrder();
+	_ecs::_dish_id getOrderedDish();
+	void getServed();
+	void changeDish();
+	float getHappiness();
 
-			// Si la felicidad llega a 0, se pone el estado a OUT
-			// (DE MOMENTO TARDA COMO 1 MINUTO)
-			if (happiness <= 0) {
-				state = OUT;
-			#ifdef _DEBUG
-				cout << "Happiness reached 0, leaving restaurant" << endl;
-			#endif
-			}
+	/*void handleEvents() {
+		if (InputHandler::instance()->isKeyDown(SDLK_r)) {
+			if (state == ORDERED)
+				changeDish();
 		}
-		// Si no, si est?pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acción
-		else if (state == THINKING || state == EATING) {
-			int delta = SDL_GetTicks() - lastTick;
-			lastTick = SDL_GetTicks();
-			timer += delta;
-
-			// Si est?pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
-			if (state == THINKING && timer >= THINKINGTIME) {
-			#ifdef _DEBUG
-				cout << "I know what I want to eat" << endl;
-			#endif
-				state = TAKEMYORDER;
-				render->renderTakingNoteState();
-				timer = 0;
-			}
-			// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja
-			else if (state == EATING && timer >= EATINGTIME) {
-				state = FINISH_EAT;
-			#ifdef _DEBUG
-				cout << "I'm done eating" << endl;
-			#endif
-			}
-		}
-
-		
-
-	}
-
-	// Función que asigna al plato pedido uno aleatorio de entre los
-	// disponibles en el men?del día y cambia el estado a ORDERED
-	void takeOrder() {
-		int rndDish = rand() % availableDishes.size();
-		orderedDish = availableDishes[rndDish];
-
-	#ifdef _DEBUG
-		cout << "Order taken, I want " << orderedDish << endl;
-	#endif
-		state = ORDERED;
-		render->renderOrderingState();
-	}
-	// Función que devuelve el plato que se ha pedido
-	_ecs::_dish_id getOrderedDish() { return orderedDish; }
-
-
-	// Función que informa que ha sido servido y cambia el estado a EATING (reinicia el contador)
-	void getServed() {
-	#ifdef _DEBUG
-		cout << "Thanks for the food" << endl;
-	#endif
-		state = EATING;
-		timer = 0;
-		lastTick = SDL_GetTicks();
-		render->renderEatingState();
-	}
-
-
-	void changeDish() {
-		if (!dishChanged) {
-			_ecs::_dish_id lastDish = orderedDish;
-			while (lastDish == orderedDish) {
-				int rndDish = rand() % availableDishes.size();
-				orderedDish = availableDishes[rndDish];
-			}
-		}
-		else state = OUT;
-	}
-
-	int getHappiness() {
-		return happiness;
-	}
-
-	void handleEvents() {
-		//if (InputHandler::instance()->isKeyDown(SDLK_SPACE)) {
-		//	if (state == TAKEMYORDER)
-		//		takeOrder();
-		//	else if (state == ORDERED)
-		//		getServed();
-		//}
-	}
+	}*/
 
 };

@@ -18,8 +18,8 @@ void UIAnimator::render() {
 	temp.x = plTf->getPos().getX();
 	temp.y = plTf->getPos().getY();
 	}
-	temp.w = width * resizeFactor;
-	temp.h = height * resizeFactor;
+	temp.w = width * sdlutils().getResizeFactor();
+	temp.h = height * sdlutils().getResizeFactor();
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 	texture->renderFrame(temp, currFrame, currentAnim);
 };

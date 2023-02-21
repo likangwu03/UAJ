@@ -15,7 +15,6 @@ void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float 
 	lastTic = sdlutils().currRealTime();
 	frameRate = 100;
 	plTf = parent->getComponent<Transform>();
-	resizeFactor = sdlutils().getResizeFactor();
 
 	if (w == 0 && h == 0) { //si no se define w y h, se coge del transform
 		width = plTf->getW();
@@ -66,8 +65,8 @@ void Animator::render() {
 	SDL_Rect temp;
 	temp.x = plTf->getPos().getX();
 	temp.y = plTf->getPos().getY();
-	temp.w = width * resizeFactor;
-	temp.h = height * resizeFactor;
+	temp.w = width * sdlutils().getResizeFactor();
+	temp.h = height * sdlutils().getResizeFactor();
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 	texture->renderFrame(temp, currFrame, currentAnim);
 };

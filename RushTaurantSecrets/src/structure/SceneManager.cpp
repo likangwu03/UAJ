@@ -54,6 +54,7 @@ void SceneManager::setScene() {
 		break;
 	case SceneManager::RESTAURANT: {
 		if (act == MAINMENU) {
+			sdlutils().setResizeFactor(0.6666666667);
 			//creacion de restaurant y pantry
 			UIRestaurant* uiRest = new UIRestaurant();
 			Restaurant* rest = new Restaurant(uiRest);
@@ -63,11 +64,14 @@ void SceneManager::setScene() {
 			Scenes.push_back(rest);
 		}
 		else if (act == PANTRY) {
+			sdlutils().setResizeFactor(1);
+
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
 			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
 		}
 		else if (act == SUPERMARKET) {
+			sdlutils().setResizeFactor(0.6666666667);
 
 		}
 		}break;

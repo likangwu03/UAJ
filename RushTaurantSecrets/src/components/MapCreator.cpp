@@ -14,16 +14,11 @@
 #include "../gameObjects/CashRegister.h"
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
-	resizeFactor = sdlutils().getResizeFactor();
-
 	loadMapDims();
 
 	SDL_RenderClear(renderer);
 	SDL_SetTextureBlendMode(bg, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderTarget(renderer, bg);
-
-	tileInWindowW = tileW * resizeFactor;
-	tileInWindowH = tileH * resizeFactor;
 
 	loadTilesets();
 	createObject();
@@ -131,13 +126,13 @@ void MapCreator::render() {
 
 
 							// Se calcula la posición en la que dibujar el tile
-							int tileX = cl * tileInWindowW;
-							int tileY = rw * tileInWindowH;
+							int tileX = cl * tileW * sdlutils().getResizeFactor();
+							int tileY = rw * tileH * sdlutils().getResizeFactor();
 
 							// Tile del tileset
 							SDL_Rect srcRect = { tilesetRegionX, tilesetRegionY, tileW, tileH };
 							// Parte del mapa en el que se va a dibujar el tile
-							SDL_Rect destRect = { tileX, tileY, tileInWindowW, tileInWindowH };
+							SDL_Rect destRect = { tileX, tileY, tileW * sdlutils().getResizeFactor(), tileH * sdlutils().getResizeFactor() };
 
 							// Dibuja el el tile del tileset (tilesets[tilesetID) srcRect en la posición destRect
 							tilesets[tilesetID]->render(srcRect, destRect);
@@ -165,20 +160,20 @@ void MapCreator::createObject() {
 				string name = obj.getName();
 				vector<tmx::Property> p = obj.getProperties();
 				if (name == "") {
-					new CollisionObject(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor},
-						aabb.width * resizeFactor, aabb.height * resizeFactor);
+					new CollisionObject(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
+						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
 				}
 				else if (name == "CookingMachine") {
-					new CookingMachine(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
-						aabb.width * resizeFactor, aabb.height * resizeFactor);
+					new CookingMachine(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
+						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
 				}
 				else if (name == "Bin") {
-					new Bin(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
-						aabb.width * resizeFactor, aabb.height * resizeFactor);
+					new Bin(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
+						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
 				}
 				else if (name == "CashRegister") {
-					new CashRegister(scene, { aabb.left * resizeFactor, aabb.top * resizeFactor },
-						aabb.width * resizeFactor, aabb.height * resizeFactor);
+					new CashRegister(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
+						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
 				}
 			};
 
