@@ -11,7 +11,7 @@ namespace _ecs {
 		cmp_MAPCREATOR,
 		cmp_MAPRENDER,
 		cmp_DESK,
-		cmp_ANIMATOR,
+		cmp_CLIENTSTATE_RENDER,
 		cmp_CLIENTSTATE,
 		cmp_COOKMACHINE,
 		cmp_DISHCOMB,

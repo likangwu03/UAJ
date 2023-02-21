@@ -1,17 +1,22 @@
 #pragma once
 #include "../structure/Component.h"
 #include "../structure/Food_def.h"
+#include "../components/ClientStateRender.h"
 #include <SDL.h>
 
 // Temporal
 #include "../sdlutils/InputHandler.h"
 using namespace std;
+using namespace _ecs;
 
 class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
 	ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id), 
-		state(START), happiness(100), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(-1), dishChanged(false) { }
+		state(START), happiness(100), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>())
+	{ 
+		render->clientStateIsReady(); //decirle que ya est¨¢ creado
+	}
 
 	enum States {
 		START,    // Caminar hasta mostrador
@@ -39,7 +44,8 @@ private:
 	float happiness, timer, lastTick;
 
 	vector<_ecs::_dish_id> availableDishes;
-	int orderedDish;
+	ClientStateRender* render;
+	_ecs::_dish_id orderedDish;
 	bool dishChanged;
 
 public:
@@ -70,6 +76,7 @@ public:
 				cout << "I know what I want to eat" << endl;
 			#endif
 				state = TAKEMYORDER;
+				render->renderTakingNoteState();
 				timer = 0;
 			}
 			// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja
@@ -89,16 +96,16 @@ public:
 	// disponibles en el men?del día y cambia el estado a ORDERED
 	void takeOrder() {
 		int rndDish = rand() % availableDishes.size();
-		orderedDish = (int)availableDishes[rndDish];
+		orderedDish = availableDishes[rndDish];
 
 	#ifdef _DEBUG
 		cout << "Order taken, I want " << orderedDish << endl;
 	#endif
 		state = ORDERED;
-
+		render->renderOrderingState();
 	}
 	// Función que devuelve el plato que se ha pedido
-	int getOrderedDish() { return orderedDish; }
+	_ecs::_dish_id getOrderedDish() { return orderedDish; }
 
 
 	// Función que informa que ha sido servido y cambia el estado a EATING (reinicia el contador)
@@ -109,12 +116,13 @@ public:
 		state = EATING;
 		timer = 0;
 		lastTick = SDL_GetTicks();
+		render->renderEatingState();
 	}
 
 
 	void changeDish() {
 		if (!dishChanged) {
-			int lastDish = orderedDish;
+			_ecs::_dish_id lastDish = orderedDish;
 			while (lastDish == orderedDish) {
 				int rndDish = rand() % availableDishes.size();
 				orderedDish = availableDishes[rndDish];

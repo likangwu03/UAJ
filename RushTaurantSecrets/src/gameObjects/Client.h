@@ -6,15 +6,20 @@
 #include "../structure/Food_def.h"
 #include "../components/ClientMovement.h"
 #include "../components/ClientTrigger.h"
-
+#include "../components/UIAnimator.h"
+#include "../components/ClientStateRender.h"
 
 class Client : public GameObject {
+	const int THINKING_WIDTH = 48;
+	const int THINKING_HEIGHT = 48;
+	const int THINKING_OFFSETY = -48;
 public:
 	Client(Scene* scene, string sprite, Vector origin, vector<_ecs::_dish_id> menu, int posEntrance, float speed) : GameObject(scene, _ecs::grp_CLIENTS) {
-		auto sdl = SDLUtils::instance();
 		Transform* t = new Transform(this, origin, Vector(0, 0), 48, 96);
-		new CharacterAnimator(this, &((*sdl).images().at(sprite)), 0, 6, 1);
+		new CharacterAnimator(this, sprite, 0, 6, 1);
+		new UIAnimator(this, "THINKING_ICON_ANIM", 0, 8, 0, 80, THINKING_WIDTH, THINKING_HEIGHT, Vector(origin.getX(), origin.getY() + THINKING_OFFSETY));
 		new StraightMovement(this, speed);
+		new ClientStateRender(this);
 		new ClientState(this, menu);
 		new ClientMovement(this, posEntrance);
 		new ClientTrigger(this, Vector(0, 0), 48, 96);

@@ -42,9 +42,9 @@ public:
 	/*cambiar de frame*/
 	void setCurrentAnim(int iniFram, int endFram, int currAnim = 0);
 	/*cambiar de textura dada la textura*/
-	void setTexture(Texture* t, int iniFrame, int endFrame, int currAnim, int frRate = FRAMERATE);
+	void setTexture(Texture* t, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE);
 	/*cambiar de textura dado el nombre de textura*/
-	void setTexture(string s, int iniFrame, int endFrame, int currAnim, int frRate = FRAMERATE);
+	void setTexture(string s, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE);
 	/*cambiar de frameRate*/
 	void setframeRate(int frRate) { frameRate = frRate; };
 	

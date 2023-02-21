@@ -5,7 +5,7 @@
 #include "../components/StraightMovement.h"
 #include "../components/ClientState.h"
 #include "../components/Transform.h"
-
+#include "../components/ClientStateRender.h"
 using namespace std;
 
 class ClientMovement : public Component {
@@ -17,6 +17,7 @@ private:
 	int assignedTable;
 	int posEntrance;
 	int posPay;
+	ClientStateRender* render;
 
 	Route tableRoute(string type) {
 		string aux = type + "_TABLE_" + std::to_string(this->assignedTable);
@@ -83,7 +84,7 @@ private:
 		straightMovement->addPath(leave);
 	}
 
-	// el cliente está quieto
+	// el cliente est?quieto
 	// se establece su nuevo estado, su orientación y la animación a ejecutar
 	void stationary(ClientState::States state, GOOrientation orientation, movementState mov) {
 		clientState->setState(state);
@@ -96,6 +97,7 @@ public:
 
 	ClientMovement(GameObject* parent, int posEntrance) : Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1) {
 		sdl = SDLUtils::instance();
+		render=parent->getComponent<ClientStateRender>();
 		clientState = parent->getComponent<ClientState>();
 		straightMovement = parent->getComponent<StraightMovement>();
 		transform = parent->getComponent<Transform>();
@@ -169,6 +171,7 @@ public:
 		case ClientState::ASSIGNED:
 			if (straightMovement->hasFinishedPath()) {
 				stationary(ClientState::THINKING, tableRoute("ARRIVE").orientation, sitting);
+				render->renderThinkingState(); //para que renderice el estado de pensar
 			}
 			break;
 		case ClientState::FINISH_EAT:

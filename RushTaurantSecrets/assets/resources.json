@@ -349,6 +349,18 @@
       "rows": 1
     },
     {
+      "id": "CLIENT_THINKING_ICON_ANIM",
+      "file": "assets/Sprites/UI/client_thinking.png",
+      "cols": 2,
+      "rows": 1
+    },
+    {
+      "id": "CLIENT_TAKINGNOTE_ICON_ANIM",
+      "file": "assets/Sprites/UI/takingNote.png",
+      "cols": 2,
+      "rows": 1
+    },
+    {
       "id": "1_Generic_48x48",
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png",
       "cols": 1,
