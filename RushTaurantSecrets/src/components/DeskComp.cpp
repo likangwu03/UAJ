@@ -4,7 +4,7 @@
 #include "../exceptions/CompNotFound.h"
 #include "Transform.h"
 
-DeskComp::DeskComp(GameObject* parent) : Component(parent, id) {
+DeskComp::DeskComp(GameObject* parent) : Component(parent, id), sucia(false) {
 	trans = parent->getComponent<Transform>();
 	if(trans == nullptr) {
 		throw exceptions::CompNotFound("Transform", "DeskComp");
@@ -12,7 +12,7 @@ DeskComp::DeskComp(GameObject* parent) : Component(parent, id) {
 }
 
 bool DeskComp::assignClients(GameObject* first, GameObject* second, GameObject* third, GameObject* fourth) {
-	if(!assigned.empty()) return false;
+	if(!assigned.empty() || sucia) return false;
 
 	assigned.push_back(first);
 	first->getComponent<ClientState>()->setState(ClientState::ASSIGNED);
@@ -38,4 +38,13 @@ bool DeskComp::receiveDish(GameObject* dish) {
 		// Recorrer todos los clientes asignados a la mesa para comprobar si alguien ha pedido el plato y si se lo lleva.
 	}
 	return served;
+}
+
+void DeskComp::leaveDesk() {
+	sucia = true;
+	assigned.clear();
+}
+
+void DeskComp::cleanDesk() {
+	sucia = false;
 }
