@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="16" nextobjectid="1">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="17" nextobjectid="26">
  <tileset firstgid="1" source="atlas.tsx"/>
  <tileset firstgid="1537" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="9821" source="16_Grocery_store_48x48.tsx"/>
@@ -9,7 +9,7 @@
  <tileset firstgid="13086" source="14_Basement_48x48.tsx"/>
  <tileset firstgid="13886" source="9_Fishing_48x48.tsx"/>
  <tileset firstgid="14318" source="12_Kitchen_48x48.tsx"/>
- <tileset firstgid="15102" source="24_Ice_Cream_Shop_48x48.tsx"/>
+ <tileset firstgid="15249" source="24_Ice_Cream_Shop_48x48.tsx"/>
  <layer id="1" name="base" width="40" height="23">
   <data encoding="csv">
 242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,242,
@@ -203,7 +203,7 @@
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9981,0,15187,15188,0,0,0,10002,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9981,0,15334,15335,0,0,0,10002,0,0,0,0,0,0,
 0,0,0,10607,10607,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,10623,10623,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9899,9900,0,0,10124,10123,10060,10211,10212,10213,9897,9898,0,10179,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9915,9916,0,0,10140,10139,10076,10227,10228,10229,9913,9914,0,10195,0,0,0,
@@ -334,4 +334,121 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="16" name="obj">
+  <object id="1" name="Cartel" x="385" y="431" width="47" height="62.5">
+   <properties>
+    <property name="id" type="int" value="51"/>
+   </properties>
+  </object>
+  <object id="2" name="Cartel" x="624.5" y="334" width="47" height="63.5">
+   <properties>
+    <property name="id" type="int" value="38"/>
+   </properties>
+  </object>
+  <object id="3" name="Cartel" x="769" y="335" width="47" height="59.5">
+   <properties>
+    <property name="id" type="int" value="29"/>
+   </properties>
+  </object>
+  <object id="4" name="Cartel" x="625" y="94.5" width="47.5" height="63">
+   <properties>
+    <property name="id" type="int" value="39"/>
+   </properties>
+  </object>
+  <object id="5" name="Cartel" x="1104.33" y="382.833" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="35"/>
+   </properties>
+  </object>
+  <object id="6" name="Cartel" x="1152.5" y="382.667" width="47.3333" height="64.3333">
+   <properties>
+    <property name="id" type="int" value="41"/>
+   </properties>
+  </object>
+  <object id="7" name="Cartel" x="1200.67" y="383.167" width="47.3333" height="64.3333">
+   <properties>
+    <property name="id" type="int" value="37"/>
+   </properties>
+  </object>
+  <object id="8" name="Cartel" x="1249.33" y="382.5" width="47.3333" height="64.3333">
+   <properties>
+    <property name="id" type="int" value="34"/>
+   </properties>
+  </object>
+  <object id="9" name="Cartel" x="1103.83" y="575.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="33"/>
+   </properties>
+  </object>
+  <object id="11" name="Cartel" x="1151.5" y="575.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="12" name="Cartel" x="1199.17" y="574.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="36"/>
+   </properties>
+  </object>
+  <object id="13" name="Cartel" x="1295.83" y="573.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="31"/>
+   </properties>
+  </object>
+  <object id="14" name="Cartel" x="769" y="525.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="15" name="Cartel" x="624.5" y="527" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="46"/>
+   </properties>
+  </object>
+  <object id="16" name="Cartel" x="384.5" y="669.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="46"/>
+   </properties>
+  </object>
+  <object id="17" name="Cartel" x="528.5" y="813.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="48"/>
+   </properties>
+  </object>
+  <object id="18" name="Cartel" x="624.5" y="815" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="49"/>
+   </properties>
+  </object>
+  <object id="20" name="Cartel" x="768" y="813.5" width="47" height="63">
+   <properties>
+    <property name="id" type="int" value="47"/>
+   </properties>
+  </object>
+  <object id="21" name="Cartel" x="911.25" y="334.5" width="47.5" height="63">
+   <properties>
+    <property name="id" type="int" value="42"/>
+   </properties>
+  </object>
+  <object id="22" name="Cartel" x="432.75" y="93" width="47.5" height="63">
+   <properties>
+    <property name="id" type="int" value="45"/>
+   </properties>
+  </object>
+  <object id="23" name="Cartel" x="864.25" y="95" width="47.5" height="63">
+   <properties>
+    <property name="id" type="int" value="44"/>
+   </properties>
+  </object>
+  <object id="24" name="Cartel" x="1008.75" y="95" width="47.5" height="63">
+   <properties>
+    <property name="id" type="int" value="32"/>
+   </properties>
+  </object>
+  <object id="25" name="Cartel" x="1152.25" y="95.5" width="47.5" height="63">
+   <properties>
+    <property name="id" type="int" value="43"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
