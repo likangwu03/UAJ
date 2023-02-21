@@ -25,6 +25,8 @@ namespace _ecs {
 		cmp_CLIENT_MOVEMENT,
 		cmp_CLIENTS_MANAGER,
 		cmp_BUTTON,
+		cmp_CHARACANIM,
+		cmp_UIANIM,
 		
 
 

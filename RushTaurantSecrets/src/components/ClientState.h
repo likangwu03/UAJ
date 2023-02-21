@@ -45,7 +45,7 @@ private:
 public:
 
 	void update() {
-		// Si está en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
+		// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
 		if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING) {
 			happiness -= DECREASE;
 
@@ -58,13 +58,13 @@ public:
 			#endif
 			}
 		}
-		// Si no, si está pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acción
+		// Si no, si est?pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acción
 		else if (state == THINKING || state == EATING) {
 			int delta = SDL_GetTicks() - lastTick;
 			lastTick = SDL_GetTicks();
 			timer += delta;
 
-			// Si está pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
+			// Si est?pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
 			if (state == THINKING && timer >= THINKINGTIME) {
 			#ifdef _DEBUG
 				cout << "I know what I want to eat" << endl;
@@ -72,7 +72,7 @@ public:
 				state = TAKEMYORDER;
 				timer = 0;
 			}
-			// Si está comiendo y termina de comer, pasa al estado de caminar hacia la caja
+			// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja
 			else if (state == EATING && timer >= EATINGTIME) {
 				state = FINISH_EAT;
 			#ifdef _DEBUG
@@ -86,7 +86,7 @@ public:
 	}
 
 	// Función que asigna al plato pedido uno aleatorio de entre los
-	// disponibles en el menú del día y cambia el estado a ORDERED
+	// disponibles en el men?del día y cambia el estado a ORDERED
 	void takeOrder() {
 		int rndDish = rand() % availableDishes.size();
 		orderedDish = (int)availableDishes[rndDish];

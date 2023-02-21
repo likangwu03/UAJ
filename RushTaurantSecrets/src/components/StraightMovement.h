@@ -11,7 +11,7 @@ using namespace std;
 struct Path {
 	// vector con los puntos a recorrer en ese camino
 	vector<Vector> points;
-	// contador que indica por que punto del camino se está recorriendo
+	// contador que indica por que punto del camino se est?recorriendo
 	// se hace de esta manera porque no se puede pop a una estructura de datos de pares
 	int cont;
 };

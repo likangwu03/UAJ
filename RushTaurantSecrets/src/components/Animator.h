@@ -1,16 +1,16 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include "../structure/Component.h"
 #include "../structure/Structure_def.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../components/Transform.h"
 #include "../structure/GameObject.h"
-#include "../components/PlayerMovementController.h"
+
 using namespace std;
 class Animator : public Component
 {
+protected:
 	static const int FRAMERATE = 100;
-private:
 	Texture* texture;
 	//fila de la anim
 	int currentAnim;
@@ -23,23 +23,20 @@ private:
 
 	float width;
 	float height;
-	Vector pos;
+	//Vector pos;
 
 	SDLUtils* sdl;
-	GOOrientation parentOrientation;
-	GOOrientation currOrientation;
-
 	Transform* plTf;
-	PlayerMovementController* plMov;
 
 	float resizeFactor;
-	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h,Vector p );
-public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
+	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h);
 
-	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE,float w= 0,float h=0, Vector pos = (-1, -1));
-	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE,float w = 0, float h = 0, Vector pos = (-1, -1));
-	
+	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate,float w,float h);
+	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate,float w, float h);
+
+public:
+	//constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
+
 	/*mover al siguiente frame*/
 	void updateAnim();
 	/*cambiar de frame*/
@@ -51,13 +48,12 @@ public:
 	/*cambiar de frameRate*/
 	void setframeRate(int frRate) { frameRate = frRate; };
 	
-	/*cambiar de pos*/
-	void setPos(Vector pos) { this->pos = pos; }
+	
 	/*cambiar de ancho*/
 	void setW(float w) { width = w; }
 	/*cambiar de alto*/
 	void setH(float h) { height = h; }
 
 	virtual void update();
-	virtual void render();
+	virtual void render(); //renderiza según tamaño de transform
 };

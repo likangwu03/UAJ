@@ -1,7 +1,7 @@
 #pragma once
 #include "../structure/GameObject.h"
 #include "../sdlutils/SDLUtils.h"
-#include "../components/Animator.h"
+#include "../components/CharacterAnimator.h"
 #include "../sdlutils/Texture.h"
 #include "../components/Ingredients.h"
 #include "../components/Transform.h"
@@ -14,7 +14,7 @@ public:
 		new Transform(this, Vector(500, 200), Vector(0, 0), 48, 96, 0);
 		new PlayerMovementController(this);
 		new CollisionComp(this, { 0,48 * sdlutils().getResizeFactor() }, 48 * sdlutils().getResizeFactor(), 48 * sdlutils().getResizeFactor());
-		new Animator(this, "Player_1", 6, 2);
+		new CharacterAnimator(this, "Player_1", 6, 2);
 		new Ingredients(this);
 	}
 };

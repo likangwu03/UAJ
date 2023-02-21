@@ -14,7 +14,7 @@ public:
 private:
 	const int 
 		BUBBLE_OFFSETX = -4,
-		BUBBLE_OFFSETY = -60,
+		BUBBLE_OFFSETY = -63,
 		BUBBLE_WIDTH = 41,
 		BUBBLE_HEIGHT = 48,
 		DISH_OFFSETX = -1, //respecto de bubble
