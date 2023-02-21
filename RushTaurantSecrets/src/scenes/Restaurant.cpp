@@ -5,6 +5,7 @@
 #include "../gameObjects/Client.h"
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
+#include "../gameObjects/Thief.h"
 
 #include "../components/MapCreator.h"
 
@@ -47,7 +48,7 @@ void Restaurant::init() {
 	menu.push_back(_ecs::PANCAKE);
 	// manager de clientes
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 10);
+	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 1);
 	
 	cm = new CollisionsManager(this);
 	ui = new UIRestaurant();
@@ -56,6 +57,8 @@ void Restaurant::init() {
 	// Tilemap de prueba
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
+
+	new Thief(this, true, Vector(32, 18), 2, 6);
 
 	/*
 	// Tilemap de prueba

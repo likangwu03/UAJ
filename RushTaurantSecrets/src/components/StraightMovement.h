@@ -112,8 +112,17 @@ public:
 		}
 	}
 
+	void stop() {
+		end = transform->getPos();
+		path.cont = path.points.size();
+	}
+
 	bool hasFinishedPath() const {
 		return path.cont >= path.points.size();
+	}
+
+	void changeSpeed(float speed) {
+		this->speed = speed;
 	}
 
 	virtual void update() {

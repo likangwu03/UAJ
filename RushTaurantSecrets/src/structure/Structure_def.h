@@ -22,12 +22,11 @@ namespace _ecs {
 		cmp_TRIGGER,
 		cmp_BIN,
 		cmp_STRAIGHT_MOVEMENT,
-		cmp_CLIENT_MOVEMENT,
 		cmp_CLIENTS_MANAGER,
 		cmp_BUTTON,
 		cmp_CHARACANIM,
 		cmp_UIANIM,
-		
+		cmp_HEART_RENDER,		
 
 
 		// Do not erase pls
@@ -45,6 +44,7 @@ namespace _ecs {
 		grp_HUD,
 		grp_ICONS,
 		grp_COLLISIONS,
+		grp_THIEFS,
 
 
 		// Do not erase pls

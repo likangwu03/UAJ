@@ -13,7 +13,7 @@ class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
 	ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id), 
-		state(START), happiness(100), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>())
+		state(START), happiness(80), timer(0), lastTick(SDL_GetTicks()), availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>())
 	{ 
 		render->clientStateIsReady(); //decirle que ya est¨¢ creado
 	}
@@ -129,6 +129,10 @@ public:
 			}
 		}
 		else state = OUT;
+	}
+
+	int getHappiness() {
+		return happiness;
 	}
 
 	void handleEvents() {

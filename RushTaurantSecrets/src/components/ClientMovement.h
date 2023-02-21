@@ -93,7 +93,7 @@ private:
 	}
 
 public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENT_MOVEMENT;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
 	ClientMovement(GameObject* parent, int posEntrance) : Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1) {
 		sdl = SDLUtils::instance();
