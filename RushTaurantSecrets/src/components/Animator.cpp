@@ -1,11 +1,11 @@
 #include "Animator.h"
 
-Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) : Component(parent, id), sdl(SDLUtils::instance()) {
+Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h, _ecs::_cmp_id id) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = t;
 	init(iniFrame, endFrame, currAnim, frRate, w, h);
 };
 
-Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) : Component(parent, id), sdl(SDLUtils::instance()) {
+Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h, _ecs::_cmp_id id) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = &((*sdl).images().at(s));
 	init(iniFrame, endFrame, currAnim, frRate, w, h);
 };

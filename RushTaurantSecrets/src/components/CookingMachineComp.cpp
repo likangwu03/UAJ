@@ -2,7 +2,7 @@
 #include "../structure/GameObject.h"
 CookingMachineComp::CookingMachineComp(GameObject* _parent) :Component(_parent, id),
 state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0), 
-transform(parent->getComponent<Transform>()),anim(parent->getComponent<Animator>()),
+transform(parent->getComponent<Transform>()),anim(parent->getComponent<UIAnimator>()),
 dishComb(DishCombinator::instance()), sdl(SDLUtils::instance())
 {
 	textures.bubble = &((*sdl).images().at("BUBBLE_ICON"));

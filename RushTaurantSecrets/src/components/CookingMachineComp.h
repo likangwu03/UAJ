@@ -1,7 +1,7 @@
 #pragma once
 #include "../structure/Component.h"
 #include "../structure/DishCombinator.h"
-#include "../components/Animator.h"
+#include "../components/UIAnimator.h"
 #include "../components/Transform.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utilities/Vector.h"
@@ -39,7 +39,7 @@ private:
 	Uint32 cont; //contador para cocinar
 
 	Transform* transform; //puede que posteriormente no sea necesario...
-	Animator* anim;
+	UIAnimator* anim;
 
 	//ha terminado de cocinar el plato
 	void finishCooking();
