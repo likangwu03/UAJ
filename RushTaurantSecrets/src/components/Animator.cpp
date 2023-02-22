@@ -45,11 +45,14 @@ void Animator::setCurrentAnim(int iniFram, int endFram, int currAnim)
 /*cambiar de textura dada la textura*/
 void Animator::setTexture(Texture* t, int iniFrame, int endFrame, int currAnim, int frRate) {
 	texture = t;
+	frameRate = frRate;
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 /*cambiar de textura dado el nombre de textura*/
 void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, int frRate) {
 	texture = &((*sdl).images().at(s));
+	frameRate = frRate;
+
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 

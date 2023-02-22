@@ -21,14 +21,14 @@ void ClientStateRender::clientStateIsReady() {
 void ClientStateRender::renderThinkingState() {
 	if(!anim->isActive())
 		anim->setActive(true);
-	anim->setTexture(textures.thinking,0,1);
+	anim->setTexture(textures.thinking,0,2,0,800);
 	anim->setH(TAKINGNOTE_WIDTH);
 }
 
 void ClientStateRender::renderTakingNoteState() {
 	if (!anim->isActive())
 		anim->setActive(true);
-	anim->setTexture(textures.takingNote , 0, 1);
+	anim->setTexture(textures.takingNote , 0, 2,0,100);
 	anim->setH(TAKINGNOTE_WIDTH);
 }
 
