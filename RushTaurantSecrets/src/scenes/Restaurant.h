@@ -17,9 +17,12 @@ private:
 	CollisionsManager* cm;
 	GameObject* map;
 	GameObject* mapTop;
+	GameObject* player;
 
 public:
 	Restaurant(UIRestaurant* restUI = nullptr) : pantry(nullptr), ui(restUI),dc(DishCombinator::init()) { init(); }
+	~Restaurant();
+
 	UIRestaurant* getUI() { return ui; }
 	Pantry* getPantry() { return pantry; }
 	void linkPantry(Pantry* pantry);

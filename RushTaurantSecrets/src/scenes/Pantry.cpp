@@ -2,6 +2,8 @@
 #include "Restaurant.h"
 #include "../structure/SceneManager.h"
 
+#include "../utils/checkML.h"
+
 void Pantry::linkRestaurant(Restaurant* rest) {
 	this->rest = rest;
 	//ui = rest->getUI();

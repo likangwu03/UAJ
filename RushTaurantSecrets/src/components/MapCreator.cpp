@@ -13,6 +13,9 @@
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/CashRegister.h"
 
+#include "../utils/checkML.h"
+
+
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
 	loadMapDims();
 

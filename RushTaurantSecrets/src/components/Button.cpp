@@ -3,6 +3,7 @@
 #include "../structure/Scene.h"
 #include<SDL.h>
 
+#include "../utils/checkML.h"
 
 Button::Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager)) 
 	: Component(parent, id), sceneManager(sceneManager), callback(callback) {

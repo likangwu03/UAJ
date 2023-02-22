@@ -1,5 +1,7 @@
 #include "BinComponent.h"
 
+#include "../utils/checkML.h"
+
 BinComponent::BinComponent(GameObject* parent, Vector pos) : Component(parent, id), myParent(parent) {
 	// puntero al inventario del jugador
 	// !! ¿posible problema con que la papelera esté en la escena Restaurant y el inventario esté en la escena UIRestaurant?

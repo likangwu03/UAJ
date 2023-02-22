@@ -1,5 +1,7 @@
 #include "ClientState.h"
 
+#include "../utils/checkML.h"
+
 ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id),
 	state(START), happiness(80), timer(0), lastTick(sdlutils().currRealTime()), 
 	availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) {
@@ -30,6 +32,7 @@ void ClientState::update() {
 		// (DE MOMENTO TARDA COMO 1 MINUTO)
 		if (happiness <= 0) {
 			setState(OUT);
+			render->renderEatingState();
 #ifdef _DEBUG
 			cout << "Happiness reached 0, leaving restaurant" << endl;
 #endif
@@ -64,9 +67,10 @@ void ClientState::update() {
 // Función que asigna al plato pedido uno aleatorio de entre los
 // disponibles en el menú del día y cambia el estado a ORDERED
 void ClientState::takeOrder() {
+	int rndDish;
 	// Si no se ha cambiado el plato, escoge uno aleatorio
 	if (!dishChanged) {
-		int rndDish = rand() % availableDishes.size();
+		rndDish = rand() % availableDishes.size();
 		orderedDish = availableDishes[rndDish];
 	}
 	// Si se ha cambiado el plato, escoge uno 
@@ -74,13 +78,13 @@ void ClientState::takeOrder() {
 	else {
 		_ecs::_dish_id lastDish = orderedDish;
 		while (lastDish == orderedDish) {
-			int rndDish = rand() % availableDishes.size();
+			 rndDish = rand() % availableDishes.size();
 			orderedDish = availableDishes[rndDish];
 		}
 	}
 
 #ifdef _DEBUG
-	cout << "Order taken, I want " << orderedDish << endl;
+	cout << "Order taken, I want " << rndDish << endl;
 #endif
 	setState(ORDERED);
 	render->renderOrderingState();

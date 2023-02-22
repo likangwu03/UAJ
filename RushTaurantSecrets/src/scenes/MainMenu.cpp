@@ -5,6 +5,8 @@
 #include "../components/Transform.h"
 #include "../components/Image.h"
 
+#include "../utils/checkML.h"
+
 void MainMenu::start(SceneManager* sceneManager) {
 	sceneManager->ChangeScene(SceneManager::RESTAURANT);
 }

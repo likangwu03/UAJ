@@ -8,6 +8,7 @@
 #include "../components/MapCreator.h"
 #include <set>
 
+#include "../utils/checkML.h"
 void Restaurant::linkPantry(Pantry* pantry) {
 	this->pantry = pantry;
 }
@@ -60,7 +61,7 @@ void Restaurant::init() {
 	
 	cm = new CollisionsManager(this);
 	ui = new UIRestaurant();
-	new Player(this);
+	player = new Player(this);
 	
 	// Tilemap de prueba
 	map = new GameObject(this);
@@ -78,4 +79,10 @@ void Restaurant::init() {
 
 
 
+}
+
+Restaurant::~Restaurant() {
+	delete pantry;
+	delete ui;
+	delete cm;
 }

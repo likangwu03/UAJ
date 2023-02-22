@@ -1,6 +1,8 @@
 #include "SuperMarket.h"
 #include "../structure/SceneManager.h"
 
+#include "../utils/checkML.h"
+
 void SuperMarket::render() {
 	Scene::render();
 	if (uiMarket != nullptr)

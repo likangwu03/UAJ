@@ -1,6 +1,8 @@
 #include "BinTriggerComp.h"
 #include "../scenes/UIRestaurant.h"
 
+#include "../utils/checkML.h"
+
 BinTriggerComp::BinTriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_),
 	inventory(static_cast<UIRestaurant*>(parent->getScene()->getUI())->getInventory()->getComponent<InventoryComp>()) { };

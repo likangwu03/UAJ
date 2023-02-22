@@ -1,5 +1,7 @@
 #include "InventoryComp.h"
 
+#include "../utils/checkML.h"
+
 InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	
 	sdl = SDLUtils::instance();

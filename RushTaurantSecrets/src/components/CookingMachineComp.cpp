@@ -1,5 +1,8 @@
 #include "CookingMachineComp.h"
 #include "../structure/GameObject.h"
+
+#include "../utils/checkML.h"
+
 CookingMachineComp::CookingMachineComp(GameObject* _parent) :Component(_parent, id),
 state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0), 
 transform(parent->getComponent<Transform>()),anim(parent->getComponent<UIAnimator>()),

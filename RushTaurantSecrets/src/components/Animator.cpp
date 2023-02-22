@@ -1,5 +1,7 @@
 #include "Animator.h"
 
+#include "../utils/checkML.h"
+
 Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h, _ecs::_cmp_id id) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = t;
 	init(iniFrame, endFrame, currAnim, frRate, w, h);

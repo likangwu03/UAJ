@@ -2,6 +2,8 @@
 #include "../structure/GameObject.h"
 #include "ClientState.h"
 
+#include "../utils/checkML.h"
+
 ClientStateRender::ClientStateRender(GameObject* _parent) :Component(_parent, id),
 transform(parent->getComponent<Transform>()), anim(parent->getComponent<UIAnimator>()),
 state(nullptr), sdl(SDLUtils::instance())

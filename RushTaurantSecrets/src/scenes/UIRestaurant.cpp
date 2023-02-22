@@ -1,5 +1,7 @@
 #include "UIRestaurant.h"
 
+#include "../utils/checkML.h"
+
 UIRestaurant::UIRestaurant() : Scene() {
 	lastTime = sdl->currRealTime();
 

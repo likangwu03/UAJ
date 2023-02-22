@@ -4,6 +4,8 @@
 #include "../exceptions/CompNotFound.h"
 #include "Transform.h"
 
+#include "../utils/checkML.h"
+
 DeskComp::DeskComp(GameObject* parent) : Component(parent, id), sucia(false) {
 	trans = parent->getComponent<Transform>();
 	if(trans == nullptr) {
