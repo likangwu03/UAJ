@@ -158,7 +158,7 @@ void MapCreator::createObject() {
 	auto& layers = tileMap->getLayers();
 	for (auto& layer : layers) {
 		if (layer->getType() == Layer::Type::Object) {		
-			if (layer->getName() == "ignorarlo_espara Trigger")return;
+			//if (layer->getName() == "ignorarlo_espara Trigger")return;
 			auto& objs = static_cast<tmx::ObjectGroup*>(layer.get())->getObjects();
 			for (auto& obj : objs) {
 				auto& aabb = obj.getAABB();
