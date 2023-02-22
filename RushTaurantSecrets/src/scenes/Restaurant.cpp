@@ -37,7 +37,6 @@ void Restaurant::handleEvents() {
 		Scene::handleEvents();
 		//ui->handleEvents();
 	}
-
 }
 void Restaurant::init() {
 

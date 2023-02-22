@@ -16,6 +16,17 @@ MainMenu::MainMenu(SceneManager* sceneManager){
 
 	button = new GameObject(this);
 	new Button(button, sceneManager, start);
-	
-	
+}
+
+void MainMenu::handleEvents(){
+	if (ih->isKeyDown(SDLK_1)) {
+		SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+	}
+	else if (ih->isKeyDown(SDLK_2)) {
+		SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);
+	}
+	else {
+		Scene::handleEvents();
+
+	}
 }

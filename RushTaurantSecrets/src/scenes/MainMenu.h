@@ -11,4 +11,6 @@ private:
 
 public:
 	MainMenu(SceneManager* sceneManager);
+
+	void handleEvents()override;
 };
