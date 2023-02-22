@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="17" nextobjectid="26">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="18" nextobjectid="59">
  <tileset firstgid="1" source="atlas.tsx"/>
  <tileset firstgid="1537" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="9821" source="16_Grocery_store_48x48.tsx"/>
@@ -240,10 +240,10 @@
 0,0,0,0,0,0,0,0,11109,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,11108,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,11119,0,0,11115,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11108,0,0,0,0,0,0,11128,11130,11131,0,11096,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,11111,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,11111,0,0,0,0,0,0,0,11108,0,0,0,0,0,0,11128,11130,11131,0,11096,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,11108,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,11123,0,11110,0,0,11124,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,11108,0,11108,0,0,11108,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -337,118 +337,235 @@
  <objectgroup id="16" name="obj">
   <object id="1" name="Cartel" x="385" y="431" width="47" height="62.5">
    <properties>
+    <property name="h" type="float" value="100"/>
     <property name="id" type="int" value="51"/>
+    <property name="w" type="float" value="72"/>
+    <property name="x" type="float" value="380"/>
+    <property name="y" type="float" value="465.5"/>
    </properties>
   </object>
   <object id="2" name="Cartel" x="624.5" y="334" width="47" height="63.5">
    <properties>
+    <property name="h" type="float" value="58"/>
     <property name="id" type="int" value="38"/>
+    <property name="w" type="float" value="86.67"/>
+    <property name="x" type="float" value="608.67"/>
+    <property name="y" type="float" value="497.33"/>
    </properties>
   </object>
   <object id="3" name="Cartel" x="769" y="335" width="47" height="59.5">
    <properties>
+    <property name="h" type="float" value="66.67"/>
     <property name="id" type="int" value="29"/>
+    <property name="w" type="float" value="110"/>
+    <property name="x" type="float" value="721.33"/>
+    <property name="y" type="float" value="493.33"/>
    </properties>
   </object>
   <object id="4" name="Cartel" x="625" y="94.5" width="47.5" height="63">
    <properties>
+    <property name="h" type="float" value="60.67"/>
     <property name="id" type="int" value="39"/>
+    <property name="w" type="float" value="118.67"/>
+    <property name="x" type="float" value="590"/>
+    <property name="y" type="float" value="254.67"/>
    </properties>
   </object>
   <object id="5" name="Cartel" x="1104.33" y="382.833" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="51.33"/>
     <property name="id" type="int" value="35"/>
+    <property name="w" type="float" value="52"/>
+    <property name="x" type="float" value="1099.33"/>
+    <property name="y" type="float" value="520.67"/>
    </properties>
   </object>
   <object id="6" name="Cartel" x="1152.5" y="382.667" width="47.3333" height="64.3333">
    <properties>
+    <property name="h" type="float" value="50"/>
     <property name="id" type="int" value="41"/>
+    <property name="w" type="float" value="44.67"/>
+    <property name="x" type="float" value="1154"/>
+    <property name="y" type="float" value="519.33"/>
    </properties>
   </object>
   <object id="7" name="Cartel" x="1200.67" y="383.167" width="47.3333" height="64.3333">
    <properties>
+    <property name="h" type="float" value="53"/>
     <property name="id" type="int" value="37"/>
+    <property name="w" type="float" value="46.67"/>
+    <property name="x" type="float" value="1199.67"/>
+    <property name="y" type="float" value="519"/>
    </properties>
   </object>
   <object id="8" name="Cartel" x="1249.33" y="382.5" width="47.3333" height="64.3333">
    <properties>
+    <property name="h" type="float" value="53"/>
     <property name="id" type="int" value="34"/>
+    <property name="w" type="float" value="46"/>
+    <property name="x" type="float" value="1248.67"/>
+    <property name="y" type="float" value="519"/>
    </properties>
   </object>
   <object id="9" name="Cartel" x="1103.83" y="575.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="50.67"/>
     <property name="id" type="int" value="33"/>
+    <property name="w" type="float" value="46.67"/>
+    <property name="x" type="float" value="1104.67"/>
+    <property name="y" type="float" value="714"/>
    </properties>
   </object>
   <object id="11" name="Cartel" x="1151.5" y="575.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="55"/>
     <property name="id" type="int" value="40"/>
+    <property name="w" type="float" value="46"/>
+    <property name="x" type="float" value="1152.33"/>
+    <property name="y" type="float" value="711.33"/>
    </properties>
   </object>
   <object id="12" name="Cartel" x="1199.17" y="574.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="53"/>
     <property name="id" type="int" value="36"/>
+    <property name="w" type="float" value="47.67"/>
+    <property name="x" type="float" value="1200.33"/>
+    <property name="y" type="float" value="713.33"/>
    </properties>
   </object>
   <object id="13" name="Cartel" x="1295.83" y="573.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="42.67"/>
     <property name="id" type="int" value="31"/>
+    <property name="w" type="float" value="89.33"/>
+    <property name="x" type="float" value="1254.67"/>
+    <property name="y" type="float" value="720.33"/>
    </properties>
   </object>
   <object id="14" name="Cartel" x="769" y="525.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="58.67"/>
     <property name="id" type="int" value="30"/>
+    <property name="w" type="float" value="110"/>
+    <property name="x" type="float" value="736"/>
+    <property name="y" type="float" value="692"/>
    </properties>
   </object>
   <object id="15" name="Cartel" x="624.5" y="527" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="62.67"/>
     <property name="id" type="int" value="46"/>
+    <property name="w" type="float" value="124.67"/>
+    <property name="x" type="float" value="598"/>
+    <property name="y" type="float" value="688"/>
    </properties>
   </object>
-  <object id="16" name="Cartel" x="384.5" y="669.5" width="47" height="63">
+  <object id="16" name="Cartel" x="384.5" y="577.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="115"/>
     <property name="id" type="int" value="46"/>
+    <property name="w" type="float" value="72"/>
+    <property name="x" type="float" value="380"/>
+    <property name="y" type="float" value="615"/>
    </properties>
   </object>
   <object id="17" name="Cartel" x="528.5" y="813.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="77.33"/>
     <property name="id" type="int" value="48"/>
+    <property name="w" type="float" value="93.33"/>
+    <property name="x" type="float" value="481.33"/>
+    <property name="y" type="float" value="794"/>
    </properties>
   </object>
   <object id="18" name="Cartel" x="624.5" y="815" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="79.33"/>
     <property name="id" type="int" value="49"/>
+    <property name="w" type="float" value="123.33"/>
+    <property name="x" type="float" value="582"/>
+    <property name="y" type="float" value="794"/>
    </properties>
   </object>
   <object id="20" name="Cartel" x="768" y="813.5" width="47" height="63">
    <properties>
+    <property name="h" type="float" value="76"/>
     <property name="id" type="int" value="47"/>
+    <property name="w" type="float" value="94"/>
+    <property name="x" type="float" value="720"/>
+    <property name="y" type="float" value="795.33"/>
    </properties>
   </object>
   <object id="21" name="Cartel" x="911.25" y="334.5" width="47.5" height="63">
    <properties>
+    <property name="h" type="float" value="68"/>
     <property name="id" type="int" value="42"/>
+    <property name="w" type="float" value="87.33"/>
+    <property name="x" type="float" value="887.33"/>
+    <property name="y" type="float" value="495.33"/>
    </properties>
   </object>
   <object id="22" name="Cartel" x="432.75" y="93" width="47.5" height="63">
    <properties>
+    <property name="h" type="float" value="64"/>
     <property name="id" type="int" value="45"/>
+    <property name="w" type="float" value="108"/>
+    <property name="x" type="float" value="396.67"/>
+    <property name="y" type="float" value="254"/>
    </properties>
   </object>
   <object id="23" name="Cartel" x="864.25" y="95" width="47.5" height="63">
    <properties>
+    <property name="h" type="float" value="55.33"/>
     <property name="id" type="int" value="44"/>
+    <property name="w" type="float" value="120.67"/>
+    <property name="x" type="float" value="975.33"/>
+    <property name="y" type="float" value="264"/>
    </properties>
   </object>
   <object id="24" name="Cartel" x="1008.75" y="95" width="47.5" height="63">
    <properties>
+    <property name="h" type="float" value="55.33"/>
     <property name="id" type="int" value="32"/>
+    <property name="w" type="float" value="120.67"/>
+    <property name="x" type="float" value="975.33"/>
+    <property name="y" type="float" value="264"/>
    </properties>
   </object>
   <object id="25" name="Cartel" x="1152.25" y="95.5" width="47.5" height="63">
    <properties>
+    <property name="h" type="float" value="52"/>
     <property name="id" type="int" value="43"/>
+    <property name="w" type="float" value="126"/>
+    <property name="x" type="float" value="1120"/>
+    <property name="y" type="float" value="264"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="17" name="ignorarlo_espara Trigger">
+  <object id="26" x="381" y="465.5" width="72" height="100"/>
+  <object id="27" x="380.667" y="615.333" width="72" height="115.333"/>
+  <object id="28" x="396.667" y="254" width="108" height="64"/>
+  <object id="29" x="590" y="254.667" width="118.667" height="60.6667"/>
+  <object id="30" x="855.333" y="264.667" width="115.333" height="55.3333"/>
+  <object id="32" x="975.333" y="264" width="120.667" height="55.3333"/>
+  <object id="33" x="1120" y="264" width="126" height="52"/>
+  <object id="36" x="1099.33" y="520.667" width="52" height="51.3333"/>
+  <object id="40" x="1154" y="519.333" width="44.6667" height="50"/>
+  <object id="41" x="1199.67" y="519" width="46.6667" height="53"/>
+  <object id="42" x="1248.67" y="519" width="46" height="53"/>
+  <object id="43" x="1104.67" y="714" width="46.6667" height="50.6667"/>
+  <object id="44" x="1152.33" y="711.333" width="46" height="55"/>
+  <object id="45" x="1200.33" y="713.333" width="47.6667" height="53"/>
+  <object id="47" x="1254.67" y="720.333" width="89.3333" height="42.6667"/>
+  <object id="50" x="598" y="688" width="124.667" height="62.6667"/>
+  <object id="51" x="736" y="692" width="110" height="58.6667"/>
+  <object id="53" x="481.333" y="794" width="93.3333" height="77.3333"/>
+  <object id="54" x="582" y="794" width="123.333" height="79.3333"/>
+  <object id="55" x="720" y="795.333" width="94" height="76"/>
+  <object id="56" x="608.667" y="497.333" width="86.6667" height="58"/>
+  <object id="57" x="721.333" y="493.333" width="110" height="66.6667"/>
+  <object id="58" x="887.333" y="495.333" width="87.3333" height="68"/>
  </objectgroup>
 </map>
