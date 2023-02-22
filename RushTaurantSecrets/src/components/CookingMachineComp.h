@@ -1,6 +1,6 @@
 #pragma once
 #include "../structure/Component.h"
-#include "../structure/DishCombinator.h"
+#include "../objects/DishCombinator.h"
 #include "../components/UIAnimator.h"
 #include "../components/Transform.h"
 #include "../sdlutils/SDLUtils.h"

@@ -76,7 +76,7 @@ namespace _ecs {
 	// a la hora de pagar lo importante es que entra desde la izq con un Vector(x, 290)
 	static Route paths[NUM_TABLES * 3 + 1] = {
 		// mesa 1 silla izquierda
-		{{Vector(27, 11), Vector(20, 11), Vector(20, 14)}, east },	// mesa
+		{{Vector(27, 11), Vector(20, 11), Vector(20, 14)}, north },	// mesa
 		{{Vector(20, 10), CASH_REGISTER}},	// pagar
 		{{Vector(20, 11), Vector(27, 11), ENTRY, OUT}},	// marcharse mesa
 		// mesa 2 silla derecha

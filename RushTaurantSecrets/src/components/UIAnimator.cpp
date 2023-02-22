@@ -21,5 +21,5 @@ void UIAnimator::render() {
 	temp.w = width * sdlutils().getResizeFactor();
 	temp.h = height * sdlutils().getResizeFactor();
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
-	texture->renderFrame(temp, currFrame, currentAnim);
+	texture->renderFrame(temp, currFrame, currentAnim, angle);
 };

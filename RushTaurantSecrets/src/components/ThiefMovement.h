@@ -7,15 +7,16 @@
 #include "../sdlutils/InputHandler.h"
 #include <vector>
 
+vector<Vector> pathsThief[3] = {
+	{Vector(32, 18)},	// origin
+	{Vector(20, 18)},	// secret
+	{Vector(24, 18)}	// freezer
+};
+
+enum Objective { Origin, Freezer, Secret };
+
 class ThiefMovement : public Component {
-	enum States{OBJECTIVE, FREEZER, SECRET, DEAD, ESCAPE};
-
-	enum Objective{Freezer, Secret};
-
-	vector<Vector> paths[2] = {
-		{Vector(20, 18)},	// secret
-		{Vector(24, 18)}	// freezer
-	};
+	enum States { OBJECTIVE, FREEZER, SECRET, DEAD, ESCAPE };
 
 private:
 	States currentState;
@@ -32,18 +33,36 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
-	ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) : Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), timer(5000), firstTick(0), escapeSpeed(escapeSpeed) {
+	ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) : 
+		Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), timer(5000), firstTick(0), escapeSpeed(escapeSpeed) {
 		straightMovement = parent->getComponent<StraightMovement>();
 		transform = parent->getComponent<Transform>();
 		sdl = SDLUtils::instance();
 		inputHandler = InputHandler::instance();
 
-		int max = 1;
+		int max = 2;
 		if (canGetFridger) {
 			++max;
 		}
-		objective = (Objective)sdl->rand().nextInt(0, max);
-		straightMovement->addPath(paths[objective]);
+		objective = (Objective)sdl->rand().nextInt(1, max);
+		straightMovement->addPath(pathsThief[objective]);
+	}
+
+	// se tendría que llamar al pulsar el botón de matar
+	void die() {
+		currentState = DEAD;
+		straightMovement->stop();
+		firstTick = sdl->currRealTime();
+		// se cambia a muerto (se pone rojo el sprite y se tumba el sprite)
+		transform->setMovState(dead);
+	}
+
+	// se tendría que llamar al pulsar el botón de escapar
+	void escape() {
+		currentState = ESCAPE;
+		straightMovement->stop();
+		straightMovement->addPath(pathsThief[Origin]);
+		straightMovement->changeSpeed(escapeSpeed);
 	}
 
 	void update() {
@@ -72,6 +91,7 @@ public:
 			tick = sdl->currRealTime() - firstTick;
 			if (tick > timer) {
 				parent->setAlive(false);
+				tick = 0;
 			}
 			break;
 		case ESCAPE:
@@ -85,18 +105,11 @@ public:
 	void handleEvents() {
 		// muere
 		if (inputHandler->isKeyDown(SDLK_m)) {
-			currentState = DEAD;
-			straightMovement->stop();
-			firstTick = sdl->currRealTime();
-			// se cambia al sprite de muerto
-			transform->setMovState(idle);
+			die();
 		}
 		// huye
 		if (inputHandler->isKeyDown(SDLK_h)) {
-			currentState = ESCAPE;
-			straightMovement->stop();
-			straightMovement->addPath({ Vector(32, 18) });
-			straightMovement->changeSpeed(escapeSpeed);
+			escape();
 		}
 	}
 };

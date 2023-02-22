@@ -98,10 +98,11 @@ private:
 	}
 
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), lastClientTime(0), assignedCustomer(false), maxClients(maxClients) {
+		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedCustomer(false), maxClients(maxClients) {
 		scene = parent->getScene();
 		clients = scene->getGroup(_ecs::grp_CLIENTS);
 		sdl = SDLUtils::instance();
+		lastClientTime = sdl->currRealTime();
 		for (int i = 0; i < _ecs::NUM_TABLES; ++i) {
 			tables[i] = false;
 		}

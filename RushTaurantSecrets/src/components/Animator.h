@@ -20,6 +20,7 @@ protected:
 	int currFrame;
 	float lastTic;
 	int frameRate;
+	float angle;
 
 	float width;
 	float height;

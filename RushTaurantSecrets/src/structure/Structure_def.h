@@ -23,6 +23,7 @@ namespace _ecs {
 		cmp_BIN,
 		cmp_STRAIGHT_MOVEMENT,
 		cmp_CLIENTS_MANAGER,
+		cmp_THIEFS_MANAGER,
 		cmp_BUTTON,
 		cmp_CHARACANIM,
 		cmp_UIANIM,

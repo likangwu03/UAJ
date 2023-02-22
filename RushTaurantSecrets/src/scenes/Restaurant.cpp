@@ -2,13 +2,10 @@
 #include "Pantry.h"
 #include "../structure/SceneManager.h"
 #include "../components/CookingMachineComp.h"
-#include "../gameObjects/Client.h"
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
-#include "../gameObjects/Thief.h"
-
+#include "../objects/ThiefsManager.h"
 #include "../components/MapCreator.h"
-
 #include <set>
 
 void Restaurant::linkPantry(Pantry* pantry) {
@@ -57,7 +54,10 @@ void Restaurant::init() {
 
 	// manager de clientes
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 1);
+	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 10);
+	ThiefsManager::init(managerContainer, 2, 6, true, 5 * 1000);
+	// me da un error raro
+	// ManagerContainer(menu, 6, 2, 10, 2, 6, true, 5);
 	
 	cm = new CollisionsManager(this);
 	ui = new UIRestaurant();
@@ -66,8 +66,6 @@ void Restaurant::init() {
 	// Tilemap de prueba
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/restaurant.tmx", sdlutils().renderer());
-
-	new Thief(this, true, Vector(32, 18), 2, 6);
 
 	/*
 	// Tilemap de prueba

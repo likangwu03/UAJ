@@ -2,7 +2,7 @@
 #include "../structure/Scene.h"
 #include "../scenes/UIRestaurant.h"
 #include "../gameObjects/Player.h"
-#include "../structure/DishCombinator.h"
+#include "../objects/DishCombinator.h"
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/Bin.h"
 #include "../structure/CollisionsManager.h"

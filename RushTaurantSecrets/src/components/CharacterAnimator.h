@@ -7,9 +7,10 @@ using namespace std;
 class CharacterAnimator :public Animator
 {
 protected:
-	PlayerMovementController* plMov;
 	GOOrientation parentOrientation;
 	GOOrientation currOrientation;
+	movementState parentMov;
+	movementState currMov;
 
 	void init();
 public:

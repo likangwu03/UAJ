@@ -106,13 +106,13 @@ public:
 		render(src, dest, rotation);
 	}
 
-	inline void renderFrame(const SDL_Rect& dest, int col, int row) {
+	inline void renderFrame(const SDL_Rect& dest, int col, int row, float angle) {
 		SDL_Rect src;
 		src.x = fw_ * col;
 		src.y = fh_ * row;
 		src.w = fw_;
 		src.h = fh_;
-		render(src, dest);
+		render(src, dest, angle);
 	}
 
 	SDL_Texture* getTexture() const { return texture_;  }

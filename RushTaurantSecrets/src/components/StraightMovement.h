@@ -89,7 +89,7 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STRAIGHT_MOVEMENT;
 
 	StraightMovement(GameObject* parent, float speed) :
-		Component(parent, id), offsetZone(2), speed(speed) {
+		Component(parent, id), offsetZone(3), speed(speed) {
 		sdl = SDLUtils::instance();
 		path.cont = 0;
 		transform = parent->getComponent<Transform>();
