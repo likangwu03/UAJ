@@ -4,26 +4,34 @@
 #include "../structure/Structure_def.h"
 #include "Transform.h"
 #include "../sdlutils/Texture.h"
+#include "../sdlutils/SDLUtils.h"
 #include "../structure/GameObject.h";
-
+using namespace std;
 class Image : public Component {
 private:
 	// componente transform para consultar las características físicas del gameobject
 	Transform* transform = nullptr;
 	Texture* texture = nullptr;
-
+	SDLUtils* sdl;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_IMAGE;
 
-	Image(GameObject* parent, Texture* texture) : Component(parent, id), texture(texture) {
+	Image(GameObject* parent, Texture* texture) : Component(parent, id), texture(texture),sdl(SDLUtils::instance()) {
 		// importante que se añada el Transform antes de Image porque sino no se va a encontrar la ref
 		// se guarda la referencia al Transform de la entidad
 		transform = parent->getComponent<Transform>();
 		// se produce un error si no se encuentra
 		assert(texture != nullptr);
 	}
+	Image(GameObject* parent, string s) : Component(parent, id), sdl(SDLUtils::instance()) {
+		transform = parent->getComponent<Transform>();
+		texture= &((*sdl).images().at(s));
+		assert(texture != nullptr);
+
+	}
 
 	void setTexture(Texture* t) { texture = t; }
+	void setTexture(string s) { texture = &((*sdl).images().at(s)); }
 
 	virtual void render() {
 		SDL_Rect dest;
