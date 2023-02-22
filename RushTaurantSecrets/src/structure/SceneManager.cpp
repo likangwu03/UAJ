@@ -86,7 +86,9 @@ void SceneManager::setScene() {
 	case SceneManager::SUPERMARKET:
 		sdlutils().setResizeFactor(0.6666666667);
 		if (act == MAINMENU) {
-			currentScene = new SuperMarket();
+			UIMarket* uiMarket = new UIMarket();
+			SuperMarket* superMarket = new SuperMarket(uiMarket);
+			currentScene = superMarket;
 			Scenes.push_back(currentScene);
 		}
 		break;
