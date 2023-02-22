@@ -87,7 +87,7 @@
       "file": "assets/Sprites/Food/Dishes/PAN.png"
     },
     {
-      "id": "0",
+      "id": "2",
       "file": "assets/Sprites/Food/Dishes/MERMELADA.png"
     },
     {
@@ -359,6 +359,10 @@
       "file": "assets/Sprites/UI/takingNote.png",
       "cols": 2,
       "rows": 1
+    },
+    {
+      "id": "DIALOG_BOX",
+      "file": "assets/Sprites/UI/dialog box big.png"
     },
     {
       "id": "1_Generic_48x48",

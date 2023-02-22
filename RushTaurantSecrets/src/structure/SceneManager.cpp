@@ -70,6 +70,13 @@ void SceneManager::setScene() {
 			Scenes.pop_back();
 			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
 		}
+		else if (act == DAILYMENU) {
+			sdlutils().setResizeFactor(1);
+
+			Scene* aux = Scenes.back();
+			Scenes.pop_back();
+			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
+		}
 		else if (act == SUPERMARKET) {
 			sdlutils().setResizeFactor(0.6666666667);
 

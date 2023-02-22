@@ -12,7 +12,7 @@ using namespace std;
 class SceneManager:public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;
 public:
-	enum SceneName{MAINMENU,RESTAURANT,PANTRY,SUPERMARKET};
+	enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET};
 private:
 	//crea menu
 	SceneManager();
