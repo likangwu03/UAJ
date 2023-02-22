@@ -18,9 +18,14 @@ private:
 	Money* moneyTxt = new Money();
 	Font* f;
 	GameObject* moneyText;
+	GameObject* timeText;
 	Texture* moneyTextTexture;
+	Texture* timeTextTexture;
 	Image* moneyTextImage;
+	Image* timeTextImage;
 	int intMoney;
+	int time, timeT;
+	float lastTime;
 
 public:
 	UIRestaurant();
@@ -28,6 +33,7 @@ public:
 	Money* getMoney() { return moneyTxt; };
 	void showMoneyText();
 	void update();
-	void deleteMoneyText();
+	void showTimeText();
+	void checkTime();
 };
 
