@@ -1,5 +1,7 @@
 ﻿#include "CashRegisterTrigger.h"
 
+#include "../objects/Reputation.h"
+
 #include "../utils/checkML.h"
 
 void CashRegisterTrigger::isOverlapping() {
@@ -11,8 +13,9 @@ void CashRegisterTrigger::isOverlapping() {
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 	
 	list<Client*>* list=cM->getPayQueue();
-	for (auto it:*list) { //añadir al contador de dinero
+	for (auto it:*list) { //añadir al contador de dinero y de reputación
 		money->addMoney(_ecs::Dishes[it->getComponent<ClientState>()->getOrderedDish()].price);
+		Reputation::instance()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 10);
 	}
 	cM->collectAndLeave(); //informa al cliente de que ya puede irse
 	

@@ -44,13 +44,13 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_HEART_RENDER;
 
-	HeartRender(GameObject* parent, Texture* texture, int widthHeart, int heightHeart, int offset) :
+	HeartRender(GameObject* parent, Texture* texture, int widthHeart, int heightHeart, int offsetY, int offsetX) :
 		Component(parent, id), texture(texture), widthHeart(widthHeart), heightHeart(heightHeart), posStartX(0), posStartY(0) {
 		clientState = parent->getComponent<ClientState>();
 		transform = parent->getComponent<Transform>();
 
-		posStartY = -offset;
-		posStartX = transform->getW() / 2;
+		posStartY = -offsetY;
+		posStartX = offsetX + transform->getW() / 2;
 		maxHearts = numHearts(clientState->getHappiness());
 		if (isEven(maxHearts)) {
 			// se resta n/2 corazones

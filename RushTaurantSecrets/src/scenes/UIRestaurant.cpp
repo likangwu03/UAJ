@@ -1,5 +1,13 @@
 #include "UIRestaurant.h"
 
+#include "../structure/GameObject.h"
+#include "../components/Transform.h"
+#include "../components/Image.h"
+#include "../objects/Money.h" // cambiar cuando se cambie la clase Money
+#include "../objects/Reputation.h"
+#include "../gameObjects/Inventory.h"
+#include "../gameObjects/Bin.h"
+
 #include "../utils/checkML.h"
 
 UIRestaurant::UIRestaurant() : Scene() {
@@ -48,6 +56,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	f = new Font("assets/Fonts/Hamish.ttf", 50);
 	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
 	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
+
+	moneyTxt = new Money();
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
 	//moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
@@ -61,26 +71,27 @@ UIRestaurant::UIRestaurant() : Scene() {
 	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
 	timeTextImage = new Image(timeText, timeTextTexture);
 
+
 	// render de estrellas vacías
-	GameObject* estar1 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
-	new Transform(estar1, Vector(100, 25), Vector(0,0), 30, 32);
-	new Image(estar1, &((*sdl).images().at("EMPTY_STAR")));
+	GameObject* emptyStar1 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(emptyStar1, Vector(100, 25), Vector(0,0), 30, 32);
+	new Image(emptyStar1, &((*sdl).images().at("EMPTY_STAR")));
 
-	GameObject* estar2 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
-	new Transform(estar2, Vector(140, 25), Vector(0, 0), 30, 32);
-	new Image(estar2, &((*sdl).images().at("EMPTY_STAR")));
+	GameObject* emptyStar2 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(emptyStar2, Vector(140, 25), Vector(0, 0), 30, 32);
+	new Image(emptyStar2, &((*sdl).images().at("EMPTY_STAR")));
 
-	GameObject* estar3 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
-	new Transform(estar3, Vector(180, 25), Vector(0, 0), 30, 32);
-	new Image(estar3, &((*sdl).images().at("EMPTY_STAR")));
+	GameObject* emptyStar3 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(emptyStar3, Vector(180, 25), Vector(0, 0), 30, 32);
+	new Image(emptyStar3, &((*sdl).images().at("EMPTY_STAR")));
 
-	GameObject* estar4 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
-	new Transform(estar4, Vector(220, 25), Vector(0, 0), 30, 32);
-	new Image(estar4, &((*sdl).images().at("EMPTY_STAR")));
+	GameObject* emptyStar4 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(emptyStar4, Vector(220, 25), Vector(0, 0), 30, 32);
+	new Image(emptyStar4, &((*sdl).images().at("EMPTY_STAR")));
 
-	GameObject* estar5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
-	new Transform(estar5, Vector(260, 25), Vector(0, 0), 30, 32);
-	new Image(estar5, &((*sdl).images().at("EMPTY_STAR")));
+	GameObject* emptyStar5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(emptyStar5, Vector(260, 25), Vector(0, 0), 30, 32);
+	new Image(emptyStar5, &((*sdl).images().at("EMPTY_STAR")));
 
 	// render de estrellas rellenas
 	GameObject* star1 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
@@ -102,6 +113,14 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* star5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
 	new Transform(star5, Vector(260, 25), Vector(0, 0), 30, 32);
 	new Image(star5, &((*sdl).images().at("STAR")));
+}
+
+
+UIRestaurant::~UIRestaurant() {
+	delete f;
+	delete moneyTxt;
+	delete moneyTextTexture;
+	delete timeTextTexture;
 }
 
 void UIRestaurant::showMoneyText() {

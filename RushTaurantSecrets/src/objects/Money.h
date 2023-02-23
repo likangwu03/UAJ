@@ -1,7 +1,6 @@
 #pragma once
 
-class Money 
-{
+class Money {
 private:
 	//Money();
 	//static Money* instance;

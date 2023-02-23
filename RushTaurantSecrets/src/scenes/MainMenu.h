@@ -8,9 +8,11 @@ private:
 
 	GameObject* bg;
 	GameObject* button;
+	Texture* image;
 
 public:
 	MainMenu(SceneManager* sceneManager);
+	~MainMenu();
 
 	void handleEvents()override;
 };
