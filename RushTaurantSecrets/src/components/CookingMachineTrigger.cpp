@@ -1,5 +1,4 @@
 #include "CookingMachineTrigger.h"
-
 #include "../utils/checkML.h"
 
 void CookingMachineTrigger::isOverlapping() {

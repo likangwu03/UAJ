@@ -65,7 +65,7 @@ void ClientState::update() {
 
 
 // Función que asigna al plato pedido uno aleatorio de entre los
-// disponibles en el menú del día y cambia el estado a ORDERED
+// disponibles en el men?del día y cambia el estado a ORDERED
 void ClientState::takeOrder() {
 	int rndDish;
 	// Si no se ha cambiado el plato, escoge uno aleatorio

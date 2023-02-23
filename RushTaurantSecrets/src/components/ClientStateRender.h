@@ -15,11 +15,11 @@ private:
 	const int
 #pragma region para la nube de plato que quiere
 		BUBBLE_OFFSETX = -4,
-		BUBBLE_OFFSETY = -13,
+		BUBBLE_OFFSETY = -7,
 		BUBBLE_WIDTH = 41,
-		BUBBLE_HEIGHT = 48,
+		BUBBLE_HEIGHT = 40,
 		DISH_OFFSETX = -1, //respecto de bubble
-		DISH_OFFSETY = -5,
+		DISH_OFFSETY = -3,
 		DISH_WIDTH = 32,
 		DISH_HEIGHT = 32,
 #pragma endregion
