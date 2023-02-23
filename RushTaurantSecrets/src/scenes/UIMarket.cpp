@@ -13,10 +13,11 @@ UIMarket::UIMarket() : Scene() {
 	new Transform(menu, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), 50, 50, 0);
 	new Image(menu, &((*sdl).images().at("DAILY_MENU")));
 
+	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
 	// icono de menú de pausa
-	GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
-	new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
-	new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
+	//GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
+	//new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
+	//new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
 
 	// icono de cesta
 	GameObject* basket = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_BASKET);

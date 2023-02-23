@@ -24,7 +24,7 @@ private:
 	Image* moneyTextImage;
 	Image* timeTextImage;
 	int intMoney;
-	int time, timeT;
+	int time = 0, timeT = 0;
 	float lastTime;
 
 public:
