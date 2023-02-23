@@ -2,6 +2,9 @@
 #include "Transform.h"
 #include "../structure/GameObject.h"
 //#include "../structure/CollisionsManager.h"
+
+#include "../utils/checkML.h"
+
 using namespace std;
 TriggerComp::TriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :Component(parent, id), ih(InputHandler::instance())
 {

@@ -295,6 +295,10 @@
       "file": "assets/Sprites/Food/Ingredients/NONE_ING.png"
     },
     {
+      "id": "Heart",
+      "file": "assets/Sprites/UI/Heart.png"
+    },
+    {
       "id": "MONEY_ICON",
       "file": "assets/Sprites/UI/money_icon.png",
       "cols": 1,

@@ -26,8 +26,8 @@ public:
 
 	virtual Scene* getScene() { return scene; }
 
-	virtual void update();
-	virtual void render();
+	void update();
+	void render();
 	void handleEvents();
 
 	template<typename Comp>

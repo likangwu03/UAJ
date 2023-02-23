@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="54">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="64">
  <tileset firstgid="1" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="8285" source="atlas.tsx"/>
  <tileset firstgid="9821" source="12_Kitchen_48x48.tsx"/>
@@ -283,5 +283,13 @@
   <object id="40" name="Bin" x="1054.66" y="345.667" width="49.3333" height="52.3333"/>
   <object id="51" name="CashRegister" x="1223.33" y="428.667" width="70" height="47.3333"/>
   <object id="53" name="KitchenIsland" x="1202.67" y="308.667" width="283.333" height="74"/>
+  <object id="54" name="table" x="300" y="220" width="122" height="114"/>
+  <object id="56" name="table" x="635" y="219" width="124" height="114"/>
+  <object id="57" name="table" x="453" y="426" width="102" height="115"/>
+  <object id="58" name="table" x="793" y="425" width="98" height="120"/>
+  <object id="60" name="table" x="1031" y="715" width="99" height="127"/>
+  <object id="61" name="table" x="358.5" y="710.5" width="99" height="127"/>
+  <object id="62" name="table" x="700.5" y="713.5" width="99" height="127"/>
+  <object id="63" name="kitchen" x="1046" y="230" width="568" height="266"/>
  </objectgroup>
 </map>

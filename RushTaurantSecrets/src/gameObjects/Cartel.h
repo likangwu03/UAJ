@@ -11,8 +11,8 @@ class Cartel :public GameObject
 public:
 	Cartel(Scene* scene,_ecs::_ingredients_id ingId, Vector pos, float w, float h,Vector triP, float triW, float triH) :GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, pos, Vector(0, 0), w, h, 0, true); //renderizar el cartel
-		new Image(this,to_string(ingId)); //renderizar el cartel
-		new CartelTrigger(this, triP-pos, w, h); //pos relativa
+		//new Image(this,to_string(ingId)); //renderizar el cartel
+		//new CartelTrigger(this, triP-pos, w, h); //pos relativa
 	};
 };
 

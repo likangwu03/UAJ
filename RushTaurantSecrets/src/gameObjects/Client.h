@@ -25,6 +25,6 @@ public:
 		new ClientState(this, menu);
 		new ClientMovement(this, posEntrance);
 		new ClientTrigger(this, Vector(0, 0), 48, 96);
-		new HeartRender(this, &SDLUtils::instance()->images().at(to_string(5)), 20, 20, 20);
+		new HeartRender(this, &sdlutils().images().at("Heart"), 15, 15, 20);
 	}
 };

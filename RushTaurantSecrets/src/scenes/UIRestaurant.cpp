@@ -1,6 +1,10 @@
 #include "UIRestaurant.h"
 
+#include "../utils/checkML.h"
+
 UIRestaurant::UIRestaurant() : Scene() {
+	lastTime = sdl->currRealTime();
+
 	// icono de reputación
 	GameObject* reputation = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_REPUTATION);
 	new Transform(reputation, Vector(20, 20), Vector(0, 0), 56, 36, 0);
@@ -8,7 +12,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// icono de dinero
 	GameObject* money = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY);
-	new Transform(money, Vector(20, 80), Vector(0, 0), 50, 50, 0);
+	new Transform(money, Vector(10, 76), Vector(0, 0), 64, 64, 0);
 	new Image(money, &((*sdl).images().at("MONEY_ICON")));
 
 	// icono de objetivo diario
@@ -18,7 +22,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// icono de menú del día
 	GameObject* menu = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MENU);
-	new Transform(menu, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), 50, 50, 0);
+	new Transform(menu, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), 54, 54, 0);
 	new Image(menu, &((*sdl).images().at("DAILY_MENU")));
 
 	// inventario (fondo)
@@ -29,10 +33,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// inventario (platos)
 	inventory = new Inventory(this);
 
+	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
 	// icono de menú de pausa
-	GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
-	new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
-	new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
+	//GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
+	//new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
+	//new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
 
 	// gestión de la cantidad de dinero
 	f = new Font("assets/Fonts/Hamish.ttf", 50);
@@ -42,6 +47,13 @@ UIRestaurant::UIRestaurant() : Scene() {
 	std::string strMoney = std::to_string(intMoney);
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
+
+	// gestión del temporizador
+	timeText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TIME_TEXT);
+	new Transform(timeText, Vector(sdl->width() - 70, 80), Vector(0, 0), 50, 50);
+	std::string strTime = std::to_string(time);
+	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
+	timeTextImage = new Image(timeText, timeTextTexture);
 }
 
 void UIRestaurant::showMoneyText() {
@@ -50,7 +62,7 @@ void UIRestaurant::showMoneyText() {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
 		delete(moneyTextTexture);
-		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
+		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0x000000FF));
 		moneyTextImage->setTexture(moneyTextTexture);
 	}
 }
@@ -58,8 +70,22 @@ void UIRestaurant::showMoneyText() {
 void UIRestaurant::update() {
 	Scene::update();
 	showMoneyText();
+	checkTime();
 }
 
-void UIRestaurant::deleteMoneyText() {
+void UIRestaurant::showTimeText() {
+	std::string strTime = std::to_string(time);
+	delete(timeTextTexture);
+	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
+	timeTextImage->setTexture(timeTextTexture);	
+}
 
+void UIRestaurant::checkTime() {
+	timeT = sdl->currRealTime();
+	if (timeT - lastTime >= 1000) {
+		time += 1;
+		showTimeText();
+		lastTime = timeT;
+		timeT = 0;
+	}
 }

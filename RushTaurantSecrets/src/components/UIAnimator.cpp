@@ -1,5 +1,6 @@
 #include "UIAnimator.h"
 
+#include "../utils/checkML.h"
 
 void UIAnimator::init(Vector p) {
 	if (pos.getX() == -1 && pos.getY() == -1) pos = plTf->getPos(); //si no le dan pos, se coge del transform

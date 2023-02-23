@@ -1,5 +1,7 @@
 ﻿#include "CashRegisterTrigger.h"
 
+#include "../utils/checkML.h"
+
 void CashRegisterTrigger::isOverlapping() {
 	// cout << "hola :)" << endl;
 	//if (other_->getComponent<PlayerMovementController>() == nullptr)return; //si no es el jugador, no hace nada

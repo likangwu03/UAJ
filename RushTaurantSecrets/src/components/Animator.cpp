@@ -1,5 +1,7 @@
 #include "Animator.h"
 
+#include "../utils/checkML.h"
+
 Animator::Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate, float w, float h, _ecs::_cmp_id id) : Component(parent, id), sdl(SDLUtils::instance()) {
 	texture = t;
 	init(iniFrame, endFrame, currAnim, frRate, w, h);
@@ -45,11 +47,14 @@ void Animator::setCurrentAnim(int iniFram, int endFram, int currAnim)
 /*cambiar de textura dada la textura*/
 void Animator::setTexture(Texture* t, int iniFrame, int endFrame, int currAnim, int frRate) {
 	texture = t;
+	frameRate = frRate;
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 /*cambiar de textura dado el nombre de textura*/
 void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, int frRate) {
 	texture = &((*sdl).images().at(s));
+	frameRate = frRate;
+
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
 

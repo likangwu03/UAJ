@@ -10,9 +10,10 @@ class ClientTrigger : public TriggerComp
 {
 	ClientState* clientState;
 	InventoryComp* inventory;
+	bool selected;
 public:
 	ClientTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
-		TriggerComp(parent, pos_, width_, height_),
+		TriggerComp(parent, pos_, width_, height_), selected(false),
 		//clientManager(ClientsManager::get()),
 		clientState(parent->getComponent<ClientState>()),
 		inventory(static_cast<UIRestaurant*>(parent->getScene()->getUI())->getInventory()->getComponent<InventoryComp>()) { };
@@ -22,5 +23,7 @@ public:
 	int randomTable();
 
 	bool inputMando();
+
+	bool isSelected() { return selected; }
 };
 

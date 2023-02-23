@@ -1,5 +1,7 @@
 #include "Ingredients.h"
 
+#include "../utils/checkML.h"
+
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	if (ingredients.size() == MAX_INGREDIENTS) {
 		removeLastIngredient(); //elimina el ultimo ingrediente añadido

@@ -1,5 +1,7 @@
 #include "CharacterAnimator.h"
 
+#include "../utils/checkML.h"
+
 void CharacterAnimator::init() {
 	// inicialmente un personaje reproduce la animación idle hacia abajo
 	// orientación anterior y actual

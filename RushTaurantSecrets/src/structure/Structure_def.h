@@ -64,6 +64,7 @@ namespace _ecs {
 		hdr_TARGET,
 		hdr_MONEY,
 		hdr_MONEY_TEXT,
+		hdr_TIME_TEXT,
 		hdr_MENU,
 		hdr_PAUSE,
 		hdr_BASKET,

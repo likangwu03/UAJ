@@ -5,6 +5,8 @@
 #include "../components/Transform.h"
 #include "../components/Image.h"
 
+#include "../utils/checkML.h"
+
 void MainMenu::start(SceneManager* sceneManager) {
 	sceneManager->ChangeScene(SceneManager::RESTAURANT);
 }
@@ -16,6 +18,17 @@ MainMenu::MainMenu(SceneManager* sceneManager){
 
 	button = new GameObject(this);
 	new Button(button, sceneManager, start);
-	
-	
+}
+
+void MainMenu::handleEvents(){
+	if (ih->isKeyDown(SDLK_1)) {
+		SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+	}
+	else if (ih->isKeyDown(SDLK_2)) {
+		SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);
+	}
+	else {
+		Scene::handleEvents();
+
+	}
 }

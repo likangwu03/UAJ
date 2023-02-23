@@ -12,6 +12,10 @@
 #include "../gameObjects/CollisionObject.h"
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/CashRegister.h"
+#include "../gameObjects/Cartel.h"
+
+#include "../utils/checkML.h"
+
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
 	loadMapDims();
@@ -153,27 +157,37 @@ void MapCreator::createObject() {
 	Scene* scene = parent->getScene();
 	auto& layers = tileMap->getLayers();
 	for (auto& layer : layers) {
-		if (layer->getType() == Layer::Type::Object) {
+		if (layer->getType() == Layer::Type::Object) {		
+			//if (layer->getName() == "ignorarlo_espara Trigger")return;
 			auto& objs = static_cast<tmx::ObjectGroup*>(layer.get())->getObjects();
 			for (auto& obj : objs) {
 				auto& aabb = obj.getAABB();
 				string name = obj.getName();
 				vector<tmx::Property> p = obj.getProperties();
+				Vector pos = { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() };
+				float width_ = aabb.width * sdlutils().getResizeFactor();
+				float height_ = aabb.height * sdlutils().getResizeFactor();
 				if (name == "") {
-					new CollisionObject(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
-						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
+					new CollisionObject(scene, pos,width_,height_);
 				}
 				else if (name == "CookingMachine") {
-					new CookingMachine(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
-						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
+					new CookingMachine(scene, pos, width_, height_);
 				}
 				else if (name == "Bin") {
-					new Bin(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
-						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
+					new Bin(scene, pos, width_, height_);
 				}
 				else if (name == "CashRegister") {
-					new CashRegister(scene, { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() },
-						aabb.width * sdlutils().getResizeFactor(), aabb.height * sdlutils().getResizeFactor());
+					new CashRegister(scene, pos, width_, height_);
+				}
+				else if (name == "Cartel") {
+					Vector aux = { p[3].getFloatValue() * sdlutils().getResizeFactor(),p[4].getFloatValue() * sdlutils().getResizeFactor() };
+					new Cartel(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
+				}
+				else if (name == "table") {
+
+				}
+				else if (name == "kitchen") {
+
 				}
 			};
 

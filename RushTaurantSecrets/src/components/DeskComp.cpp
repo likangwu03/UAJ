@@ -3,41 +3,31 @@
 #include "../components/ClientState.h"
 #include "../exceptions/CompNotFound.h"
 #include "Transform.h"
+#include "../objects/ClientsManager.h"
+#include "../utils/checkML.h"
 
-DeskComp::DeskComp(GameObject* parent) : Component(parent, id), sucia(false) {
+DeskComp::DeskComp(GameObject* parent) : TriggerComp(parent, Vector(), 0, 0), sucia(false), num(0) {
 	trans = parent->getComponent<Transform>();
 	if(trans == nullptr) {
 		throw exceptions::CompNotFound("Transform", "DeskComp");
 	}
 }
 
-bool DeskComp::assignClients(GameObject* first, GameObject* second, GameObject* third, GameObject* fourth) {
+bool DeskComp::assignClients() {
 	if(!assigned.empty() || sucia) return false;
-
-	assigned.push_back(first);
-	first->getComponent<ClientState>()->setState(ClientState::ASSIGNED);
-	if(second != nullptr) {
-		assigned.push_back(second);
-		second->getComponent<ClientState>()->setState(ClientState::ASSIGNED);
-		if(third != nullptr) {
-			assigned.push_back(third);
-			third->getComponent<ClientState>()->setState(ClientState::ASSIGNED);
-			if(fourth != nullptr) {
-				assigned.push_back(fourth);
-				fourth->getComponent<ClientState>()->setState(ClientState::ASSIGNED);
-			}
-		}
+	GameObject* client = ClientsManager::get()->getFirstEntrance();
+	if(client->getComponent<ClientTrigger>()->isSelected()) {
+		assigned.push_back(client);
+		ClientsManager::get()->assignFirstClient(num);
+		return true;
 	}
-	return true;
+	return false;
 }
 
-bool DeskComp::receiveDish(GameObject* dish) {
-	auto it = assigned.begin();
-	bool served = false;
-	while(it != assigned.end() && !served) {
-		// Recorrer todos los clientes asignados a la mesa para comprobar si alguien ha pedido el plato y si se lo lleva.
+void DeskComp::spreadOverlap() {
+	for(auto it = assigned.begin(); it != assigned.end(); ++it) {
+		(*it)->getComponent<ClientTrigger>()->isOverlapping();
 	}
-	return served;
 }
 
 void DeskComp::leaveDesk() {
@@ -47,4 +37,12 @@ void DeskComp::leaveDesk() {
 
 void DeskComp::cleanDesk() {
 	sucia = false;
+}
+
+void DeskComp::isOverlapping() {
+	if(!ih->isKeyDown(SDLK_SPACE)) return;
+
+	if(sucia) cleanDesk();
+	else if(assigned.empty()) assignClients();
+	else spreadOverlap();
 }

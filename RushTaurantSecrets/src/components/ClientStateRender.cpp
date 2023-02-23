@@ -2,6 +2,8 @@
 #include "../structure/GameObject.h"
 #include "ClientState.h"
 
+#include "../utils/checkML.h"
+
 ClientStateRender::ClientStateRender(GameObject* _parent) :Component(_parent, id),
 transform(parent->getComponent<Transform>()), anim(parent->getComponent<UIAnimator>()),
 state(nullptr), sdl(SDLUtils::instance())
@@ -21,14 +23,14 @@ void ClientStateRender::clientStateIsReady() {
 void ClientStateRender::renderThinkingState() {
 	if(!anim->isActive())
 		anim->setActive(true);
-	anim->setTexture(textures.thinking,0,1);
+	anim->setTexture(textures.thinking,0,2,0,800);
 	anim->setH(TAKINGNOTE_WIDTH);
 }
 
 void ClientStateRender::renderTakingNoteState() {
 	if (!anim->isActive())
 		anim->setActive(true);
-	anim->setTexture(textures.takingNote , 0, 1);
+	anim->setTexture(textures.takingNote , 0, 2,0,100);
 	anim->setH(TAKINGNOTE_WIDTH);
 }
 

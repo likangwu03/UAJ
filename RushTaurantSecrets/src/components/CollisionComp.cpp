@@ -4,6 +4,8 @@
 //#include "../structure/CollisionsManager.h"
 #include "../structure/GameObject.h"
 
+#include "../utils/checkML.h"
+
 CollisionComp::CollisionComp(GameObject* parent, Vector pos_, float width_, float height_) :Component(parent,id) {
 	transform_ = parent->getComponent<Transform>();
 	pos = pos_;
