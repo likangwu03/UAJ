@@ -60,6 +60,48 @@ UIRestaurant::UIRestaurant() : Scene() {
 	std::string strTime = std::to_string(time);
 	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
 	timeTextImage = new Image(timeText, timeTextTexture);
+
+	// render de estrellas vacías
+	GameObject* estar1 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(estar1, Vector(100, 25), Vector(0,0), 30, 32);
+	new Image(estar1, &((*sdl).images().at("EMPTY_STAR")));
+
+	GameObject* estar2 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(estar2, Vector(140, 25), Vector(0, 0), 30, 32);
+	new Image(estar2, &((*sdl).images().at("EMPTY_STAR")));
+
+	GameObject* estar3 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(estar3, Vector(180, 25), Vector(0, 0), 30, 32);
+	new Image(estar3, &((*sdl).images().at("EMPTY_STAR")));
+
+	GameObject* estar4 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(estar4, Vector(220, 25), Vector(0, 0), 30, 32);
+	new Image(estar4, &((*sdl).images().at("EMPTY_STAR")));
+
+	GameObject* estar5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_EMPTY_STAR);
+	new Transform(estar5, Vector(260, 25), Vector(0, 0), 30, 32);
+	new Image(estar5, &((*sdl).images().at("EMPTY_STAR")));
+
+	// render de estrellas rellenas
+	GameObject* star1 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
+	new Transform(star1, Vector(100, 25), Vector(0, 0), 30, 32);
+	new Image(star1, &((*sdl).images().at("STAR")));
+
+	GameObject* star2 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
+	new Transform(star2, Vector(140, 25), Vector(0, 0), 30, 32);
+	new Image(star2, &((*sdl).images().at("STAR")));
+
+	GameObject* star3 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
+	new Transform(star3, Vector(180, 25), Vector(0, 0), 30, 32);
+	new Image(star3, &((*sdl).images().at("STAR")));
+
+	GameObject* star4 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
+	new Transform(star4, Vector(220, 25), Vector(0, 0), 30, 32);
+	new Image(star4, &((*sdl).images().at("STAR")));
+
+	GameObject* star5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
+	new Transform(star5, Vector(260, 25), Vector(0, 0), 30, 32);
+	new Image(star5, &((*sdl).images().at("STAR")));
 }
 
 void UIRestaurant::showMoneyText() {

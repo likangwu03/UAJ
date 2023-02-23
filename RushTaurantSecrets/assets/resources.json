@@ -360,6 +360,18 @@
       "rows": 1
     },
     {
+      "id": "STAR",
+      "file": "assets/Sprites/UI/star.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "EMPTY_STAR",
+      "file": "assets/Sprites/UI/empty_star.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "THINKING_ICON_ANIM",
       "file": "assets/Sprites/UI/thinking_anim.png",
       "cols": 8,
