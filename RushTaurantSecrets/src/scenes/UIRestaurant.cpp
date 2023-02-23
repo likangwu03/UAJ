@@ -7,7 +7,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// icono de reputación
 	GameObject* reputation = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_REPUTATION);
-	new Transform(reputation, Vector(20, 20), Vector(0, 0), 56, 36, 0);
+	new Transform(reputation, Vector(20, 20), Vector(0, 0), 64, 44, 0);
 	new Image(reputation, &((*sdl).images().at("REPUTATION_ICON")));
 
 	// icono de dinero
@@ -17,7 +17,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// icono de objetivo diario
 	GameObject* target = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TARGET);
-	new Transform(target, Vector(20, 150), Vector(0, 0), 50, 50, 0);
+	new Transform(target, Vector(17, 150), Vector(0, 0), 72, 68, 0);
 	new Image(target, &((*sdl).images().at("TARGET_ICON")));
 
 	// icono de menú del día
@@ -33,6 +33,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// inventario (platos)
 	inventory = new Inventory(this);
 
+	// icono de reloj (temporizador)
+	GameObject* clock = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_CLOCK);
+	new Transform(clock, Vector(sdl->width() - 70, 20), Vector(0, 0), 60, 57, 0);
+	new Image(clock, &((*sdl).images().at("CLOCK_ICON")));
+
 	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
 	// icono de menú de pausa
 	//GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
@@ -45,12 +50,13 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
-	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
+	//moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
+	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0x000000FF));
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// gestión del temporizador
 	timeText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TIME_TEXT);
-	new Transform(timeText, Vector(sdl->width() - 70, 80), Vector(0, 0), 50, 50);
+	new Transform(timeText, Vector(sdl->width() - 140, 25), Vector(0, 0), 50, 50);
 	std::string strTime = std::to_string(time);
 	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
 	timeTextImage = new Image(timeText, timeTextTexture);

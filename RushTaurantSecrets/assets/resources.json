@@ -341,6 +341,12 @@
       "rows": 1
     },
     {
+      "id": "CLOCK_ICON",
+      "file": "assets/Sprites/UI/clock_icon.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BUBBLE_ICON",
       "file": "assets/Sprites/UI/cocina_nube.png",
       "cols": 1,
