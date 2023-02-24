@@ -62,8 +62,8 @@ void CookingMachineComp::render() {
 		textures.bubble->render(dest);
 		//dish
 		if (dish != _ecs::NONE_DISH) {
-			dest.x = (dest.x+ BUBBLE_WIDTH/2) - DISH_WIDTH/2+DISH_OFFSETX;
-			dest.y = dest.y + BUBBLE_HEIGHT / 2 - DISH_HEIGHT / 2 + DISH_OFFSETX;
+			dest.x = (dest.x + BUBBLE_WIDTH / 2) - DISH_WIDTH / 2 + DISH_OFFSETX;
+			dest.y = dest.y + BUBBLE_HEIGHT / 2 - DISH_HEIGHT / 2 + DISH_OFFSETY;
 			dest.w = DISH_WIDTH;
 			dest.h = DISH_HEIGHT;
 			textures.dishTex->render(dest);

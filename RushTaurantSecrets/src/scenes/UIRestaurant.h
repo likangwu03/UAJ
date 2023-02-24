@@ -15,6 +15,8 @@ class Bin;
 class UIRestaurant : public Scene
 {
 private:
+	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;

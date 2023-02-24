@@ -57,7 +57,7 @@ namespace _ecs {
 	enum _hdr_id : id_type {
 		hdr_PLAYER,
 		hdr_DISHCOMB,
-		hdr_CUSTOMER,
+		hdr_CLIENT,
 		hdr_INVENTORY,
 		hdr_MONEY_ICON,
 		hdr_REPUTATION,

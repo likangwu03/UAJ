@@ -52,15 +52,15 @@ void CollisionsManager::Overlap() {
 		if (objCol != nullptr) {
 
 			SDL_FRect playerRect = objCol->getRect();
-			for (auto customer : *grp_Clients) {
-				TriggerComp* customerTrigger = customer->getComponent<TriggerComp>();
-				if (customerTrigger != nullptr) {
-					SDL_FRect customerRect = customerTrigger->getRect();
-					if (SDL_HasIntersectionF(&playerRect, &customerRect)) {
-						customerTrigger->Overlap(player);
+			for (auto client : *grp_Clients) {
+				TriggerComp* clientTrigger = client->getComponent<TriggerComp>();
+				if (clientTrigger != nullptr) {
+					SDL_FRect clientRect = clientTrigger->getRect();
+					if (SDL_HasIntersectionF(&playerRect, &clientRect)) {
+						clientTrigger->Overlap(player);
 					}
 					else {
-						customerTrigger->Overlap(nullptr);
+						clientTrigger->Overlap(nullptr);
 					}
 				}				
 			}

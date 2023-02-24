@@ -6,9 +6,9 @@
 class SceneManager;
 class Scene;
 
-static const int BUTTON_W = 96, BUTTON_H = 32;
 
 class Button : public Component {
+const int BUTTON_W = 96, BUTTON_H = 32;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_BUTTON;
 

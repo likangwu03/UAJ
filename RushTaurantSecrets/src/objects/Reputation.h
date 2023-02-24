@@ -7,7 +7,7 @@ class Reputation : public Singleton<Reputation> {
 	friend Singleton<Reputation>; private:
 
 	float amount;
-	static const int MAXREPUTATION = 100;
+	const int MAXREPUTATION = 100;
 	Reputation() { amount = 15; }
 
 public:

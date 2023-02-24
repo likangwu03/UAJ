@@ -16,15 +16,14 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	for (int i = 0; i < 3; i++) {	
 		dishes.push_back(_ecs::ALBONDIGAS);
 	}
-	dishH = 60; dishW = 60;
 
 	cellSelected = -1;
 	cellsOcuppied = 0;
 	// prueba--borrar luego
-	//dishesBool[0] = true;
-	//dishesBool[1] = true;
-	//cellsOcuppied = 2;
-	//dishesBool[2] = true;
+	/*dishesBool[0] = true;
+	dishesBool[1] = true;
+	cellsOcuppied = 2;
+	dishesBool[2] = true;*/
 }
 
 // si hay espacio en el inventario, recoge el plato (suponiendo que previamente ya se ha comprobado si cookingMachine est¨¢ listo en otra clase)
@@ -65,8 +64,8 @@ void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
 	SDL_Rect dest;
 	dest.x = xD;
 	dest.y = yD;
-	dest.w = dishW;
-	dest.h = dishH;
+	dest.w = DISH_W;
+	dest.h = DISH_H;
 
 	string dID = to_string(dishID);
 
@@ -89,15 +88,11 @@ void InventoryComp::render() {
 }
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
-	if (i == 0) {
-		x = 30; y = 482;
-	}
-	else if (i == 1) {
-		x = 30; y = 554;
-	}
-	else { // i == 2
-		x = 30; y = 626;
-	}
+	x = 35;
+	if (i == 0)  y = 490;
+	else if (i == 1) y = 560;
+	else /* if (i == 2) */ y = 630;
+	
 }
 
 void InventoryComp::setCell(char key) {

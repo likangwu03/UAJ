@@ -1,14 +1,11 @@
 #pragma once
 #include "../structure/Scene.h"
-#include "../scenes/UIRestaurant.h"
-#include "../gameObjects/Player.h"
-#include "../objects/DishCombinator.h"
-#include "../gameObjects/CookingMachine.h"
-#include "../gameObjects/Bin.h"
-#include "../structure/CollisionsManager.h"
-//#include "../gameObjects/Inventory.h" //de momento est¨¢ aqu¨ª, no s¨¦ si moverlo a UI
 
-class Pantry;
+#include "Pantry.h"
+class DishCombinator;
+#include "../scenes/UIRestaurant.h"
+class CollisionsManager;
+
 class Restaurant : public Scene {
 private:
 	Pantry* pantry;
@@ -20,7 +17,7 @@ private:
 	GameObject* player;
 
 public:
-	Restaurant(UIRestaurant* restUI = nullptr) : pantry(nullptr), ui(restUI),dc(DishCombinator::init()) { init(); }
+	Restaurant(UIRestaurant* restUI = nullptr);
 	~Restaurant();
 
 	UIRestaurant* getUI() { return ui; }

@@ -25,7 +25,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// icono de objetivo diario
 	GameObject* target = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TARGET);
-	new Transform(target, Vector(17, 150), Vector(0, 0), 72, 68, 0);
+	new Transform(target, Vector(17, 150), Vector(0, 0), 50, 47, 0);
 	new Image(target, &((*sdl).images().at("TARGET_ICON")));
 
 	// icono de menú del día
@@ -53,7 +53,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	//new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
 
 	// gestión de la cantidad de dinero
-	f = new Font("assets/Fonts/Hamish.ttf", 50);
+	f = new Font(FONT_PATH, 50);
 	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
 	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
 

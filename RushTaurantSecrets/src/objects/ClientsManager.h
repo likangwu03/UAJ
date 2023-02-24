@@ -35,7 +35,7 @@ private:
 	float timer;
 	float speed;
 	int maxClients;
-	bool assignedCustomer;
+	bool assignedClient;
 	bool tables[_ecs::NUM_TABLES];
 
 
@@ -72,7 +72,7 @@ private:
 	}
 
 	void createClient() {
-		string sprite = "Customer_" + to_string(sdl->rand().nextInt(1, 9));
+		string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 10));
 		entrance.push_back(new Client(scene, sprite, relativeToGlobal(_ecs::OUT), menu, entrance.size(), speed));
 	}
 
@@ -90,15 +90,15 @@ private:
 	}
 
 	void firstClientAssigned() {
-		if (assignedCustomer) {
+		if (assignedClient) {
 			entrance.pop_front();
 			recolocateEntranceAll(entrance.begin());
-			assignedCustomer = false;
+			assignedClient = false;
 		}
 	}
 
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedCustomer(false), maxClients(maxClients) {
+		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients) {
 		scene = parent->getScene();
 		clients = scene->getGroup(_ecs::grp_CLIENTS);
 		sdl = SDLUtils::instance();
@@ -175,7 +175,7 @@ private:
 		tables[table - 1] = true;
 		// se le asigna una mesa
 		firstEntrance->getComponent<ClientMovement>()->assignTable(table);
-		assignedCustomer = true;
+		assignedClient = true;
 	}
 
 	// comprobar si algún cliente ha abandonado una mesa o si ha terminado de comer para marcarla como desocupada

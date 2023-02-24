@@ -19,7 +19,7 @@ private:
 	Texture* texture;
 	SDLUtils* sdl;
 	InputHandler* ih; //para consultar el input (teclado 123 o mando)
-	int dishH, dishW;
+	const int DISH_W = 50, DISH_H = 50;
 	int cellsOcuppied;
 	int cellSelected; //se encarga de guardar la casilla en la que lleva seleccionada (independientemente de que si tiene que repartir o no)
 
