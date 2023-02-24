@@ -13,11 +13,16 @@ void MainMenu::start(SceneManager* sceneManager) {
 
 MainMenu::MainMenu(SceneManager* sceneManager){
 	bg = new GameObject(this);
-	new Transform(bg, { 0,0 }, { 0,0 }, 1280, 720);
-	new Image(bg, new Texture(sdlutils().renderer(), "./assets/mainMenuTemp.png"));
+	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
+	image = new Texture(sdlutils().renderer(), "./assets/mainMenuTemp.png");
+	new Image(bg, image);
 
 	button = new GameObject(this);
 	new Button(button, sceneManager, start);
+}
+
+MainMenu::~MainMenu() {
+	delete image;
 }
 
 void MainMenu::handleEvents(){

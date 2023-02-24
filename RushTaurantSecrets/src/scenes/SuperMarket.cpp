@@ -19,9 +19,9 @@ void SuperMarket::handleEvents() {
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
 	new Player(this);
+	cartelM = new CartelManager();
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/supermarket.tmx", sdlutils().renderer());
-
 	uiMarket = new UIMarket();
 }
 

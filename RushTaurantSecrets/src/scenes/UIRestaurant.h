@@ -1,21 +1,25 @@
 #pragma once
 #include "../structure/Scene.h"
 #include "../sdlutils/SDLUtils.h"
-#include "../structure/GameObject.h"
-#include "../components/Transform.h"
-#include "../components/Image.h"
-#include "../objects/Money.h" // cambiar cuando se cambie la clase Money
 #include <string>
+
 #include "../gameObjects/Inventory.h"
-#include "../gameObjects/Bin.h"
+
+class GameObject;
+class Money;
+class Image;
+class Inventory;
+class Bin;
 
 // UI del restaurante 
 class UIRestaurant : public Scene
 {
 private:
+	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
-	Money* moneyTxt = new Money();
+	Money* moneyTxt;
 	Font* f;
 	GameObject* moneyText;
 	GameObject* timeText;
@@ -29,6 +33,8 @@ private:
 
 public:
 	UIRestaurant();
+	~UIRestaurant();
+
 	Inventory* getInventory() { return inventory; };
 	Money* getMoney() { return moneyTxt; };
 	void showMoneyText();

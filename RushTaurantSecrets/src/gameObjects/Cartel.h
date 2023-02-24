@@ -8,11 +8,16 @@ using namespace std;
 /*Cartel del supermercado*/
 class Cartel :public GameObject
 {
+private:
+	const int HIGH_OFFSETX = -2;
+	const int HIGH_OFFSETY =  -1;
+	const int HIGH_OFFSETW =  4;
+	const int HIGH_OFFSETH = -5;
 public:
-	Cartel(Scene* scene,_ecs::_ingredients_id ingId, Vector pos, float w, float h,Vector triP, float triW, float triH) :GameObject(scene, _ecs::grp_INTERACTABLE) {
-		new Transform(this, pos, Vector(0, 0), w, h, 0, true); //renderizar el cartel
-		//new Image(this,to_string(ingId)); //renderizar el cartel
-		//new CartelTrigger(this, triP-pos, w, h); //pos relativa
+	Cartel(Scene* scene, _ecs::_ingredients_id ingId, Vector pos, float w, float h, Vector triP, float triW, float triH) :GameObject(scene, _ecs::grp_INTERACTABLE) {
+		new Transform(this, Vector(pos.getX()+ HIGH_OFFSETX, pos.getY() + HIGH_OFFSETY), Vector(0, 0), w + HIGH_OFFSETW , h + HIGH_OFFSETH, 0, true); //renderizar el cartel
+		new Image(this, "CARTEL_HIGHLIGHT"); //renderizar el cartel
+		new CartelTrigger(this, ingId, triP - pos, w, h); //pos relativa
 	};
 };
 

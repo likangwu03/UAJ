@@ -13,6 +13,7 @@
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/CashRegister.h"
 #include "../gameObjects/Cartel.h"
+#include "../gameObjects/Bin.h"
 
 #include "../utils/checkML.h"
 

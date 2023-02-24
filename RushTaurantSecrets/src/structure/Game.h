@@ -6,7 +6,7 @@
 const uint32_t FRAME_RATE = 25;  //luego a def.h
 
 
-class Game:public Singleton<Game> {
+class Game : public Singleton<Game> {
 	friend Singleton<Game>;
 private:
 	SceneManager* sceneManager;

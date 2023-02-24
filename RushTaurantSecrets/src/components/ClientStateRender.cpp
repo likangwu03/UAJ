@@ -60,7 +60,7 @@ void ClientStateRender::render() {
 		//dish
 		if (textures.dish != nullptr) {
 			dest.x = (dest.x + BUBBLE_WIDTH / 2) - DISH_WIDTH / 2 + DISH_OFFSETX;
-			dest.y = dest.y + BUBBLE_HEIGHT / 2 - DISH_HEIGHT / 2 + DISH_OFFSETX;
+			dest.y = dest.y + BUBBLE_HEIGHT / 2 - DISH_HEIGHT / 2 + DISH_OFFSETY;
 			dest.w = DISH_WIDTH;
 			dest.h = DISH_HEIGHT;
 			textures.dish->render(dest);

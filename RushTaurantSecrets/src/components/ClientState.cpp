@@ -1,5 +1,7 @@
 #include "ClientState.h"
 
+#include "../objects/Reputation.h"
+
 #include "../utils/checkML.h"
 
 ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id),
@@ -32,6 +34,7 @@ void ClientState::update() {
 		// (DE MOMENTO TARDA COMO 1 MINUTO)
 		if (happiness <= 0) {
 			setState(OUT);
+			Reputation::instance()->reduceReputation(5);
 			render->renderEatingState();
 #ifdef _DEBUG
 			cout << "Happiness reached 0, leaving restaurant" << endl;
@@ -65,7 +68,7 @@ void ClientState::update() {
 
 
 // Función que asigna al plato pedido uno aleatorio de entre los
-// disponibles en el menú del día y cambia el estado a ORDERED
+// disponibles en el men?del día y cambia el estado a ORDERED
 void ClientState::takeOrder() {
 	int rndDish;
 	// Si no se ha cambiado el plato, escoge uno aleatorio

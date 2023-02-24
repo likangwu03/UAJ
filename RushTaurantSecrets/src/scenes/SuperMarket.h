@@ -2,6 +2,7 @@
 #include "../gameObjects/Player.h"
 #include "../structure/CollisionsManager.h"
 #include "../structure/Scene.h"
+#include "../structure/CartelManager.h"
 #include "../components/MapCreator.h"
 #include "../scenes/UIMarket.h"
 
@@ -10,6 +11,7 @@ private:
 	CollisionsManager* cm;
 	GameObject* map;
 	UIMarket* uiMarket;
+	CartelManager* cartelM;
 	//GameObject* mapTop;
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI) { init(); }
@@ -17,4 +19,5 @@ public:
 	void update();
 	void handleEvents();
 	void init();
+	CartelManager* getCartelManager() { return cartelM; }
 };
