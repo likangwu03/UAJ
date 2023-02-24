@@ -27,7 +27,7 @@ MainMenu::~MainMenu() {
 
 void MainMenu::handleEvents(){
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+		SceneManager::instance()->ChangeScene(SceneManager::DAILYMENU);
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
 		SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);

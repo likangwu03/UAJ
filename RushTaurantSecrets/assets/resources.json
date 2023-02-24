@@ -317,8 +317,8 @@
       "rows": 1
     },
     {
-      "id": "DAILY_MENU",
-      "file": "assets/Sprites/UI/daily_menu.png",
+      "id": "DAILY_MENU_BUTTON",
+      "file": "assets/Sprites/UI/daily_menu_button.png",
       "cols": 1,
       "rows": 1
     },
@@ -400,6 +400,14 @@
       "file": "assets/Sprites/UI/dialog box big.png"
     },
     {
+      "id": "DAILY_MENU",
+      "file": "assets/Sprites/UI/dailymenu.png"
+    },
+    {
+      "id": "DAILY_MENU_HIGHLIGHT",
+      "file": "assets/Sprites/UI/dailymenu_highlight.png"
+    },
+    {
       "id": "1_Generic_48x48",
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png",
       "cols": 1,
@@ -464,6 +472,13 @@
       "file": "assets/Sprites/Restaurant/bin.png",
       "cols": 1,
       "rows": 1
+    }
+  ],
+  "fonts": [
+    {
+      "id": "bubbly_font",
+      "file": "assets/Fonts/04B_30__.TTF",
+      "size": 16
     }
   ]
 }

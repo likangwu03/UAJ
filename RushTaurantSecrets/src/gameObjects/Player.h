@@ -6,6 +6,7 @@
 #include "../components/Ingredients.h"
 #include "../components/Transform.h"
 #include "../components/CollisionComp.h"
+#include "../components/PlayerMovementController.h"
 class Player :public GameObject
 {
 private:

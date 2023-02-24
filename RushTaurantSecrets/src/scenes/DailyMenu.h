@@ -9,20 +9,22 @@
 #include <set>
 
 using namespace std;
-class Restaurant;
 
 class DailyMenu : public Scene
 {
-	//cambiar a market
-	Restaurant* market;
 	bool murder;
 	SDLUtils* sdl = SDLUtils::instance();
 	vector<_ecs::DishInfo> menu1;
 	vector<_ecs::DishInfo> menu2;
 	vector<_ecs::DishInfo> randomMenu();
+	void drawDishes(GameObject* d, vector<_ecs::DishInfo> menu);
+	uint8_t menuSize;
+	uint8_t spriteSize;
+	static void select(SceneManager* sceneManager);
+	SDL_Rect src, dest;
 public:
-	DailyMenu(bool m);
+	DailyMenu(SceneManager* sceneManager, uint8_t msize = 4, bool m = true);
 	//cambiar esto a supermarket cuando exista xdd
-	void linkSupermarket(Restaurant* sm);
+	void handleEvents();
 };
 

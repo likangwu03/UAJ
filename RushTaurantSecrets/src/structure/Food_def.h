@@ -6,7 +6,7 @@ namespace _ecs {
 	using id_type = uint8_t;
 	using Dish = uint8_t;
 	using Ingredient = uint8_t;
-	const uint8_t NUM_DISH = 28;
+	const uint8_t NUM_DISH = 23;
 	const uint8_t NUM_MEAT_DISH = 5;
 	enum _dish_id : id_type {
 		HUEVO_FRITO,
@@ -97,12 +97,7 @@ namespace _ecs {
 		{SUSHI,{ARROZ,SALMON},3.7,21},
 		{CURRY_ARROZ,{PATATA,AJO,ARROZ,CURRY},3,22},
 		{PIZZA,{HARINA,QUESO,SALCHICHA},2,25},
-		{POLLO_ASADO,{ZANAHORIA,TOMATE,POLLO},6,28},
-		{FILETE,{ZANAHORIA,CARNE},4,15},
-		{ALBONDIGAS,{HARINA,CURRY,CARNE},5.5,18},
-		{ESPAGUETI,{TOMATE,FIDEOS,CARNE},5,20},
-		{BURGUER,{HARINA,LECHUGA,TOMATE,QUESO,CARNE},6.5,30},
-		{RAMEN,{HUEVO,AJO,FIDEOS,GAMBAS,CARNE},7,38}
+		{POLLO_ASADO,{ZANAHORIA,TOMATE,POLLO},6,28}
 	};
 
 	static DishInfo MeatDishes[NUM_MEAT_DISH] = {
