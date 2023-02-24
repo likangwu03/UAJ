@@ -12,9 +12,11 @@ private:
 	GameObject* map;
 	UIMarket* uiMarket;
 	CartelManager* cartelM;
+	GameObject* player;
 	//GameObject* mapTop;
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI) { init(); }
+	~SuperMarket();
 	void render();
 	void update();
 	void handleEvents();
