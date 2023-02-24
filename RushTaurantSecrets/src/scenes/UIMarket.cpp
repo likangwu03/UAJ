@@ -5,13 +5,15 @@
 UIMarket::UIMarket() : Scene() {
 	// icono de dinero
 	GameObject* money = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY);
-	new Transform(money, Vector(10, 76), Vector(0, 0), 64, 64, 0);
+	new Transform(money, Vector(10, 5), Vector(0, 0), 64, 64, 0);
 	new Image(money, &((*sdl).images().at("MONEY_ICON")));
 
 	// gestión de la cantidad de dinero
-	f = new Font("assets/Fonts/Hamish.ttf", 50);
+	f = new Font(FONT_PATH, 50);
 	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
-	new Transform(moneyText, Vector(90, 85), Vector(0, 0), 80, 50);
+	new Transform(moneyText, Vector(90, 9), Vector(0, 0), 80, 50);
+
+	moneyTxt = new Money();
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
 	//moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));

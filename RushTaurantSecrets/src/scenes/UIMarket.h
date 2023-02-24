@@ -18,6 +18,7 @@ private:
 	Texture* moneyTextTexture;
 	Image* moneyTextImage;
 	int intMoney;
+	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 
 public:
 	// constructora
