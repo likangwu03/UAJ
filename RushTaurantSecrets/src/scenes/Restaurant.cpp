@@ -20,6 +20,7 @@ Restaurant::Restaurant(UIRestaurant* restUI) : pantry(nullptr), ui(restUI), dc(D
 }
 
 Restaurant::~Restaurant() {
+	pantry->linkRestaurant(nullptr);
 	delete pantry;
 	delete ui;
 	delete cm;
@@ -63,7 +64,7 @@ void Restaurant::init() {
 }
 
 void Restaurant::linkPantry(Pantry* pantry) {
-	this->pantry = pantry;
+	if(this!=nullptr)this->pantry = pantry;
 }
 
 void Restaurant::render() {
@@ -74,8 +75,8 @@ void Restaurant::render() {
 
 void Restaurant::update() {
 	Scene::update();
-	if(pantry!=nullptr)
-	pantry->Scene::update();
+	//if(pantry!=nullptr)
+	//pantry->Scene::update();
 	ui->update();
 	cm->update();
 }

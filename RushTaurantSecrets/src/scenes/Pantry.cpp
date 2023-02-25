@@ -2,10 +2,25 @@
 #include "Restaurant.h"
 #include "../structure/SceneManager.h"
 
+#include "../components/MapCreator.h" 
+#include "../gameObjects/Player.h"
+
 #include "../utils/checkML.h"
+Pantry::Pantry() :rest(nullptr) { init(); }
+Pantry::~Pantry() {
+	rest->linkPantry(nullptr);
+	delete rest;
+	delete cm;
+}
+void Pantry::init() {
+	cm = new CollisionsManager(this);
+	new Player(this);
+	//GameObject* map = new GameObject(this);
+	//new MapCreator(map, "./assets/tilemaps/pantry.tmx", sdlutils().renderer());
+}
 
 void Pantry::linkRestaurant(Restaurant* rest) {
-	this->rest = rest;
+	if(this!=nullptr)this->rest = rest;
 	//ui = rest->getUI();
 }
 
@@ -16,7 +31,8 @@ void Pantry::render() {
 
 void Pantry::update() {
 	Scene::update();
-	rest->Scene::update();
+	//rest->Scene::update();
+	cm->update();
 }
 
 void Pantry::handleEvents() {
