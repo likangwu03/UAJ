@@ -12,11 +12,12 @@
 #include "../gameObjects/CollisionObject.h"
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/CashRegister.h"
+#include "../gameObjects/KitchenIsland.h"
 #include "../gameObjects/Cartel.h"
 #include "../gameObjects/Bin.h"
 
 #include "../utils/checkML.h"
-
+using namespace _ecs;
 
 MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
 	loadMapDims();
@@ -184,8 +185,19 @@ void MapCreator::createObject() {
 					Vector aux = { p[3].getFloatValue() * sdlutils().getResizeFactor(),p[4].getFloatValue() * sdlutils().getResizeFactor() };
 					new Cartel(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
 				}
-				else if (name == "table") {
-
+				else if (name == "KitchenIsland") {
+					//prueba
+					vector<pair<_ecs::_ingredients_id, int>> _ing;
+					_ing.push_back ( { POLLO, 3 });
+					_ing.push_back ({ LECHE,2 });
+					_ing.push_back ({ HARINA,11 });
+					_ing.push_back ({ QUESO,4 });
+					_ing.push_back ({ CARNE,4 });
+					_ing.push_back ({ FRESA,4 });
+					_ing.push_back ({ MANZANA,4 });
+					_ing.push_back ({ SALMON,4 });
+					_ing.push_back ({ GAMBAS,4 });
+					new KitchenIsland(scene, _ing, pos, width_, height_);
 				}
 				else if (name == "kitchen") {
 

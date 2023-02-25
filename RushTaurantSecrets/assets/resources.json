@@ -333,6 +333,12 @@
       "file": "assets/Sprites/UI/cartel_highlight.png",
       "cols": 1,
       "rows": 1
+    },    
+    {
+      "id": "ISLAND_HIGHLIGHT",
+      "file": "assets/Sprites/UI/island_highlight.png",
+      "cols": 1,
+      "rows": 1
     },
     
     {
