@@ -28,7 +28,7 @@ namespace _ecs {
 		cmp_CHARACANIM,
 		cmp_UIANIM,
 		cmp_HEART_RENDER,		
-
+		cmp_KITCHENISLAND,	
 
 		// Do not erase pls
 		cmp_INVALID

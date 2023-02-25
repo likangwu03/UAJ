@@ -16,12 +16,19 @@ void SuperMarket::update() {
 void SuperMarket::handleEvents() {
 	Scene::handleEvents();
 }
+
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
-	new Player(this);
+	player = new Player(this);
 	cartelM = new CartelManager();
 	map = new GameObject(this);
 	new MapCreator(map, "./assets/tilemaps/supermarket.tmx", sdlutils().renderer());
-	uiMarket = new UIMarket();
 }
+
+SuperMarket::~SuperMarket() {
+	delete uiMarket;
+	delete cm;
+	delete cartelM;
+}
+
 

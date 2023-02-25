@@ -8,7 +8,7 @@
 #include "Transform.h"
 #include <string>
 
-enum DPAD_XBOX { UP, DOWN, RIGHT, LEFT};
+enum DPAD_XBOX { UP, DOWN, RIGHT, LEFT };
 
 class PlayerMovementController : public Component
 {
@@ -23,7 +23,6 @@ private:
 
 	Transform* transform = nullptr;
 	InputHandler* input;
-
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
@@ -123,7 +122,7 @@ public:
 			//	speed.setY(offset * input->yvalue(0,2));
 			//}
 		}
-		else if (input->keyDownEvent()){
+		if (input->keyDownEvent()){
 			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 			// arriba
 			if (input->isKeyDown(SDL_SCANCODE_W)) {
@@ -181,33 +180,35 @@ public:
 			//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
 			return pressed;
 		}
-		else if (std::string(controller) == "Controller (Xbox One For Windows)") {
-			if (input->getHatEvent()) {
-				// abajo
-				if (input->getHatState(DOWN)) {
-					moveDown();
-					pressed = true;
+		if (input->joysticksInitialised()) {
+			if (std::string(controller) == "Controller (Xbox One For Windows)") {
+				if (input->getHatEvent()) {
+					// abajo
+					if (input->getHatState(DOWN)) {
+						moveDown();
+						pressed = true;
+					}
+					// arriba		
+					if (input->getHatState(UP)) {
+						moveUp();
+						pressed = true;
+					}
+					// izquierda
+					if (input->getHatState(LEFT)) {
+						moveLeft();
+						pressed = true;
+					}
+					// derecha
+					if (input->getHatState(RIGHT)) {
+						moveRight();
+						pressed = true;
+					}
 				}
-				// arriba		
-				if (input->getHatState(UP)) {
-					moveUp();
-					pressed = true;
-				}
-				// izquierda
-				if (input->getHatState(LEFT)) {
-					moveLeft();
-					pressed = true;
-				}
-				// derecha
-				if (input->getHatState(RIGHT)) {
-					moveRight();
-					pressed = true;
-				}
+				else
+					input->setFalseJoyhat();
+				return pressed;
 			}
-			else
-				input->setFalseJoyhat();
-			return pressed;
-		}
+		}	
 		else
 			return true;
 	}
