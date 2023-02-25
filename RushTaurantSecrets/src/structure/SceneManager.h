@@ -8,7 +8,7 @@
 #include "../scenes/UIRestaurant.h"
 #include "../scenes/SuperMarket.h"
 #include "../scenes/UIMarket.h"
-#include "../scenes/DailyMenu.h"
+#include "../scenes/DailyMenuScene.h"
 
 
 using namespace std;

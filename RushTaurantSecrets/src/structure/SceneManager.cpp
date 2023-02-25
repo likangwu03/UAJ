@@ -85,8 +85,8 @@ void SceneManager::setScene() {
 		}break;
 	case SceneManager::DAILYMENU: {
 		if (act == MAINMENU) {
-			DailyMenu* dailyMenu = new DailyMenu(this);
-			currentScene = dailyMenu;
+			DailyMenuScene* dailyMenuS = new DailyMenuScene(this);
+			currentScene = dailyMenuS;
 			Scenes.push_back(currentScene);
 		}
 		break;

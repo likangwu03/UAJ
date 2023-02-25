@@ -29,6 +29,7 @@ namespace _ecs {
 		cmp_UIANIM,
 		cmp_HEART_RENDER,		
 		cmp_KITCHENISLAND,	
+		cmp_DAILYMENU,
 
 		// Do not erase pls
 		cmp_INVALID
