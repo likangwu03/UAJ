@@ -1,6 +1,5 @@
 #pragma once
 #include "Animator.h"
-#include "../components/PlayerMovementController.h"
 using namespace std;
 
 /*pos seguir¨¢ la del transform, pero se puede definir independientemente w y h*/

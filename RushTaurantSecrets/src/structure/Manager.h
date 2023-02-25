@@ -1,6 +1,8 @@
 #pragma once
 #include "../structure/Component.h"
 
+using namespace std;
+
 template<typename Comp>
 class Manager : public Component {
 	friend Comp;

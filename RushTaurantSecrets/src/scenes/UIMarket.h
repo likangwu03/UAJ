@@ -11,7 +11,7 @@ class UIMarket : public Scene
 {
 private:
 	SDLUtils* sdl = SDLUtils::instance();
-	Money* moneyTxt = new Money();
+	Money* moneyTxt;
 	Font* f;
 	GameObject* moneyText;
 	GameObject* timeText;

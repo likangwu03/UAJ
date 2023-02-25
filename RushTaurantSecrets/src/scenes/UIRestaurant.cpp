@@ -13,6 +13,10 @@
 UIRestaurant::UIRestaurant() : Scene() {
 	lastTime = sdl->currRealTime();
 
+	// instancia manager del dinero
+	GameObject* moneyContainer = new GameObject(this);
+	moneyTxt = Money::init(moneyContainer, 200);
+
 	// icono de reputación
 	GameObject* reputation = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_REPUTATION);
 	new Transform(reputation, Vector(20, 20), Vector(0, 0), 64, 44, 0);
@@ -57,7 +61,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
 	new Transform(moneyText, Vector(90, 80), Vector(0, 0), 80, 50);
 
-	moneyTxt = new Money();
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
 	//moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
@@ -118,7 +121,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 UIRestaurant::~UIRestaurant() {
 	delete f;
-	delete moneyTxt;
 	delete moneyTextTexture;
 	delete timeTextTexture;
 }

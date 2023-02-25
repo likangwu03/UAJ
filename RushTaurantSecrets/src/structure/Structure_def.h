@@ -5,30 +5,40 @@ namespace _ecs {
 	using id_type = uint8_t;
 
 	// Components
+	// EL ORDEN DE LOS ENUMERADOS DETERMINA EL ORDEN DE LOS COMPONENTES
+	// IMPORTA EL ORDEN DE LOS COMPONENTES
 	enum _cmp_id : id_type {
-		cmp_TRANSFORM,
-		cmp_IMAGE,
+		// mapa
 		cmp_MAPCREATOR,
 		cmp_MAPRENDER,
-		cmp_DESK,
-		cmp_CLIENTSTATE_RENDER,
-		cmp_CLIENTSTATE,
-		cmp_COOKMACHINE,
-		cmp_DISHCOMB,
-		cmp_INVENTORY,
-		cmp_MOVEMENT,
-		cmp_INGREDIENTS,
-		cmp_COLLISIONS,
-		cmp_TRIGGER,
-		cmp_BIN,
-		cmp_STRAIGHT_MOVEMENT,
+		// managers
 		cmp_CLIENTS_MANAGER,
 		cmp_THIEFS_MANAGER,
+		cmp_MONEY,
+		// movimiento / update
+		cmp_TRANSFORM,
+		cmp_STRAIGHT_MOVEMENT,
+		cmp_MOVEMENT,
+		// colisiones / triggers
+		cmp_COLLISIONS,
+		cmp_TRIGGER,
+		cmp_DESK,
+		cmp_BIN,
+		// otros
+		cmp_COOKMACHINE,
+		cmp_CLIENTSTATE,
+		cmp_KITCHENISLAND,
+		cmp_INGREDIENTS,
+		// HUD
 		cmp_BUTTON,
+		cmp_INVENTORY,
+		// renders
+		cmp_CLIENTSTATE_RENDER,
+		cmp_HEART_RENDER,
+		cmp_IMAGE,
+		// animaciones
 		cmp_CHARACANIM,
 		cmp_UIANIM,
-		cmp_HEART_RENDER,		
-		cmp_KITCHENISLAND,	
 
 		// Do not erase pls
 		cmp_INVALID

@@ -1,7 +1,7 @@
 #include "Money.h"
 
-Money::Money() {
-	initMoney(100);
+Money::Money(GameObject* parent, int initialMoney) : Manager(parent) {
+	initMoney(initialMoney);
 }
 
 // inicializa la cantidad de dinero inicial
