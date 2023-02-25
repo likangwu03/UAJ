@@ -15,8 +15,8 @@ Pantry::~Pantry() {
 void Pantry::init() {
 	cm = new CollisionsManager(this);
 	new Player(this);
-	//GameObject* map = new GameObject(this);
-	//new MapCreator(map, "./assets/tilemaps/pantry.tmx", sdlutils().renderer());
+	GameObject* map = new GameObject(this);
+	new MapCreator(map, "./assets/tilemaps/pantry.tmx", sdlutils().renderer());
 }
 
 void Pantry::linkRestaurant(Restaurant* rest) {

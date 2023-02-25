@@ -55,12 +55,12 @@ void SceneManager::setScene() {
 		Scenes.push_back(new MainMenu(this));
 		break;
 	case SceneManager::RESTAURANT: {
+		sdlutils().setResizeFactor(0.6666666667);
 		if (act == MAINMENU) {
-			sdlutils().setResizeFactor(0.6666666667);
 			//creacion de restaurant y pantry
 			UIRestaurant* uiRest = new UIRestaurant();
 			Restaurant* rest = new Restaurant(uiRest);
-			sdlutils().setResizeFactor(1);
+			sdlutils().setResizeFactor(0.8333333333);
 			Pantry* pantry = new Pantry();
 			rest->linkPantry(pantry);
 			pantry->linkRestaurant(rest);
@@ -68,7 +68,6 @@ void SceneManager::setScene() {
 			sdlutils().setResizeFactor(0.6666666667);
 		}
 		else if (act == PANTRY) {
-			sdlutils().setResizeFactor(0.6666666667);
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
 			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
@@ -81,8 +80,8 @@ void SceneManager::setScene() {
 		}
 		}break;
 	case SceneManager::PANTRY: {
-		if (act == RESTAURANT) {
-			sdlutils().setResizeFactor(1);
+		sdlutils().setResizeFactor(0.8333333333);
+		if (act == RESTAURANT) {			
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
 			Scenes.push_back(static_cast<Restaurant*>(aux)->getPantry());
