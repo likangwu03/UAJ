@@ -18,9 +18,9 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyTxt = Money::init(moneyContainer, 200);
 
 	// icono de reputación
-	GameObject* reputation = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_REPUTATION);
-	new Transform(reputation, Vector(20, 20), Vector(0, 0), 64, 44, 0);
-	new Image(reputation, &((*sdl).images().at("REPUTATION_ICON")));
+	GameObject* reputationIcon = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_REPUTATION);
+	new Transform(reputationIcon, Vector(20, 20), Vector(0, 0), 64, 44, 0);
+	new Image(reputationIcon, &((*sdl).images().at("REPUTATION_ICON")));
 
 	// icono de dinero
 	GameObject* money = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY);
@@ -116,6 +116,14 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* star5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
 	new Transform(star5, Vector(260, 25), Vector(0, 0), 30, 32);
 	new Image(star5, &((*sdl).images().at("STAR")));
+
+	fullStarTexture = &((*sdl).images().at("STAR"));
+	actReputation = reputation->getReputation();
+
+	// inicializa array de estrellas (define qué estrellas se muestran y cuáles no)
+	for (int i = 0; i < stars.size(); i++) {
+		stars[i] = true;
+	}
 }
 
 
@@ -140,6 +148,7 @@ void UIRestaurant::update() {
 	Scene::update();
 	showMoneyText();
 	checkTime();
+	//reputationManager();
 }
 
 void UIRestaurant::showTimeText() {
@@ -156,5 +165,74 @@ void UIRestaurant::checkTime() {
 		showTimeText();
 		lastTime = timeT;
 		timeT = 0;
+	}
+}
+
+void UIRestaurant::renderStar(int x, int y) {
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	dest.w = 30;
+	dest.h = 32;
+
+	// renderiza la textura
+	fullStarTexture->render(dest);
+}
+
+void UIRestaurant::reputationManager() {
+	// comprueba si la reputación ha cambiado
+	if (actReputation != reputation->getReputation()) {
+		actReputation = reputation->getReputation();
+		checkStarsArray();
+		checkRenderStar();
+	}
+}
+
+void UIRestaurant::checkStarsArray() {
+	// si la reputación es mayor de ochenta
+	if (actReputation > 80) {
+		stars[3] = true;
+		stars[4] = true;
+	}
+
+	// si la reputación es mayor de sesenta
+	else if (actReputation > 60) {
+		stars[2] = true;
+		stars[3] = true;
+		stars[4] = false;
+	}
+
+	// si la reputación es mayor de cuarenta
+	else if (actReputation > 40) {
+		stars[1] = true;
+		stars[2] = true;
+		stars[3] = false;
+	}
+
+	// si la reputación es mayor de veinte
+	else if (actReputation > 20) {
+		stars[0] = true;
+		stars[1] = true;
+		stars[2] = false;
+	}
+
+	// si la reputación es mayor de cero
+	else if (actReputation > 0) {
+		stars[0] = true;
+		stars[1] = false;
+	}
+
+	// si la reputación es cero o menor
+	else if (actReputation < 1) {
+		stars[0] = false;
+		stars[1] = false;
+	}
+}
+
+void UIRestaurant::checkRenderStar() {
+	for (int i = 0; i < stars.size(); i++) {
+		if (stars[i] = true) {
+			//renderStar();
+		}
 	}
 }
