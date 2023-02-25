@@ -38,6 +38,8 @@ void SceneManager::ChangeScene(SceneName scene) {
 void SceneManager::clear() {
 	currentScene = nullptr;
 	for (auto scene : Scenes) {
+		//if (typeid(scene) == typeid(Restaurant)) delete static_cast<Restaurant*>(scene)->getPantry();
+		//if (typeid(scene) == typeid(Pantry)) delete static_cast<Pantry*>(scene)->getRestaurant();
 		delete scene;
 	}
 	Scenes.clear();
@@ -58,13 +60,15 @@ void SceneManager::setScene() {
 			//creacion de restaurant y pantry
 			UIRestaurant* uiRest = new UIRestaurant();
 			Restaurant* rest = new Restaurant(uiRest);
+			sdlutils().setResizeFactor(1);
 			Pantry* pantry = new Pantry();
 			rest->linkPantry(pantry);
 			pantry->linkRestaurant(rest);
 			Scenes.push_back(rest);
+			sdlutils().setResizeFactor(0.6666666667);
 		}
 		else if (act == PANTRY) {
-			sdlutils().setResizeFactor(1);
+			sdlutils().setResizeFactor(0.6666666667);
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
 			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
@@ -78,6 +82,7 @@ void SceneManager::setScene() {
 		}break;
 	case SceneManager::PANTRY: {
 		if (act == RESTAURANT) {
+			sdlutils().setResizeFactor(1);
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
 			Scenes.push_back(static_cast<Restaurant*>(aux)->getPantry());
