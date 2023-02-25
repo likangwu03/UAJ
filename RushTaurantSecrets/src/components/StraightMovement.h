@@ -100,12 +100,13 @@ public:
 
 		// si ha terminado de recorrer el camino, cambia otro
 		if (hasFinishedPath()) {
+			path.points.reserve(aux.size());
 			path.points = aux;
 			path.cont = 0;
 			newStraight(path.points[path.cont]);
 		}
 		// si no lo ha terminado de recorrer, el camino nuevo se añade al actual
-		// solo va a sucede cuando se recoloquen clientes
+		// solo va a suceder cuando se recoloquen clientes
 		else {
 			path.points.reserve(path.points.size() + aux.size());
 			path.points.insert(path.points.end(), aux.begin(), aux.end());

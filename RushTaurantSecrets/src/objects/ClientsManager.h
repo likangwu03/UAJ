@@ -6,6 +6,7 @@
 #include "../structure/Paths_def.h"
 #include <vector>
 #include <list>
+#include <array>
 
 using namespace std;
 
@@ -15,11 +16,12 @@ class ClientsManager : public Manager<ClientsManager> {
 	friend Manager<ClientsManager>;
 
 private:
-	const int MAX_ENTRANCE = 3;
-
 	// TESTEO
 	const int TEST_ENTRANCE = 3;
 	const int TEST_PAY = 4;
+
+	const int MAX_ENTRANCE = 3;
+	const int MAX_PAY = 8;
 
 	// cola con la entrada
 	list<Client*> entrance;
@@ -27,6 +29,7 @@ private:
 	list<Client*> pay;
 	// puntero al grupo con todos los clientes
 	vector<GameObject*>* clients;
+	// menú del día
 	vector<_ecs::_dish_id> menu;
 	Scene* scene;
 	SDLUtils* sdl;
@@ -34,10 +37,12 @@ private:
 	float timer;
 	float speed;
 	int maxClients;
+	// indica si el primer cliente en la entra se ha asignado o no
 	bool assignedClient;
+	// indicar si las mesas están ocupadas o no
 	bool tables[_ecs::NUM_TABLES];
 
-
+	// añadir un cliente cada cierto tiempo
 	void addFrequently() {
 		if (clients->size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 			float time = sdl->currRealTime() - lastClientTime;
@@ -52,10 +57,12 @@ private:
 		}
 	}
 
+	// comprobar si la entrada está vacía
 	bool isEntranceEmpty() {
 		return entrance.size() == 0;
 	}
 
+	// recolar en la entrada al resto si se ha ido algún cliente
 	void recolocateEntranceAll(std::list<Client*>::iterator it) {
 		for (it; it != entrance.end(); ++it) {
 			Client* c = *it;
@@ -63,6 +70,7 @@ private:
 		}
 	}
 
+	// recolocar en la caja al resto si se ha ido algún cliente
 	void recolocatePayAll(std::list<Client*>::iterator it) {
 		for (it; it != pay.end(); ++it) {
 			Client* c = *it;
@@ -70,12 +78,13 @@ private:
 		}
 	}
 
+	// crear un cliente
 	void createClient() {
 		string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 10));
-		entrance.push_back(new Client(scene, sprite, relativeToGlobal(_ecs::OUT), menu, entrance.size(), speed));
+		entrance.push_back(new Client(scene, sprite, relativeToGlobal(_ecs::OUT_ENTRY), menu, entrance.size(), speed));
 	}
 
-	// se comprueba si algún cliente ha llegado a la caja registrado y se añade a la cola de pagar
+	// comprobar si algún cliente ha llegado a la caja registradora y añadirlo a la cola de pagar
 	void checkCashRegister() {
 		for (int i = 0; i < clients->size(); ++i) {
 			GameObject* g = (*clients)[i];
@@ -88,6 +97,7 @@ private:
 		}
 	}
 
+	// eliminar al primer cliente de la entrada si se le ha asignado una mesa
 	void firstClientAssigned() {
 		if (assignedClient) {
 			entrance.pop_front();
@@ -96,29 +106,14 @@ private:
 		}
 	}
 
-	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients) {
-		scene = parent->getScene();
-		clients = scene->getGroup(_ecs::grp_CLIENTS);
-		sdl = SDLUtils::instance();
-		lastClientTime = sdl->currRealTime();
-		for (int i = 0; i < _ecs::NUM_TABLES; ++i) {
-			tables[i] = false;
-		}
-	}
-
-	int test() const {
-		int table = sdl->rand().nextInt(6, 8);
-		return table;
-	}
-
+	// convertir un punto relativo en global
 	Vector relativeToGlobal(const Vector& point) {
 		int fWidth = sdl->width() / 40;
 		int fHeight = sdl->height() / 23;
 		return Vector(point.getX() * fWidth, point.getY() * fHeight);
 	}
 
-	// comprobar si alguien en la cola de la caja se tiene que marchar
+	// comprobar si un cliente de la entrada se tiene que marchar porque se queda sin felicidad
 	void checkHappinessEntrance() {
 		bool found = false;
 		auto it = entrance.begin();
@@ -135,7 +130,7 @@ private:
 		}
 	}
 
-	// funciona igual que en la cola de entrada, pero para la caja
+	// igual que el método anterior, pero para la caja
 	void checkHappinessPay() {
 		bool found = false;
 		auto it = pay.begin();
@@ -152,10 +147,12 @@ private:
 		}
 	}
 
+	// comprobar si una mesa está ocupada o no
 	bool isTableFull(int table) const {
 		return tables[table - 1];
 	}
 
+	// encontrar la primera mesa vacía
 	bool checkFirstTableEmpty(int& table) {
 		bool found = false;
 		int i = 0;
@@ -169,6 +166,7 @@ private:
 		return found;
 	}
 
+	// asignar una mesa al primer cliente
 	void assignTable(int table, Client* firstEntrance) {
 		// se marca que la mesa está ocupada
 		tables[table - 1] = true;
@@ -189,6 +187,17 @@ private:
 		}
 	}
 
+	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
+		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients) {
+		scene = parent->getScene();
+		clients = scene->getGroup(_ecs::grp_CLIENTS);
+		sdl = SDLUtils::instance();
+		lastClientTime = sdl->currRealTime();
+		for (int i = 0; i < _ecs::NUM_TABLES; ++i) {
+			tables[i] = false;
+		}
+	}
+
 public:
 
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_CLIENTS_MANAGER;
@@ -203,16 +212,13 @@ public:
 	}
 
 	// devuelve un puntero a la cola de la caja
-	// para que se vaya actualizando dinámicamente
 	list<Client*>* getPayQueue() {
 		return &pay;
 	}
 
 	// se llama cuando se quiera asignar una mesa al primer cliente
 	// se le pasa la mesa que se le desea asignar
-	// devuelve un booleano para confirmar si se ha podido asignar o no
-	// porque solo se puede hacer cuando la cola no está vacía y el primer cliente está en la entrada
-	bool assignFirstClient(int table) {
+	void assignFirstClient(int table) {
 		if (!isEntranceEmpty()) {
 			// se coge el primer cliente
 			Client* firstEntrance = getFirstEntrance();
@@ -221,22 +227,18 @@ public:
 			if (clientState == ClientState::ENTRANCE) {
 				if (!isTableFull(table)) {
 					assignTable(table, firstEntrance);
-					return true;
 				}
 				else {
 					int table = -1;
 					if (checkFirstTableEmpty(table)) {
 						assignTable(table, firstEntrance);
-						return true;
 					}
 				}
 			}
 		}
-		return false;
 	}
 
 	// se llama cuando se quiere cobrar a los clientes que hay en la caja registradora
-	// el método solo de moverlos
 	void collectAndLeave() {
 		while (pay.size() > 0) {
 			Client* firstPay = pay.front();
@@ -258,8 +260,10 @@ public:
 		}
 		*/
 
+		// se comprueba si se ha asignado el primer cliente a una mesa para quitarlo de la entrada
 		firstClientAssigned();
 
+		// añadir los clientes que han llegado a la caja registradora a la cola de pago
 		checkCashRegister();
 
 		/*
@@ -269,10 +273,14 @@ public:
 		}
 		*/
 
+		// eliminar clientes enfadados de la entrada
 		checkHappinessEntrance();
 
+		// marcar como desucpadas a las mesas en las que clientes se han marchado
+		// (han terminado de comer o se han quedado sin felicidad)
 		checkTables();
 
+		// eliminar clientes enfadados de la cola de pagar
 		checkHappinessPay();
 	}
 };

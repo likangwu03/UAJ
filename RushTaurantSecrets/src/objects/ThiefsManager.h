@@ -20,7 +20,7 @@ private:
 
 	void createThief() {
 		string sprite = "Thief_" + to_string(sdl->rand().nextInt(1, 4));
-		new Thief(scene, relativeToGlobal(pathsThief[Origin].front()), sprite, generalSpeed, canGetFreezer, escapeSpeed);
+		new Thief(scene, relativeToGlobal(_ecs::DOOR), sprite, generalSpeed, canGetFreezer, escapeSpeed);
 	}
 
 	Vector relativeToGlobal(const Vector& point) {
