@@ -15,10 +15,10 @@ using namespace std;
 class ButtonGO : GameObject
 {
 public:
-	ButtonGO(Scene* scene, string t, Vector pos, float w, float h, void(*callback)()) : GameObject(scene, _ecs::grp_HUD) {
+	ButtonGO(Scene* scene, string t, string ht, Vector pos, float w, float h, void(*callback)()) : GameObject(scene, _ecs::grp_HUD) {
 		new Transform(this, pos, Vector(0, 0), w, h);
 		new Image(this, &((*SDLUtils::instance()).images().at(t)));
-		new ButtonComp(this, t, callback);
+		new ButtonComp(this, ht, callback);
 	};
 };
 
