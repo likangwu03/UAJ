@@ -1,11 +1,14 @@
 #pragma once
 #include <cstdint>
 #include <vector>
+#include <unordered_map>
 #include "../utilities/Vector.h"
 #include "../components/Transform.h"
+#include <string>
 
-using namespace std;
+
 namespace _ecs {
+	using namespace std;
 	using id_type = uint8_t;
 
 	// LADRONES

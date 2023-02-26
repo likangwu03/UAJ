@@ -1,7 +1,6 @@
 #include "ClientState.h"
 
 #include "../objects/Reputation.h"
-
 #include "../utils/checkML.h"
 
 ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id),
@@ -26,7 +25,7 @@ void ClientState::update() {
 	
 
 	// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
-	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING) {
+	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING || state == FINISH_EAT) {
 		if (delta < 100)
 			happiness -= DECREASE;
 
@@ -51,7 +50,7 @@ void ClientState::update() {
 #ifdef _DEBUG
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(TAKEMYORDER);
+			setState(EATING);	// TAKEMYORDER
 			render->renderTakingNoteState();
 		}
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja

@@ -23,6 +23,7 @@ public:
 		ORDERED,  // Esperando su pedido
 		EATING,   // Comiendo
 		FINISH_EAT,	// Ha terminado de comer
+		WAITING,	// Ha terminado de comer, pero la caja está llena y no puede ir
 		REGISTER, // Caminando a la caja
 		CASH_REGISTER,	// Ha llegado a la caja
 		PAYING,   // Esperando a que le cobren
