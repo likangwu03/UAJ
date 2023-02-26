@@ -1,15 +1,18 @@
 #pragma once
 #include "../structure/Scene.h"
 #include "../sdlutils/SDLUtils.h"
-#include <string>
-
 #include "../gameObjects/Inventory.h"
+#include <string>
+#include <array>
 
 class GameObject;
 class Money;
 class Image;
 class Inventory;
 class Bin;
+class Reputation;
+
+using namespace std;
 
 // UI del restaurante 
 class UIRestaurant : public Scene
@@ -25,11 +28,15 @@ private:
 	GameObject* timeText;
 	Texture* moneyTextTexture;
 	Texture* timeTextTexture;
+	Texture* fullStarTexture;
 	Image* moneyTextImage;
 	Image* timeTextImage;
 	int intMoney;
 	int time = 0, timeT = 0;
 	float lastTime;
+	Reputation* reputation;
+	int actReputation;
+	array<bool, 5> stars;
 
 public:
 	UIRestaurant();
@@ -41,5 +48,9 @@ public:
 	void update();
 	void showTimeText();
 	void checkTime();
+	void renderStar(int x, int y);
+	void reputationManager();
+	void checkStarsArray();
+	void checkRenderStar();
 };
 
