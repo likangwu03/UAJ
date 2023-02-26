@@ -5,8 +5,8 @@
 #include "../components/Image.h"
 #include "../objects/Money.h" // cambiar cuando se cambie la clase Money
 #include "../objects/Reputation.h"
-#include "../gameObjects/Inventory.h"
 #include "../gameObjects/Bin.h"
+#include "../objects/Reputation.h"
 
 #include "../utils/checkML.h"
 
@@ -116,6 +116,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* star5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
 	new Transform(star5, Vector(260, 25), Vector(0, 0), 30, 32);
 	new Image(star5, &((*sdl).images().at("STAR")));
+
+	reputation = Reputation::instance();
 
 	fullStarTexture = &((*sdl).images().at("STAR"));
 	actReputation = reputation->getReputation();

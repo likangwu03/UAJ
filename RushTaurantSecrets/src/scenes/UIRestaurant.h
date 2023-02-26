@@ -1,16 +1,16 @@
 #pragma once
 #include "../structure/Scene.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../gameObjects/Inventory.h"
 #include <string>
 #include <array>
-#include "../gameObjects/Inventory.h"
-#include "../objects/Reputation.h"
 
 class GameObject;
 class Money;
 class Image;
 class Inventory;
 class Bin;
+class Reputation;
 
 using namespace std;
 
@@ -34,7 +34,7 @@ private:
 	int intMoney;
 	int time = 0, timeT = 0;
 	float lastTime;
-	Reputation* reputation = Reputation::instance();
+	Reputation* reputation;
 	int actReputation;
 	array<bool, 5> stars;
 
