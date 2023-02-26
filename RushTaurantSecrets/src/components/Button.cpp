@@ -36,13 +36,17 @@ void Button::handleEvents() {
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		frame = 1;
 		if (ih().getMouseButtonState(ih().LEFT)) {
+			if(ih().joysticksInitialised())
+				ih().clean();
+			ih().setControls(true);
 			callback(sceneManager);
 		}
 	}
 	else if (ih().joysticksInitialised()) {
-		if (ih().getButtonState(0,SDL_CONTROLLER_BUTTON_A)) {
+		if (ih().getButtonState(0,SDL_CONTROLLER_BUTTON_B)) {
 			frame = 1;
 			ih().clean();
+			ih().setControls(false);
 			callback(sceneManager);
 		}		
 	}
