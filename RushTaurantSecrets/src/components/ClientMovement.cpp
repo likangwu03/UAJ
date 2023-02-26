@@ -99,10 +99,6 @@ void ClientMovement::payAndLeave() {
 	outPay();
 }
 
-bool ClientMovement::hasFinishedEating() const {
-	return clientState->getState() == ClientState::FINISH_EAT && clientsManager->canOccupyPay();
-}
-
 void ClientMovement::update() {
 	ClientState::States currentState;
 	currentState = clientState->getState();
@@ -128,22 +124,13 @@ void ClientMovement::update() {
 	case ClientState::FINISH_EAT:
 		// se comprueba si puede ir a la cola de pagar
 		if (clientsManager->canOccupyPay()) {
-			colocateCashRegister();
-			clientState->setState(ClientState::REGISTER);
-		}
-		// sino, se pone en espera
-		else {
-			clientState->setState(ClientState::WAITING);
+			clientState->setState(ClientState::HAS_LEFT);
 		}
 		break;
-	// está esperando a ir a la cola de pagar
-	// se hace en dos estados para tener una doble comprobación de si puede ir
-	// ya que hay un momento en el que el cliente ha llegado a la caja registradora,
-	// pero no está añadido a la cola de pagar (por el orden de ejecución de los componentes)
-	case ClientState::WAITING:
-		if (clientsManager->canOccupyPay()) {
-			clientState->setState(ClientState::FINISH_EAT);
-		}
+	// un ciclo de espera para que las mesas oportunas se desocupen
+	case ClientState::HAS_LEFT:
+		colocateCashRegister();
+		clientState->setState(ClientState::REGISTER);
 		break;
 	case ClientState::REGISTER:
 		if (straightMovement->hasFinishedPath()) {

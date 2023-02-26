@@ -80,12 +80,7 @@ public:
 	void payAndLeave();
 
 	bool hasAbandonedEntrance() const {
-		if (clientState->getState() == ClientState::OUT) {
-			if (posEntrance != -1) {
-				return true;
-			}
-		}
-		return false;
+		return clientState->getState() == ClientState::OUT && posEntrance != -1;
 	}
 
 	bool hasAbandonedPay() const {
@@ -96,9 +91,6 @@ public:
 	bool hasAbandonedTable() const {
 		return clientState->getState() == ClientState::OUT && assignedTable != -1;
 	}
-
-	// abadona la mesa porque ha terminado de comer y puede ir a la caja
-	bool hasFinishedEating() const;
 
 	int getAssignedTable() const {
 		return assignedTable;

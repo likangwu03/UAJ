@@ -179,11 +179,25 @@ private:
 		for (int i = 0; i < clients->size(); ++i) {
 			GameObject* g = (*clients)[i];
 			ClientMovement* m = g->getComponent<ClientMovement>();
-			if (m->hasFinishedEating() || m->hasAbandonedTable()) {
+			ClientState* s = g->getComponent<ClientState>();
+			if (s->getState() == ClientState::HAS_LEFT
+				|| m->hasAbandonedTable()) {
 				int n = m->getAssignedTable() - 1;
 				tables[n] = false;
 			}
 		}
+	}
+
+	bool isPaying(GameObject* client) {
+		ClientState* state = client->getComponent<ClientState>();
+		ClientState::States currentState = state->getState();
+		if (currentState == ClientState::HAS_LEFT ||
+			currentState == ClientState::REGISTER ||
+			currentState == ClientState::CASH_REGISTER ||
+			currentState == ClientState::PAYING) {
+			return true;
+		}
+		return false;
 	}
 
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
@@ -241,6 +255,9 @@ public:
 	void collectAndLeave() {
 		while (pay.size() > 0) {
 			Client* firstPay = pay.front();
+			if (firstPay->getComponent<ClientState>()->getState() > ClientState::REGISTER) {
+				cout << "hola";
+			}
 			firstPay->getComponent<ClientMovement>()->payAndLeave();
 			pay.pop_front();
 			auto it = pay.begin();
@@ -254,13 +271,13 @@ public:
 		int goingPay = 0;
 		for (int i = 0; i < clients->size(); ++i) {
 			GameObject* client = (*clients)[i];
-			ClientState* state = client->getComponent<ClientState>();
-			ClientState::States currentState = state->getState();
-			if (currentState == ClientState::REGISTER) {
+			// se hace de esta forma porque hay un momento en que el cliente
+			// ha llegado a la caja registradora, pero no se ha añadido a la cola de pagar
+			if (isPaying(client)) {
 				++goingPay;
 			}
 		}
-		return (pay.size() + goingPay) < MAX_PAY;
+		return goingPay < MAX_PAY;
 	}
 
 	void update() {
