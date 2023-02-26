@@ -72,6 +72,15 @@ public:
 		}
 	}
 
+	// set keyboard/controller
+	inline void setControls(bool _control) {
+		control = _control;
+	}
+
+	inline bool getControls() {
+		return control;
+	}
+
 	// refresh
 	inline void refresh() {
 		SDL_Event event;
@@ -378,6 +387,8 @@ private:
 
 	bool isHatEvent = false;
 	std::array<bool, 4> m_joyhat {false, false, false, false};
+
+	bool control = true; // true teclado false mando
 
 	bool isCloseWindoEvent_;
 	bool isKeyUpEvent_;

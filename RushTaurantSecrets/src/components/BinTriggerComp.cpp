@@ -10,7 +10,7 @@ BinTriggerComp::BinTriggerComp(GameObject* parent, Vector pos_, float width_, fl
 
 void BinTriggerComp::isOverlapping() {
 	if (ih->joysticksInitialised()) {
-		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
+		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 	//temporal, no comprueba si esta el plato que quiere, solo comprueba que el jugador tenga platos

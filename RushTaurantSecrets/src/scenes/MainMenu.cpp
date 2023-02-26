@@ -34,6 +34,5 @@ void MainMenu::handleEvents(){
 	}
 	else {
 		Scene::handleEvents();
-
 	}
 }

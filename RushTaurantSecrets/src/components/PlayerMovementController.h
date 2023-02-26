@@ -14,11 +14,12 @@ class PlayerMovementController : public Component
 {
 private:
 	int offset = 6;
+	bool keyboard;
 	Vector speed = (0,0);
 	Vector aux = speed;
 
 	SDL_Joystick* _joy;
-	const char* controller;
+	const char* controller = " ";
 	SDL_GameController* gamecont = nullptr;
 
 	Transform* transform = nullptr;
@@ -32,6 +33,7 @@ public:
 		if(!input->joysticksInitialised())
 			input->initialiseJoysticks(_joy);
 		controller = SDL_JoystickName(_joy);
+		keyboard = input->getControls();
 	}
 	~PlayerMovementController() { 
 		input->clean();
@@ -40,7 +42,7 @@ public:
 		// Descomentar si se quiere comprobar el binding de un mando
 		/*gamecont = SDL_GameControllerOpen(0);
 		std::cout << SDL_GameControllerMapping(gamecont) << std::endl;*/
-		if (input->joysticksInitialised())
+		if (input->joysticksInitialised() && !keyboard)
 		{
 			input->refresh();
 			// eje x mando 1
@@ -122,7 +124,7 @@ public:
 			//	speed.setY(offset * input->yvalue(0,2));
 			//}
 		}
-		if (input->keyDownEvent()){
+		if (input->keyDownEvent()) {
 			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 			// arriba
 			if (input->isKeyDown(SDL_SCANCODE_W)) {
@@ -148,14 +150,14 @@ public:
 			transform->setMovState(idle);
 		}	
 		transform->setVel(speed);
-		if (input->joysticksInitialised()) {		
+		if (input->joysticksInitialised() && !keyboard) {		
 			speed = Vector(0, 0);
 		}
 	}
 
 	bool nonKeyPressed() {
 		bool pressed = false;
-		if (!input->joysticksInitialised()) {
+		if (!input->joysticksInitialised() || keyboard) {
 			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 			if (currentKeyStates[SDL_SCANCODE_D])
 			{
