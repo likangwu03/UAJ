@@ -5,7 +5,9 @@
 UIMarket::UIMarket() : Scene() {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
-	moneyTxt = Money::init(moneyContainer, 100);
+	moneyTxt = Money::init(moneyContainer, 200);
+	ih = InputHandler::instance();
+	basketMarket = new BasketMarket(this);
 
 	// icono de dinero
 	GameObject* money = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY);
@@ -62,4 +64,21 @@ void UIMarket::showMoneyText() {
 	}
 }
 
+void UIMarket::handleEvents() {
+	if (ih->isKeyDown(SDLK_SPACE)) { 
+		// si el menú de cesta ya está abierto, lo cierra
+		if (basketMarket->getBasketON())
+			basketMarket->setBasketON(false);
+		// si el menú de cesta está cerrado, lo abre
+		else
+			basketMarket->setBasketON(true);
+	}
+	else
+		Scene::handleEvents();
+}
 
+void UIMarket::render() {
+	Scene::render();
+	if (basketMarket->getBasketON()) 
+		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();
+}

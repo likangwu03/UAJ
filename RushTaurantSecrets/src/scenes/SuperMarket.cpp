@@ -15,6 +15,7 @@ void SuperMarket::update() {
 }
 void SuperMarket::handleEvents() {
 	Scene::handleEvents();
+	uiMarket->handleEvents();
 }
 
 void SuperMarket::init() {

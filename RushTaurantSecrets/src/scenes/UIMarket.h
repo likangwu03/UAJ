@@ -5,6 +5,7 @@
 #include "../components/Transform.h"
 #include "../components/Image.h"
 #include "../objects/Money.h" // cambiar cuando se cambie la clase Money
+#include "../gameObjects/BasketMarket.h"
 
 // UI del supermercado
 class UIMarket : public Scene
@@ -19,6 +20,8 @@ private:
 	Image* moneyTextImage;
 	int intMoney;
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+	InputHandler* ih;
+	BasketMarket* basketMarket;
 
 public:
 	// constructora
@@ -26,5 +29,7 @@ public:
 	~UIMarket();
 	void showMoneyText();
 	void update();
+	void handleEvents() override;
+	void render();
 };
 
