@@ -6,7 +6,6 @@
 #include "../structure/Paths_def.h"
 #include <vector>
 #include <list>
-#include <array>
 
 using namespace std;
 
@@ -21,7 +20,7 @@ private:
 	const int TEST_PAY = 4;
 
 	const int MAX_ENTRANCE = 3;
-	const int MAX_PAY = 8;
+	const int MAX_PAY = 2;
 
 	// cola con la entrada
 	list<Client*> entrance;
@@ -180,9 +179,9 @@ private:
 		for (int i = 0; i < clients->size(); ++i) {
 			GameObject* g = (*clients)[i];
 			ClientMovement* m = g->getComponent<ClientMovement>();
-			if (g->getComponent<ClientState>()->getState() == ClientState::FINISH_EAT ||
-				(m->hasAbandonedTable())) {
-				tables[m->getAssignedTable() - 1] = false;
+			if (m->hasFinishedEating() || m->hasAbandonedTable()) {
+				int n = m->getAssignedTable() - 1;
+				tables[n] = false;
 			}
 		}
 	}
@@ -247,6 +246,21 @@ public:
 			auto it = pay.begin();
 			recolocatePayAll(it);
 		}
+	}
+
+	// puede ir a la cola de la caja
+	bool canOccupyPay() {
+		// se comprueban si están de camino a la caja o si están en la caja
+		int goingPay = 0;
+		for (int i = 0; i < clients->size(); ++i) {
+			GameObject* client = (*clients)[i];
+			ClientState* state = client->getComponent<ClientState>();
+			ClientState::States currentState = state->getState();
+			if (currentState == ClientState::REGISTER) {
+				++goingPay;
+			}
+		}
+		return (pay.size() + goingPay) < MAX_PAY;
 	}
 
 	void update() {

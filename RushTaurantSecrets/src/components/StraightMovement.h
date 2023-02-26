@@ -5,6 +5,7 @@
 #include "../utilities/Vector.h"
 #include "../components/Transform.h"
 #include "../structure/GameObject.h"
+#include "../sdlutils/SDLUtils.h"
 
 using namespace std;
 
