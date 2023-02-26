@@ -1,5 +1,5 @@
 #pragma once
-#include <unordered_map>
+#include <map>
 #include "Structure_def.h"
 
 class Component;
@@ -10,7 +10,7 @@ private:
 	friend class Component;
 	void addComponent(Component* comp, _ecs::_cmp_id id);
 protected:
-	std::unordered_map<_ecs::_cmp_id, Component*> components;
+	std::map<_ecs::_cmp_id, Component*> components;
 	Scene* scene;
 	bool alive;
 

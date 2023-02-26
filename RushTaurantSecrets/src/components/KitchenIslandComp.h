@@ -21,11 +21,11 @@ private:
 		B_W=F_W+10,OFFSETX=-6,OFFSETY=-6;
 
 	struct Ing {
-		_ecs::_ingredients_id id;
-		int n;
-		Texture* t;
-		Texture* f;
-		Texture* b;
+		_ecs::_ingredients_id id;	// id del ingrediente
+		int n;	// número de ingredientes
+		Texture* t;	// imagen del ingrediente
+		Texture* f;	// imagen con el número de ingredientes que tienes (delantera)
+		Texture* b;	// imagen con el número de ingredientes que tienes (trasera)
 	};
 	Font* f; //para indicar n de ing
 	vector<Ing>ing;
@@ -36,6 +36,7 @@ private:
 
 public:
 	KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingredients_id,int>> _ing);
+	virtual ~KitchenIslandComp();
 
 	virtual void render();
 	void pickIngredient(int i);

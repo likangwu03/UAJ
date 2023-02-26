@@ -1,21 +1,20 @@
 #pragma once
 
-class Money {
+#include "../structure/GameObject.h"
+#include "../structure/Component.h"
+#include "../structure/Manager.h"
+
+class Money : public Manager <Money> {
+
+	friend Manager<Money>;
+
 private:
-	//Money();
-	//static Money* instance;
 	int amount;
+	Money(GameObject* parent, int initialMoney);
 
 public:
-	/*static Money* Instance() {
-		if (instance == nullptr) {
-			instance = new Money();
-			instance->initMoney(0);
-		}
-		return instance;
-	}*/
+	static constexpr _ecs::_cmp_id id = _ecs::cmp_MONEY;
 
-	Money();
 	void initMoney(int num);
 	int getMoney();
 	void addMoney(int num);

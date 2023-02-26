@@ -3,6 +3,10 @@
 #include "../utils/checkML.h"
 
 UIMarket::UIMarket() : Scene() {
+	// instancia manager del dinero
+	GameObject* moneyContainer = new GameObject(this);
+	moneyTxt = Money::init(moneyContainer, 100);
+
 	// icono de dinero
 	GameObject* money = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY);
 	new Transform(money, Vector(10, 5), Vector(0, 0), 64, 64, 0);
@@ -13,7 +17,6 @@ UIMarket::UIMarket() : Scene() {
 	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
 	new Transform(moneyText, Vector(90, 9), Vector(0, 0), 80, 50);
 
-	moneyTxt = new Money();
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
 	//moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));

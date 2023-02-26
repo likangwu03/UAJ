@@ -11,13 +11,24 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 	y = parent->getComponent<Transform>()->getPos().getY();
 	f = new Font("assets/Fonts/Arcadepix Plus.ttf", 25);
 	//cargar info
-	for (int i = 0; i < _ing.size(); ++i) 
+	for (int i = 0; i < _ing.size(); ++i)
 
-		ing.push_back({ _ing[i].first,_ing[i].second,&sdl->images().at(to_string(_ing[i].first)), 
+		ing.push_back({ _ing[i].first,_ing[i].second,&sdl->images().at(to_string(_ing[i].first)),
 			new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),
 			new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0x622609ff)) });
 
 }
+
+KitchenIslandComp::~KitchenIslandComp() {
+	// se elimina la fuente cogida
+	delete f;
+	for (int i = 0; i < ing.size(); ++i) {
+		// se eliminan las texturas con las letras
+		delete ing[i].f;
+		delete ing[i].b;
+	}
+}
+
 void KitchenIslandComp::render() {
 
 	for (int i = 0; i < ing.size(); ++i) { 

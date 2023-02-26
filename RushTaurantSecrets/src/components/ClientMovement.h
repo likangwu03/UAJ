@@ -6,6 +6,7 @@
 #include "../components/ClientState.h"
 #include "../components/Transform.h"
 #include "../components/ClientStateRender.h"
+
 using namespace std;
 
 class ClientMovement : public Component {
@@ -19,6 +20,7 @@ private:
 	int posPay;
 	ClientStateRender* render;
 
+	// devuelve una ruta desde la entrada hasta la mesa
 	Route tableRoute(string type) {
 		string aux = type + "_TABLE_" + std::to_string(this->assignedTable);
 		auto it = _ecs::stringToEnum.find(aux);
@@ -27,6 +29,7 @@ private:
 		}
 	}
 
+	// llega al restaurante y se coloca en la entrada
 	void colocateEntrance() {
 		Vector entrance = _ecs::ENTRY;
 		// se calcula a partir de su pos en la cola de entrada
@@ -35,12 +38,14 @@ private:
 		straightMovement->addPath(vector<Vector>{entrance});
 	}
 
+	// desde la mesa hasta la caja registradora
 	void colocateCashRegister() {
 		vector<Vector> payPath = tableRoute("PAY").points;
 		straightMovement->addPath(payPath);
 		outTable();
 	}
 
+	// desde la caja registradora hasta la posición que le corresponde en la cola de pagar
 	void colocatePay() {
 		Vector posRegister = _ecs::CASH_REGISTER;
 		// se calcula a partir de su pos en la cola de la caja
@@ -66,25 +71,22 @@ private:
 
 	// ha abandonado la cola de la caja sin pagar
 	void abandonPay() {
-		int fh = sdl->height() / 20;
-
 		// se calcula el camino de salida
 		vector<Vector> leave;
 
 		// primer punto
 		int fWidth = sdl->width() / 40;
 		int xExit = transform->getPos().getX() / fWidth;
-		int yExit = _ecs::OUT.getY();
+		int yExit = _ecs::OUT_PAY.getY();
 		Vector firstPoint = Vector(xExit, yExit);
 		leave.push_back(firstPoint);
 
 		// se añade el punto de afuera
-		leave.push_back(_ecs::OUT);
+		leave.push_back(_ecs::OUT_PAY);
 
 		straightMovement->addPath(leave);
 	}
 
-	// el cliente est?quieto
 	// se establece su nuevo estado, su orientación y la animación a ejecutar
 	void stationary(ClientState::States state, GOOrientation orientation, movementState mov) {
 		clientState->setState(state);
@@ -118,7 +120,6 @@ public:
 
 	// recolocarse en la cola de pagar si alguien se ha marchado
 	void recolotatePay() {
-		// avanza una posición
 		--posPay;
 		colocatePay();
 	}
@@ -131,6 +132,7 @@ public:
 		clientState->setState(ClientState::ASSIGNED);
 	}
 
+	// paga por su comida y se marcha
 	void payAndLeave() {
 		clientState->setState(ClientState::OUT);
 		straightMovement->addPath(_ecs::paths[_ecs::PAY_AND_LEAVE].points);
@@ -171,7 +173,8 @@ public:
 		case ClientState::ASSIGNED:
 			if (straightMovement->hasFinishedPath()) {
 				stationary(ClientState::THINKING, tableRoute("ARRIVE").orientation, sitting);
-				render->renderThinkingState(); //para que renderice el estado de pensar
+				// para que renderice el estado de pensar
+				render->renderThinkingState();
 			}
 			break;
 		case ClientState::FINISH_EAT:
@@ -197,7 +200,7 @@ public:
 			break;
 		case ClientState::OUT:
 			if (posEntrance != -1) {
-				straightMovement->addPath(vector<Vector>{_ecs::OUT});
+				straightMovement->addPath(vector<Vector>{_ecs::OUT_ENTRY});
 				outEntrance();
 			}
 			else if (assignedTable != -1) {

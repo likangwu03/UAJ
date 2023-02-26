@@ -14,7 +14,7 @@ class CashRegisterTrigger :public TriggerComp
 	Money* money;
 public:
 	CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
-		TriggerComp(parent, pos_, width_, height_),money(static_cast<UIRestaurant*>(parent->getScene()->getUI())->getMoney()),
+		TriggerComp(parent, pos_, width_, height_),money(Money::get()),
 		cM(ClientsManager::get()) { }
 
 	virtual void isOverlapping();

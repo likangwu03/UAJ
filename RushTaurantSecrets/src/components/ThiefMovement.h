@@ -5,18 +5,13 @@
 #include "../components/Transform.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
+#include "../structure/Paths_def.h"
 #include <vector>
-
-vector<Vector> pathsThief[3] = {
-	{Vector(32, 18)},	// origin
-	{Vector(20, 18)},	// secret
-	{Vector(24, 18)}	// freezer
-};
-
-enum Objective { Origin, Freezer, Secret };
 
 class ThiefMovement : public Component {
 	enum States { OBJECTIVE, FREEZER, SECRET, DEAD, ESCAPE };
+
+	enum Objective {Freezer, Secret};
 
 private:
 	States currentState;
@@ -27,25 +22,31 @@ private:
 	Objective objective;
 	InputHandler* inputHandler;
 	float firstTick;
-	float timer;
+	float deadTime;
 	float escapeSpeed;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
 	ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) : 
-		Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), timer(5000), firstTick(0), escapeSpeed(escapeSpeed) {
+		Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(5000), firstTick(0), escapeSpeed(escapeSpeed) {
 		straightMovement = parent->getComponent<StraightMovement>();
 		transform = parent->getComponent<Transform>();
 		sdl = SDLUtils::instance();
 		inputHandler = InputHandler::instance();
 
-		int max = 2;
-		if (canGetFridger) {
-			++max;
+		int max = canGetFridger ? 2 : 1;
+		objective = (Objective)sdl->rand().nextInt(0, max);
+		vector<Vector> points;
+		switch (objective) {
+		case Freezer:
+			points.push_back(_ecs::FREEZER);
+			break;
+		case Secret:
+			points.push_back(_ecs::SECRET);
+			break;
 		}
-		objective = (Objective)sdl->rand().nextInt(1, max);
-		straightMovement->addPath(pathsThief[objective]);
+		straightMovement->addPath(points);
 	}
 
 	// se tendría que llamar al pulsar el botón de matar
@@ -61,7 +62,7 @@ public:
 	void escape() {
 		currentState = ESCAPE;
 		straightMovement->stop();
-		straightMovement->addPath(pathsThief[Origin]);
+		straightMovement->addPath({ _ecs::DOOR });
 		straightMovement->changeSpeed(escapeSpeed);
 	}
 
@@ -81,19 +82,23 @@ public:
 			break;
 
 		case SECRET:
+			// se cambia a la escena en la que los ladrones han descubierto el secreto
 			parent->setAlive(false);
 			break;
 
 		case FREEZER:
+			// se cambia a la escena en la que los ladrones han abierto el congelador
 			parent->setAlive(false);
 			break;
+
 		case DEAD:
 			tick = sdl->currRealTime() - firstTick;
-			if (tick > timer) {
+			if (tick > deadTime) {
 				parent->setAlive(false);
 				tick = 0;
 			}
 			break;
+
 		case ESCAPE:
 			if (straightMovement->hasFinishedPath()) {
 				parent->setAlive(false);

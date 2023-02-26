@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <vector>
 #include "../structure/Component.h"
 #include "../structure/Structure_def.h"
 #include "../sdlutils/SDLUtils.h"
