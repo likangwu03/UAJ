@@ -1,21 +1,20 @@
 #pragma once
-/*
+
 #include "../components/TriggerComp.h"
 #include "../structure/GameObject.h"
-class Image;
-
+#include "../components/KitchenIslandComp.h"
+#include "../components/Transform.h"
 class KitchenIslandTrigger :public TriggerComp
 {
 public:
-	KitchenIslandTrigger(GameObject* parent, _ecs::_ingredients_id id, Vector pos_, float width_, float height_);
+	KitchenIslandTrigger(GameObject* parent, Vector pos_, float width_, float height_,int i_,int orient_);
 	virtual void isOverlapping();
-	virtual void onTriggerEnter();
 	virtual void onTriggerExit();
-	void highlight(); //llamado por CartelManager
-	void unHighlight(); //llamado por CartelManager
 private:
-	bool highlighted;
+	int i;
+	KitchenIslandComp* ki;
+	Transform* p;
+	int orient;
 };
 
 
-*/

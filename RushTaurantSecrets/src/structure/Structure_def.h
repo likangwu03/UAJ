@@ -86,6 +86,7 @@ namespace _ecs {
 		hdr_BASKET,
 		hdr_BIN,
 		hdr_PRUEBA,
+		hdr_KITCHENISLAND,
 		
 		// Do not erase pls
 		hdr_INVALID

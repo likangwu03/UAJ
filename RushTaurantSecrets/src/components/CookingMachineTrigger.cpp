@@ -5,7 +5,8 @@ void CookingMachineTrigger::isOverlapping() {
 	if (ih->joysticksInitialised()) {
 		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
 	}	
-	else if (!ih->isKeyDown(SDLK_SPACE)) return;
+	else if (!ih->isKeyDown(SDLK_SPACE) ) return;
+	if (other_->getComponent<Transform>()->getOrientation() != north)return;
 
 	CookingMachineComp::State s = cook->getState();
 	pair<_ecs::_dish_id, bool>aux;

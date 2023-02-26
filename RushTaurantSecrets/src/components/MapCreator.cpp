@@ -13,6 +13,7 @@
 #include "../gameObjects/CookingMachine.h"
 #include "../gameObjects/CashRegister.h"
 #include "../gameObjects/KitchenIsland.h"
+#include "../gameObjects/IslandIngredient.h"
 #include "../gameObjects/Cartel.h"
 #include "../gameObjects/Bin.h"
 
@@ -189,15 +190,19 @@ void MapCreator::createObject() {
 					//prueba
 					vector<pair<_ecs::_ingredients_id, int>> _ing;
 					_ing.push_back ( { POLLO, 3 });
-					_ing.push_back ({ LECHE,2 });
+					_ing.push_back ({ HUEVO,8});
 					_ing.push_back ({ HARINA,11 });
-					_ing.push_back ({ QUESO,4 });
+					_ing.push_back ({ QUESO,32 });
 					_ing.push_back ({ CARNE,4 });
 					_ing.push_back ({ FRESA,4 });
-					_ing.push_back ({ MANZANA,4 });
-					_ing.push_back ({ SALMON,4 });
-					_ing.push_back ({ GAMBAS,4 });
+					_ing.push_back ({ MANZANA,7 });
+					_ing.push_back ({ SALMON,1 });
+					_ing.push_back ({ GAMBAS,99 });
 					new KitchenIsland(scene, _ing, pos, width_, height_);
+				}
+				else if (name == "KitchenIslandTri") {
+					
+					new IslandIngredient(scene, pos, width_, height_,p[0].getIntValue(), p[1].getIntValue());
 				}
 				else if (name == "kitchen") {
 

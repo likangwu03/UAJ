@@ -9,43 +9,54 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 	h = parent->getComponent<Transform>()->getH() / 2;
 	x = parent->getComponent<Transform>()->getPos().getX();
 	y = parent->getComponent<Transform>()->getPos().getY();
-	f = new Font("assets/Fonts/Arcadepix Plus.ttf", 25);
+	f = new Font("assets/Fonts/8-bit Madness.ttf", 40);
+	highlight = &sdl->images().at("ISLAND_HIGHLIGHT");
+	selected = -1;
 	//cargar info
 	for (int i = 0; i < _ing.size(); ++i)
-
 		ing.push_back({ _ing[i].first,_ing[i].second,&sdl->images().at(to_string(_ing[i].first)),
-			new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),
-			new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0x622609ff)) });
+		new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),
+			&sdl->images().at("KI_ICON") });
 
 }
 
 KitchenIslandComp::~KitchenIslandComp() {
 	// se elimina la fuente cogida
 	delete f;
-	for (int i = 0; i < ing.size(); ++i) {
-		// se eliminan las texturas con las letras
-		delete ing[i].f;
-		delete ing[i].b;
-	}
+	for (int i = 0; i < ing.size(); ++i) delete ing[i].f;
+	
 }
 
 void KitchenIslandComp::render() {
 
-	for (int i = 0; i < ing.size(); ++i) { 
+	highlight->render(build_sdlrect(hPos.getX(), hPos.getY(), w, h));
+	for (int i = 0; i < ing.size(); ++i) {
 		ing[i].t->render(build_sdlrect(x + w * (i % 6), y + w * (i / 6), w, h));
-		ing[i].b->render(build_sdlrect(x + w * (i % 6) + OFFSETX -(B_W-F_W)/2 ,y + w * (i / 6) + OFFSETY -(B_H- F_H) / 2, B_W+B_W*(ing[i].n/10)*0.5, B_H));
-		ing[i].f->render(build_sdlrect(x + w * (i % 6) + OFFSETX, y + w * (i / 6)+ OFFSETY,  F_W + F_W * (ing[i].n / 10) * 0.5, F_H));
+		ing[i].b->render(build_sdlrect(x + w * (i % 6) + OFFSETX - (B_W - F_W) / 2, y + w * (i / 6) + OFFSETY - (B_H - F_H) / 2 + 1, B_W, B_H));
+		ing[i].f->render(build_sdlrect(x + w * (i % 6) + OFFSETX, y + w * (i / 6) + OFFSETY, F_W, F_H));
 	}
-
 }
 
 void KitchenIslandComp::pickIngredient(int i) {
-	if (ing[i].n > 0) { 
+	if (i < ing.size() && ing[i].n > 0) {
 		--ing[i].n;
 		ingCloud->addIngredient(ing[i].id);
 		delete ing[i].f;
-		delete ing[i].b;
 		ing[i].f = new Texture(sdl->renderer(), to_string(ing[i].n), *f, build_sdlcolor(0xFAF2E6ff));
-		ing[i].b = new Texture(sdl->renderer(), to_string(ing[i].n), *f, build_sdlcolor(0x622609ff));
 	}
+}
+
+void KitchenIslandComp::selectedIng(int i) {
+	if (i < ing.size() && selected != i) {
+		selected = i;
+		hPos = { x + w * (i % 6) , y + w * (i / 6) };
+	}
+
+}
+void KitchenIslandComp::unselectIng(int i) {
+	if (i < ing.size() && selected == i) {
+		hPos = { -w,-h };
+		selected = -1;
+	}
+
 }

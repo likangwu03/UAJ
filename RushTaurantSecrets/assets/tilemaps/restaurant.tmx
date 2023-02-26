@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="78">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="81">
  <tileset firstgid="1" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="8285" source="atlas.tsx"/>
  <tileset firstgid="9821" source="12_Kitchen_48x48.tsx"/>
@@ -294,62 +294,77 @@
   <object id="64" name="KitchenIslandTri" x="1204.67" y="270" width="40" height="36.6667">
    <properties>
     <property name="i" type="int" value="0"/>
+    <property name="orient" type="int" value="0"/>
    </properties>
   </object>
   <object id="67" name="KitchenIslandTri" x="1346" y="270.667" width="43.3333" height="36.6667">
    <properties>
     <property name="i" type="int" value="3"/>
+    <property name="orient" type="int" value="0"/>
    </properties>
   </object>
   <object id="68" name="KitchenIslandTri" x="1252.33" y="271" width="39.3334" height="36.6667">
    <properties>
     <property name="i" type="int" value="1"/>
+    <property name="orient" type="int" value="0"/>
    </properties>
   </object>
   <object id="69" name="KitchenIslandTri" x="1299" y="270.333" width="41.3334" height="36.6667">
    <properties>
     <property name="i" type="int" value="2"/>
+    <property name="orient" type="int" value="0"/>
    </properties>
   </object>
   <object id="70" name="KitchenIslandTri" x="1393.67" y="269" width="43.3333" height="36.6667">
    <properties>
     <property name="i" type="int" value="4"/>
+    <property name="orient" type="int" value="0"/>
    </properties>
   </object>
   <object id="71" name="KitchenIslandTri" x="1442" y="270" width="43.3333" height="36.6667">
    <properties>
     <property name="i" type="int" value="5"/>
+    <property name="orient" type="int" value="0"/>
    </properties>
   </object>
   <object id="72" name="KitchenIslandTri" x="1205" y="391.333" width="40" height="36.6667">
    <properties>
     <property name="i" type="int" value="6"/>
+    <property name="orient" type="int" value="3"/>
    </properties>
   </object>
   <object id="73" name="KitchenIslandTri" x="1346.33" y="392" width="43.3333" height="36.6667">
    <properties>
     <property name="i" type="int" value="9"/>
+    <property name="orient" type="int" value="3"/>
    </properties>
   </object>
   <object id="74" name="KitchenIslandTri" x="1252.66" y="392.333" width="39.3334" height="36.6667">
    <properties>
     <property name="i" type="int" value="7"/>
+    <property name="orient" type="int" value="3"/>
    </properties>
   </object>
   <object id="75" name="KitchenIslandTri" x="1299.33" y="391.666" width="41.3334" height="36.6667">
    <properties>
     <property name="i" type="int" value="8"/>
+    <property name="orient" type="int" value="3"/>
    </properties>
   </object>
   <object id="76" name="KitchenIslandTri" x="1394" y="390.333" width="43.3333" height="36.6667">
    <properties>
     <property name="i" type="int" value="10"/>
+    <property name="orient" type="int" value="3"/>
    </properties>
   </object>
   <object id="77" name="KitchenIslandTri" x="1442.33" y="391.333" width="43.3333" height="36.6667">
    <properties>
     <property name="i" type="int" value="11"/>
+    <property name="orient" type="int" value="3"/>
    </properties>
   </object>
+  <object id="78" name="CookingMachine" x="1394.67" y="200.417" width="44.6667" height="67.8333"/>
+  <object id="79" name="CookingMachine" x="1442" y="200.083" width="44.6667" height="67.8333"/>
+  <object id="80" name="CookingMachine" x="1489.33" y="200.75" width="44.6667" height="67.8333"/>
  </objectgroup>
 </map>
