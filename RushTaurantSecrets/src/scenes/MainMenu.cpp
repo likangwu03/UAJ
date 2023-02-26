@@ -18,7 +18,7 @@ MainMenu::MainMenu(SceneManager* sceneManager){
 	new Image(bg, image);
 
 	button = new GameObject(this);
-	new Button(button, sceneManager, start);
+	new Button(button, Vector((1280 / 2) - (192 * 2 / 2), 400), sceneManager, start);
 }
 
 MainMenu::~MainMenu() {

@@ -88,6 +88,9 @@ void Restaurant::handleEvents() {
 	else if (ih->isKeyDown(SDLK_2)) {
 		SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
 	}
+	else if (ih->isKeyDown(SDL_SCANCODE_P)) {
+		SceneManager::instance()->ChangeScene(SceneManager::PAUSEMENU);
+	}
 	else {
 		Scene::handleEvents();
 		//ui->handleEvents();

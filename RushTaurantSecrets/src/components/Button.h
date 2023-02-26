@@ -15,7 +15,7 @@ const int BUTTON_W = 96, BUTTON_H = 32;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_BUTTON;
 
-	Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager));
+	Button(GameObject* parent, Vector pos, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager));
 	~Button();
 	void render();
 	void handleEvents();

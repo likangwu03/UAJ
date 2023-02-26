@@ -68,9 +68,7 @@ void SceneManager::setScene() {
 			sdlutils().setResizeFactor(0.6666666667);
 		}
 		else if (act == PANTRY) {
-			Scene* aux = Scenes.back();
 			Scenes.pop_back();
-			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
 		}
 		else if (act == SUPERMARKET) {
 			/*sdlutils().setResizeFactor(0.6666666667);
@@ -78,13 +76,18 @@ void SceneManager::setScene() {
 			Scenes.push_back(currentScene);*/
 
 		}
+		else if (act == PAUSEMENU) {
+			Scene* aux = Scenes.back();
+			Scenes.pop_back();
+			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
+		}
 		}break;
 	case SceneManager::PANTRY: {
 		sdlutils().setResizeFactor(0.8333333333);
 		if (act == RESTAURANT) {			
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
-			Scenes.push_back(static_cast<Restaurant*>(aux)->getPantry());
+			Scenes.push_back(aux);
 		}
 		}break;
 	case SceneManager::DAILYMENU: {
@@ -103,6 +106,13 @@ void SceneManager::setScene() {
 			currentScene = superMarket;
 			Scenes.push_back(currentScene);
 		}
+		break;
+	case SceneManager::PAUSEMENU:
+		if (act == RESTAURANT || act == PANTRY) {
+			PauseMenu* pauseMenu = new PauseMenu(this);
+			currentScene = pauseMenu;
+			Scenes.push_back(currentScene);
+		}		
 		break;
 	default:
 		break;

@@ -2,12 +2,12 @@
 
 #include "../utils/checkML.h"
 
-void PauseMenu::mMenu() {
-	SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
+void PauseMenu::mMenu(SceneManager* sceneManager) {
+	sceneManager->ChangeScene(SceneManager::MAINMENU);
 }
 
-void PauseMenu::bResume() {
-	SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+void PauseMenu::bResume(SceneManager* sceneManager) {
+	sceneManager->ChangeScene(SceneManager::RESTAURANT);
 }
 
 PauseMenu::PauseMenu(SceneManager* sceneManager) {
@@ -16,10 +16,10 @@ PauseMenu::PauseMenu(SceneManager* sceneManager) {
 	image = new Texture(sdlutils().renderer(), "./assets/mainMenuTemp.png");
 	new Image(bg, image);
 
-	buttonMainMenu = new GameObject(this);
-	new ButtonComp(buttonMainMenu, "MainMenu", mMenu);
 	buttonResume = new GameObject(this);
-	new ButtonComp(buttonResume, "Resume", bResume);
+	new Button(buttonResume, Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2 * SDLUtils::instance()->height() / 5), sceneManager, bResume);
+	buttonMainMenu = new GameObject(this);
+	new Button(buttonMainMenu, Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3 * SDLUtils::instance()->height() / 5), sceneManager, mMenu);
 }
 
 PauseMenu::~PauseMenu() {

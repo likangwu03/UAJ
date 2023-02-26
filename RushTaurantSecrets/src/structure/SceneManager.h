@@ -9,13 +9,14 @@
 #include "../scenes/SuperMarket.h"
 #include "../scenes/UIMarket.h"
 #include "../scenes/DailyMenuScene.h"
+#include "../scenes/PauseMenu.h"
 
 
 using namespace std;
 class SceneManager:public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;
 public:
-	enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET};
+	enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET,PAUSEMENU};
 private:
 	//crea menu
 	SceneManager();

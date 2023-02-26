@@ -6,11 +6,11 @@
 #include "../utils/checkML.h"
 
 //para spritesheets
-Button::Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager)) 
+Button::Button(GameObject* parent, Vector pos, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager)) 
 	: Component(parent, id), sceneManager(sceneManager), callback(callback), sdl(SDLUtils::instance()) {
 	texture = new Texture(sdlutils().renderer(), "./assets/Sprites/UI/PlayButton.png", 2, 2);
 	//parte de la pantalla donde se pinta
-	dest = { (1280 / 2) - (texture->width() * 2 / 2), 400, texture->width() * 2, texture->height() * 2 };
+	dest = { int(pos.getX()), int(pos.getY()), texture->width() * 2, texture->height() * 2};
 
 	// se inicializa el mando
 	ih().initialiseJoysticks(_joy);
