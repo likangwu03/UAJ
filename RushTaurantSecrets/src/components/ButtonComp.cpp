@@ -50,7 +50,6 @@ bool ButtonComp::isHighlighted()
 
 void ButtonComp::render()
 {
-	cout << highlighted << endl;
 	if (highlighted) {
 		highlight->render(dest);
 	}
