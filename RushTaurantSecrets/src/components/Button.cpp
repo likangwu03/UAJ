@@ -16,31 +16,6 @@ Button::Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(
 	InputHandler::instance()->initialiseJoysticks(_joy);
 
 }
-//para sprites pasando SDL_rect
-Button::Button(GameObject* parent, Texture* t, SDL_Rect d, SceneManager* sceneManager, void(*callback)(SceneManager* sceneManager)) 
-	: Component(parent, id), texture(t), dest(d), sceneManager(sceneManager), callback(callback), sdl(SDLUtils::instance())
-{
-	// se inicializa el mando
-	InputHandler::instance()->initialiseJoysticks(_joy);
-}
-
-//para sprites pasando pos
-Button::Button(GameObject* parent, Texture* t, int x, int y, SceneManager* sceneManager, void(*callback)(SceneManager* sceneManager))
-	: Component(parent, id), texture(t), sceneManager(sceneManager), callback(callback), sdl(SDLUtils::instance())
-{
-	dest = { x, y, t->width(), t->height() };
-	// se inicializa el mando
-	InputHandler::instance()->initialiseJoysticks(_joy);
-}
-
-Button::Button(GameObject* parent, string s, int x, int y, SceneManager* sceneManager, void(*callback)(SceneManager* sceneManager))
-	: Component(parent, id), sceneManager(sceneManager), callback(callback), sdl(SDLUtils::instance())
-{
-	texture = &((*sdl).images().at(s));
-	dest = { x, y, texture->width(), texture->height() };
-	// se inicializa el mando
-	InputHandler::instance()->initialiseJoysticks(_joy);
-}
 
 Button::~Button() {
 	delete texture;

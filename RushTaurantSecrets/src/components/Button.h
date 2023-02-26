@@ -16,9 +16,6 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_BUTTON;
 
 	Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager));
-	Button(GameObject* parent, Texture* t, SDL_Rect d, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager));
-	Button(GameObject* parent, Texture* t, int x, int y, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager));
-	Button(GameObject* parent, string s, int x, int y, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager));
 	~Button();
 	void render();
 	void handleEvents();

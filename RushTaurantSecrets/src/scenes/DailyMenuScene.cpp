@@ -3,37 +3,19 @@
 #include "../utils/checkML.h"
 #include "../structure/SceneManager.h"
 
-void DailyMenuScene::select(SceneManager* sceneManager)
+void DailyMenuScene::select()
 {
-	sceneManager->ChangeScene(SceneManager::SUPERMARKET);
+	SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);
 }
 
-DailyMenuScene::DailyMenuScene(SceneManager* sceneManager, uint8_t msize, bool m) : sdl(SDLUtils::instance())
+DailyMenuScene::DailyMenuScene(SceneManager* sceneManager, uint8_t msize, bool m) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64)
 {
-	ButtonGO* dailyMenu1 = new ButtonGO(this, "DAILY_MENU", Vector(sdl->width() / 2, sdl->height() / 15), 451, 603);
+	DailyMenu* dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8, sdl->height() / 15), 451.0f, 603.0f, select);
+	DailyMenu* dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2, sdl->height() / 15), 451.0f, 603.0f, select);
 
 	//ButtonGO* dailyMenu2 = new ButtonGO(this, Vector(sdl->width() / 2, sdl->height() / 15), 451, 603);
 }
 
 void DailyMenuScene::handleEvents() {
-	int x, y;		// corrdenadas del puntero del ratón
-	SDL_GetMouseState(&x, &y);
-	SDL_Rect mouseRect = { x, y, 1, 1 };
-
-
-
-	//if (SDL_HasIntersection(&mouseRect, &dest)) {
-	//	frame = 1;
-	//	if (InputHandler::instance()->getMouseButtonState(InputHandler::instance()->LEFT)) {
-	//		callback(sceneManager);
-	//	}
-	//}
-	//else if (InputHandler::instance()->joysticksInitialised()) {
-	//	if (InputHandler::instance()->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-	//		frame = 1;
-	//		InputHandler::instance()->clean();
-	//		callback(sceneManager);
-	//	}
-	//}
-	//else frame = 0;
+	Scene::handleEvents();
 }

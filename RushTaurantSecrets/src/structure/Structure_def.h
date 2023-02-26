@@ -29,6 +29,7 @@ namespace _ecs {
 		cmp_CLIENTSTATE,
 		cmp_KITCHENISLAND,
 		cmp_INGREDIENTS,
+		cmp_DAILYMENU,
 		// HUD
 		cmp_BUTTON,
 		cmp_INVENTORY,
@@ -36,6 +37,8 @@ namespace _ecs {
 		cmp_CLIENTSTATE_RENDER,
 		cmp_HEART_RENDER,
 		cmp_IMAGE,
+		// botones
+		cmp_BUTTON_COMP,
 		// animaciones
 		cmp_CHARACANIM,
 		cmp_UIANIM,

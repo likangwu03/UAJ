@@ -3,6 +3,8 @@
 #include "../structure/Food_def.h"
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
+#include "../components/ButtonComp.h"
+#include "../sdlutils/SDLUtils.h"
 #include "Image.h"
 #include <set>
 

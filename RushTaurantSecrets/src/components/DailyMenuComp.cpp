@@ -50,8 +50,10 @@ vector<_ecs::DishInfo> DailyMenuComp::randomMenu()
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize, bool m)
-	: Component(parent, id), tf(parent->getComponent<Transform>()), menuSize(mSize), spriteSize(64), murder(m)
+	: Component(parent, id), menuSize(mSize), spriteSize(64), murder(m)
 {
+	tf = parent->getComponent<Transform>();
 	parentScene = parent->getScene();
+
 	drawDishes(randomMenu());
 }
