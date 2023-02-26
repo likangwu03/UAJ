@@ -37,6 +37,7 @@ namespace _ecs {
 		cmp_CLIENTSTATE_RENDER,
 		cmp_HEART_RENDER,
 		cmp_IMAGE,
+		cmp_BUBBLE,
 		// botones
 		cmp_BUTTON_COMP,
 		// animaciones

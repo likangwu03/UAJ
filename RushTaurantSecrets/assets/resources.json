@@ -484,6 +484,12 @@
       "file": "assets/Sprites/Restaurant/bin.png",
       "cols": 1,
       "rows": 1
+    },
+    {
+      "id": "BUBBLE",
+      "file": "assets/Sprites/UI/ing_bubble.png",
+      "cols": 1,
+      "rows": 1
     }
   ],
   "fonts": [
