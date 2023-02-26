@@ -87,9 +87,17 @@ void SceneManager::setScene() {
 			Scenes.push_back(static_cast<Restaurant*>(aux)->getPantry());
 		}
 		}break;
+	case SceneManager::DAILYMENU: {
+		if (act == MAINMENU) {
+			DailyMenuScene* dailyMenuS = new DailyMenuScene(this);
+			currentScene = dailyMenuS;
+			Scenes.push_back(currentScene);
+		}
+		break;
+	}
 	case SceneManager::SUPERMARKET:
 		sdlutils().setResizeFactor(0.6666666667);
-		if (act == MAINMENU) {
+		if (act == MAINMENU || act == DAILYMENU) {
 			UIMarket* uiMarket = new UIMarket();
 			SuperMarket* superMarket = new SuperMarket(uiMarket);
 			currentScene = superMarket;

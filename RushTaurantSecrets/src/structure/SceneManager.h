@@ -8,13 +8,14 @@
 #include "../scenes/UIRestaurant.h"
 #include "../scenes/SuperMarket.h"
 #include "../scenes/UIMarket.h"
+#include "../scenes/DailyMenuScene.h"
 
 
 using namespace std;
 class SceneManager:public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;
 public:
-	enum SceneName{MAINMENU,RESTAURANT,PANTRY,SUPERMARKET};
+	enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET};
 private:
 	//crea menu
 	SceneManager();

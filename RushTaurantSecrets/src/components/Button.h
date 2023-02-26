@@ -2,10 +2,13 @@
 
 #include "../structure/Component.h"
 #include "../sdlutils/Texture.h"
+#include "../components/Image.h"
+#include "../sdlutils/SDLUtils.h"
 
 class SceneManager;
 class Scene;
 
+using namespace std;
 
 class Button : public Component {
 const int BUTTON_W = 96, BUTTON_H = 32;
@@ -23,9 +26,12 @@ private:
 	int frame = 0;
 
 	Texture* texture;
+
 	SDL_Rect src, dest;
 
 	SceneManager* sceneManager;
 
 	SDL_Joystick* _joy;
+
+	SDLUtils* sdl;
 };
