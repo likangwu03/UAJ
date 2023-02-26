@@ -40,6 +40,12 @@ UIMarket::UIMarket() : Scene() {
 	new Image(basket, &((*sdl).images().at("BASKET_YELLOW")));
 }
 
+UIMarket::~UIMarket() {
+	delete f;
+	delete moneyTextTexture;
+}
+
+
 void UIMarket::update() {
 	Scene::update();
 	showMoneyText();
@@ -55,3 +61,5 @@ void UIMarket::showMoneyText() {
 		moneyTextImage->setTexture(moneyTextTexture);
 	}
 }
+
+

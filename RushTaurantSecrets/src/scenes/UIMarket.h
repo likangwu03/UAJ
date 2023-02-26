@@ -23,6 +23,7 @@ private:
 public:
 	// constructora
 	UIMarket();
+	~UIMarket();
 	void showMoneyText();
 	void update();
 };
