@@ -360,8 +360,8 @@
       "rows": 1
     },
     {
-      "id": "CLOCK_ICON",
-      "file": "assets/Sprites/UI/clock_icon.png",
+      "id": "CLOCK",
+      "file": "assets/Sprites/UI/clock.png",
       "cols": 1,
       "rows": 1
     },

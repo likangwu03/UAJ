@@ -45,10 +45,15 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// inventario (platos)
 	inventory = new Inventory(this);
 
-	// icono de reloj (temporizador)
+	/*// icono de reloj (temporizador)
 	GameObject* clock = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_CLOCK);
 	new Transform(clock, Vector(sdl->width() - 70, 20), Vector(0, 0), 60, 57, 0);
-	new Image(clock, &((*sdl).images().at("CLOCK_ICON")));
+	new Image(clock, &((*sdl).images().at("CLOCK_ICON")));*/
+
+	// reloj (momento del día)
+	GameObject* clock = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_CLOCK);
+	new Transform(clock, Vector(sdl->width() - 140, 20), Vector(0, 0), 120, 117, 0);
+	new Image(clock, &((*sdl).images().at("CLOCK")));
 
 	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
 	// icono de menú de pausa
@@ -68,11 +73,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// gestión del temporizador
-	timeText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TIME_TEXT);
+	/*timeText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TIME_TEXT);
 	new Transform(timeText, Vector(sdl->width() - 140, 25), Vector(0, 0), 50, 50);
 	std::string strTime = std::to_string(time);
 	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
-	timeTextImage = new Image(timeText, timeTextTexture);
+	timeTextImage = new Image(timeText, timeTextTexture);*/
 
 
 	// render de estrellas vacías
@@ -132,7 +137,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 UIRestaurant::~UIRestaurant() {
 	delete f;
 	delete moneyTextTexture;
-	delete timeTextTexture;
+	//delete timeTextTexture;
 }
 
 void UIRestaurant::showMoneyText() {
@@ -149,7 +154,7 @@ void UIRestaurant::showMoneyText() {
 void UIRestaurant::update() {
 	Scene::update();
 	showMoneyText();
-	checkTime();
+	//checkTime();
 	//reputationManager();
 }
 
