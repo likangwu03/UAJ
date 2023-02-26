@@ -13,7 +13,7 @@ Button::Button(GameObject* parent, SceneManager* sceneManager, void (*callback)(
 	dest = { (1280 / 2) - (texture->width() * 2 / 2), 400, texture->width() * 2, texture->height() * 2 };
 
 	// se inicializa el mando
-	InputHandler::instance()->initialiseJoysticks(_joy);
+	ih().initialiseJoysticks(_joy);
 
 }
 
@@ -35,14 +35,14 @@ void Button::handleEvents() {
 
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		frame = 1;
-		if (InputHandler::instance()->getMouseButtonState(InputHandler::instance()->LEFT)) {
+		if (ih().getMouseButtonState(ih().LEFT)) {
 			callback(sceneManager);
 		}
 	}
-	else if (InputHandler::instance()->joysticksInitialised()) {
-		if (InputHandler::instance()->getButtonState(0,SDL_CONTROLLER_BUTTON_A)) {
+	else if (ih().joysticksInitialised()) {
+		if (ih().getButtonState(0,SDL_CONTROLLER_BUTTON_A)) {
 			frame = 1;
-			InputHandler::instance()->clean();
+			ih().clean();
 			callback(sceneManager);
 		}		
 	}

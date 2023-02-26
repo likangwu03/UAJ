@@ -55,7 +55,7 @@ public:
 	float getHappiness();
 
 	/*void handleEvents() {
-		if (InputHandler::instance()->isKeyDown(SDLK_r)) {
+		if (ih().isKeyDown(SDLK_r)) {
 			if (state == ORDERED)
 				changeDish();
 		}

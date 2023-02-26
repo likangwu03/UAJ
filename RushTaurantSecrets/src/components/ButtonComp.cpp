@@ -13,7 +13,7 @@ ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())
 	dest.w = tf->getW();
 	dest.h = tf->getH();
 	std::cout << "cock" << std::endl;
-	InputHandler::instance()->initialiseJoysticks(_joy);
+	ih().initialiseJoysticks(_joy);
 }
 
 void ButtonComp::handleEvents()
@@ -26,15 +26,15 @@ void ButtonComp::handleEvents()
 
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		highlighted = true;
-		if (InputHandler::instance()->getMouseButtonState(InputHandler::instance()->LEFT)) {
+		if (ih().getMouseButtonState(ih().LEFT)) {
 			std::cout << "balls" << std::endl;
 			_callback();
 		}
 	}
-	else if (InputHandler::instance()->joysticksInitialised()) {
-		if (InputHandler::instance()->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
+	else if (ih().joysticksInitialised()) {
+		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
 			highlighted = true;
-			InputHandler::instance()->clean();
+			ih().clean();
 			_callback();
 		}
 	}

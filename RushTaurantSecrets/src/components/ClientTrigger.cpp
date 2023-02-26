@@ -30,7 +30,7 @@ void ClientTrigger::isOverlapping()
 
 int ClientTrigger::randomTable()
 {
-	return SDLUtils::instance()->rand().nextInt(1, 2);
+	return sdlutils().rand().nextInt(1, 2);
 }
 
 bool ClientTrigger::inputMando() {

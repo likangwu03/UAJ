@@ -394,7 +394,7 @@ private:
 ;
 
 // This macro defines a compact way for using the singleton InputHandler, instead of
-// writing InputHandler::instance()->method() we write ih().method()
+// writing ih().method() we write ih().method()
 //
 inline InputHandler& ih() {
 	return *InputHandler::instance();
