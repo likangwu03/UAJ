@@ -15,18 +15,21 @@ class Ingredients: public Component {
 	const float ING_HEIGHT = 38;
 	const float ING_WIDTH = 38;
 	//constante que parametriza a qu� altura sobre el jugador se sit�an los ingredientes
-	const float ING_POSY = 40;
+	const float ING_POSY = 50;
 	//constante que deja un espacio entre ingredientes cuando estos se renderizan
 	const float ING_OFFSET = 40;
 	//espacio entre los ingredientes y los bordes del bocadillo de pensamiento
-	const float BUBBLE_OFFSET_X = 20;
-	const float BUBBLE_OFFSET_Y = 10;
+	const float BUBBLE_OFFSET_X = 10;
+	const float BUBBLE_OFFSET_Y = 20;
 	//distancia del bocadillo al jugador
-	const float BUBBLE_POSY = 40;
-	
+	const float BUBBLE_POSY = 60;
+	//centro del jugador en su eje x
+	const float PLAYER_CENTER_X = 15;
+	//offset de los ingredientes con respecto a la pos X del player para centrarlo sobre su cabeza
+	const float OFFSET_ING_X=5;
 
 private:
-	const int MAX_INGREDIENTS = 4;
+	const int MAX_INGREDIENTS = 5;
 	// vector de ingredientes
 	vector<_ecs::_ingredients_id> ingredients;
 	Texture* texture;
@@ -49,8 +52,8 @@ public:
 		coord = { { 0,0 } };
 		//para demo, luego se borra; 
 		addIngredient(QUESO);
-		addIngredient(HARINA);
-		addIngredient(HUEVO);
+		//addIngredient(HARINA);
+		//addIngredient(HUEVO);
 	}
 	//devuelve por ref
 	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; };

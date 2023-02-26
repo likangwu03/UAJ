@@ -45,19 +45,22 @@ void Ingredients::removeWhenExit() {
 }
 
 void Ingredients::render() {
-	dest_bubble.w = ING_WIDTH * (ingredients.size() - 1) + 2 * BUBBLE_OFFSET_X + ING_OFFSET * (ingredients.size() - 2);
-	dest_bubble.h = ING_HEIGHT + 2 * BUBBLE_OFFSET_Y;
+	if (ingredients.size() >= 1) {
+		dest_bubble.w = ING_WIDTH * (ingredients.size()) + BUBBLE_OFFSET_X + ING_OFFSET*(ingredients.size()-1)*0.25;
+		dest_bubble.h = ING_HEIGHT + 2 * BUBBLE_OFFSET_Y;
 
-	dest.w = ING_WIDTH;
-	dest.h = ING_HEIGHT;
+		dest.w = ING_WIDTH;
+		dest.h = ING_HEIGHT;
 
-	//float player_offset = (transform->getPos().getX()) / 2;
+		//float player_offset = (transform->getPos().getX()) / 2;
 
-	dest_bubble.x = transform->getPos().getX() - dest.w/2;
-	dest_bubble.y = transform->getPos().getY()-BUBBLE_POSY;
+		dest_bubble.x = transform->getPos().getX() + PLAYER_CENTER_X - dest_bubble.w / 2;
+		dest_bubble.y = transform->getPos().getY() - BUBBLE_POSY;
+
+		bubble_tex = &((*sdl).images().at("BUBBLE"));
+		bubble_tex->render(dest_bubble);
+	}
 	
-	bubble_tex = &((*sdl).images().at("BUBBLE"));
-	bubble_tex->render(dest_bubble);
 
 	//Se añade las coordenadas del jugador sobre las coordenadas centradas en 0,0 para que pasen a estar sobre el player
 	for (int i = 0; i < coord.size();++i) {
@@ -69,7 +72,7 @@ void Ingredients::render() {
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
-		dest.x = coord[k].first;
+		dest.x = coord[k].first - OFFSET_ING_X;
 		dest.y = coord[k].second;
 
 		texture->render(dest);
