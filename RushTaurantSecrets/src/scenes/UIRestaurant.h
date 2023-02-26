@@ -46,6 +46,7 @@ public:
 	Money* getMoney() { return moneyTxt; };
 	void showMoneyText();
 	void update();
+	void render();
 	void showTimeText();
 	void checkTime();
 	void renderStar(int x, int y);
