@@ -317,6 +317,12 @@
       "rows": 1
     },
     {
+      "id": "KI_ICON",
+      "file": "assets/Sprites/UI/ki_icon.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "DAILY_MENU_BUTTON",
       "file": "assets/Sprites/UI/daily_menu_button.png",
       "cols": 1,
@@ -329,18 +335,24 @@
       "rows": 1
     },
     {
+      "id": "BASKET_LIST",
+      "file": "assets/Sprites/UI/basket_list.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "CARTEL_HIGHLIGHT",
       "file": "assets/Sprites/UI/cartel_highlight.png",
       "cols": 1,
       "rows": 1
-    },    
+    },
     {
       "id": "ISLAND_HIGHLIGHT",
       "file": "assets/Sprites/UI/island_highlight.png",
       "cols": 1,
       "rows": 1
     },
-    
+
     {
       "id": "TARGET_ICON",
       "file": "assets/Sprites/UI/target_icon.png",
@@ -360,8 +372,8 @@
       "rows": 1
     },
     {
-      "id": "CLOCK_ICON",
-      "file": "assets/Sprites/UI/clock_icon.png",
+      "id": "CLOCK",
+      "file": "assets/Sprites/UI/clock.png",
       "cols": 1,
       "rows": 1
     },
@@ -476,6 +488,12 @@
     {
       "id": "BIN",
       "file": "assets/Sprites/Restaurant/bin.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "BUBBLE",
+      "file": "assets/Sprites/UI/ing_bubble.png",
       "cols": 1,
       "rows": 1
     }

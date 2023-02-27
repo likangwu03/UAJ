@@ -35,7 +35,7 @@ int ClientTrigger::randomTable()
 
 bool ClientTrigger::inputMando() {
 	if (ih->joysticksInitialised()) {
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 			return true;
 		}
 	}

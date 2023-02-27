@@ -18,17 +18,6 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 		coord.push_back({ coord[i - 1].first, coord[i - 1].second });
 		coord[i].first += ING_OFFSET;
 	}
-
-	//No quitar hasta que render ingredientes este probado
-	//int i = 0;
-	//for (i = 0;i < coord.size();++i) {
-	//	coord[i].first -= ING_OFFSET / 2;
-	//	coord[i].second = 0;
-	//}
-	////Nuevas coordenadas del nuevo ingrediente
-	//coord.push_back({ coord[i-1].first, coord[i-1].second});
-	//coord[i].first += ING_OFFSET;
-	//
 }
 
 void Ingredients::removeLastIngredient() {
@@ -56,11 +45,23 @@ void Ingredients::removeWhenExit() {
 }
 
 void Ingredients::render() {
+	if (ingredients.size() >= 1) {
+		dest_bubble.w = ING_WIDTH * (ingredients.size()) + BUBBLE_OFFSET_X + ING_OFFSET*(ingredients.size()-1)*0.25;
+		dest_bubble.h = ING_HEIGHT + 2 * BUBBLE_OFFSET_Y;
+
+		dest.w = ING_WIDTH;
+		dest.h = ING_HEIGHT;
+
+		//float player_offset = (transform->getPos().getX()) / 2;
+
+		dest_bubble.x = transform->getPos().getX() + PLAYER_CENTER_X - dest_bubble.w / 2;
+		dest_bubble.y = transform->getPos().getY() - BUBBLE_POSY;
+
+		bubble_tex = &((*sdl).images().at("BUBBLE"));
+		bubble_tex->render(dest_bubble);
+	}
 	
-	dest.w = ING_WIDTH;
-	dest.h = ING_HEIGTH;
-	debug();
-	float player_offset = (transform->getPos().getX()) / 2;
+
 	//Se añade las coordenadas del jugador sobre las coordenadas centradas en 0,0 para que pasen a estar sobre el player
 	for (int i = 0; i < coord.size();++i) {
 		coord[i].first += transform->getPos().getX();
@@ -71,7 +72,7 @@ void Ingredients::render() {
 	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
-		dest.x = coord[k].first;
+		dest.x = coord[k].first - OFFSET_ING_X;
 		dest.y = coord[k].second;
 
 		texture->render(dest);

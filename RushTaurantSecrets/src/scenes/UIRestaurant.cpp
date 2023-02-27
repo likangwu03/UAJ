@@ -45,10 +45,15 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// inventario (platos)
 	inventory = new Inventory(this);
 
-	// icono de reloj (temporizador)
+	/*// icono de reloj (temporizador)
 	GameObject* clock = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_CLOCK);
 	new Transform(clock, Vector(sdl->width() - 70, 20), Vector(0, 0), 60, 57, 0);
-	new Image(clock, &((*sdl).images().at("CLOCK_ICON")));
+	new Image(clock, &((*sdl).images().at("CLOCK_ICON")));*/
+
+	// reloj (momento del día)
+	GameObject* clock = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_CLOCK);
+	new Transform(clock, Vector(sdl->width() - 140, 20), Vector(0, 0), 120, 117, 0);
+	new Image(clock, &((*sdl).images().at("CLOCK")));
 
 	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
 	// icono de menú de pausa
@@ -68,11 +73,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// gestión del temporizador
-	timeText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TIME_TEXT);
+	/*timeText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_TIME_TEXT);
 	new Transform(timeText, Vector(sdl->width() - 140, 25), Vector(0, 0), 50, 50);
 	std::string strTime = std::to_string(time);
 	timeTextTexture = new Texture(sdl->renderer(), strTime, *f, build_sdlcolor(0x000000FF));
-	timeTextImage = new Image(timeText, timeTextTexture);
+	timeTextImage = new Image(timeText, timeTextTexture);*/
 
 
 	// render de estrellas vacías
@@ -96,27 +101,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Transform(emptyStar5, Vector(260, 25), Vector(0, 0), 30, 32);
 	new Image(emptyStar5, &((*sdl).images().at("EMPTY_STAR")));
 
-	// render de estrellas rellenas
-	GameObject* star1 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
-	new Transform(star1, Vector(100, 25), Vector(0, 0), 30, 32);
-	new Image(star1, &((*sdl).images().at("STAR")));
-
-	GameObject* star2 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
-	new Transform(star2, Vector(140, 25), Vector(0, 0), 30, 32);
-	new Image(star2, &((*sdl).images().at("STAR")));
-
-	GameObject* star3 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
-	new Transform(star3, Vector(180, 25), Vector(0, 0), 30, 32);
-	new Image(star3, &((*sdl).images().at("STAR")));
-
-	GameObject* star4 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
-	new Transform(star4, Vector(220, 25), Vector(0, 0), 30, 32);
-	new Image(star4, &((*sdl).images().at("STAR")));
-
-	GameObject* star5 = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_STAR);
-	new Transform(star5, Vector(260, 25), Vector(0, 0), 30, 32);
-	new Image(star5, &((*sdl).images().at("STAR")));
-
 	reputation = Reputation::instance();
 
 	fullStarTexture = &((*sdl).images().at("STAR"));
@@ -132,7 +116,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 UIRestaurant::~UIRestaurant() {
 	delete f;
 	delete moneyTextTexture;
-	delete timeTextTexture;
+	//delete timeTextTexture;
 }
 
 void UIRestaurant::showMoneyText() {
@@ -149,8 +133,8 @@ void UIRestaurant::showMoneyText() {
 void UIRestaurant::update() {
 	Scene::update();
 	showMoneyText();
-	checkTime();
-	//reputationManager();
+	//checkTime();
+	reputationManager();
 }
 
 void UIRestaurant::showTimeText() {
@@ -183,22 +167,24 @@ void UIRestaurant::renderStar(int x, int y) {
 
 void UIRestaurant::reputationManager() {
 	// comprueba si la reputación ha cambiado
-	if (actReputation != reputation->getReputation()) {
-		actReputation = reputation->getReputation();
-		checkStarsArray();
-		checkRenderStar();
-	}
+	actReputation = reputation->getReputation();
+	checkStarsArray();	
 }
 
 void UIRestaurant::checkStarsArray() {
 	// si la reputación es mayor de ochenta
 	if (actReputation > 80) {
+		stars[0] = true;
+		stars[1] = true;
+		stars[2] = true;
 		stars[3] = true;
 		stars[4] = true;
 	}
 
 	// si la reputación es mayor de sesenta
 	else if (actReputation > 60) {
+		stars[0] = true;
+		stars[1] = true;
 		stars[2] = true;
 		stars[3] = true;
 		stars[4] = false;
@@ -206,9 +192,11 @@ void UIRestaurant::checkStarsArray() {
 
 	// si la reputación es mayor de cuarenta
 	else if (actReputation > 40) {
+		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;
 		stars[3] = false;
+		stars[4] = false;
 	}
 
 	// si la reputación es mayor de veinte
@@ -216,25 +204,52 @@ void UIRestaurant::checkStarsArray() {
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = false;
+		stars[3] = false;
+		stars[4] = false;
 	}
 
 	// si la reputación es mayor de cero
 	else if (actReputation > 0) {
 		stars[0] = true;
 		stars[1] = false;
+		stars[2] = false;
+		stars[3] = false;
+		stars[4] = false;
 	}
 
 	// si la reputación es cero o menor
 	else if (actReputation < 1) {
 		stars[0] = false;
 		stars[1] = false;
+		stars[2] = false;
+		stars[3] = false;
+		stars[4] = false;
 	}
 }
 
 void UIRestaurant::checkRenderStar() {
 	for (int i = 0; i < stars.size(); i++) {
-		if (stars[i] = true) {
-			//renderStar();
+		if (stars[i] == true) {
+			// estrella 1
+			if (i == 0) { renderStar(100, 25); }
+
+			// estrella 2
+			if (i == 1) { renderStar(140, 25); }
+			
+			// estrella 3
+			if (i == 2) { renderStar(180, 25); }
+			
+			// estrella 4
+			if (i == 3) { renderStar(220, 25); }
+			
+			// estrella 5
+			if (i == 4) { renderStar(260, 25); }
+
 		}
 	}
+}
+
+void UIRestaurant::render() {
+	Scene::render();
+	checkRenderStar();
 }

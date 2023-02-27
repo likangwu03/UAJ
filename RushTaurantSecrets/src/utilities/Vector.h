@@ -28,6 +28,7 @@ public:
 	inline Vector& operator-=(Vector const& v) { return *this = *this - v; }
 	inline Vector& operator*=(float num) { return *this = *this * num; }
 	inline Vector& operator/=(float num) { return *this = *this / num; }
+	inline bool operator==(Vector const& v) { return x==v.x && y==v.y; }
 
 	inline float magnitude() const { return sqrtf(powf(x, 2) + powf(y, 2)); }
 	inline Vector getNormalized() const {

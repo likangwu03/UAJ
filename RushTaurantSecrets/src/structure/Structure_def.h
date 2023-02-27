@@ -33,10 +33,12 @@ namespace _ecs {
 		// HUD
 		cmp_BUTTON,
 		cmp_INVENTORY,
+		cmp_SM_INVENTORY,
 		// renders
 		cmp_CLIENTSTATE_RENDER,
 		cmp_HEART_RENDER,
 		cmp_IMAGE,
+		cmp_BUBBLE,
 		// botones
 		cmp_BUTTON_COMP,
 		// animaciones
@@ -72,6 +74,7 @@ namespace _ecs {
 		hdr_DISHCOMB,
 		hdr_CLIENT,
 		hdr_INVENTORY,
+		hdr_SM_INVENTORY,
 		hdr_MONEY_ICON,
 		hdr_REPUTATION,
 		hdr_TARGET,
@@ -86,6 +89,7 @@ namespace _ecs {
 		hdr_BASKET,
 		hdr_BIN,
 		hdr_PRUEBA,
+		hdr_KITCHENISLAND,
 		
 		// Do not erase pls
 		hdr_INVALID
