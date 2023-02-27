@@ -16,6 +16,8 @@ using namespace std;
 class SceneManager:public Singleton<SceneManager> {
 	friend Singleton<SceneManager>;
 public:
+	const float PANTRYSIZE = 83/99;
+	const float GENERALSIZE = 2/3;
 	enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET,PAUSEMENU};
 private:
 	//crea menu

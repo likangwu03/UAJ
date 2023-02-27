@@ -58,23 +58,23 @@ void SceneManager::setScene() {
 		Scenes.push_back(new MainMenu(this));
 		break;
 	case SceneManager::RESTAURANT: {
-		sdlutils().setResizeFactor(0.6666666667);
+		sdlutils().setResizeFactor(GENERALSIZE);
 		if (act == MAINMENU) {
 			//creacion de restaurant y pantry
 			UIRestaurant* uiRest = new UIRestaurant();
 			Restaurant* rest = new Restaurant(uiRest);
-			sdlutils().setResizeFactor(0.8333333333);
+			sdlutils().setResizeFactor(PANTRYSIZE);
 			Pantry* pantry = new Pantry();
 			rest->linkPantry(pantry);
 			pantry->linkRestaurant(rest);
 			Scenes.push_back(rest);
-			sdlutils().setResizeFactor(0.6666666667);
+			sdlutils().setResizeFactor(GENERALSIZE);
 		}
 		else if (act == PANTRY) {
 			Scenes.pop_back();
 		}
 		else if (act == SUPERMARKET) {
-			/*sdlutils().setResizeFactor(0.6666666667);
+			/*sdlutils().setResizeFactor(GENERALSIZE);
 			currentScene = new SuperMarket();
 			Scenes.push_back(currentScene);*/
 
@@ -86,7 +86,7 @@ void SceneManager::setScene() {
 		}
 		}break;
 	case SceneManager::PANTRY: {
-		sdlutils().setResizeFactor(0.8333333333);
+		sdlutils().setResizeFactor(PANTRYSIZE);
 		if (act == RESTAURANT) {			
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
@@ -102,7 +102,7 @@ void SceneManager::setScene() {
 		break;
 	}
 	case SceneManager::SUPERMARKET:
-		sdlutils().setResizeFactor(0.6666666667); // cleon =D
+		sdlutils().setResizeFactor(GENERALSIZE); // cleon =D
 		if (act == MAINMENU || act == DAILYMENU) {
 			UIMarket* uiMarket = new UIMarket();
 			SuperMarket* superMarket = new SuperMarket(uiMarket);
