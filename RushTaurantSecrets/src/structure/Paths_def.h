@@ -137,13 +137,14 @@ namespace _ecs {
 	const Vector OUT_PAY = Vector(40, 13);
 
 	static Route paths[NUM_TABLES * 3 * 4 + 1] = {
-		// EL PRIMER VECTOR DE MESA TIENE QUE EMPEZA POR x = 27 o y = 16
+		// EL PRIMER VECTOR DE MESA TIENE QUE EMPEZA POR x = 27
+		// SINO HAY QUE PONER ENTRY
 		// mesa 1 silla izquierda
 		{{Vector(27, 18), Vector(20, 18), Vector(20, 15)}, east},	// mesa
 		{{Vector(20, 10), CASH_REGISTER}},	// pagar
 		{{Vector(20, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 1 silla derecha
-		{{Vector(24, 16), Vector(24, 15)}, west },	// mesa
+		{{ENTRY, Vector(24, 16), Vector(24, 15)}, west },	// mesa
 		{{Vector(24, 10), CASH_REGISTER}},	// pagar
 		{{Vector(24, 13), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 1 silla abajo
