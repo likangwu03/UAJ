@@ -16,7 +16,7 @@ protected:
 
 public:
 	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
-	virtual ~GameObject();
+	~GameObject();
 
 	//void changeScene(Scene* scene);
 	void refresh();

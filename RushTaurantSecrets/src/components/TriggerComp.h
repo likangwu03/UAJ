@@ -11,7 +11,7 @@ class GameObject;
 //centro es pos de transform
 class TriggerComp :public Component {
 public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_TRIGGER;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_TRIGGER; // Si esto es una clase base, no debería tener esto :)
 
 protected:
 	Vector pos;

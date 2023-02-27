@@ -10,7 +10,6 @@ public:
 
 	Vector(float x = 0, float y = 0) : x(x), y(y) { }
 	Vector(Vector const& v) : x(v.x), y(v.y) { }
-	~Vector() { }
 
 	inline float getX() const { return x; }
 	inline float getY() const { return y; }
@@ -33,7 +32,7 @@ public:
 	inline float magnitude() const { return sqrtf(powf(x, 2) + powf(y, 2)); }
 	inline Vector getNormalized() const {
 		float mag = magnitude();
-		return mag == 0 ? Vector(0, 0) : *this / mag;
+		return mag == 0 ? Vector() : *this / mag;
 	}
 	inline void normalize() { *this = getNormalized(); }
 	// Rotar en sentido horario

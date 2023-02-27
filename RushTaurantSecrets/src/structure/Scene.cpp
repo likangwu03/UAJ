@@ -38,6 +38,8 @@ void Scene::refresh() {
 				}
 				}), //
 			objGroups[n].end());
+
+		for(auto& obj : objGroups[n]) obj->refresh();
 	}
 }
 

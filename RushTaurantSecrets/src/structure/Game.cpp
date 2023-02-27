@@ -44,11 +44,6 @@ void Game::run() {
 
 void Game::render() {
 	sdl->clearRenderer();
-	SDL_Rect destRect;
-	destRect.x = 600;
-	destRect.y = 600;
-	destRect.w = 100;
-	destRect.h = 100;
 	sceneManager->render();
 	sdl->presentRenderer();
 }

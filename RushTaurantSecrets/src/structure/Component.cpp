@@ -6,5 +6,5 @@ Component::Component(GameObject* parent, _ecs::_cmp_id id,bool active) : parent(
 }
 
 void Component::setActive(bool b) {
-	if (b != active) active = b;
+	active = b;
 }
