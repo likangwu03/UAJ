@@ -2,17 +2,18 @@
 #include "../structure/Scene.h"
 #include "../sdlutils/Texture.h"
 #include "../structure/SceneManager.h"
-#include "../components/Button.h"
+#include "../gameObjects/ButtonGO.h"
+
 
 class PauseMenu : public Scene
 {
 private:
-	static void mMenu(SceneManager* sceneManager);
-	static void bResume(SceneManager* sceneManager);
+	static void mMenu();
+	static void bResume();
 
 	GameObject* bg;
-	GameObject* buttonMainMenu;
-	GameObject* buttonResume;
+	ButtonGO* buttonResume;
+	ButtonGO* buttonMainMenu;
 	Texture* image;
 public:
 	PauseMenu(SceneManager* sceneManager);

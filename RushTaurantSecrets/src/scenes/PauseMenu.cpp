@@ -2,24 +2,24 @@
 
 #include "../utils/checkML.h"
 
-void PauseMenu::mMenu(SceneManager* sceneManager) {
-	sceneManager->ChangeScene(SceneManager::MAINMENU);
+void PauseMenu::mMenu() {
+	SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
 }
 
-void PauseMenu::bResume(SceneManager* sceneManager) {
-	sceneManager->ChangeScene(SceneManager::RESTAURANT);
+void PauseMenu::bResume() {
+	SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
 }
 
 PauseMenu::PauseMenu(SceneManager* sceneManager) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "./assets/mainMenuTemp.png");
+	image = new Texture(sdlutils().renderer(), "./assets/pauseMenuTemp.png");
 	new Image(bg, image);
 
-	buttonResume = new GameObject(this);
-	new Button(buttonResume, Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2 * SDLUtils::instance()->height() / 5), sceneManager, bResume);
-	buttonMainMenu = new GameObject(this);
-	new Button(buttonMainMenu, Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3 * SDLUtils::instance()->height() / 5), sceneManager, mMenu);
+	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "RESUME_BUTTON_DOWN",
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2 * SDLUtils::instance()->height() / 5), 385, 130, bResume);
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "MAINM_BUTTON_DOWN",
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
 }
 
 PauseMenu::~PauseMenu() {
