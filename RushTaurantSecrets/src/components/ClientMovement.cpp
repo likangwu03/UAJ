@@ -3,6 +3,8 @@
 #include "../gameObjects/Client.h"
 #include "../utils/checkML.h"
 
+// cleon: [musica de desastre y muerte]: es una búsqueda de 1º. Esto es 2º (que es más cool).
+// esto lo tiene implementado C++.
 bool ClientMovement::hasEveryoneEaten() const {
 	bool found = true;
 	int i = 0;
@@ -49,10 +51,14 @@ string ClientMovement::posGroupToOrientation(int posGroup) const {
 		break;
 	}
 	return orientation;
+
 }
 
 // devuelve una ruta desde la entrada hasta la mesa
+
 Route ClientMovement::tableRoute(string type, string orientation) {
+	// cleon: millones de gatitos han  muerto.
+	// map<tipo, map<direccion>>
 	std::string aux = type + "_TABLE_" + std::to_string(this->assignedTable) + "_" + orientation;
 	auto it = _ecs::stringToEnum.find(aux);
 	if (it != _ecs::stringToEnum.end()) {

@@ -34,11 +34,13 @@ int ClientTrigger::randomTable()
 }
 
 bool ClientTrigger::inputMando() {
-	if (ih->joysticksInitialised()) {
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
-			return true;
-		}
-	}
-	else
-		return false;
+	//if (ih->joysticksInitialised()) {
+	//	if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
+	//		return true;
+	//	}
+	//}
+	//else
+	//	return false;
+
+	return ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B);
 }

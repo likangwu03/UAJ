@@ -4,13 +4,13 @@
 #include "../utils/checkML.h"
 
 CookingMachineComp::CookingMachineComp(GameObject* _parent) :Component(_parent, id),
-state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0), 
-transform(parent->getComponent<Transform>()),anim(parent->getComponent<UIAnimator>()),
+state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0),
+transform(parent->getComponent<Transform>()), anim(parent->getComponent<UIAnimator>()),
 dishComb(DishCombinator::instance()), sdl(SDLUtils::instance())
 {
 	textures.bubble = &((*sdl).images().at("BUBBLE_ICON"));
 	renderPos = transform->getPos();
-	anim->setActive(false); 
+	anim->setActive(false);
 };
 pair<_ecs::_dish_id, bool> CookingMachineComp::canFormDish(vector<_ecs::_ingredients_id> ing) {
 	return dishComb->existDish(ing);
@@ -35,7 +35,7 @@ _ecs::_dish_id CookingMachineComp::pickDish() {
 	_ecs::_dish_id dish_aux = dish;
 	state = available;
 	dish = _ecs::NONE_DISH;
-	
+
 	return dish_aux;
 }
 

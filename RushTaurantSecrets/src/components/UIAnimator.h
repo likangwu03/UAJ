@@ -11,6 +11,10 @@ protected:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_UIANIM;
 
+
+	// cleon: 9 parámetros. MAL. MAAAAALLL. MAAAAAAAAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLLLLLLLLL. MMMUUUYYY MAAALLLL.
+	// estructuras.
+	// #dato: no lo quites.
 	UIAnimator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim = 0, int frRate = FRAMERATE, float w = 0, float h = 0, Vector pos = (-1, -1)) :
 		Animator(parent, t, iniFrame, endFrame, currAnim, frRate, w, h,id) {init(pos);}
 

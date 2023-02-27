@@ -27,7 +27,7 @@ bool DeskComp::assignClients() {
 }
 
 void DeskComp::spreadOverlap() {
-	for(auto it = assigned.begin(); it != assigned.end(); ++it) {
+	for(auto it = assigned.begin(); it != assigned.end(); ++it) { // cleon: regreso al futuro con los iteradores.
 		(*it)->getComponent<ClientTrigger>()->isOverlapping();
 	}
 }

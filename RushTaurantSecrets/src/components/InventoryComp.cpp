@@ -10,7 +10,7 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	dishes.reserve(3);
 	dishesBool.reserve(3);
 	// inicializa el vector de booleanos
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) { // cleon: este "3", casi seguro que es una constante de juego (idealmente, un parámetro)
 		dishesBool.push_back(false);
 	}
 	for (int i = 0; i < 3; i++) {	
@@ -49,7 +49,7 @@ void InventoryComp::freeDish() {
 int InventoryComp::freeSpace() {
 	int i = 0;
 	bool encontrado = false;
-	while (i < 3 && !encontrado) {
+	while (i < 3 && !encontrado) { // cleon: súper 3.
 		// si hay un hueco libre
 		if (dishesBool[i] == false) return i;
 		// si no hay un hueco libre
@@ -77,7 +77,7 @@ void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
 
 void InventoryComp::render() {
 	// recorre la lista de platos para renderizarlos
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) { // cleon: Super 3 is back
 		// si el plato est?en el inventario, se renderiza
 		if (dishesBool[i] == true) {
 			int x, y;
@@ -88,6 +88,9 @@ void InventoryComp::render() {
 }
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
+
+	// cleon: no puedo añadir nada a esto. es simplemente bello.
+	// cleon: e inexplicable.
 	x = 35;
 	if (i == 0)  y = 490;
 	else if (i == 1) y = 560;
@@ -95,36 +98,36 @@ void InventoryComp::setPosition(int i, int& x, int& y) {
 	
 }
 
-void InventoryComp::setCell(char key) {
+void InventoryComp::setCell(char key) { // cleon: SDL_KEY
 	// si no hay ninguna celda seleccionada, selecciona la primera celda libre
 	if (cellSelected == -1) freeSpace();
 	else {
 		// si se ha pulsado la tecla izquierda
-		if (key == 'l') cellSelected = firstDishL(cellSelected);
+		if (key == 'l') cellSelected = firstDishL(cellSelected);// cleon: SDL_KEY
 		// si se ha pulsado la tecla derecha
-		else if (key == 'r') cellSelected = firstDishR(cellSelected);
+		else if (key == 'r') cellSelected = firstDishR(cellSelected);// cleon: SDL_KEY
 	}
 }
 
 void InventoryComp::handleEvents() {
 	// flecha izquierda
 	if (ih->isKeyDown(SDLK_LEFT))
-		setCell('l');
+		setCell('l');// cleon: SDL_KEY
 	// flecha derecha
 	else if (ih->isKeyDown(SDLK_RIGHT))
-		setCell('r');
+		setCell('r');// cleon: SDL_KEY
 }
 
 // busca la siguiente posición ocupada en el inventario a la izquierda de la casilla seleccionada
 int InventoryComp::firstDishL(int num) {
 	int i = 0;
 	int n = num;
-	while (i < 3) {
+	while (i < 3) { // super 3: love and thunder.
 		// si el índice del inventario es 0
-		if (n == 0) n = 2;
+		if (n == 0) n = 2; // cleon: super 3 contra super 2: la batalla final.
 		else n--;
 
-		if (dishesBool[n] == true) return true;
+		if (dishesBool[n] == true) return true; // cleon: música. armonía. PAZ. Te perdonamos. Don't do it again.
 		++i;
 	}
 	return num;
@@ -139,7 +142,7 @@ int InventoryComp::firstDishR(int num) {
 		if (n == 2) n = 0;
 		else n++;
 
-		if (dishesBool[n] == true) return true;
+		if (dishesBool[n] == true) return true; // cleon: ugh.
 		++i;
 	}
 	return num;

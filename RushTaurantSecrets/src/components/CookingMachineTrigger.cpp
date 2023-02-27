@@ -10,7 +10,7 @@ void CookingMachineTrigger::isOverlapping() {
 
 	CookingMachineComp::State s = cook->getState();
 	pair<_ecs::_dish_id, bool>aux;
-	switch (s) {
+	switch (s) { // cleon: otra variable súper descriptiva.
 	case CookingMachineComp::available:
 	
 		aux = cook->canFormDish(other_->getComponent<Ingredients>()->getIngredients());

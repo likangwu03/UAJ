@@ -10,13 +10,13 @@ Pantry::Pantry() :rest(nullptr) { init(); }
 Pantry::~Pantry() {
 	rest->linkPantry(nullptr);
 	delete rest;
-	delete cm;
+	delete cm; // cleon: súper nombre. "con Murcia"? "coge maletas?" "carmen miente"?
 }
 void Pantry::init() {
 	cm = new CollisionsManager(this);
 	new Player(this);
 	GameObject* map = new GameObject(this);
-	new MapCreator(map, "./assets/tilemaps/pantry.tmx", sdlutils().renderer());
+	new MapCreator(map, "./assets/tilemaps/pantry.tmx", sdlutils().renderer()); // cleon: "./" nunca se necesita
 }
 
 void Pantry::linkRestaurant(Restaurant* rest) {

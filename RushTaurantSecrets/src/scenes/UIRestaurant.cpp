@@ -17,6 +17,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = Money::init(moneyContainer, 200);
 
+
+	// cleon: haced una función/método con parámetros: KISS (keep it simple [stupid])
 	// icono de reputación
 	GameObject* reputationIcon = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_REPUTATION);
 	new Transform(reputationIcon, Vector(20, 20), Vector(0, 0), 64, 44, 0);
@@ -114,7 +116,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 
 UIRestaurant::~UIRestaurant() {
-	delete f;
+	delete f; // cleon: es imposible que 'f' sea un nombre razonable =D
 	delete moneyTextTexture;
 	//delete timeTextTexture;
 }
@@ -131,7 +133,7 @@ void UIRestaurant::showMoneyText() {
 }
 
 void UIRestaurant::update() {
-	Scene::update();
+	Scene::update(); // cleon: falta el delta de tiempo (frametime)
 	showMoneyText();
 	//checkTime();
 	reputationManager();
@@ -173,7 +175,7 @@ void UIRestaurant::reputationManager() {
 
 void UIRestaurant::checkStarsArray() {
 	// si la reputación es mayor de ochenta
-	if (actReputation > 80) {
+	if (actReputation > 80) { // cleon: 80, 60... ¡no! esto provoca guerras y pandemias. CONSTANTES. Constantes son paz y amor.
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;
@@ -229,22 +231,26 @@ void UIRestaurant::checkStarsArray() {
 
 void UIRestaurant::checkRenderStar() {
 	for (int i = 0; i < stars.size(); i++) {
-		if (stars[i] == true) {
+		//if (stars[i] == true) {
+		if (stars[i]) {
 			// estrella 1
-			if (i == 0) { renderStar(100, 25); }
+			//if (i == 0) { renderStar(100, 25); }
 
-			// estrella 2
-			if (i == 1) { renderStar(140, 25); }
-			
-			// estrella 3
-			if (i == 2) { renderStar(180, 25); }
-			
-			// estrella 4
-			if (i == 3) { renderStar(220, 25); }
-			
-			// estrella 5
-			if (i == 4) { renderStar(260, 25); }
+			//// estrella 2
+			//else if (i == 1) { renderStar(140, 25); }
+			//
+			//// estrella 3
+			//else if (i == 2) { renderStar(180, 25); }
+			//
+			//// estrella 4
+			//else if (i == 3) { renderStar(220, 25); }
+			//
+			//// estrella 5
+			//else if (i == 4) { renderStar(260, 25); }
 
+
+			// desplazamiento de 100, y 40 por estrella
+			renderStar(100 + i * 40, 25);
 		}
 	}
 }

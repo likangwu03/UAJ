@@ -14,6 +14,8 @@ CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 	grp_Interactable = scene_->getGroup(_ecs::grp_INTERACTABLE);
 }
 
+
+// cleon: todos los métodos con el mismo standard de código (camel case o lo que queráis)
 void CollisionsManager::update() {
 	Collision();
 	Overlap();
@@ -27,6 +29,7 @@ void CollisionsManager::Collision() {
 			SDL_FRect playerRect = objCol->getRect();
 			playerRect.x += dir.getX();
 			playerRect.y += dir.getY();
+			// cleon: recordad la cach <3
 			for (auto col : *grup_Collisions) {
 				Transform* colT = col->getComponent<Transform>();
 				SDL_FRect colRect = { colT->getPos().getX(),colT->getPos().getY(),colT->getW(),colT->getH() };

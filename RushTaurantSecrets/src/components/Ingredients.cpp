@@ -68,8 +68,8 @@ void Ingredients::render() {
 		coord[i].second += (transform->getPos().getY() - ING_POSY);
 	}
 	// se pintan todas las texturas que hay en el vector
-	int k = 0;
-	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {
+	int k = 0; // mejor con un iterador.
+	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {// cleon: bienvenidos a 1999. muy retro.
 		_ecs::_ingredients_id ingr = *it;
 		texture = &((*sdl).images().at(to_string(ingr)));
 		dest.x = coord[k].first - OFFSET_ING_X;
@@ -81,15 +81,17 @@ void Ingredients::render() {
 	}
 	//Se eliminan las coordenadas del player para que las coordenadas vuelvan a ser sobre 0,0 y no se se haga una suma
 	//sobre la anterior en cada tick y que salgan de la pantalla
-	for (int i = 0; i < coord.size();++i) {
+	for (int i = 0; i < coord.size();++i) { // cleon: bienvenidos a 1975.
 		coord[i].first -= transform->getPos().getX();
 		coord[i].second -= (transform->getPos().getY() - ING_POSY);
 	}
 }
 
 void Ingredients::debug() {
-	bool func = false;
-	if (ingredients.size() == coord.size()) func = true;
+	/*bool func = false;
+	if (ingredients.size() == coord.size()) func = true;*/
 
 	//cout << func;
+
+	cout << (ingredients.size() == coord.size()); // cleon. PLEASE.
 }

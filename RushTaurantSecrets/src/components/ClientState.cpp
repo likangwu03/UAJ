@@ -20,13 +20,13 @@ void ClientState::setState(States state) {
 
 
 void ClientState::update() {
-	int delta = sdlutils().currRealTime() - lastTick;
+	int delta = sdlutils().currRealTime() - lastTick; // cleon: lágrimas en mi corazón.
 	lastTick = sdlutils().currRealTime();
 	
 
 	// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
 	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING || state == FINISH_EAT) {
-		if (delta < 100) {
+		if (delta < 100) { // cleon: este 100 seguro que es parámetro de juego.
 			happiness -= DECREASE;
 		}
 
@@ -48,7 +48,7 @@ void ClientState::update() {
 
 		// Si est?pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
 		if (state == THINKING && timer >= THINKINGTIME) {
-#ifdef _DEBUG
+#ifdef _DEBUG // cleon: este #if me hace muy feliz.
 			cout << "I know what I want to eat" << endl;
 #endif
 			setState(EATING);	// TAKEMYORDER

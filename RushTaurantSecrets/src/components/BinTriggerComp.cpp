@@ -9,6 +9,7 @@ BinTriggerComp::BinTriggerComp(GameObject* parent, Vector pos_, float width_, fl
 
 
 void BinTriggerComp::isOverlapping() {
+	// cleon: mejor en 1 if
 	if (ih->joysticksInitialised()) {
 		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
 	}
@@ -16,4 +17,5 @@ void BinTriggerComp::isOverlapping() {
 	//temporal, no comprueba si esta el plato que quiere, solo comprueba que el jugador tenga platos
 	if (inventory->freeSpace() != 0) 
 		inventory->freeDish();
+
 }

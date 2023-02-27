@@ -25,7 +25,7 @@ vector<_ecs::DishInfo> DailyMenuComp::randomMenu()
 	//set para evitar que hayan dos platos iguales en el mismo menu
 	set<uint8_t> aux;
 	vector<_ecs::DishInfo> temp;
-	int t;
+	int t; // cleon: arriba las variables descriptivas. no lo copio, pero lo pienso.
 	int i = 0;
 
 	//si el jugador ha matado a alguien se añade un plato de carne aleatorio
@@ -38,7 +38,8 @@ vector<_ecs::DishInfo> DailyMenuComp::randomMenu()
 	// Menú del día aleatorio (lo rellena con 4 platos diferentes
 	// entre sí y los pasa a un vector para poder acceder a ellos)
 	// aux sirve para asegurarse de que no se inserta dos veces el mismo plato en el menu
-	for (; i < menuSize; i++) {
+
+	for (; i < menuSize; i++) { // cleon: bienvenidos a 1971. Si os coge el de EDA os mata. y yo ayudo.
 		t = rand() % _ecs::NUM_DISH;
 		if (aux.insert(_ecs::Dishes[t].id).second) {
 			temp.push_back(_ecs::Dishes[t]);

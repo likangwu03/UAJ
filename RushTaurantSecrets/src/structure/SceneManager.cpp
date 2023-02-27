@@ -44,6 +44,9 @@ void SceneManager::clear() {
 	}
 	Scenes.clear();
 }
+
+
+// cleon: no pongáis esto con un switch, sino con polimorfismo dentro de cada escena. 'SceneManager' no puede saber qué escenas hay.
 void SceneManager::setScene() {
 	Scene* aux;
 	switch(change) {
@@ -87,7 +90,7 @@ void SceneManager::setScene() {
 		if (act == RESTAURANT) {			
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
-			Scenes.push_back(aux);
+			Scenes.push_back(static_cast<Restaurant*>(aux)->getPantry());
 		}
 		}break;
 	case SceneManager::DAILYMENU: {
@@ -99,7 +102,7 @@ void SceneManager::setScene() {
 		break;
 	}
 	case SceneManager::SUPERMARKET:
-		sdlutils().setResizeFactor(0.6666666667);
+		sdlutils().setResizeFactor(0.6666666667); // cleon =D
 		if (act == MAINMENU || act == DAILYMENU) {
 			UIMarket* uiMarket = new UIMarket();
 			SuperMarket* superMarket = new SuperMarket(uiMarket);

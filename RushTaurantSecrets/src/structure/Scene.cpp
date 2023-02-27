@@ -42,6 +42,8 @@ void Scene::refresh() {
 }
 
 void Scene::update() {
+
+	// cleon: for (auto objGroup : objGroups) { (también en los otros)
 	for (int n = 0; n < _ecs::grpNum; n++) {
 		for (auto obj : objGroups[n]) obj->update();
 	}

@@ -18,7 +18,7 @@ void Game::run() {
 		
 		ih->refresh();
 		handleEvents();
-		update();
+		update(); // cleon es malo y os lo deja para que sufráis >=D
 		refresh();
 		render();
 
