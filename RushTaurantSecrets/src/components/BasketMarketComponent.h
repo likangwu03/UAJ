@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "../structure/Food_def.h"
 #include "../sdlutils/SDLUtils.h"
+#include "Transform.h"
 
 using namespace std;
 

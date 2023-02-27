@@ -57,6 +57,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Transform(clock, Vector(sdl->width() - 140, 20), Vector(0, 0), 120, 117, 0);
 	new Image(clock, &((*sdl).images().at("CLOCK")));
 
+	// 
+
 	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
 	// icono de menú de pausa
 	//GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);

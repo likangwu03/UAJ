@@ -26,6 +26,7 @@ private:
 	Font* f;
 	GameObject* moneyText;
 	GameObject* timeText;
+	GameObject* arrow;
 	Texture* moneyTextTexture;
 	Texture* timeTextTexture;
 	Texture* fullStarTexture;
