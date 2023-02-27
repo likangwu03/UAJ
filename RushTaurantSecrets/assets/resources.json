@@ -329,6 +329,30 @@
       "rows": 1
     },
     {
+      "id": "RESUME_BUTTON_UP",
+      "file": "assets/Sprites/UI/ResumeButtonUp.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "RESUME_BUTTON_DOWN",
+      "file": "assets/Sprites/UI/ResumeButtonDown.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "MAINM_BUTTON_UP",
+      "file": "assets/Sprites/UI/MainMenuButtonUp.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "MAINM_BUTTON_DOWN",
+      "file": "assets/Sprites/UI/MainMenuButtonDown.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_YELLOW",
       "file": "assets/Sprites/UI/basket_yellow.png",
       "cols": 1,

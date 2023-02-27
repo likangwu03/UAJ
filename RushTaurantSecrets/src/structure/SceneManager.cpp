@@ -79,7 +79,7 @@ void SceneManager::setScene() {
 		else if (act == PAUSEMENU) {
 			Scene* aux = Scenes.back();
 			Scenes.pop_back();
-			Scenes.push_back(static_cast<Pantry*>(aux)->getRestaurant());
+			delete aux;
 		}
 		}break;
 	case SceneManager::PANTRY: {
