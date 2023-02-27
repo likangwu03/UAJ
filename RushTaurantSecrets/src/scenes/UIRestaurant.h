@@ -13,6 +13,7 @@ class Bin;
 class Reputation;
 
 using namespace std;
+using namespace _ecs;
 
 // UI del restaurante 
 class UIRestaurant : public Scene
@@ -23,7 +24,7 @@ private:
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
-	Font* f;
+	Font* font;
 	GameObject* moneyText;
 	GameObject* timeText;
 	GameObject* arrow;
@@ -45,6 +46,8 @@ public:
 
 	Inventory* getInventory() { return inventory; };
 	Money* getMoney() { return moneyTxt; };
+	void createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
+		Vector position, float width, float height, float rotation);
 	void showMoneyText();
 	void update();
 	void render();
@@ -54,5 +57,6 @@ public:
 	void reputationManager();
 	void checkStarsArray();
 	void checkRenderStar();
+	void createEmptyStar(Vector pos);
 };
 
