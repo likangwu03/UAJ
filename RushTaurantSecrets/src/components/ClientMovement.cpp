@@ -1,9 +1,59 @@
 #include "ClientMovement.h"
 #include "../objects/ClientsManager.h"
+#include "../gameObjects/Client.h"
+#include "../utils/checkML.h"
+
+bool ClientMovement::hasEveryoneEaten() const {
+	bool found = true;
+	int i = 0;
+	// se busca un integrante del grupo que no haya termiando de comer
+	while (i < mates.size() && found) {
+		if (mates[i]->getComponent<ClientState>()->getState() < ClientState::FINISH_EAT) {
+			found = false;
+		}
+		++i;
+	}
+	return found;
+}
+
+void ClientMovement::goOut(ClientState::States currentState) {
+	int i = 0;
+	bool found = false;
+	// si ya se ha ido no se realiza la comprobación
+	while (currentState != ClientState::OUT && i < mates.size() && !found) {
+		// cuando se hayan marchado, por si uno de sus compañeros ha sido eliminado y quiere acceder a él
+		if (mates[i] != nullptr) {
+			if (mates[i]->getComponent<ClientState>()->getState() == ClientState::OUT) {
+				clientState->unHappy();
+				found = true;
+			}
+		}
+		++i;
+	}
+}
+
+string ClientMovement::posGroupToOrientation(int posGroup) const {
+	string orientation;
+	switch (posGroup) {
+	case 0:
+		orientation = "LEFT";
+		break;
+	case 1:
+		orientation = "RIGHT";
+		break;
+	case 2:
+		orientation = "UP";
+		break;
+	case 3:
+		orientation = "DOWN";
+		break;
+	}
+	return orientation;
+}
 
 // devuelve una ruta desde la entrada hasta la mesa
-Route ClientMovement::tableRoute(string type) {
-	std::string aux = type + "_TABLE_" + std::to_string(this->assignedTable);
+Route ClientMovement::tableRoute(string type, string orientation) {
+	std::string aux = type + "_TABLE_" + std::to_string(this->assignedTable) + "_" + orientation;
 	auto it = _ecs::stringToEnum.find(aux);
 	if (it != _ecs::stringToEnum.end()) {
 		return paths[it->second];
@@ -15,13 +65,14 @@ void ClientMovement::colocateEntrance() {
 	Vector entrance = _ecs::ENTRY;
 	// se calcula a partir de su pos en la cola de entrada
 	entrance.setX(entrance.getX() + posEntrance);
+	entrance.setY(entrance.getY() - posGroup);
 	// se mueve
 	straightMovement->addPath(vector<Vector>{entrance});
 }
 
 // desde la mesa hasta la caja registradora
 void ClientMovement::colocateCashRegister() {
-	vector<Vector> payPath = tableRoute("PAY").points;
+	vector<Vector> payPath = tableRoute("PAY", posGroupToOrientation(posGroup)).points;
 	straightMovement->addPath(payPath);
 	outTable();
 }
@@ -42,7 +93,8 @@ void ClientMovement::abandonPay() {
 
 	// primer punto
 	int fWidth = sdl->width() / 40;
-	int xExit = transform->getPos().getX() / fWidth;
+	// la x del primer punto se saca a partir de la x del último punto a donde llegue
+	int xExit = straightMovement->getLastPoint().getX() / fWidth;
 	int yExit = _ecs::OUT_PAY.getY();
 	Vector firstPoint = Vector(xExit, yExit);
 	leave.push_back(firstPoint);
@@ -53,6 +105,12 @@ void ClientMovement::abandonPay() {
 	straightMovement->addPath(leave);
 }
 
+void ClientMovement::abandonEntrance() {
+	Vector end = _ecs::OUT_ENTRY;
+	end.setY(end.getY() - posGroup);
+	straightMovement->addPath(vector<Vector>{end});
+}
+
 // se establece su nuevo estado, su orientación y la animación a ejecutar
 void ClientMovement::stationary(ClientState::States state, GOOrientation orientation, movementState mov) {
 	clientState->setState(state);
@@ -60,8 +118,8 @@ void ClientMovement::stationary(ClientState::States state, GOOrientation orienta
 	transform->setMovState(mov);
 }
 
-ClientMovement::ClientMovement(GameObject* parent, int posEntrance) :
-	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1) {
+ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup) :
+	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), posGroup(posGroup) {
 	sdl = SDLUtils::instance();
 	render = parent->getComponent<ClientStateRender>();
 	clientState = parent->getComponent<ClientState>();
@@ -87,7 +145,7 @@ void ClientMovement::recolotatePay() {
 // asignar mesa
 void ClientMovement::assignTable(int assignedTable) {
 	this->assignedTable = assignedTable;
-	straightMovement->addPath(tableRoute("ARRIVE").points);
+	straightMovement->addPath(tableRoute("ARRIVE", posGroupToOrientation(posGroup)).points);
 	outEntrance();
 	clientState->setState(ClientState::ASSIGNED);
 }
@@ -102,6 +160,9 @@ void ClientMovement::payAndLeave() {
 void ClientMovement::update() {
 	ClientState::States currentState;
 	currentState = clientState->getState();
+
+	goOut(currentState);
+
 	switch (currentState) {
 	case ClientState::START:
 		if (straightMovement->hasFinishedPath()) {
@@ -116,18 +177,19 @@ void ClientMovement::update() {
 		break;
 	case ClientState::ASSIGNED:
 		if (straightMovement->hasFinishedPath()) {
-			stationary(ClientState::THINKING, tableRoute("ARRIVE").orientation, sitting);
+			stationary(ClientState::THINKING, tableRoute("ARRIVE", posGroupToOrientation(posGroup)).orientation, sitting);
 			// para que renderice el estado de pensar
 			render->renderThinkingState();
 		}
 		break;
 	case ClientState::FINISH_EAT:
 		// se comprueba si puede ir a la cola de pagar
-		if (clientsManager->canOccupyPay()) {
+		// es decir, todos los integrantes del grupo han terminado de comer y la cola de pagar tiene espacio
+		if (hasEveryoneEaten() && clientsManager->canOccupyPay(mates)) {
 			clientState->setState(ClientState::HAS_LEFT);
 		}
 		break;
-	// un ciclo de espera para que las mesas oportunas se desocupen
+		// un ciclo de espera para que las mesas oportunas se desocupen
 	case ClientState::HAS_LEFT:
 		colocateCashRegister();
 		clientState->setState(ClientState::REGISTER);
@@ -152,11 +214,11 @@ void ClientMovement::update() {
 		break;
 	case ClientState::OUT:
 		if (posEntrance != -1) {
-			straightMovement->addPath(vector<Vector>{_ecs::OUT_ENTRY});
+			abandonEntrance();
 			outEntrance();
 		}
 		else if (assignedTable != -1) {
-			straightMovement->addPath(tableRoute("OUT").points);
+			straightMovement->addPath(tableRoute("OUT", posGroupToOrientation(posGroup)).points);
 			outTable();
 		}
 		else if (posPay != -1) {

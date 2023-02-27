@@ -6,10 +6,12 @@
 #include "../components/ClientStateRender.h"
 #include "../structure/GameObject.h"
 #include "../structure/Component.h"
+#include <vector>
 
 using namespace std;
 
 class ClientsManager;
+class Client;
 
 class ClientMovement : public Component {
 private:
@@ -22,9 +24,19 @@ private:
 	int posPay;
 	ClientStateRender* render;
 	ClientsManager* clientsManager;
+	vector<Client*> mates;
+	int posGroup;
+
+	// comprobar si todos los integrantes del grupo han terminado de comeer
+	bool hasEveryoneEaten() const;
+
+	// se comprueba si alguno de sus compañero se ha marchado para que él también se vaya
+	void goOut(ClientState::States currentState);
+
+	string posGroupToOrientation(int posGroup) const;
 
 	// devuelve una ruta desde la entrada hasta la mesa
-	Route tableRoute(string type);
+	Route tableRoute(string type, string orientation);
 
 	// llega al restaurante y se coloca en la entrada
 	void colocateEntrance();
@@ -53,6 +65,9 @@ private:
 	// ha abandonado la cola de la caja sin pagar
 	void abandonPay();
 
+	// ha abandonado la cola de entrada por perder felicidad
+	void abandonEntrance();
+
 	// se establece su nuevo estado, su orientación y la animación a ejecutar
 	void stationary(ClientState::States state, GOOrientation orientation, movementState mov);
 
@@ -60,7 +75,7 @@ public:
 
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
-	ClientMovement(GameObject* parent, int posEntrance);
+	ClientMovement(GameObject* parent, int posEntrance, int posGroup);
 
 	// recolocarse en la entrada si alguien se ha marchado
 	void recolocateEntrance();
@@ -96,5 +111,10 @@ public:
 		return assignedTable;
 	}
 
-	void update();
+	// pasar el grupo de clientes al que pertence
+	void setGroup(vector<Client*> mates) {
+		this->mates = mates;
+	}
+
+	virtual void update();
 };

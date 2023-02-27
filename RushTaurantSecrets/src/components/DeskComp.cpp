@@ -14,6 +14,7 @@ DeskComp::DeskComp(GameObject* parent) : TriggerComp(parent, Vector(), 0, 0), su
 }
 
 bool DeskComp::assignClients() {
+	/*
 	if(!assigned.empty() || sucia) return false;
 	GameObject* client = ClientsManager::get()->getFirstEntrance();
 	if(client->getComponent<ClientTrigger>()->isSelected()) {
@@ -21,6 +22,7 @@ bool DeskComp::assignClients() {
 		ClientsManager::get()->assignFirstClient(num);
 		return true;
 	}
+	*/
 	return false;
 }
 

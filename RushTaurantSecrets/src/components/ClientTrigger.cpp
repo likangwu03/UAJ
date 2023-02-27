@@ -10,7 +10,7 @@ void ClientTrigger::isOverlapping()
 		switch (state)
 		{
 		case ClientState::ENTRANCE:
-			ClientsManager::get()->assignFirstClient(randomTable());
+			ClientsManager::get()->assignFirstGroup(randomTable());
 			break;
 		case ClientState::TAKEMYORDER:
 			clientState->takeOrder();

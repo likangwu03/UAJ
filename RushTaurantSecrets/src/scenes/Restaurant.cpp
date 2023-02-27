@@ -40,7 +40,7 @@ void Restaurant::init() {
 
 	// manager de clientes
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 10);
+	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 2);
 	ThiefsManager::init(managerContainer, 2, 6, true, 5 * 1000);
 	// me da un error raro
 	// ManagerContainer(menu, 6, 2, 10, 2, 6, true, 5);

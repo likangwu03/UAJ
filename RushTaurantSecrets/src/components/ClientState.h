@@ -33,6 +33,10 @@ public:
 	States getState() const;
 	void setState(States state);
 
+	void unHappy() {
+		happiness = 0;
+	}
+
 private:
 	States state;
 

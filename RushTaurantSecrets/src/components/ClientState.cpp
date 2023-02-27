@@ -4,7 +4,7 @@
 #include "../utils/checkML.h"
 
 ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id),
-	state(START), happiness(80), timer(0), lastTick(sdlutils().currRealTime()), 
+	state(START), happiness(60), timer(0), lastTick(sdlutils().currRealTime()), 
 	availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) {
 	render->clientStateIsReady(); //decirle que ya est¨¢ creado
 }
@@ -26,8 +26,9 @@ void ClientState::update() {
 
 	// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
 	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING || state == FINISH_EAT) {
-		if (delta < 100)
+		if (delta < 100) {
 			happiness -= DECREASE;
+		}
 
 		// Si la felicidad llega a 0, se pone el estado a OUT
 		// (DE MOMENTO TARDA COMO 1 MINUTO)

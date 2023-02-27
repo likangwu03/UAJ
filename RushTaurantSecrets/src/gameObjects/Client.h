@@ -17,7 +17,7 @@ class Client : public GameObject {
 
 public:
 
-	Client(Scene* scene, string sprite, Vector origin, vector<_ecs::_dish_id> menu, int posEntrance, float speed) 
+	Client(Scene* scene, string sprite, Vector origin, vector<_ecs::_dish_id> menu, int posEntrance, float speed, int posGroup) 
 		: GameObject(scene, _ecs::grp_CLIENTS) {
 		Transform* t = new Transform(this, Vector(origin), Vector(0, 0), 48, 96);
 		new CharacterAnimator(this, sprite, 18, 24, 1);
@@ -25,7 +25,7 @@ public:
 		new StraightMovement(this, speed);
 		new ClientStateRender(this);
 		new ClientState(this, menu);
-		new ClientMovement(this, posEntrance);
+		new ClientMovement(this, posEntrance, posGroup);
 		new ClientTrigger(this, Vector(0, 0), 48, 96);
 		new HeartRender(this, &sdlutils().images().at("Heart"), 15, 15, 20, -7);
 	}

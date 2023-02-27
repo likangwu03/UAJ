@@ -32,6 +32,7 @@ void Scene::refresh() {
 					return false;
 				}
 				else {
+					obj = nullptr;
 					delete obj;
 					return true;
 				}

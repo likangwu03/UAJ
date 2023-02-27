@@ -127,6 +127,10 @@ public:
 		this->speed = speed;
 	}
 
+	Vector getLastPoint() const {
+		return path.points.back();
+	}
+
 	virtual void update() {
 		// recorriendo la recta
 		if (!hasArrivedPoint()) {

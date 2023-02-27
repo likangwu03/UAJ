@@ -4,6 +4,7 @@
 #include "../structure/Manager.h"
 #include "../structure/Scene.h"
 #include "../structure/Paths_def.h"
+#include "../utils/checkML.h"
 #include <vector>
 #include <list>
 
@@ -20,14 +21,15 @@ private:
 	const int TEST_PAY = 4;
 
 	const int MAX_ENTRANCE = 3;
-	const int MAX_PAY = 2;
+	const int MAX_PAY = 7;
 
 	// cola con la entrada
-	list<Client*> entrance;
+	list<vector<Client*>> entrance;
 	// cola con la caja de pagar
+	// los clientes se colocan todos en fila
 	list<Client*> pay;
-	// puntero al grupo con todos los clientes
-	vector<GameObject*>* clients;
+	// lista con los grupos de clientes
+	list<vector<Client*>> clientsGroups;
 	// menú del día
 	vector<_ecs::_dish_id> menu;
 	Scene* scene;
@@ -43,12 +45,12 @@ private:
 
 	// añadir un cliente cada cierto tiempo
 	void addFrequently() {
-		if (clients->size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+		if (clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 			float time = sdl->currRealTime() - lastClientTime;
 			if (time > timer) {
 				lastClientTime = sdl->currRealTime();
-				// se crea un nuevo cliente
-				createClient();
+				// se crea un nuevo grupo de clientes
+				createGroupClients();
 			}
 		}
 		else {
@@ -62,10 +64,12 @@ private:
 	}
 
 	// recolar en la entrada al resto si se ha ido algún cliente
-	void recolocateEntranceAll(std::list<Client*>::iterator it) {
+	void recolocateEntranceAll(std::list<vector<Client*>>::iterator it) {
 		for (it; it != entrance.end(); ++it) {
-			Client* c = *it;
-			c->getComponent<ClientMovement>()->recolocateEntrance();
+			vector<Client*> group = *it;
+			for (int i = 0; i < group.size(); ++i) {
+				group[i]->getComponent<ClientMovement>()->recolocateEntrance();
+			}
 		}
 	}
 
@@ -77,26 +81,64 @@ private:
 		}
 	}
 
+	// crear un grupo de clientes
+	void createGroupClients() {
+		vector<Client*> group;
+
+		// número de clientes que hay en el grupo
+		int num = sdl->rand().nextInt(1, 5);
+		for (int i = num - 1; i >= 0; --i) {
+			/*
+			string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 10));
+
+			Vector origin = _ecs::OUT_ENTRY;
+			origin.setY(origin.getY() - i);
+
+			group.push_back(new Client(scene, sprite, relativeToGlobal(origin), menu, entrance.size(), speed, i));
+			*/
+
+			group.push_back(createClient(i));
+		}
+
+		entrance.push_back(group);
+		clientsGroups.push_back(group);
+
+		for (int i = 0; i < group.size(); ++i) {
+			group[i]->getComponent<ClientMovement>()->setGroup(group);
+		}
+	}
+
 	// crear un cliente
-	void createClient() {
+	Client* createClient(int posGroup) {
 		string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 10));
-		entrance.push_back(new Client(scene, sprite, relativeToGlobal(_ecs::OUT_ENTRY), menu, entrance.size(), speed));
+
+		// a partir de la posición el grupo se calcula donde empieza
+		Vector origin = _ecs::OUT_ENTRY;
+		origin.setY(origin.getY() - posGroup);
+
+		return new Client(scene, sprite, relativeToGlobal(origin), menu, entrance.size(), speed, posGroup);
 	}
 
 	// comprobar si algún cliente ha llegado a la caja registradora y añadirlo a la cola de pagar
+	// se añaden todos los clientes, sin importar del grupo que sean, en fila
 	void checkCashRegister() {
-		for (int i = 0; i < clients->size(); ++i) {
-			GameObject* g = (*clients)[i];
-			if (g->getComponent<ClientState>()->getState() == ClientState::CASH_REGISTER) {
-				Client* client = dynamic_cast<Client*> (g);
-				// se le indica la posición a ocupar en la cola
-				g->getComponent<ClientMovement>()->setPosPay(pay.size());
-				pay.push_back(client);
+		// lista de grupos
+		for (auto it = clientsGroups.begin(); it!=clientsGroups.end(); ++it) {
+			vector<Client*> group = *it;
+			// grupo
+			for (int i = 0; i < group.size(); ++i) {
+				Client* g = group[i];
+				if (g->getComponent<ClientState>()->getState() == ClientState::CASH_REGISTER) {
+					Client* client = dynamic_cast<Client*> (g);
+					// se le indica la posición a ocupar en la cola
+					g->getComponent<ClientMovement>()->setPosPay(pay.size());
+					pay.push_back(client);
+				}
 			}
 		}
 	}
 
-	// eliminar al primer cliente de la entrada si se le ha asignado una mesa
+	// eliminar al primer grupo de clientes si se le ha asignado una mesa
 	void firstClientAssigned() {
 		if (assignedClient) {
 			entrance.pop_front();
@@ -112,16 +154,26 @@ private:
 		return Vector(point.getX() * fWidth, point.getY() * fHeight);
 	}
 
-	// comprobar si un cliente de la entrada se tiene que marchar porque se queda sin felicidad
+	// comprobar si un grupo de clientes de la entrada se tiene que marchar porque se queda sin felicidad
 	void checkHappinessEntrance() {
-		bool found = false;
+		bool found = false;	// encontrar a un grupo en el que uno de sus integrantes ha abandonado la entrada
 		auto it = entrance.begin();
 		while (it != entrance.end() && !found) {
-			Client* client = (*it);
-			if (client->getComponent<ClientMovement>()->hasAbandonedEntrance()) {
+			vector<Client*> group = *it;
+			int i = 0;
+			found = true;
+			// hasta que todos los clientes del grupo no hayan abandonado la entrada,
+			// no se elimina el grupo de la entrada
+			while (i < group.size() && found) {
+				if (!group[i]->getComponent<ClientMovement>()->hasAbandonedEntrance()) {
+					found = false;
+				}
+				++i;
+			}
+			// si todos han abandonado la entrada se elimina el grupo
+			if (found) {
 				it = entrance.erase(it);
 				recolocateEntranceAll(it);
-				found = true;
 			}
 			if (it != entrance.end()) {
 				++it;
@@ -129,18 +181,22 @@ private:
 		}
 	}
 
-	// igual que el método anterior, pero para la caja
+	// comprobar si algún grupo de cliente de la caja se ha quedado sin felicidad y se ha marchado
 	void checkHappinessPay() {
-		bool found = false;
+		// se utiliza un for porque los clientes de un mismo grupo, la abandonan a la vez
 		auto it = pay.begin();
-		while (it != pay.end() && !found) {
+		for (it; it != pay.end(); it) {
 			Client* client = (*it);
+			bool found = false;
+			// si uno de los clientes ha abandonado la caja, se elimian y se recoloca
 			if (client->getComponent<ClientMovement>()->hasAbandonedPay()) {
 				it = pay.erase(it);
 				recolocatePayAll(it);
 				found = true;
 			}
-			if (it != pay.end()) {
+			// si no se ha eliminado ninguno se avanza el iterador
+			// en caso contrario, no se toca porque ya ha avanzado
+			if (!found && it != pay.end()) {
 				++it;
 			}
 		}
@@ -155,7 +211,7 @@ private:
 	bool checkFirstTableEmpty(int& table) {
 		bool found = false;
 		int i = 0;
-		while( i < _ecs::NUM_TABLES && !found) {
+		while (i < _ecs::NUM_TABLES && !found) {
 			if (!tables[i]) {
 				found = true;
 				table = i + 1;
@@ -165,29 +221,38 @@ private:
 		return found;
 	}
 
-	// asignar una mesa al primer cliente
-	void assignTable(int table, Client* firstEntrance) {
+	// asignar una mesa al primer grupo de clientes
+	void assignTable(int table, vector<Client*> firstGroup) {
 		// se marca que la mesa está ocupada
 		tables[table - 1] = true;
-		// se le asigna una mesa
-		firstEntrance->getComponent<ClientMovement>()->assignTable(table);
+		// se le asigna una mesa a cada miembro del grupo
+		for (int i = 0; i < firstGroup.size(); ++i) {
+			firstGroup[i]->getComponent<ClientMovement>()->assignTable(table);
+		}
 		assignedClient = true;
 	}
 
 	// comprobar si algún cliente ha abandonado una mesa o si ha terminado de comer para marcarla como desocupada
 	void checkTables() {
-		for (int i = 0; i < clients->size(); ++i) {
-			GameObject* g = (*clients)[i];
-			ClientMovement* m = g->getComponent<ClientMovement>();
-			ClientState* s = g->getComponent<ClientState>();
+		for (auto it = clientsGroups.begin(); it != clientsGroups.end(); ++it) {
+			// se utiliza el primer integrante del grupo para comprobar que se ha dejado la mesa
+			// se hace de esta manera por el orden de ejecución
+			// (uno se marcha e indica al resto del grupo que se marchen.
+			// En la siguiente iteración tres están abandonado la mesa y el otro ya se ha marchado
+			// Entonces, si se comprueba todo el grupo sale mal)
+			Client* c = (*it).front();
+			ClientMovement* m = c->getComponent<ClientMovement>();
+			ClientState* s = c->getComponent<ClientState>();
 			if (s->getState() == ClientState::HAS_LEFT
 				|| m->hasAbandonedTable()) {
+				// se marca la mesa como desocupada
 				int n = m->getAssignedTable() - 1;
 				tables[n] = false;
 			}
 		}
 	}
 
+	// comprobar si un cliente si un cliente está de camino a pagar o pagando
 	bool isPaying(GameObject* client) {
 		ClientState* state = client->getComponent<ClientState>();
 		ClientState::States currentState = state->getState();
@@ -200,10 +265,35 @@ private:
 		return false;
 	}
 
+	// comprobar si algún grupo ha abandonado el local para quitarlo de la lista
+	void refreshClientsGroup() {
+		bool found = true;
+		auto it = clientsGroups.begin();
+		while (it != clientsGroups.end() && found) {
+			vector<Client*> group = *it;
+			found = false;
+			int i = 0;
+			// se comprueba que todos los integrantes del grupo están saliendo del local
+			while (i < group.size() && !found) {
+				if (group[i]->getComponent<ClientState>()->getState() != ClientState::OUT) {
+					found = true;
+				}
+				++i;
+			}
+			// si no se ha encontrado ningún cliente del grupo que no esté saliendo del local,
+			// se quita de la lista
+			if (!found) {
+				it = clientsGroups.erase(it);
+			}
+			if (it != clientsGroups.end()) {
+				++it;
+			}
+		}
+	}
+
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
 		: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients) {
 		scene = parent->getScene();
-		clients = scene->getGroup(_ecs::grp_CLIENTS);
 		sdl = SDLUtils::instance();
 		lastClientTime = sdl->currRealTime();
 		for (int i = 0; i < _ecs::NUM_TABLES; ++i) {
@@ -215,12 +305,8 @@ public:
 
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_CLIENTS_MANAGER;
 
-	// devuelve el primer cliente que hay en la entrada esperando a ser atendido
-	// nullptr en caso de que la entrada esté vacía
-	Client* getFirstEntrance() {
-		if (isEntranceEmpty()) {
-			return nullptr;
-		}
+	// devuelve al primero grupo de clientes que hay en la entrada esperando a ser atendido
+	vector<Client*> getFirstEntrance() {
 		return entrance.front();
 	}
 
@@ -229,22 +315,24 @@ public:
 		return &pay;
 	}
 
-	// se llama cuando se quiera asignar una mesa al primer cliente
+	// se llama cuando se quiera asignar una mesa al primer grupo de clientes
 	// se le pasa la mesa que se le desea asignar
-	void assignFirstClient(int table) {
+	void assignFirstGroup(int table) {
 		if (!isEntranceEmpty()) {
 			// se coge el primer cliente
-			Client* firstEntrance = getFirstEntrance();
-			// se comprueba que el cliente está en la entrada
-			ClientState::States clientState = firstEntrance->getComponent<ClientState>()->getState();
+			vector<Client*> firstGroup = getFirstEntrance();
+			// con que se compruebe que el primero del grupo está en la entrada,
+			// vale para verificar que todo el grupo está en la entrada
+			Client* firstClient = firstGroup.front();
+			ClientState::States clientState = firstClient->getComponent<ClientState>()->getState();
 			if (clientState == ClientState::ENTRANCE) {
 				if (!isTableFull(table)) {
-					assignTable(table, firstEntrance);
+					assignTable(table, firstGroup);
 				}
 				else {
 					int table = -1;
 					if (checkFirstTableEmpty(table)) {
-						assignTable(table, firstEntrance);
+						assignTable(table, firstGroup);
 					}
 				}
 			}
@@ -255,9 +343,6 @@ public:
 	void collectAndLeave() {
 		while (pay.size() > 0) {
 			Client* firstPay = pay.front();
-			if (firstPay->getComponent<ClientState>()->getState() > ClientState::REGISTER) {
-				cout << "hola";
-			}
 			firstPay->getComponent<ClientMovement>()->payAndLeave();
 			pay.pop_front();
 			auto it = pay.begin();
@@ -265,19 +350,30 @@ public:
 		}
 	}
 
-	// puede ir a la cola de la caja
-	bool canOccupyPay() {
-		// se comprueban si están de camino a la caja o si están en la caja
+	// hay espacio para que vayan a la cola de la caja
+	bool canOccupyPay(vector<Client*> mates) {
 		int goingPay = 0;
-		for (int i = 0; i < clients->size(); ++i) {
-			GameObject* client = (*clients)[i];
-			// se hace de esta forma porque hay un momento en que el cliente
-			// ha llegado a la caja registradora, pero no se ha añadido a la cola de pagar
-			if (isPaying(client)) {
-				++goingPay;
+		for (auto it = clientsGroups.begin(); it != clientsGroups.end(); ++it) {
+			// con que uno del grupo esté en una de esas posiciones,
+			// todos los del grupo están en la misma
+
+			// no se cuenta el grupo que quiere ocupara la caja
+			Client* client = (*it).front();
+			if (client != mates.front()) {
+				// se cuenta el resto de grupos
+				if (isPaying(client)) {
+					// se le suma el número de integrantes del grupo
+					goingPay = goingPay + it->size();
+				}
 			}
 		}
-		return goingPay < MAX_PAY;
+		// número de clientes que quiere ir + número de clientes que hay de camino a la caja o pagando
+		if (mates.size() + goingPay <= MAX_PAY) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	void update() {
@@ -291,7 +387,7 @@ public:
 		}
 		*/
 
-		// se comprueba si se ha asignado el primer cliente a una mesa para quitarlo de la entrada
+		// se comprueba si se ha asignado el primer grupo a una mesa para quitarlo de la entrada
 		firstClientAssigned();
 
 		// añadir los clientes que han llegado a la caja registradora a la cola de pago
@@ -304,14 +400,16 @@ public:
 		}
 		*/
 
-		// eliminar clientes enfadados de la entrada
+		// eliminar grupos de clientes enfadados de la entrada
 		checkHappinessEntrance();
 
-		// marcar como desucpadas a las mesas en las que clientes se han marchado
+		// marcar como desocupadas las mesas de las que los clientes se han marchado
 		// (han terminado de comer o se han quedado sin felicidad)
 		checkTables();
 
-		// eliminar clientes enfadados de la cola de pagar
+		// eliminar grupos de clientes enfadados de la cola de pagar
 		checkHappinessPay();
+
+		refreshClientsGroup();
 	}
 };
