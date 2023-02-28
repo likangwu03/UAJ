@@ -2,17 +2,21 @@
 #include "../utils/checkML.h"
 
 void CookingMachineTrigger::isOverlapping() {
+	float auxPos = p->getPos().getX() + p->getW() / 2;
+	if (p->getOrientation() != north || auxPos < transform_->getPos().getX() ||auxPos >transform_->getPos().getX() + width) {
+		highlight->setActive(false); return;
+	}
+	highlight->setActive(true);
 	if (ih->joysticksInitialised()) {
 		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
-	}	
-	else if (!ih->isKeyDown(SDLK_SPACE) ) return;
-	if (other_->getComponent<Transform>()->getOrientation() != north)return;
+	}
+	else if (!ih->isKeyDown(SDLK_SPACE)) return;
 
 	CookingMachineComp::State state = cook->getState();
 	pair<_ecs::_dish_id, bool>aux;
 	switch (state) { // cleon: otra variable s�per descriptiva. -> Arreglado
 	case CookingMachineComp::available:
-	
+
 		aux = cook->canFormDish(other_->getComponent<Ingredients>()->getIngredients());
 		if (aux.second) {
 			cook->cook(aux.first); // cocina si se puede formar un plato
@@ -27,4 +31,7 @@ void CookingMachineTrigger::isOverlapping() {
 			inventory->takeDish(cook->pickDish());
 		break;
 	}
+}
+void CookingMachineTrigger::onTriggerExit() {
+	highlight->setActive(false); return;
 }

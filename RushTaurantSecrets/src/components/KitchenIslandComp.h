@@ -7,7 +7,7 @@
 #include "../components/Image.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utilities/Vector.h"
-
+#include <unordered_map>
 
 using namespace std;
 class KitchenIslandComp :public Component
@@ -22,14 +22,14 @@ private:
 		B_W=20,OFFSETX=-6,OFFSETY=-6;
 
 	struct Ing {
-		_ecs::_ingredients_id id;	// id del ingrediente
 		int n;	// número de ingredientes
 		Texture* t;	// imagen del ingrediente
 		Texture* f;	// imagen con el número de ingredientes que tienes (delantera)
 		Texture* b;	//
 	};
 	Font* f; //para indicar n de ing
-	vector<Ing>ing;
+	unordered_map<_ecs::_ingredients_id,Ing>ing;
+	vector<_ecs::_ingredients_id>auxID;
 	SDLUtils* sdl;
 	Ingredients* ingCloud;
 	Texture* highlight;
@@ -44,6 +44,7 @@ public:
 
 	virtual void render();
 	void pickIngredient(int i);
+	void returnIngredient(_ecs::_ingredients_id id);
 	void selectedIng(int i);
 	void unselectIng(int i);
 };

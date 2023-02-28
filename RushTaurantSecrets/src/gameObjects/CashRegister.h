@@ -2,17 +2,23 @@
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
 #include "../components/CashRegisterTrigger.h"
+#include "../components/Image.h"
 
 using namespace std;
 class CashRegister :public GameObject
 {
 private:
 
-	const int OFFSETY = -20;
+	const int OFFSETTRI_Y = -20;
+	const int OFFSETW = 2;
+	const int OFFSETH = -12;
+	const int OFFSETY= 8;
+	const int OFFSETX= 1;
 public:
 	CashRegister(Scene* scene, Vector pos, float w, float h) :GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, pos, Vector(0, 0), w, h, 0, true); //para saber en donde tiene q estar el jugador para poder cobrar
-		new CashRegisterTrigger(this,Vector(0, OFFSETY),w,h);
+		new Image(this, "CASH_HIGHLIGHT",Vector(pos.getX()+ OFFSETX,pos.getY()+ OFFSETY),w+OFFSETW,h+OFFSETH); //renderizar el cartel
+		new CashRegisterTrigger(this,Vector(0, OFFSETTRI_Y),w,h);
 	};
 };
 
