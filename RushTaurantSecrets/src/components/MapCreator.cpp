@@ -192,7 +192,7 @@ void MapCreator::createObject() {
 					_ing.push_back ( { POLLO, 3 });
 					_ing.push_back ({ HUEVO,8});
 					_ing.push_back ({ HARINA,11 });
-					_ing.push_back ({ QUESO,32 });
+					_ing.push_back ({ AJO,32 });
 					_ing.push_back ({ CARNE,4 });
 					_ing.push_back ({ FRESA,4 });
 					_ing.push_back ({ MANZANA,7 });
