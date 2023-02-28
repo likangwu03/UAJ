@@ -10,13 +10,13 @@ Pantry::Pantry() :rest(nullptr) { init(); }
 Pantry::~Pantry() {
 	rest->linkPantry(nullptr);
 	delete rest;
-	delete cm; // cleon: súper nombre. "con Murcia"? "coge maletas?" "carmen miente"?
+	delete collisionsManager; // cleon: súper nombre. "con Murcia"? "coge maletas?" "carmen miente"? -> Arreglado
 }
 void Pantry::init() {
-	cm = new CollisionsManager(this);
+	collisionsManager = new CollisionsManager(this);
 	new Player(this);
 	GameObject* map = new GameObject(this);
-	new MapCreator(map, "./assets/tilemaps/pantry.tmx", sdlutils().renderer()); // cleon: "./" nunca se necesita
+	new MapCreator(map, "assets/tilemaps/pantry.tmx"); // cleon: "./" nunca se necesita -> Arreglado
 }
 
 void Pantry::linkRestaurant(Restaurant* rest) {
@@ -32,7 +32,7 @@ void Pantry::render() {
 void Pantry::update() {
 	Scene::update();
 	//rest->Scene::update();
-	cm->update();
+	collisionsManager->update();
 }
 
 void Pantry::handleEvents() {

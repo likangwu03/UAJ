@@ -23,7 +23,9 @@ void SuperMarket::init() {
 	player = new Player(this);
 	cartelM = new CartelManager();
 	map = new GameObject(this);
-	new MapCreator(map, "./assets/tilemaps/supermarket.tmx", sdlutils().renderer());
+	new MapCreator(map, "assets/tilemaps/supermarket.tmx");
+	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(mapTop, "assets/tilemaps/supermarket_top.tmx");
 }
 
 SuperMarket::~SuperMarket() {

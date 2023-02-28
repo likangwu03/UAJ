@@ -1,10 +1,10 @@
 #include "MapCreator.h"
 #include "../structure/Structure_def.h"
 
-#include "./tmxlite/Layer.hpp"
-#include "./tmxlite/TileLayer.hpp"
-#include "./tmxlite/ObjectGroup.hpp"
-#include "./tmxlite/Tileset.hpp"
+#include "tmxlite/Layer.hpp"
+#include "tmxlite/TileLayer.hpp"
+#include "tmxlite/ObjectGroup.hpp"
+#include "tmxlite/Tileset.hpp"
 
 #include "../sdlutils/SDLUtils.h"
 #include "../structure/Scene.h"
@@ -20,7 +20,7 @@
 #include "../utils/checkML.h"
 using namespace _ecs;
 
-MapCreator::MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer) : Component(parent, id), path(filePath), renderer(renderer) {
+MapCreator::MapCreator(GameObject* parent, const string& filePath) : Component(parent, id), path(filePath), renderer(sdlutils().renderer()) {
 	loadMapDims();
 
 	SDL_RenderClear(renderer);

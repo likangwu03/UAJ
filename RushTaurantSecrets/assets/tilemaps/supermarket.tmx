@@ -13,7 +13,7 @@
    <image width="32" height="32" source="../Sprites/Food/Ingredients/white_cheese_p.png"/>
   </tile>
   <tile id="8">
-   <image width="32" height="32" source="../Sprites/Food/Dishes/85_roastedchicken.png"/>
+   <image source="../Sprites/Food/Dishes/85_roastedchicken.png"/>
   </tile>
   <tile id="9">
    <image width="32" height="32" source="../Sprites/Food/Ingredients/potato_p.png"/>
@@ -666,17 +666,16 @@
   <object id="62" x="369.333" y="153.333" width="121.333" height="86.6663"/>
   <object id="63" x="564.667" y="156" width="121.333" height="85.9997"/>
   <object id="64" x="474" y="137.334" width="121.333" height="88.6663"/>
-  <object id="65" x="1582" y="184" width="85.333" height="88.6663"/>
-  <object id="66" x="694" y="132" width="182.666" height="91.9997"/>
+  <object id="66" x="684" y="132" width="182.666" height="91.9997"/>
   <object id="67" x="868.667" y="158.667" width="182.666" height="87.333"/>
   <object id="68" x="1014" y="136" width="99.9993" height="88.6663"/>
-  <object id="69" x="1112.67" y="156" width="326.666" height="90.6663"/>
+  <object id="69" x="1118" y="133.333" width="326.666" height="90.6663"/>
   <object id="70" x="1564.67" y="386.667" width="261.333" height="587.333"/>
-  <object id="71" x="1805.33" y="48.0002" width="71.9997" height="344"/>
-  <object id="72" x="1428.67" y="165.333" width="156" height="101.333"/>
+  <object id="71" x="1805.33" y="58.0002" width="71.9997" height="344"/>
+  <object id="72" x="1428.67" y="165.333" width="256" height="101.333"/>
   <object id="73" x="1728" y="232" width="46.6663" height="36.6663"/>
   <object id="74" x="1668" y="134.667" width="146.666" height="87.9997"/>
-  <object id="75" x="1730" y="370.667" width="46.6663" height="41.9996"/>
+  <object id="75" x="1729" y="370.667" width="46.6663" height="41.9996"/>
   <object id="76" x="843.667" y="836.667" width="758.666" height="170"/>
   <object id="77" x="292.333" y="378" width="83.3333" height="423.334"/>
   <object id="78" x="147.333" y="528.667" width="40.6667" height="42"/>
@@ -684,17 +683,15 @@
   <object id="81" x="142.333" y="760.333" width="103.333" height="70"/>
   <object id="82" x="230.667" y="808" width="233.333" height="185.333"/>
   <object id="83" x="469" y="893.333" width="412" height="119.667"/>
-  <object id="84" x="873" y="803" width="79" height="47"/>
-  <object id="85" x="967" y="805" width="80" height="48"/>
-  <object id="86" x="1349" y="787" width="185" height="69"/>
+  <object id="84" x="873" y="803" width="174" height="47"/>
+  <object id="86" x="1343" y="787" width="191" height="69"/>
   <object id="88" x="1060.17" y="652" width="377.5" height="48.6667"/>
   <object id="90" x="1060" y="462" width="378.667" height="47.3333"/>
-  <object id="91" x="1450" y="462.667" width="114.667" height="16.6666"/>
+  <object id="91" x="1440.67" y="467.667" width="124" height="16.6666"/>
   <object id="92" x="1492" y="560.667" width="88" height="48"/>
   <object id="93" x="1492" y="700" width="81.3333" height="61.3333"/>
-  <object id="94" x="612" y="428" width="216" height="55.3333"/>
+  <object id="94" x="612" y="430.667" width="359.333" height="52.6666"/>
   <object id="95" x="612" y="622" width="216" height="52"/>
-  <object id="96" x="884" y="601.333" width="54.6667" height="98.6667"/>
-  <object id="97" x="853.333" y="433.333" width="121.333" height="48.6666"/>
+  <object id="96" x="884" y="612.666" width="54.6667" height="87.3334"/>
  </objectgroup>
 </map>

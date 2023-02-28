@@ -13,7 +13,7 @@ void PauseMenu::bResume() {
 PauseMenu::PauseMenu(SceneManager* sceneManager) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "./assets/pauseMenuTemp.png");
+	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
 	new Image(bg, image);
 
 	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "RESUME_BUTTON_DOWN",

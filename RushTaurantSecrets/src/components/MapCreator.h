@@ -24,7 +24,7 @@ private:
 	SDL_Texture* bg;
 
 public:
-	MapCreator(GameObject* parent, const string& filePath, SDL_Renderer* renderer);
+	MapCreator(GameObject* parent, const string& filePath);
 	~MapCreator();
 
 private:

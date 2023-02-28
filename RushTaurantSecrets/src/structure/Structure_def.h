@@ -54,8 +54,8 @@ namespace _ecs {
 	enum _grp_id : id_type {
 		grp_GENERAL,
 		grp_PLAYER,
-		grp_CLIENTS,
 		grp_RENDERTOP,
+		grp_CLIENTS,
 		grp_INTERACTABLE,
 		grp_HUD,
 		grp_ICONS,

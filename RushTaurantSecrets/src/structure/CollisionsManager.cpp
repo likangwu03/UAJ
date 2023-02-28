@@ -15,13 +15,13 @@ CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 }
 
 
-// cleon: todos los métodos con el mismo standard de código (camel case o lo que queráis)
+// cleon: todos los métodos con el mismo standard de código (camel case o lo que queráis) -> Arreglado
 void CollisionsManager::update() {
-	Collision();
-	Overlap();
+	collision();
+	overlap();
 }
 
-void CollisionsManager::Collision() {
+void CollisionsManager::collision() {
 	for (auto player : *grp_Player) {
 		CollisionComp* objCol = player->getComponent<CollisionComp>();
 		if (objCol != nullptr) {
@@ -49,7 +49,7 @@ void CollisionsManager::Collision() {
 		
 	}
 }
-void CollisionsManager::Overlap() {
+void CollisionsManager::overlap() {
 	for (auto player : *grp_Player) {
 		CollisionComp* objCol = player->getComponent<CollisionComp>();
 		if (objCol != nullptr) {

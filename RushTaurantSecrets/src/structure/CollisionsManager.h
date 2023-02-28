@@ -17,8 +17,8 @@ public:
 	CollisionsManager(Scene* scene);
 	void update();
 private:
-	void Collision();
-	void Overlap();
+	void collision();
+	void overlap();
 
 	//bool hasCollision(GameObject* object);
 

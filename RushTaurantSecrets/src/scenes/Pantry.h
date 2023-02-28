@@ -5,7 +5,7 @@ class Restaurant;
 
 class Pantry : public Scene {
 private:
-	CollisionsManager* cm;
+	CollisionsManager* collisionsManager;
 	Restaurant* rest;
 public:
 	Pantry();

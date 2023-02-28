@@ -13,17 +13,24 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 	highlight = &sdl->images().at("ISLAND_HIGHLIGHT");
 	selected = -1;
 	//cargar info
-	for (int i = 0; i < _ing.size(); ++i) // cleon: recorrido moderno? pues no. pues sí.
+	for (auto i : _ing) {
+		ing.push_back({ i.first, i.second, &sdl->images().at(to_string(i.first)), 
+			new Texture(sdl->renderer(), to_string(i.second), *f, build_sdlcolor(0xFAF2E6ff)), &sdl->images().at("KI_ICON") } );
+	}
+
+	/*for (int i = 0; i < _ing.size(); ++i) // cleon: recorrido moderno? pues no. pues sí. -> Arreglado
 		ing.push_back({ _ing[i].first,_ing[i].second,&sdl->images().at(to_string(_ing[i].first)),
 		new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),
 			&sdl->images().at("KI_ICON") });
+	*/
 
 }
 
 KitchenIslandComp::~KitchenIslandComp() {
 	// se elimina la fuente cogida
 	delete f;
-	for (int i = 0; i < ing.size(); ++i) delete ing[i].f; // cleon: recorrido moderno? pues también.
+	for (auto i : ing) delete i.f;
+	//for (int i = 0; i < ing.size(); ++i) delete ing[i].f; // cleon: recorrido moderno? pues también. -> Arreglado
 	
 }
 

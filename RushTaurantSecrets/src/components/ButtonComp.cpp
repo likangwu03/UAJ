@@ -12,7 +12,10 @@ ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())
 	dest.y = tf->getPos().getY();
 	dest.w = tf->getW();
 	dest.h = tf->getH();
-	std::cout << "cock" << std::endl; // cleon: MUCHO MEJOR. No me duele la referencia genital, sino que no hayais puesto DEBUG.
+
+#ifdef _DEBUG
+	std::cout << "cock" << std::endl; // cleon: MUCHO MEJOR. No me duele la referencia genital, sino que no hayais puesto DEBUG. -> Arreglado
+#endif
 	ih().initialiseJoysticks(_joy);
 }
 
@@ -27,7 +30,9 @@ void ButtonComp::handleEvents()
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		highlighted = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
-			std::cout << "balls" << std::endl; // cleon: BIEN.
+#ifdef _DEBUG
+			std::cout << "balls" << std::endl; // cleon: BIEN. -> Arreglado
+#endif
 			_callback();
 		}
 	}

@@ -8,9 +8,9 @@ void CookingMachineTrigger::isOverlapping() {
 	else if (!ih->isKeyDown(SDLK_SPACE) ) return;
 	if (other_->getComponent<Transform>()->getOrientation() != north)return;
 
-	CookingMachineComp::State s = cook->getState();
+	CookingMachineComp::State state = cook->getState();
 	pair<_ecs::_dish_id, bool>aux;
-	switch (s) { // cleon: otra variable súper descriptiva.
+	switch (state) { // cleon: otra variable sï¿½per descriptiva. -> Arreglado
 	case CookingMachineComp::available:
 	
 		aux = cook->canFormDish(other_->getComponent<Ingredients>()->getIngredients());

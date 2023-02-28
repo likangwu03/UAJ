@@ -7,13 +7,13 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	sdl = SDLUtils::instance();
 	ih = InputHandler::instance();
 
-	dishes.reserve(3);
-	dishesBool.reserve(3);
+	dishes.reserve(MAX_DISHES);
+	dishesBool.reserve(MAX_DISHES);
 	// inicializa el vector de booleanos
-	for (int i = 0; i < 3; i++) { // cleon: este "3", casi seguro que es una constante de juego (idealmente, un parámetro)
+	for (int i = 0; i < MAX_DISHES; i++) { // cleon: este "3", casi seguro que es una constante de juego (idealmente, un parï¿½metro) -> Arreglado
 		dishesBool.push_back(false);
 	}
-	for (int i = 0; i < 3; i++) {	
+	for (int i = 0; i < MAX_DISHES; i++) {
 		dishes.push_back(_ecs::ALBONDIGAS);
 	}
 
@@ -26,7 +26,7 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	dishesBool[2] = true;*/
 }
 
-// si hay espacio en el inventario, recoge el plato (suponiendo que previamente ya se ha comprobado si cookingMachine est¨¢ listo en otra clase)
+// si hay espacio en el inventario, recoge el plato (suponiendo que previamente ya se ha comprobado si cookingMachine estï¿½ï¿½ listo en otra clase)
 void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 	// comprueba que hay espacio libre en el inventario
 	int place = freeSpace();
@@ -38,26 +38,26 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 	}
 }
 
-// libera el espacio seg¨²n casilla seleccionado previamente ya sea para tirar el plato, dárselo a un cliente...
+// libera el espacio segï¿½ï¿½n casilla seleccionado previamente ya sea para tirar el plato, dï¿½rselo a un cliente...
 void InventoryComp::freeDish() {
 	dishesBool[cellSelected] = false;
 	firstDishR(cellSelected);
 	--cellsOcuppied;
 }
 
-// devuelve la primera posición libre; si no hay espacio libre, devuelve -1
+// devuelve la primera posiciï¿½n libre; si no hay espacio libre, devuelve -1
 int InventoryComp::freeSpace() {
 	int i = 0;
 	bool encontrado = false;
-	while (i < 3 && !encontrado) { // cleon: súper 3.
+	while (i < MAX_DISHES && !encontrado) { // cleon: sï¿½per 3. -> Arreglado
 		// si hay un hueco libre
 		if (dishesBool[i] == false) return i;
 		// si no hay un hueco libre
 		else i++;
 	}
 
-	// devuelve -1 si no tiene ningún hueco libre
-	if (i == 3) return -1;
+	// devuelve -1 si no tiene ningï¿½n hueco libre
+	if (i == MAX_DISHES) return -1;
 }
 
 void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
@@ -77,7 +77,7 @@ void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
 
 void InventoryComp::render() {
 	// recorre la lista de platos para renderizarlos
-	for (int i = 0; i < 3; i++) { // cleon: Super 3 is back
+	for (int i = 0; i < MAX_DISHES; i++) { // cleon: Super 3 is back -> Arreglado
 		// si el plato est?en el inventario, se renderiza
 		if (dishesBool[i] == true) {
 			int x, y;
@@ -89,7 +89,7 @@ void InventoryComp::render() {
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
 
-	// cleon: no puedo añadir nada a esto. es simplemente bello.
+	// cleon: no puedo aï¿½adir nada a esto. es simplemente bello.
 	// cleon: e inexplicable.
 	x = 35;
 	if (i == 0)  y = 490;
@@ -118,27 +118,27 @@ void InventoryComp::handleEvents() {
 		setCell('r');// cleon: SDL_KEY
 }
 
-// busca la siguiente posición ocupada en el inventario a la izquierda de la casilla seleccionada
+// busca la siguiente posiciï¿½n ocupada en el inventario a la izquierda de la casilla seleccionada
 int InventoryComp::firstDishL(int num) {
 	int i = 0;
 	int n = num;
-	while (i < 3) { // super 3: love and thunder.
-		// si el índice del inventario es 0
+	while (i < MAX_DISHES) { // super 3: love and thunder.
+		// si el ï¿½ndice del inventario es 0
 		if (n == 0) n = 2; // cleon: super 3 contra super 2: la batalla final.
 		else n--;
 
-		if (dishesBool[n] == true) return true; // cleon: música. armonía. PAZ. Te perdonamos. Don't do it again.
+		if (dishesBool[n] == true) return true; // cleon: mï¿½sica. armonï¿½a. PAZ. Te perdonamos. Don't do it again.
 		++i;
 	}
 	return num;
 }
 
-// busca la siguiente posición ocupada en el inventario a la derecha de la casilla seleccionada
+// busca la siguiente posiciï¿½n ocupada en el inventario a la derecha de la casilla seleccionada
 int InventoryComp::firstDishR(int num) {
 	int i = 0;
 	int n = num;
-	while (i < 3) {
-		// si el índice del inventario es 0
+	while (i < MAX_DISHES) {
+		// si el ï¿½ndice del inventario es 0
 		if (n == 2) n = 0;
 		else n++;
 

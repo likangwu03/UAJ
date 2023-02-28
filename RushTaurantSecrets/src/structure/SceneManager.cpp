@@ -102,7 +102,7 @@ void SceneManager::setScene() {
 		break;
 	}
 	case SceneManager::SUPERMARKET:
-		sdlutils().setResizeFactor(GENERALSIZE); // cleon =D
+		sdlutils().setResizeFactor(GENERALSIZE); // cleon =D -> Areglado
 		if (act == MAINMENU || act == DAILYMENU) {
 			UIMarket* uiMarket = new UIMarket();
 			SuperMarket* superMarket = new SuperMarket(uiMarket);

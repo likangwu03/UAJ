@@ -14,7 +14,7 @@ void MainMenu::start(SceneManager* sceneManager) {
 MainMenu::MainMenu(SceneManager* sceneManager){
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "./assets/mainMenuTemp.png");
+	image = new Texture(sdlutils().renderer(), "assets/mainMenuTemp.png");
 	new Image(bg, image);
 
 	button = new GameObject(this);

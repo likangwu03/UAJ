@@ -10,6 +10,7 @@ class SuperMarket: public Scene {
 private:
 	CollisionsManager* cm;
 	GameObject* map;
+	GameObject* mapTop;
 	UIMarket* uiMarket;
 	CartelManager* cartelM;
 	GameObject* player;
