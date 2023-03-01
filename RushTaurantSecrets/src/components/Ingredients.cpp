@@ -18,6 +18,7 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 		coord.push_back({ coord[i - 1].first, coord[i - 1].second });
 		coord[i].first += ING_OFFSET;
 	}
+
 }
 
 void Ingredients::removeLastIngredient() {
@@ -38,6 +39,8 @@ void Ingredients::removeAllIngredients() {
 		removeLastIngredient();
 		--i;
 	}
+	coord = { { 0,0 } };
+
 }
 
 void Ingredients::removeWhenExit() {
