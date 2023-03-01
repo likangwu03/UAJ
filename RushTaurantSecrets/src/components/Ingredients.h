@@ -47,7 +47,8 @@ private:
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
-	Ingredients(GameObject* parent, Transform* transform) : Component(parent, id), transform(transform), sdl(SDLUtils::instance()), texture(nullptr) {
+	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
+		transform = parent->getComponent<Transform>();
 		coord = { { 0,0 } };
 		//para demo, luego se borra; 
 		addIngredient(QUESO);

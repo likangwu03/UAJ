@@ -3,6 +3,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../components/CharacterAnimator.h"
 #include "../sdlutils/Texture.h"
+#include "../components/Ingredients.h"
 #include "../components/Transform.h"
 #include "../components/CollisionComp.h"
 #include "../components/PlayerMovementController.h"
@@ -15,6 +16,7 @@ public:
 		new PlayerMovementController(this);
 		new CollisionComp(this, { 0,48 * sdlutils().getResizeFactor() }, 48 * sdlutils().getResizeFactor(), 48 * sdlutils().getResizeFactor());
 		new CharacterAnimator(this, "Player_1", 18, 24, 1);
+		new Ingredients(this);
 	}
 };
 

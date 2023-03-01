@@ -15,7 +15,6 @@ private:
 	GameObject* map;
 	GameObject* mapTop;
 	GameObject* player;
-	GameObject* ingBubble;
 
 public:
 	Restaurant(UIRestaurant* restUI = nullptr);
