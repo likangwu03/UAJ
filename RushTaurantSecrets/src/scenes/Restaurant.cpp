@@ -4,6 +4,7 @@
 #include "../structure/CollisionsManager.h"
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
+#include "../gameObjects/IngredientBubble.h"
 
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
@@ -47,7 +48,9 @@ void Restaurant::init() {
 	
 	cm = new CollisionsManager(this);
 	player = new Player(this);
-	
+	ingBubble = new IngredientBubble(this, player);
+
+
 	// Tilemap
 	map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/restaurant.tmx");
