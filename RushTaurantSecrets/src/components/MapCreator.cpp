@@ -206,7 +206,7 @@ void MapCreator::createObject() {
 					new IslandIngredient(scene, pos, width_, height_,p[0].getIntValue(), p[1].getIntValue());
 				}
 				else if (name == "kitchen") {
-					//new KitchenSurfaceObj(scene, pos, width_, height_);
+					new KitchenSurfaceObj(scene, pos, width_, height_);
 				}
 			};
 
