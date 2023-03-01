@@ -16,6 +16,7 @@
 #include "../gameObjects/IslandIngredient.h"
 #include "../gameObjects/Cartel.h"
 #include "../gameObjects/Bin.h"
+#include "../gameObjects/KitchenSurfaceObj.h"
 
 #include "../utils/checkML.h"
 using namespace _ecs;
@@ -205,7 +206,7 @@ void MapCreator::createObject() {
 					new IslandIngredient(scene, pos, width_, height_,p[0].getIntValue(), p[1].getIntValue());
 				}
 				else if (name == "kitchen") {
-					// cleon: pues vale.
+					//new KitchenSurfaceObj(scene, pos, width_, height_);
 				}
 			};
 
