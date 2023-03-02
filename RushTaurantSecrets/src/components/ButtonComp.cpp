@@ -14,7 +14,7 @@ ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())
 	dest.h = tf->getH();
 
 #ifdef _DEBUG
-	std::cout << "cock" << std::endl; // cleon: MUCHO MEJOR. No me duele la referencia genital, sino que no hayais puesto DEBUG. -> Arreglado
+	std::cout << "cock" << std::endl;
 #endif
 	ih().initialiseJoysticks(_joy);
 }
@@ -31,7 +31,7 @@ void ButtonComp::handleEvents()
 		highlighted = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
 #ifdef _DEBUG
-			std::cout << "balls" << std::endl; // cleon: BIEN. -> Arreglado
+			std::cout << "balls" << std::endl;
 #endif
 			_callback();
 		}

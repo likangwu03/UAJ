@@ -15,7 +15,7 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 	selected = -1;
 	//cargar info
 	auxID = vector<_ecs::_ingredients_id>(_ing.size());
-	for (int i = 0; i < _ing.size(); ++i) { // cleon: recorrido moderno? pues no. pues s? -> Arreglado
+	for (int i = 0; i < _ing.size(); ++i) { // cleon: recorrido moderno? pues no. pues s?
 		ing.insert({ _ing[i].first, {_ing[i].second, &sdl->images().at(to_string(_ing[i].first)),
 		new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),&sdl->images().at("KI_ICON")} });
 		auxID[i] = _ing[i].first;
@@ -27,7 +27,6 @@ KitchenIslandComp::~KitchenIslandComp() {
 	// se elimina la fuente cogida
 	delete f;
 	for (auto i : ing) delete i.second.f;
-	//for (int i = 0; i < ing.size(); ++i) delete ing[i].f; // cleon: recorrido moderno? pues también. -> Arreglado
 
 }
 

@@ -10,7 +10,7 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 	dishes.reserve(MAX_DISHES);
 	dishesBool.reserve(MAX_DISHES);
 	// inicializa el vector de booleanos
-	for (int i = 0; i < MAX_DISHES; i++) { // cleon: este "3", casi seguro que es una constante de juego (idealmente, un par�metro) -> Arreglado
+	for (int i = 0; i < MAX_DISHES; i++) {
 		dishesBool.push_back(false);
 	}
 	for (int i = 0; i < MAX_DISHES; i++) {
@@ -49,7 +49,7 @@ void InventoryComp::freeDish() {
 int InventoryComp::freeSpace() {
 	int i = 0;
 	bool encontrado = false;
-	while (i < MAX_DISHES && !encontrado) { // cleon: s�per 3. -> Arreglado
+	while (i < MAX_DISHES && !encontrado) {
 		// si hay un hueco libre
 		if (dishesBool[i] == false) return i;
 		// si no hay un hueco libre
@@ -77,7 +77,7 @@ void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
 
 void InventoryComp::render() {
 	// recorre la lista de platos para renderizarlos
-	for (int i = 0; i < MAX_DISHES; i++) { // cleon: Super 3 is back -> Arreglado
+	for (int i = 0; i < MAX_DISHES; i++) {
 		// si el plato est?en el inventario, se renderiza
 		if (dishesBool[i] == true) {
 			int x, y;

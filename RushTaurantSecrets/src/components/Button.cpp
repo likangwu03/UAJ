@@ -8,7 +8,7 @@
 //para spritesheets
 Button::Button(GameObject* parent, Vector pos, SceneManager* sceneManager, void (*callback)(SceneManager* sceneManager)) 
 	: Component(parent, id), sceneManager(sceneManager), callback(callback), sdl(SDLUtils::instance()) {
-	texture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/PlayButton.png", 2, 2);
+	texture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/Menu/PlayButton.png", 2, 2);
 	//parte de la pantalla donde se pinta
 	dest = { int(pos.getX()), int(pos.getY()), texture->width() * 2, texture->height() * 2};
 

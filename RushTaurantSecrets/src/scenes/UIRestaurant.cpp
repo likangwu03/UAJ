@@ -33,7 +33,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	createGameObjects(grp_ICONS, hdr_MENU, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 54, 54, 0);
 
 	// inventario (fondo)
-	createGameObjects(grp_ICONS, hdr_INVENTORY, "INVENTORY_ICON", Vector(20, sdl->height() - 244), 80, 224, 0);
+	createGameObjects(grp_ICONS, hdr_INVENTORY, "INVENTORY_ICON", Vector(20, sdl->height() - 244), 80, 228, 0);
 
 	// reloj (momento del día)
 	createGameObjects(grp_ICONS, hdr_CLOCK, "CLOCK", Vector(sdl->width() - 140, 20), 120, 117, 0);

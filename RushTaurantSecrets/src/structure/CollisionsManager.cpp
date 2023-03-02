@@ -15,7 +15,6 @@ CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 }
 
 
-// cleon: todos los métodos con el mismo standard de código (camel case o lo que queráis) -> Arreglado
 void CollisionsManager::update() {
 	collision();
 	overlap();
