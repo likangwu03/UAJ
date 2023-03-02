@@ -208,6 +208,9 @@ void MapCreator::createObject() {
 				else if (name == "kitchen") {
 					new KitchenSurfaceObj(scene, pos, width_, height_);
 				}
+				else if (name == "goToPantry") {
+
+				}
 			};
 
 		}
