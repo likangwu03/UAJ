@@ -17,8 +17,10 @@
 
 Restaurant::Restaurant(): dc(DishCombinator::init()) { 
 	ui = new UIRestaurant();
+	SceneManager::instance()->setResize(false);
 	pantry = new Pantry();
 	pantry->linkRestaurant(this);
+	SceneManager::instance()->setResize();
 	init(); 
 }
 

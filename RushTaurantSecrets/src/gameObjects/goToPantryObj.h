@@ -4,11 +4,9 @@
 #include "../components/goToPantryTrigger.h"
 
 class goToPantryObj : public GameObject {
-private:
-
 public:
 	goToPantryObj(Scene* scene, Vector pos, float w, float h) : GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, pos, Vector(0, 0), w, h);
-		new goToPantryTrigger(this, pos, w, h);
+		new goToPantryTrigger(this, Vector(0,0), w, h);
 	}
 };

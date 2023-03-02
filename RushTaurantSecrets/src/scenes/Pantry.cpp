@@ -37,9 +37,11 @@ void Pantry::update() {
 
 void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
+		SceneManager::instance()->setResize();
 		SceneManager::instance()->changeScene(rest, -1);
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
+		SceneManager::instance()->setResize();
 		SceneManager::instance()->changeScene(nullptr,1);
 	}
 	else {

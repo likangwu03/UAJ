@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 SceneManager::SceneManager() {
+	setResize();
 	currentScene = new MainMenu(this);
 	pushScene(currentScene);
 	nSceceToPop = 0;
@@ -65,6 +66,7 @@ void SceneManager::setScene() {
 		Scenes.pop_back();
 	}
 	if (currentScene != nullptr) Scenes.push_back(currentScene);
+	else currentScene = Scenes.back();
 	//Scene* aux;
 	//switch(change) {
 	//case SceneManager::MAINMENU:
