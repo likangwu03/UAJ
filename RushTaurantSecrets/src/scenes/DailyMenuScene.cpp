@@ -5,10 +5,10 @@
 
 void DailyMenuScene::select()
 {
-	SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);
+	SceneManager::instance()->changeScene(new SuperMarket(), 1);
 }
 
-DailyMenuScene::DailyMenuScene(SceneManager* sceneManager, uint8_t msize, bool m) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64)
+DailyMenuScene::DailyMenuScene(uint8_t msize, bool m) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64)
 {
 	DailyMenu* dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8, sdl->height() / 15), 451.0f, 603.0f, select);
 	DailyMenu* dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2, sdl->height() / 15), 451.0f, 603.0f, select);

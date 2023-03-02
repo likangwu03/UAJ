@@ -17,7 +17,7 @@ private:
 	GameObject* player;
 
 public:
-	Restaurant(UIRestaurant* restUI = nullptr);
+	Restaurant();
 	~Restaurant();
 
 	UIRestaurant* getUI() { return ui; }

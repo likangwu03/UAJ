@@ -3,6 +3,7 @@
 
 Scene::Scene() {
 	ih = InputHandler::instance();
+	handlers = {};
 }
 
 Scene::~Scene() {

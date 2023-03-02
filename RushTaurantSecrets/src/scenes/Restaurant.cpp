@@ -15,11 +15,15 @@
 #include "../utils/checkML.h"
 
 
-Restaurant::Restaurant(UIRestaurant* restUI) : pantry(nullptr), ui(restUI), dc(DishCombinator::init()) { 
+Restaurant::Restaurant(): dc(DishCombinator::init()) { 
+	ui = new UIRestaurant();
+	pantry = new Pantry();
+	pantry->linkRestaurant(this);
 	init(); 
 }
 
 Restaurant::~Restaurant() {
+	end();
 	pantry->linkRestaurant(nullptr);
 	delete pantry;
 	delete ui;
@@ -80,13 +84,14 @@ void Restaurant::update() {
 
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->ChangeScene(SceneManager::PANTRY);
+		SceneManager::instance()->setResize(false);
+		SceneManager::instance()->changeScene(pantry,-1);
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
+		SceneManager::instance()->changeScene(nullptr,1);
 	}
 	else if (ih->isKeyDown(SDL_SCANCODE_P)) {
-		SceneManager::instance()->ChangeScene(SceneManager::PAUSEMENU);
+		SceneManager::instance()->changeScene(new PauseMenu());
 	}
 	else {
 		Scene::handleEvents();

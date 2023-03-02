@@ -19,9 +19,4 @@ public:
 private:
 	void collision();
 	void overlap();
-
-	//bool hasCollision(GameObject* object);
-
-	//void hasOverlap(GameObject* object);
-
 };

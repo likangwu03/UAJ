@@ -18,7 +18,7 @@ class SceneManager:public Singleton<SceneManager> {
 public:
 	const float PANTRYSIZE = 0.8333333333;
 	const float GENERALSIZE = 0.6666666667;
-	enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET,PAUSEMENU};
+	//enum SceneName{MAINMENU,RESTAURANT,PANTRY,DAILYMENU,SUPERMARKET,PAUSEMENU};
 private:
 	//crea menu
 	SceneManager();
@@ -26,9 +26,7 @@ private:
 	list<Scene*> Scenes;
 	//escenas que estar activa (jugador)
 	Scene* currentScene;
-	SceneName act;
-	SceneName change;
-
+	int nSceceToPop;
 public:
 	SceneManager(SceneManager&) = delete;
 	SceneManager(SceneManager&&) = delete;
@@ -39,9 +37,12 @@ public:
 	void handleEvents();
 	void render();
 	void refresh();
-	void ChangeScene(SceneName scene);
+	void changeScene(Scene* _scene, int nPop=0);
+	void setResize(bool type=true);
 
 private:
 	void setScene();
 	void clear();
+	void popScene(int n=1);
+	void pushScene(Scene* scene);
 };

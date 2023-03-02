@@ -8,7 +8,8 @@
 #include "../utils/checkML.h"
 
 void MainMenu::start(SceneManager* sceneManager) {
-	sceneManager->ChangeScene(SceneManager::RESTAURANT);
+	sceneManager->setResize();
+	sceneManager->changeScene(new Restaurant());
 }
 
 MainMenu::MainMenu(SceneManager* sceneManager){
@@ -27,10 +28,11 @@ MainMenu::~MainMenu() {
 
 void MainMenu::handleEvents(){
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->ChangeScene(SceneManager::DAILYMENU);
+		SceneManager::instance()->changeScene(new DailyMenuScene());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);
+		SceneManager::instance()->setResize();
+		SceneManager::instance()->changeScene(new SuperMarket());
 	}
 	else {
 		Scene::handleEvents();

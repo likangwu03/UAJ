@@ -16,7 +16,7 @@ private:
 	ButtonGO* buttonMainMenu;
 	Texture* image;
 public:
-	PauseMenu(SceneManager* sceneManager);
+	PauseMenu();
 	~PauseMenu();
 
 	void handleEvents();

@@ -15,7 +15,7 @@ class DailyMenuScene : public Scene
 	uint8_t spriteSize;
 	static void select();
 public:
-	DailyMenuScene(SceneManager* sceneManager, uint8_t msize = 4, bool m = true);
+	DailyMenuScene( uint8_t msize = 4, bool m = true);
 	void handleEvents();
 };
 

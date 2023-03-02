@@ -14,8 +14,13 @@ void SuperMarket::update() {
 	uiMarket->update();
 }
 void SuperMarket::handleEvents() {
-	Scene::handleEvents();
-	uiMarket->handleEvents();
+	if (ih->isKeyDown(SDLK_1)) {
+		SceneManager::instance()->changeScene(new Restaurant(), 1);
+	}
+	else {
+		Scene::handleEvents();
+		uiMarket->handleEvents();
+	}
 }
 
 void SuperMarket::init() {

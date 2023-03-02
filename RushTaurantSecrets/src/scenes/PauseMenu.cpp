@@ -3,14 +3,14 @@
 #include "../utils/checkML.h"
 
 void PauseMenu::mMenu() {
-	SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
+	SceneManager::instance()->changeScene(nullptr,2);
 }
 
 void PauseMenu::bResume() {
-	SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+	SceneManager::instance()->changeScene(nullptr,1);
 }
 
-PauseMenu::PauseMenu(SceneManager* sceneManager) {
+PauseMenu::PauseMenu() {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
@@ -28,10 +28,10 @@ PauseMenu::~PauseMenu() {
 
 void PauseMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->ChangeScene(SceneManager::DAILYMENU);
+		SceneManager::instance()->changeScene(new DailyMenuScene());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->ChangeScene(SceneManager::SUPERMARKET);
+		SceneManager::instance()->changeScene(new SuperMarket());
 	}
 	else {
 		Scene::handleEvents();

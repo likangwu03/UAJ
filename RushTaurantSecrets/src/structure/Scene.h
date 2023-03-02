@@ -27,4 +27,6 @@ public:
 	virtual void update();
 	virtual void render();
 	virtual void handleEvents();
+	virtual void init() {};
+	virtual void end() {};
 };

@@ -37,10 +37,10 @@ void Pantry::update() {
 
 void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->ChangeScene(SceneManager::RESTAURANT);
+		SceneManager::instance()->changeScene(rest, -1);
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->ChangeScene(SceneManager::MAINMENU);
+		SceneManager::instance()->changeScene(nullptr,1);
 	}
 	else {
 		Scene::handleEvents();
