@@ -16,5 +16,5 @@ public:
 		sceneM = SceneManager::instance();
 	};
 
-	virtual void onTriggerEnter();
+	virtual void isOverlapping();
 };

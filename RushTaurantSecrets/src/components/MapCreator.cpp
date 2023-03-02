@@ -17,6 +17,7 @@
 #include "../gameObjects/Cartel.h"
 #include "../gameObjects/Bin.h"
 #include "../gameObjects/KitchenSurfaceObj.h"
+#include "../gameObjects/goToPantryObj.h"
 
 #include "../utils/checkML.h"
 using namespace _ecs;
@@ -209,7 +210,7 @@ void MapCreator::createObject() {
 					new KitchenSurfaceObj(scene, pos, width_, height_);
 				}
 				else if (name == "goToPantry") {
-
+					new goToPantryObj(scene, pos, width_, height_);
 				}
 			};
 
