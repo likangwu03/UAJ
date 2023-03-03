@@ -79,7 +79,7 @@ void InventoryComp::render() {
 	// recorre la lista de platos para renderizarlos
 	for (int i = 0; i < MAX_DISHES; i++) {
 		// si el plato est?en el inventario, se renderiza
-		if (dishesBool[i] == true) {
+		if (dishesBool[i]) {
 			int x, y;
 			setPosition(i, x, y);
 			renderDish(x, y, dishes[i]);
@@ -89,33 +89,31 @@ void InventoryComp::render() {
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
 
-	// cleon: no puedo a�adir nada a esto. es simplemente bello.
+	// cleon: no puedo a�adir nada a esto. es simplemente bello. -> corregido
 	// cleon: e inexplicable.
 	x = 35;
-	if (i == 0)  y = 490;
-	else if (i == 1) y = 560;
-	else /* if (i == 2) */ y = 630;
+	y = 490 + 70 * i;
 	
 }
 
-void InventoryComp::setCell(char key) { // cleon: SDL_KEY
+void InventoryComp::setCell(SDL_KeyCode key) { // cleon: SDL_KEY
 	// si no hay ninguna celda seleccionada, selecciona la primera celda libre
 	if (cellSelected == -1) freeSpace();
 	else {
 		// si se ha pulsado la tecla izquierda
-		if (key == 'l') cellSelected = firstDishL(cellSelected);// cleon: SDL_KEY
+		if (key == SDLK_LEFT) cellSelected = firstDishL(cellSelected);
 		// si se ha pulsado la tecla derecha
-		else if (key == 'r') cellSelected = firstDishR(cellSelected);// cleon: SDL_KEY
+		else if (key == SDLK_RIGHT) cellSelected = firstDishR(cellSelected);
 	}
 }
 
 void InventoryComp::handleEvents() {
 	// flecha izquierda
 	if (ih->isKeyDown(SDLK_LEFT))
-		setCell('l');// cleon: SDL_KEY
+		setCell(SDLK_LEFT);
 	// flecha derecha
 	else if (ih->isKeyDown(SDLK_RIGHT))
-		setCell('r');// cleon: SDL_KEY
+		setCell(SDLK_RIGHT);
 }
 
 // busca la siguiente posici�n ocupada en el inventario a la izquierda de la casilla seleccionada
@@ -127,7 +125,7 @@ int InventoryComp::firstDishL(int num) {
 		if (n == 0) n = 2; // cleon: super 3 contra super 2: la batalla final.
 		else n--;
 
-		if (dishesBool[n] == true) return true; // cleon: m�sica. armon�a. PAZ. Te perdonamos. Don't do it again.
+		if (dishesBool[n]) return true; // cleon: m�sica. armon�a. PAZ. Te perdonamos. Don't do it again.
 		++i;
 	}
 	return num;
@@ -142,7 +140,7 @@ int InventoryComp::firstDishR(int num) {
 		if (n == 2) n = 0;
 		else n++;
 
-		if (dishesBool[n] == true) return true; // cleon: ugh.
+		if (dishesBool[n]) return true; // cleon: ugh.
 		++i;
 	}
 	return num;

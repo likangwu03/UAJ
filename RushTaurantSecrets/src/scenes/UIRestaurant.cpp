@@ -142,7 +142,7 @@ void UIRestaurant::reputationManager() {
 
 void UIRestaurant::checkStarsArray() {
 	// si la reputación es mayor de ochenta
-	if (actReputation > 80) { // cleon: 80, 60... ¡no! esto provoca guerras y pandemias. CONSTANTES. Constantes son paz y amor.
+	if (actReputation > REP5) { // cleon: 80, 60... ¡no! esto provoca guerras y pandemias. CONSTANTES. Constantes son paz y amor. -> corregido
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;
@@ -151,7 +151,7 @@ void UIRestaurant::checkStarsArray() {
 	}
 
 	// si la reputación es mayor de sesenta
-	else if (actReputation > 60) {
+	else if (actReputation > REP4) {
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;
@@ -160,7 +160,7 @@ void UIRestaurant::checkStarsArray() {
 	}
 
 	// si la reputación es mayor de cuarenta
-	else if (actReputation > 40) {
+	else if (actReputation > REP3) {
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;
@@ -169,7 +169,7 @@ void UIRestaurant::checkStarsArray() {
 	}
 
 	// si la reputación es mayor de veinte
-	else if (actReputation > 20) {
+	else if (actReputation > REP2) {
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = false;
@@ -178,7 +178,7 @@ void UIRestaurant::checkStarsArray() {
 	}
 
 	// si la reputación es mayor de cero
-	else if (actReputation > 0) {
+	else if (actReputation > REP1) {
 		stars[0] = true;
 		stars[1] = false;
 		stars[2] = false;
@@ -187,7 +187,7 @@ void UIRestaurant::checkStarsArray() {
 	}
 
 	// si la reputación es cero o menor
-	else if (actReputation < 1) {
+	else if (actReputation < REP0) {
 		stars[0] = false;
 		stars[1] = false;
 		stars[2] = false;
@@ -198,24 +198,7 @@ void UIRestaurant::checkStarsArray() {
 
 void UIRestaurant::checkRenderStar() {
 	for (int i = 0; i < stars.size(); i++) {
-		//if (stars[i] == true) {
 		if (stars[i]) {
-			// estrella 1
-			//if (i == 0) { renderStar(100, 25); }
-
-			//// estrella 2
-			//else if (i == 1) { renderStar(140, 25); }
-			//
-			//// estrella 3
-			//else if (i == 2) { renderStar(180, 25); }
-			//
-			//// estrella 4
-			//else if (i == 3) { renderStar(220, 25); }
-			//
-			//// estrella 5
-			//else if (i == 4) { renderStar(260, 25); }
-
-
 			// desplazamiento de 100, y 40 por estrella
 			renderStar(100 + i * 40, 25);
 		}

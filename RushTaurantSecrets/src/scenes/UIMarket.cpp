@@ -10,9 +10,7 @@ UIMarket::UIMarket() : Scene() {
 	basketMarket = new BasketMarket(this);
 
 	// icono de dinero
-	GameObject* money = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY);
-	new Transform(money, Vector(10, 5), Vector(0, 0), 64, 64, 0);
-	new Image(money, &((*sdl).images().at("MONEY_ICON")));
+	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MONEY, "MONEY_ICON", Vector(10, 5), 64, 64, 0);
 
 	// gestión de la cantidad de dinero
 	f = new Font(FONT_PATH, 50);
@@ -26,20 +24,10 @@ UIMarket::UIMarket() : Scene() {
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// icono de menú del día
-	GameObject* menu = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MENU);
-	new Transform(menu, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), 50, 50, 0);
-	new Image(menu, &((*sdl).images().at("DAILY_MENU_BUTTON")));
-
-	// !! ¿mostrar para indicar la tecla a pulsar para mostrar el menú de pausa?
-	// icono de menú de pausa
-	//GameObject* pause = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_PAUSE);
-	//new Transform(pause, Vector(sdl->width() - 70, 20), Vector(0, 0), 50, 50, 0);
-	//new Image(pause, &((*sdl).images().at("PAUSE_BUTTON")));
+	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MENU, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
 
 	// icono de cesta
-	GameObject* basket = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_BASKET);
-	new Transform(basket, Vector(20, sdl->height() - 90), Vector(0, 0), 68, 70, 0);
-	new Image(basket, &((*sdl).images().at("BASKET_YELLOW")));
+	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_BASKET, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
 }
 
 UIMarket::~UIMarket() {
@@ -52,6 +40,14 @@ void UIMarket::update() {
 	Scene::update();
 	showMoneyText();
 }
+
+void UIMarket::createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
+	Vector position, float width, float height, float rotation) {
+	GameObject* gameObject = new GameObject(this, grp, handler);
+	new Transform(gameObject, position, Vector(0, 0), width, height, rotation);
+	new Image(gameObject, &((*sdl).images().at(textureName)));
+}
+
 
 void UIMarket::showMoneyText() {
 	// si la cantidad de dinero ha variado, lo muestra por pantalla

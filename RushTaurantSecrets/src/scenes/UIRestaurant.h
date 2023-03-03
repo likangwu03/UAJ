@@ -20,6 +20,7 @@ class UIRestaurant : public Scene
 {
 private:
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+	const int REP0 = 0, REP1 = 0, REP2 = 20, REP3 = 40, REP4 = 60, REP5 = 80;
 
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
