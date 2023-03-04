@@ -424,6 +424,12 @@
       "file": "assets/Sprites/UI/arrow.png",
       "cols": 1,
       "rows": 1
+    },  
+    {
+      "id": "CROSS",
+      "file": "assets/Sprites/UI/UI_Flat_Cross_Medium.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "BUBBLE_ICON",

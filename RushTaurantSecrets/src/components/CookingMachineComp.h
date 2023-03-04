@@ -9,10 +9,10 @@ class CookingMachineComp :public Component
 {
 public:
 	//determinar si el horno est¨¢ libre, cocinando o que ha cocinado un plato
-	enum State { available, cooking, finished };
+	enum State { available, informing, cooking, finished };
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_COOKMACHINE;
 private:
-	const int 
+	const float 
 		BUBBLE_OFFSETX = -4,
 		BUBBLE_OFFSETY = -63,
 		BUBBLE_WIDTH = 41,
@@ -20,12 +20,16 @@ private:
 		DISH_OFFSETX = -1, //respecto de bubble
 		DISH_OFFSETY = -5,
 		DISH_WIDTH = 32,
-		DISH_HEIGHT = 32
+		DISH_HEIGHT = 32,
+		CROSS_WIDTH = 32,
+		CROSS_HEIGHT = 32
 		;
+	const float CROSS_TIME =0.5;
 	struct CookingTex {
 		Texture* bubble = nullptr;
 		Texture* dishTex = nullptr;
 		Texture* cookingTex = nullptr;
+		Texture* cross = nullptr;
 	};
 
 	CookingTex textures;
@@ -57,7 +61,7 @@ public:
 
 	//cocinar un plato
 	void cook(_ecs::_dish_id d);
-
+	void informCannotCook();
 	//recoger el plato
 	_ecs::_dish_id pickDish();
 

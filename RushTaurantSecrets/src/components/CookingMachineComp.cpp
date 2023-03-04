@@ -9,13 +9,19 @@ transform(parent->getComponent<Transform>()), anim(parent->getComponent<UIAnimat
 dishComb(DishCombinator::instance()), sdl(SDLUtils::instance())
 {
 	textures.bubble = &((*sdl).images().at("BUBBLE_ICON"));
+	textures.cross = &((*sdl).images().at("CROSS"));
+	
 	renderPos = transform->getPos();
 	anim->setActive(false);
 };
 pair<_ecs::_dish_id, bool> CookingMachineComp::canFormDish(vector<_ecs::_ingredients_id> ing) {
 	return dishComb->existDish(ing);
 }
-
+void CookingMachineComp::informCannotCook() {
+	cookingTime = CROSS_TIME;
+	state = informing;
+	cont = sdl->currRealTime();
+}
 void CookingMachineComp::cook(_ecs::_dish_id d) {
 	dish = d;
 	cookingTime = _ecs::Dishes[d].cookingTime;
@@ -43,6 +49,9 @@ void CookingMachineComp::update() {
 	if (state == cooking && sdl->currRealTime() - cont >= cookingTime * 1000) {
 		finishCooking();
 	}
+	else if (state == informing && sdl->currRealTime() - cont >= cookingTime * 1000) {
+		state = available;
+	}
 }
 
 void CookingMachineComp::render() {
@@ -52,6 +61,9 @@ void CookingMachineComp::render() {
 	case CookingMachineComp::available: //de momento no hace nada
 		break;
 	case CookingMachineComp::cooking: //puntos suspensivos
+		break;
+	case CookingMachineComp::informing: //cruz
+		textures.cross->render(build_sdlrect(renderPos.getX() , renderPos.getY() + BUBBLE_OFFSETY, CROSS_WIDTH, CROSS_HEIGHT) );
 		break;
 	case CookingMachineComp::finished:
 		SDL_Rect dest;

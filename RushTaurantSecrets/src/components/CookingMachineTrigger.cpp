@@ -22,7 +22,7 @@ void CookingMachineTrigger::isOverlapping() {
 			cook->cook(aux.first); // cocina si se puede formar un plato
 			other_->getComponent<Ingredients>()->removeAllIngredients();
 		}
-		else cout << "cookingMachineCol: no se puede formarse un plato" << endl;
+		else cook->informCannotCook();
 		break;
 	case CookingMachineComp::cooking: //no hace nada
 		break;
