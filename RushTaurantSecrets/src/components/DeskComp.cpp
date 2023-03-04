@@ -6,7 +6,7 @@
 #include "../objects/ClientsManager.h"
 #include "../utils/checkML.h"
 
-DeskComp::DeskComp(GameObject* parent) : TriggerComp(parent, Vector(), 0, 0), sucia(false), num(0) {
+DeskComp::DeskComp(GameObject* parent) : TriggerComp(parent, Vector(), 10, 10), sucia(false), num(0) {
 	trans = parent->getComponent<Transform>();
 	if(trans == nullptr) {
 		throw exceptions::CompNotFound("Transform", "DeskComp");

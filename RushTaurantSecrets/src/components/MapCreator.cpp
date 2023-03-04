@@ -18,6 +18,7 @@
 #include "../gameObjects/Bin.h"
 #include "../gameObjects/KitchenSurfaceObj.h"
 #include "../gameObjects/goToPantryObj.h"
+#include "../gameObjects/Desk.h"
 
 #include "../utils/checkML.h"
 using namespace _ecs;
@@ -48,7 +49,7 @@ void MapCreator::loadMapDims() {
 	rows = tileCount.y;
 	cols = tileCount.x;
 
-	// Lee el tama�o de los tiles
+	// Lee el tamaño de los tiles
 	auto tileSize = tileMap->getTileSize();
 	tileW = tileSize.x;
 	tileH = tileSize.y;
@@ -70,7 +71,7 @@ void MapCreator::loadTilesets() {
 		string tilesetName = ts.getName();
 		// Tilesets precargados
 		auto preloadedTiles = sdlutils().getLoadedTilesets();
-		// Posici�n del tileset buscado en los tilesets precargados
+		// Posición del tileset buscado en los tilesets precargados
 		auto preloadedTexture = preloadedTiles.find(tilesetName);
 
 		// Si el tileset buscado est?en los tilesets precargados,
@@ -97,18 +98,18 @@ void MapCreator::render() {
 			bool found = false;
 			// Se recorre todo el mapa 
 			for (int rw = 0; rw < rows; rw++) {
-				// Adem�s, si no existe tileset para el tile, pasa a la siguiente casilla
+				// Además, si no existe tileset para el tile, pasa a la siguiente casilla
 				for (int cl = 0; cl < cols; cl++) {
 					// Se obtiene la ID del tile en el mapa y se
 					// usa para obtener la ID del tile en el tileset
 					int tileInTilemap = cl + rw * cols;
 					int tileID = tiles[tileInTilemap].ID;
 
-					// Si la casilla no est?vac�a
+					// Si la casilla no está vacía
 					if (tileID != 0) {
 						found = false;
 						// Recorre los tilesets cargados y busca el primero que
-						// el ID m�s cercano y <= al ID del tile
+						// el ID más cercano y <= al ID del tile
 						int tilesetFile = 0, tilesetID = -1;
 						for (auto ts = tilesets.begin(); ts != tilesets.end() && !found; ++ts) {
 							if (ts->first <= tileID) {
@@ -120,7 +121,7 @@ void MapCreator::render() {
 
 						// Si se encuentra el tileset que contiene el tile
 						if (tilesetID != -1) {
-							// Se normaliza el �ndice
+							// Se normaliza el índice
 							tileID -= tilesetID;
 
 							// Se calculan las dimensiones del tileset
@@ -129,12 +130,12 @@ void MapCreator::render() {
 							int tilesetCols = tilesetW / tileW;
 							int tilesetRows = tilesetH / tileH;
 
-							// Se calcula la zona del tileset en la que est?el tile a dibujar
+							// Se calcula la zona del tileset en la que está el tile a dibujar
 							int tilesetRegionX = (tileID % tilesetCols) * tileW;
 							int tilesetRegionY = (tileID / tilesetCols) * tileH;
 
 
-							// Se calcula la posici�n en la que dibujar el tile
+							// Se calcula la posición en la que dibujar el tile
 							int tileX = cl * tileW * sdlutils().getResizeFactor();
 							int tileY = rw * tileH * sdlutils().getResizeFactor();
 
@@ -143,7 +144,7 @@ void MapCreator::render() {
 							// Parte del mapa en el que se va a dibujar el tile
 							SDL_Rect destRect = { tileX, tileY, tileW * sdlutils().getResizeFactor(), tileH * sdlutils().getResizeFactor() };
 
-							// Dibuja el el tile del tileset (tilesets[tilesetID) srcRect en la posici�n destRect
+							// Dibuja el el tile del tileset (tilesets[tilesetID) srcRect en la posición destRect
 							tilesets[tilesetID]->render(srcRect, destRect);
 
 						}
@@ -211,6 +212,9 @@ void MapCreator::createObject() {
 				}
 				else if (name == "goToPantry") {
 					new goToPantryObj(scene, pos, width_, height_);
+
+				} else if(name == "table") {
+					new Desk(scene, pos, width_, height_);
 				}
 			};
 
