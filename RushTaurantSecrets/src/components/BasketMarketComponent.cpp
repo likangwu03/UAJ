@@ -14,7 +14,7 @@ void BasketMarketComponent::buyIngredient() {
 		_ecs::_ingredients_id ingrToBuy = cartelM->getIngredient();
 		auto it = ingredients.find(ingrToBuy);
 		if (it != ingredients.end())
-			it->second++;
+			it->second += 1;
 		else 
 			ingredients.insert({ ingrToBuy,1 });
 	}
