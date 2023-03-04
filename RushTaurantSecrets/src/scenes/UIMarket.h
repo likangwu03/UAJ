@@ -25,7 +25,7 @@ private:
 
 public:
 	// constructora
-	UIMarket();
+	UIMarket(CartelManager* cM);
 	~UIMarket();
 	void showMoneyText();
 	void createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,

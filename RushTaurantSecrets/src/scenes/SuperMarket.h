@@ -16,7 +16,7 @@ private:
 	GameObject* player;
 	//GameObject* mapTop;
 public:
-	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket()) { init(); }
+	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket(cartelM)) { init(); }
 	~SuperMarket();
 	void render();
 	void update();

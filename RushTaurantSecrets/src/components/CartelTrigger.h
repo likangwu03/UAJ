@@ -14,6 +14,9 @@ public:
 	virtual void onTriggerExit();
 	void highlight(); //llamado por CartelManager
 	void unHighlight(); //llamado por CartelManager
+	
+	_ecs::_ingredients_id getIngredient() { return ingId; }
+
 private:
 	_ecs::_ingredients_id ingId; //para saber qu¨¦ ingrediente est¨¢ seleccionando
 	CartelManager* cartelManager;

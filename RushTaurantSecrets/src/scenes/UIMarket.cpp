@@ -2,7 +2,7 @@
 
 #include "../utils/checkML.h"
 
-UIMarket::UIMarket() : Scene() {
+UIMarket::UIMarket(CartelManager* cM) : Scene() {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = Money::init(moneyContainer, 200);
@@ -61,7 +61,7 @@ void UIMarket::showMoneyText() {
 }
 
 void UIMarket::handleEvents() {
-	if (ih->isKeyDown(SDLK_SPACE)) { 
+	if (ih->isKeyDown(SDLK_z)) { 
 		// si el menú de cesta ya está abierto, lo cierra
 		if (basketMarket->getBasketON())
 			basketMarket->setBasketON(false);
@@ -71,10 +71,16 @@ void UIMarket::handleEvents() {
 	}
 	else
 		Scene::handleEvents();
+
+	if (ih->isKeyDown(SDLK_SPACE)){
+		basketMarket->buyIngredient();
+	}
 }
 
 void UIMarket::render() {
 	Scene::render();
-	if (basketMarket->getBasketON()) 
+	if (basketMarket->getBasketON()) {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();
+	}
+
 }

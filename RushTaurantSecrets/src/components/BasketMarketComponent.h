@@ -4,6 +4,8 @@
 #include "../structure/Food_def.h"
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
+#include "../structure/CollisionsManager.h"
+#include "../structure/CartelManager.h"
 
 using namespace std;
 
@@ -13,6 +15,8 @@ private:
 	// lista de ingredientes en la cesta y su cantidad
 	unordered_map<_ecs::_ingredients_id, int> ingredients;
 	SDLUtils* sdl = SDLUtils::instance();
+	InputHandler* ih;
+	CartelManager* cartelM = CartelManager::instance();
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);

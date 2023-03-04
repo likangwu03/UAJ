@@ -26,7 +26,8 @@ void SuperMarket::handleEvents() {
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
 	player = new Player(this);
-	cartelM = new CartelManager();
+	//cartelM = new CartelManager();
+	cartelM = CartelManager::instance();
 	map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/supermarket.tmx");
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);

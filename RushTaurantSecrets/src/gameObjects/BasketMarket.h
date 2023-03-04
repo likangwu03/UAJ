@@ -6,9 +6,10 @@
 class BasketMarket : public GameObject {
 private:
 	bool basketON;
+	BasketMarketComponent* basketMC;
 public:
 	BasketMarket(Scene* scene) : GameObject(scene, _ecs::grp_ICONS, _ecs::hdr_SM_INVENTORY) {
-		new BasketMarketComponent(this);
+		basketMC = new BasketMarketComponent(this);
 		basketON = false;
 	}
 
@@ -18,5 +19,9 @@ public:
 
 	bool getBasketON() {
 		return basketON;
+	}
+
+	void buyIngredient() {
+		basketMC->buyIngredient();
 	}
 };

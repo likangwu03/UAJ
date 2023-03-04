@@ -1,12 +1,19 @@
 #pragma once
 #include "../components/CartelTrigger.h"
-class CartelManager
+
+class CartelManager : public Singleton<CartelManager>
 {
+	friend Singleton<CartelManager>;
+private:
+	CartelTrigger* selectedCartel;
+	CartelManager() :selectedCartel(nullptr) {}
 public:
-	CartelManager():selectedCartel(nullptr){}
 	void signIn(CartelTrigger* c); //llamado por onTriggerEnter de cartelTrigger 
 	void signOut(CartelTrigger* c); //llamado por onTriggerExit de cartelTrigger
-private: 
-	CartelTrigger* selectedCartel;
+
+	_ecs::_ingredients_id getIngredient() { return selectedCartel->getIngredient(); }
+	bool isSelected() { 
+		return (selectedCartel != nullptr);  
+	}
 };
 
