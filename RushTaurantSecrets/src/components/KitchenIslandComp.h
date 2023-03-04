@@ -3,13 +3,14 @@
 #include "../objects/DishCombinator.h"
 #include "../components/UIAnimator.h"
 #include "../components/Transform.h"
-#include "../components/Ingredients.h"
+
 #include "../components/Image.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utilities/Vector.h"
 #include <unordered_map>
 
 using namespace std;
+class Ingredients;
 class KitchenIslandComp :public Component
 {
 public:

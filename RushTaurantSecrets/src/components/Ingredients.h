@@ -4,13 +4,15 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
+#include "../structure/Scene.h"
+#include "../components/KitchenIslandComp.h"
 #include <vector>
 #include <utility>
 
 using namespace std;
 using namespace _ecs;
 
-
+class KitchenIslandComp;
 class Ingredients: public Component {
 	const float ING_HEIGHT = 38;
 	const float ING_WIDTH = 38;
@@ -42,6 +44,7 @@ private:
 	SDL_Rect dest;
 	SDL_Rect dest_bubble;
 	
+	KitchenIslandComp* kitchenIsland; //para devolver ing a la mesa
 
 	void debug(); //provisional
 
@@ -55,6 +58,8 @@ public:
 		//addIngredient(HARINA);
 		//addIngredient(HUEVO);
 	}
+	
+	void setKitchenIsland(KitchenIslandComp* k) { kitchenIsland = k; }
 	//devuelve por ref
 	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; };
 	void addIngredient(_ecs::_ingredients_id ingr);

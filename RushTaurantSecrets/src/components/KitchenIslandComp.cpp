@@ -1,7 +1,7 @@
 #include "KitchenIslandComp.h"
 #include "../utils/checkML.h"
 #include "../structure/Scene.h"
-
+#include "../components/Ingredients.h"
 using namespace std;
 KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingredients_id, int>> _ing) :
 	Component(parent, id), sdl(SDLUtils::instance()), ingCloud(parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Ingredients>()) {
@@ -20,6 +20,7 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 		new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),&sdl->images().at("KI_ICON")} });
 		auxID[i] = _ing[i].first;
 	}
+	ingCloud->setKitchenIsland(this);
 
 }
 
@@ -47,7 +48,7 @@ void KitchenIslandComp::pickIngredient(int i) {
 		--ing[auxID[i]].n;
 		ingCloud->addIngredient(auxID[i]);
 		delete ing[auxID[i]].f;
-		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(auxID[i]), *f, build_sdlcolor(0xFAF2E6ff));
+		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(ing[auxID[i]].n), *f, build_sdlcolor(0xFAF2E6ff));
 	}
 }
 
@@ -69,5 +70,5 @@ void KitchenIslandComp::unselectIng(int i) {
 void KitchenIslandComp::returnIngredient(_ecs::_ingredients_id id) {
 	++ing[id].n;
 	delete ing[id].f;
-	ing[id].f = new Texture(sdl->renderer(), to_string(id), *f, build_sdlcolor(0xFAF2E6ff));
+	ing[id].f = new Texture(sdl->renderer(), to_string(ing[id].n), *f, build_sdlcolor(0xFAF2E6ff));
 }

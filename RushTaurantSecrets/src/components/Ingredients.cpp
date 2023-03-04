@@ -1,6 +1,6 @@
+#include "../utils/checkML.h"
 #include "Ingredients.h"
 
-#include "../utils/checkML.h"
 
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	if (ingredients.size() == MAX_INGREDIENTS) {
@@ -22,6 +22,9 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 }
 
 void Ingredients::removeLastIngredient() {
+	//devolver a la mesa
+	kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
+	
 	ingredients.pop_back();
 	
 	for (int i = 0; i < coord.size(); ++i) {
