@@ -23,4 +23,10 @@ void UIAnimator::render() {
 	temp.h = height * sdlutils().getResizeFactor();
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
 	texture->renderFrame(temp, currFrame, currentAnim, angle);
-};
+}
+
+int UIAnimator::getFramesNumber() { return endFrame + 1; }
+
+void UIAnimator::changeFrameRate(int newFrameRate) {
+	frameRate = newFrameRate;
+}

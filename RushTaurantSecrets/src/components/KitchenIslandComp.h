@@ -28,7 +28,7 @@ private:
 		Texture* f;	// imagen con el número de ingredientes que tienes (delantera)
 		Texture* b;	//
 	};
-	Font* f; //para indicar n de ing
+	Font* font; //para indicar n de ing
 	unordered_map<_ecs::_ingredients_id,Ing>ing;
 	vector<_ecs::_ingredients_id>auxID;
 	SDLUtils* sdl;

@@ -9,6 +9,8 @@ Game::Game() {
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
 	sdl->showCursor();
+
+	sdlutils().setFrameTime(1);
 }
 
 void Game::run() {
@@ -22,7 +24,9 @@ void Game::run() {
 		refresh();
 		render();
 
-		frameTime = SDL_GetTicks() - startTime;
+		frameTime = sdlutils().currRealTime() - startTime;
+		sdlutils().setFrameTime(frameTime);
+
 		if (frameTime < FRAME_RATE)
 			SDL_Delay(FRAME_RATE - frameTime);
 	}

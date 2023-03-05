@@ -23,7 +23,6 @@ private:
 		DISH_WIDTH = 32,
 		DISH_HEIGHT = 32,
 #pragma endregion
-		TAKINGNOTE_WIDTH = 48,
 		TAKINGNOTE_OFFSETY = -5;
 		
 

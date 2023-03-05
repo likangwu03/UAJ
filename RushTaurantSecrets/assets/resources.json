@@ -318,7 +318,7 @@
     },
     {
       "id": "KI_ICON",
-      "file": "assets/Sprites/UI/HUD/ki_icon.png",
+      "file": "assets/Sprites/UI/HUD/kitchenIsland_icon.png",
       "cols": 1,
       "rows": 1
     },
@@ -450,21 +450,21 @@
       "rows": 1
     },
     {
-      "id": "THINKING_ICON_ANIM",
-      "file": "assets/Sprites/UI/HUD/thinking_anim.png",
+      "id": "KITCHEN_PROCESSING_ICON_ANIM",
+      "file": "assets/Sprites/UI/HUD/kitchen_processing.png",
       "cols": 8,
       "rows": 1
     },
     {
       "id": "CLIENT_THINKING_ICON_ANIM",
       "file": "assets/Sprites/UI/HUD/client_thinking.png",
-      "cols": 2,
+      "cols": 8,
       "rows": 1
     },
     {
       "id": "CLIENT_TAKINGNOTE_ICON_ANIM",
       "file": "assets/Sprites/UI/HUD/takingNote.png",
-      "cols": 2,
+      "cols": 1,
       "rows": 1
     },
     {

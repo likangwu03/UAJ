@@ -1,16 +1,19 @@
 #pragma once
+
 #include "../structure/Component.h"
 #include "../objects/DishCombinator.h"
 #include "../components/UIAnimator.h"
 #include "../components/Transform.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utilities/Vector.h"
-class CookingMachineComp :public Component
-{
+
+
+class CookingMachineComp :public Component {
 public:
-	//determinar si el horno est®¢ libre, cocinando o que ha cocinado un plato
+	//determinar si el horno est√° libre, cocinando o que ha cocinado un plato
 	enum State { available, informing, cooking, finished };
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_COOKMACHINE;
+
 private:
 	const float 
 		BUBBLE_OFFSETX = -4,
@@ -22,9 +25,10 @@ private:
 		DISH_WIDTH = 32,
 		DISH_HEIGHT = 32,
 		CROSS_WIDTH = 32,
-		CROSS_HEIGHT = 32
-		;
-	const float CROSS_TIME =0.5;
+		CROSS_HEIGHT = 32 ;
+		
+		const float CROSS_TIME =0.5;
+
 	struct CookingTex {
 		Texture* bubble = nullptr;
 		Texture* dishTex = nullptr;
@@ -36,7 +40,7 @@ private:
 	State state;
 	DishCombinator* dishComb; //solo existe uno en todo el juego
 	_ecs::_dish_id dish; // plato que lleva cocinando,none si no hay
-	float cookingTime; //tiempo de cocci®Æn del plato
+	float cookingTime; //tiempo de cocci√≥n del plato
 
 	Vector renderPos;
 	SDLUtils* sdl;
@@ -56,7 +60,7 @@ public:
 
 	State getState() { return state; };
 
-	//informar si se puede formar un plato y qu®¶ plato es
+	//informar si se puede formar un plato y qu√© plato es
 	pair<_ecs::_dish_id, bool> canFormDish(vector<_ecs::_ingredients_id> ing);
 
 	//cocinar un plato
@@ -67,5 +71,6 @@ public:
 
 	virtual void update(); //para cocinar
 	virtual void render();
+
 };
 

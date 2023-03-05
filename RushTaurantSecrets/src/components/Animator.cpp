@@ -15,7 +15,7 @@ Animator::Animator(GameObject* parent, string s, int iniFrame, int endFrame, int
 void Animator::init(int iniFrame, int endFrame, int currAnim, int frRate, float w, float h) {
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 	lastTic = sdlutils().currRealTime();
-	frameRate = 100;
+	frameRate = frRate;
 	angle = 0;
 	plTf = parent->getComponent<Transform>();
 
@@ -37,8 +37,7 @@ void Animator::updateAnim() {
 		currFrame = initFrame;
 }
 /*cambiar de frame*/
-void Animator::setCurrentAnim(int iniFram, int endFram, int currAnim)
-{
+void Animator::setCurrentAnim(int iniFram, int endFram, int currAnim) {
 	currentAnim = currAnim;
 	endFrame = endFram;
 	initFrame = iniFram;

@@ -10,14 +10,14 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 	h = parent->getComponent<Transform>()->getH() / 2;
 	x = parent->getComponent<Transform>()->getPos().getX();
 	y = parent->getComponent<Transform>()->getPos().getY();
-	f = new Font("assets/Fonts/8-bit Madness.ttf", 40);
+	font = new Font("assets/Fonts/8-bit Madness.ttf", 40);
 	highlight = &sdl->images().at("ISLAND_HIGHLIGHT");
 	selected = -1;
 	//cargar info
 	auxID = vector<_ecs::_ingredients_id>(_ing.size());
 	for (int i = 0; i < _ing.size(); ++i) { // cleon: recorrido moderno? pues no. pues s?
 		ing.insert({ _ing[i].first, {_ing[i].second, &sdl->images().at(to_string(_ing[i].first)),
-		new Texture(sdl->renderer(), to_string(_ing[i].second), *f, build_sdlcolor(0xFAF2E6ff)),&sdl->images().at("KI_ICON")} });
+		new Texture(sdl->renderer(), to_string(_ing[i].second), *font, build_sdlcolor(0xFAF2E6ff)),&sdl->images().at("KI_ICON")} });
 		auxID[i] = _ing[i].first;
 	}
 	ingCloud->setKitchenIsland(this);
@@ -26,7 +26,7 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 
 KitchenIslandComp::~KitchenIslandComp() {
 	// se elimina la fuente cogida
-	delete f;
+	delete font;
 	for (auto i : ing) delete i.second.f;
 
 }
@@ -48,7 +48,7 @@ void KitchenIslandComp::pickIngredient(int i) {
 		--ing[auxID[i]].n;
 		ingCloud->addIngredient(auxID[i]);
 		delete ing[auxID[i]].f;
-		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(ing[auxID[i]].n), *f, build_sdlcolor(0xFAF2E6ff));
+		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(ing[auxID[i]].n), *font, build_sdlcolor(0xFAF2E6ff));
 	}
 }
 
@@ -64,11 +64,10 @@ void KitchenIslandComp::unselectIng(int i) {
 		hPos = { -w,-h };
 		selected = -1;
 	}
-
 }
 
 void KitchenIslandComp::returnIngredient(_ecs::_ingredients_id id) {
 	++ing[id].n;
 	delete ing[id].f;
-	ing[id].f = new Texture(sdl->renderer(), to_string(ing[id].n), *f, build_sdlcolor(0xFAF2E6ff));
+	ing[id].f = new Texture(sdl->renderer(), to_string(ing[id].n), *font, build_sdlcolor(0xFAF2E6ff));
 }

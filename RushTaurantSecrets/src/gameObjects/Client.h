@@ -21,7 +21,7 @@ public:
 		: GameObject(scene, _ecs::grp_CLIENTS) {
 		Transform* t = new Transform(this, Vector(origin), Vector(0, 0), 48, 96);
 		new CharacterAnimator(this, sprite, 18, 24, 1);
-		new UIAnimator(this, "THINKING_ICON_ANIM", 0, 8, 0, 80, THINKING_WIDTH, THINKING_HEIGHT, Vector(origin.getX(), origin.getY() + THINKING_OFFSETY));
+		new UIAnimator(this, "CLIENT_THINKING_ICON_ANIM", 0, 8, 0, 80, THINKING_WIDTH, THINKING_HEIGHT, Vector(origin.getX(), origin.getY() + THINKING_OFFSETY));
 		new StraightMovement(this, speed);
 		new ClientStateRender(this);
 		new ClientState(this, menu);

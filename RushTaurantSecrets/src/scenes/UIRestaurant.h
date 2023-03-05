@@ -11,6 +11,7 @@ class Image;
 class Inventory;
 class Bin;
 class Reputation;
+class Transform;
 
 using namespace std;
 using namespace _ecs;
@@ -19,13 +20,15 @@ using namespace _ecs;
 class UIRestaurant : public Scene
 {
 private:
-	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+	const string FONT_PATH = "assets/Fonts/8-bit Madness.ttf";
 	const int REP0 = 0, REP1 = 0, REP2 = 20, REP3 = 40, REP4 = 60, REP5 = 80;
+	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15;
 
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
 	Font* font;
+	Transform* transform;
 	GameObject* moneyText;
 	GameObject* timeText;
 	GameObject* arrow;
@@ -58,6 +61,5 @@ public:
 	void reputationManager();
 	void checkStarsArray();
 	void checkRenderStar();
-	void createEmptyStar(Vector pos);
 };
 
