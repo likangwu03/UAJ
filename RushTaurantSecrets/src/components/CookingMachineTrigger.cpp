@@ -20,7 +20,7 @@ void CookingMachineTrigger::isOverlapping() {
 		aux = cook->canFormDish(other_->getComponent<Ingredients>()->getIngredients());
 		if (aux.second) {
 			cook->cook(aux.first); // cocina si se puede formar un plato
-			other_->getComponent<Ingredients>()->removeAllIngredients();
+			other_->getComponent<Ingredients>()->cookingIngredients();
 		}
 		else cook->informCannotCook();
 		break;

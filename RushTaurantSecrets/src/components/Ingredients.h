@@ -65,6 +65,7 @@ public:
 	void addIngredient(_ecs::_ingredients_id ingr);
 	void removeLastIngredient();
 	void removeAllIngredients();
+	void cookingIngredients();
 	void removeWhenExit();
 	void render();
 

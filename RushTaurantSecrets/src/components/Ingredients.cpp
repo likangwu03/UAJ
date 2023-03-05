@@ -22,8 +22,7 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 }
 
 void Ingredients::removeLastIngredient() {
-	//devolver a la mesa
-	kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
+	
 	
 	ingredients.pop_back();
 	
@@ -39,11 +38,22 @@ void Ingredients::removeAllIngredients() {
 	//no es un for porque, a pesar de saber las vueltas que da, se va reduciendo el tamaño del vector
 	int i = ingredients.size(); //i vale 5 (el numero de ingredientes maximo que se puede llevar) o menos si no esta lleno el vector
 	while (i != 0) {
+		//devolver a la mesa
+		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
 		removeLastIngredient();
 		--i;
 	}
 	coord = { { 0,0 } };
 
+}
+
+void Ingredients::cookingIngredients() {
+	int i = ingredients.size(); 
+	while (i != 0) {
+		removeLastIngredient();
+		--i;
+	}
+	coord = { { 0,0 } };
 }
 
 void Ingredients::removeWhenExit() {
