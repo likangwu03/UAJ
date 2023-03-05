@@ -59,11 +59,12 @@ void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, in
 
 
 void Animator::update() {
-
-	if (sdlutils().currRealTime() - lastTic > frameRate) {
-		lastTic = sdlutils().currRealTime();
+	lastTic += sdlutils().getFrameTime();
+	if (lastTic > frameRate ) {
+		lastTic = 0;
 		updateAnim();
 	}
+
 }
 
 void Animator::render() {

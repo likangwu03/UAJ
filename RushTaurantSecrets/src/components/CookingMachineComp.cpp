@@ -3,10 +3,9 @@
 
 #include "../utils/checkML.h"
 
-CookingMachineComp::CookingMachineComp(GameObject* _parent) :Component(_parent, id),
-state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0),
-transform(parent->getComponent<Transform>()), anim(parent->getComponent<UIAnimator>()),
-dishComb(DishCombinator::instance()), sdl(SDLUtils::instance())
+CookingMachineComp::CookingMachineComp(GameObject* _parent) : Component(_parent, id), 
+	state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0),  transform(parent->getComponent<Transform>()), 
+	anim(parent->getComponent<UIAnimator>()), dishComb(DishCombinator::instance()), sdl(SDLUtils::instance())
 {
 	textures.bubble = &((*sdl).images().at("BUBBLE_ICON"));
 	textures.cross = &((*sdl).images().at("CROSS"));
@@ -20,21 +19,22 @@ pair<_ecs::_dish_id, bool> CookingMachineComp::canFormDish(vector<_ecs::_ingredi
 void CookingMachineComp::informCannotCook() {
 	cookingTime = CROSS_TIME;
 	state = informing;
-	cont = sdl->currRealTime();
+	cont = 0;
 }
 void CookingMachineComp::cook(_ecs::_dish_id d) {
 	dish = d;
 	cookingTime = _ecs::Dishes[d].cookingTime;
-	cont = sdl->currRealTime();
+	cont = 0;
 	state = cooking;
 	anim->setActive(true);
+	float aaa = (cookingTime / anim->getFramesNumber());
+	anim->changeFrameRate(aaa * 100);
 }
 
 void CookingMachineComp::finishCooking() {
 	state = finished;
 	anim->setActive(false);
 	textures.dishTex = &((*sdl).images().at(to_string(dish)));
-
 }
 
 _ecs::_dish_id CookingMachineComp::pickDish() {
@@ -46,12 +46,13 @@ _ecs::_dish_id CookingMachineComp::pickDish() {
 }
 
 void CookingMachineComp::update() {
-	if (state == cooking && sdl->currRealTime() - cont >= cookingTime * 1000) {
+	if (state == cooking && cont >= cookingTime * 100) {
 		finishCooking();
 	}
-	else if (state == informing && sdl->currRealTime() - cont >= cookingTime * 1000) {
+	else if (state == informing && cont >= cookingTime * 100) {
 		state = available;
 	}
+	cont += sdlutils().getFrameTime();
 }
 
 void CookingMachineComp::render() {

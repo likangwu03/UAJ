@@ -25,7 +25,7 @@ void UIAnimator::render() {
 	texture->renderFrame(temp, currFrame, currentAnim, angle);
 }
 
-int UIAnimator::getFramesNumber() { return endFrame + 1; }
+int UIAnimator::getFramesNumber() { return endFrame - 1; }
 
 void UIAnimator::changeFrameRate(int newFrameRate) {
 	frameRate = newFrameRate;

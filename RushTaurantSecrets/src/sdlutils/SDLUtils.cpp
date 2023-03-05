@@ -151,7 +151,7 @@ void SDLUtils::loadReasources(std::string filename) {
 					uint8_t size =
 							static_cast<uint8_t>(vObj["size"]->AsNumber());
 #ifdef _DEBUG
-					std::cout << "Loading font with id: " << key << std::endl;
+					//std::cout << "Loading font with id: " << key << std::endl;
 #endif
 					fonts_.emplace(key, Font(file, size));
 				} else {
@@ -177,7 +177,7 @@ void SDLUtils::loadReasources(std::string filename) {
 					int cols = vObj["cols"] == nullptr ? 1 : vObj["cols"]->AsNumber();
 					int rows = vObj["rows"] == nullptr ? 1 : vObj["rows"]->AsNumber();
 #ifdef _DEBUG
-					std::cout << "Loading image with id: " << key << std::endl;
+					//std::cout << "Loading image with id: " << key << std::endl;
 #endif
 					images_.emplace(key, Texture(renderer(), file, cols, rows));
 				} else {
@@ -202,8 +202,7 @@ void SDLUtils::loadReasources(std::string filename) {
 					std::string txt = vObj["text"]->AsString();
 					auto &font = fonts_.at(vObj["font"]->AsString());
 #ifdef _DEBUG
-					std::cout << "Loading message with id: " << key
-							<< std::endl;
+					//std::cout << "Loading message with id: " << key << std::endl;
 #endif
 					if (vObj["bg"] == nullptr)
 						msgs_.emplace(key,
@@ -238,8 +237,7 @@ void SDLUtils::loadReasources(std::string filename) {
 					std::string key = vObj["id"]->AsString();
 					std::string file = vObj["file"]->AsString();
 #ifdef _DEBUG
-					std::cout << "Loading sound effect with id: " << key
-							<< std::endl;
+					//std::cout << "Loading sound effect with id: " << key << std::endl;
 #endif
 					sounds_.emplace(key, SoundEffect(file));
 				} else {
@@ -263,7 +261,7 @@ void SDLUtils::loadReasources(std::string filename) {
 					std::string key = vObj["id"]->AsString();
 					std::string file = vObj["file"]->AsString();
 #ifdef _DEBUG
-					std::cout << "Loading music with id: " << key << std::endl;
+					//std::cout << "Loading music with id: " << key << std::endl;
 #endif
 					musics_.emplace(key, Music(file));
 				} else {
@@ -301,7 +299,7 @@ void SDLUtils::loadTilesets() {
 					std::string key = vObj["id"]->AsString();
 					std::string file = vObj["file"]->AsString();
 #ifdef _DEBUG
-					std::cout << "Loading image with id: " << key << std::endl;
+					//std::cout << "Loading image with id: " << key << std::endl;
 #endif
 					tilesets_.emplace(key, new Texture(renderer(), file));
 				}
