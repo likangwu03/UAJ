@@ -3,13 +3,12 @@
 
 Game::Game() {
 	srand(time(NULL));
-
+	GameInfor::init();
 	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720, "assets/resources.json");
 	exit = false;
 	sceneManager = SceneManager::instance();
 	ih = InputHandler::instance();
 	sdl->showCursor();
-
 	sdlutils().setFrameTime(1);
 }
 

@@ -2,11 +2,13 @@
 #include "GameObject.h"
 
 Scene::Scene() {
+	Infor = GameInfor::instance();
 	ih = InputHandler::instance();
 	handlers = {};
 }
 
 Scene::~Scene() {
+	end();
 	for (int n = 0; n < _ecs::grpNum; n++) {
 		for (auto obj : objGroups[n]) delete obj;
 	}
@@ -47,19 +49,19 @@ void Scene::refresh() {
 void Scene::update() {
 
 	// cleon: for (auto objGroup : objGroups) { (también en los otros) -> Areglado
-	for (auto objGroup : objGroups) {
+	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->update();
 	}
 }
 
 void Scene::render() {
-	for (auto objGroup : objGroups) {
+	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->render();
 	}
 }
 
 void Scene::handleEvents() {
-	for (auto objGroup : objGroups) {
+	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->handleEvents();
 	}
 }

@@ -3,6 +3,7 @@
 #include <array>
 #include "Structure_def.h"
 #include "../sdlutils/InputHandler.h"
+#include "GameInfor.h"
 class GameObject;
 using namespace _ecs;
 class Scene {
@@ -10,6 +11,7 @@ private:
 	friend class GameObject;
 	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
 protected:
+	GameInfor* Infor;
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 	// se utiliza para conectar objetos de una misma escena

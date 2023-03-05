@@ -1,10 +1,5 @@
 #include "CollisionsManager.h"
 #include "../structure/Scene.h"
-#include "../structure/GameObject.h"
-#include "../components/CollisionComp.h"
-#include "../components/TriggerComp.h"
-#include "../components/Transform.h"
-
 #include "../utils/checkML.h"
 
 CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {

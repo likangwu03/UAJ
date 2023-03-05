@@ -11,6 +11,10 @@ public:
 private:
 	bool hasKill;
 	int money;
+	
+	GameInfor():hasKill(false),money(0) {};
+public:
+	int& getMoney() { return money; }
+	bool& getHasKill() { return hasKill; }
 
-	GameInfor() {};
 };
