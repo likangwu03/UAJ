@@ -38,6 +38,12 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// reloj (momento del día)
 	createGameObjects(grp_ICONS, hdr_CLOCK, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0);
 
+	// aguja del reloj
+	//createGameObjects(grp_ICONS, hdr_ARROW, "ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0);
+	arrow = new GameObject(this, grp_ICONS, hdr_ARROW);
+	new Transform(arrow, Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), Vector(0, 0), ICONSIZE / 3, ICONSIZE, 0);
+	new Image(arrow, &((*sdl).images().at("ARROW")));
+
 
 	// inventario (platos)
 	inventory = new Inventory(this);
@@ -102,6 +108,7 @@ void UIRestaurant::update() {
 	showMoneyText();
 	//checkTime();
 	reputationManager();
+	updateClock();
 }
 
 void UIRestaurant::showTimeText() {
@@ -207,4 +214,25 @@ void UIRestaurant::checkRenderStar() {
 void UIRestaurant::render() {
 	Scene::render();
 	checkRenderStar();
+}
+
+void UIRestaurant::updateClock() {
+	timeT = sdl->currRealTime();
+	if (timeT - lastTime >= TIME_CLOCK_REFRESH) {
+		time += 1;
+		auto transformArrow = arrow->getComponent<Transform>();
+		transformArrow->setRot(transformArrow->getRot() + ANGLE_UPDATE);
+		Vector posA;
+		if (transformArrow->getRot() <= ANGLE) 
+			posA = transformArrow->getPos() + Vector(1, 1);
+		else if (transformArrow->getRot() <= ANGLE * 2)
+			posA = transformArrow->getPos() + Vector(-1, 1);
+		else if (transformArrow->getRot() <= ANGLE * 3)
+			posA = transformArrow->getPos() + Vector(-1, -1);
+		else
+			posA = transformArrow->getPos() + Vector(1, -1);
+		transformArrow->setPos(posA);
+		lastTime = timeT;
+		timeT = 0;
+	}
 }

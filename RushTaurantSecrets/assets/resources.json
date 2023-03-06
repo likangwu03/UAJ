@@ -427,13 +427,13 @@
     },
     {
       "id": "CLOCK",
-      "file": "assets/Sprites/UI/HUD/clock.png",
+      "file": "assets/Sprites/UI/HUD/clock_2.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "ARROW",
-      "file": "assets/Sprites/UI/arrow.png",
+      "file": "assets/Sprites/UI/HUD/arrow_2.png",
       "cols": 1,
       "rows": 1
     },
