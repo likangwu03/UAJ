@@ -504,6 +504,24 @@
       "file": "assets/Sprites/UI/dailymenu_highlight.png"
     },
     {
+      "id": "KEYBOARD_KEYS",
+      "file": "assets/Sprites/UI/Keyboard_Letters_and_Symbols.png",
+      "cols": 8,
+      "rows": 14
+    },
+    {
+      "id": "PLAYSTATION_KEYS",
+      "file": "assets/Sprites/UI/gdb-playstation-2.png",
+      "cols": 35,
+      "rows": 40
+    },
+    {
+      "id": "XBOX_KEYS",
+      "file": "assets/Sprites/UI/gdb-xbox-2.png",
+      "cols": 35,
+      "rows": 40
+    },
+    {
       "id": "1_Generic_48x48",
       "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png",
       "cols": 1,

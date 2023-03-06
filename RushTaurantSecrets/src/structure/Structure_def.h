@@ -24,6 +24,7 @@ namespace _ecs {
 		cmp_TRIGGER,
 		cmp_DESK,
 		cmp_BIN,
+		cmp_THIEF_TRIGGER,
 		// otros
 		cmp_COOKMACHINE,
 		cmp_CLIENTSTATE,
@@ -37,6 +38,8 @@ namespace _ecs {
 		// renders
 		cmp_CLIENTSTATE_RENDER,
 		cmp_HEART_RENDER,
+		cmp_MURDER_RENDER,
+		cmp_SHOO_RENDER,
 		cmp_IMAGE,
 		cmp_BUBBLE,
 		// botones
