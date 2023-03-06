@@ -1,17 +1,17 @@
 #pragma once
 #include "../structure/Scene.h"
-#include "../components/Button.h"
+#include "../gameObjects/ButtonGO.h"
 #include "../sdlutils/Texture.h"
 class MainMenu : public Scene {
 private:
-	static void start(SceneManager* sceneManager);
+	static void start();
 
 	GameObject* bg;
-	GameObject* button;
+	ButtonGO* button;
 	Texture* image;
 
 public:
-	MainMenu(SceneManager* sceneManager);
+	MainMenu();
 	~MainMenu();
 
 	void handleEvents() override;

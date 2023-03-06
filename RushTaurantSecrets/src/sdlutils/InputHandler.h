@@ -212,7 +212,6 @@ public:
 					m_joysticks.push_back(joy);
 					m_joystickValues.push_back(std::make_pair(new
 						Vector(0, 0), new Vector(0, 0))); // add our pair
-
 					std::vector<bool> cButtons;
 					for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
 					{

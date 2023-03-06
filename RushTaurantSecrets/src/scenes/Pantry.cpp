@@ -6,6 +6,7 @@
 #include "../gameObjects/Player.h"
 
 #include "../utils/checkML.h"
+
 Pantry::Pantry() :rest(nullptr) { init(); }
 Pantry::~Pantry() {
 	rest->linkPantry(nullptr);

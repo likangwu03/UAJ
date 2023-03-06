@@ -15,7 +15,7 @@ public:
 		new Transform(this, Vector(500, 200), Vector(0, 0), 48, 96, 0);
 		new PlayerMovementController(this);
 		new CollisionComp(this, { 0,48 * sdlutils().getResizeFactor() }, 48 * sdlutils().getResizeFactor(), 48 * sdlutils().getResizeFactor());
-		new CharacterAnimator(this, "Player_1", 18, 24, 1);
+		new CharacterAnimator(this, "Player_1", 18, 24, 1,40);
 		new Ingredients(this);
 	}
 };

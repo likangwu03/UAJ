@@ -18,6 +18,7 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_IMAGE;
 
+	// REVISAR RELACIÓN CON TRANSFORM
 	Image(GameObject* parent, Texture* texture, Vector _pos = { -1,-1 },float _w=-1,float _h=-1) : Component(parent, id), texture(texture), sdl(SDLUtils::instance()) {
 		// importante que se añada el Transform antes de Image porque sino no se va a encontrar la ref
 		// se guarda la referencia al Transform de la entidad
@@ -61,8 +62,8 @@ public:
 
 	virtual void render() {
 		SDL_Rect dest;
-		dest.x = pos.getX();
-		dest.y = pos.getY();
+		dest.x = transform->getPos().getX();
+		dest.y = transform->getPos().getY();
 		dest.w = w;
 		dest.h = h;
 		// renderiza la textura

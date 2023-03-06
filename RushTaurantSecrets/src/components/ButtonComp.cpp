@@ -13,10 +13,11 @@ ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())
 	dest.w = tf->getW();
 	dest.h = tf->getH();
 
+	ih().initialiseJoysticks(_joy);
+
 #ifdef _DEBUG
 	std::cout << "cock" << std::endl;
 #endif
-	ih().initialiseJoysticks(_joy);
 }
 
 void ButtonComp::handleEvents()
@@ -37,9 +38,10 @@ void ButtonComp::handleEvents()
 		}
 	}
 	else if (ih().joysticksInitialised()) {
-		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-			highlighted = true;
+		highlighted = true;
+		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 			ih().clean();
+			ih().setControls(false);
 			_callback();
 		}
 	}

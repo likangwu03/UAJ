@@ -23,7 +23,6 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 
 void Ingredients::removeLastIngredient() {
 	
-	
 	ingredients.pop_back();
 	
 	for (int i = 0; i < coord.size(); ++i) {
@@ -44,6 +43,7 @@ void Ingredients::removeAllIngredients() {
 		--i;
 	}
 	coord = { { 0,0 } };
+	
 
 }
 
@@ -57,7 +57,9 @@ void Ingredients::cookingIngredients() {
 }
 
 void Ingredients::removeWhenExit() {
-	removeAllIngredients();
+	
+	//el método actual solo se llama cuando el personaje sale de la cocina
+	removeAllIngredients();	
 }
 
 void Ingredients::render() {

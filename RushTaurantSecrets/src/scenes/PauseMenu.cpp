@@ -16,9 +16,9 @@ PauseMenu::PauseMenu() {
 	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
 	new Image(bg, image);
 
-	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "RESUME_BUTTON_DOWN",
+	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2 * SDLUtils::instance()->height() / 5), 385, 130, bResume);
-	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "MAINM_BUTTON_DOWN",
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
 }
 

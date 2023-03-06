@@ -6,6 +6,7 @@
 #include "../components/Transform.h"
 #include "../structure/Scene.h"
 #include "../components/KitchenIslandComp.h"
+#include "../sdlutils/InputHandler.h"
 #include <vector>
 #include <utility>
 
@@ -42,8 +43,7 @@ private:
 	vector<pair<float, float>> coord;
 	// rectángulo en el mundo donde se va a colocar la textura
 	SDL_Rect dest;
-	SDL_Rect dest_bubble;
-	
+	SDL_Rect dest_bubble;	
 	KitchenIslandComp* kitchenIsland; //para devolver ing a la mesa
 
 	void debug(); //provisional

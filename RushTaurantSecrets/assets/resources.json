@@ -353,6 +353,24 @@
       "rows": 1
     },
     {
+      "id": "PLAY_BUTTON_UP",
+      "file": "assets/Sprites/UI/Menu/PlayButtonUp.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "BUTTON_HIGHLIGHT",
+      "file": "assets/Sprites/UI/Menu/button_highlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "BUTTON2_HIGHLIGHT",
+      "file": "assets/Sprites/UI/Menu/button2_highlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_YELLOW",
       "file": "assets/Sprites/UI/HUD/basket_yellow.png",
       "cols": 1,
@@ -415,16 +433,16 @@
     },
     {
       "id": "CLOCK",
-      "file": "assets/Sprites/UI/HUD/clock.png",
+      "file": "assets/Sprites/UI/HUD/clock_2.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "ARROW",
-      "file": "assets/Sprites/UI/arrow.png",
+      "file": "assets/Sprites/UI/HUD/arrow_2.png",
       "cols": 1,
       "rows": 1
-    },  
+    },
     {
       "id": "CROSS",
       "file": "assets/Sprites/UI/UI_Flat_Cross_Medium.png",
