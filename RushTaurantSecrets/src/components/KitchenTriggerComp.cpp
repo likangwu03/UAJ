@@ -9,7 +9,7 @@ KitchenTriggerComp::KitchenTriggerComp(GameObject* parent, Vector pos_, float wi
 }
 
 void KitchenTriggerComp::isOverlapping() {
-	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) || ih->isKeyDown(SDLK_RETURN))
+	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) || ih->isKeyDown(SDLK_r))
 		ing->removeLastIngredient();
 	else if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_Y)) || ih->isKeyDown(SDLK_x))
 		ing->removeAllIngredients();

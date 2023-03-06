@@ -8,7 +8,7 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	}
 	ingredients.push_back(ingr);
 	
-	if (ingredients.size() > 1){
+	if (ingredients.size() > 0){
 		int i = 0;
 		for (i = 0;i < coord.size();++i) {
 			coord[i].first -= (0.5*ING_OFFSET);
@@ -23,8 +23,9 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 
 void Ingredients::removeLastIngredient() {
 	
+ 	kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
 	ingredients.pop_back();
-	
+
 	for (int i = 0; i < coord.size(); ++i) {
 		coord[i].first += (0.5 * ING_OFFSET);
 		coord[i].second = 0;
@@ -38,7 +39,6 @@ void Ingredients::removeAllIngredients() {
 	int i = ingredients.size(); //i vale 5 (el numero de ingredientes maximo que se puede llevar) o menos si no esta lleno el vector
 	while (i != 0) {
 		//devolver a la mesa
-		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
 		removeLastIngredient();
 		--i;
 	}
@@ -50,7 +50,13 @@ void Ingredients::removeAllIngredients() {
 void Ingredients::cookingIngredients() {
 	int i = ingredients.size(); 
 	while (i != 0) {
-		removeLastIngredient();
+		ingredients.pop_back();
+
+		for (int i = 0; i < coord.size(); ++i) {
+			coord[i].first += (0.5 * ING_OFFSET);
+			coord[i].second = 0;
+		}
+		coord.pop_back();
 		--i;
 	}
 	coord = { { 0,0 } };
