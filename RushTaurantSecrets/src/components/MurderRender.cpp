@@ -5,7 +5,7 @@ MurderRender::MurderRender(GameObject* parent)
 	spriteWidth(16), spriteHeight(16), ih(InputHandler::instance())
 {
 	string tex;
-	if (ih->joysticksInitialised()) {
+	if (!ih->joysticksInitialised()) {
 		row = 2;
 		col = 4;
 		tex = "KEYBOARD_KEYS";

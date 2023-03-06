@@ -5,7 +5,7 @@ ShooRender::ShooRender(GameObject* parent)
 	spriteWidth(16), spriteHeight(16), ih(InputHandler::instance())
 {
 	string tex;
-	if (ih->joysticksInitialised()) {
+	if (!ih->joysticksInitialised()) {
 		row = 4;
 		col = 0;
 		tex = "KEYBOARD_KEYS";

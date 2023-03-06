@@ -16,9 +16,7 @@ class ShooRender : public Component
 	const int spriteWidth;
 	const int spriteHeight;
 	InputHandler* ih;
-	// 4 es la fila en la que está el sprite de la q
 	int row;
-	// 0 es la columa en la que está el sprite de la q
 	int col;
 	Texture* texture;
 	Transform* transform;
