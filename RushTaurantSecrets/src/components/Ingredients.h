@@ -43,9 +43,7 @@ private:
 	vector<pair<float, float>> coord;
 	// rectángulo en el mundo donde se va a colocar la textura
 	SDL_Rect dest;
-	SDL_Rect dest_bubble;
-	bool exit;
-	
+	SDL_Rect dest_bubble;	
 	KitchenIslandComp* kitchenIsland; //para devolver ing a la mesa
 
 	void debug(); //provisional
@@ -55,7 +53,6 @@ public:
 	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
 		transform = parent->getComponent<Transform>();
 		coord = { { 0,0 } };
-		exit = false;
 		//para demo, luego se borra; 
 		addIngredient(QUESO);
 		//addIngredient(HARINA);

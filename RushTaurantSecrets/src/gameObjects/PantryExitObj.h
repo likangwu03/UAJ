@@ -1,7 +1,7 @@
 #pragma once
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
-#include "../components/PatryExitTrigger.h"
+#include "../components/PantryExitTrigger.h"
 
 class PantryExitObj : public GameObject {
 private:

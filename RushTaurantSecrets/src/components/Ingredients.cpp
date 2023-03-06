@@ -57,11 +57,9 @@ void Ingredients::cookingIngredients() {
 }
 
 void Ingredients::removeWhenExit() {
-	exit = !exit; //cambia exit de false a true para que indicar que se ha llamado a este metodo
-	//el método actual solo se llama cuando el personaje sale de la cocina
-	removeAllIngredients();
-	exit = !exit; //se vuelve a poner a false para repetir el proceso si quiere salir en otro momento de la cocina
 	
+	//el método actual solo se llama cuando el personaje sale de la cocina
+	removeAllIngredients();	
 }
 
 void Ingredients::render() {
