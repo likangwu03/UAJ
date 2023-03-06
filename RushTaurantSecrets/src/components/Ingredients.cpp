@@ -23,7 +23,9 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 
 void Ingredients::removeLastIngredient() {
 	
-	
+	if (!ih().joysticksInitialised() && !ih().isKeyDown(SDLK_SPACE)) return;
+	if (!ih().getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
+
 	ingredients.pop_back();
 	
 	for (int i = 0; i < coord.size(); ++i) {
@@ -35,6 +37,12 @@ void Ingredients::removeLastIngredient() {
 }
 
 void Ingredients::removeAllIngredients() {
+	if (!exit) { //Si exit está a true, significa que ha salido de la cocina y no entra en el if
+		if (!ih().joysticksInitialised() && !ih().isKeyDown(SDLK_SPACE)) return;
+		if (!ih().getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
+		
+	}
+	
 	//no es un for porque, a pesar de saber las vueltas que da, se va reduciendo el tamaño del vector
 	int i = ingredients.size(); //i vale 5 (el numero de ingredientes maximo que se puede llevar) o menos si no esta lleno el vector
 	while (i != 0) {
@@ -44,6 +52,7 @@ void Ingredients::removeAllIngredients() {
 		--i;
 	}
 	coord = { { 0,0 } };
+	
 
 }
 
@@ -57,7 +66,11 @@ void Ingredients::cookingIngredients() {
 }
 
 void Ingredients::removeWhenExit() {
+	exit = !exit; //cambia exit de false a true para que indicar que se ha llamado a este metodo
+	//el método actual solo se llama cuando el personaje sale de la cocina
 	removeAllIngredients();
+	exit = !exit; //se vuelve a poner a false para repetir el proceso si quiere salir en otro momento de la cocina
+	
 }
 
 void Ingredients::render() {

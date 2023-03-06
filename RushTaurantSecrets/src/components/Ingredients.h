@@ -6,6 +6,7 @@
 #include "../components/Transform.h"
 #include "../structure/Scene.h"
 #include "../components/KitchenIslandComp.h"
+#include "../sdlutils/InputHandler.h"
 #include <vector>
 #include <utility>
 
@@ -43,6 +44,7 @@ private:
 	// rectángulo en el mundo donde se va a colocar la textura
 	SDL_Rect dest;
 	SDL_Rect dest_bubble;
+	bool exit;
 	
 	KitchenIslandComp* kitchenIsland; //para devolver ing a la mesa
 
@@ -53,6 +55,7 @@ public:
 	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
 		transform = parent->getComponent<Transform>();
 		coord = { { 0,0 } };
+		exit = false;
 		//para demo, luego se borra; 
 		addIngredient(QUESO);
 		//addIngredient(HARINA);
