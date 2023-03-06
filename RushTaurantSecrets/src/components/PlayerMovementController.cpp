@@ -1,5 +1,7 @@
 #include "PlayerMovementController.h"
 
+#include "../utils/checkML.h"
+
 PlayerMovementController::PlayerMovementController(GameObject* parent) : Component(parent, id) {
 	transform = parent->getComponent<Transform>();
 	input = InputHandler::instance();

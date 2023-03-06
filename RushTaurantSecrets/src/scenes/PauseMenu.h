@@ -14,6 +14,7 @@ private:
 	GameObject* bg;
 	ButtonGO* buttonResume;
 	ButtonGO* buttonMainMenu;
+	ButtonGO* buttonOptions;
 	Texture* image;
 public:
 	PauseMenu();
