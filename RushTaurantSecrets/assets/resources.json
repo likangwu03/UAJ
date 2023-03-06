@@ -353,6 +353,18 @@
       "rows": 1
     },
     {
+      "id": "BUTTON_HIGHLIGHT",
+      "file": "assets/Sprites/UI/Menu/button_highlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "BUTTON2_HIGHLIGHT",
+      "file": "assets/Sprites/UI/Menu/button2_highlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_YELLOW",
       "file": "assets/Sprites/UI/HUD/basket_yellow.png",
       "cols": 1,
@@ -424,7 +436,7 @@
       "file": "assets/Sprites/UI/arrow.png",
       "cols": 1,
       "rows": 1
-    },  
+    },
     {
       "id": "CROSS",
       "file": "assets/Sprites/UI/UI_Flat_Cross_Medium.png",

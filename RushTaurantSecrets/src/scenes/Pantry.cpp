@@ -6,6 +6,7 @@
 #include "../gameObjects/Player.h"
 
 #include "../utils/checkML.h"
+
 Pantry::Pantry() :rest(nullptr) { init(); }
 Pantry::~Pantry() {
 	rest->linkPantry(nullptr);
@@ -14,7 +15,7 @@ Pantry::~Pantry() {
 }
 void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
-	new Player(this);
+	//new Player(this);
 	GameObject* map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/pantry.tmx");
 }

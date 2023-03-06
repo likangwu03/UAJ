@@ -1,9 +1,13 @@
 #include "SceneManager.h"
-SceneManager::SceneManager() {
-	setResize();
-	currentScene = new MainMenu(this);
+
+void SceneManager::init() {
+	currentScene = new MainMenu();
 	pushScene(currentScene);
 	nSceceToPop = 0;
+}
+
+SceneManager::SceneManager() {
+	setResize();
 }
 
 void SceneManager::update() {

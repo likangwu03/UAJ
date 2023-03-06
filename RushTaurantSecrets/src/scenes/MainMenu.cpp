@@ -1,25 +1,24 @@
 #include "MainMenu.h"
 #include "../structure/SceneManager.h"
 #include "../scenes/Restaurant.h"
-#include "../components/Button.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
 
 #include "../utils/checkML.h"
 
-void MainMenu::start(SceneManager* sceneManager) {
-	sceneManager->setResize();
-	sceneManager->changeScene(new Restaurant());
+void MainMenu::start() {
+	SceneManager::instance()->setResize();
+	SceneManager::instance()->changeScene(new Restaurant());
 }
 
-MainMenu::MainMenu(SceneManager* sceneManager){
+MainMenu::MainMenu() {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = new Texture(sdlutils().renderer(), "assets/mainMenuTemp.png");
 	new Image(bg, image);
 
-	button = new GameObject(this);
-	new Button(button, Vector((1280 / 2) - (192 * 2 / 2), 400), sceneManager, start);
+	button = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2 * SDLUtils::instance()->height() / 5), 385, 130, start);
 }
 
 MainMenu::~MainMenu() {

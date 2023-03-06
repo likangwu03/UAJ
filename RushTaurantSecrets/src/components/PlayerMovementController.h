@@ -19,7 +19,7 @@ private:
 	Vector aux = speed;
 
 	SDL_Joystick* _joy;
-	const char* controller = " ";
+	const char* controller;
 	SDL_GameController* gamecont = nullptr;
 
 	Transform* transform = nullptr;
@@ -33,6 +33,7 @@ public:
 		if(!input->joysticksInitialised())
 			input->initialiseJoysticks(_joy);
 		controller = SDL_JoystickName(_joy);
+		std::cout << controller << std::endl;
 		keyboard = input->getControls();
 	}
 	~PlayerMovementController() { 
@@ -136,13 +137,13 @@ public:
 			if (input->isKeyDown(SDL_SCANCODE_A)) {
 				moveLeft();
 			}
-			// abajo
-			if (input->isKeyDown(SDL_SCANCODE_S)) {
-				moveDown();
-			}
 			// derecha
 			if (input->isKeyDown(SDL_SCANCODE_D)) {
 				moveRight();
+			}
+			// abajo
+			if (input->isKeyDown(SDL_SCANCODE_S)) {
+				moveDown();
 			}
 		}
 	}
@@ -161,14 +162,14 @@ public:
 		bool pressed = false;
 		if (!input->joysticksInitialised() || keyboard) {
 			const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-			if (currentKeyStates[SDL_SCANCODE_D])
-			{
-				moveRight();
-				pressed = true;
-			}
 			if (currentKeyStates[SDL_SCANCODE_S])
 			{
 				moveDown();
+				pressed = true;
+			}
+			if (currentKeyStates[SDL_SCANCODE_D])
+			{
+				moveRight();
 				pressed = true;
 			}
 			if (currentKeyStates[SDL_SCANCODE_A])

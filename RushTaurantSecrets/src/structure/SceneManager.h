@@ -28,6 +28,7 @@ private:
 	Scene* currentScene;
 	int nSceceToPop;
 public:
+	void init();
 	SceneManager(SceneManager&) = delete;
 	SceneManager(SceneManager&&) = delete;
 	SceneManager& operator=(SceneManager&) = delete;
