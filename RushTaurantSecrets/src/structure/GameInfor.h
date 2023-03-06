@@ -12,9 +12,9 @@ private:
 	bool hasKill;
 	int money;
 	
-	GameInfor():hasKill(false),money(0) {};
+	GameInfor():hasKill(false), money(0) {};
 public:
 	int& getMoney() { return money; }
 	bool& getHasKill() { return hasKill; }
-
+	void setHasKill(bool hKill) { hasKill = hKill; }
 };

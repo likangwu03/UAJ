@@ -4,6 +4,7 @@
 #include "../components/ThiefMovement.h"
 #include "../components/MurderRender.h"
 #include "../components/ShooRender.h"
+#include "../structure/GameInfor.h"
 
 class ThiefTrigger : public TriggerComp
 {
@@ -12,6 +13,8 @@ class ThiefTrigger : public TriggerComp
 	ShooRender* sRender;
 public:
 	ThiefTrigger(GameObject* parent, Vector pos_, float width_, float height_);
+
+	void killPressed();
 
 	virtual void isOverlapping();
 	virtual void onTriggerEnter();

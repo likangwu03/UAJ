@@ -8,6 +8,14 @@ ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float 
 	sRender = parent->getComponent<ShooRender>();
 }
 
+void ThiefTrigger::killPressed()
+{
+	tMovement->die();
+	GameInfor::instance()->setHasKill(true);
+	mRender->setActive(false);
+	sRender->setActive(false);
+}
+
 void ThiefTrigger::isOverlapping()
 {
 	if (ih->joysticksInitialised()) {
@@ -15,9 +23,7 @@ void ThiefTrigger::isOverlapping()
 			tMovement->escape();
 		}
 		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-			tMovement->die();
-			mRender->setActive(false);
-			sRender->setActive(false);
+			killPressed();
 		}
 	}
 	else {
@@ -26,6 +32,7 @@ void ThiefTrigger::isOverlapping()
 		}
 		else if (ih->isKeyDown(SDLK_e)) {
 			tMovement->die();
+			GameInfor::instance()->setHasKill(true);
 			mRender->setActive(false);
 			sRender->setActive(false);
 		}
