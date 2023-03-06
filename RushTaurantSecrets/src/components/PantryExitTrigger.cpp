@@ -1,4 +1,4 @@
-#include "../components/PantryExitTrigger.h"
+#include "PantryExitTrigger.h"
 #include "../structure/SceneManager.h"
 
 
