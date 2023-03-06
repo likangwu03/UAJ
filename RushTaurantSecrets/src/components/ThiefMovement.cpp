@@ -87,3 +87,8 @@ void ThiefMovement::handleEvents() {
 		escape();
 	}
 }
+
+const ThiefMovement::States ThiefMovement::getState()
+{
+	return currentState;
+}

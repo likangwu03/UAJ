@@ -7,6 +7,7 @@ CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 	grup_Collisions= scene_->getGroup(_ecs::grp_COLLISIONS);
 	grp_Clients = scene_->getGroup(_ecs::grp_CLIENTS);
 	grp_Interactable = scene_->getGroup(_ecs::grp_INTERACTABLE);
+	grp_Thiefs = scene_->getGroup(_ecs::grp_THIEFS);
 }
 
 
@@ -70,6 +71,18 @@ void CollisionsManager::overlap() {
 					}
 					else {
 						interactiveTrigger->Overlap(nullptr);
+					}
+				}
+			}
+			for (auto thiefs : *grp_Thiefs) {
+				TriggerComp* thiefTrigger = thiefs->getComponent<TriggerComp>();
+				if (thiefTrigger != nullptr) {
+					SDL_FRect thiefsRect = thiefTrigger->getRect();
+					if (SDL_HasIntersectionF(&playerRect, &thiefsRect)) {
+						thiefTrigger->Overlap(player);
+					}
+					else {
+						thiefTrigger->Overlap(nullptr);
 					}
 				}
 			}

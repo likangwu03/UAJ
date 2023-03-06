@@ -15,6 +15,7 @@ private:
 	vector<GameObject*>* grup_Collisions;
 	vector<GameObject*>* grp_Clients;
 	vector<GameObject*>* grp_Interactable;
+	vector<GameObject*>* grp_Thiefs;
 public:
 	CollisionsManager(Scene* scene);
 	void update();

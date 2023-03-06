@@ -40,8 +40,6 @@ public:
 	void moveDown();
 	void moveRight();
 	void moveLeft();
+
+	const char* getControllerType();
 };
-
-
-
-

@@ -9,11 +9,12 @@
 #include <vector>
 
 class ThiefMovement : public Component {
+public:
 	enum States { OBJECTIVE, FREEZER, SECRET, DEAD, ESCAPE };
 
+private:
 	enum Objective {Freezer, Secret};
 
-private:
 	States currentState;
 	StraightMovement* straightMovement;
 	Transform* transform;
@@ -40,4 +41,6 @@ public:
 
 	// matar o hacer que huya el ladrón
 	virtual void handleEvents();
+
+	const States getState();
 };
