@@ -3,17 +3,24 @@
 
 Game::Game() {
 	srand(time(NULL));
-	GameInfor::init();
+	
 	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720, "assets/resources.json");
 	exit = false;
-	sceneManager = SceneManager::instance();
-	ih = InputHandler::instance();
+	sceneManager = nullptr;
+	ih = nullptr;
 	sdl->showCursor();
 	sdlutils().setFrameTime(1);
+	frameTime = 0;
+}
+
+void Game::init() {
+	GameInfor::init();
+	sceneManager = SceneManager::instance();
+	ih = InputHandler::instance();
 }
 
 void Game::run() {
-	uint32_t startTime, frameTime;
+	uint32_t startTime;
 	while (!exit) {
 		startTime = sdlutils().currRealTime();  //SDL_GetTicks(); 
 		
@@ -26,8 +33,11 @@ void Game::run() {
 		frameTime = sdlutils().currRealTime() - startTime;
 		sdlutils().setFrameTime(frameTime);
 
-		if (frameTime < FRAME_RATE)
+		if (frameTime < FRAME_RATE) {
 			SDL_Delay(FRAME_RATE - frameTime);
+			frameTime = FRAME_RATE;
+		}
+			
 	}
 	//decidir si hacer falta un bucle de juego mas precisos 
 	/*

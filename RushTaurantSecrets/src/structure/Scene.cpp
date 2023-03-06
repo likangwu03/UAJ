@@ -1,7 +1,7 @@
 ﻿#include "Scene.h"
 #include "GameObject.h"
-
-Scene::Scene() {
+#include "Game.h"
+Scene::Scene():frameTime(Game::instance()->getframeTime()) {
 	Infor = GameInfor::instance();
 	ih = InputHandler::instance();
 	handlers = {};

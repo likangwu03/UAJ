@@ -13,6 +13,7 @@ private:
 protected:
 	GameInfor* Infor;
 	InputHandler* ih;
+	const uint32_t& frameTime;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 	// se utiliza para conectar objetos de una misma escena
 	std::array<GameObject*, _ecs::hdrNum> handlers;

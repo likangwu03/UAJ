@@ -14,15 +14,18 @@ private:
 	InputHandler* ih;
 	SDLUtils* sdl;
 	bool exit;
+	uint32_t frameTime;
 public:
 	Game(Game&) = delete;
 	Game(Game&&) = delete;
 	Game& operator=(Game&) = delete;
 	Game& operator=(Game&&) = delete;
 	void run();
+	uint32_t& getframeTime() { return frameTime; }
+
+	void init();
 private:
 	Game();
-	//~Game() {};
 	void refresh();
 	void render();
 	void update();
