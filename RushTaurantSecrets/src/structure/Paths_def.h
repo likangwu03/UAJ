@@ -1,6 +1,5 @@
 #pragma once
 #include <cstdint>
-#include <vector>
 #include <unordered_map>
 #include "../utilities/Vector.h"
 #include "../components/Transform.h"
@@ -16,8 +15,11 @@ namespace _ecs {
 	const Vector SECRET = Vector(20, 18);
 	const Vector FREEZER = Vector(24, 18);
 
+
 	// CLIENTES
-	const id_type NUM_TABLES = 7;
+	const int NUM_TABLES = 7;
+	const int NUM_CLIENTS_PATHS = 3;
+	const int NUM_SEATS = 4;
 
 	enum _path_client_id : id_type {
 		// mesa 1
@@ -63,6 +65,42 @@ namespace _ecs {
 		PAY_TABLE_7,
 		OUT_TABLE_7,
 		PAY_AND_LEAVE
+	};
+
+	static _path_client_id enumClientPaths[NUM_TABLES][NUM_SEATS][NUM_CLIENTS_PATHS]{
+		// mesa 1 izquierda
+		_path_client_id::ARRIVE_TABLE_1_LEFT,
+		_path_client_id::PAY_TABLE_1_LEFT,
+		_path_client_id::OUT_TABLE_1_LEFT,
+		// mesa 1 derecha
+		_path_client_id::ARRIVE_TABLE_1_RIGHT,
+		_path_client_id::PAY_TABLE_1_RIGHT,
+		_path_client_id::OUT_TABLE_1_RIGHT,
+		// mesa 1 arriba
+		_path_client_id::ARRIVE_TABLE_1_UP,
+		_path_client_id::PAY_TABLE_1_UP,
+		_path_client_id::OUT_TABLE_1_UP,
+		// mesa 1 abajo
+		_path_client_id::ARRIVE_TABLE_1_DOWN,
+		_path_client_id::PAY_TABLE_1_DOWN,
+		_path_client_id::OUT_TABLE_1_DOWN,
+
+		// mesa 2 izquierda
+		_path_client_id::ARRIVE_TABLE_2_LEFT,
+		_path_client_id::PAY_TABLE_2_LEFT,
+		_path_client_id::OUT_TABLE_2_LEFT,
+		// mesa 2 derecha
+		_path_client_id::ARRIVE_TABLE_2_RIGHT,
+		_path_client_id::PAY_TABLE_2_RIGHT,
+		_path_client_id::OUT_TABLE_2_RIGHT,
+		// mesa 2 arriba
+		_path_client_id::ARRIVE_TABLE_2_UP,
+		_path_client_id::PAY_TABLE_2_UP,
+		_path_client_id::OUT_TABLE_2_UP,
+		// mesa 2 abajo
+		_path_client_id::ARRIVE_TABLE_2_DOWN,
+		_path_client_id::PAY_TABLE_2_DOWN,
+		_path_client_id::OUT_TABLE_2_DOWN
 	};
 
 	static unordered_map<string, _path_client_id> stringToEnum = {
@@ -136,8 +174,8 @@ namespace _ecs {
 	// afuera salida
 	const Vector OUT_PAY = Vector(40, 13);
 
-	static Route paths[NUM_TABLES * 3 * 4 + 1] = {
-		// EL PRIMER VECTOR DE MESA TIENE QUE EMPEZA POR x = 27
+	static Route clientsPaths[NUM_TABLES * NUM_SEATS * NUM_CLIENTS_PATHS + 1] = {
+		// EL PRIMER VECTOR DE MESA TIENE QUE EMPEZAR POR x = 27
 		// SINO HAY QUE PONER ENTRY
 		// mesa 1 silla izquierda
 		{{Vector(27, 18), Vector(20, 18), Vector(20, 15)}, east},	// mesa
@@ -155,6 +193,7 @@ namespace _ecs {
 		{{Vector(27, 13), Vector(22, 13)}, south },	// mesa
 		{{Vector(22, 10), CASH_REGISTER}},	// pagar
 		{{PAY, OUT_PAY}},	// marcharse mesa
+
 		// mesa 2 silla izquierda
 		{{Vector(27, 12), Vector(13, 12), Vector(13, 15)}, east },	// mesa
 		{{Vector(13, 12), Vector(17, 12), Vector(21, 12), Vector(21, 10), CASH_REGISTER}},	// pagar

@@ -6,6 +6,7 @@
 #include "../components/ClientStateRender.h"
 #include "../structure/GameObject.h"
 #include "../structure/Component.h"
+#include "../utils/checkML.h"
 #include <vector>
 
 using namespace std;
@@ -14,6 +15,8 @@ class ClientsManager;
 class Client;
 
 class ClientMovement : public Component {
+	enum typePath {ARRIVE, PAY, OUT};
+
 private:
 	ClientState* clientState;
 	StraightMovement* straightMovement;
@@ -33,10 +36,15 @@ private:
 	// se comprueba si alguno de sus compañero se ha marchado para que él también se vaya
 	void goOut(ClientState::States currentState);
 
-	string posGroupToOrientation(int posGroup) const;
-
-	// devuelve una ruta desde la entrada hasta la mesa
-	Route tableRoute(string type, string orientation);
+	// devuelve una ruta
+	inline Route tableRoute(typePath type) const {
+		// posGroup = 0 -> LEFT
+		// posGroup = 1 -> RIGHT
+		// posGroup = 2 -> UP
+		// posGroup = 3 -> DOWN
+		_path_client_id path = _ecs::enumClientPaths[assignedTable - 1][posGroup][type];
+		return clientsPaths[path];
+	}
 
 	// llega al restaurante y se coloca en la entrada
 	void colocateEntrance();
@@ -81,7 +89,7 @@ public:
 	void recolocateEntrance();
 
 	// pos en la cola de pagar
-	void setPosPay(int pos) {
+	inline void setPosPay(int pos) {
 		this->posPay = pos;
 	}
 
@@ -94,25 +102,25 @@ public:
 	// paga por su comida y se marcha
 	void payAndLeave();
 
-	bool hasAbandonedEntrance() const {
+	inline bool hasAbandonedEntrance() const {
 		return clientState->getState() == ClientState::OUT && posEntrance != -1;
 	}
 
-	bool hasAbandonedPay() const {
+	inline bool hasAbandonedPay() const {
 		return clientState->getState() == ClientState::OUT && posPay != -1;
 	}
 
 	// abandona la mesa porque se queda sin felicidad
-	bool hasAbandonedTable() const {
+	inline bool hasAbandonedTable() const {
 		return clientState->getState() == ClientState::OUT && assignedTable != -1;
 	}
 
-	int getAssignedTable() const {
+	inline int getAssignedTable() const {
 		return assignedTable;
 	}
 
 	// pasar el grupo de clientes al que pertence
-	void setGroup(vector<Client*> mates) {
+	inline void setGroup(vector<Client*> mates) {
 		this->mates = mates;
 	}
 

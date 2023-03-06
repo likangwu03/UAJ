@@ -35,8 +35,10 @@ void Scene::refresh() {
 					return false;
 				}
 				else {
-					obj = nullptr;
 					delete obj;
+					// hacer que el hueco de memoria 
+					// apunte a nullptr siempre va después de eliminar el objeto
+					obj = nullptr;
 					return true;
 				}
 				}), //

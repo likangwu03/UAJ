@@ -1,7 +1,6 @@
 #include "ClientMovement.h"
 #include "../objects/ClientsManager.h"
 #include "../gameObjects/Client.h"
-#include "../utils/checkML.h"
 
 // cleon: [musica de desastre y muerte]: es una búsqueda de 1º. Esto es 2º (que es más cool).
 // esto lo tiene implementado C++.
@@ -34,38 +33,6 @@ void ClientMovement::goOut(ClientState::States currentState) {
 	}
 }
 
-string ClientMovement::posGroupToOrientation(int posGroup) const {
-	string orientation;
-	switch (posGroup) {
-	case 0:
-		orientation = "LEFT";
-		break;
-	case 1:
-		orientation = "RIGHT";
-		break;
-	case 2:
-		orientation = "UP";
-		break;
-	case 3:
-		orientation = "DOWN";
-		break;
-	}
-	return orientation;
-
-}
-
-// devuelve una ruta desde la entrada hasta la mesa
-
-Route ClientMovement::tableRoute(string type, string orientation) {
-	// cleon: millones de gatitos han  muerto.
-	// map<tipo, map<direccion>>
-	std::string aux = type + "_TABLE_" + std::to_string(this->assignedTable) + "_" + orientation;
-	auto it = _ecs::stringToEnum.find(aux);
-	if (it != _ecs::stringToEnum.end()) {
-		return paths[it->second];
-	}
-}
-
 // llega al restaurante y se coloca en la entrada
 void ClientMovement::colocateEntrance() {
 	Vector entrance = _ecs::ENTRY;
@@ -78,7 +45,7 @@ void ClientMovement::colocateEntrance() {
 
 // desde la mesa hasta la caja registradora
 void ClientMovement::colocateCashRegister() {
-	vector<Vector> payPath = tableRoute("PAY", posGroupToOrientation(posGroup)).points;
+	vector<Vector> payPath = tableRoute(PAY).points;
 	straightMovement->addPath(payPath);
 	outTable();
 }
@@ -151,7 +118,7 @@ void ClientMovement::recolotatePay() {
 // asignar mesa
 void ClientMovement::assignTable(int assignedTable) {
 	this->assignedTable = assignedTable;
-	straightMovement->addPath(tableRoute("ARRIVE", posGroupToOrientation(posGroup)).points);
+	straightMovement->addPath(tableRoute(ARRIVE).points);
 	outEntrance();
 	clientState->setState(ClientState::ASSIGNED);
 }
@@ -159,7 +126,7 @@ void ClientMovement::assignTable(int assignedTable) {
 // paga por su comida y se marcha
 void ClientMovement::payAndLeave() {
 	clientState->setState(ClientState::OUT);
-	straightMovement->addPath(_ecs::paths[_ecs::PAY_AND_LEAVE].points);
+	straightMovement->addPath(_ecs::clientsPaths[_ecs::PAY_AND_LEAVE].points);
 	outPay();
 }
 
@@ -183,7 +150,7 @@ void ClientMovement::update() {
 		break;
 	case ClientState::ASSIGNED:
 		if (straightMovement->hasFinishedPath()) {
-			stationary(ClientState::THINKING, tableRoute("ARRIVE", posGroupToOrientation(posGroup)).orientation, sitting);
+			stationary(ClientState::THINKING, tableRoute(ARRIVE).orientation, sitting);
 			// para que renderice el estado de pensar
 			render->renderThinkingState();
 		}
@@ -224,7 +191,7 @@ void ClientMovement::update() {
 			outEntrance();
 		}
 		else if (assignedTable != -1) {
-			straightMovement->addPath(tableRoute("OUT", posGroupToOrientation(posGroup)).points);
+			straightMovement->addPath(tableRoute(OUT).points);
 			outTable();
 		}
 		else if (posPay != -1) {
