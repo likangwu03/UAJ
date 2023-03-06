@@ -9,5 +9,5 @@ private:
 
 public:
 	PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_);
-	virtual void isOverlapping();
+	virtual void onTriggerEnter();
 };

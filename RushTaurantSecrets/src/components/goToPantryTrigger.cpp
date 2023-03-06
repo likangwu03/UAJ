@@ -4,7 +4,7 @@ goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float widt
 	ih = InputHandler::instance();
 	sceneM = SceneManager::instance();
 };
-void goToPantryTrigger::isOverlapping() {
+void goToPantryTrigger::onTriggerEnter() {
 	sceneM->setResize(false);
 	sceneM->changeScene(static_cast<Restaurant*>(parent->getScene())->getPantry(), -1);
 }
