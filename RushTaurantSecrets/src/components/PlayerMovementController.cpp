@@ -221,3 +221,8 @@ void PlayerMovementController::moveLeft() {
 	transform->setOrientation(west);
 	transform->setMovState(walking);
 }
+
+const char* PlayerMovementController::getControllerType()
+{
+	return controller;
+}

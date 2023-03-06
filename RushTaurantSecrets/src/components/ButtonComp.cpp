@@ -14,10 +14,6 @@ ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())
 	dest.h = tf->getH();
 
 	ih().initialiseJoysticks(_joy);
-
-#ifdef _DEBUG
-	std::cout << "cock" << std::endl;
-#endif
 }
 
 void ButtonComp::handleEvents()
@@ -31,9 +27,6 @@ void ButtonComp::handleEvents()
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		highlighted = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
-#ifdef _DEBUG
-			std::cout << "balls" << std::endl;
-#endif
 			_callback();
 		}
 	}

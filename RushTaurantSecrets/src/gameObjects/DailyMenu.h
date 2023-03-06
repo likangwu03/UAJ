@@ -21,7 +21,6 @@ public:
 		new Image(this, &((*SDLUtils::instance()).images().at(t)));
 		new ButtonComp(this, "DAILY_MENU_HIGHLIGHT", callback);
 		new DailyMenuComp(this, 451, 603, _ecs::cmp_DAILYMENU);
-	}
-	;
+	};
 };
 
