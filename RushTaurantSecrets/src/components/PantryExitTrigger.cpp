@@ -8,7 +8,7 @@ PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float widt
 };
 
 
-void PantryExitTrigger::isOverlapping() {
+void PantryExitTrigger::onTriggerEnter() {
 	sceneM->setResize(false);
 	sceneM->changeScene(static_cast<Pantry*>(parent->getScene())->getRestaurant(), -1);
 }
