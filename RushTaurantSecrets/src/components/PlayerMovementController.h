@@ -19,7 +19,7 @@ private:
 	Vector aux = speed;
 
 	SDL_Joystick* _joy;
-	const char* controller;
+	const char* controller = "";
 	SDL_GameController* gamecont = nullptr;
 
 	Transform* transform = nullptr;
@@ -30,10 +30,10 @@ public:
 	PlayerMovementController(GameObject* parent) : Component(parent, id) {
 		transform = parent->getComponent<Transform>();
 		input = InputHandler::instance();
-		if(!input->joysticksInitialised())
+		if (!input->joysticksInitialised()) {
 			input->initialiseJoysticks(_joy);
-		controller = SDL_JoystickName(_joy);
-		std::cout << controller << std::endl;
+			controller = SDL_JoystickName(_joy);
+		}
 		keyboard = input->getControls();
 	}
 	~PlayerMovementController() { 
@@ -90,7 +90,7 @@ public:
 				}
 				else input->setFalseJoyhat();
 			}
-			else {
+			else { // PS4 Controller
 				// derecha
 				if (input->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)) {
 					transform->setMovState(walking);

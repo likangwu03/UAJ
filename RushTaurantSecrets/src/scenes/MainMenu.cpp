@@ -17,7 +17,7 @@ MainMenu::MainMenu() {
 	image = new Texture(sdlutils().renderer(), "assets/mainMenuTemp.png");
 	new Image(bg, image);
 
-	button = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+	button = new ButtonGO(this, "PLAY_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2 * SDLUtils::instance()->height() / 5), 385, 130, start);
 }
 

@@ -353,6 +353,12 @@
       "rows": 1
     },
     {
+      "id": "PLAY_BUTTON_UP",
+      "file": "assets/Sprites/UI/Menu/PlayButtonUp.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BUTTON_HIGHLIGHT",
       "file": "assets/Sprites/UI/Menu/button_highlight.png",
       "cols": 1,
