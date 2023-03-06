@@ -64,8 +64,8 @@ void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {
 	SDL_Rect dest;
 	dest.x = xD;
 	dest.y = yD;
-	dest.w = DISH_W;
-	dest.h = DISH_H;
+	dest.w = DISH_SIZE;
+	dest.h = DISH_SIZE;
 
 	string dID = to_string(dishID);
 
