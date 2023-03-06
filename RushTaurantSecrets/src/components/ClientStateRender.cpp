@@ -23,7 +23,7 @@ void ClientStateRender::clientStateIsReady() {
 void ClientStateRender::renderThinkingState() {
 	if(!anim->isActive())
 		anim->setActive(true);
-	anim->setTexture(textures.thinking, 0, 7, 0);
+	anim->setTexture(textures.thinking, 0, 7, 0,35);
 }
 
 void ClientStateRender::renderTakingNoteState() {
