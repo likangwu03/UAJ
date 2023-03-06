@@ -9,6 +9,6 @@ PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float widt
 
 
 void PantryExitTrigger::onTriggerEnter() {
-	sceneM->setResize(false);
+	sceneM->setResize(true);
 	sceneM->changeScene(static_cast<Pantry*>(parent->getScene())->getRestaurant(), -1);
 }
