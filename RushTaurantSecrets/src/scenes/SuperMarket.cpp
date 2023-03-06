@@ -37,7 +37,6 @@ void SuperMarket::init() {
 SuperMarket::~SuperMarket() {
 	delete uiMarket;
 	delete cm;
-	delete cartelM;
 }
 
 
