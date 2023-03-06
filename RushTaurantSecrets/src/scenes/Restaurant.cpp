@@ -48,8 +48,6 @@ void Restaurant::init() {
 	GameObject* managerContainer = new GameObject(this);
 	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 2);
 	ThiefsManager::init(managerContainer, 2, 6, true, 5 * 1000);
-	// me da un error raro
-	// ManagerContainer(menu, 6, 2, 10, 2, 6, true, 5);
 	
 	cm = new CollisionsManager(this);
 	player = new Player(this);
@@ -60,10 +58,7 @@ void Restaurant::init() {
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
 	new MapCreator(mapTop, "assets/tilemaps/restaurant_top.tmx");
 
-	
-	// objetos interactuables
-	//new Bin(this, Vector(1100, 70));
-
+	ClientsManager::get()->getTables();
 }
 
 void Restaurant::linkPantry(Pantry* pantry) {

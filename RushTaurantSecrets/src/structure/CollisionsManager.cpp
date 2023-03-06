@@ -7,6 +7,7 @@ CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 	grup_Collisions= scene_->getGroup(_ecs::grp_COLLISIONS);
 	grp_Clients = scene_->getGroup(_ecs::grp_CLIENTS);
 	grp_Interactable = scene_->getGroup(_ecs::grp_INTERACTABLE);
+	grp_Desk = scene_->getGroup(_ecs::grp_DESK);
 }
 
 
@@ -63,6 +64,18 @@ void CollisionsManager::overlap() {
 			}
 			for (auto interactive : *grp_Interactable) {
 				TriggerComp* interactiveTrigger = interactive->getComponent<TriggerComp>();
+				if (interactiveTrigger != nullptr) {
+					SDL_FRect interactiveRect = interactiveTrigger->getRect();
+					if (SDL_HasIntersectionF(&playerRect, &interactiveRect)) {
+						interactiveTrigger->Overlap(player);
+					}
+					else {
+						interactiveTrigger->Overlap(nullptr);
+					}
+				}
+			}
+			for (auto interactive : *grp_Desk) {
+				TriggerComp* interactiveTrigger = interactive->getComponent<DeskComp>();
 				if (interactiveTrigger != nullptr) {
 					SDL_FRect interactiveRect = interactiveTrigger->getRect();
 					if (SDL_HasIntersectionF(&playerRect, &interactiveRect)) {

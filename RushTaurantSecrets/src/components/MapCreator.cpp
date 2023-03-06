@@ -215,7 +215,7 @@ void MapCreator::createObject() {
 					new goToPantryObj(scene, pos, width_, height_);
 
 				} else if(name == "table") {
-					new Desk(scene, pos, width_, height_);
+					new Desk(scene, pos, width_, height_, p[0].getIntValue());
 				}
 				else if (name == "pantryExit") {
 					new PantryExitObj(scene, pos, width_, height_);

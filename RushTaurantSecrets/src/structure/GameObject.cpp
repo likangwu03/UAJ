@@ -18,18 +18,13 @@ void GameObject::addComponent(Component* comp, _ecs::_cmp_id id) {
 		delete it->second;
 	}
 	components[id] = comp;
+	cmpOrder.push_back(comp);
 }
-
-/*void GameObject::changeScene(Scene* scene) {
-	//this->scene->removeObject(this);
-	//scene->addObject(this);
-	this->scene = scene;
-}//*/
 
 void GameObject::refresh() {
 	auto it = components.begin();
-	while (it != components.end()) {
-		if (!it->second->isAlive()) {
+	while(it != components.end()) {
+		if(!it->second->isAlive()) {
 			delete it->second;
 			it = components.erase(it);
 		}
@@ -38,16 +33,16 @@ void GameObject::refresh() {
 }
 
 void GameObject::update() {
-	for (auto& i : components)
-		if (i.second->isActive())i.second->update();
+	for(auto i : cmpOrder)
+		if(i->isActive()) i->update();
 }
 
 void GameObject::render() {
-	for (auto& i : components)
-		if (i.second->isActive())i.second->render();
+	for(auto i : cmpOrder)
+		if(i->isActive()) i->render();
 }
 
 void GameObject::handleEvents() {
-	for (auto& i : components)
-		if (i.second->isActive())i.second->handleEvents();
+	for(auto i : cmpOrder)
+		if(i->isActive()) i->handleEvents();
 }

@@ -6,7 +6,7 @@
 #include "../utils/checkML.h"
 
 using namespace std;
-TriggerComp::TriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :Component(parent, id), ih(InputHandler::instance())
+TriggerComp::TriggerComp(GameObject* parent, Vector pos_, float width_, float height_, _ecs::_cmp_id id) :Component(parent, id), ih(InputHandler::instance())
 {
 	transform_ = parent->getComponent<Transform>();
 	other_ = nullptr;

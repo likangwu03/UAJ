@@ -1,4 +1,5 @@
 #include "./ClientsManager.h"
+#include "../components/DeskComp.h"
 
 void ClientsManager::addFrequently() {
 	if (clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
@@ -132,7 +133,7 @@ bool ClientsManager::checkFirstTableEmpty(int& table) {
 	bool found = false;
 	int i = 0;
 	while (i < _ecs::NUM_TABLES && !found) {
-		if (!tables[i]) {
+		if (!tables[i]->isOccupied()) {
 			found = true;
 			table = i + 1;
 		}
@@ -142,12 +143,13 @@ bool ClientsManager::checkFirstTableEmpty(int& table) {
 }
 
 void ClientsManager::assignTable(int table, vector<Client*> firstGroup) {
-	// se marca que la mesa está ocupada
-	tables[table - 1] = true;
 	// se le asigna una mesa a cada miembro del grupo
 	for (int i = 0; i < firstGroup.size(); ++i) {
 		firstGroup[i]->getComponent<ClientMovement>()->assignTable(table);
 	}
+	// Se asigna el grupo de clientes a la mesa
+	tables[table - 1]->assignClients(firstGroup);
+
 	assignedClient = true;
 }
 
@@ -165,7 +167,7 @@ void ClientsManager::checkTables() {
 			|| m->hasAbandonedTable()) {
 			// se marca la mesa como desocupada
 			int n = m->getAssignedTable() - 1;
-			tables[n] = false;
+			//tables[n] = false;
 		}
 	}
 }
@@ -214,9 +216,6 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 	scene = parent->getScene();
 	sdl = SDLUtils::instance();
 	lastClientTime = sdl->currRealTime();
-	for (int i = 0; i < _ecs::NUM_TABLES; ++i) {
-		tables[i] = false;
-	}
 }
 
 void ClientsManager::assignFirstGroup(int table) {
@@ -228,7 +227,7 @@ void ClientsManager::assignFirstGroup(int table) {
 		Client* firstClient = firstGroup.front();
 		ClientState::States clientState = firstClient->getComponent<ClientState>()->getState();
 		if (clientState == ClientState::ENTRANCE) {
-			if (!isTableFull(table)) {
+			if (!tables[table - 1]->isOccupied()) {
 				assignTable(table, firstGroup);
 			}
 			else {
@@ -291,10 +290,20 @@ void ClientsManager::update() {
 
 	// marcar como desocupadas las mesas de las que los clientes se han marchado
 	// (han terminado de comer o se han quedado sin felicidad)
-	checkTables();
+	//checkTables();
 
 	// eliminar grupos de clientes enfadados de la cola de pagar
 	checkHappinessPay();
 
 	refreshClientsGroup();
+}
+
+void ClientsManager::getTables() {
+	for (auto obj : *scene->getGroup(_ecs::grp_DESK)) {
+		DeskComp* desk = obj->getComponent<DeskComp>();
+		// duck typing para comprobar si el objeto interactuable es una mesa
+		if (desk != nullptr) {
+			tables[desk->getID() - 1] = desk;
+		}
+	}
 }

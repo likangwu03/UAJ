@@ -4,47 +4,54 @@
 #include "../exceptions/CompNotFound.h"
 #include "Transform.h"
 #include "../objects/ClientsManager.h"
+#include "../gameObjects/Client.h"
 #include "../utils/checkML.h"
 
-DeskComp::DeskComp(GameObject* parent) : TriggerComp(parent, Vector(), 10, 10), sucia(false), num(0) {
+DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : TriggerComp(parent, Vector(0,0), width, height, DeskComp::id), sucia(false), num(id) {
 	trans = parent->getComponent<Transform>();
 	if(trans == nullptr) {
 		throw exceptions::CompNotFound("Transform", "DeskComp");
 	}
 }
 
-bool DeskComp::assignClients() {
-	/*
-	if(!assigned.empty() || sucia) return false;
-	GameObject* client = ClientsManager::get()->getFirstEntrance();
-	if(client->getComponent<ClientTrigger>()->isSelected()) {
-		assigned.push_back(client);
-		ClientsManager::get()->assignFirstClient(num);
-		return true;
-	}
-	*/
-	return false;
+void DeskComp::assignClients(const std::vector<Client*>& clients) {
+	assigned = clients;
 }
 
 void DeskComp::spreadOverlap() {
-	for(auto it = assigned.begin(); it != assigned.end(); ++it) { // cleon: regreso al futuro con los iteradores.
-		(*it)->getComponent<ClientTrigger>()->isOverlapping();
+	for(auto obj : assigned) {
+		obj->getComponent<ClientTrigger>()->isOverlapping();
 	}
 }
 
 void DeskComp::leaveDesk() {
-	sucia = true;
-	assigned.clear();
 }
 
 void DeskComp::cleanDesk() {
 	sucia = false;
 }
 
+bool DeskComp::isOccupied() {
+	return !assigned.empty() || sucia;
+}
+
 void DeskComp::isOverlapping() {
 	if(!ih->isKeyDown(SDLK_SPACE)) return;
 
 	if(sucia) cleanDesk();
-	else if(assigned.empty()) assignClients();
 	else spreadOverlap();
+}
+
+void DeskComp::update() {
+	if(!assigned.empty()) {
+		ClientState::States st = assigned[0]->getComponent<ClientState>()->getState();
+		// Si los clientes han terminado de comer se ensucia la mesa.
+		if(st == ClientState::HAS_LEFT) {
+			sucia = false;
+			assigned.clear();
+		// Si los clientes se han quedado sin felicidad no se ensucia la mesa.
+		} else if(st == ClientState::OUT) {
+			assigned.clear();
+		}
+	}
 }

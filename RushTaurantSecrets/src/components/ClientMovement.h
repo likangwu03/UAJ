@@ -85,6 +85,8 @@ public:
 
 	ClientMovement(GameObject* parent, int posEntrance, int posGroup);
 
+	void init();
+
 	// recolocarse en la entrada si alguien se ha marchado
 	void recolocateEntrance();
 

@@ -23,9 +23,10 @@ public:
 		new CharacterAnimator(this, sprite, 18, 24, 1,40);
 		new UIAnimator(this, "CLIENT_THINKING_ICON_ANIM", 0, 8, 0, 80, THINKING_WIDTH, THINKING_HEIGHT, Vector(origin.getX(), origin.getY() + THINKING_OFFSETY));
 		new StraightMovement(this, speed);
+		ClientMovement* mov = new ClientMovement(this, posEntrance, posGroup);
 		new ClientStateRender(this);
 		new ClientState(this, menu);
-		new ClientMovement(this, posEntrance, posGroup);
+		mov->init();
 		new ClientTrigger(this, Vector(0, 0), 48, 96);
 		new HeartRender(this, &sdlutils().images().at("Heart"), 15, 15, 20, -7);
 	}

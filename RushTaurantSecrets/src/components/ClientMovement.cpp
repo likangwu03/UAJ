@@ -94,13 +94,16 @@ void ClientMovement::stationary(ClientState::States state, GOOrientation orienta
 ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup) :
 	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), posGroup(posGroup) {
 	sdl = SDLUtils::instance();
-	render = parent->getComponent<ClientStateRender>();
-	clientState = parent->getComponent<ClientState>();
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	clientsManager = ClientsManager::get();
 
 	colocateEntrance();
+}
+
+void ClientMovement::init() {
+	render = parent->getComponent<ClientStateRender>();
+	clientState = parent->getComponent<ClientState>();
 }
 
 // recolocarse en la entrada si alguien se ha marchado

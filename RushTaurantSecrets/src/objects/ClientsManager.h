@@ -10,6 +10,7 @@
 #include <list>
 
 using namespace std;
+class DeskComp;
 
 class ClientsManager : public Manager<ClientsManager> {
 
@@ -39,7 +40,7 @@ private:
 	// indica si el primer cliente en la entra se ha asignado o no
 	bool assignedClient;
 	// indicar si las mesas están ocupadas o no
-	bool tables[_ecs::NUM_TABLES];
+	DeskComp* tables[_ecs::NUM_TABLES];
 
 	// añadir un cliente cada cierto tiempo
 	void addFrequently();
@@ -122,4 +123,7 @@ public:
 
 	// se realizan todas las comprobaciones
 	virtual void update();
+
+	// Recoge las mesas
+	void getTables();
 };

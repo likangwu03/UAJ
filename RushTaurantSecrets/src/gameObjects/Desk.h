@@ -5,8 +5,8 @@
 class Desk : public GameObject 
 {
 public:
-	Desk(Scene* scene, Vector pos, float width, float height) : GameObject(scene, _ecs::grp_INTERACTABLE) {
+	Desk(Scene* scene, Vector pos, float width, float height, int id) : GameObject(scene, _ecs::grp_DESK) {
 		new Transform(this, pos, Vector::zero, width, height);
-		new DeskComp(this);
+		new DeskComp(this, width, height, id);
 	}
 };

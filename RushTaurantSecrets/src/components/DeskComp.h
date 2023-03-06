@@ -3,21 +3,22 @@
 #include "TriggerComp.h"
 #include <vector>
 class Transform;
+class Client;
 
 class DeskComp : public TriggerComp {
 private:
 	Transform* trans;
-	std::vector<GameObject*> assigned;
+	std::vector<Client*> assigned;
 	bool sucia;
 	int num;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DESK;
 
-	DeskComp(GameObject* parent);
+	DeskComp(GameObject* parent, float width, float height, int id);
 
-	// Se pasan como parámetros los clientes que se quieran asignar a la mesa. Devuelve true si se han podido asignar,
-	// o false si no se ha podido (la mesa estaba ocupada o sucia).
-	bool assignClients();
+	int getID() { return num; }
+
+	void assignClients(const std::vector<Client*>& clients);
 
 	// Se pasa como parámetro el plato que se quiera servir a los clientes asignados a la mesa.
 	// Devuelve true si un cliente ha recibido el plato que quería,
@@ -30,5 +31,9 @@ public:
 	// Se llama cuando se quiere limpiar la mesa.
 	void cleanDesk();
 
-	void isOverlapping();
+	bool isOccupied();
+
+	void isOverlapping() override;
+
+	void update();
 };

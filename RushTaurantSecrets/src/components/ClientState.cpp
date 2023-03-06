@@ -51,7 +51,7 @@ void ClientState::update() {
 #ifdef _DEBUG // cleon: este #if me hace muy feliz.
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(EATING);	// TAKEMYORDER
+			setState(TAKEMYORDER);	// TAKEMYORDER
 			render->renderTakingNoteState();
 		}
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja
@@ -81,7 +81,7 @@ void ClientState::takeOrder() {
 	else {
 		_ecs::_dish_id lastDish = orderedDish;
 		while (lastDish == orderedDish) {
-			 rndDish = rand() % availableDishes.size();
+			rndDish = rand() % availableDishes.size();
 			orderedDish = availableDishes[rndDish];
 		}
 	}

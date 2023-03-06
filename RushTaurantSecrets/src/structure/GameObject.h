@@ -1,5 +1,6 @@
 #pragma once
-#include <map>
+#include <unordered_map>
+#include <vector>
 #include "Structure_def.h"
 
 class Component;
@@ -10,7 +11,8 @@ private:
 	friend class Component;
 	void addComponent(Component* comp, _ecs::_cmp_id id);
 protected:
-	std::map<_ecs::_cmp_id, Component*> components;
+	std::unordered_map<_ecs::_cmp_id, Component*> components;
+	std::vector<Component*> cmpOrder;
 	Scene* scene;
 	bool alive;
 
@@ -18,14 +20,13 @@ public:
 	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
 	~GameObject();
 
-	//void changeScene(Scene* scene);
-	void refresh();
 	bool isAlive() { return alive; }
 
 	void setAlive(bool alive) { this->alive = alive; }
 
 	virtual Scene* getScene() { return scene; }
 
+	void refresh();
 	void update();
 	void render();
 	void handleEvents();
