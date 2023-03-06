@@ -359,6 +359,12 @@
       "rows": 1
     },
     {
+      "id": "OPTIONS_BUTTON",
+      "file": "assets/Sprites/UI/Menu/Options_Button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BUTTON_HIGHLIGHT",
       "file": "assets/Sprites/UI/Menu/button_highlight.png",
       "cols": 1,
