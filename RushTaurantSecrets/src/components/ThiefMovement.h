@@ -21,7 +21,6 @@ private:
 	SDLUtils* sdl;
 	bool canGetFridger;
 	Objective objective;
-	InputHandler* inputHandler;
 	float firstTick;
 	float deadTime;
 	float escapeSpeed;
@@ -37,10 +36,10 @@ public:
 	// se tendría que llamar al pulsar el botón de escapar
 	void escape();
 
+	States getState() const {
+		return currentState;
+	}
+
 	virtual void update();
 
-	// matar o hacer que huya el ladrón
-	virtual void handleEvents();
-
-	const States getState();
 };

@@ -8,6 +8,7 @@
 #include "../structure/Component.h"
 #include "../utils/checkML.h"
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,6 +30,11 @@ private:
 	ClientsManager* clientsManager;
 	vector<Client*> mates;
 	int posGroup;
+
+	// función que se utiliza para el find que se hace en la función de más abajo
+	// tienen que ser siempre estáticas
+	// se comprueba si un cliente no ha terminado de comer
+	static bool hasNotEaten(Client* mate);
 
 	// comprobar si todos los integrantes del grupo han terminado de comeer
 	bool hasEveryoneEaten() const;
@@ -85,7 +91,10 @@ public:
 
 	ClientMovement(GameObject* parent, int posEntrance, int posGroup);
 
-	void init();
+	// no se inicializa en la constructora porque
+	// ClientMovement tiene que ejecutarse antes que ClientState,
+	// pero ClientState se crea después que ClientMovement
+	void initState();
 
 	// recolocarse en la entrada si alguien se ha marchado
 	void recolocateEntrance();
@@ -110,11 +119,6 @@ public:
 
 	inline bool hasAbandonedPay() const {
 		return clientState->getState() == ClientState::OUT && posPay != -1;
-	}
-
-	// abandona la mesa porque se queda sin felicidad
-	inline bool hasAbandonedTable() const {
-		return clientState->getState() == ClientState::OUT && assignedTable != -1;
 	}
 
 	inline int getAssignedTable() const {

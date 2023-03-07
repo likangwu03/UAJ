@@ -51,7 +51,7 @@ void ClientState::update() {
 #ifdef _DEBUG // cleon: este #if me hace muy feliz.
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(TAKEMYORDER);	// TAKEMYORDER
+			setState(EATING);	// TAKEMYORDER
 			render->renderTakingNoteState();
 		}
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja

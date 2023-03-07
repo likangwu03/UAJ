@@ -26,7 +26,8 @@ public:
 		ClientMovement* mov = new ClientMovement(this, posEntrance, posGroup);
 		new ClientStateRender(this);
 		new ClientState(this, menu);
-		mov->init();
+		// se guarda en clientMovement la referencia a ClientState
+		mov->initState();
 		new ClientTrigger(this, Vector(0, 0), 48, 96);
 		new HeartRender(this, &sdlutils().images().at("Heart"), 15, 15, 20, -7);
 	}

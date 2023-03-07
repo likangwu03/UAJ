@@ -73,6 +73,7 @@ void StraightMovement::addPath(const vector<Vector>& points) {
 void StraightMovement::stop() {
 	end = transform->getPos();
 	path.cont = path.points.size();
+	path.points.clear();
 }
 
 void StraightMovement::update() {

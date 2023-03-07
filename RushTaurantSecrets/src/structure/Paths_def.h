@@ -167,8 +167,8 @@ namespace _ecs {
 	const Vector OUT_ENTRY = Vector(40, 16);
 	// entrada
 	const Vector ENTRY = Vector(27, 16);
-	// pos caja registradora
-	const Vector CASH_REGISTER = Vector(26, 10);
+	// pos 1 casilla más en y que la caja registradora
+	const Vector CASH_REGISTER = Vector(26, 11);
 	// salida
 	const Vector PAY = Vector(28, 13);
 	// afuera salida
@@ -179,32 +179,32 @@ namespace _ecs {
 		// SINO HAY QUE PONER ENTRY
 		// mesa 1 silla izquierda
 		{{Vector(27, 18), Vector(20, 18), Vector(20, 15)}, east},	// mesa
-		{{Vector(20, 10), CASH_REGISTER}},	// pagar
+		{{Vector(20, 11), CASH_REGISTER}},	// pagar
 		{{Vector(20, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 1 silla derecha
 		{{ENTRY, Vector(24, 16), Vector(24, 15)}, west },	// mesa
-		{{Vector(24, 10), CASH_REGISTER}},	// pagar
+		{{Vector(24, 11), CASH_REGISTER}},	// pagar
 		{{Vector(24, 13), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 1 silla abajo
 		{{Vector(27, 17), Vector(22, 17)}, north },	// mesa
-		{{Vector(19, 17), Vector(19, 10), CASH_REGISTER}},	// pagar
+		{{Vector(19, 17), Vector(19, 11), CASH_REGISTER}},	// pagar
 		{{Vector(28, 17), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 1 silla arriba
 		{{Vector(27, 13), Vector(22, 13)}, south },	// mesa
-		{{Vector(22, 10), CASH_REGISTER}},	// pagar
+		{{Vector(22, 11), CASH_REGISTER}},	// pagar
 		{{PAY, OUT_PAY}},	// marcharse mesa
 
 		// mesa 2 silla izquierda
 		{{Vector(27, 12), Vector(13, 12), Vector(13, 15)}, east },	// mesa
-		{{Vector(13, 12), Vector(17, 12), Vector(21, 12), Vector(21, 10), CASH_REGISTER}},	// pagar
+		{{Vector(13, 12), Vector(17, 12), Vector(21, 12), Vector(21, 11), CASH_REGISTER}},	// pagar
 		{{Vector(13, 12), Vector(17, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 2 silla derecha
 		{{Vector(27, 12), Vector(17, 12), Vector(17, 15)}, west },	// mesa
-		{{Vector(17, 12), Vector(21, 12), Vector(21, 10), CASH_REGISTER}},	// pagar
+		{{Vector(17, 12), Vector(21, 12), Vector(21, 11), CASH_REGISTER}},	// pagar
 		{{Vector(17, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 2 silla abajo
 		{{Vector(27, 18), Vector(15, 18), Vector(15, 17)}, north },	// mesa
-		{{Vector(19, 17), Vector(19, 10), CASH_REGISTER}},	// pagar
+		{{Vector(19, 17), Vector(19, 11), CASH_REGISTER}},	// pagar
 		{{Vector(19, 17), Vector(19, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 2 silla arriba
 		{{Vector(27, 12), Vector(15, 12), Vector(15, 13)}, south },	// mesa

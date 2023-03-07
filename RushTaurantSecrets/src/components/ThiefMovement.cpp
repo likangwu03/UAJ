@@ -1,12 +1,12 @@
 #include "./ThiefMovement.h"
 
 ThiefMovement::ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) :
-	Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(5000), firstTick(0), escapeSpeed(escapeSpeed) {
+	Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(1 * 1000), firstTick(0), escapeSpeed(escapeSpeed) {
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	sdl = SDLUtils::instance();
-	inputHandler = InputHandler::instance();
 
+	// elegir un camino u otro dependiendo de si puede ir al congelador o no
 	int max = canGetFridger ? 2 : 1;
 	objective = (Objective)sdl->rand().nextInt(0, max);
 	vector<Vector> points;
@@ -65,7 +65,7 @@ void ThiefMovement::update() {
 		tick = sdl->currRealTime() - firstTick;
 		if (tick > deadTime) {
 			parent->setAlive(false);
-			tick = 0;
+			tick = 0;	// no haría falta
 		}
 		break;
 
@@ -75,20 +75,4 @@ void ThiefMovement::update() {
 		}
 		break;
 	}
-}
-
-void ThiefMovement::handleEvents() {
-	// muere
-	if (inputHandler->isKeyDown(SDLK_m)) {
-		die();
-	}
-	// huye
-	if (inputHandler->isKeyDown(SDLK_h)) {
-		escape();
-	}
-}
-
-const ThiefMovement::States ThiefMovement::getState()
-{
-	return currentState;
 }

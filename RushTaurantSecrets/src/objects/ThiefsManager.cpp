@@ -14,7 +14,7 @@ ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escap
 }
 
 void ThiefsManager::update() {
-	if (thiefs->size() < 1) {
+	if (thiefs->size() < MAX_THIEFS) {
 		float time = sdl->currRealTime() - lastThiefTime;
 		if (time > timer) {
 			createThief();

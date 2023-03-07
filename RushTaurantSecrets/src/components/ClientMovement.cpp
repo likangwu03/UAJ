@@ -2,19 +2,14 @@
 #include "../objects/ClientsManager.h"
 #include "../gameObjects/Client.h"
 
-// cleon: [musica de desastre y muerte]: es una búsqueda de 1º. Esto es 2º (que es más cool).
-// esto lo tiene implementado C++.
+bool ClientMovement::hasNotEaten(Client* mate) {
+	return mate->getComponent<ClientState>()->getState() < ClientState::FINISH_EAT;
+}
+
 bool ClientMovement::hasEveryoneEaten() const {
-	bool found = true;
-	int i = 0;
-	// se busca un integrante del grupo que no haya termiando de comer
-	while (i < mates.size() && found) {
-		if (mates[i]->getComponent<ClientState>()->getState() < ClientState::FINISH_EAT) {
-			found = false;
-		}
-		++i;
-	}
-	return found;
+	// se busca uno que no haya terminado de comer y si no se encuentra,
+	// es que todos han terminado
+	return std::find_if(mates.begin(), mates.end(), hasNotEaten) == mates.end();
 }
 
 void ClientMovement::goOut(ClientState::States currentState) {
@@ -52,11 +47,19 @@ void ClientMovement::colocateCashRegister() {
 
 // desde la caja registradora hasta la posición que le corresponde en la cola de pagar
 void ClientMovement::colocatePay() {
+	vector<Vector> queuePay;
+
 	Vector posRegister = _ecs::CASH_REGISTER;
 	// se calcula a partir de su pos en la cola de la caja
 	posRegister.setX(posRegister.getX() + posPay);
+	queuePay.push_back(posRegister);
+
+	// se retrasan una casilla en 1 para estar pegados a la caja registradora
+	posRegister.setY(posRegister.getY() - 1);
+	queuePay.push_back(posRegister);
+
 	// se mueve
-	straightMovement->addPath(vector<Vector>{posRegister});
+	straightMovement->addPath(queuePay);
 }
 
 // ha abandonado la cola de la caja sin pagar
@@ -92,7 +95,7 @@ void ClientMovement::stationary(ClientState::States state, GOOrientation orienta
 }
 
 ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup) :
-	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), posGroup(posGroup) {
+	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), posGroup(posGroup), clientState(nullptr), render(nullptr) {
 	sdl = SDLUtils::instance();
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
@@ -101,9 +104,9 @@ ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup
 	colocateEntrance();
 }
 
-void ClientMovement::init() {
-	render = parent->getComponent<ClientStateRender>();
+void ClientMovement::initState() {
 	clientState = parent->getComponent<ClientState>();
+	render = parent->getComponent<ClientStateRender>();
 }
 
 // recolocarse en la entrada si alguien se ha marchado
@@ -115,7 +118,16 @@ void ClientMovement::recolocateEntrance() {
 // recolocarse en la cola de pagar si alguien se ha marchado
 void ClientMovement::recolotatePay() {
 	--posPay;
-	colocatePay();
+
+	vector<Vector> queuePay;
+	Vector posRegister = _ecs::CASH_REGISTER;
+	// se calcula su nueva posición en la cola a partir de la pos de la caja
+	posRegister.setX(posRegister.getX() + posPay);
+	// se quita uno porque tienen que estar pegados a la caja registradora
+	posRegister.setY(posRegister.getY() - 1);
+	queuePay.push_back(posRegister);
+
+	straightMovement->addPath(queuePay);
 }
 
 // asignar mesa

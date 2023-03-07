@@ -4,6 +4,8 @@
 #include "../structure/CollisionsManager.h"
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
+#include "../components/Transform.h"
+#include "../components/Image.h"
 
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
@@ -21,6 +23,7 @@ Restaurant::Restaurant(): dc(DishCombinator::init()) {
 	pantry = new Pantry();
 	pantry->linkRestaurant(this);
 	SceneManager::instance()->setResize();
+
 	init(); 
 }
 
@@ -43,10 +46,9 @@ void Restaurant::init() {
 	vector<_ecs::_dish_id> menu;
 	for (auto i = aux.begin(); i != aux.end(); ++i) menu.push_back((_ecs::_dish_id)*i);
 
-
-	// manager de clientes
+	// se crean los managers
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 2);
+	ClientsManager* clientsManager = ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 2);
 	ThiefsManager::init(managerContainer, 2, 6, true, 5 * 1000);
 	
 	cm = new CollisionsManager(this);
@@ -58,7 +60,12 @@ void Restaurant::init() {
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
 	new MapCreator(mapTop, "assets/tilemaps/restaurant_top.tmx");
 
-	ClientsManager::get()->getTables();
+	GameObject* thiefExclamation = new GameObject(this, _ecs::grp_HUD);
+	new Transform(thiefExclamation, Vector(637, 100), Vector::zero, 38, 38);
+	new Image(thiefExclamation, &sdlutils().images().at("EXCLAMATION"));
+
+	// las mesas se inicializan luego de haberse creado
+	clientsManager->initTables();
 }
 
 void Restaurant::linkPantry(Pantry* pantry) {

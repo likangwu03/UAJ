@@ -7,10 +7,13 @@
 #include "../utils/checkML.h"
 #include "../objects/RelativeToGlobal.h"
 #include <vector>
+#include <array>
 #include <list>
+#include <algorithm>
+
+class DeskComp;
 
 using namespace std;
-class DeskComp;
 
 class ClientsManager : public Manager<ClientsManager> {
 
@@ -39,8 +42,9 @@ private:
 	int maxClients;
 	// indica si el primer cliente en la entra se ha asignado o no
 	bool assignedClient;
-	// indicar si las mesas están ocupadas o no
-	DeskComp* tables[_ecs::NUM_TABLES];
+	// se utiliza para indicar si la mesas están ocupadas o no 
+	// pasándole el grupo que se sienta en ella
+	array<DeskComp*, _ecs::NUM_TABLES> tables;
 
 	// añadir un cliente cada cierto tiempo
 	void addFrequently();
@@ -69,6 +73,9 @@ private:
 	// eliminar al primer grupo de clientes si se le ha asignado una mesa
 	void firstClientAssigned();
 
+	// comprueba si un cliente no ha abandonado la entrada
+	static bool notAbandonedEntrance(Client* client);
+
 	// comprobar si un grupo de clientes de la entrada se tiene que marchar porque se queda sin felicidad
 	void checkHappinessEntrance();
 
@@ -80,6 +87,8 @@ private:
 		return tables[table - 1];
 	}
 
+	static bool deskIsNotOccupied(DeskComp* desk);
+
 	// encontrar la primera mesa vacía
 	bool checkFirstTableEmpty(int& table);
 
@@ -87,10 +96,12 @@ private:
 	void assignTable(int table, vector<Client*> firstGroup);
 
 	// comprobar si algún cliente ha abandonado una mesa o si ha terminado de comer para marcarla como desocupada
-	void checkTables();
+	// void checkTables();
 
 	// comprobar si un cliente si un cliente está de camino a pagar o pagando
 	bool isPaying(GameObject* client);
+
+	static bool notOutOfLocal(Client* client);
 
 	// comprobar si algún grupo ha abandonado el local para quitarlo de la lista
 	void refreshClientsGroup();
@@ -121,9 +132,11 @@ public:
 	// hay espacio para que vayan a la cola de la caja
 	bool canOccupyPay(vector<Client*> mates);
 
+	// guarda el componente de las mesas en el array
+	// no se hace en la constructora porque
+	// las mesas se tienen que crear después que el ClientsManager
+	void initTables();
+
 	// se realizan todas las comprobaciones
 	virtual void update();
-
-	// Recoge las mesas
-	void getTables();
 };

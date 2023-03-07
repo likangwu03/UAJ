@@ -18,8 +18,9 @@ void ClientsManager::addFrequently() {
 void ClientsManager::recolocateEntranceAll(std::list<vector<Client*>>::iterator it) {
 	for (it; it != entrance.end(); ++it) {
 		vector<Client*> group = *it;
-		for (int i = 0; i < group.size(); ++i) {
-			group[i]->getComponent<ClientMovement>()->recolocateEntrance();
+		// las búsquedas modernas se utilizan para recorrer un contenedor de elementos completo
+		for (auto client : group) {
+			client->getComponent<ClientMovement>()->recolocateEntrance();
 		}
 	}
 }
@@ -43,8 +44,8 @@ void ClientsManager::createGroupClients() {
 	entrance.push_back(group);
 	clientsGroups.push_back(group);
 
-	for (int i = 0; i < group.size(); ++i) {
-		group[i]->getComponent<ClientMovement>()->setGroup(group);
+	for (auto client : group) {
+		client->getComponent<ClientMovement>()->setGroup(group);
 	}
 }
 
@@ -60,15 +61,13 @@ Client* ClientsManager::createClient(int posGroup) {
 
 void ClientsManager::checkCashRegister() {
 	// lista de grupos
-	for (auto it = clientsGroups.begin(); it != clientsGroups.end(); ++it) {
-		vector<Client*> group = *it;
-		// grupo
-		for (int i = 0; i < group.size(); ++i) {
-			Client* g = group[i];
-			if (g->getComponent<ClientState>()->getState() == ClientState::CASH_REGISTER) {
-				Client* client = dynamic_cast<Client*> (g);
+	for (auto group : clientsGroups) {
+		// se recorre cada cliente del grupo
+		for (auto client : group) {
+			if (client->getComponent<ClientState>()->getState() == ClientState::CASH_REGISTER) {
+				// Client* client = dynamic_cast<Client*> (object);
 				// se le indica la posición a ocupar en la cola
-				g->getComponent<ClientMovement>()->setPosPay(pay.size());
+				client->getComponent<ClientMovement>()->setPosPay(pay.size());
 				pay.push_back(client);
 			}
 		}
@@ -83,22 +82,22 @@ void ClientsManager::firstClientAssigned() {
 	}
 }
 
+bool ClientsManager::notAbandonedEntrance(Client* client) {
+	return !client->getComponent<ClientMovement>()->hasAbandonedEntrance();
+}
+
 void ClientsManager::checkHappinessEntrance() {
-	bool found = false;	// encontrar a un grupo en el que uno de sus integrantes ha abandonado la entrada
+	// encontrar a un grupo en el que todos sus integrantes han abandonado la entrada
+	bool found = false;
 	auto it = entrance.begin();
 	while (it != entrance.end() && !found) {
 		vector<Client*> group = *it;
-		int i = 0;
-		found = true;
 		// hasta que todos los clientes del grupo no hayan abandonado la entrada,
 		// no se elimina el grupo de la entrada
-		while (i < group.size() && found) {
-			if (!group[i]->getComponent<ClientMovement>()->hasAbandonedEntrance()) {
-				found = false;
-			}
-			++i;
-		}
-		// si todos han abandonado la entrada se elimina el grupo
+		// se busca uno que no haya abandonado la entrada y si no se encuentra,
+		// es que todos la han abandonado
+		found = std::find_if(group.begin(), group.end(), notAbandonedEntrance) == group.end();
+
 		if (found) {
 			it = entrance.erase(it);
 			recolocateEntranceAll(it);
@@ -111,8 +110,7 @@ void ClientsManager::checkHappinessEntrance() {
 
 void ClientsManager::checkHappinessPay() {
 	// se utiliza un for porque los clientes de un mismo grupo, la abandonan a la vez
-	auto it = pay.begin();
-	for (it; it != pay.end(); it) {
+	for (auto it = pay.begin(); it != pay.end(); it) {
 		Client* client = (*it);
 		bool found = false;
 		// si uno de los clientes ha abandonado la caja, se elimian y se recoloca
@@ -129,30 +127,33 @@ void ClientsManager::checkHappinessPay() {
 	}
 }
 
+bool ClientsManager::deskIsNotOccupied(DeskComp* desk) {
+	return !desk->isOccupied();
+}
+
 bool ClientsManager::checkFirstTableEmpty(int& table) {
-	bool found = false;
-	int i = 0;
-	while (i < _ecs::NUM_TABLES && !found) {
-		if (!tables[i]->isOccupied()) {
-			found = true;
-			table = i + 1;
-		}
-		++i;
+	auto it = std::find_if(tables.begin(), tables.end(), deskIsNotOccupied);
+	// se ha encontrado una mesa no ocupada
+	if (it != tables.end()) {
+		table = (*it)->getID();
+		return true;
 	}
-	return found;
+	return false;
 }
 
 void ClientsManager::assignTable(int table, vector<Client*> firstGroup) {
-	// se le asigna una mesa a cada miembro del grupo
-	for (int i = 0; i < firstGroup.size(); ++i) {
-		firstGroup[i]->getComponent<ClientMovement>()->assignTable(table);
+	// se le asigna la mesa a cada miembro del grupo
+	for (auto client : firstGroup) {
+		client->getComponent<ClientMovement>()->assignTable(table);
 	}
-	// Se asigna el grupo de clientes a la mesa
+
+	// se asigna el grupo de clientes a la mesa
 	tables[table - 1]->assignClients(firstGroup);
 
 	assignedClient = true;
 }
 
+/*
 void ClientsManager::checkTables() {
 	for (auto it = clientsGroups.begin(); it != clientsGroups.end(); ++it) {
 		// se utiliza el primer integrante del grupo para comprobar que se ha dejado la mesa
@@ -171,18 +172,21 @@ void ClientsManager::checkTables() {
 		}
 	}
 }
+*/
 
 // comprobar si un cliente si un cliente está de camino a pagar o pagando
 bool ClientsManager::isPaying(GameObject* client) {
 	ClientState* state = client->getComponent<ClientState>();
 	ClientState::States currentState = state->getState();
-	if (currentState == ClientState::HAS_LEFT ||
+
+	return currentState == ClientState::HAS_LEFT ||
 		currentState == ClientState::REGISTER ||
 		currentState == ClientState::CASH_REGISTER ||
-		currentState == ClientState::PAYING) {
-		return true;
-	}
-	return false;
+		currentState == ClientState::PAYING;
+}
+
+bool ClientsManager::notOutOfLocal(Client* client) {
+	return client->getComponent<ClientState>()->getState() != ClientState::OUT;
 }
 
 // comprobar si algún grupo ha abandonado el local para quitarlo de la lista
@@ -191,17 +195,10 @@ void ClientsManager::refreshClientsGroup() {
 	auto it = clientsGroups.begin();
 	while (it != clientsGroups.end() && found) {
 		vector<Client*> group = *it;
-		found = false;
-		int i = 0;
+
 		// se comprueba que todos los integrantes del grupo están saliendo del local
-		while (i < group.size() && !found) {
-			if (group[i]->getComponent<ClientState>()->getState() != ClientState::OUT) {
-				found = true;
-			}
-			++i;
-		}
-		// si no se ha encontrado ningún cliente del grupo que no esté saliendo del local,
-		// se quita de la lista
+		found = std::find_if(group.begin(), group.end(), notOutOfLocal) != group.end();
+
 		if (!found) {
 			it = clientsGroups.erase(it);
 		}
@@ -212,7 +209,7 @@ void ClientsManager::refreshClientsGroup() {
 }
 
 ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients) {
+	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), tables() {
 	scene = parent->getScene();
 	sdl = SDLUtils::instance();
 	lastClientTime = sdl->currRealTime();
@@ -252,17 +249,17 @@ void ClientsManager::collectAndLeave() {
 
 bool ClientsManager::canOccupyPay(vector<Client*> mates) {
 	int goingPay = 0;
-	for (auto it = clientsGroups.begin(); it != clientsGroups.end(); ++it) {
+	for (auto group : clientsGroups) {
 		// con que uno del grupo esté en una de esas posiciones,
 		// todos los del grupo están en la misma
 
 		// no se cuenta el grupo que quiere ocupar la caja
-		Client* client = (*it).front();
+		Client* client = group.front();
 		if (client != mates.front()) {
 			// se cuenta el resto de grupos
 			if (isPaying(client)) {
 				// se le suma el número de integrantes del grupo
-				goingPay = goingPay + it->size();
+				goingPay = goingPay + group.size();
 			}
 		}
 	}
@@ -272,6 +269,13 @@ bool ClientsManager::canOccupyPay(vector<Client*> mates) {
 	}
 	else {
 		return false;
+	}
+}
+
+void ClientsManager::initTables() {
+	for (auto obj : *scene->getGroup(_ecs::grp_DESK)) {
+		DeskComp* desk = obj->getComponent<DeskComp>();
+		tables[desk->getID() - 1] = desk;
 	}
 }
 
@@ -290,20 +294,10 @@ void ClientsManager::update() {
 
 	// marcar como desocupadas las mesas de las que los clientes se han marchado
 	// (han terminado de comer o se han quedado sin felicidad)
-	//checkTables();
+	// checkTables();
 
 	// eliminar grupos de clientes enfadados de la cola de pagar
 	checkHappinessPay();
 
 	refreshClientsGroup();
-}
-
-void ClientsManager::getTables() {
-	for (auto obj : *scene->getGroup(_ecs::grp_DESK)) {
-		DeskComp* desk = obj->getComponent<DeskComp>();
-		// duck typing para comprobar si el objeto interactuable es una mesa
-		if (desk != nullptr) {
-			tables[desk->getID() - 1] = desk;
-		}
-	}
 }

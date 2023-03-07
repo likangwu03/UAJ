@@ -27,5 +27,9 @@ private:
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_THIEFS_MANAGER;
 
+	bool isThereThieves() const {
+		return !thiefs->size();
+	}
+
 	virtual void update();
 };
