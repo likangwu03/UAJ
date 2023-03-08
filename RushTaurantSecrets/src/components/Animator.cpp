@@ -59,7 +59,7 @@ void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, in
 
 
 void Animator::update() {
-	lastTic += sdlutils().getFrameTime();
+	lastTic += deltaTime / 10;
 	if (lastTic > frameRate ) {
 		lastTic = 0;
 		updateAnim();

@@ -41,8 +41,8 @@ private:
 	States state;
 
 	const int THINKINGTIME = 5000, EATINGTIME = 5000;
-	const float DECREASE = 0.05;
-	float happiness, timer, lastTick;
+	const float DECREASEFREQ = 1000;
+	float happiness, timer;
 
 	vector<_ecs::_dish_id> availableDishes;
 	ClientStateRender* render;
@@ -57,12 +57,5 @@ public:
 	void getServed();
 	void changeDish();
 	float getHappiness();
-
-	/*void handleEvents() {
-		if (ih().isKeyDown(SDLK_r)) {
-			if (state == ORDERED)
-				changeDish();
-		}
-	}*/
 
 };

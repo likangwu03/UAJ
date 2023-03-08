@@ -58,7 +58,7 @@ void Restaurant::init() {
 	map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/restaurant.tmx");
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(mapTop, "assets/tilemaps/restaurant_top.tmx");
+	new MapCreator(mapTop, "assets/tilemaps/restaurant_top_walls.tmx");
 
 	GameObject* thiefExclamation = new GameObject(this, _ecs::grp_HUD);
 	new Transform(thiefExclamation, Vector(637, 100), Vector::zero, 38, 38);

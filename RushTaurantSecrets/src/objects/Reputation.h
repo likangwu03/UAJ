@@ -8,7 +8,7 @@ class Reputation : public Singleton<Reputation> {
 
 	float amount;
 	const int MAXREPUTATION = 100;
-	Reputation() { amount = 15; }
+	Reputation() : amount(15) { }
 
 public:
 	float getReputation() { return amount; }

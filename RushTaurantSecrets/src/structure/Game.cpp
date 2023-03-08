@@ -9,7 +9,6 @@ Game::Game() {
 	sceneManager = nullptr;
 	ih = nullptr;
 	sdl->showCursor();
-	sdlutils().setFrameTime(1);
 	frameTime = 0;
 }
 
@@ -27,12 +26,11 @@ void Game::run() {
 		
 		ih->refresh();
 		handleEvents();
-		update(); // cleon es malo y os lo deja para que sufráis >=D
+		update();
 		refresh();
 		render();
 
 		frameTime = sdlutils().currRealTime() - startTime;
-		sdlutils().setFrameTime(frameTime);
 
 		if (frameTime < FRAME_RATE) {
 			SDL_Delay(FRAME_RATE - frameTime);

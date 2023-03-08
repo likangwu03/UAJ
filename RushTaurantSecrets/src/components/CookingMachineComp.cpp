@@ -27,8 +27,7 @@ void CookingMachineComp::cook(_ecs::_dish_id d) {
 	cont = 0;
 	state = cooking;
 	anim->setActive(true);
-	float aaa = (cookingTime / anim->getFramesNumber());
-	anim->changeFrameRate(aaa * 100);
+	anim->changeFrameRate((cookingTime / anim->getFramesNumber()) * 100);
 }
 
 void CookingMachineComp::finishCooking() {
@@ -52,7 +51,7 @@ void CookingMachineComp::update() {
 	else if (state == informing && cont >= cookingTime * 100) {
 		state = available;
 	}
-	cont += sdlutils().getFrameTime();
+	cont += deltaTime / 10;
 }
 
 void CookingMachineComp::render() {

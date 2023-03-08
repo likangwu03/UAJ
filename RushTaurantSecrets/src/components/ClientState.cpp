@@ -3,9 +3,9 @@
 #include "../objects/Reputation.h"
 #include "../utils/checkML.h"
 
-ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) : Component(parent, id),
-	state(START), happiness(60), timer(0), lastTick(sdlutils().currRealTime()), 
-	availableDishes(menu), orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) {
+ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) :
+	Component(parent, id), state(START), happiness(60), timer(0), availableDishes(menu), 
+	orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) {
 	render->clientStateIsReady(); //decirle que ya est¨¢ creado
 }
 
@@ -13,25 +13,23 @@ ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) 
 ClientState::States ClientState::getState() const { return state; }
 
 void ClientState::setState(States state) { 
-	lastTick = sdlutils().currRealTime();
+	if (state == ASSIGNED || state == ORDERED || state == EATING) happiness += 5;
 	timer = 0;
 	this->state = state;
 }
 
 
 void ClientState::update() {
-	int delta = sdlutils().currRealTime() - lastTick; // cleon: lágrimas en mi corazón.
-	lastTick = sdlutils().currRealTime();
-	
-
 	// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
 	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING || state == FINISH_EAT) {
-		if (delta < 100) { // cleon: este 100 seguro que es parámetro de juego.
-			happiness -= DECREASE;
+		
+		timer += deltaTime;
+		if (timer > DECREASEFREQ) {
+			timer = 0;
+			happiness--;
 		}
 
 		// Si la felicidad llega a 0, se pone el estado a OUT
-		// (DE MOMENTO TARDA COMO 1 MINUTO)
 		if (happiness <= 0) {
 			setState(OUT);
 			Reputation::instance()->reduceReputation(5);
@@ -43,8 +41,7 @@ void ClientState::update() {
 	}
 	// Si no, si est?pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acción
 	else if (state == THINKING || state == EATING) {
-		if (delta < 100)
-			timer += delta;
+		timer += deltaTime;
 
 		// Si est?pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
 		if (state == THINKING && timer >= THINKINGTIME) {
