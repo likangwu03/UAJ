@@ -32,10 +32,7 @@ void ThiefTrigger::isOverlapping()
 			tMovement->escape();
 		}
 		else if (ih->isKeyDown(SDLK_e)) {
-			tMovement->die();
-			GameInfor::instance()->setHasKill(true);
-			mRender->setActive(false);
-			sRender->setActive(false);
+			killPressed();
 		}
 	}
 
@@ -43,7 +40,7 @@ void ThiefTrigger::isOverlapping()
 
 void ThiefTrigger::onTriggerEnter()
 {
-	if (!mRender->isActive() && (tMovement->getState() != ThiefMovement::DEAD)) {
+	if (tMovement->getState() != ThiefMovement::DEAD) {
 		mRender->setActive(true);
 		sRender->setActive(true);
 	}
