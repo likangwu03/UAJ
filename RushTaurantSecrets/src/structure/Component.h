@@ -7,6 +7,7 @@ protected:
 	GameObject* parent;
 	bool alive;
 	bool active; //indica si el componente est?activo (si se actualizan update, render,handleEvents,...)
+	const uint32_t& deltaTime;
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_INVALID;
 
