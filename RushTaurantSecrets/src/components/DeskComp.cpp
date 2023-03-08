@@ -24,9 +24,6 @@ void DeskComp::spreadOverlap() {
 	}
 }
 
-void DeskComp::leaveDesk() {
-}
-
 void DeskComp::cleanDesk() {
 	sucia = false;
 }
@@ -47,7 +44,7 @@ void DeskComp::update() {
 		ClientState::States st = assigned[0]->getComponent<ClientState>()->getState();
 		// Si los clientes han terminado de comer se ensucia la mesa.
 		if(st == ClientState::HAS_LEFT) {
-			sucia = false;
+			sucia = true;
 			assigned.clear();
 		// Si los clientes se han quedado sin felicidad no se ensucia la mesa.
 		} else if(st == ClientState::OUT) {

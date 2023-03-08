@@ -229,7 +229,7 @@ void ClientsManager::assignFirstGroup(int table) {
 			}
 			else {
 				int table = -1;
-				if (checkFirstTableEmpty(table)) {
+				if (checkFirstTableEmpty(table) && table < 3) {
 					assignTable(table, firstGroup);
 				}
 			}

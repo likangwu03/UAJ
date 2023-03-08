@@ -25,9 +25,6 @@ public:
 	// o false si nadie ha aceptado el plato (no lo pedían o ya lo han recibido) 
 	void spreadOverlap();
 
-	// Se llama cuando los clientes se van de la mesa.
-	void leaveDesk();
-
 	// Se llama cuando se quiere limpiar la mesa.
 	void cleanDesk();
 
