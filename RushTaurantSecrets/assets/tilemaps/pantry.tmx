@@ -233,6 +233,6 @@
   <object id="28" x="1168.67" y="577.333" width="66" height="29.6667"/>
  </objectgroup>
  <objectgroup id="12" name="obj">
-  <object id="30" name="pantryExit" x="936" y="765.333" width="100" height="68"/>
+  <object id="30" name="pantryExit" x="952" y="765.333" width="84" height="68"/>
  </objectgroup>
 </map>

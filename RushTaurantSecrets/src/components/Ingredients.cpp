@@ -24,7 +24,9 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 void Ingredients::removeLastIngredient() {
 	
  	kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
-	ingredients.pop_back();
+	
+	if (ingredients.size() != 0) ingredients.pop_back();
+	else return;
 
 	for (int i = 0; i < coord.size(); ++i) {
 		coord[i].first += (0.5 * ING_OFFSET);
