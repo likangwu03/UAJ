@@ -45,6 +45,7 @@ private:
 	Reputation* reputation;
 	int actReputation;
 	array<bool, 5> stars;
+	int numFullClock; // número de vueltas que ha dado el reloj
 
 public:
 	UIRestaurant();
@@ -64,5 +65,6 @@ public:
 	void checkStarsArray();
 	void checkRenderStar();
 	void updateClock();
+	int getNumFullClock(); // devuelve cuántas vueltas ha dado reloj cuando se llama al método
 };
 
