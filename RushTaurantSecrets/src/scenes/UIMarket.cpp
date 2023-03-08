@@ -23,7 +23,7 @@ UIMarket::UIMarket(CartelManager* cM) : Scene() {
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0x000000FF));
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
-	// icono de menú del día
+	// icono de men?del día
 	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MENU, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
 
 	// icono de cesta
@@ -62,19 +62,16 @@ void UIMarket::showMoneyText() {
 
 void UIMarket::handleEvents() {
 	if (ih->isKeyDown(SDLK_z)) { 
-		// si el menú de cesta ya está abierto, lo cierra
+		// si el men?de cesta ya est?abierto, lo cierra
 		if (basketMarket->getBasketON())
 			basketMarket->setBasketON(false);
-		// si el menú de cesta está cerrado, lo abre
+		// si el men?de cesta est?cerrado, lo abre
 		else
 			basketMarket->setBasketON(true);
 	}
 	else
 		Scene::handleEvents();
 
-	if (ih->isKeyDown(SDLK_SPACE)){
-		basketMarket->buyIngredient();
-	}
 }
 
 void UIMarket::render() {

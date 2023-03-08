@@ -5,6 +5,21 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	ih = InputHandler::instance();
 }
 
+void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n) {
+
+	if (totalDifIngr < MAX_ING) { // si no ha superado el límite de ingredientes a comprar
+		auto it = ingredients.find(ing);
+
+		if (it != ingredients.end())
+			it->second += n;
+		else {
+			ingredients.insert({ ing,n });
+			totalDifIngr++; //num de dif ing
+		}
+	}
+}
+
+/*
 void BasketMarketComponent::buyIngredient() {
 	// si hay un cartel iluminado y se pulsa una tecla para comprarlo
 	if (cartelM->isSelected() && ih->isKeyDown(SDLK_SPACE)) {
@@ -23,9 +38,10 @@ void BasketMarketComponent::buyIngredient() {
 		}
 	}
 }
+*/
 
 void BasketMarketComponent::renderBasket() {
-	// renderiza menú de cesta
+	// renderiza men?de cesta
 	renderTexture(10, sdl->height() - 610, BASKET_SIZE, BASKET_SIZE / 2 + 100, "BASKET_LIST");
 	// render de ingredientes
 	auto it = ingredients.begin();

@@ -26,6 +26,8 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);
 	void buyIngredient();
+	//llamado por men¨² de compra
+	void addToBasket(_ecs::_ingredients_id ing, int n);
 	void renderBasket();
 	void renderTexture(int x, int y, int w, int h, string text);
 };

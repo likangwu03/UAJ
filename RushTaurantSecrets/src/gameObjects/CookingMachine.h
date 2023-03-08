@@ -16,7 +16,7 @@ private:
 	const int OFFSETW = 6;
 	const int OFFSETH = -2;
 	const int OFFSETY = 0;
-	const int OFFSETX = -4;
+	const int OFFSETX = -7;
 public:
 	CookingMachine(Scene* scene, Vector pos, float w, float h) :GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, pos, Vector(0, 0), w, h,0,true); //para saber en qu¨¦ posici¨®n renderizar el bocadillo 

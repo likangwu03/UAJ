@@ -11,6 +11,7 @@
 class UIMarket : public Scene
 {
 private:
+	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
 	Font* f;
@@ -19,7 +20,6 @@ private:
 	Texture* moneyTextTexture;
 	Image* moneyTextImage;
 	int intMoney;
-	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	InputHandler* ih;
 	BasketMarket* basketMarket;
 

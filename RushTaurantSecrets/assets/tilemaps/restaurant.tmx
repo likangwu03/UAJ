@@ -286,9 +286,9 @@
   <object id="82" x="873" y="232" width="29" height="30"/>
  </objectgroup>
  <objectgroup id="20" name="obj" class="KitchenIsland">
-  <object id="38" name="CookingMachine" x="1347.47" y="200.197" width="44.6667" height="67.8333"/>
+  <object id="38" name="CookingMachine" x="1346.56" y="200.197" width="44.6667" height="67.8333"/>
   <object id="40" name="Bin" x="1054.66" y="345.667" width="49.3333" height="52.3333"/>
-  <object id="51" name="CashRegister" x="1223.33" y="428.667" width="70" height="47.3333"/>
+  <object id="51" name="CashRegister" x="1226.95" y="440.667" width="66.375" height="23.3333"/>
   <object id="53" name="KitchenIsland" x="1202.67" y="290" width="283.333" height="92.6667"/>
   <object id="54" name="table" x="300" y="220" width="122" height="114">
    <properties>
@@ -400,7 +400,7 @@
   </object>
   <object id="78" name="CookingMachine" x="1394.67" y="200.417" width="44.6667" height="67.8333"/>
   <object id="79" name="CookingMachine" x="1442" y="200.083" width="44.6667" height="67.8333"/>
-  <object id="80" name="CookingMachine" x="1489.33" y="200.75" width="44.6667" height="67.8333"/>
+  <object id="80" name="CookingMachine" x="1488.78" y="200.932" width="44.6667" height="67.8333"/>
   <object id="81" name="goToPantry" x="948" y="179.333" width="78" height="85"/>
  </objectgroup>
 </map>
