@@ -15,7 +15,7 @@ Pantry::~Pantry() {
 }
 void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
-	new Player(this);
+	new Player(this, 0);
 	GameObject* map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/pantry.tmx");
 }

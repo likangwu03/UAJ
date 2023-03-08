@@ -52,7 +52,7 @@ void Restaurant::init() {
 	ThiefsManager::init(managerContainer, 2, 6, true, 5 * 1000);
 	
 	cm = new CollisionsManager(this);
-	player = new Player(this);
+	player = new Player(this, 0);
 	
 	// Tilemap
 	map = new GameObject(this);

@@ -1,6 +1,6 @@
 #include "PantryExitTrigger.h"
 #include "../structure/SceneManager.h"
-
+#include "../utils/checkML.h"
 
 PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
 	ih = InputHandler::instance();

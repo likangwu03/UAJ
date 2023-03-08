@@ -1,4 +1,5 @@
 #include "DailyMenuComp.h"
+#include "../utils/checkML.h"
 
 void DailyMenuComp::drawDishes(vector<_ecs::DishInfo> menu)
 {

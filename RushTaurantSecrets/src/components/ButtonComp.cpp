@@ -1,6 +1,8 @@
 #include "ButtonComp.h"
 #include "../structure/SceneManager.h"
 
+#include "../utils/checkML.h"
+
 ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)()) 
 	: Component(parent, id), sceneManager(SceneManager::instance()), transform(parent->getComponent<Transform>()), highlighted(false)
 {

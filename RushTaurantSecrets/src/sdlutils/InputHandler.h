@@ -201,7 +201,7 @@ public:
 	}
 
 	void initialiseJoysticks() {
-
+		bool joyInit = false;
 		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
 		{
 			SDL_InitSubSystem(SDL_INIT_JOYSTICK);
@@ -214,16 +214,19 @@ public:
 				joys.push_back(joy);
 				if (SDL_JoystickGetAttached(joy) == 1) // nueva alternativa a SDL_JoystickOpened a partir de SDL 2.0
 				{
-					m_joysticks.push_back(joy);
-					m_joystickValues.push_back(std::make_pair(new
-						Vector(0, 0), new Vector(0, 0))); // add our pair
-					std::vector<bool> cButtons;
-					for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
-					{
-						numB++;
-						cButtons.push_back(false);
-					}
-					m_buttonStates.push_back(cButtons);
+					if (SDL_JoystickNumButtons(joy) > 5) {
+						joyInit = true;
+						m_joysticks.push_back(joy);
+						m_joystickValues.push_back(std::make_pair(new
+							Vector(0, 0), new Vector(0, 0))); // add our pair
+						std::vector<bool> cButtons;
+						for (int j = 0; j < SDL_JoystickNumButtons(joy); j++)
+						{
+							numB++;
+							cButtons.push_back(false);
+						}
+						m_buttonStates.push_back(cButtons);
+					}		
 				}
 				else
 				{
@@ -231,7 +234,8 @@ public:
 				}
 			}
 			SDL_JoystickEventState(SDL_ENABLE);
-			m_bJoysticksInitialised = true;
+			if(joyInit > 5)
+				m_bJoysticksInitialised = true;
 			std::cout << "Initialised " << m_joysticks.size() << "joystick(s)" << std::endl;
 		}
 		else

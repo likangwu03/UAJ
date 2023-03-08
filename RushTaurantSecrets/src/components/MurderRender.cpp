@@ -1,4 +1,5 @@
 #include "MurderRender.h"
+#include "../utils/checkML.h"
 
 MurderRender::MurderRender(GameObject* parent)
 	: Component(parent, id), offsetX(-16), offsetY(-16),

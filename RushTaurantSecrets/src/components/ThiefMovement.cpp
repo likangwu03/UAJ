@@ -1,4 +1,5 @@
 #include "./ThiefMovement.h"
+#include "../utils/checkML.h"
 
 ThiefMovement::ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) :
 	Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(1 * 1000), firstTick(0), escapeSpeed(escapeSpeed) {

@@ -25,7 +25,7 @@ void SuperMarket::handleEvents() {
 
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
-	player = new Player(this);
+	player = new Player(this, 0);
 	//cartelM = new CartelManager();
 	cartelM = CartelManager::instance();
 	map = new GameObject(this);

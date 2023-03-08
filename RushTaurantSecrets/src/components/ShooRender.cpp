@@ -1,4 +1,5 @@
 #include "ShooRender.h"
+#include "../utils/checkML.h"
 
 ShooRender::ShooRender(GameObject* parent) 
 	: Component(parent, id), offsetX(-16), offsetY(-16),

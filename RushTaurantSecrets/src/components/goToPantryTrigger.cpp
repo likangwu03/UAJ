@@ -1,5 +1,7 @@
 #include "goToPantryTrigger.h"
 #include "../structure/SceneManager.h"
+#include "../utils/checkML.h"
+
 goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
 	ih = InputHandler::instance();
 	sceneM = SceneManager::instance();

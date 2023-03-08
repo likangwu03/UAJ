@@ -1,4 +1,5 @@
 #include "ThiefTrigger.h"
+#include "../utils/checkML.h"
 
 ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_)

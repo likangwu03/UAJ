@@ -1,6 +1,7 @@
 #include "ClientMovement.h"
 #include "../objects/ClientsManager.h"
 #include "../gameObjects/Client.h"
+#include "../utils/checkML.h"
 
 bool ClientMovement::hasNotEaten(Client* mate) {
 	return mate->getComponent<ClientState>()->getState() < ClientState::FINISH_EAT;
