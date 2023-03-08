@@ -18,6 +18,8 @@ private:
 	Vector speed = (0,0);
 	Vector aux = speed;
 
+	int player; // num de player
+
 	SDL_Joystick* _joy;
 	const char* controller = "";
 	SDL_GameController* gamecont = nullptr;
@@ -27,7 +29,7 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
-	PlayerMovementController(GameObject* parent);
+	PlayerMovementController(GameObject* parent, int _player);
 	~PlayerMovementController();
 
 	// cleon: no sé si es aquí, pero frametime. frametime es felicidad. frametime es maravilloso. frametime, por lo visto, es vuestro padre (no son mis palabras).

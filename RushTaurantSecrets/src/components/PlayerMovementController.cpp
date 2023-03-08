@@ -2,11 +2,13 @@
 
 #include "../utils/checkML.h"
 
-PlayerMovementController::PlayerMovementController(GameObject* parent) : Component(parent, id) {
+PlayerMovementController::PlayerMovementController(GameObject* parent, int _player) : Component(parent, id), player(_player) {
 	transform = parent->getComponent<Transform>();
 	input = InputHandler::instance();
-	if (!input->joysticksInitialised()) {
-		input->initialiseJoysticks(_joy);
+	if (!input->joysticksInitialised()) 
+		input->initialiseJoysticks();
+	else {
+		_joy = input->getPlayerController(player);
 		controller = SDL_JoystickName(_joy);
 	}
 	keyboard = input->getControls();

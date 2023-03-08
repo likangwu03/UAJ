@@ -13,7 +13,7 @@ Button::Button(GameObject* parent, Vector pos, SceneManager* sceneManager, void 
 	dest = { int(pos.getX()), int(pos.getY()), texture->width() * 2, texture->height() * 2};
 
 	// se inicializa el mando
-	ih().initialiseJoysticks(_joy);
+	ih().initialiseJoysticks();
 
 }
 
@@ -43,7 +43,7 @@ void Button::handleEvents() {
 		}
 	}
 	else if (ih().joysticksInitialised()) {
-		if (ih().getButtonState(0,SDL_CONTROLLER_BUTTON_B)) {
+		if (ih().getButtonState(0,SDL_CONTROLLER_BUTTON_A)) {
 			frame = 1;
 			ih().clean();
 			ih().setControls(false);

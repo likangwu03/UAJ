@@ -81,6 +81,11 @@ public:
 		return control;
 	}
 
+	// return joystick 
+	inline SDL_Joystick* getPlayerController(int player) {
+		return joys[player];
+	}
+
 	// refresh
 	inline void refresh() {
 		SDL_Event event;
@@ -195,7 +200,7 @@ public:
 		return 0;
 	}
 
-	void initialiseJoysticks(SDL_Joystick*& _joy) {
+	void initialiseJoysticks() {
 
 		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
 		{
@@ -206,7 +211,7 @@ public:
 			for (int i = 0; i < SDL_NumJoysticks(); i++)
 			{
 				SDL_Joystick* joy = SDL_JoystickOpen(i);
-				_joy = joy;
+				joys.push_back(joy);
 				if (SDL_JoystickGetAttached(joy) == 1) // nueva alternativa a SDL_JoystickOpened a partir de SDL 2.0
 				{
 					m_joysticks.push_back(joy);
@@ -388,6 +393,8 @@ private:
 	std::array<bool, 4> m_joyhat {false, false, false, false};
 
 	bool control = true; // true teclado false mando
+
+	std::vector<SDL_Joystick*> joys;
 
 	bool isCloseWindoEvent_;
 	bool isKeyUpEvent_;
