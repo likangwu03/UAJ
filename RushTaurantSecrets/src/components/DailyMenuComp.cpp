@@ -7,16 +7,26 @@ void DailyMenuComp::drawDishes(vector<_ecs::DishInfo> menu)
 
 	//se dibujan los platos
 	for (int i = 0; i < menu.size(); ++i) {
-		GameObject* aux = new GameObject(parentScene, _ecs::grp_HUD, _ecs::hdr_MENU);
-		new Transform(aux, Vector(t.getX() + spriteSize, (t.getY() * 4) + (i * spriteSize)), Vector(0, 0), spriteSize, spriteSize, 0);
-		new Image(aux, &((*SDLUtils::instance()).images().at(std::to_string(menu[i].id))));
-		int temp = 0;
-		//se dibujan los ingredientes
-		for (auto ing : menu[i].ingredients) {
-			GameObject* aux2 = new GameObject(parentScene, _ecs::grp_HUD, _ecs::hdr_MENU);
-			new Transform(aux2, Vector(t.getX() + (spriteSize * 2) + (48 * temp), (t.getY() * 4) + (i * spriteSize) + 6), Vector(0, 0), 48, 48, 0);
-			new Image(aux2, &((*SDLUtils::instance()).images().at(std::to_string(ing))));
-			++temp;
+		//se dibujan los platos
+		for (int i = 0; i < menu.size(); ++i) {
+			GameObject* aux = new GameObject(parentScene, _ecs::grp_HUD, _ecs::hdr_MENU);
+			new Transform(aux, Vector(t.getX() + (spriteSize), (t.getY() * 4) + (i * spriteSize)), Vector(0, 0), spriteSize, spriteSize, 0);
+			new Image(aux, &((*SDLUtils::instance()).images().at(std::to_string(menu[i].id))));
+			int temp = 0;
+			//se dibujan los ingredientes
+			for (auto ing : menu[i].ingredients) {
+				GameObject* aux2 = new GameObject(parentScene, _ecs::grp_HUD, _ecs::hdr_MENU);
+				new Transform(aux2, Vector(t.getX() + (spriteSize * 2) + (48 * temp), (t.getY() * 4) + (i * spriteSize) + 6), Vector(0, 0), 48, 48, 0);
+				new Image(aux2, &((*SDLUtils::instance()).images().at(std::to_string(ing))));
+				++temp;
+			}
+			//se dibuja el precio
+			font = new Font("assets/Fonts/light_pixel-7.ttf", 50);
+			GameObject* price = new GameObject(parentScene, _ecs::grp_HUD, _ecs::hdr_MENU);
+			new Transform(price, Vector(t.getX() + (spriteSize * 2) + (50 * 5), (t.getY() * 4) + (i * spriteSize) + 6), Vector(0, 0), 48, 48, 0);
+			std::string priceString = (std::to_string(menu[i].price) + "$");
+			Texture* tempTex = new Texture(sdlutils().renderer(), priceString, *font, build_sdlcolor(0xffbb11FF));
+			new Image(price, tempTex);
 		}
 	}
 }
@@ -51,11 +61,13 @@ vector<_ecs::DishInfo> DailyMenuComp::randomMenu()
 	return temp;
 }
 
-DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize, bool m)
-	: Component(parent, id), menuSize(mSize), spriteSize(64), murder(m)
+DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize)
+	: Component(parent, id), menuSize(mSize), spriteSize(64)
 {
 	tf = parent->getComponent<Transform>();
 	parentScene = parent->getScene();
+
+	murder = GameInfor::instance()->getHasKill();
 
 	drawDishes(randomMenu());
 }

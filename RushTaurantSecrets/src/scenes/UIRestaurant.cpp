@@ -12,6 +12,7 @@
 
 UIRestaurant::UIRestaurant() : Scene() {
 	lastTime = sdl->currRealTime();
+	numFullClock = 0;
 
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
@@ -234,5 +235,11 @@ void UIRestaurant::updateClock() {
 		transformArrow->setPos(posA);
 		lastTime = timeT;
 		timeT = 0;
+
+		if (transformArrow->getRot() == 0) numFullClock++;
 	}
+}
+
+int UIRestaurant::getNumFullClock() {
+	return numFullClock;
 }

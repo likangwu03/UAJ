@@ -2,6 +2,7 @@
 #include "../structure/Component.h"
 #include "../structure/Food_def.h"
 #include "../structure/GameObject.h"
+#include "../structure/GameInfor.h"
 #include "../components/Transform.h"
 #include "../components/ButtonComp.h"
 #include "../sdlutils/SDLUtils.h"
@@ -20,8 +21,10 @@ private:
 	uint8_t spriteSize;
 
 	bool murder;
+
+	Font* font;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
-	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize = 4, bool m = false);
+	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize = 4);
 };
 

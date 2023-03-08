@@ -5,13 +5,17 @@
 PlayerMovementController::PlayerMovementController(GameObject* parent, int _player) : Component(parent, id), player(_player) {
 	transform = parent->getComponent<Transform>();
 	input = InputHandler::instance();
-	if (!input->joysticksInitialised()) 
-		input->initialiseJoysticks();
-	else {
+	keyboard = input->getControls();
+	if (!keyboard) {
+		if (!input->joysticksInitialised())
+			input->initialiseJoysticks();
 		_joy = input->getPlayerController(player);
 		controller = SDL_JoystickName(_joy);
+		if (std::string(controller) == "Controller (Xbox One For Windows)")
+			xbox = true;
+		else
+			xbox = false;
 	}
-	keyboard = input->getControls();
 }
 
 PlayerMovementController::~PlayerMovementController() {
@@ -22,7 +26,7 @@ void PlayerMovementController::handleEvents() {
 	// Descomentar si se quiere comprobar el binding de un mando
 	/*gamecont = SDL_GameControllerOpen(0);
 	std::cout << SDL_GameControllerMapping(gamecont) << std::endl;*/
-	if (input->joysticksInitialised() && !keyboard)
+	if (!keyboard)
 	{
 		input->refresh();
 		// eje x mando 1
@@ -46,7 +50,7 @@ void PlayerMovementController::handleEvents() {
 		else if (input->xvalue(0, 1) == 0 && input->yvalue(0, 1) == 0) {
 			transform->setMovState(idle);
 		}
-		if (std::string(controller) == "Controller (Xbox One For Windows)") {
+		if (xbox) {
 			if (input->getHatEvent()) {
 				// derecha
 				if (input->getHatState(RIGHT)) {
@@ -65,7 +69,8 @@ void PlayerMovementController::handleEvents() {
 					moveDown();
 				}
 			}
-			else input->setFalseJoyhat();
+			else // eliminar
+				input->setFalseJoyhat();
 		}
 		else { // PS4 Controller
 			// derecha
@@ -104,7 +109,7 @@ void PlayerMovementController::handleEvents() {
 		//	speed.setY(offset * input->yvalue(0,2));
 		//}
 	}
-	if (input->keyDownEvent()) {
+	else if (input->keyDownEvent()) {
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 		// arriba
 		if (input->isKeyDown(SDL_SCANCODE_W)) {
@@ -131,14 +136,14 @@ void PlayerMovementController::update() {
 		transform->setMovState(idle);
 	}
 	transform->setVel(speed);
-	if (input->joysticksInitialised() && !keyboard) {
+	if (!keyboard) {
 		speed = Vector(0, 0);
 	}
 }
 
 bool PlayerMovementController::nonKeyPressed() {
 	bool pressed = false;
-	if (!input->joysticksInitialised() || keyboard) {
+	if (keyboard) {
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 		if (currentKeyStates[SDL_SCANCODE_S])
 		{
@@ -163,8 +168,8 @@ bool PlayerMovementController::nonKeyPressed() {
 		//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
 		return pressed;
 	}
-	if (input->joysticksInitialised()) {
-		if (std::string(controller) == "Controller (Xbox One For Windows)") {
+	if (!keyboard) {
+		if (xbox) {
 			if (input->getHatEvent()) {
 				// abajo
 				if (input->getHatState(DOWN)) {
@@ -187,7 +192,7 @@ bool PlayerMovementController::nonKeyPressed() {
 					pressed = true;
 				}
 			}
-			else
+			else // eliminar
 				input->setFalseJoyhat();
 			return pressed;
 		}
