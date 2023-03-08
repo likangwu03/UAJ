@@ -212,7 +212,7 @@ void MapCreator::createObject() {
 					new KitchenSurfaceObj(scene, pos, width_, height_);
 				}
 				else if (name == "goToPantry") {
-					new goToPantryObj(scene, pos, width_, height_);
+					new goToPantryObj(/*restaurant,*/ scene, pos, width_, height_);
 
 				} else if(name == "table") {
 					new Desk(scene, pos, width_, height_, p[0].getIntValue());

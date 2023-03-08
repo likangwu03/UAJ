@@ -5,9 +5,13 @@
 goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
 	ih = InputHandler::instance();
 	sceneM = SceneManager::instance();
+	//restaurant = ... 
 };
 void goToPantryTrigger::onTriggerEnter() {
 	sceneM->setResize(false);
 	sceneM->changeScene(static_cast<Restaurant*>(parent->getScene())->getPantry(), -1);
 	static_cast<Restaurant*>(parent->getScene())->getPantry()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
+
+	//restaurant->getPantry()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
+
 }
