@@ -22,14 +22,14 @@ class Ingredients: public Component {
 	//constante que deja un espacio entre ingredientes cuando estos se renderizan
 	const float ING_OFFSET = 40;
 	//espacio entre los ingredientes y los bordes del bocadillo de pensamiento
-	const float BUBBLE_OFFSET_X = 10;
+	const float BUBBLE_OFFSET_X = 20;
 	const float BUBBLE_OFFSET_Y = 20;
 	//distancia del bocadillo al jugador
 	const float BUBBLE_POSY = 60;
 	//centro del jugador en su eje x
 	const float PLAYER_CENTER_X = 15;
 	//offset de los ingredientes con respecto a la pos X del player para centrarlo sobre su cabeza
-	const float OFFSET_ING_X=5;
+	const float OFFSET_ING_X=15;
 
 private:
 	const int MAX_INGREDIENTS = 5;

@@ -1,6 +1,6 @@
 #include "PantryExitTrigger.h"
 #include "../structure/SceneManager.h"
-#include "../utils/checkML.h"
+
 
 PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
 	ih = InputHandler::instance();
@@ -11,5 +11,5 @@ PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float widt
 void PantryExitTrigger::onTriggerEnter() {
 	sceneM->setResize(true);
 	sceneM->changeScene(static_cast<Pantry*>(parent->getScene())->getRestaurant(), -1);
-	parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(1000, 200));
+	parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(1000, 200));	
 }
