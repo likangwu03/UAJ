@@ -76,8 +76,6 @@ void Ingredients::render() {
 		dest.w = ING_WIDTH;
 		dest.h = ING_HEIGHT;
 
-		//float player_offset = (transform->getPos().getX()) / 2;
-
 		dest_bubble.x = transform->getPos().getX() + PLAYER_CENTER_X - dest_bubble.w / 2;
 		dest_bubble.y = transform->getPos().getY() - BUBBLE_POSY;
 

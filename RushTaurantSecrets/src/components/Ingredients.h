@@ -29,7 +29,7 @@ class Ingredients: public Component {
 	//centro del jugador en su eje x
 	const float PLAYER_CENTER_X = 15;
 	//offset de los ingredientes con respecto a la pos X del player para centrarlo sobre su cabeza
-	const float OFFSET_ING_X=15;
+	const float OFFSET_ING_X=-15;
 
 private:
 	const int MAX_INGREDIENTS = 5;
