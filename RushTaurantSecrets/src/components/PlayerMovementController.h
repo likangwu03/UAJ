@@ -22,6 +22,7 @@ private:
 
 	SDL_Joystick* _joy;
 	const char* controller = "";
+	bool xbox;
 	SDL_GameController* gamecont = nullptr;
 
 	Transform* transform = nullptr;

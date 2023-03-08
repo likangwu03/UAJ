@@ -163,9 +163,9 @@ public:
 	}
 
 	void setFalseJoyhat() {
-		for (int i = 0; i < m_joyhat.size(); i++)
-			m_joyhat[i] = false;
-		isHatEvent = false;
+		for (auto i : m_joyhat) 
+			i = false;
+		isHatEvent = false;			
 	}
 
 	int xvalue(int joy, int stick)
@@ -201,6 +201,7 @@ public:
 	}
 
 	void initialiseJoysticks() {
+		int numButtons = 5;
 		bool joyInit = false;
 		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0)
 		{
@@ -214,7 +215,7 @@ public:
 				joys.push_back(joy);
 				if (SDL_JoystickGetAttached(joy) == 1) // nueva alternativa a SDL_JoystickOpened a partir de SDL 2.0
 				{
-					if (SDL_JoystickNumButtons(joy) > 5) {
+					if (SDL_JoystickNumButtons(joy) > numButtons) {
 						joyInit = true;
 						m_joysticks.push_back(joy);
 						m_joystickValues.push_back(std::make_pair(new
@@ -234,7 +235,7 @@ public:
 				}
 			}
 			SDL_JoystickEventState(SDL_ENABLE);
-			if(joyInit > 5)
+			if(joyInit)
 				m_bJoysticksInitialised = true;
 			std::cout << "Initialised " << m_joysticks.size() << "joystick(s)" << std::endl;
 		}
@@ -394,7 +395,7 @@ private:
 	bool m_bJoysticksInitialised = false;
 
 	bool isHatEvent = false;
-	std::array<bool, 4> m_joyhat {false, false, false, false};
+	std::vector<bool> m_joyhat {false, false, false, false};
 
 	bool control = true; // true teclado false mando
 
@@ -411,8 +412,7 @@ private:
 	std::pair<Sint32, Sint32> mousePos_;
 	std::array<bool, 3> mbState_;
 	const Uint8* kbState_;
-}
-;
+};
 
 // This macro defines a compact way for using the singleton InputHandler, instead of
 // writing ih().method() we write ih().method()
