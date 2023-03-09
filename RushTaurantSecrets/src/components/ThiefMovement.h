@@ -21,7 +21,7 @@ private:
 	SDLUtils* sdl;
 	bool canGetFridger;
 	Objective objective;
-	float firstTick;
+	float elapsedTime;
 	float deadTime;
 	float escapeSpeed;
 

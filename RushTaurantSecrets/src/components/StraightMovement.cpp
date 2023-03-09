@@ -77,6 +77,20 @@ void StraightMovement::stop() {
 	path.points.clear();
 }
 
+void StraightMovement::goBack(const Vector& last) {
+	vector<Vector> aux;
+	aux.reserve(path.cont);
+	for (int i = path.cont - 1; i >= 0; --i) {
+		aux.push_back(path.points[i]);
+	}
+	aux.push_back(last);
+
+	path.points = aux;
+	path.cont = 0;
+
+	newStraight(path.points[path.cont]);
+}
+
 void StraightMovement::update() {
 	// recorriendo la recta
 	if (!hasArrivedPoint()) {

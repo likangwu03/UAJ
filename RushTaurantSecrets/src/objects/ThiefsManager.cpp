@@ -5,8 +5,8 @@ void ThiefsManager::createThief() {
 	new Thief(scene, RelativeToGlobal::point(_ecs::DOOR), sprite, generalSpeed, canGetFreezer, escapeSpeed);
 }
 
-ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs) :
-	Manager(parent), generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), timer(frequencyThiefs), elapsedTime(0) {
+ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int n) :
+	Manager(parent), generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), timer(frequencyThiefs), n(n), elapsedTime(0) {
 	scene = parent->getScene();
 	thiefs = scene->getGroup(_ecs::grp_THIEFS);
 	sdl = SDLUtils::instance();
@@ -15,10 +15,12 @@ ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escap
 void ThiefsManager::update() {
 	elapsedTime += deltaTime;
 
-	if (thiefs->size() < MAX_THIEFS) {
+	if (thiefs->size() <= 0) {
 		if (elapsedTime > timer) {
 			elapsedTime = 0;
-			createThief();
+			for (int i = 0; i < n; ++i) {
+				createThief();
+			}
 		}
 	}
 }

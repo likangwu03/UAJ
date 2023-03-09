@@ -78,8 +78,7 @@ void Restaurant::render() {
 
 void Restaurant::update() {
 	Scene::update();
-	//if(pantry!=nullptr)
-	//pantry->Scene::update();
+	pantry->Scene::update();
 	ui->update();
 	cm->update();
 }

@@ -2,7 +2,7 @@
 #include "../utils/checkML.h"
 
 ThiefMovement::ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) :
-	Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(1 * 1000), firstTick(0), escapeSpeed(escapeSpeed) {
+	Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(1 * 1000), elapsedTime(0), escapeSpeed(escapeSpeed) {
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	sdl = SDLUtils::instance();
@@ -25,7 +25,6 @@ ThiefMovement::ThiefMovement(GameObject* parent, bool canGetFridger, float escap
 void ThiefMovement::die() {
 	currentState = DEAD;
 	straightMovement->stop();
-	firstTick = sdl->currRealTime();
 	// se cambia a muerto (se pone rojo el sprite y se tumba el sprite)
 	transform->setMovState(dead);
 }
@@ -63,10 +62,10 @@ void ThiefMovement::update() {
 		break;
 
 	case DEAD:
-		tick = sdl->currRealTime() - firstTick;
-		if (tick > deadTime) {
+		elapsedTime += deltaTime;
+		if (elapsedTime > deadTime) {
 			parent->setAlive(false);
-			tick = 0;	// no haría falta
+			elapsedTime = 0;	// no haría falta
 		}
 		break;
 

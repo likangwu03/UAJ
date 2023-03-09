@@ -47,6 +47,8 @@ public:
 
 	void stop();
 
+	void goBack(const Vector& last);
+
 	inline bool hasFinishedPath() const {
 		return path.cont >= path.points.size();
 	}
