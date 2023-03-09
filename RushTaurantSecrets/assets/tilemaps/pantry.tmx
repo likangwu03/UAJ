@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="48" tileheight="48" infinite="0" nextlayerid="14" nextobjectid="31">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="48" tileheight="48" infinite="0" nextlayerid="14" nextobjectid="31">
  <tileset firstgid="1" source="atlas.tsx"/>
  <tileset firstgid="1537" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="9821" source="16_Grocery_store_48x48.tsx"/>
@@ -233,6 +233,6 @@
   <object id="28" x="1168.67" y="577.333" width="66" height="29.6667"/>
  </objectgroup>
  <objectgroup id="12" name="obj">
-  <object id="30" name="pantryExit" x="952" y="765.333" width="84" height="68"/>
+  <object id="30" name="pantryExit" x="956" y="793.333" width="56" height="68"/>
  </objectgroup>
 </map>

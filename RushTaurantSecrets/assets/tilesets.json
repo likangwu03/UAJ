@@ -53,8 +53,8 @@
       "file": "assets/Sprites/Restaurant/Interiors/Room_Builder_48x48.png"
     },
     {
-      "id": "tile",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/tile.png"
+      "id": "signs",
+      "file": "assets/Sprites/Restaurant/Signs.png"
     }
   ]
 }

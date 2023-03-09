@@ -36,7 +36,7 @@ void SuperMarket::init() {
 	map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/supermarket.tmx");
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(mapTop, "assets/tilemaps/supermarket_top.tmx");
+	new MapCreator(mapTop, "assets/tilemaps/supermarket_top_walls.tmx");
 
 	initComponent();
 }
