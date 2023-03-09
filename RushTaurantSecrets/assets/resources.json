@@ -528,66 +528,6 @@
       "rows": 40
     },
     {
-      "id": "1_Generic_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "2_LivingRoom_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "7_Art_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/7_Art_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "9_Fishing_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "12_Kitchen_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/12_Kitchen_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "14_Basement_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/14_Basement_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "16_Grocery_store_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "19_Hospital_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/19_Hospital_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "22_Museum_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/22_Museum_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "24_Ice_Cream_Shop_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
       "id": "BUBBLE",
       "file": "assets/Sprites/UI/HUD/ing_bubble.png",
       "cols": 1,
@@ -600,5 +540,8 @@
       "file": "assets/Fonts/04B_30__.TTF",
       "size": 16
     }
+  ], 
+  "sounds" : [
+    { "id" : "click_button", "file" : "assets/Sound/clicks/Minimalist10.mp3" }
   ]
 }

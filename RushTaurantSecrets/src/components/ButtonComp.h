@@ -24,6 +24,8 @@ private:
 	SDL_Rect dest;
 	Transform* tf;
 
+	void playSound();
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_BUTTON_COMP;
 

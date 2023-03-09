@@ -3,8 +3,8 @@
 
 #include "../utils/checkML.h"
 
-ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)()) 
-	: Component(parent, id), sceneManager(SceneManager::instance()), transform(parent->getComponent<Transform>()), highlighted(false)
+ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())  : Component(parent, id), 
+	sceneManager(SceneManager::instance()), transform(parent->getComponent<Transform>()), highlighted(false)
 {
 	tf = parent->getComponent<Transform>();
 
@@ -31,6 +31,7 @@ void ButtonComp::handleEvents()
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		highlighted = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
+			playSound();
 			_callback();
 		}
 	}
@@ -39,6 +40,7 @@ void ButtonComp::handleEvents()
 		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
 			ih().clean();
 			ih().setControls(false);
+			playSound();
 			_callback();
 		}
 	}
@@ -47,14 +49,17 @@ void ButtonComp::handleEvents()
 	}
 }
 
-bool ButtonComp::isHighlighted()
-{
+bool ButtonComp::isHighlighted() {
 	return highlighted;
 }
 
-void ButtonComp::render()
-{
+void ButtonComp::render() {
 	if (highlighted) {
 		highlight->render(dest);
 	}
+}
+
+
+void ButtonComp::playSound() {
+	sdlutils().soundEffects().at("click_button").play();
 }
