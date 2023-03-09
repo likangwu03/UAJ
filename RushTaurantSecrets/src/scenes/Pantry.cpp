@@ -18,18 +18,20 @@ void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 	new Player(this, 0);
 
-	// el update no se ejecuta hasta que se está en la escena
-	// por lo que no se crean ni se destruyen ladrones cuandon no se está en la despensa
+	// el update no se ejecuta hasta que se est?en la escena
+	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
 	ThiefsManager::init(managerContainer, 2, 6, true, 4 * 1000, 1);
 
 	GameObject* map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/pantry.tmx");
+
+	Scene::initComponent();
 }
 
 void Pantry::linkRestaurant(Restaurant* rest) {
 	if(this!=nullptr)this->rest = rest;
-	//ui = rest->getUI();
+	//ui = rest->getConnectedScene();
 }
 
 void Pantry::render() {

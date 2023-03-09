@@ -7,6 +7,7 @@ namespace _ecs {
 	using Dish = uint8_t;
 	using Ingredient = uint8_t;
 	const uint8_t NUM_DISH = 23;
+	const uint8_t NUM_ING= 23; //n de ing del market
 	const uint8_t NUM_MEAT_DISH = 5;
 	enum _dish_id : id_type {
 		HUEVO_FRITO,
@@ -74,6 +75,36 @@ namespace _ecs {
 		int price;
 	};
 
+	struct IngInfo {
+		_ingredients_id id;
+		int price;
+	};
+
+	static IngInfo MarketIngs[NUM_ING] = {
+		{HARINA,1},
+		{HUEVO,1},
+		{PATATA,1},
+		{CHOCOLATE,2},
+		{LECHUGA,2},
+		{MAIZ,2},
+		{FRESA,2},
+		{ZANAHORIA,2},
+		{AJO,2},
+		{LECHE,2},
+		{ARROZ,2},
+		{TOMATE,3} ,
+		{MANZANA,2},
+		{MANTEQUILLA,3},
+		{FRAMBUESA,3},
+		{MOSTAZA,3},
+		{FIDEOS,3},
+		{CURRY,3},
+		{QUESO,4},
+		{SALCHICHA,5},
+		{POLLO,6},
+		{GAMBAS,7},
+		{SALMON,8}
+	};
 	static DishInfo Dishes[NUM_DISH] = {
 		{HUEVO_FRITO,{HUEVO},0.5,4},
 		{PAN,{HARINA},0.7,4},

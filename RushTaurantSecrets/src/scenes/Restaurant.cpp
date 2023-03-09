@@ -34,8 +34,8 @@ Restaurant::~Restaurant() {
 }
 
 vector<_ecs::_dish_id> Restaurant::menu() const {
-	// Menú del día aleatorio (lo rellena con 4 platos diferentes
-	// entre sí y los pasa a un vector para poder acceder a ellos)
+	// Men?del día aleatorio (lo rellena con 4 platos diferentes
+	// entre s?y los pasa a un vector para poder acceder a ellos)
 	set<int> aux;
 	for (int i = 0; i < 4; i++) {
 		if (!aux.insert(rand() % _ecs::NONE_DISH).second)
@@ -64,6 +64,8 @@ void Restaurant::init() {
 
 	// las mesas se inicializan luego de haberse creado
 	clientsManager->initTables();
+
+	initComponent();
 }
 
 void Restaurant::linkPantry(Pantry* pantry) {
@@ -76,13 +78,16 @@ void Restaurant::render() {
 	ui->render();
 }
 
+void Restaurant::initComponent() {
+	Scene::initComponent();
+	ui->initComponent();
+}
 void Restaurant::update() {
 	Scene::update();
 	pantry->Scene::update();
 	ui->update();
 	cm->update();
 }
-
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		SceneManager::instance()->setResize(false);

@@ -11,6 +11,7 @@
 class UIMarket : public Scene
 {
 private:
+	Scene* market;
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
@@ -22,10 +23,12 @@ private:
 	int intMoney;
 	InputHandler* ih;
 	BasketMarket* basketMarket;
+	GameObject* shopMenu;
+
 
 public:
 	// constructora
-	UIMarket(CartelManager* cM);
+	UIMarket(Scene* market);
 	~UIMarket();
 	void showMoneyText();
 	void createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
@@ -33,5 +36,6 @@ public:
 	void update();
 	void handleEvents() override;
 	void render();
+	virtual Scene* getConnectedScene() { return market; }
 };
 

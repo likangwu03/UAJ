@@ -46,3 +46,8 @@ void GameObject::handleEvents() {
 	for(auto i : cmpOrder)
 		if(i->isActive()) i->handleEvents();
 }
+
+void GameObject::initComponent() {
+	for(auto i : cmpOrder)
+		i->initComponent();
+}

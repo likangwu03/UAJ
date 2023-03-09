@@ -3,6 +3,10 @@
 
 #include "../utils/checkML.h"
 
+ void SuperMarket::initComponent() {
+	 Scene::initComponent();
+	 uiMarket->initComponent();
+}
 void SuperMarket::render() {
 	Scene::render();
 	if (uiMarket != nullptr)
@@ -25,13 +29,16 @@ void SuperMarket::handleEvents() {
 
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
-	player = new Player(this, 0);
 	//cartelM = new CartelManager();
-	cartelM = CartelManager::instance();
+	player = new Player(this, 0);
+
+	cartelM = new CartelManager(this);
 	map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/supermarket.tmx");
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
 	new MapCreator(mapTop, "assets/tilemaps/supermarket_top.tmx");
+
+	initComponent();
 }
 
 SuperMarket::~SuperMarket() {

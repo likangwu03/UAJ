@@ -148,7 +148,7 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup) {
 	assignedClient = true;
 }
 
-// comprobar si un cliente si un cliente está de camino a pagar o pagando
+// comprobar si un cliente si un cliente est?de camino a pagar o pagando
 bool ClientsManager::isPaying(GameObject* client) {
 	ClientState* state = client->getComponent<ClientState>();
 	ClientState::States currentState = state->getState();
@@ -186,7 +186,7 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
 
-	UIrestaurant = dynamic_cast<UIRestaurant*>(scene->getUI());
+	UIrestaurant = dynamic_cast<UIRestaurant*>(scene->getConnectedScene());
 	if (UIrestaurant == nullptr) {
 		throw new string("Error conversión Scene en UIRestaurant");
 	}
@@ -198,8 +198,8 @@ void ClientsManager::assignFirstGroup(int table) {
 	if (!isEntranceEmpty()) {
 		// se coge el primer cliente
 		vector<Client*> firstGroup = getFirstEntrance();
-		// con que se compruebe que el primero del grupo está en la entrada,
-		// vale para verificar que todo el grupo está en la entrada
+		// con que se compruebe que el primero del grupo est?en la entrada,
+		// vale para verificar que todo el grupo est?en la entrada
 		Client* firstClient = firstGroup.front();
 		ClientState::States clientState = firstClient->getComponent<ClientState>()->getState();
 		if (clientState == ClientState::ENTRANCE) {
@@ -229,7 +229,7 @@ void ClientsManager::collectAndLeave() {
 bool ClientsManager::canOccupyPay(vector<Client*> mates) {
 	int goingPay = 0;
 	for (auto group : clientsGroups) {
-		// con que uno del grupo esté en una de esas posiciones,
+		// con que uno del grupo est?en una de esas posiciones,
 		// todos los del grupo están en la misma
 
 		// no se cuenta el grupo que quiere ocupar la caja

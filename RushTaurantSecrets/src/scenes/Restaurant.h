@@ -24,12 +24,13 @@ public:
 	Restaurant();
 	~Restaurant();
 
-	UIRestaurant* getUI() { return ui; }
+	UIRestaurant* getConnectedScene() { return ui; }
 	Pantry* getPantry() { return pantry; }
 	void linkPantry(Pantry* pantry);
 	void render();
 	void update();
 	void handleEvents();
+	virtual void initComponent();
 	// sirve para crear los objetos necesarios
 	void init();
 };

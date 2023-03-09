@@ -16,7 +16,7 @@ public:
 		TriggerComp(parent, pos_, width_, height_), selected(false),
 		//clientManager(ClientsManager::get()),
 		clientState(parent->getComponent<ClientState>()),
-		inventory(static_cast<UIRestaurant*>(parent->getScene()->getUI())->getInventory()->getComponent<InventoryComp>()) { };
+		inventory(static_cast<UIRestaurant*>(parent->getScene()->getConnectedScene())->getInventory()->getComponent<InventoryComp>()) { };
 
 	virtual void isOverlapping();
 

@@ -5,7 +5,7 @@ namespace _ecs {
 	using id_type = uint8_t;
 
 	// Components
-	// EL ORDEN DE EJECUCIÓN DE LOS COMPONENTES ESTÁ DETERMINADO POR COMO SE AÑADEN
+	// EL ORDEN DE EJECUCIÓN DE LOS COMPONENTES EST?DETERMINADO POR COMO SE AÑADEN
 	enum _cmp_id : id_type {
 		cmp_MAPCREATOR,
 		cmp_MAPRENDER,
@@ -38,7 +38,7 @@ namespace _ecs {
 		cmp_CHARACANIM,
 		cmp_UIANIM,
 		cmp_WARNING,
-
+		cmp_SHOP_MENU,
 		// Do not erase pls
 		cmp_INVALID
 	};
@@ -85,7 +85,7 @@ namespace _ecs {
 		hdr_BIN,
 		hdr_PRUEBA,
 		hdr_KITCHENISLAND,
-		
+		hdr_SHOP_MENU1,
 		// Do not erase pls
 		hdr_INVALID
 	};

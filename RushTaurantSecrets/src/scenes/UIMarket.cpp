@@ -1,8 +1,8 @@
 #include "UIMarket.h"
-
+#include "../components/ShoppingMenuComp.h"
 #include "../utils/checkML.h"
 
-UIMarket::UIMarket(CartelManager* cM) : Scene() {
+UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = Money::init(moneyContainer, 200);
@@ -28,6 +28,10 @@ UIMarket::UIMarket(CartelManager* cM) : Scene() {
 
 	// icono de cesta
 	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_BASKET, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
+
+	//men¨² de compra
+	shopMenu = new GameObject(this, _ecs::grp_GENERAL, _ecs::hdr_SHOP_MENU1);
+	new ShoppingMenuComp(shopMenu);
 }
 
 UIMarket::~UIMarket() {
@@ -71,7 +75,11 @@ void UIMarket::handleEvents() {
 	}
 	else
 		Scene::handleEvents();
-
+	/*
+	if (ih->isKeyDown(SDLK_SPACE)){
+		basketMarket->buyIngredient();
+	}
+	*/
 }
 
 void UIMarket::render() {

@@ -30,6 +30,7 @@ public:
 	void update();
 	void render();
 	void handleEvents();
+	void initComponent();
 
 	template<typename Comp>
 	inline Comp* getComponent() {

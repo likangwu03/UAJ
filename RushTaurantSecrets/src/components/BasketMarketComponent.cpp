@@ -1,4 +1,4 @@
-#include "BasketMarketComponent.h"
+ï»¿#include "BasketMarketComponent.h"
 #include "../utils/checkML.h"
 
 BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(parent, id), totalDifIngr(0) {
@@ -8,9 +8,11 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	font = new Font(FONT_PATH, 50);
 }
 
-void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n) {
+void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int addPrice) {
+	//hacer algo para addPrice................................
+	//addPrice es el dinero total segÃºn n cantidades del ingrediente ing aÃ±adida a la cesta
 
-	if (totalDifIngr < MAX_ING) { // si no ha superado el límite de ingredientes a comprar
+	if (totalDifIngr < MAX_ING) { // si no ha superado el léŸ’ite de ingredientes a comprar
 		auto it = ingredients.find(ing);
 
 		if (it != ingredients.end()) {
@@ -30,10 +32,10 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n) {
 /*void BasketMarketComponent::buyIngredient() {
 	// si hay un cartel iluminado y se pulsa una tecla para comprarlo
 	if (cartelM->isSelected() && ih->isKeyDown(SDLK_SPACE)) {
-		// provisional, se añade un ingrediente automáticamente
+		// provisional, se aé¦»de un ingrediente automé†«icamente
 		// modificar para poder elegir la cantidad
-		// añadir gasto de dinero
-		if (totalDifIngr < MAX_ING) { // si no ha superado el límite de ingredientes a comprar
+		// aé¦»dir gasto de dinero
+		if (totalDifIngr < MAX_ING) { // si no ha superado el léŸ’ite de ingredientes a comprar
 			_ecs::_ingredients_id ingrToBuy = cartelM->getIngredient();
 			auto it = ingredients.find(ingrToBuy);
 			if (it != ingredients.end()) {
@@ -52,7 +54,7 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n) {
 
 
 void BasketMarketComponent::renderBasket() {
-	// renderiza menú de cesta
+	// renderiza men?de cesta
 	renderTexture(10, sdl->height() - 610, BASKET_SIZE, BASKET_SIZE / 2 + 100, "BASKET_LIST");
 	// render de ingredientes
 	auto it = ingredients.begin();
@@ -64,7 +66,7 @@ void BasketMarketComponent::renderBasket() {
 		}
 		textDish = to_string(it->first);
 		renderTexture(x * col, y * fil, ING_SIZE, ING_SIZE, textDish);
-		// renderizar número
+		// renderizar né·ero
 		col++;
 		it++;
 	}

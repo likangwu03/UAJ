@@ -5,7 +5,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
 #include "../structure/CollisionsManager.h"
-#include "../structure/CartelManager.h"
+//#include "../structure/CartelManager.h"
 #include "../components/Image.h"
 
 using namespace std;
@@ -28,7 +28,7 @@ private:
 	//unordered_map<Texture*, int> ingTextures; // textura y cantidad de un ingrediente
 	SDLUtils* sdl = SDLUtils::instance();
 	InputHandler* ih;
-	CartelManager* cartelM = CartelManager::instance();
+	//CartelManager* cartelM = CartelManager::instance();
 	int totalDifIngr;
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	const int OFFSET = 10;
@@ -39,7 +39,7 @@ public:
 	BasketMarketComponent(GameObject* parent);
 	void buyIngredient();
 	//llamado por men¨² de compra
-	void addToBasket(_ecs::_ingredients_id ing, int n);
+	void addToBasket(_ecs::_ingredients_id ing, int n, int addPrice);
 	void renderBasket();
 	void renderTexture(int x, int y, int w, int h, string text);
 };

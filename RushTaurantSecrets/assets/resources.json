@@ -304,6 +304,12 @@
       "id": "Heart",
       "file": "assets/Sprites/UI/HUD/heart.png"
     },
+
+  {
+   "id": "SHOP_MENU",
+   "file": "assets/Sprites/UI/HUD/shoppingMenu.png",
+   "cols": 1,
+   "rows": 1},
     {
       "id": "MONEY_ICON",
       "file": "assets/Sprites/UI/HUD/money_icon.png",

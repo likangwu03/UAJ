@@ -60,7 +60,7 @@ void SceneManager::setResize(bool type) {
 	}
 }
 
-// cleon: no pongáis esto con un switch, sino con polimorfismo dentro de cada escena. 'SceneManager' no puede saber qué escenas hay.
+// cleon: no pongáis esto con un switch, sino con polimorfismo dentro de cada escena. 'SceneManager' no puede saber qu?escenas hay.
 void SceneManager::setScene() {
 	if (nSceceToPop != -1) {
 		popScene(nSceceToPop);

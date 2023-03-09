@@ -1,6 +1,9 @@
 ﻿#include "Scene.h"
 #include "GameObject.h"
 #include "Game.h"
+
+
+
 Scene::Scene():frameTime(Game::instance()->getframeTime()) {
 	Infor = GameInfor::instance();
 	ih = InputHandler::instance();
@@ -45,6 +48,13 @@ void Scene::refresh() {
 			objGroups[n].end());
 
 		for(auto& obj : objGroups[n]) obj->refresh();
+	}
+}
+
+void Scene::initComponent() {
+
+	for (auto& objGroup : objGroups) {
+		for (auto obj : objGroup) obj->initComponent();
 	}
 }
 

@@ -21,6 +21,6 @@ public:
 	virtual void render() { }
 	virtual void handleEvents() { }
 	virtual void setActive(bool b); //activar/desactivar componente
-
+	virtual void initComponent(){};
 
 };

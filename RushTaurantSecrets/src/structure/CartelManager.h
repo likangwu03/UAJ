@@ -1,19 +1,21 @@
 #pragma once
 #include "../components/CartelTrigger.h"
-
-class CartelManager : public Singleton<CartelManager>
+#include "../components/ShoppingMenuComp.h"
+#include "../structure//Scene.h"
+class CartelManager 
 {
-	friend Singleton<CartelManager>;
 private:
 	CartelTrigger* selectedCartel;
-	CartelManager() :selectedCartel(nullptr) {}
+	ShoppingMenuComp* menu;
+	Scene* scene;
 public:
+	CartelManager(Scene* scene) :scene(scene),selectedCartel(nullptr),menu(scene->getConnectedScene()->getGameObject(hdr_SHOP_MENU1)->getComponent<ShoppingMenuComp>()) {}
 	void signIn(CartelTrigger* c); //llamado por onTriggerEnter de cartelTrigger 
 	void signOut(CartelTrigger* c); //llamado por onTriggerExit de cartelTrigger
 
+	void openMenu();
+	void closeMenu();
 	_ecs::_ingredients_id getIngredient() { return selectedCartel->getIngredient(); }
-	bool isSelected() { 
-		return (selectedCartel != nullptr);  
-	}
+	bool isSelected() { return (selectedCartel != nullptr);  }
 };
 

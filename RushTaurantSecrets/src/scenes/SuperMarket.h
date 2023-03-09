@@ -5,7 +5,6 @@
 #include "../structure/CartelManager.h"
 #include "../components/MapCreator.h"
 #include "../scenes/UIMarket.h"
-
 class SuperMarket: public Scene {
 private:
 	CollisionsManager* cm;
@@ -13,14 +12,15 @@ private:
 	GameObject* mapTop;
 	UIMarket* uiMarket;
 	CartelManager* cartelM;
-	GameObject* player;
-	//GameObject* mapTop;
+	Player* player;
 public:
-	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket(cartelM)) { init(); }
+	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket(this) ){ init(); }
 	~SuperMarket();
+	virtual void initComponent();
 	void render();
 	void update();
 	void handleEvents();
 	void init();
+	virtual Scene* getConnectedScene() { return uiMarket; }
 	CartelManager* getCartelManager() { return cartelM; }
 };

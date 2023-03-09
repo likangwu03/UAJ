@@ -19,7 +19,7 @@ protected:
 	Scene();
 public:
 	virtual ~Scene();
-	virtual Scene* getUI() { return nullptr; };
+	virtual Scene* getConnectedScene() { return nullptr; }//entre escena principal y UI
 
 	const uint32_t& frameTime;
 
@@ -27,6 +27,7 @@ public:
 	inline std::vector<GameObject*>* getGroup(_ecs::_grp_id grp) { return &objGroups[grp]; }
 	inline GameObject* getGameObject(_ecs::_hdr_id handler) { return handlers[handler]; }
 
+	virtual void initComponent();
 	virtual void update();
 	virtual void render();
 	virtual void handleEvents();

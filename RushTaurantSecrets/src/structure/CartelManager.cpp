@@ -14,3 +14,12 @@ void CartelManager::signOut(CartelTrigger* c) {
 	}
 
 }
+
+void CartelManager::openMenu() {
+	if (selectedCartel != nullptr)
+		menu->openMenu(selectedCartel->getIngredient());
+}
+void CartelManager::closeMenu() {
+	if (selectedCartel == nullptr)
+		menu->closeMenu();
+}

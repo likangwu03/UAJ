@@ -14,7 +14,7 @@ public:
 	CookingMachineTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 		TriggerComp(parent, pos_,width_,height_),
 		cook(parent->getComponent<CookingMachineComp>()),
-		inventory(static_cast<UIRestaurant*>(parent->getScene()->getUI())->getInventory()->getComponent<InventoryComp>()) ,
+		inventory(static_cast<UIRestaurant*>(parent->getScene()->getConnectedScene())->getInventory()->getComponent<InventoryComp>()) ,
 		p(parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()) , highlight(parent->getComponent<Image>()) {
 		highlight->setActive(false);
 	};

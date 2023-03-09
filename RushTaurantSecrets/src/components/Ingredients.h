@@ -54,7 +54,7 @@ public:
 		transform = parent->getComponent<Transform>();
 		coord = { { 0,0 } };
 		//para demo, luego se borra; 
-		addIngredient(HUEVO);
+		//addIngredient(HUEVO);
 		//addIngredient(HARINA);
 		//addIngredient(HUEVO);
 	}

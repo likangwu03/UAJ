@@ -5,7 +5,7 @@
 
 BinTriggerComp::BinTriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_),
-	inventory(static_cast<UIRestaurant*>(parent->getScene()->getUI())->getInventory()->getComponent<InventoryComp>()), highlight(parent->getComponent<Image>()) 
+	inventory(static_cast<UIRestaurant*>(parent->getScene()->getConnectedScene())->getInventory()->getComponent<InventoryComp>()), highlight(parent->getComponent<Image>()) 
 {
 	highlight->setActive(false);
 };
