@@ -26,6 +26,8 @@ private:
 	// parametrizable: 1000 (cada segundo) / 10000 (cada diez segundos)
 	const int TIME_CLOCK_REFRESH = 10000, ANGLE = 90, ANGLE_UPDATE = 5;
 
+	const int MAX_LAPS = 1;
+
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
@@ -47,24 +49,49 @@ private:
 	array<bool, 5> stars;
 	int numFullClock; // número de vueltas que ha dado el reloj
 
+	GameObject* dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
+		_ecs::_grp_id grp, _ecs::_hdr_id handler);
+
+	GameObject* createIcon(string textureName, Vector position, float width, float height, float rotation = 0,
+		_ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
+
+	GameObject* createIcon(Texture* texture, Vector position, float width, float height, float rotation = 0,
+		_ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
+
 public:
 	UIRestaurant();
 	~UIRestaurant();
 
-	Inventory* getInventory() { return inventory; };
-	Money* getMoney() { return moneyTxt; };
-	void createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
-		Vector position, float width, float height, float rotation);
-	void showMoneyText();
-	void update();
-	void render();
-	void showTimeText();
-	void checkTime();
-	void renderStar(int x, int y);
-	void reputationManager();
-	void checkStarsArray();
-	void checkRenderStar();
-	void updateClock();
-	int getNumFullClock(); // devuelve cuántas vueltas ha dado reloj cuando se llama al método
-};
+	Inventory* getInventory() const { return inventory; };
 
+	Money* getMoney() const { return moneyTxt; };
+
+	// devuelve cuántas vueltas ha dado reloj cuando se llama al método
+	int getNumFullClock() const {
+		return numFullClock;
+	}
+
+	bool dayHasFinished() {
+		return numFullClock > MAX_LAPS;
+	}
+
+	void showMoneyText();
+
+	void showTimeText();
+
+	void checkTime();
+
+	void renderStar(int x, int y);
+
+	void reputationManager();
+
+	void checkStarsArray();
+
+	void checkRenderStar();
+
+	void updateClock();
+
+	void update();
+
+	void render();
+};

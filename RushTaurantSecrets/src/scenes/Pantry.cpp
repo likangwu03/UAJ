@@ -4,6 +4,7 @@
 
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
+#include "../objects/ThiefsManager.h"
 
 #include "../utils/checkML.h"
 
@@ -16,6 +17,12 @@ Pantry::~Pantry() {
 void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 	new Player(this, 0);
+
+	// el update no se ejecuta hasta que se está en la escena
+	// por lo que no se crean ni se destruyen ladrones cuandon no se está en la despensa
+	GameObject* managerContainer = new GameObject(this);
+	ThiefsManager::init(managerContainer, 2, 6, true, 4 * 1000);
+
 	GameObject* map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/pantry.tmx");
 }

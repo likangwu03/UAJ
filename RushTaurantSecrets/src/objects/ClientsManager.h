@@ -3,9 +3,11 @@
 #include "../gameObjects/Client.h"
 #include "../structure/Manager.h"
 #include "../structure/Scene.h"
+#include "../scenes/UIRestaurant.h"
 #include "../structure/Paths_def.h"
 #include "../utils/checkML.h"
 #include "../objects/RelativeToGlobal.h"
+#include "../scenes/UIRestaurant.h"
 #include <vector>
 #include <array>
 #include <list>
@@ -35,8 +37,9 @@ private:
 	// menú del día
 	vector<_ecs::_dish_id> menu;
 	Scene* scene;
+	UIRestaurant* UIrestaurant;
 	SDLUtils* sdl;
-	float lastClientTime;
+	float elapsedTime;
 	float timer;
 	float speed;
 	int maxClients;
@@ -94,9 +97,6 @@ private:
 
 	// asignar una mesa al primer grupo de clientes
 	void assignTable(int table, vector<Client*> firstGroup);
-
-	// comprobar si algún cliente ha abandonado una mesa o si ha terminado de comer para marcarla como desocupada
-	// void checkTables();
 
 	// comprobar si un cliente si un cliente está de camino a pagar o pagando
 	bool isPaying(GameObject* client);

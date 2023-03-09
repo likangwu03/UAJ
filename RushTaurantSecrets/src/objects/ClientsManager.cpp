@@ -2,16 +2,12 @@
 #include "../components/DeskComp.h"
 
 void ClientsManager::addFrequently() {
-	if (clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
-		float time = sdl->currRealTime() - lastClientTime;
-		if (time > timer) {
-			lastClientTime = sdl->currRealTime();
+	if (!UIrestaurant->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+		if (elapsedTime > timer) {
+			elapsedTime = 0;
 			// se crea un nuevo grupo de clientes
 			createGroupClients();
 		}
-	}
-	else {
-		lastClientTime = sdl->currRealTime();
 	}
 }
 
@@ -65,7 +61,6 @@ void ClientsManager::checkCashRegister() {
 		// se recorre cada cliente del grupo
 		for (auto client : group) {
 			if (client->getComponent<ClientState>()->getState() == ClientState::CASH_REGISTER) {
-				// Client* client = dynamic_cast<Client*> (object);
 				// se le indica la posición a ocupar en la cola
 				client->getComponent<ClientMovement>()->setPosPay(pay.size());
 				pay.push_back(client);
@@ -153,27 +148,6 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup) {
 	assignedClient = true;
 }
 
-/*
-void ClientsManager::checkTables() {
-	for (auto it = clientsGroups.begin(); it != clientsGroups.end(); ++it) {
-		// se utiliza el primer integrante del grupo para comprobar que se ha dejado la mesa
-		// se hace de esta manera por el orden de ejecución
-		// (uno se marcha e indica al resto del grupo que se marchen.
-		// En la siguiente iteración tres están abandonado la mesa y el otro ya se ha marchado
-		// Entonces, si se comprueba todo el grupo sale mal)
-		Client* c = (*it).front();
-		ClientMovement* m = c->getComponent<ClientMovement>();
-		ClientState* s = c->getComponent<ClientState>();
-		if (s->getState() == ClientState::HAS_LEFT
-			|| m->hasAbandonedTable()) {
-			// se marca la mesa como desocupada
-			int n = m->getAssignedTable() - 1;
-			//tables[n] = false;
-		}
-	}
-}
-*/
-
 // comprobar si un cliente si un cliente está de camino a pagar o pagando
 bool ClientsManager::isPaying(GameObject* client) {
 	ClientState* state = client->getComponent<ClientState>();
@@ -209,10 +183,15 @@ void ClientsManager::refreshClientsGroup() {
 }
 
 ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), tables() {
+	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
+
+	UIrestaurant = dynamic_cast<UIRestaurant*>(scene->getUI());
+	if (UIrestaurant == nullptr) {
+		throw new string("Error conversión Scene en UIRestaurant");
+	}
+
 	sdl = SDLUtils::instance();
-	lastClientTime = sdl->currRealTime();
 }
 
 void ClientsManager::assignFirstGroup(int table) {
@@ -280,6 +259,8 @@ void ClientsManager::initTables() {
 }
 
 void ClientsManager::update() {
+	elapsedTime += deltaTime;
+
 	// se añade con frecuencia un cliente
 	addFrequently();
 
@@ -291,10 +272,6 @@ void ClientsManager::update() {
 
 	// eliminar grupos de clientes enfadados de la entrada
 	checkHappinessEntrance();
-
-	// marcar como desocupadas las mesas de las que los clientes se han marchado
-	// (han terminado de comer o se han quedado sin felicidad)
-	// checkTables();
 
 	// eliminar grupos de clientes enfadados de la cola de pagar
 	checkHappinessPay();

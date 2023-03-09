@@ -37,6 +37,7 @@ namespace _ecs {
 		cmp_BUTTON_COMP,
 		cmp_CHARACANIM,
 		cmp_UIANIM,
+		cmp_WARNING,
 
 		// Do not erase pls
 		cmp_INVALID

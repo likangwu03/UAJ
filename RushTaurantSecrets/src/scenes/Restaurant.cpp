@@ -4,12 +4,9 @@
 #include "../structure/CollisionsManager.h"
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
-#include "../components/Transform.h"
-#include "../components/Image.h"
 
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
-#include "../objects/ThiefsManager.h"
 
 #include "../structure/SceneManager.h"
 #include <set>
@@ -18,10 +15,11 @@
 
 
 Restaurant::Restaurant(): dc(DishCombinator::init()) { 
-	ui = new UIRestaurant();
 	SceneManager::instance()->setResize(false);
 	pantry = new Pantry();
+
 	pantry->linkRestaurant(this);
+	ui = new UIRestaurant();
 	SceneManager::instance()->setResize();
 
 	init(); 
@@ -35,7 +33,7 @@ Restaurant::~Restaurant() {
 	delete cm;
 }
 
-void Restaurant::init() {
+vector<_ecs::_dish_id> Restaurant::menu() const {
 	// Menú del día aleatorio (lo rellena con 4 platos diferentes
 	// entre sí y los pasa a un vector para poder acceder a ellos)
 	set<int> aux;
@@ -46,23 +44,23 @@ void Restaurant::init() {
 	vector<_ecs::_dish_id> menu;
 	for (auto i = aux.begin(); i != aux.end(); ++i) menu.push_back((_ecs::_dish_id)*i);
 
-	// se crean los managers
-	GameObject* managerContainer = new GameObject(this);
-	ClientsManager* clientsManager = ClientsManager::init(managerContainer, menu, 6 * 1000, 2, 2);
-	ThiefsManager::init(managerContainer, 2, 6, true, 5 * 1000);
+	return menu;
+}
+
+void Restaurant::init() {
 	
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
+
+	// clientsManager
+	GameObject* managerContainer = new GameObject(this);
+	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
 	
 	// Tilemap
 	map = new GameObject(this);
 	new MapCreator(map, "assets/tilemaps/restaurant.tmx");
 	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
 	new MapCreator(mapTop, "assets/tilemaps/restaurant_top_walls.tmx");
-
-	GameObject* thiefExclamation = new GameObject(this, _ecs::grp_HUD);
-	new Transform(thiefExclamation, Vector(637, 100), Vector::zero, 38, 38);
-	new Image(thiefExclamation, &sdlutils().images().at("EXCLAMATION"));
 
 	// las mesas se inicializan luego de haberse creado
 	clientsManager->initTables();

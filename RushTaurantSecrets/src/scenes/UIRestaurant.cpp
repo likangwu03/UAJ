@@ -7,6 +7,7 @@
 #include "../objects/Reputation.h"
 #include "../gameObjects/Bin.h"
 #include "../objects/Reputation.h"
+#include "../components/Warning.h"
 
 #include "../utils/checkML.h"
 
@@ -22,29 +23,25 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// así que Cleon me dijo que pasara directamente la información del struct como parámetro
 
 	// icono de reputación
-	createGameObjects(grp_ICONS, hdr_REPUTATION, "REPUTATION_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0);
+	createIcon("REPUTATION_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0, grp_ICONS, hdr_REPUTATION);
 
 	// icono de dinero
-	createGameObjects(grp_ICONS, hdr_MONEY, "MONEY_ICON", Vector(ICONX, ICONY * 2 + ICONSIZE), ICONSIZE, ICONSIZE, 0);
+	createIcon("MONEY_ICON", Vector(ICONX, ICONY * 2 + ICONSIZE), ICONSIZE, ICONSIZE, 0, grp_ICONS, hdr_MONEY);
 
 	// icono de objetivo diario
-	createGameObjects(grp_ICONS, hdr_TARGET, "TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0);
+	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS, hdr_TARGET);
 
 	// icono de menú del día
-	createGameObjects(grp_ICONS, hdr_MENU, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0);
+	createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS, hdr_MENU);
 
 	// inventario (fondo)
-	createGameObjects(grp_ICONS, hdr_INVENTORY, "INVENTORY_ICON", Vector(ICONX, sdl->height() - 244), 80, 228, 0);
+	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 244), 80, 228, 0, grp_ICONS, hdr_INVENTORY);
 
 	// reloj (momento del día)
-	createGameObjects(grp_ICONS, hdr_CLOCK, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0);
+	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS, hdr_CLOCK);
 
 	// aguja del reloj
-	//createGameObjects(grp_ICONS, hdr_ARROW, "ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0);
-	arrow = new GameObject(this, grp_ICONS, hdr_ARROW);
-	new Transform(arrow, Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), Vector(0, 0), ICONSIZE / 3, ICONSIZE, 0);
-	new Image(arrow, &((*sdl).images().at("ARROW")));
-
+	arrow = createIcon("ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0, grp_ICONS, hdr_ARROW);
 
 	// inventario (platos)
 	inventory = new Inventory(this);
@@ -54,15 +51,13 @@ UIRestaurant::UIRestaurant() : Scene() {
 	std::string strMoney = std::to_string(intMoney);
 
 	font = new Font(FONT_PATH, FONTSIZE);
-	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
-	transform = new Transform(moneyText, Vector(80, ICONY * 2 + ICONSIZE - 5), Vector(0, 0), strMoney.length() * FONTSIZE / 2, FONTSIZE);
-	
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-	moneyTextImage = new Image(moneyText, moneyTextTexture);
+
+	moneyText = createIcon(moneyTextTexture, Vector(80, ICONY * 2 + ICONSIZE - 5), strMoney.length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
 
 	// render de estrellas vacías
 	for (int i = 0; i < stars.size(); i++) 
-		createGameObjects(grp_ICONS, hdr_EMPTY_STAR, "EMPTY_STAR", Vector(80 + i * 40, 25), 30, 32, 0);
+		createIcon("EMPTY_STAR", Vector(80 + i * 40, 25), 30, 32, 0, grp_ICONS, hdr_EMPTY_STAR);
 
 
 	reputation = Reputation::instance();
@@ -75,21 +70,36 @@ UIRestaurant::UIRestaurant() : Scene() {
 		stars[i] = true;
 	}
 
-
-	// cleon: haced una función/método con parámetros: KISS (keep it simple [stupid]) -> corregido!!
+	float frequency = 1000;
+	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
+	new Warning(thiefExclamation, frequency);
 }
 
 UIRestaurant::~UIRestaurant() {
-	delete font; // cleon: es imposible que 'f' sea un nombre razonable =D -> corregido!
+	delete font;
 	delete moneyTextTexture;
-	//delete timeTextTexture;
 }
 
-void UIRestaurant::createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
-	Vector position, float width, float height, float rotation) {
+GameObject* UIRestaurant::dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
+	_ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID) {
+
 	GameObject* gameObject = new GameObject(this, grp, handler);
 	new Transform(gameObject, position, Vector(0, 0), width, height, rotation);
-	new Image(gameObject, &((*sdl).images().at(textureName)));
+	new Image(gameObject, texture);
+
+	return gameObject;
+}
+
+GameObject* UIRestaurant::createIcon(string textureName, Vector position, float width, float height, float rotation,
+	_ecs::_grp_id grp, _ecs::_hdr_id handler) {
+
+	return dataIcon(&((*sdl).images().at(textureName)), position, width, height, rotation, grp, handler);
+}
+
+GameObject* UIRestaurant::createIcon(Texture* texture, Vector position, float width, float height, float rotation,
+	_ecs::_grp_id grp, _ecs::_hdr_id handler) {
+
+	return dataIcon(texture, position, width, height, rotation, grp, handler);
 }
 
 void UIRestaurant::showMoneyText() {
@@ -238,8 +248,4 @@ void UIRestaurant::updateClock() {
 
 		if (transformArrow->getRot() == 0) numFullClock++;
 	}
-}
-
-int UIRestaurant::getNumFullClock() {
-	return numFullClock;
 }

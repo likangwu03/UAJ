@@ -5,6 +5,7 @@
 class DishCombinator;
 #include "../scenes/UIRestaurant.h"
 class CollisionsManager;
+class ClientsManager;
 
 class Restaurant : public Scene {
 private:
@@ -15,6 +16,9 @@ private:
 	GameObject* map;
 	GameObject* mapTop;
 	GameObject* player;
+	ClientsManager* clientsManager;
+
+	vector<_ecs::_dish_id> menu() const;
 
 public:
 	Restaurant();

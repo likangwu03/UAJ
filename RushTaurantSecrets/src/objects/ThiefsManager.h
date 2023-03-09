@@ -18,7 +18,7 @@ private:
 	float escapeSpeed;
 	bool canGetFreezer;
 	float timer;
-	float lastThiefTime;
+	float elapsedTime;
 
 	void createThief();
 
@@ -28,7 +28,7 @@ public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_THIEFS_MANAGER;
 
 	bool isThereThieves() const {
-		return !thiefs->size();
+		return !thiefs->empty();
 	}
 
 	virtual void update();
