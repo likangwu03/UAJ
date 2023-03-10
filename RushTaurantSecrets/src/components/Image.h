@@ -1,5 +1,4 @@
 #pragma once
-
 #include "../structure/Component.h"
 #include "../structure/Structure_def.h"
 #include "Transform.h"

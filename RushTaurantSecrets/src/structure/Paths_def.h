@@ -6,8 +6,8 @@
 #include <string>
 
 
+using namespace std;
 namespace _ecs {
-	using namespace std;
 	using id_type = uint8_t;
 
 	// LADRONES

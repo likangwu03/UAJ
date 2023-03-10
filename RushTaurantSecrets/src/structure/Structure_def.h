@@ -39,6 +39,7 @@ namespace _ecs {
 		cmp_UIANIM,
 		cmp_WARNING,
 		cmp_SHOP_MENU,
+		cmp_RENDER_LIST,
 		// Do not erase pls
 		cmp_INVALID
 	};

@@ -2,8 +2,10 @@
 
 #include "../objects/DishCombinator.h"
 #include "../structure/CollisionsManager.h"
+
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
+#include "../components/AddRenderList.h"
 
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
@@ -33,6 +35,8 @@ Restaurant::~Restaurant() {
 	delete cm;
 }
 
+
+
 vector<_ecs::_dish_id> Restaurant::menu() const {
 	// Men?del día aleatorio (lo rellena con 4 platos diferentes
 	// entre s?y los pasa a un vector para poder acceder a ellos)
@@ -55,12 +59,8 @@ void Restaurant::init() {
 	// clientsManager
 	GameObject* managerContainer = new GameObject(this);
 	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
-	
-	// Tilemap
-	map = new GameObject(this);
-	new MapCreator(map, "assets/tilemaps/restaurant.tmx");
-	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(mapTop, "assets/tilemaps/restaurant_top_walls.tmx");
+	CreateMap();
+	initRender();
 
 	// las mesas se inicializan luego de haberse creado
 	clientsManager->initTables();
@@ -68,12 +68,35 @@ void Restaurant::init() {
 	initComponent();
 }
 
+void Restaurant::CreateMap() {
+	// Tilemap
+	map = new GameObject(this);
+	new MapCreator(map, "assets/tilemaps/restaurant.tmx");
+	renderListDown.push_back(map);
+
+	GameObject* mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(mapTop, "assets/tilemaps/restaurant_top_walls.tmx");
+	renderListTop.push_back(mapTop);
+
+	GameObject* kichenlIsland_top = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(kichenlIsland_top, "assets/tilemaps/restaurant_top_walls.tmx");
+	new Transform(kichenlIsland_top, Vector(0, 336 * sdlutils().getResizeFactor()));
+	renderListMiddle.push_back(kichenlIsland_top);
+
+	GameObject* counter_top = new GameObject(this, _ecs::grp_RENDERTOP);
+	new MapCreator(counter_top, "assets/tilemaps/restaurant_top_counter.tmx");
+	new Transform(counter_top, Vector(0, 520 * sdlutils().getResizeFactor()));
+	renderListMiddle.push_back(counter_top);
+}
+
+
 void Restaurant::linkPantry(Pantry* pantry) {
 	if(this!=nullptr)this->pantry = pantry;
 }
 
 void Restaurant::render() {
-	Scene::render();
+	renderLayer();
+	//Scene::render();
 	if (ui != nullptr)
 	ui->render();
 }

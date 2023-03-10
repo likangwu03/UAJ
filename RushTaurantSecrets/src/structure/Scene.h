@@ -4,6 +4,7 @@
 #include "Structure_def.h"
 #include "../sdlutils/InputHandler.h"
 #include "GameInfor.h"
+#include <list>
 class GameObject;
 using namespace _ecs;
 class Scene {
@@ -14,9 +15,16 @@ protected:
 	GameInfor* Infor;
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
+
+	//render
+	std::list<GameObject*> renderListTop;
+	std::list<GameObject*> renderListMiddle;
+	std::list<GameObject*> renderListDown;
+
 	// se utiliza para conectar objetos de una misma escena
 	std::array<GameObject*, _ecs::hdrNum> handlers;
 	Scene();
+	void SortList(std::list<GameObject*>& v);
 public:
 	virtual ~Scene();
 	virtual Scene* getConnectedScene() { return nullptr; }//entre escena principal y UI
@@ -31,6 +39,9 @@ public:
 	virtual void update();
 	virtual void render();
 	virtual void handleEvents();
-	virtual void init() {};
+
+	void initRender();
 	virtual void end() {};
+	virtual void renderLayer();
+	void pushRenderList(int pos, GameObject* obj);
 };

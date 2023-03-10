@@ -65,7 +65,25 @@ void Scene::update() {
 		for (auto obj : objGroup) obj->update();
 	}
 }
+void Scene::renderLayer() {
 
+	for (auto obj : renderListDown) {
+		obj->render();
+	}
+
+	list<GameObject*> aux;
+	aux.insert(aux.end(), renderListMiddle.begin(), renderListMiddle.end());
+	aux.insert(aux.end(), objGroups[_grp_id::grp_CLIENTS].begin(), objGroups[_grp_id::grp_CLIENTS].end());
+	aux.insert(aux.end(), objGroups[_grp_id::grp_THIEFS].begin(), objGroups[_grp_id::grp_THIEFS].end());
+	SortList(aux);
+	for (auto& gameObject : aux) {
+		gameObject->render();
+	}
+
+	for (auto obj : renderListTop) {
+		obj->render();
+	}
+}
 void Scene::render() {
 	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->render();
@@ -75,5 +93,49 @@ void Scene::render() {
 void Scene::handleEvents() {
 	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->handleEvents();
+	}
+}
+
+void Scene::initRender(){
+	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_GENERAL].begin(), objGroups[_grp_id::grp_GENERAL].end());
+	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_PLAYER].begin(), objGroups[_grp_id::grp_PLAYER].end());
+	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_RENDERTOP].begin(), objGroups[_grp_id::grp_RENDERTOP].end());
+	//renderList.insert(renderList.end(), objGroups[_grp_id::grp_CLIENTS].begin(), objGroups[_grp_id::grp_CLIENTS].end());
+	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_INTERACTABLE].begin(), objGroups[_grp_id::grp_INTERACTABLE].end());
+	std::list<GameObject*>::iterator it = renderListMiddle.begin();
+	std::list<GameObject*>::iterator aux;
+	while (it!=renderListMiddle.end())
+	{
+		aux = it;
+		it++;
+		if ((*aux)->getComponent<Transform>() == nullptr) {
+			renderListMiddle.erase(aux);
+		}
+	}
+	
+	SortList(renderListMiddle);
+}
+
+void Scene::SortList(std::list<GameObject*>& v) {
+	v.sort([](GameObject* a, GameObject* b)
+		{
+			return a->getComponent<Transform>()->getPos().getY()+a->getComponent<Transform>()->getH() < b->getComponent<Transform>()->getPos().getY() + b->getComponent<Transform>()->getH();
+		});
+}
+
+void Scene::pushRenderList(int pos, GameObject* obj) {
+	switch (pos)
+	{
+	case 0:{
+		renderListTop.push_back(obj);
+	}break;
+	case 1: {
+		renderListMiddle.push_back(obj);
+	}
+	case 2: {
+		renderListDown.push_back(obj);
+	}
+	default:
+		break;
 	}
 }
