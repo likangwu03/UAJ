@@ -15,7 +15,7 @@ private:
 
 		PRICE_OFFSETX = 33, //respecto del men¨²
 		PRICE_OFFSETY = 9,
-		PRICE_WIDTH = 20,
+		PRICE_WIDTH = 18,
 		PRICE_HEIGHT = 30,
 
 		ING_OFFSETX = 15,

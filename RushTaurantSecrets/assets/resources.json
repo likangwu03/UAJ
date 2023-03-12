@@ -301,6 +301,18 @@
       "file": "assets/Sprites/Food/Ingredients/NONE_ING.png"
     },
     {
+      "id": "FREEZER_OPEN",
+      "file": "assets/Sprites/Restaurant/freezer1.png"
+    },
+    {
+      "id": "FREEZER2_CLOSE",
+      "file": "assets/Sprites/Restaurant/freezer2.png"
+    },
+     {
+      "id": "FREEZER2_OPEN",
+      "file": "assets/Sprites/Restaurant/freezer3.png"
+    },
+    {
       "id": "Heart",
       "file": "assets/Sprites/UI/HUD/heart.png"
     },
