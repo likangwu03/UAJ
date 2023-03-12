@@ -7,6 +7,8 @@ class Pantry : public Scene {
 private:
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
+	void CreateMap();
+
 public:
 	Pantry();
 	~Pantry();

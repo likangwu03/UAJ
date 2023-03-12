@@ -22,11 +22,18 @@ void Pantry::init() {
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
 	ThiefsManager::init(managerContainer, 2, 6, true, 4 * 1000, 1);
-
-	GameObject* map = new GameObject(this);
-	new MapCreator(map, "assets/tilemaps/pantry.tmx");
+	CreateMap();
+	initRender();
 
 	Scene::initComponent();
+}
+
+void Pantry::CreateMap() {
+	Scene::CreateMap("assets/tilemaps/pantry.tmx", Down, Vector());
+	Scene::CreateMap("assets/tilemaps/pantry_top_walls.tmx", Top, Vector());
+	Scene::CreateMap("assets/tilemaps/pantry_top_bottom.tmx", Middle, Vector(0, 14*48 * sdlutils().getResizeFactor()));
+	Scene::CreateMap("assets/tilemaps/pantry_top_middle.tmx", Middle, Vector(0, 11*48 * sdlutils().getResizeFactor()));
+	Scene::CreateMap("assets/tilemaps/pantry_top_bottom_2.tmx", Middle, Vector(0, 16*48 * sdlutils().getResizeFactor()));
 }
 
 void Pantry::linkRestaurant(Restaurant* rest) {
@@ -35,7 +42,8 @@ void Pantry::linkRestaurant(Restaurant* rest) {
 }
 
 void Pantry::render() {
-	Scene::render();
+	Scene::renderLayer();
+	//Scene::render();
 	//ui->render();
 }
 

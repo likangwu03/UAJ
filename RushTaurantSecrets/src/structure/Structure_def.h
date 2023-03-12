@@ -92,4 +92,6 @@ namespace _ecs {
 		hdr_INVALID
 	};
 	constexpr id_type hdrNum = hdr_INVALID;
+
+	enum RenderPos { Top, Middle, Down };
 }

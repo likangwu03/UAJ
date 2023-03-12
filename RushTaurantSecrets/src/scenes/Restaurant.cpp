@@ -5,7 +5,7 @@
 
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
-#include "../components/AddRenderList.h"
+
 
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
@@ -69,24 +69,11 @@ void Restaurant::init() {
 }
 
 void Restaurant::CreateMap() {
-	// Tilemap
-	map = new GameObject(this);
-	new MapCreator(map, "assets/tilemaps/restaurant.tmx");
-	renderListDown.push_back(map);
-
-	GameObject* mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(mapTop, "assets/tilemaps/restaurant_top_walls.tmx");
-	renderListTop.push_back(mapTop);
-
-	GameObject* kichenlIsland_top = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(kichenlIsland_top, "assets/tilemaps/restaurant_top_walls.tmx");
-	new Transform(kichenlIsland_top, Vector(0, 336 * sdlutils().getResizeFactor()));
-	renderListMiddle.push_back(kichenlIsland_top);
-
-	GameObject* counter_top = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(counter_top, "assets/tilemaps/restaurant_top_counter.tmx");
-	new Transform(counter_top, Vector(0, 520 * sdlutils().getResizeFactor()));
-	renderListMiddle.push_back(counter_top);
+	Scene::CreateMap("assets/tilemaps/restaurant.tmx", Down, Vector());
+	Scene::CreateMap("assets/tilemaps/restaurant_top_walls.tmx", Top, Vector());
+	Scene::CreateMap("assets/tilemaps/restaurant_top_kitchenIsland.tmx", Middle, Vector(0, 336 * sdlutils().getResizeFactor()));
+	Scene::CreateMap("assets/tilemaps/restaurant_top_table.tmx", Middle, Vector(0, 768 * sdlutils().getResizeFactor()));
+	Scene::CreateMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 507.015 * sdlutils().getResizeFactor()));
 }
 
 

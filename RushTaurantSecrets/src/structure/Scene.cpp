@@ -123,19 +123,26 @@ void Scene::SortList(std::list<GameObject*>& v) {
 		});
 }
 
-void Scene::pushRenderList(int pos, GameObject* obj) {
+void Scene::pushRenderList(RenderPos pos, GameObject* obj) {
 	switch (pos)
 	{
-	case 0:{
+	case _ecs::Top:
 		renderListTop.push_back(obj);
-	}break;
-	case 1: {
+		break;
+	case _ecs::Middle:
 		renderListMiddle.push_back(obj);
-	}
-	case 2: {
+		break;
+	case _ecs::Down:
 		renderListDown.push_back(obj);
-	}
+		break;
 	default:
 		break;
 	}
+}
+
+void Scene::CreateMap(std::string file, RenderPos Rpos, Vector pos) {
+	GameObject* aux = new GameObject(this, grp_RENDERTOP);
+	new MapCreator(aux, file);
+	new Transform(aux, pos);
+	pushRenderList(Rpos, aux);
 }

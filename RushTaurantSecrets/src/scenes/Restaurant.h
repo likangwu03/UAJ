@@ -13,13 +13,14 @@ private:
 	DishCombinator* dc;
 	UIRestaurant* ui;
 	CollisionsManager* cm;
-	GameObject* map;
+	//GameObject* map;
 	
 	GameObject* player;
 	ClientsManager* clientsManager;
 
 	vector<_ecs::_dish_id> menu() const;
 	void CreateMap();
+	
 
 public:
 	Restaurant();

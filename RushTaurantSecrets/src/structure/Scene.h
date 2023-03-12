@@ -11,20 +11,21 @@ class Scene {
 private:
 	friend class GameObject;
 	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
+	//render
+	std::list<GameObject*> renderListTop;
+	std::list<GameObject*> renderListMiddle;
+	std::list<GameObject*> renderListDown;
 protected:
 	GameInfor* Infor;
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 
-	//render
-	std::list<GameObject*> renderListTop;
-	std::list<GameObject*> renderListMiddle;
-	std::list<GameObject*> renderListDown;
 
 	// se utiliza para conectar objetos de una misma escena
 	std::array<GameObject*, _ecs::hdrNum> handlers;
 	Scene();
 	void SortList(std::list<GameObject*>& v);
+	void CreateMap(std::string file, RenderPos Rpos, Vector pos);
 public:
 	virtual ~Scene();
 	virtual Scene* getConnectedScene() { return nullptr; }//entre escena principal y UI
@@ -43,5 +44,6 @@ public:
 	void initRender();
 	virtual void end() {};
 	virtual void renderLayer();
-	void pushRenderList(int pos, GameObject* obj);
+	void pushRenderList(RenderPos pos, GameObject* obj);
+
 };

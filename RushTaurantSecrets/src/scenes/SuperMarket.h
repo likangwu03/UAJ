@@ -13,6 +13,7 @@ private:
 	UIMarket* uiMarket;
 	CartelManager* cartelM;
 	Player* player;
+	void CreateMap();
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket(this) ){ init(); }
 	~SuperMarket();
