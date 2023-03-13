@@ -13,9 +13,13 @@ private:
 	bool sucia;
 	int num;
 	const float
-		WIDTH = 30,
-		HEIGHT = 30;
+		ICON_WIDTH = 40,
+		ICON_HEIGHT = 40,
+		ICON_OFFSETY = -25,
+		PLATE_WIDTH = 30,
+		PLATE_HEIGHT = 30;
 	Texture* dirtyIcon;
+	Texture* dirtyPlate;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DESK;

@@ -405,6 +405,11 @@
       "file": "assets/Sprites/UI/HUD/cleanTable_icon.png",
       "cols": 1,
       "rows": 1
+    },   {
+      "id": "DIRT_PLATES",
+      "file": "assets/Sprites/UI/HUD/dirtPlates.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "BASKET_LIST",

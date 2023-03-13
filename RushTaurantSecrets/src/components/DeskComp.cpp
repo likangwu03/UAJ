@@ -13,6 +13,7 @@ DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : Trig
 		throw exceptions::CompNotFound("Transform", "DeskComp");
 	}
 	dirtyIcon = &(SDLUtils::instance())->images().at("CLEANTABLE_ICON");
+	dirtyPlate = &(SDLUtils::instance())->images().at("DIRT_PLATES");
 
 }
 
@@ -55,12 +56,12 @@ void DeskComp::update() {
 		}
 	}
 	
-	//dirtyIcon->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - WIDTH / 2, trans->getPos().getY() + trans->getH() / 2 - HEIGHT / 2, 400, 400));
 
 }
 
 void DeskComp::render() {
-	if (sucia)
-		dirtyIcon->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - WIDTH / 2, trans->getPos().getY() + trans->getH() / 2 - HEIGHT / 2, WIDTH, HEIGHT));
-
+	if (sucia) {
+		dirtyIcon->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - ICON_WIDTH / 2, trans->getPos().getY() +ICON_OFFSETY, ICON_WIDTH, ICON_HEIGHT));
+		dirtyPlate->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - PLATE_WIDTH / 2, trans->getPos().getY() + trans->getH() / 2 - PLATE_HEIGHT / 2, PLATE_WIDTH, PLATE_HEIGHT));
+	}
 }
