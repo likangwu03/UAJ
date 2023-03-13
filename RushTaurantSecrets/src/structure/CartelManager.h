@@ -1,7 +1,7 @@
 #pragma once
 #include "../components/CartelTrigger.h"
 #include "../components/ShoppingMenuComp.h"
-#include "../structure//Scene.h"
+#include "../structure/Scene.h"
 class CartelManager 
 {
 private:

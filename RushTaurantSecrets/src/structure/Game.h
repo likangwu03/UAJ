@@ -3,7 +3,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "SceneManager.h"
-#include "GameInfor.h"
+#include "GameManager.h"
 const uint32_t FRAME_RATE = 25;  //luego a def.h
 
 

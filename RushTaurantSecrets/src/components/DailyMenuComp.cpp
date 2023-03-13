@@ -67,7 +67,7 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 	tf = parent->getComponent<Transform>();
 	parentScene = parent->getScene();
 
-	murder = GameInfor::instance()->getHasKill();
+	murder = GameManager::instance()->getHasKill();
 
 	drawDishes(randomMenu());
 }

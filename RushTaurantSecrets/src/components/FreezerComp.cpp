@@ -3,7 +3,7 @@
 #include "../utils/checkML.h"
 
 FreezerComp::FreezerComp(GameObject* _parent) : Component(_parent, id),
- image(parent->getComponent<Image>()),gameInfo(GameInfor::instance())
+ image(parent->getComponent<Image>()),gameInfo(GameManager::instance())
 {
 	textures.open1 = &sdlutils().images().at("FREEZER_OPEN");
 	textures.close2 = &sdlutils().images().at("FREEZER2_CLOSE");

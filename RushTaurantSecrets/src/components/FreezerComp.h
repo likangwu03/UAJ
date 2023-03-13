@@ -4,7 +4,7 @@
 #include "../components/Image.h"
 #include "../utilities/Vector.h"
 #include "../sdlutils/SDLUtils.h"
-#include "../structure/GameInfor.h"
+#include "../structure/GameManager.h"
 
 class FreezerComp :public Component {
 public:
@@ -20,7 +20,7 @@ private:
 
 	Image* image; 
 	FreezerTex textures;
-	GameInfor* gameInfo;
+	GameManager* gameInfo;
 
 public:
 	FreezerComp(GameObject* parent);

@@ -2,7 +2,7 @@
 #include "../structure/Component.h"
 #include "../structure/Food_def.h"
 #include "../structure/GameObject.h"
-#include "../structure/GameInfor.h"
+#include "../structure/GameManager.h"
 #include "../components/Transform.h"
 #include "../components/ButtonComp.h"
 #include "../sdlutils/SDLUtils.h"

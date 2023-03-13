@@ -1,16 +1,13 @@
 #pragma once
 
-#include "../utils/Singleton.h"
-#include "../utils/checkML.h"
 
-class Reputation : public Singleton<Reputation> {
-	friend Singleton<Reputation>; private:
-
+class Reputation {
+	const int INITIALREPUTATION = 15, MAXREPUTATION = 100;
 	float amount;
-	const int MAXREPUTATION = 100;
-	Reputation() : amount(15) { }
 
 public:
+	Reputation() : amount(INITIALREPUTATION) { }
+
 	float getReputation() { return amount; }
 	void addReputatiton(float n) {
 		amount += n;

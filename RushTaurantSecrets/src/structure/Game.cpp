@@ -13,7 +13,7 @@ Game::Game() {
 }
 
 void Game::init() {
-	GameInfor::init();
+	GameManager::init();
 	sceneManager = SceneManager::instance();
 	sceneManager->init();
 	ih = InputHandler::instance();

@@ -3,7 +3,7 @@
 #include <array>
 #include "Structure_def.h"
 #include "../sdlutils/InputHandler.h"
-#include "GameInfor.h"
+#include "GameManager.h"
 #include <list>
 class GameObject;
 using namespace _ecs;
@@ -16,7 +16,7 @@ private:
 	std::list<GameObject*> renderListMiddle;
 	std::list<GameObject*> renderListDown;
 protected:
-	GameInfor* Infor;
+	GameManager* Infor;
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 

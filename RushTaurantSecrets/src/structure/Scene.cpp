@@ -5,7 +5,7 @@
 
 
 Scene::Scene():frameTime(Game::instance()->getframeTime()) {
-	Infor = GameInfor::instance();
+	Infor = GameManager::instance();
 	ih = InputHandler::instance();
 	handlers = {};
 }
