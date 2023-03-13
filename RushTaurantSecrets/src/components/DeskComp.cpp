@@ -7,11 +7,13 @@
 #include "../gameObjects/Client.h"
 #include "../utils/checkML.h"
 
-DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : TriggerComp(parent, Vector(0,0), width, height, DeskComp::id), sucia(false), num(id) {
+DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : TriggerComp(parent, Vector(0, 0), width, height, DeskComp::id), sucia(false), num(id) {
 	trans = parent->getComponent<Transform>();
-	if(trans == nullptr) {
+	if (trans == nullptr) {
 		throw exceptions::CompNotFound("Transform", "DeskComp");
 	}
+	dirtyIcon = &(SDLUtils::instance())->images().at("CLEANTABLE_ICON");
+
 }
 
 void DeskComp::assignClients(const std::vector<Client*>& clients) {
@@ -19,7 +21,7 @@ void DeskComp::assignClients(const std::vector<Client*>& clients) {
 }
 
 void DeskComp::spreadOverlap() {
-	for(auto obj : assigned) {
+	for (auto obj : assigned) {
 		obj->getComponent<ClientTrigger>()->isOverlapping();
 	}
 }
@@ -33,22 +35,32 @@ bool DeskComp::isOccupied() {
 }
 
 void DeskComp::isOverlapping() {
-	if(!ih->isKeyDown(SDLK_SPACE)) return;
+	if (!ih->isKeyDown(SDLK_SPACE)) return;
 
-	if(sucia) cleanDesk();
+	if (sucia) cleanDesk();
 	else spreadOverlap();
 }
 
 void DeskComp::update() {
-	if(!assigned.empty()) {
+	if (!assigned.empty()) {
 		ClientState::States st = assigned[0]->getComponent<ClientState>()->getState();
 		// Si los clientes han terminado de comer se ensucia la mesa.
-		if(st == ClientState::HAS_LEFT) {
+		if (st == ClientState::HAS_LEFT) {
 			sucia = true;
 			assigned.clear();
-		// Si los clientes se han quedado sin felicidad no se ensucia la mesa.
-		} else if(st == ClientState::OUT) {
+			// Si los clientes se han quedado sin felicidad no se ensucia la mesa.
+		}
+		else if (st == ClientState::OUT) {
 			assigned.clear();
 		}
 	}
+	
+	//dirtyIcon->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - WIDTH / 2, trans->getPos().getY() + trans->getH() / 2 - HEIGHT / 2, 400, 400));
+
+}
+
+void DeskComp::render() {
+	if (sucia)
+		dirtyIcon->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - WIDTH / 2, trans->getPos().getY() + trans->getH() / 2 - HEIGHT / 2, WIDTH, HEIGHT));
+
 }

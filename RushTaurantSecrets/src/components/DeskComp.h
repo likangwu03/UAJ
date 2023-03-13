@@ -1,6 +1,7 @@
 #pragma once
 #include "../structure/Component.h"
 #include "TriggerComp.h"
+#include "../sdlutils/SDLUtils.h"
 #include <vector>
 class Transform;
 class Client;
@@ -11,6 +12,11 @@ private:
 	std::vector<Client*> assigned;
 	bool sucia;
 	int num;
+	const float
+		WIDTH = 30,
+		HEIGHT = 30;
+	Texture* dirtyIcon;
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DESK;
 
@@ -32,5 +38,6 @@ public:
 
 	void isOverlapping() override;
 
-	void update();
+	void update() override;
+	void render() override;
 };

@@ -401,6 +401,12 @@
       "rows": 1
     },
     {
+      "id": "CLEANTABLE_ICON",
+      "file": "assets/Sprites/UI/HUD/cleanTable_icon.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_LIST",
       "file": "assets/Sprites/UI/basket_list.png",
       "cols": 1,
