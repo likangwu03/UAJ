@@ -10,10 +10,50 @@ using namespace std;
 namespace _ecs {
 	using id_type = uint8_t;
 
+	struct Route {
+		vector<Vector> points;
+		GOOrientation orientation = none;
+	};
+
 	// LADRONES
-	const Vector DOOR = Vector(32, 18);
-	const Vector SECRET = Vector(20, 18);
-	const Vector FREEZER = Vector(24, 18);
+	const int MAX_THIEFS = 3;
+	const int NUM_THIEFS_PATHS = 2;
+
+	enum _path_thief_id : id_type {
+		SECRET_1,
+		SECRET_2,
+		SECRET_3,
+		FREEZER_1,
+		FREEZER_2,
+		FREEZER_3
+	};
+
+	static _path_thief_id enumThiefsPaths[NUM_THIEFS_PATHS][MAX_THIEFS]{
+		_path_thief_id::SECRET_1,
+		_path_thief_id::SECRET_2,
+		_path_thief_id::SECRET_3,
+		_path_thief_id::FREEZER_1,
+		_path_thief_id::FREEZER_2,
+		_path_thief_id::FREEZER_3
+	};
+
+	const Vector DOOR = Vector(-1, 13);
+	const Vector SECRET = Vector(26, 6);
+	const Vector FREEZER = Vector(15, 5);
+
+	// los caminos van de abajo a arriba
+	// es decir, el 1 es el que está más abajo
+	static Route thiefsPahts[NUM_THIEFS_PATHS * MAX_THIEFS] = {
+		// fórmula secreta
+		{{Vector(7, 13), Vector(7, 11), Vector(16, 11), Vector(16, 14), Vector(23, 14), Vector(23, 12), Vector(26, 12), SECRET}, north},
+		{{Vector(7, 12), Vector(7, 11), Vector(15, 11), Vector(15, 6), Vector(24, 6), Vector(24, 7), Vector(26, 7), SECRET}, north},
+		{{Vector(8, 11), Vector(8, 8), Vector(12, 8), Vector(12, 7), Vector(15, 7), Vector(15, 10), Vector(23, 10), Vector(23, 8), Vector(26, 8), SECRET}, north},
+
+		// frigorífico
+		{{Vector(7, 13), Vector(7, 11), Vector(15, 11), FREEZER}, north},
+		{{Vector(7, 12), Vector(7, 11), Vector(15, 11), FREEZER}, north},
+		{{Vector(8, 11), Vector(8, 8), Vector(12, 8), Vector(12, 7), Vector(15, 7), FREEZER}, north}
+	};
 
 
 	// CLIENTES
@@ -101,66 +141,6 @@ namespace _ecs {
 		_path_client_id::ARRIVE_TABLE_2_DOWN,
 		_path_client_id::PAY_TABLE_2_DOWN,
 		_path_client_id::OUT_TABLE_2_DOWN
-	};
-
-	static unordered_map<string, _path_client_id> stringToEnum = {
-		// mesa 1 izquierda
-		{"ARRIVE_TABLE_1_LEFT", _path_client_id::ARRIVE_TABLE_1_LEFT},
-		{"PAY_TABLE_1_LEFT", _path_client_id::PAY_TABLE_1_LEFT},
-		{"OUT_TABLE_1_LEFT", _path_client_id::OUT_TABLE_1_LEFT},
-		// mesa 1 derecha
-		{"ARRIVE_TABLE_1_RIGHT", _path_client_id::ARRIVE_TABLE_1_RIGHT},
-		{"PAY_TABLE_1_RIGHT", _path_client_id::PAY_TABLE_1_RIGHT},
-		{"OUT_TABLE_1_RIGHT", _path_client_id::OUT_TABLE_1_RIGHT},
-		// mesa 1 abajo
-		{"ARRIVE_TABLE_1_DOWN", _path_client_id::ARRIVE_TABLE_1_DOWN},
-		{"PAY_TABLE_1_DOWN", _path_client_id::PAY_TABLE_1_DOWN},
-		{"OUT_TABLE_1_DOWN", _path_client_id::OUT_TABLE_1_DOWN},
-		// mesa 1 arriba
-		{"ARRIVE_TABLE_1_UP", _path_client_id::ARRIVE_TABLE_1_UP},
-		{"PAY_TABLE_1_UP", _path_client_id::PAY_TABLE_1_UP},
-		{"OUT_TABLE_1_UP", _path_client_id::OUT_TABLE_1_UP},
-		// mesa 2 izquierda
-		{"ARRIVE_TABLE_2_LEFT",_path_client_id::ARRIVE_TABLE_2_LEFT},
-		{"PAY_TABLE_2_LEFT",_path_client_id::PAY_TABLE_2_LEFT},
-		{"OUT_TABLE_2_LEFT",_path_client_id::OUT_TABLE_2_LEFT},
-		// mesa 2 derecha
-		{"ARRIVE_TABLE_2_RIGHT",_path_client_id::ARRIVE_TABLE_2_RIGHT},
-		{"PAY_TABLE_2_RIGHT",_path_client_id::PAY_TABLE_2_RIGHT},
-		{"OUT_TABLE_2_RIGHT",_path_client_id::OUT_TABLE_2_RIGHT},
-		// mesa 2 abajo
-		{"ARRIVE_TABLE_2_DOWN",_path_client_id::ARRIVE_TABLE_2_DOWN},
-		{"PAY_TABLE_2_DOWN",_path_client_id::PAY_TABLE_2_DOWN},
-		{"OUT_TABLE_2_DOWN",_path_client_id::OUT_TABLE_2_DOWN},
-		// mesa 2 arriba
-		{"ARRIVE_TABLE_2_UP",_path_client_id::ARRIVE_TABLE_2_UP},
-		{"PAY_TABLE_2_UP",_path_client_id::PAY_TABLE_2_UP},
-		{"OUT_TABLE_2_UP",_path_client_id::OUT_TABLE_2_UP},
-		// mesa 3
-		{"ARRIVE_TABLE_3",_path_client_id::ARRIVE_TABLE_3},
-		{"PAY_TABLE_3", _path_client_id::PAY_TABLE_3},
-		{"OUT_TABLE_3", _path_client_id::OUT_TABLE_3},
-		// mesa 4
-		{"ARRIVE_TABLE_4", _path_client_id::ARRIVE_TABLE_4},
-		{"PAY_TABLE_4",_path_client_id::PAY_TABLE_4},
-		{"OUT_TABLE_4",_path_client_id::OUT_TABLE_4},
-		// mesa 5
-		{"ARRIVE_TABLE_5",_path_client_id::ARRIVE_TABLE_5},
-		{"PAY_TABLE_5", _path_client_id::PAY_TABLE_5},
-		{"OUT_TABLE_5", _path_client_id::OUT_TABLE_5},
-		// mesa 6
-		{"ARRIVE_TABLE_6",_path_client_id::ARRIVE_TABLE_6},
-		{"PAY_TABLE_6", _path_client_id::PAY_TABLE_6},
-		{"OUT_TABLE_6", _path_client_id::OUT_TABLE_6},
-		// mesa 7
-		{"ARRIVE_TABLE_7",_path_client_id::ARRIVE_TABLE_7},
-		{"PAY_TABLE_7", _path_client_id::PAY_TABLE_7},
-		{"OUT_TABLE_7", _path_client_id::OUT_TABLE_7},
-	};
-
-	struct Route {
-		vector<Vector> points;
-		GOOrientation orientation = none;
 	};
 
 	// afuera entrada

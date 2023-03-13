@@ -63,8 +63,8 @@ public:
 		SDL_Rect dest;
 		dest.x = transform->getPos().getX();
 		dest.y = transform->getPos().getY();
-		dest.w = w;
-		dest.h = h;
+		dest.w = transform->getW();
+		dest.h = transform->getH();
 		// renderiza la textura
 		texture->render(dest, transform->getRot());
 	}

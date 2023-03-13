@@ -23,6 +23,7 @@ private:
 	Transform* transform;
 	Path path;
 	Vector end;
+	Vector startingPoint;	// guardar el punto desde el que parte el personaje
 	float speed;	// velocidad en ir de un punto a otro
 	float offsetZone;	// tiene que ser un número pequeño
 
@@ -38,6 +39,9 @@ private:
 	// se establece una nueva recta
 	void newStraight(const Vector& end);
 
+	// se establece un nuevo camino a partir de una serie de puntos
+	void newPath(const vector<Vector>& newPath);
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STRAIGHT_MOVEMENT;
 
@@ -47,7 +51,7 @@ public:
 
 	void stop();
 
-	void goBack(const Vector& last);
+	void goBack();
 
 	inline bool hasFinishedPath() const {
 		return path.cont >= path.points.size();

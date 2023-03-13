@@ -63,7 +63,7 @@ void Restaurant::init() {
 	initRender();
 
 	// las mesas se inicializan luego de haberse creado
-	clientsManager->initTables();
+	// clientsManager->initTables();
 
 	initComponent();
 }

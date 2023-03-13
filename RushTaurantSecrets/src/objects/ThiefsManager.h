@@ -19,11 +19,25 @@ private:
 	bool canGetFreezer;
 	float timer;
 	float elapsedTime;
-	int n;
+	int numThiefs;
+	// array que se utiliza para saber que posición de las puerta han sido ocupadas y cuales no
+	array<bool, _ecs::MAX_THIEFS> selectedPosition;
 
 	void createThief();
 
-	ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int n);
+	void addFrequently();
+
+	void allFalse() {
+		for (int i = 0; i < selectedPosition.size(); ++i) {
+			selectedPosition[i] = false;
+		}
+	}
+
+	int randomPos();
+
+	Objective randomObjective();
+
+	ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int numThiefs);
 
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_THIEFS_MANAGER;

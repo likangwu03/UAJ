@@ -8,27 +8,28 @@
 #include "../structure/Paths_def.h"
 #include <vector>
 
+enum Objective { Secret, Freezer };
+
 class ThiefMovement : public Component {
 public:
 	enum States { OBJECTIVE, FREEZER, SECRET, DEAD, ESCAPE };
 
 private:
-	enum Objective {Freezer, Secret};
-
 	States currentState;
 	StraightMovement* straightMovement;
 	Transform* transform;
 	SDLUtils* sdl;
-	bool canGetFridger;
 	Objective objective;
 	float elapsedTime;
 	float deadTime;
 	float escapeSpeed;
 
+	void addPath(const vector<Vector>& points);
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
-	ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed);
+	ThiefMovement(GameObject* parent, Objective objective, int pos, float escapeSpeed);
 
 	// se tendría que llamar al pulsar el botón de matar
 	void die();

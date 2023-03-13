@@ -47,27 +47,30 @@ void StraightMovement::newStraight(const Vector& end) {
 	transform->setMovState(walking);
 }
 
+void StraightMovement::newPath(const vector<Vector>& newPath) {
+	path.points.reserve(newPath.size());
+	path.points = newPath;
+	path.cont = 0;
+	newStraight(path.points[path.cont]);
+}
+
 StraightMovement::StraightMovement(GameObject* parent, float speed) :
 	Component(parent, id), offsetZone(3), speed(speed) {
 	path.cont = 0;
 	transform = parent->getComponent<Transform>();
+	startingPoint = transform->getPos();
 }
 
 void StraightMovement::addPath(const vector<Vector>& points) {
-	vector<Vector> aux = RelativeToGlobal::points(points);
-
-	// si ha terminado de recorrer el camino, cambia otro
+	// si ha terminado de recorrer el camino, cambia a otro
 	if (hasFinishedPath()) {
-		path.points.reserve(aux.size());
-		path.points = aux;
-		path.cont = 0;
-		newStraight(path.points[path.cont]);
+		newPath(points);
 	}
 	// si no lo ha terminado de recorrer, el camino nuevo se añade al actual
 	// solo va a suceder cuando se recoloquen clientes
 	else {
-		path.points.reserve(path.points.size() + aux.size());
-		path.points.insert(path.points.end(), aux.begin(), aux.end());
+		path.points.reserve(path.points.size() + points.size());
+		path.points.insert(path.points.end(), points.begin(), points.end());
 	}
 }
 
@@ -77,18 +80,18 @@ void StraightMovement::stop() {
 	path.points.clear();
 }
 
-void StraightMovement::goBack(const Vector& last) {
+void StraightMovement::goBack() {
 	vector<Vector> aux;
-	aux.reserve(path.cont);
+	aux.reserve(path.cont + 1);
+
+	// se guardan en un vector auxiliar los puntos que ya se han recorrido
 	for (int i = path.cont - 1; i >= 0; --i) {
 		aux.push_back(path.points[i]);
 	}
-	aux.push_back(last);
+	// se guarda el punto de partida
+	aux.push_back(startingPoint);
 
-	path.points = aux;
-	path.cont = 0;
-
-	newStraight(path.points[path.cont]);
+	newPath(aux);
 }
 
 void StraightMovement::update() {

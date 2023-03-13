@@ -3,6 +3,10 @@
 #include "../gameObjects/Client.h"
 #include "../utils/checkML.h"
 
+void ClientMovement::addPath(const vector<Vector>& points) {
+	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
+}
+
 bool ClientMovement::hasNotEaten(Client* mate) {
 	return mate->getComponent<ClientState>()->getState() < ClientState::FINISH_EAT;
 }
@@ -11,6 +15,10 @@ bool ClientMovement::hasEveryoneEaten() const {
 	// se busca uno que no haya terminado de comer y si no se encuentra,
 	// es que todos han terminado
 	return std::find_if(mates.begin(), mates.end(), hasNotEaten) == mates.end();
+}
+
+bool ClientMovement::isNotPaying(Client* mate) {
+	return mate->getComponent<ClientState>()->getState() != ClientState::PAYING;
 }
 
 void ClientMovement::goOut(ClientState::States currentState) {
@@ -36,13 +44,13 @@ void ClientMovement::colocateEntrance() {
 	entrance.setX(entrance.getX() + posEntrance);
 	entrance.setY(entrance.getY() - posGroup);
 	// se mueve
-	straightMovement->addPath(vector<Vector>{entrance});
+	addPath(vector<Vector>{entrance});
 }
 
 // desde la mesa hasta la caja registradora
 void ClientMovement::colocateCashRegister() {
 	vector<Vector> payPath = tableRoute(PAY).points;
-	straightMovement->addPath(payPath);
+	addPath(payPath);
 	outTable();
 }
 
@@ -60,7 +68,7 @@ void ClientMovement::colocatePay() {
 	queuePay.push_back(posRegister);
 
 	// se mueve
-	straightMovement->addPath(queuePay);
+	addPath(queuePay);
 }
 
 // ha abandonado la cola de la caja sin pagar
@@ -79,13 +87,13 @@ void ClientMovement::abandonPay() {
 	// se añade el punto de afuera
 	leave.push_back(_ecs::OUT_PAY);
 
-	straightMovement->addPath(leave);
+	addPath(leave);
 }
 
 void ClientMovement::abandonEntrance() {
 	Vector end = _ecs::OUT_ENTRY;
 	end.setY(end.getY() - posGroup);
-	straightMovement->addPath(vector<Vector>{end});
+	addPath(vector<Vector>{end});
 }
 
 // se establece su nuevo estado, su orientación y la animación a ejecutar
@@ -128,13 +136,13 @@ void ClientMovement::recolotatePay() {
 	posRegister.setY(posRegister.getY() - 1);
 	queuePay.push_back(posRegister);
 
-	straightMovement->addPath(queuePay);
+	addPath(queuePay);
 }
 
 // asignar mesa
 void ClientMovement::assignTable(int assignedTable) {
 	this->assignedTable = assignedTable;
-	straightMovement->addPath(tableRoute(ARRIVE).points);
+	addPath(tableRoute(ARRIVE).points);
 	outEntrance();
 	clientState->setState(ClientState::ASSIGNED);
 }
@@ -142,8 +150,12 @@ void ClientMovement::assignTable(int assignedTable) {
 // paga por su comida y se marcha
 void ClientMovement::payAndLeave() {
 	clientState->setState(ClientState::OUT);
-	straightMovement->addPath(_ecs::clientsPaths[_ecs::PAY_AND_LEAVE].points);
+	addPath(_ecs::clientsPaths[_ecs::PAY_AND_LEAVE].points);
 	outPay();
+}
+
+bool ClientMovement::isEveryonePaying() const {
+	return std::find_if(mates.begin(), mates.end(), isNotPaying) == mates.end();
 }
 
 void ClientMovement::update() {
@@ -207,7 +219,7 @@ void ClientMovement::update() {
 			outEntrance();
 		}
 		else if (assignedTable != -1) {
-			straightMovement->addPath(tableRoute(OUT).points);
+			addPath(tableRoute(OUT).points);
 			outTable();
 		}
 		else if (posPay != -1) {

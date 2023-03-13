@@ -21,7 +21,7 @@ void Pantry::init() {
 	// el update no se ejecuta hasta que se est?en la escena
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
-	ThiefsManager::init(managerContainer, 2, 6, true, 4 * 1000, 1);
+	ThiefsManager::init(managerContainer, 2, 6, false, 4 * 1000, 2);
 	CreateMap();
 	initRender();
 

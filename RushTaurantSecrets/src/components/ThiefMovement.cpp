@@ -1,25 +1,18 @@
 #include "./ThiefMovement.h"
 #include "../utils/checkML.h"
 
-ThiefMovement::ThiefMovement(GameObject* parent, bool canGetFridger, float escapeSpeed) :
-	Component(parent, id), canGetFridger(canGetFridger), currentState(OBJECTIVE), deadTime(1 * 1000), elapsedTime(0), escapeSpeed(escapeSpeed) {
+void ThiefMovement::addPath(const vector<Vector>& points) {
+	straightMovement->addPath(RelativeToGlobal::pointsPantry(points));
+}
+
+ThiefMovement::ThiefMovement(GameObject* parent, Objective objective, int pos, float escapeSpeed) :
+	Component(parent, id), objective(objective), currentState(OBJECTIVE), deadTime(1 * 1000), elapsedTime(0), escapeSpeed(escapeSpeed) {
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	sdl = SDLUtils::instance();
 
-	// elegir un camino u otro dependiendo de si puede ir al congelador o no
-	int max = canGetFridger ? 2 : 1;
-	objective = (Objective)sdl->rand().nextInt(0, max);
-	vector<Vector> points;
-	switch (objective) {
-	case Freezer:
-		points.push_back(_ecs::FREEZER);
-		break;
-	case Secret:
-		points.push_back(_ecs::SECRET);
-		break;
-	}
-	straightMovement->addPath(points);
+	_ecs::_path_thief_id id = _ecs::enumThiefsPaths[objective][pos];
+	addPath(_ecs::thiefsPahts[id].points);
 }
 
 void ThiefMovement::die() {
@@ -31,8 +24,7 @@ void ThiefMovement::die() {
 
 void ThiefMovement::escape() {
 	currentState = ESCAPE;
-	straightMovement->stop();
-	straightMovement->addPath({ _ecs::DOOR });
+	straightMovement->goBack();
 	straightMovement->changeSpeed(escapeSpeed);
 }
 

@@ -106,6 +106,11 @@ private:
 	// comprobar si algún grupo ha abandonado el local para quitarlo de la lista
 	void refreshClientsGroup();
 
+	// guarda el componente de las mesas en el array
+	// no se hace en la constructora porque
+	// las mesas se tienen que crear después que el ClientsManager
+	void initTables();
+
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients);
 
 public:
@@ -127,15 +132,12 @@ public:
 	void assignFirstGroup(int table);
 
 	// se llama cuando se quiere cobrar a los clientes que hay en la caja registradora
-	void collectAndLeave();
+	bool collectAndLeave();
 
 	// hay espacio para que vayan a la cola de la caja
 	bool canOccupyPay(vector<Client*> mates);
 
-	// guarda el componente de las mesas en el array
-	// no se hace en la constructora porque
-	// las mesas se tienen que crear después que el ClientsManager
-	void initTables();
+	virtual void initComponent();
 
 	// se realizan todas las comprobaciones
 	virtual void update();

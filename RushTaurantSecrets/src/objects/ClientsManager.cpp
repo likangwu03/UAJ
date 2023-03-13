@@ -52,7 +52,7 @@ Client* ClientsManager::createClient(int posGroup) {
 	Vector origin = _ecs::OUT_ENTRY;
 	origin.setY(origin.getY() - posGroup);
 
-	return new Client(scene, sprite, RelativeToGlobal::point(origin), menu, entrance.size(), speed, posGroup);
+	return new Client(scene, sprite, RelativeToGlobal::pointRestaurant(origin), menu, entrance.size(), speed, posGroup);
 }
 
 void ClientsManager::checkCashRegister() {
@@ -182,6 +182,13 @@ void ClientsManager::refreshClientsGroup() {
 	}
 }
 
+void ClientsManager::initTables() {
+	for (auto obj : *scene->getGroup(_ecs::grp_DESK)) {
+		DeskComp* desk = obj->getComponent<DeskComp>();
+		tables[desk->getID() - 1] = desk;
+	}
+}
+
 ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
 	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
@@ -216,14 +223,31 @@ void ClientsManager::assignFirstGroup(int table) {
 	}
 }
 
-void ClientsManager::collectAndLeave() {
-	while (pay.size() > 0) {
-		Client* firstPay = pay.front();
-		firstPay->getComponent<ClientMovement>()->payAndLeave();
-		pay.pop_front();
-		auto it = pay.begin();
-		recolocatePayAll(it);
+bool ClientsManager::collectAndLeave() {
+	bool canCollect = true;
+
+	// se comprueba si todos los integrantes de cada grupo están en colocados en la cola
+	// listos para cobrar
+	auto it = pay.begin();
+	while (it != pay.end() && canCollect) {
+		if (!(*it)->getComponent<ClientMovement>()->isEveryonePaying()) {
+			canCollect = false;
+		}
+		++it;
 	}
+
+	// si es así, se les cobra
+	if (canCollect) {
+		while (pay.size() > 0) {
+			Client* firstPay = pay.front();
+			firstPay->getComponent<ClientMovement>()->payAndLeave();
+			pay.pop_front();
+			auto it = pay.begin();
+			recolocatePayAll(it);
+		}
+	}
+
+	return canCollect;
 }
 
 bool ClientsManager::canOccupyPay(vector<Client*> mates) {
@@ -251,11 +275,8 @@ bool ClientsManager::canOccupyPay(vector<Client*> mates) {
 	}
 }
 
-void ClientsManager::initTables() {
-	for (auto obj : *scene->getGroup(_ecs::grp_DESK)) {
-		DeskComp* desk = obj->getComponent<DeskComp>();
-		tables[desk->getID() - 1] = desk;
-	}
+void ClientsManager::initComponent() {
+	initTables();
 }
 
 void ClientsManager::update() {

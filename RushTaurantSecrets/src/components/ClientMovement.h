@@ -31,6 +31,8 @@ private:
 	vector<Client*> mates;
 	int posGroup;
 
+	void addPath(const vector<Vector>& points);
+
 	// función que se utiliza para el find que se hace en la función de más abajo
 	// tienen que ser siempre estáticas
 	// se comprueba si un cliente no ha terminado de comer
@@ -38,6 +40,9 @@ private:
 
 	// comprobar si todos los integrantes del grupo han terminado de comeer
 	bool hasEveryoneEaten() const;
+
+	// se comprueba si un cliente no está en la cola esperando a pagar
+	static bool isNotPaying(Client* mate);
 
 	// se comprueba si alguno de sus compañero se ha marchado para que él también se vaya
 	void goOut(ClientState::States currentState);
@@ -94,7 +99,7 @@ public:
 	// no se inicializa en la constructora porque
 	// ClientMovement tiene que ejecutarse antes que ClientState,
 	// pero ClientState se crea después que ClientMovement
-	void initState();
+	virtual void initState();
 
 	// recolocarse en la entrada si alguien se ha marchado
 	void recolocateEntrance();
@@ -113,6 +118,9 @@ public:
 	// paga por su comida y se marcha
 	void payAndLeave();
 
+	// comprobar si todos los integrantes del grupo están en la cola esperando a pagar
+	bool isEveryonePaying() const;
+
 	inline bool hasAbandonedEntrance() const {
 		return clientState->getState() == ClientState::OUT && posEntrance != -1;
 	}
@@ -129,6 +137,7 @@ public:
 	inline void setGroup(vector<Client*> mates) {
 		this->mates = mates;
 	}
+
 
 	virtual void update();
 };

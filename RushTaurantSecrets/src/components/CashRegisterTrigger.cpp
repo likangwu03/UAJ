@@ -11,14 +11,16 @@ void CashRegisterTrigger::isOverlapping() {
 		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
-	list<Client*>* list = cM->getPayQueue();
-	for (auto it : *list) { //añadir al contador de dinero y de reputación
-		money->addMoney(_ecs::Dishes[it->getComponent<ClientState>()->getOrderedDish()].price);
-		Reputation::instance()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 50);
+	// informa al cliente de que ya puede irse
+	if (cM->collectAndLeave()) {
+		list<Client*>* list = cM->getPayQueue();
+		for (auto it : *list) { //añadir al contador de dinero y de reputación
+			money->addMoney(_ecs::Dishes[it->getComponent<ClientState>()->getOrderedDish()].price);
+			Reputation::instance()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 50);
+		}
 	}
-	cM->collectAndLeave(); //informa al cliente de que ya puede irse
-
 }
+
 void CashRegisterTrigger::onTriggerExit() {
 	 highlight->setActive(false);
 }
