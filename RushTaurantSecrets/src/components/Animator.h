@@ -9,7 +9,7 @@ using namespace std;
 class Animator : public Component
 {
 protected:
-	static const int FRAMERATE = 10;
+	static const int FRAMERATE = 7;
 	Texture* texture;
 	//fila de la anim
 	int currentAnim;

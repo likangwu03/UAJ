@@ -11,6 +11,7 @@ state(nullptr), sdl(SDLUtils::instance())
 	textures.bubble = &((*sdl).images().at("BUBBLE_ICON"));
 	textures.takingNote = &((*sdl).images().at("CLIENT_TAKINGNOTE_ICON_ANIM"));
 	textures.thinking = &((*sdl).images().at("CLIENT_THINKING_ICON_ANIM"));
+	textures.eating = &((*sdl).images().at("CLIENT_EATING_ICON_ANIM"));
 
 	anim->setActive(false); //al principio no tiene ning¨²n UIAnim
 };
@@ -41,7 +42,7 @@ void ClientStateRender::renderOrderingState() {
 void ClientStateRender::renderEatingState() {
 	if (anim->isActive())
 		anim->setActive(false);
-	//falta anim
+	anim->setTexture(textures.eating, 0, 2, 0, 20);
 }
 
 void ClientStateRender::render() {

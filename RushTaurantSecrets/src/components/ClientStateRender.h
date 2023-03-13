@@ -32,6 +32,7 @@ private:
 		Texture* dish = nullptr;
 		Texture* thinking = nullptr;
 		Texture* takingNote = nullptr;
+		Texture* eating = nullptr;
 	};
 
 	OrderedDishTex textures;

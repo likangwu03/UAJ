@@ -504,6 +504,12 @@
       "rows": 1
     },
     {
+      "id": "CLIENT_EATING_ICON_ANIM",
+      "file": "assets/Sprites/UI/HUD/client_eating.png",
+      "cols": 2,
+      "rows": 1
+    },
+    {
       "id": "CLIENT_TAKINGNOTE_ICON_ANIM",
       "file": "assets/Sprites/UI/HUD/takingNote.png",
       "cols": 1,
