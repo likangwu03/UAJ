@@ -3,7 +3,6 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../structure/Structure_def.h"
 #include "../structure/GameObject.h"
-#include "../structure/SceneManager.h"
 #include "../gameObjects/DailyMenu.h"
 
 using namespace std;

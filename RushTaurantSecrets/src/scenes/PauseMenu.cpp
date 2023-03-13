@@ -1,13 +1,14 @@
 #include "PauseMenu.h"
+#include "../structure/GameManager.h"
 
 #include "../utils/checkML.h"
 
 void PauseMenu::mMenu() {
-	SceneManager::instance()->changeScene(nullptr,2);
+	GameManager::instance()->changeScene(GameManager::instance()->getMainMenu());
 }
 
 void PauseMenu::bResume() {
-	SceneManager::instance()->changeScene(nullptr,1);
+	GameManager::instance()->popScene();
 }
 
 PauseMenu::PauseMenu() {
@@ -30,10 +31,10 @@ PauseMenu::~PauseMenu() {
 
 void PauseMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->changeScene(new DailyMenuScene());
+		GameManager::instance()->changeScene(GameManager::instance()->getDailyMenu());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->changeScene(new SuperMarket());
+		GameManager::instance()->changeScene(GameManager::instance()->getSupermarket());
 	}
 	else {
 		Scene::handleEvents();

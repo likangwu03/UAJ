@@ -9,7 +9,8 @@ private:
 	ShoppingMenuComp* menu;
 	Scene* scene;
 public:
-	CartelManager(Scene* scene) :scene(scene),selectedCartel(nullptr),menu(scene->getConnectedScene()->getGameObject(hdr_SHOP_MENU1)->getComponent<ShoppingMenuComp>()) {}
+	CartelManager(Scene* scene) : 
+		scene(scene), selectedCartel(nullptr), menu(scene->getConnectedScene()->getGameObject(hdr_SHOP_MENU1)->getComponent<ShoppingMenuComp>()) {}
 	void signIn(CartelTrigger* c); //llamado por onTriggerEnter de cartelTrigger 
 	void signOut(CartelTrigger* c); //llamado por onTriggerExit de cartelTrigger
 

@@ -1,5 +1,7 @@
 #include "Restaurant.h"
 
+#include "../structure/GameManager.h"
+
 #include "../objects/DishCombinator.h"
 #include "../structure/CollisionsManager.h"
 
@@ -10,22 +12,12 @@
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
 
-#include "../structure/SceneManager.h"
 #include <set>
 
 #include "../utils/checkML.h"
 
 
-Restaurant::Restaurant(): dc(DishCombinator::init()) { 
-	SceneManager::instance()->setResize(false);
-	pantry = new Pantry();
-
-	pantry->linkRestaurant(this);
-	ui = new UIRestaurant();
-	SceneManager::instance()->setResize();
-
-	init(); 
-}
+Restaurant::Restaurant(): dc(DishCombinator::init()) { init(); }
 
 Restaurant::~Restaurant() {
 	end();
@@ -100,17 +92,12 @@ void Restaurant::update() {
 }
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->setResize(false);
-		SceneManager::instance()->changeScene(pantry,-1);
+		GameManager::instance()->changeScene(GameManager::instance()->getPantry());
 	}
-	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->changeScene(nullptr,1);
-	}
-	else if (ih->isKeyDown(SDL_SCANCODE_P)) {
-		SceneManager::instance()->changeScene(new PauseMenu());
+	else if (ih->isKeyDown(SDLK_p)) {
+		GameManager::instance()->changeScene(GameManager::instance()->getPauseMenu());
 	}
 	else {
 		Scene::handleEvents();
-		//ui->handleEvents();
 	}
 }

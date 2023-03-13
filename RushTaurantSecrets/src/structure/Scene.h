@@ -1,12 +1,17 @@
 #pragma once
 #include <vector>
 #include <array>
-#include "Structure_def.h"
-#include "../sdlutils/InputHandler.h"
-#include "GameManager.h"
 #include <list>
+#include <string>
+#include "Structure_def.h"
+
 class GameObject;
+class GameManager;
+class InputHandler;
+class Vector;
+
 using namespace _ecs;
+
 class Scene {
 private:
 	friend class GameObject;
@@ -46,4 +51,6 @@ public:
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);
 
+	virtual void reset() {};
+	virtual float getResizeFactor() { return 0; };
 };

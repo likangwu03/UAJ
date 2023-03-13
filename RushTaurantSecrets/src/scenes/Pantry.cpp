@@ -1,6 +1,6 @@
 #include "Pantry.h"
 #include "Restaurant.h"
-#include "../structure/SceneManager.h"
+#include "../structure/GameManager.h"
 
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
@@ -55,12 +55,7 @@ void Pantry::update() {
 
 void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->setResize();
-		SceneManager::instance()->changeScene(rest, -1);
-	}
-	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->setResize();
-		SceneManager::instance()->changeScene(nullptr,1);
+		GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
 	}
 	else {
 		Scene::handleEvents();

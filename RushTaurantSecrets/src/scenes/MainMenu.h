@@ -1,7 +1,11 @@
 #pragma once
+
 #include "../structure/Scene.h"
-#include "../gameObjects/ButtonGO.h"
-#include "../sdlutils/Texture.h"
+
+class GameObject;
+class ButtonGO;
+class Texture;
+
 class MainMenu : public Scene {
 private:
 	static void start();
@@ -14,5 +18,5 @@ public:
 	MainMenu();
 	~MainMenu();
 
-	void handleEvents() override;
+	void handleEvents();
 };

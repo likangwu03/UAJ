@@ -2,14 +2,17 @@
 
 #include "../utils/Singleton.h"
 
-#include "../objects/Reputation.h"
-#include "../objects/Money.h"
-#include "../scenes/Restaurant.h"
-#include "../scenes/Pantry.h"
-#include "../scenes/SuperMarket.h"
-#include "../gameObjects/Player.h"
+class Scene;
+class MainMenu;
+class Restaurant;
+class Pantry;
+class DailyMenuScene;
+class SuperMarket;
+class PauseMenu;
+class Reputation;
+class Money;
 
-class GameManager:public Singleton<GameManager> {
+class GameManager :public Singleton<GameManager> {
 	friend Singleton<GameManager>;
 
 public:
@@ -18,22 +21,50 @@ public:
 	GameManager& operator=(GameManager&) = delete;
 	GameManager& operator=(GameManager&&) = delete;
 
-	Player* player;
+	
+private:
+	Scene* currentScene;
+	Scene* previousScene;
+	MainMenu* mainMenu;
+	Restaurant* restaurant;
+	Pantry* pantry;
+	DailyMenuScene* dailyMenu;
+	SuperMarket* supermarket;
+	PauseMenu* pauseMenu;
 
 	Reputation* reputation;
 	Money* money;
 
-	Restaurant* restaurant;
-	Pantry* pantry;
-	SuperMarket* supermarket;
-
-private:
+	float dayTime;
+	bool multiplayer;
 	bool hasKilled;
+	bool gameOver;
 
-
-	GameManager(): hasKilled(false), money(0), reputation() { };
+	GameManager();
 
 public:
-	bool& getHasKill() { return hasKilled; }
-	void setHasKill(bool hKill) { hasKilled = hKill; }
+	void initialize();
+	~GameManager();
+
+	void update();
+	void handleEvents();
+	void render();
+	void refresh();
+
+	void changeScene(Scene* scene);
+	void popScene();
+	Scene* getCurrentScene();
+	Scene* getMainMenu();
+	Scene* getRestaurant();
+	Scene* getPantry();
+	Scene* getDailyMenu();
+	Scene* getSupermarket();
+	Scene* getPauseMenu();
+
+	Reputation* getReputation();
+	Money* getMoney();
+
+	bool getHasKill();
+	void setHasKill(bool hKill);
+
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../structure/Structure_def.h"
+
 class Money {
 private:
 	const int INITIALANMOUNT = 0;

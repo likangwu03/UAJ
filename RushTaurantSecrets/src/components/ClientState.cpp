@@ -1,5 +1,6 @@
 #include "ClientState.h"
 
+#include "../structure/GameManager.h"
 #include "../objects/Reputation.h"
 #include "../utils/checkML.h"
 
@@ -32,7 +33,7 @@ void ClientState::update() {
 		// Si la felicidad llega a 0, se pone el estado a OUT
 		if (happiness <= 0) {
 			setState(OUT);
-			Reputation::instance()->reduceReputation(5);
+			GameManager::instance()->getReputation()->reduceReputation(5);
 			render->renderEatingState();
 #ifdef _DEBUG
 			cout << "Happiness reached 0, leaving restaurant" << endl;

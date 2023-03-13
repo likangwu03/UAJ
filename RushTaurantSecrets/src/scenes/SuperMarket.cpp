@@ -1,5 +1,5 @@
 #include "SuperMarket.h"
-#include "../structure/SceneManager.h"
+#include "../structure/GameManager.h"
 
 #include "../utils/checkML.h"
 
@@ -19,7 +19,7 @@ void SuperMarket::update() {
 }
 void SuperMarket::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->changeScene(new Restaurant(), 1);
+		GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
 	}
 	else {
 		Scene::handleEvents();

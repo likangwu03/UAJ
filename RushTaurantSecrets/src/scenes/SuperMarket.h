@@ -5,8 +5,11 @@
 #include "../structure/CartelManager.h"
 #include "../components/MapCreator.h"
 #include "../scenes/UIMarket.h"
+
 class SuperMarket: public Scene {
 private:
+	const float RESIZEFACTOR = 0.6666666667;
+
 	CollisionsManager* cm;
 	GameObject* map;
 	GameObject* mapTop;
@@ -24,4 +27,7 @@ public:
 	void init();
 	virtual Scene* getConnectedScene() { return uiMarket; }
 	CartelManager* getCartelManager() { return cartelM; }
+
+	float getResizeFactor() { return RESIZEFACTOR; }
+
 };

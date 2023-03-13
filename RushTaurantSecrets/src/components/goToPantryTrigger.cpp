@@ -1,17 +1,12 @@
 #include "goToPantryTrigger.h"
-#include "../structure/SceneManager.h"
+
+#include "../sdlutils/InputHandler.h"
+#include "../structure/GameManager.h"
 #include "../utils/checkML.h"
 
-goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
-	ih = InputHandler::instance();
-	sceneM = SceneManager::instance();
-	//restaurant = ... 
-};
+goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) { };
+
 void goToPantryTrigger::onTriggerEnter() {
-	sceneM->setResize(false);
-	sceneM->changeScene(static_cast<Restaurant*>(parent->getScene())->getPantry(), -1);
-	static_cast<Restaurant*>(parent->getScene())->getPantry()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
-
-	//restaurant->getPantry()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
-
+	if(ih->isKeyDown(SDLK_SPACE))
+		GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
 }

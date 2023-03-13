@@ -1,4 +1,5 @@
 ﻿#include "CashRegisterTrigger.h"
+#include "../structure/GameManager.h"
 #include "../objects/Reputation.h"
 #include "../utils/checkML.h"
 
@@ -14,7 +15,7 @@ void CashRegisterTrigger::isOverlapping() {
 	list<Client*>* list = cM->getPayQueue();
 	for (auto it : *list) { //añadir al contador de dinero y de reputación
 		money->addMoney(_ecs::Dishes[it->getComponent<ClientState>()->getOrderedDish()].price);
-		Reputation::instance()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 50);
+		GameManager::instance()->getReputation()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 50);
 	}
 	cM->collectAndLeave(); //informa al cliente de que ya puede irse
 

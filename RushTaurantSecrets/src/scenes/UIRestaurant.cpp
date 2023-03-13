@@ -3,7 +3,8 @@
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
-#include "../objects/Money.h" // cambiar cuando se cambie la clase Money
+#include "../structure/GameManager.h"
+#include "../objects/Money.h"
 #include "../objects/Reputation.h"
 #include "../gameObjects/Bin.h"
 #include "../objects/Reputation.h"
@@ -17,7 +18,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
-	moneyTxt = Money::init(moneyContainer, 200);
+	moneyTxt = GameManager::instance()->getMoney();
 
 	// pensé en hacerlo pasando un struct como parámetro, pero el struct tenía que redefinirse demasiadas veces,
 	// así que Cleon me dijo que pasara directamente la información del struct como parámetro
@@ -60,7 +61,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 		createIcon("EMPTY_STAR", Vector(80 + i * 40, 25), 30, 32, 0, grp_ICONS, hdr_EMPTY_STAR);
 
 
-	reputation = Reputation::instance();
+	reputation = GameManager::instance()->getReputation();
 
 	fullStarTexture = &((*sdl).images().at("STAR"));
 	actReputation = reputation->getReputation();
