@@ -1,11 +1,14 @@
 #include "UIMarket.h"
+#include "../structure/GameManager.h"
+#include "../objects/Money.h"
+
 #include "../components/ShoppingMenuComp.h"
 #include "../utils/checkML.h"
 
 UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
-	moneyTxt = Money::init(moneyContainer, 200);
+	moneyTxt = GameManager::instance()->getMoney();
 	ih = InputHandler::instance();
 	basketMarket = new BasketMarket(this);
 

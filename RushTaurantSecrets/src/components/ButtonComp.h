@@ -11,13 +11,11 @@ using namespace std;
 
 class SceneManager;
 
-class ButtonComp : public Component
-{
+class ButtonComp : public Component {
 private:
 
 	SDL_Joystick* _joy;
 	Transform* transform;
-	SceneManager* sceneManager;
 	Texture* highlight;
 	void (*_callback)();
 	bool highlighted;

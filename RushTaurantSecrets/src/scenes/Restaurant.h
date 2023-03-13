@@ -9,11 +9,11 @@ class ClientsManager;
 
 class Restaurant : public Scene {
 private:
+	const float RESIZEFACTOR = 0.6666666667;
 	Pantry* pantry;
 	DishCombinator* dc;
 	UIRestaurant* ui;
 	CollisionsManager* cm;
-	//GameObject* map;
 	
 	GameObject* player;
 	ClientsManager* clientsManager;
@@ -26,7 +26,9 @@ public:
 	Restaurant();
 	~Restaurant();
 
-	UIRestaurant* getConnectedScene() { return ui; }
+	void callAfterCreating();
+
+	UIRestaurant* getUI() { return ui; }
 	Pantry* getPantry() { return pantry; }
 	void linkPantry(Pantry* pantry);
 	void render();
@@ -35,4 +37,6 @@ public:
 	virtual void initComponent();
 	// sirve para crear los objetos necesarios
 	void init();
+
+	float getResizeFactor() { return RESIZEFACTOR; }
 };

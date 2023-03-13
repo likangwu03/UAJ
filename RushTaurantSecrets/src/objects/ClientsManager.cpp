@@ -1,6 +1,9 @@
 #include "./ClientsManager.h"
 #include "../components/DeskComp.h"
 
+#include "../structure/GameManager.h"
+#include "../scenes/Restaurant.h"
+
 void ClientsManager::addFrequently() {
 	if (!UIrestaurant->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 		if (elapsedTime > timer) {
@@ -193,7 +196,7 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
 
-	UIrestaurant = dynamic_cast<UIRestaurant*>(scene->getConnectedScene());
+	UIrestaurant = GameManager::instance()->getRestaurant()->getUI();
 	if (UIrestaurant == nullptr) {
 		throw new string("Error conversión Scene en UIRestaurant");
 	}

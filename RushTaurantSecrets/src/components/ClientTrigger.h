@@ -6,6 +6,10 @@
 #include "../components/TriggerComp.h"
 #include "../components/ClientState.h"
 #include "../structure/Paths_def.h"
+
+#include "../structure/GameManager.h"
+#include "../scenes/Restaurant.h"
+
 class ClientTrigger : public TriggerComp
 {
 	ClientState* clientState;
@@ -16,7 +20,7 @@ public:
 		TriggerComp(parent, pos_, width_, height_), selected(false),
 		//clientManager(ClientsManager::get()),
 		clientState(parent->getComponent<ClientState>()),
-		inventory(static_cast<UIRestaurant*>(parent->getScene()->getConnectedScene())->getInventory()->getComponent<InventoryComp>()) { };
+		inventory(GameManager::instance()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()) { };
 
 	virtual void isOverlapping();
 

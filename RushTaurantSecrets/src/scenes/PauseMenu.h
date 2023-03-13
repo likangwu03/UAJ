@@ -1,7 +1,6 @@
 #pragma once
 #include "../structure/Scene.h"
 #include "../sdlutils/Texture.h"
-#include "../structure/SceneManager.h"
 #include "../gameObjects/ButtonGO.h"
 
 

@@ -1,22 +1,17 @@
 #pragma once
 
-#include "../structure/GameObject.h"
-#include "../structure/Component.h"
-#include "../structure/Manager.h"
+#include "../structure/Structure_def.h"
 
-class Money : public Manager <Money> {
-
-	friend Manager<Money>;
-
+class Money {
 private:
+	const int INITIALANMOUNT = 0;
 	int amount;
-	Money(GameObject* parent, int initialMoney);
 
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_MONEY;
+	Money() : amount(INITIALANMOUNT) { }
 
-	void initMoney(int num);
-	int getMoney();
-	void addMoney(int num);
-	void subtractMoney(int num);
+	int getMoney() { return amount; }
+	void addMoney(int num) { amount += num; }
+	void subtractMoney(int num) { amount -= num; }
 };

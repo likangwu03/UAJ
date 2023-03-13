@@ -1,12 +1,17 @@
 #pragma once
 #include <vector>
 #include <array>
-#include "Structure_def.h"
-#include "../sdlutils/InputHandler.h"
-#include "GameInfor.h"
 #include <list>
+#include <string>
+#include "Structure_def.h"
+
 class GameObject;
+class GameManager;
+class InputHandler;
+class Vector;
+
 using namespace _ecs;
+
 class Scene {
 private:
 	friend class GameObject;
@@ -16,7 +21,7 @@ private:
 	std::list<GameObject*> renderListMiddle;
 	std::list<GameObject*> renderListDown;
 protected:
-	GameInfor* Infor;
+	GameManager* Infor;
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 
@@ -28,7 +33,6 @@ protected:
 	void CreateMap(std::string file, RenderPos Rpos, Vector pos);
 public:
 	virtual ~Scene();
-	virtual Scene* getConnectedScene() { return nullptr; }//entre escena principal y UI
 
 	const uint32_t& frameTime;
 
@@ -46,4 +50,7 @@ public:
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);
 
+	virtual void callAfterCreating() {};
+	virtual void reset() {};
+	virtual float getResizeFactor() { return 0; };
 };

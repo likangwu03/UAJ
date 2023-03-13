@@ -1,11 +1,11 @@
 #include "DailyMenuScene.h"
 #include "SuperMarket.h"
 #include "../utils/checkML.h"
-#include "../structure/SceneManager.h"
+#include "../structure/GameManager.h"
 
 void DailyMenuScene::select()
 {
-	SceneManager::instance()->changeScene(new SuperMarket(), 1);
+	GameManager::instance()->changeScene(GameManager::instance()->getSupermarket());
 }
 
 DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64)

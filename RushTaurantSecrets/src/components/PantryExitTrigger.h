@@ -4,7 +4,7 @@
 class SceneManager;
 class PantryExitTrigger : public TriggerComp {
 private:
-	SceneManager* sceneM;
+	GameObject* parent;
 	InputHandler* ih;
 
 public:

@@ -1,5 +1,7 @@
 #include "Restaurant.h"
 
+#include "../structure/GameManager.h"
+
 #include "../objects/DishCombinator.h"
 #include "../structure/CollisionsManager.h"
 
@@ -10,35 +12,41 @@
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
 
-#include "../structure/SceneManager.h"
 #include <set>
 
 #include "../utils/checkML.h"
 
 
 Restaurant::Restaurant(): dc(DishCombinator::init()) { 
-	SceneManager::instance()->setResize(false);
-	pantry = new Pantry();
-
-	pantry->linkRestaurant(this);
 	ui = new UIRestaurant();
-	SceneManager::instance()->setResize();
+	cm = new CollisionsManager(this);
+	player = new Player(this, 0);
 
-	init(); 
+	
 }
 
 Restaurant::~Restaurant() {
-	end();
 	pantry->linkRestaurant(nullptr);
-	delete pantry;
 	delete ui;
 	delete cm;
 }
 
+void Restaurant::callAfterCreating() {
+	// clientsManager
+	GameObject* managerContainer = new GameObject(this);
+	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
+	CreateMap();
+	initRender();
+
+	// las mesas se inicializan luego de haberse creado
+	clientsManager->initTables();
+
+	initComponent();
+}
 
 
 vector<_ecs::_dish_id> Restaurant::menu() const {
-	// Men?del día aleatorio (lo rellena con 4 platos diferentes
+	// Men?del dï¿½a aleatorio (lo rellena con 4 platos diferentes
 	// entre s?y los pasa a un vector para poder acceder a ellos)
 	set<int> aux;
 	for (int i = 0; i < 4; i++) {
@@ -51,22 +59,6 @@ vector<_ecs::_dish_id> Restaurant::menu() const {
 	return menu;
 }
 
-void Restaurant::init() {
-	
-	cm = new CollisionsManager(this);
-	player = new Player(this, 0);
-
-	// clientsManager
-	GameObject* managerContainer = new GameObject(this);
-	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
-	CreateMap();
-	initRender();
-
-	// las mesas se inicializan luego de haberse creado
-	// clientsManager->initTables();
-
-	initComponent();
-}
 
 void Restaurant::CreateMap() {
 	Scene::CreateMap("assets/tilemaps/restaurant.tmx", Down, Vector());
@@ -100,17 +92,12 @@ void Restaurant::update() {
 }
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->setResize(false);
-		SceneManager::instance()->changeScene(pantry,-1);
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPantry());
 	}
-	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->changeScene(nullptr,1);
-	}
-	else if (ih->isKeyDown(SDL_SCANCODE_P)) {
-		SceneManager::instance()->changeScene(new PauseMenu());
+	else if (ih->isKeyDown(SDLK_p)) {
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPauseMenu());
 	}
 	else {
 		Scene::handleEvents();
-		//ui->handleEvents();
 	}
 }

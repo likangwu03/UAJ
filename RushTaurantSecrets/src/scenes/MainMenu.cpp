@@ -1,5 +1,10 @@
 #include "MainMenu.h"
-#include "../structure/SceneManager.h"
+
+#include "../structure/Scene.h"
+#include "../gameObjects/ButtonGO.h"
+#include "../sdlutils/Texture.h"
+
+#include "../structure/GameManager.h"
 #include "../scenes/Restaurant.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
@@ -7,8 +12,7 @@
 #include "../utils/checkML.h"
 
 void MainMenu::start() {
-	SceneManager::instance()->setResize();
-	SceneManager::instance()->changeScene(new Restaurant());
+	GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
 }
 
 MainMenu::MainMenu() {
@@ -27,11 +31,10 @@ MainMenu::~MainMenu() {
 
 void MainMenu::handleEvents(){
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->changeScene(new DailyMenuScene());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getDailyMenu());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		SceneManager::instance()->setResize();
-		SceneManager::instance()->changeScene(new SuperMarket());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
 	}
 	else {
 		Scene::handleEvents();
