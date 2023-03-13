@@ -73,11 +73,16 @@ UIRestaurant::UIRestaurant() : Scene() {
 	float frequency = 1000;
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
 	new Warning(thiefExclamation, frequency);
+
+	intObjective = 30;
+	objectiveTextTexture = new Texture(sdl->renderer(), std::to_string(intObjective), *font, build_sdlcolor(0x000000FF));
+	createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), std::to_string(intObjective).length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
 }
 
 UIRestaurant::~UIRestaurant() {
 	delete font;
 	delete moneyTextTexture;
+	delete objectiveTextTexture;
 }
 
 GameObject* UIRestaurant::dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
