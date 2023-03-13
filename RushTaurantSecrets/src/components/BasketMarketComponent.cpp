@@ -12,8 +12,8 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 	//hacer algo para addPrice................................
 	//addPrice es el dinero total según n cantidades del ingrediente ing añadida a la cesta
 
-	if (totalDifIngr < MAX_ING) { // si no ha superado el l韒ite de ingredientes a comprar
-		auto it = ingredients.find(ing);
+	auto it = ingredients.find(ing);
+	if (totalDifIngr < MAX_ING || it->first == ing) { // si no ha superado el límite de ingredientes a comprar o el ingrediente ya está en la cesta
 
 		if (it != ingredients.end()) {
 			it->second.amount += n;
