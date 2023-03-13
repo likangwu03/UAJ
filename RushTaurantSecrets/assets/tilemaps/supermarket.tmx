@@ -333,7 +333,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="16" name="obj" visible="0">
+ <objectgroup id="16" name="obj">
   <object id="1" name="Cartel" x="385" y="431" width="47" height="62.5">
    <properties>
     <property name="h" type="float" value="100"/>
@@ -463,7 +463,7 @@
   <object id="16" name="Cartel" x="384.5" y="625.5" width="47" height="63">
    <properties>
     <property name="h" type="float" value="115"/>
-    <property name="id" type="int" value="46"/>
+    <property name="id" type="int" value="50"/>
     <property name="w" type="float" value="72"/>
     <property name="x" type="float" value="380"/>
     <property name="y" type="float" value="615"/>

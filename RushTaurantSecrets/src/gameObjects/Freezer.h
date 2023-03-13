@@ -12,7 +12,7 @@ class Freezer :public GameObject
 private:
 
 public:
-	Freezer(Scene* scene, Vector pos, float w, float h) :GameObject(scene) {
+	Freezer(Scene* scene, Vector pos, float w, float h) :GameObject(scene,grp_GENERAL, hdr_FREEZER) {
 		new Transform(this, pos, Vector(0, 0), w, h, 0, true); 
 		new Image(this, "FREEZER_OPEN");
 		new FreezerComp(this);

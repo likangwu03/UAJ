@@ -22,10 +22,10 @@ private:
 	FreezerTex textures;
 	GameInfor* gameInfo;
 
+	void isClosedWhenKilled();
+	void isOpenWhenKilled();
 public:
 	FreezerComp(GameObject* parent);
 	void isOpen();
-	void isClosedWhenKilled();
-	void isOpenWhenKilled();
 };
 

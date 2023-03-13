@@ -6,6 +6,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
 #include "../structure/Paths_def.h"
+#include "../components/FreezerComp.h"
 #include <vector>
 
 enum Objective { Secret, Freezer };
@@ -25,12 +26,12 @@ private:
 	float escapeSpeed;
 
 	void addPath(const vector<Vector>& points);
+	FreezerComp* freezer;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 
 	ThiefMovement(GameObject* parent, Objective objective, int pos, float escapeSpeed);
-
 	// se tendría que llamar al pulsar el botón de matar
 	void die();
 

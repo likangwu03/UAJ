@@ -88,6 +88,7 @@ namespace _ecs {
 		hdr_PRUEBA,
 		hdr_KITCHENISLAND,
 		hdr_SHOP_MENU1,
+		hdr_FREEZER,
 		// Do not erase pls
 		hdr_INVALID
 	};
