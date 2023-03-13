@@ -20,14 +20,17 @@ private:
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket(this) ){ init(); }
 	~SuperMarket();
+	
+	void callAfterCreating();
+
 	virtual void initComponent();
 	void render();
 	void update();
 	void handleEvents();
 	void init();
-	virtual Scene* getConnectedScene() { return uiMarket; }
+	UIMarket* getUI() { return uiMarket; }
 	CartelManager* getCartelManager() { return cartelM; }
 
 	float getResizeFactor() { return RESIZEFACTOR; }
-
+	
 };

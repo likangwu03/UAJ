@@ -33,7 +33,6 @@ protected:
 	void CreateMap(std::string file, RenderPos Rpos, Vector pos);
 public:
 	virtual ~Scene();
-	virtual Scene* getConnectedScene() { return nullptr; }//entre escena principal y UI
 
 	const uint32_t& frameTime;
 
@@ -51,6 +50,7 @@ public:
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);
 
+	virtual void callAfterCreating() {};
 	virtual void reset() {};
 	virtual float getResizeFactor() { return 0; };
 };

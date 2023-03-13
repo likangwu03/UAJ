@@ -26,7 +26,9 @@ public:
 	Restaurant();
 	~Restaurant();
 
-	UIRestaurant* getConnectedScene() { return ui; }
+	void callAfterCreating();
+
+	UIRestaurant* getUI() { return ui; }
 	Pantry* getPantry() { return pantry; }
 	void linkPantry(Pantry* pantry);
 	void render();

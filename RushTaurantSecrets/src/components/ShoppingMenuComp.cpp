@@ -1,6 +1,7 @@
 ﻿#include "ShoppingMenuComp.h"
 #include "../structure/Scene.h"
 #include "../scenes/UIMarket.h"
+#include "../structure/GameManager.h"
 #include "../scenes/SuperMarket.h"
 
 ShoppingMenuComp::ShoppingMenuComp(GameObject* parent) :Component(parent, id),
@@ -15,7 +16,7 @@ priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), 
 
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
-	playerTransform = parent->getScene()->getConnectedScene()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
+	playerTransform = GameManager::instance()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {

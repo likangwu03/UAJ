@@ -17,16 +17,32 @@
 #include "../utils/checkML.h"
 
 
-Restaurant::Restaurant(): dc(DishCombinator::init()) { init(); }
+Restaurant::Restaurant(): dc(DishCombinator::init()) { 
+	ui = new UIRestaurant();
+	cm = new CollisionsManager(this);
+	player = new Player(this, 0);
+
+	
+}
 
 Restaurant::~Restaurant() {
-	end();
 	pantry->linkRestaurant(nullptr);
-	delete pantry;
 	delete ui;
 	delete cm;
 }
 
+void Restaurant::callAfterCreating() {
+	// clientsManager
+	GameObject* managerContainer = new GameObject(this);
+	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
+	CreateMap();
+	initRender();
+
+	// las mesas se inicializan luego de haberse creado
+	clientsManager->initTables();
+
+	initComponent();
+}
 
 
 vector<_ecs::_dish_id> Restaurant::menu() const {
@@ -43,22 +59,6 @@ vector<_ecs::_dish_id> Restaurant::menu() const {
 	return menu;
 }
 
-void Restaurant::init() {
-	
-	cm = new CollisionsManager(this);
-	player = new Player(this, 0);
-
-	// clientsManager
-	GameObject* managerContainer = new GameObject(this);
-	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
-	CreateMap();
-	initRender();
-
-	// las mesas se inicializan luego de haberse creado
-	clientsManager->initTables();
-
-	initComponent();
-}
 
 void Restaurant::CreateMap() {
 	Scene::CreateMap("assets/tilemaps/restaurant.tmx", Down, Vector());
@@ -92,10 +92,10 @@ void Restaurant::update() {
 }
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::instance()->changeScene(GameManager::instance()->getPantry());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPantry());
 	}
 	else if (ih->isKeyDown(SDLK_p)) {
-		GameManager::instance()->changeScene(GameManager::instance()->getPauseMenu());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPauseMenu());
 	}
 	else {
 		Scene::handleEvents();

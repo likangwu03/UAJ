@@ -23,6 +23,9 @@ public:
 
 	
 private:
+	const float RESTSUPERSIZE = 0.6666666667;
+	const float PANTRYSIZE = 0.8333333333;
+
 	Scene* currentScene;
 	Scene* previousScene;
 	MainMenu* mainMenu;
@@ -54,12 +57,12 @@ public:
 	void changeScene(Scene* scene);
 	void popScene();
 	Scene* getCurrentScene();
-	Scene* getMainMenu();
-	Scene* getRestaurant();
-	Scene* getPantry();
-	Scene* getDailyMenu();
-	Scene* getSupermarket();
-	Scene* getPauseMenu();
+	MainMenu* getMainMenu();
+	Restaurant* getRestaurant();
+	Pantry* getPantry();
+	DailyMenuScene* getDailyMenu();
+	SuperMarket* getSupermarket();
+	PauseMenu* getPauseMenu();
 
 	Reputation* getReputation();
 	Money* getMoney();

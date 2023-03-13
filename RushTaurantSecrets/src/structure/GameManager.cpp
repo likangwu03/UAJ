@@ -19,14 +19,23 @@
 GameManager::GameManager() { };
 
 void GameManager::initialize() {
-	mainMenu = new MainMenu;
-	restaurant = new Restaurant;
-	pantry = new Pantry;
-	dailyMenu = new DailyMenuScene;
-	supermarket = new SuperMarket;
-	pauseMenu = new PauseMenu;
-	reputation = new Reputation;
-	money = new Money;
+	reputation = new Reputation();
+	money = new Money();
+
+	mainMenu = new MainMenu();
+	
+	sdlutils().setResizeFactor(PANTRYSIZE);
+	pantry = new Pantry();
+	dailyMenu = new DailyMenuScene();
+
+	sdlutils().setResizeFactor(RESTSUPERSIZE);
+	supermarket = new SuperMarket();
+	pauseMenu = new PauseMenu();
+	restaurant = new Restaurant();
+
+	
+	restaurant->callAfterCreating();
+	supermarket->callAfterCreating();
 
 	currentScene = mainMenu;
 	previousScene = nullptr;
@@ -35,6 +44,7 @@ void GameManager::initialize() {
 	gameOver = false;
 	dayTime = false;
 
+	restaurant->linkPantry(pantry);
 	pantry->linkRestaurant(restaurant);
 
 }
@@ -45,6 +55,7 @@ GameManager::~GameManager() {
 	delete pantry;
 	delete supermarket;
 	delete pauseMenu;
+	delete dailyMenu;
 
 	delete reputation;
 	delete money;
@@ -66,12 +77,10 @@ void GameManager::refresh() {
 
 
 void GameManager::changeScene(Scene* scene) {
-	if (currentScene != scene) {
-		previousScene = currentScene;
-		currentScene = scene;
-		scene->reset();
-		sdlutils().setResizeFactor(scene->getResizeFactor());
-	}
+	previousScene = currentScene;
+	currentScene = scene;
+	scene->reset();
+	sdlutils().setResizeFactor(scene->getResizeFactor());
 }
 void GameManager::popScene() {
 	if (previousScene != nullptr) {
@@ -80,12 +89,12 @@ void GameManager::popScene() {
 	}
 }
 Scene* GameManager::getCurrentScene() { return currentScene; }
-Scene* GameManager::getMainMenu() { return mainMenu; }
-Scene* GameManager::getRestaurant() { return restaurant; }
-Scene* GameManager::getPantry() { return pantry; }
-Scene* GameManager::getDailyMenu() { return dailyMenu; }
-Scene* GameManager::getSupermarket() { return supermarket; }
-Scene* GameManager::getPauseMenu() { return pauseMenu; }
+MainMenu* GameManager::getMainMenu() { return mainMenu; }
+Restaurant* GameManager::getRestaurant() { return restaurant; }
+Pantry* GameManager::getPantry() { return pantry; }
+DailyMenuScene* GameManager::getDailyMenu() { return dailyMenu; }
+SuperMarket* GameManager::getSupermarket() { return supermarket; }
+PauseMenu* GameManager::getPauseMenu() { return pauseMenu; }
 
 Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }

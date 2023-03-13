@@ -11,9 +11,6 @@ PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float widt
 
 
 void PantryExitTrigger::onTriggerEnter() {
-	if (ih->isKeyDown(SDLK_SPACE)) {
-		GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
-		GameManager::instance()->getCurrentScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(1000, 200));	
-
-	}
+	GameManager::instance()->changeScene((Scene*)GameManager::instance()->getRestaurant());
+	GameManager::instance()->getCurrentScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(640, 130));
 }

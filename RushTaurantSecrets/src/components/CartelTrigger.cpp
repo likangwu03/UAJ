@@ -1,11 +1,13 @@
 #include "CartelTrigger.h"
 #include "../utils/checkML.h"
 #include "../structure/CartelManager.h"
+
+#include "../structure/GameManager.h"
 #include "../scenes/SuperMarket.h"
 
 CartelTrigger::CartelTrigger(GameObject* parent, _ecs::_ingredients_id id, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_), ingId(id), highlighted(false),
-	cartelManager(static_cast<SuperMarket*>(parent->getScene())->getCartelManager())
+	cartelManager(GameManager::instance()->getSupermarket()->getCartelManager())
 {
 	unHighlight();
 }

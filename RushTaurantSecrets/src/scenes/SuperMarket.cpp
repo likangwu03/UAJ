@@ -19,7 +19,7 @@ void SuperMarket::update() {
 }
 void SuperMarket::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getRestaurant());
 	}
 	else {
 		Scene::handleEvents();
@@ -32,15 +32,16 @@ void SuperMarket::init() {
 	//cartelM = new CartelManager();
 	player = new Player(this, 0);
 
+	
+}
+
+void SuperMarket::callAfterCreating() {
 	cartelM = new CartelManager(this);
-	/*map = new GameObject(this);
-	new MapCreator(map, "assets/tilemaps/supermarket.tmx");
-	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(mapTop, "assets/tilemaps/supermarket_top_walls.tmx");*/
 	CreateMap();
 	initRender();
 	initComponent();
 }
+
 void SuperMarket::CreateMap() {
 	Scene::CreateMap("assets/tilemaps/supermarket.tmx", Down, Vector());
 	Scene::CreateMap("assets/tilemaps/supermarket_top_walls.tmx", Top, Vector());

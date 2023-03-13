@@ -31,10 +31,10 @@ MainMenu::~MainMenu() {
 
 void MainMenu::handleEvents(){
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::instance()->changeScene(GameManager::instance()->getDailyMenu());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getDailyMenu());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		GameManager::instance()->changeScene(GameManager::instance()->getSupermarket());
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
 	}
 	else {
 		Scene::handleEvents();
