@@ -16,37 +16,42 @@
 
 #include "../utils/checkML.h"
 
-GameManager::GameManager() { };
+GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
+mainMenu(nullptr), dailyMenu(nullptr), currentScene(nullptr), previousScene(nullptr), hasKilled(false), gameOver(false), dayTime(false) { };
+
 
 void GameManager::initialize() {
 	reputation = new Reputation();
 	money = new Money();
 
-	mainMenu = new MainMenu();
 	
-	sdlutils().setResizeFactor(PANTRYSIZE);
-	pantry = new Pantry();
+	mainMenu = new MainMenu();
 	dailyMenu = new DailyMenuScene();
 
+	sdlutils().setResizeFactor(PANTRYSIZE);
+	pantry = new Pantry();
+
 	sdlutils().setResizeFactor(RESTSUPERSIZE);
-	supermarket = new SuperMarket();
 	pauseMenu = new PauseMenu();
+	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
 
 	
+
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
 
-	currentScene = mainMenu;
+	restaurant->linkPantry(pantry);
+	pantry->linkRestaurant(restaurant);
+
+	currentScene = nullptr;
 	previousScene = nullptr;
 
 	hasKilled = false;
 	gameOver = false;
 	dayTime = false;
 
-	restaurant->linkPantry(pantry);
-	pantry->linkRestaurant(restaurant);
-
+	changeScene(mainMenu);
 }
 
 GameManager::~GameManager() {
@@ -86,6 +91,8 @@ void GameManager::popScene() {
 	if (previousScene != nullptr) {
 		currentScene = previousScene;
 		previousScene = nullptr;
+		sdlutils().setResizeFactor(currentScene->getResizeFactor());
+
 	}
 }
 Scene* GameManager::getCurrentScene() { return currentScene; }

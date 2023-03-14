@@ -52,5 +52,5 @@ public:
 
 	virtual void callAfterCreating() {};
 	virtual void reset() {};
-	virtual float getResizeFactor() { return 0; };
+	virtual float getResizeFactor() { return 1; };
 };

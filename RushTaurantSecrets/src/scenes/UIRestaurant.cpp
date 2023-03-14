@@ -36,7 +36,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS, hdr_MENU);
 
 	// inventario (fondo)
-	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 244), 80, 228, 0, grp_ICONS, hdr_INVENTORY);
+	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS, hdr_INVENTORY);
 
 	// reloj (momento del día)
 	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS, hdr_CLOCK);

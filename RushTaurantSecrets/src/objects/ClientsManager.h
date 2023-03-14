@@ -34,7 +34,7 @@ private:
 	list<Client*> pay;
 	// lista con los grupos de clientes
 	list<vector<Client*>> clientsGroups;
-	// menú del día
+	// menï¿½ del dï¿½a
 	vector<_ecs::_dish_id> menu;
 	Scene* scene;
 	UIRestaurant* UIrestaurant;
@@ -45,22 +45,22 @@ private:
 	int maxClients;
 	// indica si el primer cliente en la entra se ha asignado o no
 	bool assignedClient;
-	// se utiliza para indicar si la mesas están ocupadas o no 
-	// pasándole el grupo que se sienta en ella
+	// se utiliza para indicar si la mesas estï¿½n ocupadas o no 
+	// pasï¿½ndole el grupo que se sienta en ella
 	array<DeskComp*, _ecs::NUM_TABLES> tables;
 
-	// añadir un cliente cada cierto tiempo
+	// aï¿½adir un cliente cada cierto tiempo
 	void addFrequently();
 
-	// comprobar si la entrada está vacía
+	// comprobar si la entrada estï¿½ vacï¿½a
 	inline bool isEntranceEmpty() {
 		return entrance.size() == 0;
 	}
 
-	// recolar en la entrada al resto si se ha ido algún cliente
+	// recolar en la entrada al resto si se ha ido algï¿½n cliente
 	void recolocateEntranceAll(std::list<vector<Client*>>::iterator it);
 
-	// recolocar en la caja al resto si se ha ido algún cliente
+	// recolocar en la caja al resto si se ha ido algï¿½n cliente
 	void recolocatePayAll(std::list<Client*>::iterator it);
 
 	// crear un grupo de clientes
@@ -69,8 +69,8 @@ private:
 	// crear un cliente
 	Client* createClient(int posGroup);
 
-	// comprobar si algún cliente ha llegado a la caja registradora y añadirlo a la cola de pagar
-	// se añaden todos los clientes, sin importar del grupo que sean, en fila
+	// comprobar si algï¿½n cliente ha llegado a la caja registradora y aï¿½adirlo a la cola de pagar
+	// se aï¿½aden todos los clientes, sin importar del grupo que sean, en fila
 	void checkCashRegister();
 
 	// eliminar al primer grupo de clientes si se le ha asignado una mesa
@@ -82,34 +82,29 @@ private:
 	// comprobar si un grupo de clientes de la entrada se tiene que marchar porque se queda sin felicidad
 	void checkHappinessEntrance();
 
-	// comprobar si algún grupo de cliente de la caja se ha quedado sin felicidad y se ha marchado
+	// comprobar si algï¿½n grupo de cliente de la caja se ha quedado sin felicidad y se ha marchado
 	void checkHappinessPay();
 
-	// comprobar si una mesa está ocupada o no
+	// comprobar si una mesa estï¿½ ocupada o no
 	inline bool isTableFull(int table) const {
 		return tables[table - 1];
 	}
 
 	static bool deskIsNotOccupied(DeskComp* desk);
 
-	// encontrar la primera mesa vacía
+	// encontrar la primera mesa vacï¿½a
 	bool checkFirstTableEmpty(int& table);
 
 	// asignar una mesa al primer grupo de clientes
 	void assignTable(int table, vector<Client*> firstGroup);
 
-	// comprobar si un cliente si un cliente está de camino a pagar o pagando
+	// comprobar si un cliente si un cliente estï¿½ de camino a pagar o pagando
 	bool isPaying(GameObject* client);
 
 	static bool notOutOfLocal(Client* client);
 
-	// comprobar si algún grupo ha abandonado el local para quitarlo de la lista
+	// comprobar si algï¿½n grupo ha abandonado el local para quitarlo de la lista
 	void refreshClientsGroup();
-
-	// guarda el componente de las mesas en el array
-	// no se hace en la constructora porque
-	// las mesas se tienen que crear después que el ClientsManager
-	void initTables();
 
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients);
 
@@ -132,13 +127,17 @@ public:
 	void assignFirstGroup(int table);
 
 	// se llama cuando se quiere cobrar a los clientes que hay en la caja registradora
-	bool collectAndLeave();
+	void collectAndLeave();
 
 	// hay espacio para que vayan a la cola de la caja
 	bool canOccupyPay(vector<Client*> mates);
 
-	virtual void initComponent();
+	// guarda el componente de las mesas en el array
+	// no se hace en la constructora porque
+	// las mesas se tienen que crear despuï¿½s que el ClientsManager
+	void initTables();
 
 	// se realizan todas las comprobaciones
 	virtual void update();
+
 };

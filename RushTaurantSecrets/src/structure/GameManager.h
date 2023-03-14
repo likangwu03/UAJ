@@ -39,7 +39,7 @@ private:
 	Money* money;
 
 	float dayTime;
-	bool multiplayer;
+	//bool multiplayer;
 	bool hasKilled;
 	bool gameOver;
 
