@@ -6,5 +6,5 @@ class goToPantryTrigger : public TriggerComp {
 
 public:
 	goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_);
-	virtual void onTriggerEnter();
+	virtual void isOverlapping();
 };
