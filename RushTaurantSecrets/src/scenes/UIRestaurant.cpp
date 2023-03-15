@@ -14,7 +14,6 @@
 
 UIRestaurant::UIRestaurant() : Scene() {
 	lastTime = sdl->currRealTime();
-	numFullClock = 0;
 
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
@@ -37,12 +36,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// inventario (fondo)
 	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS, hdr_INVENTORY);
-
-	// reloj (momento del día)
-	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS, hdr_CLOCK);
-
-	// aguja del reloj
-	arrow = createIcon("ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0, grp_ICONS, hdr_ARROW);
 
 	// inventario (platos)
 	inventory = new Inventory(this);
@@ -78,6 +71,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	intObjective = 30;
 	objectiveTextTexture = new Texture(sdl->renderer(), std::to_string(intObjective), *font, build_sdlcolor(0x000000FF));
 	createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), std::to_string(intObjective).length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
+
+	clock = new Clock(this);
 }
 
 UIRestaurant::~UIRestaurant() {
@@ -125,26 +120,9 @@ void UIRestaurant::update() {
 	showMoneyText();
 	//checkTime();
 	reputationManager();
-	updateClock();
+	//updateClock();
 }
 
-void UIRestaurant::showTimeText() {
-	std::string strTime = std::to_string(time);
-	delete(timeTextTexture);
-	timeTextTexture = new Texture(sdl->renderer(), strTime, *font, build_sdlcolor(0x000000FF));
-	timeTextImage->setTexture(timeTextTexture);	
-}
-
-void UIRestaurant::checkTime() {
-	// NO BORRAR (tomo los antiguos métodos de tiempo como referencia)
-	timeT = sdl->currRealTime();
-	if (timeT - lastTime >= 1000) {
-		time += 1;
-		showTimeText();
-		lastTime = timeT;
-		timeT = 0;
-	}
-}
 
 void UIRestaurant::renderStar(int x, int y) {
 	SDL_Rect dest;
@@ -231,27 +209,4 @@ void UIRestaurant::checkRenderStar() {
 void UIRestaurant::render() {
 	Scene::render();
 	checkRenderStar();
-}
-
-void UIRestaurant::updateClock() {
-	timeT = sdl->currRealTime();
-	if (timeT - lastTime >= TIME_CLOCK_REFRESH) {
-		time += 1;
-		auto transformArrow = arrow->getComponent<Transform>();
-		transformArrow->setRot(transformArrow->getRot() + ANGLE_UPDATE);
-		Vector posA;
-		if (transformArrow->getRot() <= ANGLE) 
-			posA = transformArrow->getPos() + Vector(1, 1);
-		else if (transformArrow->getRot() <= ANGLE * 2)
-			posA = transformArrow->getPos() + Vector(-1, 1);
-		else if (transformArrow->getRot() <= ANGLE * 3)
-			posA = transformArrow->getPos() + Vector(-1, -1);
-		else
-			posA = transformArrow->getPos() + Vector(1, -1);
-		transformArrow->setPos(posA);
-		lastTime = timeT;
-		timeT = 0;
-
-		if (transformArrow->getRot() == 0) numFullClock++;
-	}
 }

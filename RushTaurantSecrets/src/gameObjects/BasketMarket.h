@@ -20,11 +20,4 @@ public:
 	bool getBasketON() {
 		return basketON;
 	}
-	/*
-	void buyIngredient() {
-		basketMC->buyIngredient();
-	}
-	*/
-
-	
 };

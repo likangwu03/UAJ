@@ -5,7 +5,8 @@
 #include "../scenes/Restaurant.h"
 
 void ClientsManager::addFrequently() {
-	if (!UIrestaurant->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+	//if (!UIrestaurant->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+	if (clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 		if (elapsedTime > timer) {
 			elapsedTime = 0;
 			// se crea un nuevo grupo de clientes
