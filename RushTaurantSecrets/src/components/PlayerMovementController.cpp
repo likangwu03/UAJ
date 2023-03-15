@@ -5,17 +5,6 @@
 PlayerMovementController::PlayerMovementController(GameObject* parent, int _player) : Component(parent, id), player(_player) {
 	transform = parent->getComponent<Transform>();
 	input = InputHandler::instance();
-	keyboard = input->getControls();
-	if (!keyboard) {
-		if (!input->joysticksInitialised())
-			input->initialiseJoysticks();
-		_joy = input->getPlayerController(player);
-		controller = SDL_JoystickName(_joy);
-		if (std::string(controller) == "Controller (Xbox One For Windows)")
-			xbox = true;
-		else
-			xbox = false;
-	}
 }
 
 PlayerMovementController::~PlayerMovementController() {
@@ -199,6 +188,20 @@ bool PlayerMovementController::nonKeyPressed() {
 	}
 	else
 		return true;
+}
+
+void PlayerMovementController::initP() {
+	keyboard = input->getControls();
+	if (!keyboard) {
+		if (!input->joysticksInitialised())
+			input->initialiseJoysticks();
+		_joy = input->getPlayerController(player);
+		controller = SDL_JoystickName(_joy);
+		if (std::string(controller) == "Controller (Xbox One For Windows)")
+			xbox = true;
+		else
+			xbox = false;
+	}
 }
 
 void PlayerMovementController::moveUp() {

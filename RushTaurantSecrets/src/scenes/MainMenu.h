@@ -11,7 +11,10 @@ private:
 	static void start();
 
 	GameObject* bg;
-	ButtonGO* button;
+	ButtonGO* oneplayer;
+	ButtonGO* twoplayer;
+	ButtonGO* options;
+	ButtonGO* exit;
 	Texture* image;
 
 public:
