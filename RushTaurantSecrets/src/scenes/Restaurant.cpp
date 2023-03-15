@@ -21,8 +21,6 @@ Restaurant::Restaurant(): dc(DishCombinator::init()) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
-
-	
 }
 
 Restaurant::~Restaurant() {
@@ -30,6 +28,11 @@ Restaurant::~Restaurant() {
 	delete ui;
 	delete cm;
 }
+
+void Restaurant::reset() {
+	player->getComponent<PlayerMovementController>()->initP();
+}
+
 
 void Restaurant::callAfterCreating() {
 	// clientsManager

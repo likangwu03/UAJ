@@ -26,6 +26,8 @@ public:
 	Restaurant();
 	~Restaurant();
 
+	void reset();
+
 	void callAfterCreating();
 
 	UIRestaurant* getUI() { return ui; }

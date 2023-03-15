@@ -34,6 +34,7 @@ void ButtonComp::handleEvents()
 		highlighted = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
 			playSound();
+			ih().setControls(true);
 			_callback();
 		}
 	}
