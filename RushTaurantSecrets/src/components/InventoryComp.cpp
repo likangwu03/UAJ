@@ -88,8 +88,8 @@ void InventoryComp::render() {
 }
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
-	x = 35;
-	y = 490 + 70 * i;
+	x = DISHX;
+	y = DISHY + DISHOFFSET * i;
 
 }
 

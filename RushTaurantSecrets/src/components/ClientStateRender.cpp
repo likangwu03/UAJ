@@ -34,17 +34,21 @@ void ClientStateRender::renderTakingNoteState() {
 }
 
 void ClientStateRender::renderOrderingState() {
-	if (anim->isActive())
-		anim->setActive(false); 
+	if (!anim->isActive())
+		anim->setActive(true); 
 	textures.dish = &((*sdl).images().at(to_string(state->getOrderedDish())));
 }
 
 void ClientStateRender::renderEatingState() {
-	if (anim->isActive())
-		anim->setActive(false);
+	if (!anim->isActive())
+		anim->setActive(true);
 	anim->setTexture(textures.eating, 0, 2, 0, 20);
 }
 
+void ClientStateRender::renderFinishEatState() {
+	if (anim->isActive())
+		anim->setActive(false);
+}
 void ClientStateRender::render() {
 
 	switch (state->getState())

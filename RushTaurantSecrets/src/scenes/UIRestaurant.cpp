@@ -165,7 +165,7 @@ void UIRestaurant::reputationManager() {
 
 void UIRestaurant::checkStarsArray() {
 	// si la reputación es mayor de ochenta
-	if (actReputation > REP5) { // cleon: 80, 60... ¡no! esto provoca guerras y pandemias. CONSTANTES. Constantes son paz y amor. -> corregido
+	if (actReputation > REP5) {
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;

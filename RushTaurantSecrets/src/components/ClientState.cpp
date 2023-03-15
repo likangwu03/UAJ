@@ -58,6 +58,7 @@ void ClientState::update() {
 #ifdef _DEBUG
 			cout << "I'm done eating" << endl;
 #endif
+			render->renderFinishEatState();
 		}
 	}
 

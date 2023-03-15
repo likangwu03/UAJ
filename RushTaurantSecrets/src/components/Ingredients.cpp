@@ -22,18 +22,16 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 }
 
 void Ingredients::removeLastIngredient() {
-	
- 	kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
-	
-	if (ingredients.size() != 0) ingredients.pop_back();
-	else return;
+	if (ingredients.size() > 0) {
+ 		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
+		ingredients.pop_back();
 
-	for (int i = 0; i < coord.size(); ++i) {
-		coord[i].first += (0.5 * ING_OFFSET);
-		coord[i].second = 0;
+		for (auto& coords : coord) {
+			coords.first += (0.5 * ING_OFFSET);
+			coords.second = 0;
+		}
+		coord.pop_back();
 	}
-	coord.pop_back();
-	
 }
 
 void Ingredients::removeAllIngredients() {
@@ -54,9 +52,9 @@ void Ingredients::cookingIngredients() {
 	while (i != 0) {
 		ingredients.pop_back();
 
-		for (int i = 0; i < coord.size(); ++i) {
-			coord[i].first += (0.5 * ING_OFFSET);
-			coord[i].second = 0;
+		for (auto& coords : coord) {
+			coords.first += (0.5 * ING_OFFSET);
+			coords.second = 0;
 		}
 		coord.pop_back();
 		--i;
@@ -65,7 +63,6 @@ void Ingredients::cookingIngredients() {
 }
 
 void Ingredients::removeWhenExit() {
-	
 	//el método actual solo se llama cuando el personaje sale de la cocina
 	removeAllIngredients();	
 }
@@ -78,8 +75,8 @@ void Ingredients::render() {
 		dest.w = ING_WIDTH;
 		dest.h = ING_HEIGHT;
 
-		dest_bubble.x = transform->getPos().getX() + PLAYER_CENTER_X - dest_bubble.w / 2;
-		dest_bubble.y = transform->getPos().getY() - BUBBLE_POSY;
+		dest_bubble.x = BUBBLE_X - dest_bubble.w / 2;
+		dest_bubble.y = BUBBLE_Y;
 
 		bubble_tex = &((*sdl).images().at("BUBBLE"));
 		bubble_tex->render(dest_bubble);
@@ -88,34 +85,26 @@ void Ingredients::render() {
 
 	//Se añade las coordenadas del jugador sobre las coordenadas centradas en 0,0 para que pasen a estar sobre el player
 	for (int i = 0; i < coord.size();++i) {
-		coord[i].first += transform->getPos().getX();
-		coord[i].second += (transform->getPos().getY() - ING_POSY);
+		coord[i].first += BUBBLE_X;
+		coord[i].second += (BUBBLE_Y + BUBBLE_OFFSET_Y / 2);
 	}
 	// se pintan todas las texturas que hay en el vector
+
 	int k = 0; // mejor con un iterador.
-	for (auto it = ingredients.begin(); it != ingredients.end(); ++it) {// cleon: bienvenidos a 1999. muy retro.
-		_ecs::_ingredients_id ingr = *it;
+	for (auto& ingredient : ingredients) {
+		_ecs::_ingredients_id ingr = ingredient;
 		texture = &((*sdl).images().at(to_string(ingr)));
-		dest.x = coord[k].first - OFFSET_ING_X;
+		dest.x = coord[k].first;
 		dest.y = coord[k].second;
-
 		texture->render(dest);
-
 		++k;
 	}
+	
 	//Se eliminan las coordenadas del player para que las coordenadas vuelvan a ser sobre 0,0 y no se se haga una suma
 	//sobre la anterior en cada tick y que salgan de la pantalla
-	for (int i = 0; i < coord.size();++i) { // cleon: bienvenidos a 1975.
-		coord[i].first -= transform->getPos().getX();
-		coord[i].second -= (transform->getPos().getY() - ING_POSY);
+
+	for (auto& coords : coord) {
+		coords.first -= BUBBLE_X;
+		coords.second = 0;
 	}
-}
-
-void Ingredients::debug() {
-	/*bool func = false;
-	if (ingredients.size() == coord.size()) func = true;*/
-
-	//cout << func;
-
-	cout << (ingredients.size() == coord.size()); // cleon. PLEASE.
 }

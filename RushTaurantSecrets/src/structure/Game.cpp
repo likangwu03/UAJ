@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "../structure/Structure_def.h"
 
 Game::Game() {
 	srand(time(NULL));
