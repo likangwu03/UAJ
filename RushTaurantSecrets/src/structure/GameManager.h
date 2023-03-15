@@ -5,6 +5,7 @@
 
 class Scene;
 class MainMenu;
+class BeforeDayStartScene;
 class Restaurant;
 class Pantry;
 class DailyMenuScene;
@@ -30,6 +31,7 @@ private:
 	Scene* currentScene;
 	Scene* previousScene;
 	MainMenu* mainMenu;
+	BeforeDayStartScene* beforeDayStartScene;
 	Restaurant* restaurant;
 	Pantry* pantry;
 	DailyMenuScene* dailyMenu;

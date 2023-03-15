@@ -6,6 +6,7 @@
 #include "../objects/Money.h"
 
 #include "../structure/Scene.h"
+#include "../scenes/BeforeDayStartScene.h"
 #include "../scenes/MainMenu.h"
 #include "../scenes/Restaurant.h"
 #include "../scenes/Pantry.h"
@@ -17,7 +18,7 @@
 #include "../utils/checkML.h"
 
 GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
-mainMenu(nullptr), dailyMenu(nullptr), currentScene(nullptr), previousScene(nullptr), hasKilled(false), gameOver(false), dayTime(false) { };
+mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr), hasKilled(false), gameOver(false), dayTime(false) { };
 
 
 void GameManager::initialize() {
@@ -36,6 +37,8 @@ void GameManager::initialize() {
 	pauseMenu = new PauseMenu();
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
+	//beforeDayStartScene = new BeforeDayStartScene();
+
 
 	
 
