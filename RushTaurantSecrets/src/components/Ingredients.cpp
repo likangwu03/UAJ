@@ -3,22 +3,24 @@
 
 
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
-	if (ingredients.size() == MAX_INGREDIENTS) {
-		removeLastIngredient(); //elimina el ultimo ingrediente añadido
-	}
-	ingredients.push_back(ingr);
-	
-	if (ingredients.size() > 0){
-		int i = 0;
-		for (i = 0;i < coord.size();++i) {
-			coord[i].first -= (0.5*ING_OFFSET);
-			coord[i].second = 0;
+	// si el iterador llega al final, es que el iterador no está
+	if (std::find(ingredients.begin(), ingredients.end(), ingr) == ingredients.end()) {
+		if (ingredients.size() == MAX_INGREDIENTS) {
+			removeLastIngredient(); //elimina el ultimo ingrediente añadido
 		}
-		//Nuevas coordenadas del nuevo ingrediente
-		coord.push_back({ coord[i - 1].first, coord[i - 1].second });
-		coord[i].first += ING_OFFSET;
-	}
+		ingredients.push_back(ingr);
 
+		if (ingredients.size() > 0) {
+			int i = 0;
+			for (i = 0;i < coord.size();++i) {
+				coord[i].first -= (0.5 * ING_OFFSET);
+				coord[i].second = 0;
+			}
+			//Nuevas coordenadas del nuevo ingrediente
+			coord.push_back({ coord[i - 1].first, coord[i - 1].second });
+			coord[i].first += ING_OFFSET;
+		}
+	}
 }
 
 void Ingredients::removeLastIngredient() {
