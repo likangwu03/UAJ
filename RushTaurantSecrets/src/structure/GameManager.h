@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../utils/Singleton.h"
+#include "../structure/Food_def.h"
 
 class Scene;
 class MainMenu;
@@ -37,6 +38,7 @@ private:
 
 	Reputation* reputation;
 	Money* money;
+	vector<_ecs::DishInfo>* menu;
 
 	float dayTime;
 	//bool multiplayer;
@@ -66,6 +68,8 @@ public:
 
 	Reputation* getReputation();
 	Money* getMoney();
+	vector<_ecs::DishInfo>* getTodaysMenu();
+	void setTodaysMenu(vector<_ecs::DishInfo>* tmenu);
 
 	bool getHasKill();
 	void setHasKill(bool hKill);

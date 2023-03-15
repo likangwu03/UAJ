@@ -4,7 +4,8 @@
 
 #include "../utils/checkML.h"
 
-ButtonComp::ButtonComp(GameObject* parent, string hl, void(*callback)())  : Component(parent, id), 
+ButtonComp::ButtonComp(GameObject* parent, string hl, std::function<void()> callback)
+	: Component(parent, id),
 	transform(parent->getComponent<Transform>()), highlighted(false)
 {
 	tf = parent->getComponent<Transform>();
@@ -27,7 +28,7 @@ void ButtonComp::handleEvents()
 	SDL_GetMouseState(&x, &y);
 	SDL_Rect mouseRect = { x, y, 1, 1 };
 
-	SDL_Rect dest = {transform->getPos().getX(), transform->getPos().getY(), transform->getW(), transform->getH()};
+	SDL_Rect dest = { transform->getPos().getX(), transform->getPos().getY(), transform->getW(), transform->getH() };
 
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		highlighted = true;

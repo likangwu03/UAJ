@@ -23,6 +23,7 @@ mainMenu(nullptr), dailyMenu(nullptr), currentScene(nullptr), previousScene(null
 void GameManager::initialize() {
 	reputation = new Reputation();
 	money = new Money();
+	//menu = new vector<_ecs::_dish_id>();
 
 	
 	mainMenu = new MainMenu();
@@ -105,6 +106,9 @@ PauseMenu* GameManager::getPauseMenu() { return pauseMenu; }
 
 Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
+
+vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
+void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
 
 bool GameManager::getHasKill() { return hasKilled; }
 void GameManager::setHasKill(bool hKill) { hasKilled = hKill; }

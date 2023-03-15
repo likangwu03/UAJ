@@ -69,5 +69,11 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 
 	murder = GameManager::instance()->getHasKill();
 
-	drawDishes(randomMenu());
+	menu = randomMenu();
+	drawDishes(menu);
+}
+
+vector<_ecs::DishInfo>* DailyMenuComp::getMenu()
+{
+	return &menu;
 }

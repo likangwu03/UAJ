@@ -26,5 +26,7 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize = 4);
+
+	vector<_ecs::DishInfo>* getMenu();
 };
 

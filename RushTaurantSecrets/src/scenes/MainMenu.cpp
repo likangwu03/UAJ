@@ -6,6 +6,7 @@
 
 #include "../structure/GameManager.h"
 #include "../scenes/Restaurant.h"
+#include "../scenes/DailyMenuScene.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
 
