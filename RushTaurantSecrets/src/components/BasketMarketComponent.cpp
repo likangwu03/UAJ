@@ -5,7 +5,11 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	//cartelM = new CartelManager();
 	ih = InputHandler::instance();
 
+	basketPosY = sdl->height() - 610;
+	basketPosX = 10;
+
 	font = new Font(FONT_PATH, 50);
+	totalPrize = 0;
 }
 
 BasketMarketComponent::~BasketMarketComponent() {
@@ -29,12 +33,13 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 			ingredients.insert({ ing, { texture, n} });
 			totalDifIngr++; //num de dif ing
 		}
+		totalPrize += addPrice;
 	}
 }
 
 void BasketMarketComponent::renderBasket() {
 	// renderiza men?de cesta
-	renderTexture(10, sdl->height() - 610, BASKET_SIZE, BASKET_SIZE / 2 + 100, "BASKET_LIST");
+	renderTexture(basketPosX, basketPosY, BASKET_SIZE, BASKET_SIZE - 100, "BASKET_LIST");
 	// render de ingredientes
 	auto it = ingredients.begin();
 	int x = 30 + ING_SIZE, y = sdl->height() - 590 + ING_SIZE, col = 1, fil = 1;
@@ -46,7 +51,7 @@ void BasketMarketComponent::renderBasket() {
 		}
 		textDish = to_string(it->first);
 		renderTexture(x * col, y * fil, ING_SIZE, ING_SIZE, textDish);
-		// renderizar n鷐ero
+		// renderizar número
 		dest.x = x * col + 2 * ING_SIZE / 3;
 		dest.y = y * fil + ING_SIZE / 2 + 3;
 		dest.w = ING_SIZE / 3;
@@ -57,6 +62,13 @@ void BasketMarketComponent::renderBasket() {
 		col++;
 		it++;
 	}
+	// render de precio total
+	Texture* textureTotal = new Texture(sdl->renderer(), to_string(totalPrize), *font, build_sdlcolor(0x000000FF));
+	dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
+	dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
+	dest.w = ING_SIZE;
+	dest.h = ING_SIZE;
+	textureTotal->render(dest);
 }
 
 void BasketMarketComponent::renderTexture(int x, int y, int w, int h, string text) {

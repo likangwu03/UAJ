@@ -33,6 +33,9 @@ private:
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	const int OFFSET = 10;
 	Font* font;
+	int basketPosY;
+	int basketPosX;
+	int totalPrize;
 	//Texture* texture;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
