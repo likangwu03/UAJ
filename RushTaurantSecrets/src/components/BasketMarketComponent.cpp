@@ -8,6 +8,10 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	font = new Font(FONT_PATH, 50);
 }
 
+BasketMarketComponent::~BasketMarketComponent() {
+	delete font;
+}
+
 void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int addPrice) {
 	//hacer algo para addPrice................................
 	//addPrice es el dinero total según n cantidades del ingrediente ing añadida a la cesta

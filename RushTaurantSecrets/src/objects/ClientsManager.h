@@ -127,7 +127,7 @@ public:
 	void assignFirstGroup(int table);
 
 	// se llama cuando se quiere cobrar a los clientes que hay en la caja registradora
-	void collectAndLeave();
+	bool collectAndLeave();
 
 	// hay espacio para que vayan a la cola de la caja
 	bool canOccupyPay(vector<Client*> mates);
@@ -140,4 +140,5 @@ public:
 	// se realizan todas las comprobaciones
 	virtual void update();
 
+	void initComponent();
 };

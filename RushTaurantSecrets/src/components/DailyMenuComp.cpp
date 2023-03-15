@@ -27,6 +27,9 @@ void DailyMenuComp::drawDishes(vector<_ecs::DishInfo> menu)
 			std::string priceString = (std::to_string(menu[i].price) + "$");
 			Texture* tempTex = new Texture(sdlutils().renderer(), priceString, *font, build_sdlcolor(0xffbb11FF));
 			new Image(price, tempTex);
+
+			delete tempTex;
+			delete font;
 		}
 	}
 }

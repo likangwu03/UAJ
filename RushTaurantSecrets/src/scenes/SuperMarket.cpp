@@ -51,6 +51,7 @@ void SuperMarket::CreateMap() {
 SuperMarket::~SuperMarket() {
 	delete uiMarket;
 	delete cm;
+	delete cartelM;
 }
 
 
