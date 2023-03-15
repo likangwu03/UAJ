@@ -5,6 +5,7 @@
 #include "GameManager.h"
 const uint32_t FRAME_RATE = 25;  //luego a def.h
 
+#include <SDL_net.h>
 
 class Game : public Singleton<Game> {
 	friend Singleton<Game>;
