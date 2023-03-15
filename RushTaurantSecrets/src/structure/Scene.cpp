@@ -10,7 +10,6 @@
 #include "../components/MapCreator.h"
 
 Scene::Scene():frameTime(Game::instance()->getframeTime()) {
-	Infor = GameManager::instance();
 	ih = InputHandler::instance();
 	handlers = {};
 }

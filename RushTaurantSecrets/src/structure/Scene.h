@@ -21,7 +21,6 @@ private:
 	std::list<GameObject*> renderListMiddle;
 	std::list<GameObject*> renderListDown;
 protected:
-	GameManager* Infor;
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 

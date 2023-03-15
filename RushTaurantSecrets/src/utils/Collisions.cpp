@@ -1,33 +1,33 @@
 #include "Collisions.h"
 
-bool Collisions::collidesWithRotation(const Vector2D &o1Pos, float o1Width,
-		float o1Height, float o1Rot, const Vector2D &o2Pos, float o2Width,
+bool Collisions::collidesWithRotation(const Vector &o1Pos, float o1Width,
+		float o1Height, float o1Rot, const Vector &o2Pos, float o2Width,
 		float o2Height, float o2Rot) {
-	Vector2D Ac = o1Pos + Vector2D(o1Width / 2.0f, o1Height / 2.0f);
+	Vector Ac = o1Pos + Vector(o1Width / 2.0f, o1Height / 2.0f);
 
 	float angleA = o1Rot;
 
-	Vector2D Alu = Ac
-			+ Vector2D(-o1Width / 2.0f, -o1Height / 2.0f).rotate(angleA);
-	Vector2D Aru = Ac
-			+ Vector2D(o1Width / 2.0f, -o1Height / 2.0f).rotate(angleA);
-	Vector2D All = Ac
-			+ Vector2D(-o1Width / 2.0f, o1Height / 2.0f).rotate(angleA);
-	Vector2D Arl = Ac
-			+ Vector2D(o1Width / 2.0f, o1Height / 2.0f).rotate(angleA);
+	Vector Alu = Ac
+			+ Vector(-o1Width / 2.0f, -o1Height / 2.0f).getRotated(angleA);
+	Vector Aru = Ac
+			+ Vector(o1Width / 2.0f, -o1Height / 2.0f).getRotated(angleA);
+	Vector All = Ac
+			+ Vector(-o1Width / 2.0f, o1Height / 2.0f).getRotated(angleA);
+	Vector Arl = Ac
+			+ Vector(o1Width / 2.0f, o1Height / 2.0f).getRotated(angleA);
 
 	float angleB = o2Rot;
 
-	Vector2D Bc = o2Pos + Vector2D(o2Width / 2.0f, o2Height / 2.0f);
+	Vector Bc = o2Pos + Vector(o2Width / 2.0f, o2Height / 2.0f);
 
-	Vector2D Blu = Bc
-			+ Vector2D(-o2Width / 2.0f, -o2Height / 2.0f).rotate(angleB);
-	Vector2D Bru = Bc
-			+ Vector2D(o2Width / 2.0f, -o2Height / 2.0f).rotate(angleB);
-	Vector2D Bll = Bc
-			+ Vector2D(-o2Width / 2.0f, o2Height / 2.0f).rotate(angleB);
-	Vector2D Brl = Bc
-			+ Vector2D(o2Width / 2.0f, o2Height / 2.0f).rotate(angleB);
+	Vector Blu = Bc
+			+ Vector(-o2Width / 2.0f, -o2Height / 2.0f).getRotated(angleB);
+	Vector Bru = Bc
+			+ Vector(o2Width / 2.0f, -o2Height / 2.0f).getRotated(angleB);
+	Vector Bll = Bc
+			+ Vector(-o2Width / 2.0f, o2Height / 2.0f).getRotated(angleB);
+	Vector Brl = Bc
+			+ Vector(o2Width / 2.0f, o2Height / 2.0f).getRotated(angleB);
 
 	return PointInRectangle(Alu, Aru, All, Arl, Blu)
 			|| PointInRectangle(Alu, Aru, All, Arl, Bru)
@@ -39,8 +39,8 @@ bool Collisions::collidesWithRotation(const Vector2D &o1Pos, float o1Width,
 			|| PointInRectangle(Blu, Bru, Bll, Brl, Arl);
 }
 
-bool Collisions::PointInRectangle(const Vector2D &A, const Vector2D &B,
-		const Vector2D &C, const Vector2D &D, const Vector2D &P) {
+bool Collisions::PointInRectangle(const Vector &A, const Vector &B,
+		const Vector &C, const Vector &D, const Vector &P) {
 	if (PointInTriangle(A, B, C, P))
 		return true;
 	if (PointInTriangle(A, C, D, P))
@@ -48,20 +48,20 @@ bool Collisions::PointInRectangle(const Vector2D &A, const Vector2D &B,
 	return false;
 }
 
-bool Collisions::PointInTriangle(const Vector2D &A, const Vector2D &B,
-		const Vector2D &C, const Vector2D &P) {
+bool Collisions::PointInTriangle(const Vector &A, const Vector &B,
+		const Vector &C, const Vector &P) {
 
 	// Compute vectors
-	Vector2D v0 = C - A;
-	Vector2D v1 = B - A;
-	Vector2D v2 = P - A;
+	Vector v0 = C - A;
+	Vector v1 = B - A;
+	Vector v2 = P - A;
 
 	// Compute dot products
-	float dot00 = v0 * v0;
-	float dot01 = v0 * v1;
-	float dot02 = v0 * v2;
-	float dot11 = v1 * v1;
-	float dot12 = v1 * v2;
+	float dot00 = v0.dot(v0);
+	float dot01 = v0.dot(v1);
+	float dot02 = v0.dot(v2);
+	float dot11 = v1.dot(v1);
+	float dot12 = v1.dot(v2);
 
 	// Compute barycentric coordinates
 	float invDenom = 1 / (dot00 * dot11 - dot01 * dot01);
@@ -76,8 +76,8 @@ bool Collisions::PointInTriangle(const Vector2D &A, const Vector2D &B,
 	}
 }
 
-bool Collisions::collides(const Vector2D &o1Pos, float o1Width, float o1Height,
-		const Vector2D &o2Pos, float o2Width, float o2Height) {
+bool Collisions::collides(const Vector &o1Pos, float o1Width, float o1Height,
+		const Vector &o2Pos, float o2Width, float o2Height) {
 
 	// o1 completely to the left of o2, or vice versa
 	if (o1Pos.getX() + o1Width < o2Pos.getX()
