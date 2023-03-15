@@ -141,4 +141,7 @@ public:
 	virtual void update();
 
 	void initComponent();
+
+	// Devuelve si no hay clientes
+	inline bool noClients() { return clientsGroups.empty(); }
 };

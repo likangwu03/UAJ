@@ -11,6 +11,7 @@
 
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
+#include "../components/FinishDay.h"
 
 #include <set>
 
@@ -38,6 +39,7 @@ void Restaurant::callAfterCreating() {
 	// clientsManager
 	GameObject* managerContainer = new GameObject(this);
 	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
+	new FinishDay(managerContainer);
 	CreateMap();
 	initRender();
 
