@@ -15,16 +15,27 @@ GameObject::~GameObject() {
 void GameObject::addComponent(Component* comp, _ecs::_cmp_id id) {
 	auto it = components.find(id);
 	if(it != components.end()) {
+		deleteCompVector(it->second);
 		delete it->second;
 	}
 	components[id] = comp;
 	cmpOrder.push_back(comp);
 }
 
+void GameObject::deleteCompVector(Component* comp) {
+	for(auto it = cmpOrder.cbegin(); it != cmpOrder.cend(); ++it) {
+		if(*it == comp) {
+			cmpOrder.erase(it);
+			break;
+		}
+	}
+}
+
 void GameObject::refresh() {
 	auto it = components.begin();
 	while(it != components.end()) {
 		if(!it->second->isAlive()) {
+			deleteCompVector(it->second);
 			delete it->second;
 			it = components.erase(it);
 		}
