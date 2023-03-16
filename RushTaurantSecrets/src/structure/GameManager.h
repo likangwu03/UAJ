@@ -67,6 +67,7 @@ public:
 	DailyMenuScene* getDailyMenu();
 	SuperMarket* getSupermarket();
 	PauseMenu* getPauseMenu();
+	BeforeDayStartScene* getBeforeDayStart();
 
 	Reputation* getReputation();
 	Money* getMoney();
