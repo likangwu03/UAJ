@@ -2,6 +2,12 @@
 #include "Ingredients.h"
 
 
+Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
+	coord = { STARTING_COORDS };
+	dest_bubble = { BUBBLE_X, BUBBLE_Y, BUBBLE_W, BUBBLE_H };
+	dest.w = dest.h = ING_SIZE;
+}
+
 void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	// si el iterador llega al final, es que el iterador no está
 	if (std::find(ingredients.begin(), ingredients.end(), ingr) == ingredients.end()) {
@@ -12,12 +18,11 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 
 		if (ingredients.size() > 0) {
 			int i = 0;
-			for (i = 0;i < coord.size();++i) {
-				coord[i].first -= (0.5 * ING_OFFSET);
-				coord[i].second = 0;
+			for (i = 0; i < coord.size(); ++i) {
+				coord[i].first -= ING_OFFSET / 2;
 			}
 			//Nuevas coordenadas del nuevo ingrediente
-			coord.push_back({ coord[i - 1].first, coord[i - 1].second });
+			coord.push_back( {coord[i - 1].first, ING_Y} );
 			coord[i].first += ING_OFFSET;
 		}
 	}
@@ -28,24 +33,19 @@ void Ingredients::removeLastIngredient() {
  		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
 		ingredients.pop_back();
 
-		for (auto& coords : coord) {
-			coords.first += (0.5 * ING_OFFSET);
-			coords.second = 0;
+		for (int i = 0; i < coord.size(); ++i) {
+			coord[i].first += ING_OFFSET / 2;
 		}
 		coord.pop_back();
 	}
 }
 
 void Ingredients::removeAllIngredients() {
-	//no es un for porque, a pesar de saber las vueltas que da, se va reduciendo el tamaño del vector
-	int i = ingredients.size(); //i vale 5 (el numero de ingredientes maximo que se puede llevar) o menos si no esta lleno el vector
-	while (i != 0) {
+	while (ingredients.size() > 0) {
 		//devolver a la mesa
 		removeLastIngredient();
-		--i;
 	}
-	coord = { { 0,0 } };
-	
+	coord = { STARTING_COORDS };
 
 }
 
@@ -56,12 +56,11 @@ void Ingredients::cookingIngredients() {
 
 		for (auto& coords : coord) {
 			coords.first += (0.5 * ING_OFFSET);
-			coords.second = 0;
 		}
 		coord.pop_back();
 		--i;
 	}
-	coord = { { 0,0 } };
+	coord = { STARTING_COORDS };
 }
 
 void Ingredients::removeWhenExit() {
@@ -70,43 +69,21 @@ void Ingredients::removeWhenExit() {
 }
 
 void Ingredients::render() {
-	if (ingredients.size() >= 1) {
-		dest_bubble.w = ING_WIDTH * (ingredients.size()) + BUBBLE_OFFSET_X + ING_OFFSET*(ingredients.size()-1)*0.25;
-		dest_bubble.h = ING_HEIGHT + 2 * BUBBLE_OFFSET_Y;
-
-		dest.w = ING_WIDTH;
-		dest.h = ING_HEIGHT;
-
-		dest_bubble.x = BUBBLE_X - dest_bubble.w / 2;
-		dest_bubble.y = BUBBLE_Y;
-
+	if (ingredients.size() > 0) {
 		bubble_tex = &((*sdl).images().at("BUBBLE"));
-		bubble_tex->render(dest_bubble);
+		bubble_tex->renderFrame(dest_bubble, 0, ingredients.size() - 1, 0);
 	}
 	
-
-	//Se añade las coordenadas del jugador sobre las coordenadas centradas en 0,0 para que pasen a estar sobre el player
-	for (int i = 0; i < coord.size();++i) {
-		coord[i].first += BUBBLE_X;
-		coord[i].second += (BUBBLE_Y + BUBBLE_OFFSET_Y / 2);
-	}
-	// se pintan todas las texturas que hay en el vector
-
 	int k = 0; // mejor con un iterador.
 	for (auto& ingredient : ingredients) {
+		cout << "x = " << coord[k].first << " y = " << ING_Y << endl;
+
 		_ecs::_ingredients_id ingr = ingredient;
 		texture = &((*sdl).images().at(to_string(ingr)));
 		dest.x = coord[k].first;
-		dest.y = coord[k].second;
+		dest.y = ING_Y;
 		texture->render(dest);
 		++k;
 	}
 	
-	//Se eliminan las coordenadas del player para que las coordenadas vuelvan a ser sobre 0,0 y no se se haga una suma
-	//sobre la anterior en cada tick y que salgan de la pantalla
-
-	for (auto& coords : coord) {
-		coords.first -= BUBBLE_X;
-		coords.second = 0;
-	}
 }

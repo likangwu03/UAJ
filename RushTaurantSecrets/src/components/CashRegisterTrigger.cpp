@@ -21,8 +21,12 @@ void CashRegisterTrigger::isOverlapping() {
 		GameManager::instance()->getReputation()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 100);
 	}
 	int rnd = sdlutils().rand().nextInt(0, 101);
-	if(GameManager::instance()->getReputation()->getReputation() > rnd)
+	if (GameManager::instance()->getReputation()->getReputation() > rnd) {
 		money->addMoney(totalPayment / 10);
+#ifdef _DEBUG
+		cout << "You got " << totalPayment/10 << " coins from tips" << endl;
+#endif
+	}
 
 }
 

@@ -15,14 +15,10 @@ using namespace _ecs;
 
 class KitchenIslandComp;
 class Ingredients: public Component {
-	const float BUBBLE_X = 900, BUBBLE_Y = 20;
-	const float ING_HEIGHT = 38, ING_WIDTH = 38;
-	//constante que parametriza a qu� altura sobre el jugador se sit�an los ingredientes
-	const float ING_POSY = 50;
-	//constante que deja un espacio entre ingredientes cuando estos se renderizan
-	const float ING_OFFSET = 40;
-	//espacio entre los ingredientes y los bordes del bocadillo de pensamiento
-	const float BUBBLE_OFFSET_X = 20, BUBBLE_OFFSET_Y = 20;
+	const int BUBBLE_X = 780, BUBBLE_Y = 10, BUBBLE_W = 322, BUBBLE_H = 83;
+	const float ING_SIZE = 40, ING_Y = 40, ING_OFFSET = 60, ING_CENTER = 4;
+	const pair<float,float> STARTING_COORDS = { BUBBLE_X + BUBBLE_W / 2 + ING_CENTER, ING_Y };
+
 
 private:
 	const int MAX_INGREDIENTS = 5;
@@ -41,13 +37,7 @@ private:
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
-	Ingredients(GameObject* parent) :Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
-		coord = { { 0,0 } };
-		//para demo, luego se borra; 
-		//addIngredient(HUEVO);
-		//addIngredient(HARINA);
-		//addIngredient(HUEVO);
-	}
+	Ingredients(GameObject* parent);
 	
 	void setKitchenIsland(KitchenIslandComp* k) { kitchenIsland = k; }
 	//devuelve por ref

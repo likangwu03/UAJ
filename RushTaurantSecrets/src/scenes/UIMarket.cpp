@@ -13,17 +13,16 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	basketMarket = new BasketMarket(this);
 
 	// icono de dinero
-	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MONEY, "MONEY_ICON", Vector(10, 5), 64, 64, 0);
+	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MONEY, "MONEY_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0);
 
 	// gestión de la cantidad de dinero
-	f = new Font(FONT_PATH, 50);
-	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
-	new Transform(moneyText, Vector(90, 9), Vector(0, 0), 80, 50);
-
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
-	//moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0xFFC863ff));
-	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0x000000FF));
+
+	font = new Font(FONT_PATH, 50);
+	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
+	new Transform(moneyText, Vector(80, ICONY - 3), Vector(0, 0), strMoney.length() * FONTSIZE / 2, FONTSIZE);
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// icono de men?del día
@@ -38,7 +37,7 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 }
 
 UIMarket::~UIMarket() {
-	delete f;
+	delete font;
 	delete moneyTextTexture;
 }
 
@@ -61,8 +60,9 @@ void UIMarket::showMoneyText() {
 	if (intMoney != moneyTxt->getMoney()) {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
-		delete(moneyTextTexture);
-		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *f, build_sdlcolor(0x000000FF));
+		delete moneyTextTexture;
+		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONTSIZE / 2);
 		moneyTextImage->setTexture(moneyTextTexture);
 	}
 }

@@ -46,8 +46,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	font = new Font(FONT_PATH, FONTSIZE);
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-
 	moneyText = createIcon(moneyTextTexture, Vector(80, ICONY * 2 + ICONSIZE - 5), strMoney.length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
+	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// render de estrellas vacías
 	for (int i = 0; i < stars.size(); i++) 
@@ -108,10 +108,11 @@ void UIRestaurant::showMoneyText() {
 	if (intMoney != moneyTxt->getMoney()) {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
-		delete(moneyTextTexture);
+		
+		delete moneyTextTexture;
 		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONTSIZE / 2);
 		moneyTextImage->setTexture(moneyTextTexture);
-		transform->setW(strMoney.length() * FONTSIZE / 2);
 	}
 }
 
