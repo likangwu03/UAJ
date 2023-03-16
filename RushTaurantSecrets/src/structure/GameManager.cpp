@@ -106,7 +106,7 @@ Pantry* GameManager::getPantry() { return pantry; }
 DailyMenuScene* GameManager::getDailyMenu() { return dailyMenu; }
 SuperMarket* GameManager::getSupermarket() { return supermarket; }
 PauseMenu* GameManager::getPauseMenu() { return pauseMenu; }
-
+BeforeDayStartScene* GameManager::getBeforeDayStart() { return beforeDayStartScene; }
 Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
 
