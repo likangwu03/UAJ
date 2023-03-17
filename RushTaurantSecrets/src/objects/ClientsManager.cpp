@@ -226,8 +226,7 @@ void ClientsManager::assignFirstGroup(int table) {
 bool ClientsManager::collectAndLeave() {
 	bool canCollect = true;
 
-	// se comprueba si todos los integrantes de cada grupo están en colocados en la cola
-	// listos para cobrar
+	// se comprueba si todos los integrantes de cada grupo están en colocados en la cola listos para pagar
 	auto it = pay.begin();
 	while (it != pay.end() && canCollect) {
 		if (!(*it)->getComponent<ClientMovement>()->isEveryonePaying()) {

@@ -1,20 +1,12 @@
 #include "Restaurant.h"
-
 #include "../objects/DishCombinator.h"
 #include "../structure/CollisionsManager.h"
-
 #include "../components/MapCreator.h" 
 #include "../gameObjects/Player.h"
-
-
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
-
 #include "../structure/SceneManager.h"
-#include <set>
-
 #include "../utils/checkML.h"
-
 
 Restaurant::Restaurant(): dc(DishCombinator::init()) { 
 	SceneManager::instance()->setResize(false);
@@ -58,12 +50,9 @@ void Restaurant::init() {
 
 	// clientsManager
 	GameObject* managerContainer = new GameObject(this);
-	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
+	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
 	CreateMap();
 	initRender();
-
-	// las mesas se inicializan luego de haberse creado
-	// clientsManager->initTables();
 
 	initComponent();
 }
@@ -85,7 +74,7 @@ void Restaurant::render() {
 	renderLayer();
 	//Scene::render();
 	if (ui != nullptr)
-	ui->render();
+	ui->render();	
 }
 
 void Restaurant::initComponent() {
@@ -111,6 +100,6 @@ void Restaurant::handleEvents() {
 	}
 	else {
 		Scene::handleEvents();
-		//ui->handleEvents();
+		ui->handleEvents();
 	}
 }

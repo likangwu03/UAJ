@@ -48,6 +48,7 @@ void CharacterAnimator::update() {
 		}
 		else if (currMov == dead) {
 			currentAnim = 19;
+			// se cambia el ángulo para que se tumbe el sprite
 			angle = 90;
 		}
 	}
@@ -56,14 +57,28 @@ void CharacterAnimator::update() {
 	// si no ha cambiado, se comprueba si la dirección ha cambiado
 	// si es así, se cogen los frames oportunos
 	if (currOrientation != parentOrientation || movHaveChanged) {
-		
+
 		currOrientation = parentOrientation;
 
 		if (currOrientation == east) {
-			setCurrentAnim(0, 6, currentAnim);
+			// muerto
+			if (currentAnim == 19) {
+				setCurrentAnim(3, 5, currentAnim);
+			}
+			// idle, corriendo y sentado
+			else {
+				setCurrentAnim(0, 6, currentAnim);
+			}
 		}
 		else if (currOrientation == north) {
-			setCurrentAnim(6, 12, currentAnim);
+			// muerto
+			if (currentAnim == 19) {
+				setCurrentAnim(3, 5, currentAnim);
+			}
+			// idle, corriendo y sentado
+			else {
+				setCurrentAnim(6, 12, currentAnim);
+			}
 		}
 		else if (currOrientation == west) {
 			// sentado
@@ -72,18 +87,23 @@ void CharacterAnimator::update() {
 			}
 			// muerto
 			else if (currentAnim == 19) {
-				// se cambia el ángulo para que se tumbe el sprite
-				setCurrentAnim(7, 7, currentAnim);
+				setCurrentAnim(3, 5, currentAnim);
 			}
-			// corriendo y idle
+			// idle y corriendo
 			else {
 				setCurrentAnim(12, 18, currentAnim);
 			}
 		}
 		else if (plTf->getOrientation() == south) {
-			setCurrentAnim(18, 24, currentAnim);
+			// muerto
+			if (currentAnim == 19) {
+				setCurrentAnim(3, 5, currentAnim);
+			}
+			// idle, corriendo y sentado
+			else {
+				setCurrentAnim(18, 24, currentAnim);
+			}
 		}
 	}
-
 	Animator::update();
 }

@@ -22,6 +22,9 @@ void ThiefMovement::die() {
 	straightMovement->stop();
 	// se cambia a muerto (se pone rojo el sprite y se tumba el sprite)
 	transform->setMovState(dead);
+	straightMovement->setActive(false);
+	Vector pos = transform->getPos();
+	transform->setPos(Vector(pos.getX(), pos.getY() + transform->getW() / 2));
 }
 
 void ThiefMovement::escape() {

@@ -1,11 +1,11 @@
 #pragma once
 #include "../structure/Scene.h"
-
-#include "Pantry.h"
-class DishCombinator;
 #include "../scenes/UIRestaurant.h"
+#include "Pantry.h"
+
+class DishCombinator;
 class CollisionsManager;
-class ClientsManager;
+class TextBox;
 
 class Restaurant : public Scene {
 private:
@@ -13,10 +13,8 @@ private:
 	DishCombinator* dc;
 	UIRestaurant* ui;
 	CollisionsManager* cm;
-	//GameObject* map;
 	
 	GameObject* player;
-	ClientsManager* clientsManager;
 
 	vector<_ecs::_dish_id> menu() const;
 	void CreateMap();

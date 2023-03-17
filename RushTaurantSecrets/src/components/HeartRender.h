@@ -17,11 +17,11 @@ private:
 	int posStartY;
 	int maxHearts;
 
-	bool isEven(int num) const {
+	inline bool isEven(int num) const {
 		return num % 2 == 0;
 	}
 
-	int numHearts(float happiness) const {
+	inline int numHearts(float happiness) const {
 		return happiness / (2 * 10);
 	}
 
@@ -64,14 +64,14 @@ public:
 		}
 	}
 
-	void update() {
+	virtual void update() {
 		// cuando el cliente se marcha se autodesactiva
 		if (clientState->getState() == ClientState::OUT) {
 			setActive(false);
 		}
 	}
 
-	void render() {
+	virtual void render() {
 		SDL_Rect dest;
 		dest.w = widthHeart;
 		dest.h = heightHeart;

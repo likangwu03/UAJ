@@ -41,6 +41,7 @@ namespace _ecs {
 		cmp_SHOP_MENU,
 		cmp_FREEZER,
 		cmp_RENDER_LIST,
+		cmp_TEXT,
 		// Do not erase pls
 		cmp_INVALID
 	};

@@ -8,6 +8,7 @@
 #include "../gameObjects/Bin.h"
 #include "../objects/Reputation.h"
 #include "../components/Warning.h"
+#include "../components/BoxText.h"
 
 #include "../utils/checkML.h"
 
@@ -77,6 +78,9 @@ UIRestaurant::UIRestaurant() : Scene() {
 	intObjective = 30;
 	objectiveTextTexture = new Texture(sdl->renderer(), std::to_string(intObjective), *font, build_sdlcolor(0x000000FF));
 	createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), std::to_string(intObjective).length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
+	
+	GameObject* prueba = new GameObject(this);
+	new BoxText(prueba, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia, que grabo sus nombres sobre hojas de oro coloreadas de humedas pedrerias y las cuido bajo el terciopelo de sus pupilas hasta la adolescencia dura.", "Holaaa holaaa" }, 30, 30, Vector(200, 100), 0.2 * 1000, FONT_PATH, FONTSIZE, 700);
 }
 
 UIRestaurant::~UIRestaurant() {
