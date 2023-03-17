@@ -30,7 +30,8 @@ private:
 	ClientsManager* clientsManager;
 	vector<Client*> mates;
 	int posGroup;
-	bool placedCashRegister;
+	// colocado en la cola de pagar, es decir, está quieto
+	bool placedPay;
 
 	void addPath(const vector<Vector>& points);
 
@@ -39,8 +40,13 @@ private:
 	// se comprueba si un cliente no ha terminado de comer
 	static bool hasNotEaten(Client* mate);
 
-	// comprobar si todos los integrantes del grupo han terminado de comeer
+	// comprobar si todos los integrantes del grupo han terminado de comer
 	bool hasEveryoneEaten() const;
+
+	static bool isNotSit(Client* mate);
+
+	// comprobar si todos los integrantes del grupo están sentados
+	bool isEveryoneSit() const;
 
 	// se comprueba si un cliente no está en la cola esperando a pagar
 	static bool isNotPaying(Client* mate);
@@ -82,8 +88,8 @@ private:
 		posPay = -1;
 	}
 
-	inline bool isPlacedCashRegister() const {
-		return placedCashRegister;
+	inline bool isPlacedPay() const {
+		return placedPay;
 	}
 
 	// ha abandonado la cola de la caja sin pagar
@@ -91,9 +97,6 @@ private:
 
 	// ha abandonado la cola de entrada por perder felicidad
 	void abandonEntrance();
-
-	// se establece su nuevo estado, su orientación y la animación a ejecutar
-	void stationary(ClientState::States state, GOOrientation orientation, movementState mov);
 
 public:
 

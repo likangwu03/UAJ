@@ -17,8 +17,17 @@ bool ClientMovement::hasEveryoneEaten() const {
 	return std::find_if(mates.begin(), mates.end(), hasNotEaten) == mates.end();
 }
 
+bool ClientMovement::isNotSit(Client* mate) {
+	return mate->getComponent<Transform>()->getMovState() != sitting;
+}
+
+// comprobar si todos los integrantes del grupo están sentados
+bool ClientMovement::isEveryoneSit() const {
+	return std::find_if(mates.begin(), mates.end(), isNotSit) == mates.end();
+}
+
 bool ClientMovement::isNotPaying(Client* mate) {
-	return !mate->getComponent<ClientMovement>()->isPlacedCashRegister();
+	return !mate->getComponent<ClientMovement>()->isPlacedPay();
 }
 
 void ClientMovement::goOut(ClientState::States currentState) {
@@ -96,16 +105,9 @@ void ClientMovement::abandonEntrance() {
 	addPath(vector<Vector>{end});
 }
 
-// se establece su nuevo estado, su orientación y la animación a ejecutar
-void ClientMovement::stationary(ClientState::States state, GOOrientation orientation, movementState mov) {
-	clientState->setState(state);
-	transform->setOrientation(orientation);
-	transform->setMovState(mov);
-}
-
 ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup) :
 	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), 
-	posGroup(posGroup), clientState(nullptr), render(nullptr), placedCashRegister(false) {
+	posGroup(posGroup), clientState(nullptr), render(nullptr), placedPay(false) {
 	sdl = SDLUtils::instance();
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
@@ -168,7 +170,8 @@ void ClientMovement::update() {
 	switch (currentState) {
 	case ClientState::START:
 		if (straightMovement->hasFinishedPath()) {
-			stationary(ClientState::ENTRANCE, west, idle);
+			clientState->setState(ClientState::ENTRANCE);
+			transform->setMovState(idle);
 		}
 		break;
 	case ClientState::ENTRANCE:
@@ -179,9 +182,13 @@ void ClientMovement::update() {
 		break;
 	case ClientState::ASSIGNED:
 		if (straightMovement->hasFinishedPath()) {
-			stationary(ClientState::THINKING, tableRoute(ARRIVE).orientation, sitting);
-			// para que renderice el estado de pensar
-			render->renderThinkingState();
+			transform->setOrientation(tableRoute(ARRIVE).orientation);
+			transform->setMovState(sitting);
+			if (isEveryoneSit()) {
+				clientState->setState(ClientState::THINKING);
+				// para que renderice el estado de pensar
+				render->renderThinkingState();
+			}
 		}
 		break;
 	case ClientState::FINISH_EAT:
@@ -210,13 +217,14 @@ void ClientMovement::update() {
 		break;
 	case ClientState::PAYING:
 		if (straightMovement->hasFinishedPath()) {
-			placedCashRegister = true;
+			placedPay = true;
 			transform->setOrientation(west);
 			transform->setMovState(idle);
 		}
 		break;
 	case ClientState::OUT:
-		placedCashRegister = false;
+		// puede irse de la cola de pagar porque ha pagado o porque se ha quedado sin felicidad
+		placedPay = false;
 
 		if (posEntrance != -1) {
 			abandonEntrance();
