@@ -584,6 +584,9 @@
     }
   ], 
   "sounds" : [
-    { "id" : "click_button", "file" : "assets/Sound/clicks/Minimalist10.mp3" }
+    { "id" : "CLICK_BUTTON", "file" : "assets/Sound/clicks/Minimalist10.mp3" },
+    { "id" : "CASH_REGISTER1", "file" : "assets/Sound/cashRegister/CashRegister1.mp3" },
+    { "id" : "CASH_REGISTER2", "file" : "assets/Sound/cashRegister/CashRegister2.mp3" }
+
   ]
 }

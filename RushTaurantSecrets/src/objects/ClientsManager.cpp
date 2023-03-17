@@ -243,7 +243,7 @@ bool ClientsManager::collectAndLeave() {
 
 	// si es así, se les cobra
 	if (canCollect) {
-		while (pay.size() > 0) {
+		while (!pay.empty()) {
 			Client* firstPay = pay.front();
 			firstPay->getComponent<ClientMovement>()->payAndLeave();
 			pay.pop_front();

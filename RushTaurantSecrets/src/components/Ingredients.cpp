@@ -16,7 +16,7 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 		}
 		ingredients.push_back(ingr);
 
-		if (ingredients.size() > 0) {
+		if (!ingredients.empty()) {
 			int i = 0;
 			for (i = 0; i < coord.size(); ++i) {
 				coord[i].first -= ING_OFFSET / 2;
@@ -29,7 +29,7 @@ void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 }
 
 void Ingredients::removeLastIngredient() {
-	if (ingredients.size() > 0) {
+	if (!ingredients.empty()) {
  		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
 		ingredients.pop_back();
 
@@ -41,7 +41,7 @@ void Ingredients::removeLastIngredient() {
 }
 
 void Ingredients::removeAllIngredients() {
-	while (ingredients.size() > 0) {
+	while (!ingredients.empty()) {
 		//devolver a la mesa
 		removeLastIngredient();
 	}
@@ -69,15 +69,13 @@ void Ingredients::removeWhenExit() {
 }
 
 void Ingredients::render() {
-	if (ingredients.size() > 0) {
+	if (!ingredients.empty()) {
 		bubble_tex = &((*sdl).images().at("BUBBLE"));
 		bubble_tex->renderFrame(dest_bubble, 0, ingredients.size() - 1, 0);
 	}
 	
 	int k = 0; // mejor con un iterador.
 	for (auto& ingredient : ingredients) {
-		cout << "x = " << coord[k].first << " y = " << ING_Y << endl;
-
 		_ecs::_ingredients_id ingr = ingredient;
 		texture = &((*sdl).images().at(to_string(ingr)));
 		dest.x = coord[k].first;

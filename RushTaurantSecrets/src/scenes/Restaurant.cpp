@@ -89,35 +89,35 @@ void Restaurant::handleEvents() {
 	else if (ih->isKeyDown(SDLK_p)) {
 		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPauseMenu());
 	}
-	//else if (ih->isKeyDown(SDLK_f)) {
-	//	vector<pair<_ecs::_ingredients_id, int>> _ing;
-	//	_ing.push_back({ POLLO, 3 });
-	//	_ing.push_back({ HUEVO,8 });
-	//	_ing.push_back({ HARINA,11 });
-	//	_ing.push_back({ AJO,32 });
-	//	_ing.push_back({ CARNE,4 });
-	//	_ing.push_back({ FRESA,4 });
-	//	_ing.push_back({ MANZANA,7 });
-	//	_ing.push_back({ SALMON,1 });
-	//	_ing.push_back({ GAMBAS,99 });
+	else if (ih->isKeyDown(SDLK_f)) {
+		vector<pair<_ecs::_ingredients_id, int>> _ing;
+		_ing.push_back({ POLLO, 3 });
+		_ing.push_back({ HUEVO,8 });
+		_ing.push_back({ HARINA,11 });
+		//_ing.push_back({ AJO,32 });
+		//_ing.push_back({ CARNE,4 });
+		//_ing.push_back({ FRESA,4 });
+		//_ing.push_back({ MANZANA,7 });
+		//_ing.push_back({ SALMON,1 });
+		//_ing.push_back({ GAMBAS,99 });
 
-	//	GameManager::instance()->setIngredients(_ing);
-	//}
-	//else if (ih->isKeyDown(SDLK_g)) {
-	//	vector<pair<_ecs::_ingredients_id, int>> _ing;
-	//	_ing.push_back({ MAIZ, 3 });
-	//	_ing.push_back({ HARINA,8 });
-	//	_ing.push_back({ MOSTAZA,11 });
-	//	_ing.push_back({ PATATA,32 });
-	//	_ing.push_back({ CURRY,4 });
-	//	_ing.push_back({ ARROZ,4 });
-	//	_ing.push_back({ AJO,7 });
-	//	_ing.push_back({ SALCHICHA,1 });
-	//	_ing.push_back({ QUESO,99 });
-	//	_ing.push_back({ HUEVO,19 });
+		GameManager::instance()->setIngredients(_ing);
+	}
+	else if (ih->isKeyDown(SDLK_g)) {
+		vector<pair<_ecs::_ingredients_id, int>> _ing;
+		_ing.push_back({ MAIZ, 3 });
+		_ing.push_back({ HARINA,8 });
+		_ing.push_back({ MOSTAZA,11 });
+		_ing.push_back({ PATATA,32 });
+		_ing.push_back({ CURRY,4 });
+		_ing.push_back({ ARROZ,4 });
+		_ing.push_back({ AJO,7 });
+		_ing.push_back({ SALCHICHA,1 });
+		_ing.push_back({ QUESO,99 });
+		_ing.push_back({ HUEVO,19 });
 
-	//	GameManager::instance()->setIngredients(_ing);
-	//}
+		GameManager::instance()->setIngredients(_ing);
+	}
 	else {
 		Scene::handleEvents();
 		ui->handleEvents();

@@ -64,5 +64,5 @@ void ButtonComp::render() {
 
 
 void ButtonComp::playSound() {
-	sdlutils().soundEffects().at("click_button").play();
+	sdlutils().soundEffects().at("CLICK_BUTTON").play();
 }
