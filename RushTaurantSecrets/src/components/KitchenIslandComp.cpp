@@ -17,7 +17,7 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent) :
 	font = new Font("assets/Fonts/8-bit Madness.ttf", 40);
 	highlight = &sdl->images().at("ISLAND_HIGHLIGHT");
 	selected = -1;
-	
+	hPos = { -w,-h };
 	ingCloud->setKitchenIsland(this);
 
 }
@@ -42,6 +42,7 @@ void KitchenIslandComp::render() {
 
 void KitchenIslandComp::pickIngredient(int i) {
 	if (i < ing.size() && ing[auxID[i]].n > 0) {
+		//if(ingCloud->addIngredient(auxID[i]))
 		--ing[auxID[i]].n;
 		ingCloud->addIngredient(auxID[i]);
 		delete ing[auxID[i]].f;
