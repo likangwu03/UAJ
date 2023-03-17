@@ -7,6 +7,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/Texture.h"
 #include "../sdlutils/InputHandler.h"
+#include "../components/Transform.h"
 #include <string>
 #include <sstream>	// se usa para poder convertir string en stringstreams
 #include <vector>
@@ -68,7 +69,7 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;
 
-	BoxText(GameObject* parent, deque<string> text, int widthLetter, int heightLetter, Vector pos, float letterFrequency, string fontPath, int size, int widthTextBox);
+	BoxText(GameObject* parent, deque<string> text, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox);
 
 	virtual ~BoxText();
 
@@ -83,7 +84,7 @@ public:
 	bool checkAllTextWritten() const {
 		return texts.empty();
 	}
-	
+
 	virtual void update();
 
 	virtual void render();

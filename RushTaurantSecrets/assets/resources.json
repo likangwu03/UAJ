@@ -308,7 +308,7 @@
       "id": "FREEZER2_CLOSE",
       "file": "assets/Sprites/Restaurant/freezer2.png"
     },
-     {
+    {
       "id": "FREEZER2_OPEN",
       "file": "assets/Sprites/Restaurant/freezer3.png"
     },
@@ -317,11 +317,12 @@
       "file": "assets/Sprites/UI/HUD/heart.png"
     },
 
-  {
-   "id": "SHOP_MENU",
-   "file": "assets/Sprites/UI/HUD/shoppingMenu.png",
-   "cols": 1,
-   "rows": 1},
+    {
+      "id": "SHOP_MENU",
+      "file": "assets/Sprites/UI/HUD/shoppingMenu.png",
+      "cols": 1,
+      "rows": 1
+    },
     {
       "id": "MONEY_ICON",
       "file": "assets/Sprites/UI/HUD/money_icon.png",
@@ -405,7 +406,8 @@
       "file": "assets/Sprites/UI/HUD/cleanTable_icon.png",
       "cols": 1,
       "rows": 1
-    },   {
+    },
+    {
       "id": "DIRT_PLATES",
       "file": "assets/Sprites/UI/HUD/dirtPlates.png",
       "cols": 1,
@@ -447,7 +449,6 @@
       "cols": 1,
       "rows": 1
     },
-
     {
       "id": "TARGET_ICON",
       "file": "assets/Sprites/UI/HUD/target_icon.png",
@@ -549,6 +550,12 @@
       "file": "assets/Sprites/UI/Keyboard_Letters_and_Symbols.png",
       "cols": 8,
       "rows": 14
+    },
+    {
+      "id": "KEYBOARD_KEYS_2",
+      "file": "assets/Sprites/UI/Keyboard Extras.png",
+      "cols": 4,
+      "rows": 8
     },
     {
       "id": "PLAYSTATION_KEYS",

@@ -20,7 +20,7 @@ protected:
 
 public:
 	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
-	~GameObject();
+	virtual ~GameObject();
 
 	bool isAlive() { return alive; }
 

@@ -107,22 +107,22 @@ void BoxText::newText(string newText) {
 	init(newText);
 }
 
-BoxText::BoxText(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, Vector pos, float letterFrequency, string fontPath, int size, int widthTextBox) :
-	Component(parent, id), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), pos(pos),
-	timer(letterFrequency), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing) {
+BoxText::BoxText(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox) :
+	Component(parent, id), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency), 
+	font(font), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing) {
 
 	sdl = SDLUtils::instance();
 	ih = InputHandler::instance();
-	font = new Font(fontPath, size);
+
+	int offsetX = 55, offsetY = 85;
+	Vector pos = parent->getComponent<Transform>()->getPos();
+	this->pos = Vector(pos.getX() + offsetX, pos.getY() + offsetY);
 
 	init(this->texts.front());
 	this->texts.pop_front();
 }
 
 BoxText::~BoxText() {
-	delete font;
-	font = nullptr;
-
 	releaseLetters();
 }
 

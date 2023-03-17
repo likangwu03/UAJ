@@ -9,7 +9,7 @@
 #include "../gameObjects/Bin.h"
 #include "../objects/Reputation.h"
 #include "../components/Warning.h"
-#include "../components/BoxText.h"
+#include "../gameObjects/Dialogue.h"
 
 #include "../utils/checkML.h"
 
@@ -73,10 +73,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	objectiveTextTexture = new Texture(sdl->renderer(), std::to_string(intObjective), *font, build_sdlcolor(0x000000FF));
 	createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), std::to_string(intObjective).length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
 	
-	/*
-	GameObject* text = new GameObject(this, _ecs::grp_HUD);
-	new BoxText(text, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia, que grabo sus nombres sobre hojas de oro coloreadas de humedas pedrerias y las cuido bajo el terciopelo de sus pupilas hasta la adolescencia dura.", "Holaaa holaaa" }, 30, 30, Vector(200, 100), 0.2 * 1000, FONT_PATH, FONTSIZE, 700);
-	*/
+	// new Dialogue(this, Vector(500, 200), 500, 0.01 * 1000, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro"});
 
 	new Clock(this);
 }
