@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../structure/Component.h"
 #include "../objects/DishCombinator.h"
 #include "../components/UIAnimator.h"
@@ -40,7 +41,7 @@ private:
 	float x, y;
 
 public:
-	KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingredients_id,int>> _ing);
+	KitchenIslandComp(GameObject* parent);
 	virtual ~KitchenIslandComp();
 
 	virtual void render();
@@ -48,5 +49,7 @@ public:
 	void returnIngredient(_ecs::_ingredients_id id);
 	void selectedIng(int i);
 	void unselectIng(int i);
+
+	void setIngredients(vector<pair<_ecs::_ingredients_id, int>> _ing);
 };
 

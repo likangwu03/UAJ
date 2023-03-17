@@ -14,6 +14,8 @@ class PauseMenu;
 class Reputation;
 class Money;
 
+class KitchenIslandComp;
+
 class GameManager :public Singleton<GameManager> {
 	friend Singleton<GameManager>;
 
@@ -40,7 +42,9 @@ private:
 
 	Reputation* reputation;
 	Money* money;
+
 	vector<_ecs::DishInfo>* menu;
+	KitchenIslandComp* kitchenIsland;
 
 	float dayTime;
 	//bool multiplayer;
@@ -71,8 +75,12 @@ public:
 
 	Reputation* getReputation();
 	Money* getMoney();
+
 	vector<_ecs::DishInfo>* getTodaysMenu();
 	void setTodaysMenu(vector<_ecs::DishInfo>* tmenu);
+
+	void setKichenIsland(KitchenIslandComp* KIComp);
+	void setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing);
 
 	bool getHasKill();
 	void setHasKill(bool hKill);

@@ -13,12 +13,12 @@
 #include "../scenes/DailyMenuScene.h"
 #include "../scenes/SuperMarket.h"
 #include "../scenes/PauseMenu.h"
-#include "../gameObjects/Player.h"
 
 #include "../utils/checkML.h"
 
 GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
-mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr), hasKilled(false), gameOver(false), dayTime(false) { };
+	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), gameOver(false), dayTime(false) { };
 
 
 void GameManager::initialize() {
@@ -112,6 +112,14 @@ Money* GameManager::getMoney() { return money; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
+
+void GameManager::setKichenIsland(KitchenIslandComp* KIComp) {
+	kitchenIsland = KIComp;
+}
+
+void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
+	kitchenIsland->setIngredients(ing);
+}
 
 bool GameManager::getHasKill() { return hasKilled; }
 void GameManager::setHasKill(bool hKill) { hasKilled = hKill; }

@@ -1,9 +1,13 @@
 #include "KitchenIslandComp.h"
-#include "../utils/checkML.h"
+
 #include "../structure/Scene.h"
 #include "../components/Ingredients.h"
+
+#include "../utils/checkML.h"
+
+
 using namespace std;
-KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingredients_id, int>> _ing) :
+KitchenIslandComp::KitchenIslandComp(GameObject* parent) :
 	Component(parent, id), sdl(SDLUtils::instance()), ingCloud(parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Ingredients>()) {
 
 	w = parent->getComponent<Transform>()->getW() / 6;
@@ -13,13 +17,7 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent, vector<pair<_ecs::_ingr
 	font = new Font("assets/Fonts/8-bit Madness.ttf", 40);
 	highlight = &sdl->images().at("ISLAND_HIGHLIGHT");
 	selected = -1;
-	//cargar info
-	auxID = vector<_ecs::_ingredients_id>(_ing.size());
-	for (int i = 0; i < _ing.size(); ++i) { // cleon: recorrido moderno? pues no. pues s?
-		ing.insert({ _ing[i].first, {_ing[i].second, &sdl->images().at(to_string(_ing[i].first)),
-		new Texture(sdl->renderer(), to_string(_ing[i].second), *font, build_sdlcolor(0xFAF2E6ff)),&sdl->images().at("KI_ICON")} });
-		auxID[i] = _ing[i].first;
-	}
+	
 	ingCloud->setKitchenIsland(this);
 
 }
@@ -28,7 +26,6 @@ KitchenIslandComp::~KitchenIslandComp() {
 	// se elimina la fuente cogida
 	delete font;
 	for (auto i : ing) delete i.second.f;
-
 }
 
 void KitchenIslandComp::render() {
@@ -63,6 +60,23 @@ void KitchenIslandComp::unselectIng(int i) {
 	if (i < ing.size() && selected == i) {
 		hPos = { -w,-h };
 		selected = -1;
+	}
+}
+
+void KitchenIslandComp::setIngredients(vector<pair<_ecs::_ingredients_id, int>> _ing) {
+	auxID.clear();
+	for (auto i : ing) {
+		delete i.second.f;
+	}
+	ing.clear();
+
+	//cargar info
+	auxID = vector<_ecs::_ingredients_id>(_ing.size());
+
+	for (int i = 0; i < _ing.size(); ++i) { // cleon: recorrido moderno? pues no. pues s?
+		ing.insert({ _ing[i].first, {_ing[i].second, &sdl->images().at(to_string(_ing[i].first)),
+		new Texture(sdl->renderer(), to_string(_ing[i].second), *font, build_sdlcolor(0xFAF2E6ff)), &sdl->images().at("KI_ICON")} });
+		auxID[i] = _ing[i].first;
 	}
 }
 
