@@ -43,4 +43,5 @@ public:
 	// Rotar en sentido horario
 	inline void rotate(float degrees) { *this = getRotated(degrees); }
 	inline float angle() { return atanf(y / x) * 180 / PI; }
+	inline float dot(Vector const& v) { return v.x * x + v.y * y; }
 };

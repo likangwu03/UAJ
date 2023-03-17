@@ -9,6 +9,7 @@ class TextBox;
 
 class Restaurant : public Scene {
 private:
+	const float RESIZEFACTOR = 0.6666666667;
 	Pantry* pantry;
 	DishCombinator* dc;
 	UIRestaurant* ui;
@@ -18,13 +19,17 @@ private:
 
 	vector<_ecs::_dish_id> menu() const;
 	void CreateMap();
-	
+	vector<_ecs::_dish_id> dailyMenu;
 
 public:
 	Restaurant();
 	~Restaurant();
 
-	UIRestaurant* getConnectedScene() { return ui; }
+	void reset();
+
+	void callAfterCreating();
+
+	UIRestaurant* getUI() { return ui; }
 	Pantry* getPantry() { return pantry; }
 	void linkPantry(Pantry* pantry);
 	void render();
@@ -33,4 +38,6 @@ public:
 	virtual void initComponent();
 	// sirve para crear los objetos necesarios
 	void init();
+
+	float getResizeFactor() { return RESIZEFACTOR; }
 };

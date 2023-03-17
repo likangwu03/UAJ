@@ -55,6 +55,7 @@ public:
 	void renderTakingNoteState(); //informa de que quiere pedir algo
 	void renderOrderingState(); //esperando su plato
 	void renderEatingState(); //comiendo
+	void renderFinishEatState(); // termina de comer
 
 	void clientStateIsReady();
 

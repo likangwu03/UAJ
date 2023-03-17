@@ -12,6 +12,7 @@ class InventoryComp :public Component
 {
 private:
 	const int MAX_DISHES = 3;
+	const int DISHX = 36, DISHY = 413, DISHOFFSET = 72;
 	// vector de 3 platos
 	vector<_ecs::_dish_id> dishes;
 	// determina si el contenido del vector de platos es válido o no
@@ -19,7 +20,7 @@ private:
 	Texture* texture;
 	SDLUtils* sdl;
 	InputHandler* ih; //para consultar el input (teclado 123 o mando)
-	const int DISH_SIZE = 25;
+	const int DISH_SIZE = 50;
 	int cellsOcuppied;
 	int cellSelected; //se encarga de guardar la casilla en la que lleva seleccionada (independientemente de que si tiene que repartir o no)
 

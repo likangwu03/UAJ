@@ -42,6 +42,7 @@ namespace _ecs {
 		cmp_FREEZER,
 		cmp_RENDER_LIST,
 		cmp_TEXT,
+		cmp_FINISH_DAY,
 		// Do not erase pls
 		cmp_INVALID
 	};

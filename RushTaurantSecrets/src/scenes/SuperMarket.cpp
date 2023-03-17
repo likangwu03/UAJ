@@ -1,5 +1,5 @@
 #include "SuperMarket.h"
-#include "../structure/SceneManager.h"
+#include "../structure/GameManager.h"
 
 #include "../utils/checkML.h"
 
@@ -19,7 +19,7 @@ void SuperMarket::update() {
 }
 void SuperMarket::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		SceneManager::instance()->changeScene(new Restaurant(), 1);
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getRestaurant());
 	}
 	else {
 		Scene::handleEvents();
@@ -32,15 +32,16 @@ void SuperMarket::init() {
 	//cartelM = new CartelManager();
 	player = new Player(this, 0);
 
+	
+}
+
+void SuperMarket::callAfterCreating() {
 	cartelM = new CartelManager(this);
-	/*map = new GameObject(this);
-	new MapCreator(map, "assets/tilemaps/supermarket.tmx");
-	mapTop = new GameObject(this, _ecs::grp_RENDERTOP);
-	new MapCreator(mapTop, "assets/tilemaps/supermarket_top_walls.tmx");*/
 	CreateMap();
 	initRender();
 	initComponent();
 }
+
 void SuperMarket::CreateMap() {
 	Scene::CreateMap("assets/tilemaps/supermarket.tmx", Down, Vector());
 	Scene::CreateMap("assets/tilemaps/supermarket_top_walls.tmx", Top, Vector());
@@ -50,6 +51,7 @@ void SuperMarket::CreateMap() {
 SuperMarket::~SuperMarket() {
 	delete uiMarket;
 	delete cm;
+	delete cartelM;
 }
 
 

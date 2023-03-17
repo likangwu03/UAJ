@@ -39,6 +39,8 @@ public:
 
 	bool nonKeyPressed();
 
+	void initP();
+
 	void moveUp();
 	void moveDown();
 	void moveRight();

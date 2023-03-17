@@ -1,17 +1,21 @@
 #include "goToPantryTrigger.h"
-#include "../structure/SceneManager.h"
+
+#include "../sdlutils/InputHandler.h"
+
+#include "../structure/GameManager.h"
+#include "../structure/Scene.h"
+#include "../structure/GameObject.h"
+#include "../components/Transform.h"
+
+
 #include "../utils/checkML.h"
 
-goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
-	ih = InputHandler::instance();
-	sceneM = SceneManager::instance();
-	//restaurant = ... 
-};
-void goToPantryTrigger::onTriggerEnter() {
-	sceneM->setResize(false);
-	sceneM->changeScene(static_cast<Restaurant*>(parent->getScene())->getPantry(), -1);
-	static_cast<Restaurant*>(parent->getScene())->getPantry()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
+goToPantryTrigger::goToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) { };
 
-	//restaurant->getPantry()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
-
+void goToPantryTrigger::isOverlapping() {
+	if (ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))) {
+		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPantry());
+		GameManager::instance()->getCurrentScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>()->setPos(Vector(800, 550));
+	}
+	
 }

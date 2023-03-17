@@ -1,11 +1,15 @@
 ﻿#include "Scene.h"
+
 #include "GameObject.h"
 #include "Game.h"
+#include "../structure/GameManager.h"
+#include "../sdlutils/InputHandler.h"
+#include "../structure/GameObject.h"
 
-
+#include "../components/Transform.h"
+#include "../components/MapCreator.h"
 
 Scene::Scene():frameTime(Game::instance()->getframeTime()) {
-	Infor = GameInfor::instance();
 	ih = InputHandler::instance();
 	handlers = {};
 }
@@ -59,8 +63,6 @@ void Scene::initComponent() {
 }
 
 void Scene::update() {
-
-	// cleon: for (auto objGroup : objGroups) { (también en los otros) -> Areglado
 	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->update();
 	}

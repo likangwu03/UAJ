@@ -2,15 +2,13 @@
 #include "../utils/Singleton.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../sdlutils/InputHandler.h"
-#include "SceneManager.h"
-#include "GameInfor.h"
+#include "GameManager.h"
 const uint32_t FRAME_RATE = 25;  //luego a def.h
-
 
 class Game : public Singleton<Game> {
 	friend Singleton<Game>;
 private:
-	SceneManager* sceneManager;
+	GameManager* gameManager;
 	InputHandler* ih;
 	SDLUtils* sdl;
 	bool exit;

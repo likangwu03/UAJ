@@ -1,4 +1,9 @@
 #include "CartelManager.h"
+
+CartelManager::CartelManager(Scene* scene) : scene(scene), selectedCartel(nullptr),
+menu(GameManager::instance()->getSupermarket()->getUI()->getGameObject(hdr_SHOP_MENU1)->getComponent<ShoppingMenuComp>())
+{ }
+
 void CartelManager::signIn(CartelTrigger* c) {
 	if (c == selectedCartel)return;
 	if (selectedCartel != nullptr) //si ya existi¨¢ un cartel seleccionado

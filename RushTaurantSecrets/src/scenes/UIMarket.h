@@ -11,11 +11,14 @@
 class UIMarket : public Scene
 {
 private:
-	Scene* market;
+	//const string FONT_PATH = "assets/Fonts/8-bit Madness.ttf";
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15;
+
+	Scene* market;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
-	Font* f;
+	Font* font;
 	GameObject* moneyText;
 	GameObject* timeText;
 	Texture* moneyTextTexture;

@@ -27,6 +27,7 @@ void CookingMachineComp::cook(_ecs::_dish_id d) {
 	cont = 0;
 	state = cooking;
 	anim->setActive(true);
+	anim->setTexture("KITCHEN_PROCESSING_ICON_ANIM", 0, 8, 0);
 	anim->changeFrameRate((cookingTime / anim->getFramesNumber()) * 100);
 }
 

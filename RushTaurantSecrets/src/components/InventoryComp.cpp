@@ -88,15 +88,12 @@ void InventoryComp::render() {
 }
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
+	x = DISHX;
+	y = DISHY + DISHOFFSET * i;
 
-	// cleon: no puedo a�adir nada a esto. es simplemente bello. -> corregido
-	// cleon: e inexplicable.
-	x = 35;
-	y = 490 + 70 * i;
-	
 }
 
-void InventoryComp::setCell(SDL_KeyCode key) { // cleon: SDL_KEY
+void InventoryComp::setCell(SDL_KeyCode key) {
 	// si no hay ninguna celda seleccionada, selecciona la primera celda libre
 	if (cellSelected == -1) freeSpace();
 	else {
@@ -120,7 +117,7 @@ void InventoryComp::handleEvents() {
 int InventoryComp::firstDishL(int num) {
 	int i = 0;
 	int n = num;
-	while (i < MAX_DISHES) { // super 3: love and thunder.
+	while (i < MAX_DISHES) {
 		// si el �ndice del inventario es 0
 		if (n == 0) n = 2; // cleon: super 3 contra super 2: la batalla final.
 		else n--;

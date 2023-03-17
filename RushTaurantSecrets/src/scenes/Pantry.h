@@ -5,6 +5,8 @@ class Restaurant;
 
 class Pantry : public Scene {
 private:
+	const float RESIZEFACTOR = 0.8333333333;
+
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
 	void CreateMap();
@@ -18,4 +20,7 @@ public:
 	void handleEvents();
 	Restaurant* getRestaurant() { return rest; }
 	void init();
+
+	float getResizeFactor() { return RESIZEFACTOR; }
+
 };

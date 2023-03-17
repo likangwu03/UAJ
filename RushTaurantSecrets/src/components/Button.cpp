@@ -1,6 +1,6 @@
 #include "../components/Button.h"
-#include "../structure/SceneManager.h"
 #include "../structure/Scene.h"
+#include "../sdlutils/InputHandler.h"
 #include<SDL.h>
 
 #include "../utils/checkML.h"

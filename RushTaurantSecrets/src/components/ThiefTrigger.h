@@ -4,7 +4,7 @@
 #include "../components/ThiefMovement.h"
 #include "../components/MurderRender.h"
 #include "../components/ShooRender.h"
-#include "../structure/GameInfor.h"
+#include "../structure/GameManager.h"
 
 class ThiefTrigger : public TriggerComp
 {

@@ -77,6 +77,9 @@ public:
 		return instance_.get();
 	}
 
+	// Devuelve la instancia del Singleton
+	inline static T* get() { return instance(); }
+
 private:
 	static std::unique_ptr<T> instance_;
 };

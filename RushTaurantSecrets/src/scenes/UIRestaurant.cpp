@@ -3,7 +3,8 @@
 #include "../structure/GameObject.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
-#include "../objects/Money.h" // cambiar cuando se cambie la clase Money
+#include "../structure/GameManager.h"
+#include "../objects/Money.h"
 #include "../objects/Reputation.h"
 #include "../gameObjects/Bin.h"
 #include "../objects/Reputation.h"
@@ -14,11 +15,10 @@
 
 UIRestaurant::UIRestaurant() : Scene() {
 	lastTime = sdl->currRealTime();
-	numFullClock = 0;
 
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
-	moneyTxt = Money::init(moneyContainer, 200);
+	moneyTxt = GameManager::instance()->getMoney();
 
 	// pensé en hacerlo pasando un struct como parámetro, pero el struct tenía que redefinirse demasiadas veces,
 	// así que Cleon me dijo que pasara directamente la información del struct como parámetro
@@ -36,13 +36,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS, hdr_MENU);
 
 	// inventario (fondo)
-	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 244), 80, 228, 0, grp_ICONS, hdr_INVENTORY);
-
-	// reloj (momento del día)
-	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS, hdr_CLOCK);
-
-	// aguja del reloj
-	arrow = createIcon("ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0, grp_ICONS, hdr_ARROW);
+	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS, hdr_INVENTORY);
 
 	// inventario (platos)
 	inventory = new Inventory(this);
@@ -53,15 +47,15 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	font = new Font(FONT_PATH, FONTSIZE);
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-
 	moneyText = createIcon(moneyTextTexture, Vector(80, ICONY * 2 + ICONSIZE - 5), strMoney.length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
+	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// render de estrellas vacías
 	for (int i = 0; i < stars.size(); i++) 
 		createIcon("EMPTY_STAR", Vector(80 + i * 40, 25), 30, 32, 0, grp_ICONS, hdr_EMPTY_STAR);
 
 
-	reputation = Reputation::instance();
+	reputation = GameManager::instance()->getReputation();
 
 	fullStarTexture = &((*sdl).images().at("STAR"));
 	actReputation = reputation->getReputation();
@@ -81,6 +75,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	
 	GameObject* prueba = new GameObject(this);
 	new BoxText(prueba, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia, que grabo sus nombres sobre hojas de oro coloreadas de humedas pedrerias y las cuido bajo el terciopelo de sus pupilas hasta la adolescencia dura.", "Holaaa holaaa" }, 30, 30, Vector(200, 100), 0.2 * 1000, FONT_PATH, FONTSIZE, 700);
+
+	clock = new Clock(this);
 }
 
 UIRestaurant::~UIRestaurant() {
@@ -116,10 +112,11 @@ void UIRestaurant::showMoneyText() {
 	if (intMoney != moneyTxt->getMoney()) {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
-		delete(moneyTextTexture);
+		
+		delete moneyTextTexture;
 		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONTSIZE / 2);
 		moneyTextImage->setTexture(moneyTextTexture);
-		transform->setW(strMoney.length() * FONTSIZE / 2);
 	}
 }
 
@@ -128,26 +125,9 @@ void UIRestaurant::update() {
 	showMoneyText();
 	//checkTime();
 	reputationManager();
-	updateClock();
+	//updateClock();
 }
 
-void UIRestaurant::showTimeText() {
-	std::string strTime = std::to_string(time);
-	delete(timeTextTexture);
-	timeTextTexture = new Texture(sdl->renderer(), strTime, *font, build_sdlcolor(0x000000FF));
-	timeTextImage->setTexture(timeTextTexture);	
-}
-
-void UIRestaurant::checkTime() {
-	// NO BORRAR (tomo los antiguos métodos de tiempo como referencia)
-	timeT = sdl->currRealTime();
-	if (timeT - lastTime >= 1000) {
-		time += 1;
-		showTimeText();
-		lastTime = timeT;
-		timeT = 0;
-	}
-}
 
 void UIRestaurant::renderStar(int x, int y) {
 	SDL_Rect dest;
@@ -168,7 +148,7 @@ void UIRestaurant::reputationManager() {
 
 void UIRestaurant::checkStarsArray() {
 	// si la reputación es mayor de ochenta
-	if (actReputation > REP5) { // cleon: 80, 60... ¡no! esto provoca guerras y pandemias. CONSTANTES. Constantes son paz y amor. -> corregido
+	if (actReputation > REP5) {
 		stars[0] = true;
 		stars[1] = true;
 		stars[2] = true;
@@ -234,27 +214,4 @@ void UIRestaurant::checkRenderStar() {
 void UIRestaurant::render() {
 	Scene::render();
 	checkRenderStar();
-}
-
-void UIRestaurant::updateClock() {
-	timeT = sdl->currRealTime();
-	if (timeT - lastTime >= TIME_CLOCK_REFRESH) {
-		time += 1;
-		auto transformArrow = arrow->getComponent<Transform>();
-		transformArrow->setRot(transformArrow->getRot() + ANGLE_UPDATE);
-		Vector posA;
-		if (transformArrow->getRot() <= ANGLE) 
-			posA = transformArrow->getPos() + Vector(1, 1);
-		else if (transformArrow->getRot() <= ANGLE * 2)
-			posA = transformArrow->getPos() + Vector(-1, 1);
-		else if (transformArrow->getRot() <= ANGLE * 3)
-			posA = transformArrow->getPos() + Vector(-1, -1);
-		else
-			posA = transformArrow->getPos() + Vector(1, -1);
-		transformArrow->setPos(posA);
-		lastTime = timeT;
-		timeT = 0;
-
-		if (transformArrow->getRot() == 0) numFullClock++;
-	}
 }

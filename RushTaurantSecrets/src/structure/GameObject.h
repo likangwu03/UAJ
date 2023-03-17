@@ -10,6 +10,8 @@ class GameObject {
 private:
 	friend class Component;
 	void addComponent(Component* comp, _ecs::_cmp_id id);
+
+	void deleteCompVector(Component* comp);
 protected:
 	std::unordered_map<_ecs::_cmp_id, Component*> components;
 	std::vector<Component*> cmpOrder;
