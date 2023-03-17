@@ -3,11 +3,11 @@
 #include "../gameObjects/Client.h"
 #include "../structure/Manager.h"
 #include "../structure/Scene.h"
-#include "../scenes/UIRestaurant.h"
 #include "../structure/Paths_def.h"
 #include "../utils/checkML.h"
 #include "../objects/RelativeToGlobal.h"
 #include "../scenes/UIRestaurant.h"
+#include "../components/ClockComponent.h"
 #include <vector>
 #include <array>
 #include <list>
@@ -34,10 +34,9 @@ private:
 	list<Client*> pay;
 	// lista con los grupos de clientes
 	list<vector<Client*>> clientsGroups;
-	// men� del d�a
+	// menu del día
 	vector<_ecs::_dish_id> menu;
 	Scene* scene;
-	UIRestaurant* UIrestaurant;
 	SDLUtils* sdl;
 	float elapsedTime;
 	float timer;
@@ -46,8 +45,9 @@ private:
 	// indica si el primer cliente en la entra se ha asignado o no
 	bool assignedClient;
 	// se utiliza para indicar si la mesas est�n ocupadas o no 
-	// pas�ndole el grupo que se sienta en ella
+	// pasandole el grupo que se sienta en ella
 	array<DeskComp*, _ecs::NUM_TABLES> tables;
+	ClockComponent* clock;
 
 	// a�adir un cliente cada cierto tiempo
 	void addFrequently();
@@ -122,6 +122,13 @@ public:
 		return &pay;
 	}
 
+	// devuelve si quedan clientes en el restaurante o no
+	// mejor comprobar con el grupo de clientes
+	// porque de la lista de clientes se quitan cuando se están marchando del local
+	inline bool noClients() const {
+		return parent->getScene()->getGroup(_ecs::grp_CLIENTS)->empty();
+	}
+
 	// se llama cuando se quiera asignar una mesa al primer grupo de clientes
 	// se le pasa la mesa que se le desea asignar
 	void assignFirstGroup(int table);
@@ -141,7 +148,4 @@ public:
 	virtual void update();
 
 	void initComponent();
-
-	// Devuelve si no hay clientes
-	inline bool noClients() { return clientsGroups.empty(); }
 };

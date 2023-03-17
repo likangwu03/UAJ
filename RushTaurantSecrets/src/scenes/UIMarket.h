@@ -34,8 +34,8 @@ public:
 	UIMarket(Scene* market);
 	~UIMarket();
 	void showMoneyText();
-	void createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
-		Vector position, float width, float height, float rotation);
+	void createGameObjects(_ecs::_grp_id grp, string textureName, Vector position,
+		float width, float height, float rotation, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
 	void update();
 	void handleEvents() override;
 	void render();

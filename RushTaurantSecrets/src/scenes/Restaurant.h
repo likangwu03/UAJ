@@ -35,9 +35,8 @@ public:
 	void render();
 	void update();
 	void handleEvents();
+	void refresh();
 	virtual void initComponent();
-	// sirve para crear los objetos necesarios
-	void init();
 
 	float getResizeFactor() { return RESIZEFACTOR; }
 };

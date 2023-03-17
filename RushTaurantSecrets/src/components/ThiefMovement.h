@@ -20,13 +20,14 @@ private:
 	StraightMovement* straightMovement;
 	Transform* transform;
 	SDLUtils* sdl;
+	GameManager* gm;
 	Objective objective;
+	FreezerComp* freezer;
 	float elapsedTime;
 	float deadTime;
 	float escapeSpeed;
 
 	void addPath(const vector<Vector>& points);
-	FreezerComp* freezer;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;

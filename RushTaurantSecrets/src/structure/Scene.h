@@ -35,7 +35,7 @@ public:
 
 	const uint32_t& frameTime;
 
-	void refresh();
+	virtual void refresh();
 	inline std::vector<GameObject*>* getGroup(_ecs::_grp_id grp) { return &objGroups[grp]; }
 	inline GameObject* getGameObject(_ecs::_hdr_id handler) { return handlers[handler]; }
 

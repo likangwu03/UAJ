@@ -11,8 +11,10 @@ ThiefMovement::ThiefMovement(GameObject* parent, Objective objective, int pos, f
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	sdl = SDLUtils::instance();
+	gm = GameManager::instance();
 	freezer = parent->getScene()->getGameObject(_ecs::hdr_FREEZER)->getComponent<FreezerComp>();
 
+	// se mueve el ladrón
 	_ecs::_path_thief_id id = _ecs::enumThiefsPaths[objective][pos];
 	addPath(_ecs::thiefsPahts[id].points);
 }
@@ -49,21 +51,22 @@ void ThiefMovement::update() {
 		break;
 
 	case SECRET:
-		// se cambia a la escena en la que los ladrones han descubierto el secreto
+		// se cambia al final en el que los ladrones han descubierto la fórmula secreta
 		parent->setAlive(false);
 		break;
 
 	case FREEZER:
-		// se cambia a la escena en la que los ladrones han abierto el congelador
-		parent->setAlive(false);
 		freezer->isOpen();
+		// se cambia al final en el que los ladrones han abierto el congelador
+		parent->setAlive(false);
 		break;
 
 	case DEAD:
 		elapsedTime += deltaTime;
 		if (elapsedTime > deadTime) {
+			gm->setHasKill(true);
 			parent->setAlive(false);
-			elapsedTime = 0;	// no har�a falta
+			elapsedTime = 0;	// no haria falta
 		}
 		break;
 

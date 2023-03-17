@@ -102,6 +102,11 @@ void BoxText::releaseLetters() {
 	}
 }
 
+void BoxText::newText(string newText) {
+	releaseLetters();
+	init(newText);
+}
+
 BoxText::BoxText(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, Vector pos, float letterFrequency, string fontPath, int size, int widthTextBox) :
 	Component(parent, id), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), pos(pos),
 	timer(letterFrequency), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing) {
@@ -122,6 +127,7 @@ BoxText::~BoxText() {
 }
 
 void BoxText::update() {
+
 	if (actWord != words.end()) {
 		state = Writing;
 		if (showAllText) {
@@ -141,10 +147,15 @@ void BoxText::update() {
 	}
 	else {
 		state = Written;
-		if (nextText && !texts.empty()) {
-			newText(texts.front());
-			texts.pop_front();
+		if (nextText) {
+			if (!texts.empty()) {
+				newText(texts.front());
+				texts.pop_front();
 
+			}
+			else {
+				parent->setAlive(false);
+			}
 			nextText = false;
 		}
 	}

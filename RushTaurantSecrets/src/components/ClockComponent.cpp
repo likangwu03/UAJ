@@ -5,14 +5,14 @@ ClockComponent::ClockComponent(GameObject* parent, Scene* _scene) : Component(pa
 	numFullClock = 0;
 
 	// reloj (momento del día)
-	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS, hdr_CLOCK);
+	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS);
 
 	// aguja del reloj
-	arrow = createIcon("ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0, grp_ICONS, hdr_ARROW);
+	arrow = createIcon("ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0, grp_ICONS);
 }
 
 // devuelve cuántas vueltas ha dado reloj cuando se llama al método
-int ClockComponent::getNumFullClock() {
+int ClockComponent::getNumFullClock() const {
 	return numFullClock;
 }
 

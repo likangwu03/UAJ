@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../structure/Component.h"
+#include "../structure/GameObject.h"
 #include "../utilities/Vector.h"
 #include "../utils/checkML.h"
 #include "../sdlutils/SDLUtils.h"
@@ -62,10 +63,7 @@ private:
 
 	void releaseLetters();
 
-	inline void newText(string newText) {
-		releaseLetters();
-		init(newText);
-	}
+	void newText(string newText);
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;

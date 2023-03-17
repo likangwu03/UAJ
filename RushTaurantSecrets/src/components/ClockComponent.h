@@ -15,6 +15,7 @@ private:
 	// parametrizable: 1000 (cada segundo) / 10000 (cada diez segundos)
 	const int TIME_CLOCK_REFRESH = 1000, ANGLE = 90, ANGLE_UPDATE = 5;
 	const int ICONX = 20, ICONY = 15, ICONSIZE = 48;
+	const int MAX_LAPS = 1;
 	SDLUtils* sdl = SDLUtils::instance();
 	float lastTime;
 	int numFullClock; // número de vueltas que ha dado el reloj
@@ -30,7 +31,10 @@ private:
 		_ecs::_grp_id grp, _ecs::_hdr_id handler);
 public:
 	ClockComponent(GameObject* parent, Scene* _scene);
-	int getNumFullClock();
+	int getNumFullClock() const;
+	inline bool dayHasFinished() const {
+		return getNumFullClock() > MAX_LAPS;
+	}
 	void updateClock();
 
 	virtual void update();

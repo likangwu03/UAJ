@@ -5,8 +5,8 @@
 #include "../scenes/Restaurant.h"
 
 void ClientsManager::addFrequently() {
-	//if (!UIrestaurant->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
-	if (clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+	// se crea un grupo si: el día no ha terminado y el restaurante y la cola de entrada no están llenas
+	if (!clock->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 		if (elapsedTime > timer) {
 			elapsedTime = 0;
 			// se crea un nuevo grupo de clientes
@@ -197,10 +197,12 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
 
-	UIrestaurant = GameManager::instance()->getRestaurant()->getUI();
-	if (UIrestaurant == nullptr) {
+	UIRestaurant* uiRest = GameManager::instance()->getRestaurant()->getUI();
+	if (uiRest == nullptr) {
 		throw new string("Error conversión Scene en UIRestaurant");
 	}
+	GameObject* c = uiRest->getGameObject(_ecs::hdr_CLOCK);
+	clock = c->getComponent<ClockComponent>();
 
 	sdl = SDLUtils::instance();
 }

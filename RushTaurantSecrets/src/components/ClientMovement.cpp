@@ -18,7 +18,7 @@ bool ClientMovement::hasEveryoneEaten() const {
 }
 
 bool ClientMovement::isNotPaying(Client* mate) {
-	return mate->getComponent<ClientState>()->getState() != ClientState::PAYING;
+	return !mate->getComponent<ClientMovement>()->isPlacedCashRegister();
 }
 
 void ClientMovement::goOut(ClientState::States currentState) {
@@ -104,7 +104,8 @@ void ClientMovement::stationary(ClientState::States state, GOOrientation orienta
 }
 
 ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup) :
-	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), posGroup(posGroup), clientState(nullptr), render(nullptr) {
+	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), 
+	posGroup(posGroup), clientState(nullptr), render(nullptr), placedCashRegister(false) {
 	sdl = SDLUtils::instance();
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
@@ -209,11 +210,14 @@ void ClientMovement::update() {
 		break;
 	case ClientState::PAYING:
 		if (straightMovement->hasFinishedPath()) {
+			placedCashRegister = true;
 			transform->setOrientation(west);
 			transform->setMovState(idle);
 		}
 		break;
 	case ClientState::OUT:
+		placedCashRegister = false;
+
 		if (posEntrance != -1) {
 			abandonEntrance();
 			outEntrance();

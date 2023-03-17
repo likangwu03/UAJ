@@ -6,9 +6,9 @@
 #include "../gameObjects/Player.h"
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
-#include "../structure/SceneManager.h"
 #include "../components/FinishDay.h"
 #include "../utils/checkML.h"
+#include <set>
 
 Restaurant::Restaurant(): dc(DishCombinator::init()) { 
 	ui = new UIRestaurant();
@@ -26,17 +26,13 @@ void Restaurant::reset() {
 	player->getComponent<PlayerMovementController>()->initP();
 }
 
-
 void Restaurant::callAfterCreating() {
 	// clientsManager
 	GameObject* managerContainer = new GameObject(this);
-	clientsManager = ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
+	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
 	new FinishDay(managerContainer);
 	CreateMap();
 	initRender();
-
-	// las mesas se inicializan luego de haberse creado
-	//clientsManager->initTables();
 
 	initComponent();
 }
@@ -54,20 +50,6 @@ vector<_ecs::_dish_id> Restaurant::menu() const {
 	for (auto i = aux.begin(); i != aux.end(); ++i) menu.push_back((_ecs::_dish_id)*i);
 
 	return menu;
-}
-
-void Restaurant::init() {
-	
-	cm = new CollisionsManager(this);
-	player = new Player(this, 0);
-
-	// clientsManager
-	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
-	CreateMap();
-	initRender();
-
-	initComponent();
 }
 
 void Restaurant::CreateMap() {
@@ -140,4 +122,9 @@ void Restaurant::handleEvents() {
 		Scene::handleEvents();
 		ui->handleEvents();
 	}
+}
+
+void Restaurant::refresh() {
+	Scene::refresh();
+	ui->refresh();
 }

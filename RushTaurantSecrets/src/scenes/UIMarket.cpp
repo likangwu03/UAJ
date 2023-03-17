@@ -13,7 +13,7 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	basketMarket = new BasketMarket(this);
 
 	// icono de dinero
-	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MONEY, "MONEY_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0);
+	createGameObjects(_ecs::grp_ICONS, "MONEY_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0);
 
 	// gestión de la cantidad de dinero
 	intMoney = moneyTxt->getMoney();
@@ -21,18 +21,18 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 
 	font = new Font(FONT_PATH, 50);
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-	moneyText = new GameObject(this, _ecs::grp_ICONS, _ecs::hdr_MONEY_TEXT);
+	moneyText = new GameObject(this, _ecs::grp_ICONS);
 	new Transform(moneyText, Vector(80, ICONY - 3), Vector(0, 0), strMoney.length() * FONTSIZE / 2, FONTSIZE);
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// icono de men?del día
-	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_MENU, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
+	createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
 
 	// icono de cesta
-	createGameObjects(_ecs::grp_ICONS, _ecs::hdr_BASKET, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
+	createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
 
 	//men¨² de compra
-	shopMenu = new GameObject(this, _ecs::grp_GENERAL, _ecs::hdr_SHOP_MENU1);
+	shopMenu = new GameObject(this, _ecs::grp_GENERAL, hdr_SHOP_MENU1);
 	new ShoppingMenuComp(shopMenu);
 }
 
@@ -47,8 +47,8 @@ void UIMarket::update() {
 	showMoneyText();
 }
 
-void UIMarket::createGameObjects(_ecs::_grp_id grp, _ecs::_hdr_id handler, string textureName,
-	Vector position, float width, float height, float rotation) {
+void UIMarket::createGameObjects(_ecs::_grp_id grp, string textureName,
+	Vector position, float width, float height, float rotation, _ecs::_hdr_id handler) {
 	GameObject* gameObject = new GameObject(this, grp, handler);
 	new Transform(gameObject, position, Vector(0, 0), width, height, rotation);
 	new Image(gameObject, &((*sdl).images().at(textureName)));

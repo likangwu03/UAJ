@@ -30,6 +30,7 @@ private:
 	ClientsManager* clientsManager;
 	vector<Client*> mates;
 	int posGroup;
+	bool placedCashRegister;
 
 	void addPath(const vector<Vector>& points);
 
@@ -79,6 +80,10 @@ private:
 	// ha abandonado la cola de pagar
 	inline void outPay() {
 		posPay = -1;
+	}
+
+	inline bool isPlacedCashRegister() const {
+		return placedCashRegister;
 	}
 
 	// ha abandonado la cola de la caja sin pagar

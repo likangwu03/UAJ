@@ -25,8 +25,6 @@ private:
 	const int REP0 = 0, REP1 = 0, REP2 = 20, REP3 = 40, REP4 = 60, REP5 = 80;
 	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15;
 
-	const int MAX_LAPS = 1;
-
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
 	Money* moneyTxt;
@@ -44,7 +42,6 @@ private:
 	Reputation* reputation;
 	int actReputation;
 	array<bool, 5> stars;
-	Clock* clock;
 
 	GameObject* dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
 		_ecs::_grp_id grp, _ecs::_hdr_id handler);
@@ -62,10 +59,6 @@ public:
 	Inventory* getInventory() const { return inventory; };
 
 	Money* getMoney() const { return moneyTxt; };
-
-	/*bool dayHasFinished() {
-		return numFullClock > MAX_LAPS;
-	}*/
 
 	void showMoneyText();
 

@@ -69,28 +69,11 @@ namespace _ecs {
 	// Handlers
 	enum _hdr_id : id_type {
 		hdr_PLAYER,
-		hdr_DISHCOMB,
-		hdr_CLIENT,
-		hdr_INVENTORY,
-		hdr_SM_INVENTORY,
-		hdr_MONEY_ICON,
-		hdr_REPUTATION,
-		hdr_TARGET,
-		hdr_MONEY,
-		hdr_MONEY_TEXT,
-		hdr_TIME_TEXT,
 		hdr_CLOCK,
-		hdr_ARROW,
-		hdr_STAR,
-		hdr_EMPTY_STAR,
-		hdr_MENU,
-		hdr_PAUSE,
-		hdr_BASKET,
-		hdr_BIN,
-		hdr_PRUEBA,
+		hdr_FREEZER,
 		hdr_KITCHENISLAND,
 		hdr_SHOP_MENU1,
-		hdr_FREEZER,
+		hdr_SM_INVENTORY,
 		// Do not erase pls
 		hdr_INVALID
 	};
