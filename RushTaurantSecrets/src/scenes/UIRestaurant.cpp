@@ -1,15 +1,16 @@
 #include "UIRestaurant.h"
 
 #include "../structure/GameObject.h"
+#include "../structure/GameManager.h"
 #include "../components/Transform.h"
 #include "../components/Image.h"
-#include "../structure/GameManager.h"
+#include "../components/Warning.h"
 #include "../objects/Money.h"
 #include "../objects/Reputation.h"
+#include "../gameObjects/DailyMenu.h"
 #include "../gameObjects/Bin.h"
-#include "../objects/Reputation.h"
-#include "../components/Warning.h"
 #include "../gameObjects/Dialogue.h"
+#include "../gameObjects/ButtonGO.h"
 
 #include "../utils/checkML.h"
 
@@ -32,9 +33,18 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// icono de objetivo diario
 	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS);
 
-	// icono de menú del día
-	createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS);
+	//menú del día
+	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15), 479.0f, 640.0f, []() {});
+	menuToggled = true;
+	toggleDailyMenu();
+	menu->getComponent<ButtonComp>()->setActive(false);
 
+	// icono de menú del día
+	//createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS);
+	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 
+		[&]() {
+			toggleDailyMenu();
+		});
 	// inventario (fondo)
 	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
 
@@ -104,6 +114,14 @@ GameObject* UIRestaurant::createIcon(Texture* texture, Vector position, float wi
 	_ecs::_grp_id grp, _ecs::_hdr_id handler) {
 
 	return dataIcon(texture, position, width, height, rotation, grp, handler);
+}
+
+void UIRestaurant::toggleDailyMenu()
+{
+	menuToggled = !menuToggled;
+	menu->getComponent<Transform>()->setActive(menuToggled);
+	menu->getComponent<Image>()->setActive(menuToggled);
+	menu->getComponent<DailyMenuComp>()->setActive(menuToggled);
 }
 
 void UIRestaurant::showMoneyText() {

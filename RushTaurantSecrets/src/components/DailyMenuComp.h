@@ -33,9 +33,12 @@ private:
 	bool murder;
 
 	Font* font;
+
+	void init(GameObject* parent);
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize = 4);
+	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo> _menu);
 	virtual ~DailyMenuComp();
 
 	virtual void render();

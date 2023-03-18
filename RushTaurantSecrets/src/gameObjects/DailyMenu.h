@@ -13,7 +13,7 @@ class Vector;
 
 using namespace std;
 
-class DailyMenu : GameObject
+class DailyMenu : public GameObject
 {
 public:
 	DailyMenu(Scene* scene, string t, Vector pos, float w, float h, std::function<void()>&& callback)
@@ -24,13 +24,5 @@ public:
 		new DailyMenuComp(this, 479, 640, _ecs::cmp_DAILYMENU);
 	};
 
-	template<typename Comp>
-	inline Comp* getComponent() {
-		auto it = components.find(Comp::id);
-		if (it == components.end()) {
-			return nullptr;
-		}
-		return static_cast<Comp*>(it->second);
-	}
 };
 

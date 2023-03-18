@@ -61,8 +61,7 @@ vector<_ecs::DishInfo> DailyMenuComp::randomMenu()
 	return temp;
 }
 
-DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize)
-	: Component(parent, id), menuSize(mSize), spriteSize(64)
+void DailyMenuComp::init(GameObject* parent)
 {
 	tf = parent->getComponent<Transform>();
 	parentScene = parent->getScene();
@@ -72,6 +71,18 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 	menu = randomMenu();
 	font = new Font("assets/Fonts/light_pixel-7.ttf", 50);
 	drawDishes(menu);
+}
+
+DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize)
+	: Component(parent, id), menuSize(mSize), spriteSize(64)
+{
+	init(parent);
+}
+
+DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo> _menu)
+	: Component(parent, id), menu(_menu), menuSize(_menu.size()), spriteSize(64)
+{
+	init(parent);
 }
 
 DailyMenuComp::~DailyMenuComp()

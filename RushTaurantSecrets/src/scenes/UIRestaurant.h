@@ -5,6 +5,7 @@
 #include "../gameObjects/Clock.h"
 #include <string>
 #include <array>
+#include <vector>
 
 class GameObject;
 class Money;
@@ -13,6 +14,7 @@ class Inventory;
 class Bin;
 class Reputation;
 class Transform;
+class DailyMenu;
 
 using namespace std;
 using namespace _ecs;
@@ -42,6 +44,8 @@ private:
 	Reputation* reputation;
 	int actReputation;
 	array<bool, 5> stars;
+	DailyMenu* menu;
+	bool menuToggled;
 
 	GameObject* dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
 		_ecs::_grp_id grp, _ecs::_hdr_id handler);
@@ -51,6 +55,8 @@ private:
 
 	GameObject* createIcon(Texture* texture, Vector position, float width, float height, float rotation = 0,
 		_ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
+
+	void toggleDailyMenu();
 
 public:
 	UIRestaurant();

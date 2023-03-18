@@ -25,13 +25,13 @@ void DailyMenuScene::handleEvents() {
 void DailyMenuScene::init()
 {
 	dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8, sdl->height() / 15), 479.0f, 640.0f,
-		[=]() { // mirar esto
+		[&]() { 
 			GameManager::instance()->setTodaysMenu(dailyMenu1->getComponent<DailyMenuComp>()->getMenu());
 			GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
 		});
 
 	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2, sdl->height() / 15), 479.0f, 640.0f,
-		[=]() { // mirar esto
+		[&]() { 
 			GameManager::instance()->setTodaysMenu(dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
 			GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
 		});
