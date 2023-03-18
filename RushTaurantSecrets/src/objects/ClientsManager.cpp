@@ -229,30 +229,26 @@ void ClientsManager::assignFirstGroup(int table) {
 	}
 }
 
-bool ClientsManager::collectAndLeave() {
-	bool canCollect = true;
+bool ClientsManager::notAllGroupPaying(Client* client) {
+	return !client->getComponent<ClientMovement>()->isEveryonePaying();
+}
 
-	// se comprueba si todos los integrantes de cada grupo están en colocados en la cola listos para pagar
-	auto it = pay.begin();
-	while (it != pay.end() && canCollect) {
-		if (!(*it)->getComponent<ClientMovement>()->isEveryonePaying()) {
-			canCollect = false;
-		}
-		++it;
+bool ClientsManager::canCollect() const {
+	// se comprueba si:
+	// - la cola de pagar no está vacía
+	// - todos los integrantes de cada grupo están en colocados en la cola listos para pagar
+	return !pay.empty() && std::find_if(pay.begin(), pay.end(), notAllGroupPaying) == pay.end();
+}
+
+void ClientsManager::collectAndLeave() {
+	// se marchan todos los clientes hasta que la caja quede vacía
+	while (!pay.empty()) {
+		Client* firstPay = pay.front();
+		firstPay->getComponent<ClientMovement>()->payAndLeave();
+		pay.pop_front();
+		auto it = pay.begin();
+		recolocatePayAll(it);
 	}
-
-	// si es así, se les cobra
-	if (canCollect) {
-		while (!pay.empty()) {
-			Client* firstPay = pay.front();
-			firstPay->getComponent<ClientMovement>()->payAndLeave();
-			pay.pop_front();
-			auto it = pay.begin();
-			recolocatePayAll(it);
-		}
-	}
-
-	return canCollect;
 }
 
 bool ClientsManager::canOccupyPay(vector<Client*> mates) {

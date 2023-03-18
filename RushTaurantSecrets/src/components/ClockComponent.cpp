@@ -35,7 +35,10 @@ void ClockComponent::updateClock() {
 		lastTime = timeT;
 		timeT = 0;
 
-		if (transformArrow->getRot() == 0) numFullClock++;
+		int rot = transformArrow->getRot();
+		if (rot % 360 == 0) {
+			numFullClock++;
+		}
 	}
 }
 

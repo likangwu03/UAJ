@@ -133,8 +133,12 @@ public:
 	// se le pasa la mesa que se le desea asignar
 	void assignFirstGroup(int table);
 
+	static bool notAllGroupPaying(Client* client);
+
+	bool canCollect() const;
+
 	// se llama cuando se quiere cobrar a los clientes que hay en la caja registradora
-	bool collectAndLeave();
+	void collectAndLeave();
 
 	// hay espacio para que vayan a la cola de la caja
 	bool canOccupyPay(vector<Client*> mates);

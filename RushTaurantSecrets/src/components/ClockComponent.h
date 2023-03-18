@@ -33,7 +33,7 @@ public:
 	ClockComponent(GameObject* parent, Scene* _scene);
 	int getNumFullClock() const;
 	inline bool dayHasFinished() const {
-		return getNumFullClock() > MAX_LAPS;
+		return numFullClock >= MAX_LAPS;
 	}
 	void updateClock();
 
