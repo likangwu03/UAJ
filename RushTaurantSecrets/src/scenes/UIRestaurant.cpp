@@ -33,18 +33,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// icono de objetivo diario
 	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS);
 
-	//menú del día
-	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15), 479.0f, 640.0f, []() {});
-	menuToggled = true;
-	toggleDailyMenu();
-	menu->getComponent<ButtonComp>()->setActive(false);
-
-	// icono de menú del día
-	//createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS);
-	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 
-		[&]() {
-			toggleDailyMenu();
-		});
 	// inventario (fondo)
 	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
 
@@ -225,6 +213,26 @@ void UIRestaurant::checkRenderStar() {
 			renderStar(80 + i * 40, 25);
 		}
 	}
+}
+
+void UIRestaurant::setDailyMenu()
+{
+	//menú del día
+	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15), 
+		479.0f, 640.0f, GameManager::instance()->getTodaysMenu(), []() {});
+	menuToggled = true;
+	toggleDailyMenu();
+	menu->getComponent<ButtonComp>()->setActive(false);
+
+	// icono de menú del día
+	//createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS);
+	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,
+		[&]() {
+			toggleDailyMenu();
+		});
+
+	//menu->getComponent<DailyMenuComp>()->setMenu(_menu);
+	//dmen = menu->getComponent<DailyMenuComp>()->getMenu();
 }
 
 void UIRestaurant::render() {

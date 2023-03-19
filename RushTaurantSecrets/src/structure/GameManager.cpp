@@ -9,6 +9,7 @@
 #include "../scenes/BeforeDayStartScene.h"
 #include "../scenes/MainMenu.h"
 #include "../scenes/Restaurant.h"
+#include "../scenes/UIRestaurant.h"
 #include "../scenes/Pantry.h"
 #include "../scenes/DailyMenuScene.h"
 #include "../scenes/SuperMarket.h"

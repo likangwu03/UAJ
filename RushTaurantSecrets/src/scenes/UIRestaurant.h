@@ -76,6 +76,8 @@ public:
 
 	void checkRenderStar();
 
+	void setDailyMenu();
+
 	void updateClock();
 
 	void update();

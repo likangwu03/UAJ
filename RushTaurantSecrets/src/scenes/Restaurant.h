@@ -19,7 +19,7 @@ private:
 
 	vector<_ecs::_dish_id> menu() const;
 	void CreateMap();
-	vector<_ecs::_dish_id> dailyMenu;
+	//vector<_ecs::_dish_id> dailyMenu;
 
 public:
 	Restaurant();

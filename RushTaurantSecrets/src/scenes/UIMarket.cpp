@@ -5,6 +5,14 @@
 #include "../components/ShoppingMenuComp.h"
 #include "../utils/checkML.h"
 
+void UIMarket::toggleDailyMenu()
+{
+	menuToggled = !menuToggled;
+	menu->getComponent<Transform>()->setActive(menuToggled);
+	menu->getComponent<Image>()->setActive(menuToggled);
+	menu->getComponent<DailyMenuComp>()->setActive(menuToggled);
+}
+
 UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
@@ -26,7 +34,7 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// icono de men?del día
-	createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
+	//createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
 
 	// icono de cesta
 	createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
@@ -34,6 +42,8 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	//men¨² de compra
 	shopMenu = new GameObject(this, _ecs::grp_GENERAL, hdr_SHOP_MENU1);
 	new ShoppingMenuComp(shopMenu);
+
+	menuToggled = true;
 }
 
 UIMarket::~UIMarket() {
@@ -91,4 +101,20 @@ void UIMarket::render() {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();
 	}
 
+}
+
+void UIMarket::setDailyMenu()
+{
+	//menú del día
+	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15),
+		479.0f, 640.0f, GameManager::instance()->getTodaysMenu(), []() {});
+	menuToggled = true;
+	toggleDailyMenu();
+	menu->getComponent<ButtonComp>()->setActive(false);
+
+	// icono de menú del día
+	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,
+		[&]() {
+			toggleDailyMenu();
+		});
 }

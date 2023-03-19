@@ -6,6 +6,8 @@
 #include "../components/Image.h"
 #include "../objects/Money.h" // cambiar cuando se cambie la clase Money
 #include "../gameObjects/BasketMarket.h"
+#include "../gameObjects/ButtonGO.h"
+#include "../gameObjects/DailyMenu.h"
 
 // UI del supermercado
 class UIMarket : public Scene
@@ -27,6 +29,10 @@ private:
 	InputHandler* ih;
 	BasketMarket* basketMarket;
 	GameObject* shopMenu;
+	DailyMenu* menu;
+	bool menuToggled;
+
+	void toggleDailyMenu();
 
 
 public:
@@ -39,6 +45,7 @@ public:
 	void update();
 	void handleEvents() override;
 	void render();
+	void setDailyMenu();
 	virtual Scene* getConnectedScene() { return market; }
 };
 

@@ -13,10 +13,10 @@ class DailyMenuComp : public Component
 {
 private:
 	Transform* tf;
-	void drawDishes(vector<_ecs::DishInfo> menu);
+	void drawDishes();
 	Scene* parentScene;
-	vector<_ecs::DishInfo> menu;
-	vector<_ecs::DishInfo> randomMenu();
+	vector<_ecs::DishInfo>* menu;
+	void randomMenu();
 	uint8_t menuSize;
 	uint8_t spriteSize;
 	struct rend
@@ -38,10 +38,11 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize = 4);
-	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo> _menu);
+	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu);
 	virtual ~DailyMenuComp();
 
 	virtual void render();
 	vector<_ecs::DishInfo>* getMenu();
+	void setMenu(vector<_ecs::DishInfo>* _menu);
 };
 

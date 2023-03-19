@@ -7,6 +7,7 @@ class Scene;
 class MainMenu;
 class BeforeDayStartScene;
 class Restaurant;
+class UIRestaurant;
 class Pantry;
 class DailyMenuScene;
 class SuperMarket;
@@ -35,6 +36,7 @@ private:
 	MainMenu* mainMenu;
 	BeforeDayStartScene* beforeDayStartScene;
 	Restaurant* restaurant;
+	UIRestaurant* uiRestaurant;
 	Pantry* pantry;
 	DailyMenuScene* dailyMenu;
 	SuperMarket* supermarket;
