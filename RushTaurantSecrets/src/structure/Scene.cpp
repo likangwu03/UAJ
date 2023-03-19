@@ -9,6 +9,8 @@
 #include "../components/Transform.h"
 #include "../components/MapCreator.h"
 
+#include "../utils/checkML.h"
+
 Scene::Scene():frameTime(Game::instance()->getframeTime()) {
 	ih = InputHandler::instance();
 	handlers = {};

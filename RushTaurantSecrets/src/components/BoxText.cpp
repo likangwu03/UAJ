@@ -1,5 +1,7 @@
 #include "BoxText.h"
 
+#include "../utils/checkML.h"
+
 void BoxText::createLetter(string l) {
 	Letter letter;
 	letter.texture = new Texture(sdl->renderer(), l, *font, build_sdlcolor(0x000000FF));

@@ -1,5 +1,7 @@
 #include "ClockComponent.h"
 
+#include "../utils/checkML.h"
+
 ClockComponent::ClockComponent(GameObject* parent, Scene* _scene) : Component(parent, id), scene(_scene) {
 	lastTime = sdl->currRealTime();
 	numFullClock = 0;

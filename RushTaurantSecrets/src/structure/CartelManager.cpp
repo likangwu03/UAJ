@@ -1,5 +1,7 @@
 #include "CartelManager.h"
 
+#include "../utils/checkML.h"
+
 CartelManager::CartelManager(Scene* scene) : scene(scene), selectedCartel(nullptr),
 menu(GameManager::instance()->getSupermarket()->getUI()->getGameObject(hdr_SHOP_MENU1)->getComponent<ShoppingMenuComp>())
 { }

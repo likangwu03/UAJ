@@ -4,13 +4,14 @@
 #include "../structure/GameManager.h"
 #include "../objects/ClientsManager.h"
 
+#include "../utils/checkML.h"
+
 FinishDay::FinishDay(GameObject* parent) : Component(parent, id), clock(nullptr) { }
 
 void FinishDay::update() {
-	/*if(ui->dayHasFinished()) cout << "Day has finished";
-	if(ui->dayHasFinished() && ClientsManager::get()->noClients()) {
+	if(clock->dayHasFinished() && ClientsManager::get()->noClients()) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
-	}*/
+	}
 }
 
 void FinishDay::initComponent() {

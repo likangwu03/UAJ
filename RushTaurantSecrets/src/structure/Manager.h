@@ -1,6 +1,8 @@
 #pragma once
 #include "../structure/Component.h"
 
+#include "../utils/checkML.h"
+
 using namespace std;
 
 template<typename Comp>

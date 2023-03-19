@@ -4,6 +4,8 @@
 #include "../structure/GameManager.h"
 #include "../scenes/SuperMarket.h"
 
+#include "../utils/checkML.h"
+
 ShoppingMenuComp::ShoppingMenuComp(GameObject* parent) :Component(parent, id),
 sdl(SDLUtils::instance()), ih(InputHandler::instance()),
 priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), ing(_ecs::NONE_ING) {
