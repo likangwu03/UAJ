@@ -24,10 +24,10 @@ void CashRegisterTrigger::isOverlapping() {
 			int price = _ecs::Dishes[id].price;
 			totalPayment += price;
 			money->addMoney(price);
-			GameManager::instance()->getReputation()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 100);
+			GameManager::get()->getReputation()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 100);
 		}
 
-		if (GameManager::instance()->getReputation()->getReputation() > rnd) {
+		if (GameManager::get()->getReputation()->getReputation() > rnd) {
 			money->addMoney(totalPayment / 10);
 #ifdef _DEBUG
 			cout << "You got " << totalPayment / 10 << " coins from tips" << endl;

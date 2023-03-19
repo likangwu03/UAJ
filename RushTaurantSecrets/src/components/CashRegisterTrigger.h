@@ -19,7 +19,7 @@ class CashRegisterTrigger :public TriggerComp
 
 public:
 	CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
-		TriggerComp(parent, pos_, width_, height_), money(GameManager::instance()->getMoney()),
+		TriggerComp(parent, pos_, width_, height_), money(GameManager::get()->getMoney()),
 		cM(ClientsManager::get()),highlight(parent->getComponent<Image>()) {
 		highlight->setActive(false);
 		list = cM->getPayQueue();

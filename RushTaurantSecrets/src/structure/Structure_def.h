@@ -80,4 +80,6 @@ namespace _ecs {
 	constexpr id_type hdrNum = hdr_INVALID;
 
 	enum RenderPos { Top, Middle, Down };
+
+	enum endingType { BadRep, Broke, Caught, Robbed, Normal, Happy };
 }

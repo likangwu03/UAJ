@@ -7,7 +7,7 @@ Game::Game() {
 	
 	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720, "assets/resources.json");
 	exit = false;
-	gameManager = GameManager::instance();
+	gameManager = GameManager::get();
 	ih = InputHandler::instance();
 	sdl->showCursor();
 	frameTime = 0;

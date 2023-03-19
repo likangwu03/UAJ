@@ -13,7 +13,7 @@
 #include "../utils/checkML.h"
 
 void MainMenu::start() {
-	GameManager::instance()->changeScene(GameManager::instance()->getRestaurant());
+	GameManager::get()->changeScene(GameManager::get()->getRestaurant());
 }
 
 MainMenu::MainMenu() {
@@ -32,10 +32,10 @@ MainMenu::~MainMenu() {
 
 void MainMenu::handleEvents(){
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getDailyMenu());
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 	}
 	else {
 		Scene::handleEvents();

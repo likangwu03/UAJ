@@ -9,7 +9,6 @@ private:
 
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
-	void CreateMap();
 
 public:
 	Pantry();
@@ -22,5 +21,6 @@ public:
 	void init();
 
 	float getResizeFactor() { return RESIZEFACTOR; }
+	void createMap();
 
 };

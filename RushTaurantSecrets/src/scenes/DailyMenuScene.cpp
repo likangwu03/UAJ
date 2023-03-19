@@ -7,12 +7,12 @@
 
 void DailyMenuScene::select1()
 {
-	GameManager::instance()->changeScene(GameManager::instance()->getSupermarket());
+	GameManager::get()->changeScene(GameManager::get()->getSupermarket());
 }
 
 void DailyMenuScene::select2()
 {
-	GameManager::instance()->changeScene(GameManager::instance()->getSupermarket());
+	GameManager::get()->changeScene(GameManager::get()->getSupermarket());
 }
 
 DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64)
@@ -28,17 +28,17 @@ void DailyMenuScene::init()
 {
 	dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8, sdl->height() / 15), 479.0f, 640.0f,
 		[=]() { 
-			GameManager::instance()->setTodaysMenu(dailyMenu1->getComponent<DailyMenuComp>()->getMenu());
-			GameManager::instance()->getRestaurant()->getUI()->setDailyMenu();
-			GameManager::instance()->getSupermarket()->getUI()->setDailyMenu();
-			GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
+			GameManager::get()->setTodaysMenu(dailyMenu1->getComponent<DailyMenuComp>()->getMenu());
+			GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
+			GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 		});
 
 	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2, sdl->height() / 15), 479.0f, 640.0f,
 		[=]() { 
-			GameManager::instance()->setTodaysMenu(dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
-			GameManager::instance()->getRestaurant()->getUI()->setDailyMenu();
-			GameManager::instance()->getSupermarket()->getUI()->setDailyMenu();
-			GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
+			GameManager::get()->setTodaysMenu(dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
+			GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
+			GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 		});
 }

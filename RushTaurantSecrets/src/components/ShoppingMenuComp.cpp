@@ -18,7 +18,7 @@ priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), 
 
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
-	playerTransform = GameManager::instance()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
+	playerTransform = GameManager::get()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {

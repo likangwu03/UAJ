@@ -192,7 +192,7 @@ void MapCreator::createObject() {
 				}
 				else if (name == "KitchenIsland") {
 					KitchenIsland* kitchenIsland = new KitchenIsland(scene, pos, width_, height_);
-					GameManager::instance()->setKichenIsland(kitchenIsland->getComponent<KitchenIslandComp>());
+					GameManager::get()->setKichenIsland(kitchenIsland->getComponent<KitchenIslandComp>());
 				}
 				else if (name == "KitchenIslandTri") {
 					new IslandIngredient(scene, pos, width_, height_,p[0].getIntValue(), p[1].getIntValue());

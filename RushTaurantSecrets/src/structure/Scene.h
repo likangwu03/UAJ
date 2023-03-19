@@ -20,6 +20,7 @@ private:
 	std::list<GameObject*> renderListTop;
 	std::list<GameObject*> renderListMiddle;
 	std::list<GameObject*> renderListDown;
+
 protected:
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
@@ -29,7 +30,8 @@ protected:
 	std::array<GameObject*, _ecs::hdrNum> handlers;
 	Scene();
 	void SortList(std::list<GameObject*>& v);
-	void CreateMap(std::string file, RenderPos Rpos, Vector pos);
+	void createMap(std::string file, RenderPos Rpos, Vector pos);
+
 public:
 	virtual ~Scene();
 

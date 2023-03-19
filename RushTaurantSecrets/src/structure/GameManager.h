@@ -51,7 +51,7 @@ private:
 	float dayTime;
 	//bool multiplayer;
 	bool hasKilled;
-	bool gameOver;
+	bool mapsCreated;
 
 	GameManager();
 
@@ -66,6 +66,7 @@ public:
 
 	void changeScene(Scene* scene);
 	void popScene();
+	void setGameOver(int type);
 	Scene* getCurrentScene();
 	MainMenu* getMainMenu();
 	Restaurant* getRestaurant();

@@ -11,7 +11,7 @@ ThiefMovement::ThiefMovement(GameObject* parent, Objective objective, int pos, f
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	sdl = SDLUtils::instance();
-	gm = GameManager::instance();
+	gm = GameManager::get();
 	freezer = parent->getScene()->getGameObject(_ecs::hdr_FREEZER)->getComponent<FreezerComp>();
 
 	// se mueve el ladrón

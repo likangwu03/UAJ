@@ -8,7 +8,7 @@
 
 BinTriggerComp::BinTriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_),
-	inventory(GameManager::instance()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()), highlight(parent->getComponent<Image>())
+	inventory(GameManager::get()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()), highlight(parent->getComponent<Image>())
 {
 	highlight->setActive(false);
 };

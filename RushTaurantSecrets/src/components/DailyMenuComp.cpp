@@ -64,7 +64,7 @@ void DailyMenuComp::init(GameObject* parent)
 	tf = parent->getComponent<Transform>();
 	parentScene = parent->getScene();
 
-	murder = GameManager::instance()->getHasKill();
+	murder = GameManager::get()->getHasKill();
 
 	font = new Font("assets/Fonts/light_pixel-7.ttf", 50);
 	drawDishes();

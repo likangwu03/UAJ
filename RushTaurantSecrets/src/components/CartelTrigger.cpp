@@ -7,7 +7,7 @@
 
 CartelTrigger::CartelTrigger(GameObject* parent, _ecs::_ingredients_id id, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_), ingId(id), highlighted(false),
-	cartelManager(GameManager::instance()->getSupermarket()->getCartelManager())
+	cartelManager(GameManager::get()->getSupermarket()->getCartelManager())
 {
 	unHighlight();
 }

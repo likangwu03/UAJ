@@ -20,7 +20,7 @@ public:
 		TriggerComp(parent, pos_, width_, height_), selected(false),
 		//clientManager(ClientsManager::get()),
 		clientState(parent->getComponent<ClientState>()),
-		inventory(GameManager::instance()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()) { };
+		inventory(GameManager::get()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()) { };
 
 	virtual void isOverlapping();
 

@@ -19,7 +19,7 @@
 
 GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), gameOver(false), dayTime(false) { };
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false) { };
 
 
 void GameManager::initialize() {
@@ -38,13 +38,15 @@ void GameManager::initialize() {
 	pauseMenu = new PauseMenu();
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
+
 	//beforeDayStartScene = new BeforeDayStartScene();
-
-
-	
+	restaurant->createMap();
+	supermarket->createMap();
+	pantry->createMap();
 
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
+
 
 	restaurant->linkPantry(pantry);
 	pantry->linkRestaurant(restaurant);
@@ -53,8 +55,8 @@ void GameManager::initialize() {
 	previousScene = nullptr;
 
 	hasKilled = false;
-	gameOver = false;
 	dayTime = false;
+
 
 	changeScene(mainMenu);
 }
@@ -87,10 +89,19 @@ void GameManager::refresh() {
 
 
 void GameManager::changeScene(Scene* scene) {
+	//if (!mapsCreated) {
+	//	mapsCreated = true;
+	//	restaurant->createMap();
+	//	supermarket->createMap();
+	//	pantry->createMap();
+	//}
+
 	previousScene = currentScene;
 	currentScene = scene;
 	scene->reset();
 	sdlutils().setResizeFactor(scene->getResizeFactor());
+
+
 }
 void GameManager::popScene() {
 	if (previousScene != nullptr) {
@@ -99,6 +110,10 @@ void GameManager::popScene() {
 		sdlutils().setResizeFactor(currentScene->getResizeFactor());
 
 	}
+}
+void GameManager::setGameOver(int type) {
+	//gameOverScene->setGameOver(type);
+	//changeScene(gameOverScene);
 }
 Scene* GameManager::getCurrentScene() { return currentScene; }
 MainMenu* GameManager::getMainMenu() { return mainMenu; }

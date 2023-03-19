@@ -16,7 +16,7 @@ void UIMarket::toggleDailyMenu()
 UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
-	moneyTxt = GameManager::instance()->getMoney();
+	moneyTxt = GameManager::get()->getMoney();
 	ih = InputHandler::instance();
 	basketMarket = new BasketMarket(this);
 
@@ -107,7 +107,7 @@ void UIMarket::setDailyMenu()
 {
 	//menú del día
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15),
-		479.0f, 640.0f, GameManager::instance()->getTodaysMenu(), []() {});
+		479.0f, 640.0f, GameManager::get()->getTodaysMenu(), []() {});
 	menuToggled = true;
 	toggleDailyMenu();
 	menu->getComponent<ButtonComp>()->setActive(false);

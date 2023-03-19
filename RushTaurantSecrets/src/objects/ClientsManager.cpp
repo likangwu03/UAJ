@@ -199,7 +199,7 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
 
-	UIRestaurant* uiRest = GameManager::instance()->getRestaurant()->getUI();
+	UIRestaurant* uiRest = GameManager::get()->getRestaurant()->getUI();
 	if (uiRest == nullptr) {
 		throw new string("Error conversión Scene en UIRestaurant");
 	}

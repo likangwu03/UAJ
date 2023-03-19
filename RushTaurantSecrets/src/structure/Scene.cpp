@@ -144,7 +144,7 @@ void Scene::pushRenderList(RenderPos pos, GameObject* obj) {
 	}
 }
 
-void Scene::CreateMap(std::string file, RenderPos Rpos, Vector pos) {
+void Scene::createMap(std::string file, RenderPos Rpos, Vector pos) {
 	GameObject* aux = new GameObject(this, grp_RENDERTOP);
 	new MapCreator(aux, file);
 	new Transform(aux, pos);

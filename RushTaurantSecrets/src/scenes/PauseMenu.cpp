@@ -4,11 +4,11 @@
 #include "../utils/checkML.h"
 
 void PauseMenu::mMenu() {
-	GameManager::instance()->changeScene((Scene*)GameManager::instance()->getMainMenu());
+	GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());
 }
 
 void PauseMenu::bResume() {
-	GameManager::instance()->popScene();
+	GameManager::get()->popScene();
 }
 
 PauseMenu::PauseMenu() {
@@ -31,10 +31,10 @@ PauseMenu::~PauseMenu() {
 
 void PauseMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getDailyMenu());
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getSupermarket());
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 	}
 	else {
 		Scene::handleEvents();

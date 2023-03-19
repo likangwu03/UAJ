@@ -12,7 +12,7 @@ ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float 
 void ThiefTrigger::killPressed()
 {
 	tMovement->die();
-	GameManager::instance()->setHasKill(true);
+	GameManager::get()->setHasKill(true);
 	mRender->setActive(false);
 	sRender->setActive(false);
 }

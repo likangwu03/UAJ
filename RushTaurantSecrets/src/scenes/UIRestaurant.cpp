@@ -19,7 +19,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
-	moneyTxt = GameManager::instance()->getMoney();
+	moneyTxt = GameManager::get()->getMoney();
 
 	// pensé en hacerlo pasando un struct como parámetro, pero el struct tenía que redefinirse demasiadas veces,
 	// así que Cleon me dijo que pasara directamente la información del struct como parámetro
@@ -53,7 +53,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 		createIcon("EMPTY_STAR", Vector(80 + i * 40, 25), 30, 32, 0, grp_ICONS);
 
 
-	reputation = GameManager::instance()->getReputation();
+	reputation = GameManager::get()->getReputation();
 
 	fullStarTexture = &((*sdl).images().at("STAR"));
 	actReputation = reputation->getReputation();
@@ -219,7 +219,7 @@ void UIRestaurant::setDailyMenu()
 {
 	//menú del día
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15), 
-		479.0f, 640.0f, GameManager::instance()->getTodaysMenu(), []() {});
+		479.0f, 640.0f, GameManager::get()->getTodaysMenu(), []() {});
 	menuToggled = true;
 	toggleDailyMenu();
 	menu->getComponent<ButtonComp>()->setActive(false);

@@ -10,7 +10,7 @@
 #include "../utils/checkML.h"
 #include <set>
 
-Restaurant::Restaurant(): dc(DishCombinator::init()) { 
+Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) { 
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
@@ -31,9 +31,8 @@ void Restaurant::callAfterCreating() {
 	GameObject* managerContainer = new GameObject(this);
 	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
 	new FinishDay(managerContainer);
-	CreateMap();
-	initRender();
 
+	initRender();
 	initComponent();
 }
 
@@ -52,12 +51,12 @@ vector<_ecs::_dish_id> Restaurant::menu() const {
 	return menu;
 }
 
-void Restaurant::CreateMap() {
-	Scene::CreateMap("assets/tilemaps/restaurant.tmx", Down, Vector());
-	Scene::CreateMap("assets/tilemaps/restaurant_top_walls.tmx", Top, Vector());
-	Scene::CreateMap("assets/tilemaps/restaurant_top_kitchenIsland.tmx", Middle, Vector(0, 336 * sdlutils().getResizeFactor()));
-	Scene::CreateMap("assets/tilemaps/restaurant_top_table.tmx", Middle, Vector(0, 800 * sdlutils().getResizeFactor()));
-	Scene::CreateMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 507.015 * sdlutils().getResizeFactor()));
+void Restaurant::createMap() {
+	Scene::createMap("assets/tilemaps/restaurant.tmx", Down, Vector());
+	Scene::createMap("assets/tilemaps/restaurant_top_walls.tmx", Top, Vector());
+	Scene::createMap("assets/tilemaps/restaurant_top_kitchenIsland.tmx", Middle, Vector(0, 336 * RESIZEFACTOR));
+	Scene::createMap("assets/tilemaps/restaurant_top_table.tmx", Middle, Vector(0, 800 * RESIZEFACTOR));
+	Scene::createMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 507.015 * RESIZEFACTOR));
 }
 
 
@@ -67,7 +66,6 @@ void Restaurant::linkPantry(Pantry* pantry) {
 
 void Restaurant::render() {
 	renderLayer();
-	//Scene::render();
 	if (ui != nullptr)
 	ui->render();	
 }
@@ -84,10 +82,10 @@ void Restaurant::update() {
 }
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPantry());
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getPantry());
 	}
 	else if (ih->isKeyDown(SDLK_p)) {
-		GameManager::instance()->changeScene((Scene*)GameManager::instance()->getPauseMenu());
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getPauseMenu());
 	}
 	else if (ih->isKeyDown(SDLK_f)) {
 		vector<pair<_ecs::_ingredients_id, int>> _ing;
@@ -101,7 +99,7 @@ void Restaurant::handleEvents() {
 		//_ing.push_back({ SALMON,1 });
 		//_ing.push_back({ GAMBAS,99 });
 
-		GameManager::instance()->setIngredients(_ing);
+		GameManager::get()->setIngredients(_ing);
 	}
 	else if (ih->isKeyDown(SDLK_g)) {
 		vector<pair<_ecs::_ingredients_id, int>> _ing;
@@ -116,7 +114,7 @@ void Restaurant::handleEvents() {
 		_ing.push_back({ QUESO,99 });
 		_ing.push_back({ HUEVO,19 });
 
-		GameManager::instance()->setIngredients(_ing);
+		GameManager::get()->setIngredients(_ing);
 	}
 	else {
 		Scene::handleEvents();
