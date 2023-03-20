@@ -35,7 +35,7 @@ void SuperMarket::init() {
 
 void SuperMarket::callAfterCreating() {
 	cartelM = new CartelManager(this);
-
+	createMap();
 	initRender();
 	initComponent();
 }

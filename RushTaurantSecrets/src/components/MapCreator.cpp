@@ -29,7 +29,7 @@ MapCreator::MapCreator(GameObject* parent, const string& filePath) : Component(p
 
 	SDL_RenderClear(renderer);
 	SDL_SetTextureBlendMode(bg, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderTarget(renderer, bg);
+	//SDL_SetRenderTarget(renderer, bg);
 
 	loadTilesets();
 	createObject();

@@ -43,10 +43,9 @@ void GameManager::initialize() {
 	days = new DayManager();
 
 	//beforeDayStartScene = new BeforeDayStartScene();
-	//restaurant->createMap();
-	supermarket->createMap();
-	pantry->createMap();
 
+
+	pantry->createMap();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
 

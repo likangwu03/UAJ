@@ -33,7 +33,7 @@ void Restaurant::callAfterCreating() {
 
 	dm = GameManager::get()->getDayManager();
 
-	//createMap();
+	createMap();
 	initRender();
 
 	initComponent();
@@ -57,7 +57,7 @@ vector<_ecs::_dish_id> Restaurant::menu() const {
 void Restaurant::createMap() {
 	Scene::createMap("assets/tilemaps/restaurant.tmx", Down, Vector());
 	Scene::createMap("assets/tilemaps/restaurant_top_walls.tmx", Top, Vector());
-	Scene::createMap("assets/tilemaps/restaurant_top_kitchenIsland.tmx", Middle, Vector(0, 336 * RESIZEFACTOR));
+	Scene::createMap("assets/tilemaps/restaurant_top_kitchenIsland.tmx", Middle, Vector(0, 370 * RESIZEFACTOR));
 	Scene::createMap("assets/tilemaps/restaurant_top_table.tmx", Middle, Vector(0, 800 * RESIZEFACTOR));
 	Scene::createMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 507.015 * RESIZEFACTOR));
 }
