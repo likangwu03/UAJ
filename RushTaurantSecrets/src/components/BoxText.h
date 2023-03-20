@@ -2,92 +2,114 @@
 
 #include "../structure/Component.h"
 #include "../structure/GameObject.h"
-#include "../utilities/Vector.h"
+#include "../components/Text.h"
 #include "../utils/checkML.h"
-#include "../sdlutils/SDLUtils.h"
-#include "../sdlutils/Texture.h"
-#include "../sdlutils/InputHandler.h"
-#include "../components/Transform.h"
-#include <string>
-#include <sstream>	// se usa para poder convertir string en stringstreams
-#include <vector>
-#include <deque>
 
-using namespace std;
-
-struct Letter {
-	Texture* texture;
-	Vector pos;
+struct Size {
+	float desiredWidth;	// ancho al que tiene que llegar el objeto
+	float desiredHeight;	// alto al que tiene que llegar el objeot
+	float actWidth;		// ancho actual
+	float actHeight;	// alto actual
+	Vector centerPos;	// posición centrada del objeto
+	// proporción ancho - alto
+	// es decir, cuanto tiene que crecer el ancho respecto al alto
+	// para que llegan a su máximo a la vez
+	float proportionWidthHeight;
 };
 
 class BoxText : public Component {
 private:
-	enum State {Writing, Written};
-	State state;
-	deque<string> texts;
+	Text* text;
+	Transform* transform;
+	Texture* texture;
 	float elapsedTime;
 	float timer;
-	int widthLetter;
-	int heightLetter;
-	Font* font;
-	Vector pos;	// posición del texto
-	SDLUtils* sdl;
-	InputHandler* ih;
-	vector<Letter> letterTextures;
-	list<string> words;	// vector con todas las palabras
-	int widthTextBox;	// ancho del cuadro de texto
-	int offset;	// separación entre las líneas del texto
-	int numLines;	// número de líneas del texto
+	float increment;
+	Size box;
+	Size key;
+	Vector keyPos;
+	float proportionBoxKeyH;
 
-	std::list<string>::iterator actWord;	// número de palabra actual
-	int actLetter;	// número de letra actual
-	int cont;
-	int actLine;
-	int space;
+	void enlargeBox() {
+		// se aumenta el tamaño de al caja
+		box.actWidth += box.proportionWidthHeight * increment;
+		box.actHeight += increment;
+		transform->setW(box.actWidth);
+		transform->setH(box.actHeight);
+		// se recoloca para que crezca desde el centro
+		transform->setPos(Vector(box.centerPos.getX() - box.actWidth / 2,
+			box.centerPos.getY() - box.actHeight / 2));
+	}
 
-	bool showAllText;
-	bool nextText;
-
-	void createLetter(string l);
-
-	void nextWord();
-
-	void nextLine();
-
-	int wrapText(list<string>& words);
-
-	void separateText(string text);
-
-	void printLetter();
-
-	void init(string text);
-
-	void releaseLetters();
-
-	void newText(string newText);
+	void enlargeKey() {
+		// se aumenta el tamaño de la tecla
+		key.actWidth += (key.proportionWidthHeight * increment) / proportionBoxKeyH;
+		key.actHeight += increment / proportionBoxKeyH;
+		// se coloca en el centro
+		// se hace cada iteración porque la posición de la tecla
+		// cambia en función de la caja y la caja se está moviendo
+		// hasta terminar de crecer
+		key.centerPos = Vector((transform->getPos().getX() + 3.3 * box.actWidth / 4),
+			(transform->getPos().getY() + box.actHeight / 1.2));
+		// se recoloca para que crezca desde el centro
+		keyPos = Vector(key.centerPos.getX() - key.actWidth / 2,
+			key.centerPos.getY() - key.actHeight / 2);
+	}
 
 public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_BOX_TEXT;
 
-	BoxText(GameObject* parent, deque<string> text, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox);
+	BoxText(GameObject* parent, Texture* texture) :
+		Component(parent, id), texture(texture), elapsedTime(0), timer(0.001), increment(5) {
+		text = parent->getComponent<Text>();
+		transform = parent->getComponent<Transform>();
+		box = { 0, 0, 0, 0, Vector::zero, 0 };
+		key = { 0, 0, 0, 0, Vector::zero, 0 };
 
-	virtual ~BoxText();
+		// tamaños deseados de la caja
+		box.desiredWidth = text->getWidthTextBox() * 1.2;
+		box.desiredHeight = text->getNumLines() * 90;
+		box.proportionWidthHeight = box.desiredWidth / box.desiredHeight;
+		// posición central de la caja
+		// se hace para que el objeto crezca desde el centro
+		// se coloca en su centro y se va aumentando y recolocando
+		// hasta que alcanza el tamaño deseado
+		box.centerPos = Vector(transform->getPos().getX() + box.desiredWidth / 2,
+			transform->getPos().getY() + box.desiredHeight / 2);
 
-	inline int getNumLines() const {
-		return numLines;
+		// tamaños deseados de la tecla
+		key.desiredWidth = 160 / 1.4;
+		key.desiredHeight = 80 / 1.4;
+		key.proportionWidthHeight = key.desiredWidth / key.desiredHeight;
+
+		// propórción caja - letra respecto a la altura
+		proportionBoxKeyH = box.desiredHeight / key.desiredHeight;
 	}
 
-	void addText(string text) {
-		texts.push_back(text);
+	inline bool hasGrown() {
+		return box.actWidth >= box.desiredWidth && box.actHeight >= box.actHeight;
 	}
 
-	bool checkAllTextWritten() const {
-		return texts.empty();
+	virtual void update() {
+		if (!hasGrown()) {
+			elapsedTime += deltaTime;
+			if (elapsedTime > timer) {
+				elapsedTime = 0;
+
+				enlargeBox();
+
+				enlargeKey();
+			}
+		}
 	}
 
-	virtual void update();
-
-	virtual void render();
-
-	virtual void handleEvents();
+	virtual void render() {
+		// render de la tecla
+		SDL_Rect dest;
+		dest.x = keyPos.getX();
+		dest.y = keyPos.getY();
+		dest.w = key.actWidth;
+		dest.h = key.actHeight;
+		texture->renderFrame(dest, 2, 2, 0);
+	}
 };

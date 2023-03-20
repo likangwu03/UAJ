@@ -4,6 +4,7 @@
 #include "../structure/Manager.h"
 #include "../structure/Scene.h"
 #include "../objects/RelativeToGlobal.h"
+#include "../utils/checkML.h"
 
 class ThiefsManager : public Manager<ThiefsManager> {
 

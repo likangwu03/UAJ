@@ -15,11 +15,13 @@ void CashRegisterTrigger::isOverlapping() {
 
 	if (cM->canCollect()) {
 		int totalPayment = 0;
+		// SONIDO CAJA REGISTRADORA
 		int rnd = sdlutils().rand().nextInt(0, 101);
 		if (rnd % 2 == 0) sdlutils().soundEffects().at("CASH_REGISTER1").play();
 		else sdlutils().soundEffects().at("CASH_REGISTER2").play();
 
-		for (auto it : *list) { //añadir al contador de dinero y de reputación
+		// AÑADIR DINERO Y REPUTACIÓN
+		for (auto it : *list) {
 			_ecs::_dish_id id = it->getComponent<ClientState>()->getOrderedDish();
 			int price = _ecs::Dishes[id].price;
 			totalPayment += price;
@@ -27,6 +29,7 @@ void CashRegisterTrigger::isOverlapping() {
 			GameManager::get()->getReputation()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 100);
 		}
 
+		// PROPINAS
 		if (GameManager::get()->getReputation()->getReputation() > rnd) {
 			money->addMoney(totalPayment / 10);
 #ifdef _DEBUG
@@ -34,6 +37,11 @@ void CashRegisterTrigger::isOverlapping() {
 #endif
 		}
 
+		// RACHA
+		money->addMoney(streak->getMoneyStreak() * list->size());
+		streak->setStreak(list->size());
+
+		// CLIENTES ABANDONAN CAJA
 		cM->collectAndLeave();
 
 	}

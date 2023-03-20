@@ -17,16 +17,15 @@ class DeskComp;
 
 using namespace std;
 
+const int MAX_ENTRANCE = 3;
+const int MAX_PAY = 7;
+
 class ClientsManager : public Manager<ClientsManager> {
 
 	// dar acceso al constructor privado a la clase Manager, de la que hereda
 	friend Manager<ClientsManager>;
 
 private:
-
-	const int MAX_ENTRANCE = 3;
-	const int MAX_PAY = 7;
-
 	// cola con la entrada
 	list<vector<Client*>> entrance;
 	// cola con la caja de pagar

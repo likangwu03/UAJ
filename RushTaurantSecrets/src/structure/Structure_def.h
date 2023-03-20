@@ -42,7 +42,9 @@ namespace _ecs {
 		cmp_FREEZER,
 		cmp_RENDER_LIST,
 		cmp_TEXT,
+		cmp_BOX_TEXT,
 		cmp_FINISH_DAY,
+		cmp_STREAK,
 		// Do not erase pls
 		cmp_INVALID
 	};
@@ -74,6 +76,7 @@ namespace _ecs {
 		hdr_KITCHENISLAND,
 		hdr_SHOP_MENU1,
 		hdr_SM_INVENTORY,
+		hdr_STREAK,
 		// Do not erase pls
 		hdr_INVALID
 	};

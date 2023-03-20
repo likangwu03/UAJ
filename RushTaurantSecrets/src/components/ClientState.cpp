@@ -10,7 +10,6 @@ ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) 
 	render->clientStateIsReady(); //decirle que ya esta creado
 }
 
-
 ClientState::States ClientState::getState() const { return state; }
 
 void ClientState::setState(States state) { 
@@ -46,10 +45,10 @@ void ClientState::update() {
 
 		// Si est?pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
 		if (state == THINKING && timer >= THINKINGTIME) {
-#ifdef _DEBUG // cleon: este #if me hace muy feliz.
+#ifdef _DEBUG
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(TAKEMYORDER);	// TAKEMYORDER
+			setState(TAKEMYORDER);	// TAKEYMYORDER
 			render->renderTakingNoteState();
 		}
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja
