@@ -52,4 +52,7 @@ SuperMarket::~SuperMarket() {
 	delete cartelM;
 }
 
+void SuperMarket::reset() {
+	player->getComponent<PlayerMovementController>()->initP();
+}
 

@@ -12,6 +12,11 @@ Pantry::~Pantry() {
 	delete rest;
 	delete collisionsManager;
 }
+
+void Pantry::reset() {
+	//player->getComponent<PlayerMovementController>()->initP();
+}
+
 void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 

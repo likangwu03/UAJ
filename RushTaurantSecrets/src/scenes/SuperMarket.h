@@ -20,6 +20,7 @@ public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI == nullptr ? new UIMarket(this) : marketUI),
 		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr) { init(); }
 	~SuperMarket();
+	void reset();
 	
 	void callAfterCreating();
 

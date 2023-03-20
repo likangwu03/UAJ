@@ -100,20 +100,20 @@ void PlayerMovementController::handleEvents() {
 	}
 	else if (input->keyDownEvent()) {
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-		// arriba
-		if (input->isKeyDown(SDL_SCANCODE_W)) {
-			moveUp();
-		}
 		// izquierda
-		if (input->isKeyDown(SDL_SCANCODE_A)) {
+		if (currentKeyStates[SDL_SCANCODE_A]) {
 			moveLeft();
 		}
 		// derecha
-		if (input->isKeyDown(SDL_SCANCODE_D)) {
+		if (currentKeyStates[SDL_SCANCODE_D]) {
 			moveRight();
 		}
+		// arriba
+		if (currentKeyStates[SDL_SCANCODE_W]) {
+			moveUp();
+		}
 		// abajo
-		if (input->isKeyDown(SDL_SCANCODE_S)) {
+		if (currentKeyStates[SDL_SCANCODE_S]) {
 			moveDown();
 		}
 	}
@@ -134,11 +134,6 @@ bool PlayerMovementController::nonKeyPressed() {
 	bool pressed = false;
 	if (keyboard) {
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-		if (currentKeyStates[SDL_SCANCODE_S])
-		{
-			moveDown();
-			pressed = true;
-		}
 		if (currentKeyStates[SDL_SCANCODE_D])
 		{
 			moveRight();
@@ -148,12 +143,17 @@ bool PlayerMovementController::nonKeyPressed() {
 		{
 			moveLeft();
 			pressed = true;
+		}	
+		if (currentKeyStates[SDL_SCANCODE_S])
+		{
+			moveDown();
+			pressed = true;
 		}
 		if (currentKeyStates[SDL_SCANCODE_W])
 		{
 			moveUp();
 			pressed = true;
-		}
+		}		
 		//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
 		return pressed;
 	}
