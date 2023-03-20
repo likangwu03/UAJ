@@ -19,6 +19,7 @@ private:
 	void randomMenu();
 	uint8_t menuSize;
 	uint8_t spriteSize;
+	bool random;
 	struct rend
 	{
 		Texture* tex;

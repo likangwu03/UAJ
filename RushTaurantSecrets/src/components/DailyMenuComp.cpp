@@ -71,7 +71,7 @@ void DailyMenuComp::init(GameObject* parent)
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize)
-	: Component(parent, id), menuSize(mSize), spriteSize(64)
+	: Component(parent, id), menuSize(mSize), spriteSize(64), random(true)
 {
 	menu = new vector<_ecs::DishInfo>();
 	randomMenu();
@@ -80,14 +80,15 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu)
-	: Component(parent, id), menu(_menu), menuSize(_menu->size()), spriteSize(64)
+	: Component(parent, id), menu(_menu), menuSize(_menu->size()), spriteSize(64), random(false)
 {
 	init(parent);
 }
 
 DailyMenuComp::~DailyMenuComp()
 {
-	//delete menu;
+	if(random)
+		delete menu;
 	delete font;
 	for (auto e : prices) {
 		delete e.tex;
