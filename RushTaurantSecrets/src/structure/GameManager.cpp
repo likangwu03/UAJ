@@ -40,7 +40,9 @@ void GameManager::initialize() {
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
 
-	days = new DayManager();
+	try {
+		days = new DayManager();
+	} catch(std::exception e) { std::cout << e.what(); }
 
 	//beforeDayStartScene = new BeforeDayStartScene();
 

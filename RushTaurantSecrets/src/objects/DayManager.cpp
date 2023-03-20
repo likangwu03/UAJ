@@ -7,6 +7,13 @@
 
 #include "../utils/checkML.h"
 
+void DayManager::readLine(std::string& line) {
+	do {
+		std::getline(file, line);
+	} while(!file.eof() && (line.empty() || line[0] != '#')); // Si la línea que se lee está vacía o es un comentario (empieza con '#'), se lee la siguiente.
+	if(file.eof()) { line = ""; }
+}
+
 DayManager::DayManager() : day(0) {
 	// clock
 	for(auto i : *GameManager::get()->getRestaurant()->getUI()->getGroup(grp_ICONS)) {
@@ -17,8 +24,17 @@ DayManager::DayManager() : day(0) {
 
 	// file
 	file.open("assets/dayConfig.rsdat");
-	if(file.fail()) throw std::exception("Data for days not found. Game cannot start.");
+	if(file.fail()) throw std::exception("Data for days not found.\n");
+	file >> maxDays;
 	nextDay();
+
+#ifdef _DEBUG
+	std::cout << "DayManager initiated.\n";
+#endif // _DEBUG
+}
+
+DayManager::~DayManager() {
+	if(file.is_open()) file.close();
 }
 
 void DayManager::checkDayFinished() {
@@ -31,12 +47,29 @@ void DayManager::checkDayFinished() {
 	}
 }
 
-int DayManager::getDay() {
-	return day;
-}
+int DayManager::getDay() { return day; }
 
 void DayManager::nextDay() {
 	day++;
+
+	if(day > maxDays) {
+		// Activar final, ya que no hay más días
+
+		return;
+	}
+
 	// Leer dayConfig
 
+	std::string line;
+	while(!file.eof() && line != "begin") {
+		readLine(line);
+	}
+
+	while(!file.eof() && line != "end") {
+		readLine(line);
+
+		// Recoger los parámetros de este día
+	}
 }
+
+int DayManager::getDailyObjective() { return dailyObjective; }

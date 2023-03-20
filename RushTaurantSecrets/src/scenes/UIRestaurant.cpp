@@ -68,9 +68,12 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
 	new Warning(thiefExclamation, frequency);
 
-	intObjective = 30;
-	objectiveTextTexture = new Texture(sdl->renderer(), std::to_string(intObjective), *font, build_sdlcolor(0x000000FF));
-	createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), std::to_string(intObjective).length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
+	intObjective = 30; moneyDiff = 0;
+	std::string strObjective = "0 / " + std::to_string(intObjective);
+	objectiveTextTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x000000FF));
+	GameObject* objectiveText = createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), strObjective.length() * FONTSIZE / 2.0f, FONTSIZE, 0, _ecs::grp_ICONS);
+	objectiveTextTrans = objectiveText->getComponent<Transform>();
+	objectiveTextImage = objectiveText->getComponent<Image>();
 	
 	//new Dialogue(this, Vector(100, 200), 700, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro"});
 	//new FreeText(this, Vector(300, 300), 20, 30, 500, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro" });
@@ -120,6 +123,7 @@ void UIRestaurant::toggleDailyMenu()
 void UIRestaurant::showMoneyText() {
 	// si la cantidad de dinero ha variado, lo muestra por pantalla
 	if (intMoney != moneyTxt->getMoney()) {
+		moneyDiff += moneyTxt->getMoney() - intMoney;
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
 		
@@ -127,6 +131,12 @@ void UIRestaurant::showMoneyText() {
 		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
 		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONTSIZE / 2);
 		moneyTextImage->setTexture(moneyTextTexture);
+
+		delete objectiveTextTexture;
+		std::string strObj = std::to_string(moneyDiff) + " / " + std::to_string(intObjective);
+		objectiveTextTexture = new Texture(sdl->renderer(), strObj, *font, build_sdlcolor(0x000000FF));
+		objectiveTextTrans->setW(strObj.length() * FONTSIZE / 2.0f);
+		objectiveTextImage->setTexture(objectiveTextTexture);
 	}
 }
 

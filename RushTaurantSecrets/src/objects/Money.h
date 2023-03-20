@@ -4,7 +4,7 @@
 
 class Money {
 private:
-	const int INITIALANMOUNT = 0;
+	const int INITIALANMOUNT = 200;
 	int amount;
 
 public:

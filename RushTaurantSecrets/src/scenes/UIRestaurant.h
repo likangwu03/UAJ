@@ -39,7 +39,8 @@ private:
 	Image* moneyTextImage;
 	Image* timeTextImage;
 	Image* objectiveTextImage;
-	int intMoney, intObjective;
+	Transform* objectiveTextTrans;
+	int intMoney, intObjective, moneyDiff;
 	float lastTime;
 	Reputation* reputation;
 	int actReputation;

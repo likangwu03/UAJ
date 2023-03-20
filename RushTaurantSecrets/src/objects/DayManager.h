@@ -6,11 +6,17 @@
 class DayManager {
 private:
 	ClockComponent* clock;
-	int day;
+	int day, maxDays;
 	std::ifstream file;
+	int dailyObjective;
+
+	void readLine(std::string& line);
 public:
 	DayManager();
+	~DayManager();
 	void checkDayFinished();
 	int getDay();
 	void nextDay();
+
+	int getDailyObjective();
 };
