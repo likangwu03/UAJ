@@ -14,7 +14,6 @@ private:
 	int widthLetter;
 	int heightLetter;
 
-
 public:
 	Dialogue(Scene* scene, Vector pos, int widthBox, float letterFrequency, Font* font, deque<string> texts) :
 		GameObject(scene, _ecs::grp_HUD), sdl(SDLUtils::instance()), widthLetter(20), heightLetter(30) {

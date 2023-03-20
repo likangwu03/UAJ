@@ -52,8 +52,8 @@ private:
 		key.centerPos = Vector((transform->getPos().getX() + 3.3 * box.actWidth / 4),
 			(transform->getPos().getY() + box.actHeight / 1.2));
 		// se recoloca para que crezca desde el centro
-		keyPos = Vector(keyPos.getX() - key.actWidth / 2,
-			keyPos.getY() - key.actHeight / 2);
+		keyPos = Vector(key.centerPos.getX() - key.actWidth / 2,
+			key.centerPos.getY() - key.actHeight / 2);
 	}
 
 public:
