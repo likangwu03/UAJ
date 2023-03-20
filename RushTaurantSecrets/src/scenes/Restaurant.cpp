@@ -6,7 +6,7 @@
 #include "../gameObjects/Player.h"
 #include "../structure/Paths_def.h"
 #include "../objects/ClientsManager.h"
-#include "../components/FinishDay.h"
+#include "../objects/DayManager.h"
 #include "../utils/checkML.h"
 #include <set>
 
@@ -30,9 +30,12 @@ void Restaurant::callAfterCreating() {
 	// clientsManager
 	GameObject* managerContainer = new GameObject(this);
 	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
-	new FinishDay(managerContainer);
 
+	dm = GameManager::get()->getDayManager();
+
+	//createMap();
 	initRender();
+
 	initComponent();
 }
 
@@ -79,6 +82,7 @@ void Restaurant::update() {
 	pantry->Scene::update();
 	ui->update();
 	cm->update();
+	dm->checkDayFinished();
 }
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {

@@ -4,6 +4,7 @@
 
 #include "../objects/Reputation.h"
 #include "../objects/Money.h"
+#include "../objects/DayManager.h"
 
 #include "../structure/Scene.h"
 #include "../scenes/BeforeDayStartScene.h"
@@ -19,7 +20,7 @@
 
 GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false) { };
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), days(nullptr) { };
 
 
 void GameManager::initialize() {
@@ -38,6 +39,8 @@ void GameManager::initialize() {
 	pauseMenu = new PauseMenu();
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
+
+	days = new DayManager();
 
 	//beforeDayStartScene = new BeforeDayStartScene();
 	restaurant->createMap();
@@ -71,6 +74,7 @@ GameManager::~GameManager() {
 
 	delete reputation;
 	delete money;
+	delete days;
 }
 
 
@@ -125,6 +129,7 @@ PauseMenu* GameManager::getPauseMenu() { return pauseMenu; }
 BeforeDayStartScene* GameManager::getBeforeDayStart() { return beforeDayStartScene; }
 Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
+DayManager* GameManager::getDayManager() { return days; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }

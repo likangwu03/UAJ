@@ -17,7 +17,8 @@ private:
 	CartelManager* cartelM;
 	Player* player;
 public:
-	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(new UIMarket(this) ){ init(); }
+	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI == nullptr ? new UIMarket(this) : marketUI),
+		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr) { init(); }
 	~SuperMarket();
 	
 	void callAfterCreating();

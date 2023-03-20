@@ -14,6 +14,7 @@ class SuperMarket;
 class PauseMenu;
 class Reputation;
 class Money;
+class DayManager;
 
 class KitchenIslandComp;
 
@@ -44,6 +45,7 @@ private:
 
 	Reputation* reputation;
 	Money* money;
+	DayManager* days;
 
 	vector<_ecs::DishInfo>* menu;
 	KitchenIslandComp* kitchenIsland;
@@ -78,6 +80,7 @@ public:
 
 	Reputation* getReputation();
 	Money* getMoney();
+	DayManager* getDayManager();
 
 	vector<_ecs::DishInfo>* getTodaysMenu();
 	void setTodaysMenu(vector<_ecs::DishInfo>* tmenu);

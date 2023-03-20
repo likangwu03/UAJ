@@ -6,6 +6,7 @@
 class DishCombinator;
 class CollisionsManager;
 class TextBox;
+class DayManager;
 
 class Restaurant : public Scene {
 private:
@@ -14,6 +15,7 @@ private:
 	DishCombinator* dc;
 	UIRestaurant* ui;
 	CollisionsManager* cm;
+	DayManager* dm;
 	
 	GameObject* player;
 
