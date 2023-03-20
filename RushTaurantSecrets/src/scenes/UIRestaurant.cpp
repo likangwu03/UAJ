@@ -11,7 +11,8 @@
 #include "../gameObjects/Bin.h"
 #include "../gameObjects/Dialogue.h"
 #include "../gameObjects/ButtonGO.h"
-
+#include "../gameObjects/FreeText.h"
+#include "../components/Streak.h"
 #include "../utils/checkML.h"
 
 UIRestaurant::UIRestaurant() : Scene() {
@@ -71,7 +72,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 	objectiveTextTexture = new Texture(sdl->renderer(), std::to_string(intObjective), *font, build_sdlcolor(0x000000FF));
 	createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), std::to_string(intObjective).length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
 	
-	// new Dialogue(this, Vector(500, 200), 500, 0.01 * 1000, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro"});
+	//new Dialogue(this, Vector(100, 200), 700, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro"});
+	//new FreeText(this, Vector(0, 0), 20, 30, 500, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro" });
+
+	GameObject* streak = new GameObject(this, _ecs::grp_HUD, _ecs::hdr_STREAK);
+	new Streak(streak, 10, Vector(820, 260), 430, 30, 2, font);
 
 	new Clock(this);
 }

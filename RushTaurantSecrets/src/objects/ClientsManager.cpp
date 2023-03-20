@@ -4,8 +4,6 @@
 #include "../structure/GameManager.h"
 #include "../scenes/Restaurant.h"
 
-#include "../utils/checkML.h"
-
 void ClientsManager::addFrequently() {
 	// se crea un grupo si: el día no ha terminado y el restaurante y la cola de entrada no están llenas
 	if (!clock->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {

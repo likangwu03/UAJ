@@ -40,7 +40,7 @@ void GameManager::initialize() {
 	restaurant = new Restaurant();
 
 	//beforeDayStartScene = new BeforeDayStartScene();
-	restaurant->createMap();
+	//restaurant->createMap();
 	supermarket->createMap();
 	pantry->createMap();
 

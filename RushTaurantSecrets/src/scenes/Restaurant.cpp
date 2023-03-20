@@ -32,6 +32,8 @@ void Restaurant::callAfterCreating() {
 	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
 	new FinishDay(managerContainer);
 
+	createMap();
+
 	initRender();
 	initComponent();
 }

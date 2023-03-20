@@ -1,4 +1,5 @@
 #pragma once
+#include "../components/Text.h"
 #include "../components/BoxText.h"
 #include "../components/Image.h"
 #include "../components/Transform.h"
@@ -10,25 +11,17 @@
 class Dialogue : public GameObject {
 private:
 	SDLUtils* sdl;
-	Font* font;
+	int widthLetter;
+	int heightLetter;
+
 
 public:
-	Dialogue(Scene* scene, Vector pos, int widthBox, float letterFrequency, deque<string> texts):
-		GameObject(scene, _ecs::grp_HUD), sdl(SDLUtils::instance()) {
+	Dialogue(Scene* scene, Vector pos, int widthBox, float letterFrequency, Font* font, deque<string> texts) :
+		GameObject(scene, _ecs::grp_HUD), sdl(SDLUtils::instance()), widthLetter(20), heightLetter(30) {
 
-		font = new Font("assets/Fonts/8-bit Madness.ttf", 50);
-		int width = widthBox + 100, height;
-		int widthLetter = 20, heightLetter = 30;
-
-		Transform* transform = new Transform(this, Vector(pos.getX(), pos.getY()), Vector::zero, width);
+		Transform* transform = new Transform(this, Vector(pos.getX(), pos.getY()));
 		new Image(this, &sdl->images().at("DIALOG_BOX"));
-		BoxText* boxText = new BoxText(this, texts, widthLetter, heightLetter, letterFrequency, font, widthBox);
-		height = boxText->getNumLines() * 90;
-		transform->setH(height);
-	}
-
-	virtual ~Dialogue() {
-		delete font;
-		font = nullptr;
+		new Text(this, texts, widthLetter, heightLetter, letterFrequency, font, widthBox);
+		new BoxText(this, &sdl->images().at("KEYBOARD_KEYS_2"));
 	}
 };
