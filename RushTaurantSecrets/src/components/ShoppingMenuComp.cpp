@@ -96,6 +96,8 @@ void  ShoppingMenuComp::closeMenu() {
 }
 void  ShoppingMenuComp::changePrice() {
 	totalPrice = number * price;
+	delete numberTex;
+	delete totalPriceTex;
 	numberTex = new Texture(sdl->renderer(), to_string(number), *font, build_sdlcolor(0xf3e5c2ff));
 	totalPriceTex = new Texture(sdl->renderer(), to_string(totalPrice), *font, build_sdlcolor(0x504631ff));
 }

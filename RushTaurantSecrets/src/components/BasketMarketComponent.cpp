@@ -14,6 +14,9 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 
 BasketMarketComponent::~BasketMarketComponent() {
 	delete font;
+	for (auto t : ingredients) {
+		delete t.second.text;
+	}
 }
 
 void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int addPrice) {
