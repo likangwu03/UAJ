@@ -51,7 +51,6 @@ void GameManager::initialize() {
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
 
-
 	restaurant->linkPantry(pantry);
 	pantry->linkRestaurant(restaurant);
 
@@ -94,13 +93,6 @@ void GameManager::refresh() {
 
 
 void GameManager::changeScene(Scene* scene) {
-	//if (!mapsCreated) {
-	//	mapsCreated = true;
-	//	restaurant->createMap();
-	//	supermarket->createMap();
-	//	pantry->createMap();
-	//}
-
 	previousScene = currentScene;
 	currentScene = scene;
 	scene->reset();

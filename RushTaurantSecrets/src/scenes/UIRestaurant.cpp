@@ -44,9 +44,9 @@ UIRestaurant::UIRestaurant() : Scene() {
 	intMoney = moneyTxt->getMoney();
 	std::string strMoney = std::to_string(intMoney);
 
-	font = new Font(FONT_PATH, FONTSIZE);
+	font = new Font(FONT_PATH, FONT_H);
 	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-	moneyText = createIcon(moneyTextTexture, Vector(80, ICONY * 2 + ICONSIZE - 5), strMoney.length() * FONTSIZE / 2, FONTSIZE, 0, _ecs::grp_ICONS);
+	moneyText = createIcon(moneyTextTexture, Vector(80, ICONY * 2 + ICONSIZE - 5), strMoney.length() * FONT_W, FONT_H, 0, _ecs::grp_ICONS);
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// render de estrellas vacías
@@ -71,7 +71,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	intObjective = 30; moneyDiff = 0;
 	std::string strObjective = "0 / " + std::to_string(intObjective);
 	objectiveTextTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x000000FF));
-	GameObject* objectiveText = createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), strObjective.length() * FONTSIZE / 2.0f, FONTSIZE, 0, _ecs::grp_ICONS);
+	GameObject* objectiveText = createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), strObjective.length() * FONT_W, FONT_H, 0, _ecs::grp_ICONS);
 	objectiveTextTrans = objectiveText->getComponent<Transform>();
 	objectiveTextImage = objectiveText->getComponent<Image>();
 	
@@ -129,13 +129,13 @@ void UIRestaurant::showMoneyText() {
 		
 		delete moneyTextTexture;
 		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONTSIZE / 2);
+		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONT_W);
 		moneyTextImage->setTexture(moneyTextTexture);
 
 		delete objectiveTextTexture;
 		std::string strObj = std::to_string(moneyDiff) + " / " + std::to_string(intObjective);
 		objectiveTextTexture = new Texture(sdl->renderer(), strObj, *font, build_sdlcolor(0x000000FF));
-		objectiveTextTrans->setW(strObj.length() * FONTSIZE / 2.0f);
+		objectiveTextTrans->setW(strObj.length() * FONT_W);
 		objectiveTextImage->setTexture(objectiveTextTexture);
 	}
 }
