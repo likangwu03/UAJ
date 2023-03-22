@@ -1,70 +1,66 @@
 #include "ClockComponent.h"
-
 #include "../utils/checkML.h"
 
-ClockComponent::ClockComponent(GameObject* parent, Scene* _scene) : Component(parent, id), scene(_scene) {
-	lastTime = sdl->currRealTime();
-	numFullClock = 0;
+ClockComponent::ClockComponent(GameObject* parent) :
+	Component(parent, id), sdl(SDLUtils::instance()), elapsedTime(0), numFullClock(0) {
 
-	// reloj (momento del día)
-	createIcon("CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2, 0, grp_ICONS);
-
-	// aguja del reloj
-	arrow = createIcon("ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE, 0, grp_ICONS);
-}
-
-// devuelve cuántas vueltas ha dado reloj cuando se llama al método
-int ClockComponent::getNumFullClock() const {
-	return numFullClock;
+	fillData(clock, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2);
+	fillData(arrow, "ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE);
 }
 
 void ClockComponent::updateClock() {
-	timeT = sdl->currRealTime();
-	if (timeT - lastTime >= TIME_CLOCK_REFRESH) {
-		time += 1;
-		auto transformArrow = arrow->getComponent<Transform>();
-		transformArrow->setRot(transformArrow->getRot() + ANGLE_UPDATE);
-		Vector posA;
-		if (transformArrow->getRot() <= ANGLE)
-			posA = transformArrow->getPos() + Vector(1, 1);
-		else if (transformArrow->getRot() <= ANGLE * 2)
-			posA = transformArrow->getPos() + Vector(-1, 1);
-		else if (transformArrow->getRot() <= ANGLE * 3)
-			posA = transformArrow->getPos() + Vector(-1, -1);
-		else
-			posA = transformArrow->getPos() + Vector(1, -1);
-		transformArrow->setPos(posA);
-		lastTime = timeT;
-		timeT = 0;
+	elapsedTime += deltaTime;
+	if (elapsedTime > TIME_CLOCK_REFRESH) {
+		elapsedTime = 0;
 
-		int rot = transformArrow->getRot();
+		arrow.rotation = arrow.rotation + ANGLE_UPDATE;
+		Vector posA;
+		if (arrow.rotation <= ANGLE) {
+			posA = arrow.position + Vector(1, 1);
+		}
+		else if (arrow.rotation <= ANGLE * 2) {
+			posA = arrow.position + Vector(-1, 1);
+		}
+		else if (arrow.rotation <= ANGLE * 3) {
+			posA = arrow.position + Vector(-1, -1);
+		}
+		else {
+			posA = arrow.position + Vector(1, -1);
+		}
+		arrow.position = posA;
+
+		// se aumenta una vuelta
+		int rot = arrow.rotation;
 		if (rot % 360 == 0) {
 			numFullClock++;
 		}
 	}
 }
 
-GameObject* ClockComponent::createIcon(string textureName, Vector position, float width, float height, float rotation,
-	_ecs::_grp_id grp, _ecs::_hdr_id handler) {
-
-	return dataIcon(&((*sdl).images().at(textureName)), position, width, height, rotation, grp, handler);
+void ClockComponent::fillData(Data& data, string textureName, Vector position, float width, float height, float rotation) {
+	data.texture = &sdl->images().at(textureName);
+	data.position = position;
+	data.width = width;
+	data.height = height;
+	data.rotation = rotation;
 }
 
-GameObject* ClockComponent::dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
-	_ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID) {
-
-	GameObject* gameObject = new GameObject(scene, grp, handler);
-	new Transform(gameObject, position, Vector(0, 0), width, height, rotation);
-	new Image(gameObject, texture);
-
-	return gameObject;
+void ClockComponent::renderData(const Data& data) const {
+	SDL_Rect dest;
+	dest.x = data.position.getX();
+	dest.y = data.position.getY();
+	dest.w = data.width;
+	dest.h = data.height;
+	data.texture->render(dest, data.rotation);
 }
 
 void ClockComponent::update() {
-	Component::update();
-	updateClock();
+	if (!dayHasFinished()) {
+		updateClock();
+	}
 }
 
 void ClockComponent::render() {
-	Component::render();
+	renderData(clock);
+	renderData(arrow);
 }

@@ -18,28 +18,27 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_IMAGE;
 
 	// REVISAR RELACIÓN CON TRANSFORM
-	Image(GameObject* parent, Texture* texture, Vector _pos = { 0,0 },float _w=-1,float _h=-1) : Component(parent, id), texture(texture), sdl(SDLUtils::instance()) {
+	Image(GameObject* parent, Texture* texture, Vector _pos = { 0,0 }, float _w = -1, float _h = -1) : Component(parent, id), texture(texture), sdl(SDLUtils::instance()) {
 		// importante que se añada el Transform antes de Image porque sino no se va a encontrar la ref
 		// se guarda la referencia al Transform de la entidad
 		transform = parent->getComponent<Transform>();
 		// se produce un error si no se encuentra
 		assert(texture != nullptr);
-		
+
 		pos = _pos;
 
-		if (_w == -1 || _h == -1) { 
+		if (_w == -1 || _h == -1) {
 			h = transform->getH();
 			w = transform->getW();
 		}
 		else {
 			h = _h; w = _w;
 		}
-
 	}
 	Image(GameObject* parent, string s, Vector _pos = { 0,0 }, float _w = -1, float _h = -1) : Component(parent, id), sdl(SDLUtils::instance()) {
 		transform = parent->getComponent<Transform>();
 		texture = &((*sdl).images().at(s));
-		
+
 		pos = _pos;
 
 		if (_w == -1 || _h == -1) {
@@ -50,7 +49,6 @@ public:
 			h = _h; w = _w;
 		}
 		assert(texture != nullptr);
-
 	}
 
 	void setTexture(Texture* t) { texture = t; }

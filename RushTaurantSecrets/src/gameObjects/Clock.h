@@ -4,10 +4,9 @@
 
 class Clock : public GameObject {
 private:
-	ClockComponent* cComponent;
 
 public:
 	Clock(Scene* scene) : GameObject(scene, _ecs::grp_ICONS, _ecs::hdr_CLOCK) {
-		cComponent = new ClockComponent(this, scene);
+		new ClockComponent(this);
 	}
 };
