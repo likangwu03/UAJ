@@ -462,6 +462,12 @@
       "rows": 1
     },
     {
+      "id": "SUPER_CASHREGISTER",
+      "file": "assets/Sprites/UI/super_cashregister.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "REPUTATION_ICON",
       "file": "assets/Sprites/UI/HUD/reputation_icon.png",
       "cols": 1,

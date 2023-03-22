@@ -21,6 +21,7 @@
 #include "../gameObjects/Desk.h"
 #include "../gameObjects/PantryExitObj.h"
 #include "../gameObjects/Freezer.h"
+#include "../gameObjects/SuperCashRegister.h"
 #include "../utils/checkML.h"
 using namespace _ecs;
 
@@ -211,6 +212,9 @@ void MapCreator::createObject() {
 				}
 				else if (name == "Freezer") {
 					new Freezer(scene, pos, width_, height_);
+				}
+				else if (name == "Caja"){
+					new SuperCashRegister(scene, pos, width_, height_);
 				}
 			};
 
