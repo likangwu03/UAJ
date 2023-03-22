@@ -25,20 +25,21 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 	//addPrice es el dinero total según n cantidades del ingrediente ing añadida a la cesta
 
 	auto it = ingredients.find(ing);
-	if (totalDifIngr < MAX_ING || it->first == ing) { // si no ha superado el límite de ingredientes a comprar o el ingrediente ya está en la cesta
-
-		if (it != ingredients.end()) {
-			it->second.amount += n;
-			Texture* texture = new Texture(sdl->renderer(), to_string(it->second.amount), *font, build_sdlcolor(0xFFFFFFFF));
-			it->second.text = texture;
+	if (totalDifIngr < MAX_ING || it != ingredients.end()) { // si no ha superado el límite de ingredientes a comprar o el ingrediente ya está en la cesta
+		if (totalDifIngr < MAX_ING || it->first == ing) {
+			if (it != ingredients.end()) {
+				it->second.amount += n;
+				Texture* texture = new Texture(sdl->renderer(), to_string(it->second.amount), *font, build_sdlcolor(0xFFFFFFFF));
+				it->second.text = texture;
+			}
+			else {
+				Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
+				ingredients.insert({ ing, { texture, n} });
+				totalDifIngr++; //num de dif ing
+			}
+			totalPrize += addPrice;
+			selectedIngr = ingredients.find(ing);
 		}
-		else {
-			Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
-			ingredients.insert({ ing, { texture, n} });
-			totalDifIngr++; //num de dif ing
-		}
-		totalPrize += addPrice;
-		selectedIngr = ingredients.find(ing);
 	}
 }
 

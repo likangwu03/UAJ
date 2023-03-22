@@ -6,7 +6,6 @@
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
 #include "../structure/CollisionsManager.h"
-//#include "../structure/CartelManager.h"
 #include "../components/Image.h"
 
 using namespace std;
@@ -16,7 +15,7 @@ class BasketMarketComponent : public Component
 private:
 	const int BASKET_SIZE = 600;
 	const int ING_SIZE = 50;
-	const int MAX_ING = 12;
+	const int MAX_ING = 11;
 
 	struct ingText {
 		Texture* text;

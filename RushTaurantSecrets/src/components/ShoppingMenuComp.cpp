@@ -13,7 +13,6 @@ priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), 
 	menu = &((*sdl).images().at("SHOP_MENU"));
 	font = new Font("assets/Fonts/8-bit Madness.ttf", 40);
 	parent->setActive<ShoppingMenuComp>(false);
-
 }
 
 void ShoppingMenuComp::initComponent() {
