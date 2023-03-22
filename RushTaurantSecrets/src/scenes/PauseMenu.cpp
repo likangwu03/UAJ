@@ -1,14 +1,20 @@
 #include "PauseMenu.h"
 #include "../structure/GameManager.h"
+#include "../scenes/MainMenu.h"
+#include "../scenes/OptionsMenu.h"
 
 #include "../utils/checkML.h"
 
 void PauseMenu::mMenu() {
-	GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());
+	GameManager::get()->changeScene(GameManager::get()->getMainMenu());
 }
 
 void PauseMenu::bResume() {
 	GameManager::get()->popScene();
+}
+
+void PauseMenu::oMenu() {
+	GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
 }
 
 PauseMenu::PauseMenu() {
@@ -22,7 +28,7 @@ PauseMenu::PauseMenu() {
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, oMenu);
 }
 
 PauseMenu::~PauseMenu() {

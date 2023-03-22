@@ -12,6 +12,7 @@ class Pantry;
 class DailyMenuScene;
 class SuperMarket;
 class PauseMenu;
+class OptionsMenu;
 class Reputation;
 class Money;
 class DayManager;
@@ -42,6 +43,7 @@ private:
 	DailyMenuScene* dailyMenu;
 	SuperMarket* supermarket;
 	PauseMenu* pauseMenu;
+	OptionsMenu* optionsMenu;
 
 	Reputation* reputation;
 	Money* money;
@@ -76,6 +78,7 @@ public:
 	DailyMenuScene* getDailyMenu();
 	SuperMarket* getSupermarket();
 	PauseMenu* getPauseMenu();
+	OptionsMenu* getOptionsMenu();
 	BeforeDayStartScene* getBeforeDayStart();
 
 	Reputation* getReputation();

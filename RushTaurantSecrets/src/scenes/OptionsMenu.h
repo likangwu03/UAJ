@@ -3,22 +3,20 @@
 #include "../sdlutils/Texture.h"
 #include "../gameObjects/ButtonGO.h"
 
-class PauseMenu : public Scene
+class OptionsMenu : public Scene
 {
 private:
 	static void mMenu();
 	static void bResume();
-	static void oMenu();
 
 	GameObject* bg;
 	ButtonGO* buttonResume;
-	ButtonGO* buttonMainMenu;
-	ButtonGO* buttonOptions;
 	Texture* image;
 public:
-	PauseMenu();
-	~PauseMenu();
+	OptionsMenu();
+	~OptionsMenu();
 
 	void handleEvents();
+
 };
 
