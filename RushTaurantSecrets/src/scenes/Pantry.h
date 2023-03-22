@@ -6,7 +6,7 @@ class Restaurant;
 class Pantry : public Scene {
 private:
 	const float RESIZEFACTOR = 0.8333333333;
-
+	GameObject* player;
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
 

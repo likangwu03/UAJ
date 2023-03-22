@@ -24,7 +24,7 @@
 #include "../utils/checkML.h"
 using namespace _ecs;
 
-MapCreator::MapCreator(GameObject* parent, const string& filePath) : Component(parent, id), path(filePath), renderer(sdlutils().renderer()) {
+MapCreator::MapCreator(GameObject* parent, const string& filePath) : Component(parent, id), path(filePath), renderer(sdlutils().renderer()), RESIZEFACTOR(parent->getScene()->getResizeFactor()) {
 	loadMapDims();
 
 	SDL_RenderClear(renderer);
@@ -137,13 +137,13 @@ void MapCreator::render() {
 
 
 							// Se calcula la posición en la que dibujar el tile
-							int tileX = cl * tileW * sdlutils().getResizeFactor();
-							int tileY = rw * tileH * sdlutils().getResizeFactor();
+							int tileX = cl * tileW * RESIZEFACTOR;
+							int tileY = rw * tileH * RESIZEFACTOR;
 
 							// Tile del tileset
 							SDL_Rect srcRect = { tilesetRegionX, tilesetRegionY, tileW, tileH };
 							// Parte del mapa en el que se va a dibujar el tile
-							SDL_Rect destRect = { tileX, tileY, tileW * sdlutils().getResizeFactor(), tileH * sdlutils().getResizeFactor() };
+							SDL_Rect destRect = { tileX, tileY, tileW * RESIZEFACTOR, tileH * RESIZEFACTOR };
 
 							// Dibuja el el tile del tileset (tilesets[tilesetID) srcRect en la posición destRect
 							tilesets[tilesetID]->render(srcRect, destRect);
@@ -171,9 +171,9 @@ void MapCreator::createObject() {
 				auto& aabb = obj.getAABB();
 				string name = obj.getName();
 				vector<tmx::Property> p = obj.getProperties();
-				Vector pos = { aabb.left * sdlutils().getResizeFactor(), aabb.top * sdlutils().getResizeFactor() };
-				float width_ = aabb.width * sdlutils().getResizeFactor();
-				float height_ = aabb.height * sdlutils().getResizeFactor();
+				Vector pos = { aabb.left * RESIZEFACTOR, aabb.top * RESIZEFACTOR };
+				float width_ = aabb.width * RESIZEFACTOR;
+				float height_ = aabb.height * RESIZEFACTOR;
 				if (name == "") {
 					new CollisionObject(scene, pos,width_,height_);
 				}
@@ -187,7 +187,7 @@ void MapCreator::createObject() {
 					new CashRegister(scene, pos, width_, height_);
 				}
 				else if (name == "Cartel") {
-					Vector aux = { p[3].getFloatValue() * sdlutils().getResizeFactor(),p[4].getFloatValue() * sdlutils().getResizeFactor() };
+					Vector aux = { p[3].getFloatValue() * RESIZEFACTOR,p[4].getFloatValue() * RESIZEFACTOR };
 					new Cartel(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
 				}
 				else if (name == "KitchenIsland") {

@@ -14,13 +14,13 @@ Pantry::~Pantry() {
 }
 
 void Pantry::reset() {
-	//player->getComponent<PlayerMovementController>()->initP();
+	player->getComponent<PlayerMovementController>()->initP();
 }
 
 void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 
-	//new Player(this, 0);
+	player=new Player(this, 0);
 	// el update no se ejecuta hasta que se est?en la escena
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
