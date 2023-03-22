@@ -1,6 +1,7 @@
 #pragma once
 #include "../structure/Component.h"
 #include <unordered_map>
+#include <map>
 #include "../structure/Food_def.h"
 #include "../sdlutils/SDLUtils.h"
 #include "Transform.h"
@@ -23,7 +24,9 @@ private:
 	};
 
 	// lista de ingredientes en la cesta y su cantidad
-	unordered_map<_ecs::_ingredients_id, ingText> ingredients; // ingredientes, sus cantidades y texturas
+	map<_ecs::_ingredients_id, ingText> ingredients; // ingredientes, sus cantidades y texturas
+	map<_ecs::_ingredients_id, ingText>::iterator selectedIngr;
+	//unordered_map<_ecs::_ingredients_id, ingText> ingredients; // ingredientes, sus cantidades y texturas
 	//unordered_map<_ecs::_ingredients_id, unordered_map<Texture*, int>::iterator> ingredients; // ingredientes y un iterador a su textura y cantidad
 	//unordered_map<Texture*, int> ingTextures; // textura y cantidad de un ingrediente
 	SDLUtils* sdl = SDLUtils::instance();
@@ -36,14 +39,19 @@ private:
 	int basketPosY;
 	int basketPosX;
 	int totalPrize;
-	//Texture* texture;
+	bool basketON;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);
 	~BasketMarketComponent();
 	void buyIngredient();
-	//llamado por men¨² de compra
+	//llamado por menú de compra
 	void addToBasket(_ecs::_ingredients_id ing, int n, int addPrice);
 	void renderBasket();
 	void renderTexture(int x, int y, int w, int h, string text);
+	void selectIngredientInBasket(SDL_KeyCode key);
+	void setBasketON(bool value);
+	bool getBasketON();
+
+	virtual void handleEvents();
 };

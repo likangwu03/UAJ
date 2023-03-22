@@ -426,6 +426,12 @@
       "rows": 1
     },
     {
+      "id": "INGREDIENT_HIGHLIGHT",
+      "file": "assets/Sprites/UI/ingredient_highlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "CASH_HIGHLIGHT",
       "file": "assets/Sprites/UI/cash_Regis_higlight.png",
       "cols": 1,

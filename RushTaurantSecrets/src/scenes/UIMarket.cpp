@@ -80,11 +80,11 @@ void UIMarket::showMoneyText() {
 void UIMarket::handleEvents() {
 	if (ih->isKeyDown(SDLK_z)) { 
 		// si el men?de cesta ya est?abierto, lo cierra
-		if (basketMarket->getBasketON())
-			basketMarket->setBasketON(false);
+		if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON())
+			basketMarket->getComponent<BasketMarketComponent>()->setBasketON(false);
 		// si el men?de cesta est?cerrado, lo abre
 		else
-			basketMarket->setBasketON(true);
+			basketMarket->getComponent<BasketMarketComponent>()->setBasketON(true);
 	}
 	else
 		Scene::handleEvents();
@@ -97,7 +97,7 @@ void UIMarket::handleEvents() {
 
 void UIMarket::render() {
 	Scene::render();
-	if (basketMarket->getBasketON()) {
+	if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON()) {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();
 	}
 
