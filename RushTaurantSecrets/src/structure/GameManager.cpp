@@ -15,6 +15,7 @@
 #include "../scenes/DailyMenuScene.h"
 #include "../scenes/SuperMarket.h"
 #include "../scenes/PauseMenu.h"
+#include "../scenes/OptionsMenu.h"
 
 #include "../utils/checkML.h"
 
@@ -37,6 +38,7 @@ void GameManager::initialize() {
 
 	sdlutils().setResizeFactor(RESTSUPERSIZE);
 	pauseMenu = new PauseMenu();
+	optionsMenu = new OptionsMenu();
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
 
@@ -123,6 +125,7 @@ BeforeDayStartScene* GameManager::getBeforeDayStart() { return beforeDayStartSce
 Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
 DayManager* GameManager::getDayManager() { return days; }
+OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }

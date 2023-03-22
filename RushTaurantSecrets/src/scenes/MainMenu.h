@@ -9,10 +9,10 @@ class Texture;
 class MainMenu : public Scene {
 private:
 	static void start();
+	static void opt();
 
 	GameObject* bg;
 	ButtonGO* oneplayer;
-	ButtonGO* twoplayer;
 	ButtonGO* options;
 	ButtonGO* exit;
 	Texture* image;

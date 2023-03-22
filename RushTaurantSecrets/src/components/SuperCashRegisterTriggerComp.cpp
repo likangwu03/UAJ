@@ -10,7 +10,6 @@ SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, V
 	TriggerComp(parent, pos_, width_, height_)
 {
 	highlight = parent->getComponent<Image>();
-
 	highlight->setActive(false);
 };
 
@@ -22,7 +21,6 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
-
 }
 
 void SuperCashRegisterTriggerComp::onTriggerExit() {
