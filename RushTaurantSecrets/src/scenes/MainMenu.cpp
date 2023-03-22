@@ -24,18 +24,15 @@ void MainMenu::opt() {
 MainMenu::MainMenu() {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/mainMenu_bg.png");
+	image = &(sdlutils().images().at("MAIN_MENU_BG"));
 	new Image(bg, image);
 
-	oneplayer = new ButtonGO(this, "PLAY_BUTTON_UP", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 2.6 * (192 * 2 / 2), 2.7 * SDLUtils::instance()->height() / 5), 395, 130, start);
-	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 2.6 * (192 * 2 / 2), 3.7 * SDLUtils::instance()->height() / 5), 395, 130, opt);
+	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, start);
+	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 1.1 * BUTTONS_H), BUTTONS_W, BUTTONS_H, start);
+	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2.1 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
 }
 
-MainMenu::~MainMenu() {
-	delete image;
-}
+MainMenu::~MainMenu() { }
 
 void MainMenu::handleEvents(){
 	if (ih->isKeyDown(SDLK_1)) {

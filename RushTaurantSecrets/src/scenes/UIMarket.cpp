@@ -28,9 +28,9 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	std::string strMoney = std::to_string(intMoney);
 
 	font = new Font(FONT_PATH, 50);
-	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
 	moneyText = new GameObject(this, _ecs::grp_ICONS);
-	new Transform(moneyText, Vector(80, ICONY - 3), Vector(0, 0), strMoney.length() * FONTSIZE / 2, FONTSIZE);
+	new Transform(moneyText, Vector(80, ICONY - 3), Vector(0, 0), strMoney.length() * FONT_W, FONT_H);
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// icono de men?del día
@@ -71,8 +71,8 @@ void UIMarket::showMoneyText() {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
 		delete moneyTextTexture;
-		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
-		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONTSIZE / 2);
+		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
+		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONT_W);
 		moneyTextImage->setTexture(moneyTextTexture);
 	}
 }

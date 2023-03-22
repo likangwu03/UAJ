@@ -13,9 +13,8 @@
 class UIMarket : public Scene
 {
 private:
-	//const string FONT_PATH = "assets/Fonts/8-bit Madness.ttf";
-	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
-	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15;
+	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
+	const int  FONT_H = 50, FONT_W = 30, ICONSIZE = 48, ICONX = 20, ICONY = 15;
 
 	Scene* market;
 	SDLUtils* sdl = SDLUtils::instance();

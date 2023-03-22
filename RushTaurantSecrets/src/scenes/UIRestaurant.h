@@ -23,9 +23,9 @@ using namespace _ecs;
 class UIRestaurant : public Scene
 {
 private:
-	const string FONT_PATH = "assets/Fonts/8-bit Madness.ttf";
+	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
+	const float FONT_H = 50, FONT_W = 30, ICONSIZE = 48, ICONX = 20, ICONY = 15;
 	const int REP0 = 0, REP1 = 0, REP2 = 20, REP3 = 40, REP4 = 60, REP5 = 80;
-	const float FONT_H = 50, FONT_W = 20, ICONSIZE = 48, ICONX = 20, ICONY = 15;
 
 	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();

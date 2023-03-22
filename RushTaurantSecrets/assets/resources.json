@@ -342,6 +342,12 @@
       "rows": 1
     },
     {
+      "id": "MAIN_MENU_BG",
+      "file": "assets/mainMenu_bg.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "DAILY_MENU_BUTTON",
       "file": "assets/Sprites/UI/HUD/daily_menu_button.png",
       "cols": 1,
@@ -368,6 +374,24 @@
     {
       "id": "MAINM_BUTTON_DOWN",
       "file": "assets/Sprites/UI/Menu/MainMenuButtonDown.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "PLAY_BUTTON_UP",
+      "file": "assets/Sprites/UI/Menu/PlayButtonUp.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "1_PLAYER_BUTTON",
+      "file": "assets/Sprites/UI/Menu/1player_button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "2_PLAYER_BUTTON",
+      "file": "assets/Sprites/UI/Menu/2player_button.png",
       "cols": 1,
       "rows": 1
     },

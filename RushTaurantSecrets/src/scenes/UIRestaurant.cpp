@@ -45,7 +45,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	std::string strMoney = std::to_string(intMoney);
 
 	font = new Font(FONT_PATH, FONT_H);
-	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
 	moneyText = createIcon(moneyTextTexture, Vector(80, ICONY * 2 + ICONSIZE - 5), strMoney.length() * FONT_W, FONT_H, 0, _ecs::grp_ICONS);
 	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
@@ -69,8 +69,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Warning(thiefExclamation, frequency);
 
 	intObjective = 30; moneyDiff = 0;
-	std::string strObjective = "0 / " + std::to_string(intObjective);
-	objectiveTextTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x000000FF));
+	std::string strObjective = "0/" + std::to_string(intObjective);
+	objectiveTextTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x3a3a50FF));
 	GameObject* objectiveText = createIcon(objectiveTextTexture, Vector(80, ICONY * 3 + ICONSIZE * 2), strObjective.length() * FONT_W, FONT_H, 0, _ecs::grp_ICONS);
 	objectiveTextTrans = objectiveText->getComponent<Transform>();
 	objectiveTextImage = objectiveText->getComponent<Image>();
@@ -128,13 +128,13 @@ void UIRestaurant::showMoneyText() {
 		std::string strMoney = std::to_string(intMoney);
 		
 		delete moneyTextTexture;
-		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x000000FF));
+		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
 		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONT_W);
 		moneyTextImage->setTexture(moneyTextTexture);
 
 		delete objectiveTextTexture;
 		std::string strObj = std::to_string(moneyDiff) + " / " + std::to_string(intObjective);
-		objectiveTextTexture = new Texture(sdl->renderer(), strObj, *font, build_sdlcolor(0x000000FF));
+		objectiveTextTexture = new Texture(sdl->renderer(), strObj, *font, build_sdlcolor(0x3a3a50FF));
 		objectiveTextTrans->setW(strObj.length() * FONT_W);
 		objectiveTextImage->setTexture(objectiveTextTexture);
 	}
