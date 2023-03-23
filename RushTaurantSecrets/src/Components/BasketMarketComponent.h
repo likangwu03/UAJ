@@ -7,8 +7,10 @@
 #include "Transform.h"
 #include "../Managers/CollisionsManager.h"
 #include "Image.h"
+#include "../Definitions/Food_def.h"
 
 using namespace std;
+using namespace _ecs;
 
 class BasketMarketComponent : public Component
 {
@@ -30,7 +32,6 @@ private:
 	//unordered_map<Texture*, int> ingTextures; // textura y cantidad de un ingrediente
 	SDLUtils* sdl = SDLUtils::instance();
 	InputHandler* ih;
-	//CartelManager* cartelM = CartelManager::instance();
 	int totalDifIngr;
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	const int OFFSET = 10;
@@ -39,6 +40,7 @@ private:
 	int basketPosX;
 	int totalPrize;
 	bool basketON;
+	Texture* menu;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);

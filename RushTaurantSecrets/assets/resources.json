@@ -384,6 +384,12 @@
       "rows": 1
     },
     {
+      "id": "BASKET_BUY_MENU",
+      "file": "assets/Sprites/UI/HUD/basketBuyMenu.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "MONEY_ICON",
       "file": "assets/Sprites/UI/HUD/money_icon.png",
       "cols": 1,

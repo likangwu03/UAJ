@@ -11,6 +11,7 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	font = new Font(FONT_PATH, 50);
 	totalPrize = 0;
 	basketON = false;
+	menu = &((*sdl).images().at("BASKET_BUY_MENU"));
 }
 
 BasketMarketComponent::~BasketMarketComponent() {
@@ -65,9 +66,12 @@ void BasketMarketComponent::renderBasket() {
 		renderTexture(x * col + ING_SIZE / 2, y * fil + ING_SIZE / 2, ING_SIZE / 2, ING_SIZE / 2, "KI_ICON");
 		it->second.text->render(dest);
 
-		// render highlight de ingrediente
-		if (selectedIngr->first == it->first)
+		// render highlight de ingrediente y para añadir o quitar ingredientes de la cesta
+		if (selectedIngr->first == it->first) {
 			renderTexture(x * col, y * fil, ING_SIZE + 5, ING_SIZE + 5, "INGREDIENT_HIGHLIGHT");
+			menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
+			int cost = _ecs::MarketIngs[it->first - _ecs::HARINA].price;
+		}
 
 		col++;
 		it++;
@@ -79,9 +83,6 @@ void BasketMarketComponent::renderBasket() {
 	dest.w = ING_SIZE;
 	dest.h = ING_SIZE;
 	textureTotal->render(dest);
-
-	// render para añadir o quitar ingredientes de la cesta
-	// ...
 }
 
 void BasketMarketComponent::renderTexture(int x, int y, int w, int h, string text) {
