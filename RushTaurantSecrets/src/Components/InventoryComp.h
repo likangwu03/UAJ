@@ -38,8 +38,10 @@ public:
 	InventoryComp(GameObject* parent);
 	void takeDish(_ecs::_dish_id newDish);
 	void freeDish();
-	bool isFull() { return cellsOcuppied == MAX_DISHES; } //indica si el inventario est¨¢ lleno
+	bool isFull() { return cellsOcuppied == MAX_DISHES; } //indica si el inventario está lleno
 	int freeSpace(); //llamado desde fuera
+	bool serveDish(_ecs::_dish_id dish);
+
 	virtual void render();
 	virtual void handleEvents(); //se encarga de comprobar si ha var¨ªado la selecci¨®n de casilla seg¨²n input y se actualiza cellSelected
 };

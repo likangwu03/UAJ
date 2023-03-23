@@ -38,15 +38,17 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 			cellSelected = 0;
 		dishes[place] = newDish;
 		dishesBool[place] = true;
-		++cellsOcuppied;
+		cellsOcuppied++;
 	}
 }
 
 // Libera el espacio de la casilla seleccionado y pone la casilla seleccionada a la siguiente casilla ocupada 
 void InventoryComp::freeDish() {
-	dishesBool[cellSelected] = false;
-	nextDish();
-	cellsOcuppied--;
+	if (cellsOcuppied > 0) {
+		dishesBool[cellSelected] = false;
+		nextDish();
+		cellsOcuppied--;
+	}
 }
 
 // devuelve la primera posici�n libre; si no hay espacio libre, devuelve -1
@@ -62,6 +64,19 @@ int InventoryComp::freeSpace() {
 
 	// devuelve -1 si no tiene ning�n hueco libre
 	if (i == MAX_DISHES) return -1;
+}
+
+bool InventoryComp::serveDish(_ecs::_dish_id dish) {
+	if (cellsOcuppied > 0) {
+		if (dishes[cellSelected] == dish) {
+			freeDish();
+			return true;
+		}
+		else return false;
+		/*freeDish();
+		return true;*/
+	}
+	else return false;
 }
 
 void InventoryComp::renderDish(int xD, int yD, _ecs::_dish_id dishID) {

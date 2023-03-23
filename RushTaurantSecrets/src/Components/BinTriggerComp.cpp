@@ -22,9 +22,7 @@ void BinTriggerComp::isOverlapping() {
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 
-	//temporal, no comprueba si esta el plato que quiere, solo comprueba que el jugador tenga platos
-	if (inventory->freeSpace() != -1) 
-		inventory->freeDish();
+	inventory->freeDish();
 
 }
 void BinTriggerComp::onTriggerExit() {
