@@ -56,7 +56,7 @@ private:
 	//bool multiplayer;
 	bool hasKilled;
 	bool mapsCreated;
-
+	int killedNum; //n¨²mero de ladrones matados en el d¨ªa anterior
 	GameManager();
 
 public:
@@ -93,5 +93,6 @@ public:
 
 	bool getHasKill();
 	void setHasKill(bool hKill);
+	void killed();
 
 };

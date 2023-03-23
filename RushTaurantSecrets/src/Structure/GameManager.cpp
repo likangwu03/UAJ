@@ -21,7 +21,7 @@
 
 GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), days(nullptr) { };
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), days(nullptr), killedNum(0) { };
 
 
 void GameManager::initialize() {
@@ -136,8 +136,13 @@ void GameManager::setKichenIsland(KitchenIslandComp* KIComp) {
 }
 
 void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
+	if (hasKilled) {
+		ing.push_back({ _ecs::CARNE,killedNum });
+		killedNum = 0;
+	}
 	kitchenIsland->setIngredients(ing);
 }
 
 bool GameManager::getHasKill() { return hasKilled; }
+void GameManager::killed() { ++killedNum; }
 void GameManager::setHasKill(bool hKill) { hasKilled = hKill; }

@@ -65,6 +65,7 @@ void ThiefMovement::update() {
 		elapsedTime += deltaTime;
 		if (elapsedTime > deadTime) {
 			gm->setHasKill(true);
+			gm->killed();
 			parent->setAlive(false);
 			elapsedTime = 0;	// no haria falta
 		}
