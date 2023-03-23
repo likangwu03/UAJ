@@ -14,12 +14,13 @@ KitchenIslandComp::KitchenIslandComp(GameObject* parent) :
 	h = parent->getComponent<Transform>()->getH() / 2;
 	x = parent->getComponent<Transform>()->getPos().getX();
 	y = parent->getComponent<Transform>()->getPos().getY();
-	font = new Font("assets/Fonts/8-bit Madness.ttf", 40);
+	font = new Font(FONT_PATH, FONTSIZE);
 	highlight = &sdl->images().at("ISLAND_HIGHLIGHT");
 	selected = -1;
 	hPos = { -w,-h };
 	ingCloud->setKitchenIsland(this);
 
+	KI_icon = &sdl->images().at("KI_ICON");
 }
 
 KitchenIslandComp::~KitchenIslandComp() {
@@ -34,8 +35,8 @@ void KitchenIslandComp::render() {
 	
 	for (int i = 0; i < ing.size(); ++i) {
 		ing[auxID[i]].t->render(build_sdlrect(x + w * (i % 6), y + w * (i / 6), w, h));
-		ing[auxID[i]].b->render(build_sdlrect(x + w * (i % 6) + OFFSETX - (B_W - F_W) / 2, y + w * (i / 6) + OFFSETY - (B_H - F_H) / 2 + 1, B_W, B_H));
-		ing[auxID[i]].f->render(build_sdlrect(x + w * (i % 6) + OFFSETX, y + w * (i / 6) + OFFSETY, F_W, F_H));
+		ing[auxID[i]].b->render(build_sdlrect(x + w * (i % 6) + OFFSETX - (B_W - ing[auxID[i]].f->width()) / 2, y + w * (i / 6) + OFFSETY - (B_H - ing[auxID[i]].f->height()) / 2 + 1, B_W, B_H));
+		ing[auxID[i]].f->render(build_sdlrect(x + w * (i % 6) + OFFSETX, y + w * (i / 6) + OFFSETY, ing[auxID[i]].f->width(), ing[auxID[i]].f->height()));
 	}
 	
 }
@@ -74,10 +75,13 @@ void KitchenIslandComp::setIngredients(vector<pair<_ecs::_ingredients_id, int>> 
 	//cargar info
 	auxID = vector<_ecs::_ingredients_id>(_ing.size());
 
-	for (int i = 0; i < _ing.size(); ++i) { // cleon: recorrido moderno? pues no. pues s?
-		ing.insert({ _ing[i].first, {_ing[i].second, &sdl->images().at(to_string(_ing[i].first)),
-		new Texture(sdl->renderer(), to_string(_ing[i].second), *font, build_sdlcolor(0xFAF2E6ff)), &sdl->images().at("KI_ICON")} });
-		auxID[i] = _ing[i].first;
+	int i = 0;
+	for (auto& ingredient : _ing) {
+		auto texture = new Texture(sdl->renderer(), to_string(_ing[i].second), *font, build_sdlcolor(0xFAF2E6ff));
+		ing.insert( { ingredient.first, {ingredient.second, &sdl->images().at(to_string(ingredient.first)), texture, KI_icon} });
+		auxID[i] = ingredient.first;
+
+		i++;
 	}
 }
 

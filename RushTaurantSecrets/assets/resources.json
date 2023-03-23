@@ -67,6 +67,36 @@
       "rows": 20
     },
     {
+      "id": "Client_10",
+      "file": "assets/Sprites/Clients/Client_sprite_10.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Client_11",
+      "file": "assets/Sprites/Clients/Client_sprite_11.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Client_12",
+      "file": "assets/Sprites/Clients/Client_sprite_12.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Client_13",
+      "file": "assets/Sprites/Clients/Client_sprite_13.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Client_14",
+      "file": "assets/Sprites/Clients/Client_sprite_14.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
       "id": "Thief_1",
       "file": "assets/Sprites/Thieves/Thief_sprite_1.png",
       "cols": 56,
@@ -81,6 +111,36 @@
     {
       "id": "Thief_3",
       "file": "assets/Sprites/Thieves/Thief_sprite_3.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Thief_4",
+      "file": "assets/Sprites/Thieves/Thief_sprite_4.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Thief_5",
+      "file": "assets/Sprites/Thieves/Thief_sprite_5.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Thief_6",
+      "file": "assets/Sprites/Thieves/Thief_sprite_6.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Thief_7",
+      "file": "assets/Sprites/Thieves/Thief_sprite_7.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Thief_8",
+      "file": "assets/Sprites/Thieves/Thief_sprite_8.png",
       "cols": 56,
       "rows": 20
     },
@@ -500,6 +560,12 @@
     {
       "id": "INVENTORY_ICON",
       "file": "assets/Sprites/UI/HUD/inventory.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "INVENTORY_HIGHLIGHT",
+      "file": "assets/Sprites/UI/HUD/inventory_highlight.png",
       "cols": 1,
       "rows": 1
     },

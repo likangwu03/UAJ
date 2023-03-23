@@ -49,6 +49,8 @@ void Pantry::render() {
 void Pantry::update() {
 	Scene::update();
 	collisionsManager->update();
+	
+	//GameManager::get()->getRestaurant()->Scene::update();
 }
 
 void Pantry::handleEvents() {

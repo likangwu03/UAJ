@@ -14,6 +14,7 @@ Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
+	player->getComponent<Transform>()->setPos({ 750, 240 });
 }
 
 Restaurant::~Restaurant() {

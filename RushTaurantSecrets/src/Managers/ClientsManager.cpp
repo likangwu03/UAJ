@@ -50,7 +50,7 @@ void ClientsManager::createGroupClients() {
 }
 
 Client* ClientsManager::createClient(int posGroup) {
-	string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 10));
+	string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 15));
 
 	// a partir de la posición el grupo se calcula donde empieza
 	Vector origin = _ecs::OUT_ENTRY;

@@ -16,7 +16,7 @@ private:
 public:
 	Cartel(Scene* scene, _ecs::_ingredients_id ingId, Vector pos, float w, float h, Vector triP, float triW, float triH) :GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, Vector(pos.getX() + HIGH_OFFSETX, pos.getY() + HIGH_OFFSETY), Vector(0, 0), w + HIGH_OFFSETW , h + HIGH_OFFSETH, 0, true); //renderizar el cartel
-		new Image(this, "CARTEL_HIGHLIGHT"); //renderizar el cartel
+		new Image(this, "CARTEL_HIGHLIGHT"); //renderizar el highlight
 		new CartelTrigger(this, ingId, triP - pos, w, h); //pos relativa
 	};
 };

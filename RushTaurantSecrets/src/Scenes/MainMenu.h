@@ -17,6 +17,7 @@ private:
 	GameObject* bg;
 	Texture* image;
 	ButtonGO* oneplayer;
+	ButtonGO* twoplayer;
 	ButtonGO* options;
 	ButtonGO* exit;
 

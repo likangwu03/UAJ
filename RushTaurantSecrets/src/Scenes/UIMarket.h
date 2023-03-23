@@ -14,17 +14,20 @@ class UIMarket : public Scene
 {
 private:
 	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
-	const int  FONT_H = 50, FONT_W = 30, ICONSIZE = 48, ICONX = 20, ICONY = 15;
+	const float FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15, CENTEROUTLINE = 4;
 
 	Scene* market;
 	SDLUtils* sdl = SDLUtils::instance();
-	Money* moneyTxt;
 	Font* font;
-	GameObject* moneyText;
-	GameObject* timeText;
-	Texture* moneyTextTexture;
-	Image* moneyTextImage;
+	Font* outline;
+
+	Money* moneyTxt;
+	Texture* moneyTexture;
+	Texture* moneyOutline;
+	SDL_Rect moneyRect;
+	SDL_Rect moneyOutlineRect;
 	int intMoney;
+
 	InputHandler* ih;
 	BasketMarket* basketMarket;
 	GameObject* shopMenu;

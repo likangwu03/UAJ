@@ -17,14 +17,13 @@ class KitchenIslandComp :public Component
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_KITCHENISLAND;
 private:
-	const float
-		F_W =12,
-		F_H = 25,
-		B_H=20,
-		B_W=20,OFFSETX=-6,OFFSETY=-6;
+	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
+	const float FONTSIZE = 15,
+				B_H = 20, B_W = 20,
+				OFFSETX = -6, OFFSETY = -6;
 
 	struct Ing {
-		int n;	// número de ingredientes
+		int n;		// número de ingredientes
 		Texture* t;	// imagen del ingrediente
 		Texture* f;	// imagen con el número de ingredientes que tienes (delantera)
 		Texture* b;	//
@@ -35,6 +34,7 @@ private:
 	SDLUtils* sdl;
 	Ingredients* ingCloud;
 	Texture* highlight;
+	Texture* KI_icon;
 	Vector hPos;
 	int selected;
 	float w, h;// para cada ing

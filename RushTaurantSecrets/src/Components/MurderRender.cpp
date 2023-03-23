@@ -26,7 +26,7 @@ MurderRender::MurderRender(GameObject* parent)
 void MurderRender::render()
 {
 	SDL_Rect dest;
-	dest.x = parentTransform->getPos().getX() + offsetX;
+	dest.x = parentTransform->getPos().getX() - offsetX;
 	dest.y = parentTransform->getPos().getY() + offsetY;
 	dest.w = 32;
 	dest.h = 32;

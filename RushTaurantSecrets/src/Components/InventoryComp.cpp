@@ -19,6 +19,8 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 
 	cellSelected = -1;
 	cellsOcuppied = 0;
+	highlight = &sdl->images().at("INVENTORY_HIGHLIGHT");
+
 	// prueba--borrar luego
 	/*dishesBool[0] = true;
 	dishesBool[1] = true;
@@ -31,18 +33,20 @@ void InventoryComp::takeDish(_ecs::_dish_id newDish) {
 	// comprueba que hay espacio libre en el inventario
 	int place = freeSpace();
 	if (place != -1) {
+		// Si el inventario estaba vacío, se pone el primer hueco como seleccionado
+		if(cellsOcuppied == 0)
+			cellSelected = 0;
 		dishes[place] = newDish;
 		dishesBool[place] = true;
 		++cellsOcuppied;
-		cellSelected = place;
 	}
 }
 
-// libera el espacio seg��n casilla seleccionado previamente ya sea para tirar el plato, d�rselo a un cliente...
+// Libera el espacio de la casilla seleccionado y pone la casilla seleccionada a la siguiente casilla ocupada 
 void InventoryComp::freeDish() {
 	dishesBool[cellSelected] = false;
-	firstDishR(cellSelected);
-	--cellsOcuppied;
+	nextDish();
+	cellsOcuppied--;
 }
 
 // devuelve la primera posici�n libre; si no hay espacio libre, devuelve -1
@@ -85,60 +89,58 @@ void InventoryComp::render() {
 			renderDish(x, y, dishes[i]);
 		}
 	}
+
+	// Si hay alguna casilla seleccionada, se renderiza el highlight
+	if (cellSelected > -1)
+		highlight->render({ HIGHLIGHT_X, HIGHLIGHT_Y + DISHOFFSET * cellSelected, HIGHLIGHTSIZE, HIGHLIGHTSIZE });
 }
 
 void InventoryComp::setPosition(int i, int& x, int& y) {
 	x = DISHX;
 	y = DISHY + DISHOFFSET * i;
-
 }
 
-void InventoryComp::setCell(SDL_KeyCode key) {
-	// si no hay ninguna celda seleccionada, selecciona la primera celda libre
-	if (cellSelected == -1) freeSpace();
-	else {
-		// si se ha pulsado la tecla izquierda
-		if (key == SDLK_LEFT) cellSelected = firstDishL(cellSelected);
-		// si se ha pulsado la tecla derecha
-		else if (key == SDLK_RIGHT) cellSelected = firstDishR(cellSelected);
-	}
-}
 
 void InventoryComp::handleEvents() {
-	// flecha izquierda
-	if (ih->isKeyDown(SDLK_LEFT))
-		setCell(SDLK_LEFT);
-	// flecha derecha
-	else if (ih->isKeyDown(SDLK_RIGHT))
-		setCell(SDLK_RIGHT);
+	// flecha hacia arriba
+	if (ih->isKeyDown(SDLK_UP) && cellSelected > -1)
+		prevDish();
+	// flecha hacia abajo
+	else if (ih->isKeyDown(SDLK_DOWN) && cellSelected > -1)
+		nextDish();
 }
 
-// busca la siguiente posici�n ocupada en el inventario a la izquierda de la casilla seleccionada
-int InventoryComp::firstDishL(int num) {
+// busca la primera casilla anterior a la seleccionada que esté ocupada
+void InventoryComp::prevDish() {
 	int i = 0;
-	int n = num;
-	while (i < MAX_DISHES) {
-		// si el �ndice del inventario es 0
-		if (n == 0) n = 2; // cleon: super 3 contra super 2: la batalla final.
-		else n--;
 
-		if (dishesBool[n]) return true; // cleon: m�sica. armon�a. PAZ. Te perdonamos. Don't do it again.
-		++i;
+	// Da como máximo 3 vueltas al inventario
+	while (i < MAX_DISHES && cellsOcuppied > 1) {
+		// Reduce la casilla seleccionada y si es menor que 0, la pone en la última casilla 
+		cellSelected--;
+		if (cellSelected < 0) cellSelected = MAX_DISHES - 1;
+
+		// Si la casilla está ocupada, sale del método
+		if (dishesBool[cellSelected]) return;
+		i++;
 	}
-	return num;
+	cellSelected = -1;
 }
 
-// busca la siguiente posici�n ocupada en el inventario a la derecha de la casilla seleccionada
-int InventoryComp::firstDishR(int num) {
+// busca la primera casilla posterior a la seleccionada que esté ocupada
+void InventoryComp::nextDish() {
 	int i = 0;
-	int n = num;
-	while (i < MAX_DISHES) {
-		// si el �ndice del inventario es 0
-		if (n == 2) n = 0;
-		else n++;
 
-		if (dishesBool[n]) return true; // cleon: ugh.
-		++i;
+	// Da como máximo 3 vueltas al inventario
+	while (i < MAX_DISHES && cellsOcuppied > 1) {
+		// Aumenta la casilla seleccionada y si es mayor o igual al
+		// número máximo de platos, la pone en la primera casilla 
+		cellSelected++;
+		if (cellSelected >= MAX_DISHES) cellSelected = 0;
+
+		// Si la casilla está ocupada, sale del método
+		if (dishesBool[cellSelected]) return;
+		i++;
 	}
-	return num;
+	cellSelected = -1;
 }

@@ -5,8 +5,7 @@
 #include "../Components/ShoppingMenuComp.h"
 #include "../Utilities/checkML.h"
 
-void UIMarket::toggleDailyMenu()
-{
+void UIMarket::toggleDailyMenu() {
 	menuToggled = !menuToggled;
 	menu->getComponent<Transform>()->setActive(menuToggled);
 	menu->getComponent<Image>()->setActive(menuToggled);
@@ -20,18 +19,24 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	ih = InputHandler::instance();
 	basketMarket = new BasketMarket(this);
 
-	// icono de dinero
-	createGameObjects(_ecs::grp_ICONS, "MONEY_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0);
+	// Fuente
+	font = new Font(FONT_PATH, FONTSIZE);
+	outline = new Font(FONT_PATH, FONTSIZE);
+	TTF_SetFontOutline(outline->getTTFFont(), 2);
 
-	// gestión de la cantidad de dinero
+	// Dinero
 	intMoney = moneyTxt->getMoney();
+	// icono
+	createGameObjects(_ecs::grp_ICONS, "MONEY_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0);
+	// Texto
 	std::string strMoney = std::to_string(intMoney);
+	moneyTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
+	moneyOutline = new Texture(sdl->renderer(), strMoney, *outline, build_sdlcolor(0xFFFFFFFF));
+	moneyRect = { 80, (int)(ICONY - 2), moneyTexture->width() ,moneyTexture->height() };
+	moneyOutlineRect = moneyRect;
+	moneyOutlineRect.x -= CENTEROUTLINE / 2; moneyOutlineRect.w += CENTEROUTLINE;
+	moneyOutlineRect.y -= CENTEROUTLINE / 2; moneyOutlineRect.h += CENTEROUTLINE;
 
-	font = new Font(FONT_PATH, 50);
-	moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
-	moneyText = new GameObject(this, _ecs::grp_ICONS);
-	new Transform(moneyText, Vector(80, ICONY - 3), Vector(0, 0), strMoney.length() * FONT_W, FONT_H);
-	moneyTextImage = new Image(moneyText, moneyTextTexture);
 
 	// icono de men?del día
 	//createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), 50, 50, 0);
@@ -48,7 +53,9 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 
 UIMarket::~UIMarket() {
 	delete font;
-	delete moneyTextTexture;
+	delete outline;
+	delete moneyTexture;
+	delete moneyOutline;
 }
 
 
@@ -70,10 +77,15 @@ void UIMarket::showMoneyText() {
 	if (intMoney != moneyTxt->getMoney()) {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
-		delete moneyTextTexture;
-		moneyTextTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
-		moneyText->getComponent<Transform>()->setW(strMoney.length() * FONT_W);
-		moneyTextImage->setTexture(moneyTextTexture);
+		
+		delete moneyTexture;
+		delete moneyOutline;
+		moneyTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
+		moneyOutline = new Texture(sdl->renderer(), strMoney, *outline, build_sdlcolor(0xFFFFFFFF));
+		moneyRect = { 80, (int)(ICONY - 2), moneyTexture->width() ,moneyTexture->height() };
+		moneyOutlineRect = moneyRect;
+		moneyOutlineRect.x -= CENTEROUTLINE / 2; moneyOutlineRect.w += CENTEROUTLINE;
+		moneyOutlineRect.y -= CENTEROUTLINE / 2; moneyOutlineRect.h += CENTEROUTLINE;
 	}
 }
 
@@ -96,6 +108,9 @@ void UIMarket::handleEvents() {
 }
 
 void UIMarket::render() {
+	moneyOutline->render(moneyOutlineRect);
+	moneyTexture->render(moneyRect);
+
 	Scene::render();
 	if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON()) {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();

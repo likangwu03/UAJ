@@ -72,6 +72,7 @@ GameManager::~GameManager() {
 	delete pantry;
 	delete supermarket;
 	delete pauseMenu;
+	delete optionsMenu;
 	delete dailyMenu;
 
 	delete reputation;

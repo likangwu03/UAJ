@@ -53,6 +53,8 @@ public:
 		return TTF_RenderUTF8_Shaded(font_, text.c_str(), fgColor, bgColor);
 	}
 
+	TTF_Font* getTTFFont() { return font_; }
+
 private:
 	TTF_Font *font_;
 }

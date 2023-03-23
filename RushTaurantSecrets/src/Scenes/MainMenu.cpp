@@ -14,7 +14,7 @@
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
-	GameManager::get()->changeScene(GameManager::get()->getRestaurant());
+	GameManager::get()->changeScene(GameManager::get()->getDailyMenu());
 }
 
 void MainMenu::opt() {
@@ -28,8 +28,8 @@ MainMenu::MainMenu() {
 	new Image(bg, image);
 
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, start);
-	//twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 1.1 * BUTTONS_H), BUTTONS_W, BUTTONS_H, start);
-	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2.1 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
+	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, start);
+	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
 }
 
 MainMenu::~MainMenu() { }

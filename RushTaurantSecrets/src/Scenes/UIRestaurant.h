@@ -24,29 +24,37 @@ class UIRestaurant : public Scene
 {
 private:
 	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
-	const float FONT_H = 50, FONT_W = 30, ICONSIZE = 48, ICONX = 20, ICONY = 15;
+	const float FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15, CENTEROUTLINE = 4;
 	const int REP0 = 0, REP1 = 0, REP2 = 20, REP3 = 40, REP4 = 60, REP5 = 80;
 
-	Inventory* inventory;
 	SDLUtils* sdl = SDLUtils::instance();
-	Money* moneyTxt;
 	Font* font;
-	Transform* transform;
-	GameObject* moneyText;
-	Texture* moneyTextTexture;
-	Texture* fullStarTexture;
-	Texture* objectiveTextTexture;
-	Image* moneyTextImage;
-	Image* timeTextImage;
-	Image* objectiveTextImage;
-	Transform* objectiveTextTrans;
-	int intMoney, intObjective, moneyDiff;
-	float lastTime;
+	Font* outline;
+	
 	Reputation* reputation;
 	int actReputation;
 	array<bool, 5> stars;
+	Texture* fullStarTexture;
+
+	Money* moneyTxt;
+	Texture* moneyTexture;
+	Texture* moneyOutline;
+	SDL_Rect moneyRect;
+	SDL_Rect moneyOutlineRect;
+
+
+	int intMoney, intObjective, moneyDiff;
+	Texture* objectiveTexture;
+	Texture* objectiveOutline;
+	SDL_Rect objectiveRect;
+	SDL_Rect objectiveOutlineRect;
+
+	Inventory* inventory;
+
+	float lastTime;
 	DailyMenu* menu;
 	bool menuToggled;
+
 
 	GameObject* dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
 		_ecs::_grp_id grp, _ecs::_hdr_id handler);
@@ -64,24 +72,13 @@ public:
 	~UIRestaurant();
 
 	Inventory* getInventory() const { return inventory; };
-
-	Money* getMoney() const { return moneyTxt; };
-
 	void showMoneyText();
-
 	void renderStar(int x, int y);
-
 	void reputationManager();
-
 	void checkStarsArray();
-
 	void checkRenderStar();
-
 	void setDailyMenu();
-
 	void updateClock();
-
 	void update();
-
 	void render();
 };

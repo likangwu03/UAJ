@@ -1,7 +1,7 @@
 #include "ThiefsManager.h"
 
 void ThiefsManager::createThief() {
-	string sprite = "Thief_" + to_string(sdl->rand().nextInt(1, 4));
+	string sprite = "Thief_" + to_string(sdl->rand().nextInt(1, 9));
 
 	int pos = randomPos();
 
