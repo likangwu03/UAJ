@@ -76,8 +76,8 @@ void Restaurant::initComponent() {
 	ui->initComponent();
 }
 void Restaurant::update() {
-	Scene::update();
 	pantry->_update();
+	Scene::update();
 	ui->update();
 	cm->update();
 	dm->checkDayFinished();
@@ -86,7 +86,7 @@ void Restaurant::update() {
 void Restaurant::_update() {
 	Scene::update();
 	ui->update();
-	cm->update();
+	//cm->update();
 	dm->checkDayFinished();
 }
 void Restaurant::handleEvents() {

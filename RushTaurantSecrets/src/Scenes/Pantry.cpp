@@ -47,14 +47,14 @@ void Pantry::render() {
 }
 
 void Pantry::update() {
+	rest->_update();
 	Scene::update();
 	collisionsManager->update();
-	rest->_update();
 }
 
 void Pantry::_update() {
 	Scene::update();
-	collisionsManager->update();
+	//collisionsManager->update();
 }
 
 
