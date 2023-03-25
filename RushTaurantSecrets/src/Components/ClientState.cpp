@@ -4,9 +4,10 @@
 #include "../Managers/Reputation.h"
 #include "../Utilities/checkML.h"
 
-ClientState::ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu) :
+ClientState::ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu) :
 	Component(parent, id), state(START), happiness(60), timer(0), availableDishes(menu), 
 	orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) {
+	availableDishes = menu;
 	render->clientStateIsReady(); //decirle que ya esta creado
 }
 
@@ -71,16 +72,16 @@ void ClientState::takeOrder() {
 	int rndDish;
 	// Si no se ha cambiado el plato, escoge uno aleatorio
 	if (!dishChanged) {
-		rndDish = rand() % availableDishes.size();
-		orderedDish = availableDishes[rndDish];
+		rndDish = rand() % availableDishes->size();
+		orderedDish = availableDishes->at(rndDish).id;
 	}
 	// Si se ha cambiado el plato, escoge uno 
 	// aleatorio hasta que sea diferente del anterior
 	else {
 		_ecs::_dish_id lastDish = orderedDish;
 		while (lastDish == orderedDish) {
-			rndDish = rand() % availableDishes.size();
-			orderedDish = availableDishes[rndDish];
+			rndDish = rand() % availableDishes->size();
+			orderedDish = availableDishes->at(rndDish).id;
 		}
 	}
 

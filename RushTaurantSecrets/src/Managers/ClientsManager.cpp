@@ -56,7 +56,7 @@ Client* ClientsManager::createClient(int posGroup) {
 	Vector origin = _ecs::OUT_ENTRY;
 	origin.setY(origin.getY() - posGroup);
 
-	return new Client(scene, sprite, RelativeToGlobal::pointRestaurant(origin), menu, entrance.size(), speed, posGroup);
+	return new Client(scene, sprite, RelativeToGlobal::pointRestaurant(origin), GameManager::instance()->getTodaysMenu(), entrance.size(), speed, posGroup);
 }
 
 void ClientsManager::checkCashRegister() {
@@ -194,7 +194,7 @@ void ClientsManager::initTables() {
 }
 
 ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-	: Manager(parent), menu(menu), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
+	: Manager(parent), menu(GameManager::instance()->getTodaysMenu()), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
 
 	UIRestaurant* uiRest = GameManager::get()->getRestaurant()->getUI();

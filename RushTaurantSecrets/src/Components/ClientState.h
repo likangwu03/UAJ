@@ -12,7 +12,7 @@ using namespace _ecs;
 class ClientState : public Component {
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
-	ClientState(GameObject* parent, const vector<_ecs::_dish_id> menu);
+	ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu);
 
 	enum States {
 		START,    // Caminar hasta mostrador
@@ -44,7 +44,7 @@ private:
 	const float DECREASEFREQ = 1000;
 	float happiness, timer;
 
-	vector<_ecs::_dish_id> availableDishes;
+	vector<_ecs::DishInfo>* availableDishes;
 	ClientStateRender* render;
 	_ecs::_dish_id orderedDish;
 	bool dishChanged;

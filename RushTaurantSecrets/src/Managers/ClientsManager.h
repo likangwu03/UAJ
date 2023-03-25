@@ -34,7 +34,7 @@ private:
 	// lista con los grupos de clientes
 	list<vector<Client*>> clientsGroups;
 	// menu del día
-	vector<_ecs::_dish_id> menu;
+	vector<_ecs::DishInfo>* menu;
 	Scene* scene;
 	SDLUtils* sdl;
 	float elapsedTime;
