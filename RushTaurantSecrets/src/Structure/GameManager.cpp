@@ -53,8 +53,6 @@ void GameManager::initialize() {
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
 
-	restaurant->linkPantry(pantry);
-	pantry->linkRestaurant(restaurant);
 
 	currentScene = nullptr;
 	previousScene = nullptr;

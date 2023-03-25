@@ -31,10 +31,10 @@ public:
 	void callAfterCreating();
 
 	UIRestaurant* getUI() { return ui; }
-	Pantry* getPantry() { return pantry; }
-	void linkPantry(Pantry* pantry);
+	
 	void render();
 	void update();
+	void _update();
 	void handleEvents();
 	void refresh();
 	virtual void initComponent();

@@ -62,3 +62,10 @@ void GameObject::initComponent() {
 	for(auto i : cmpOrder)
 		i->initComponent();
 }
+
+
+void GameObject::setActives(bool b) {
+	for (auto &comp : components) {
+		comp.second->setActive(b);
+	}
+}

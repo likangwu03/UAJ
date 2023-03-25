@@ -14,14 +14,16 @@ public:
 	Pantry();
 	~Pantry();
 	void reset();
-	void linkRestaurant(Restaurant* rest);
 	void render();
 	void update();
+	void _update();
 	void handleEvents();
 	Restaurant* getRestaurant() { return rest; }
 	void init();
 
 	float getResizeFactor() { return RESIZEFACTOR; }
 	void createMap();
+
+	void callAfterCreating();
 
 };

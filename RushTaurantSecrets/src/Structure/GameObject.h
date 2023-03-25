@@ -49,4 +49,6 @@ public:
 		if (it == components.end())return;
 		it->second->setActive(b);
 	}
+
+	void setActives(bool b);
 };

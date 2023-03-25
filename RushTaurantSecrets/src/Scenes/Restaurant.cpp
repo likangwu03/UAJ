@@ -18,17 +18,19 @@ Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) {
 }
 
 Restaurant::~Restaurant() {
-	pantry->linkRestaurant(nullptr);
 	delete ui;
 	delete cm;
 }
 
 void Restaurant::reset() {
+
 	player->getComponent<PlayerMovementController>()->initP();
 }
 
 void Restaurant::callAfterCreating() {
 	// clientsManager
+	pantry = GameManager::get()->getPantry();
+
 	GameObject* managerContainer = new GameObject(this);
 	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
 
@@ -63,11 +65,6 @@ void Restaurant::createMap() {
 	Scene::createMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 507.015 * RESIZEFACTOR));
 }
 
-
-void Restaurant::linkPantry(Pantry* pantry) {
-	if(this!=nullptr)this->pantry = pantry;
-}
-
 void Restaurant::render() {
 	renderLayer();
 	if (ui != nullptr)
@@ -80,7 +77,14 @@ void Restaurant::initComponent() {
 }
 void Restaurant::update() {
 	Scene::update();
-	pantry->Scene::update();
+	pantry->_update();
+	ui->update();
+	cm->update();
+	dm->checkDayFinished();
+}
+
+void Restaurant::_update() {
+	Scene::update();
 	ui->update();
 	cm->update();
 	dm->checkDayFinished();
