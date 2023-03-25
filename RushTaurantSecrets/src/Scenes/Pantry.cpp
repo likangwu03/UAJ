@@ -8,7 +8,6 @@
 
 Pantry::Pantry() :rest(nullptr) { init(); }
 Pantry::~Pantry() {
-	delete rest;
 	delete collisionsManager;
 }
 

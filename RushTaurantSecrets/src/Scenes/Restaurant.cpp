@@ -62,7 +62,7 @@ void Restaurant::createMap() {
 	Scene::createMap("assets/tilemaps/restaurant_top_walls.tmx", Top, Vector());
 	Scene::createMap("assets/tilemaps/restaurant_top_kitchenIsland.tmx", Middle, Vector(0, 370 * RESIZEFACTOR));
 	Scene::createMap("assets/tilemaps/restaurant_top_table.tmx", Middle, Vector(0, 800 * RESIZEFACTOR));
-	Scene::createMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 507.015 * RESIZEFACTOR));
+	Scene::createMap("assets/tilemaps/restaurant_top_counter.tmx", Middle, Vector(0, 520 * RESIZEFACTOR));
 }
 
 void Restaurant::render() {

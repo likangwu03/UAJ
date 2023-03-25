@@ -4,7 +4,7 @@
 
 CollisionsManager::CollisionsManager(Scene* scene) :scene_(scene) {
 	grp_Player = scene_->getGroup(_ecs::grp_PLAYER);
-	grup_Collisions= scene_->getGroup(_ecs::grp_COLLISIONS);
+	grup_Collisions = scene_->getGroup(_ecs::grp_COLLISIONS);
 	grp_Clients = scene_->getGroup(_ecs::grp_CLIENTS);
 	grp_Interactable = scene_->getGroup(_ecs::grp_INTERACTABLE);
 	grp_Desk = scene_->getGroup(_ecs::grp_DESK);
@@ -42,13 +42,15 @@ void CollisionsManager::collision() {
 				}
 			}
 		}
-		
+
 	}
 }
 void CollisionsManager::overlap() {
 	for (auto player : *grp_Player) {
+
+
 		CollisionComp* objCol = player->getComponent<CollisionComp>();
-		if (objCol != nullptr) {
+		if (objCol != nullptr&&objCol->isActive()) {
 
 			SDL_FRect playerRect = objCol->getRect();
 			for (auto client : *grp_Clients) {
@@ -61,7 +63,7 @@ void CollisionsManager::overlap() {
 					else {
 						clientTrigger->Overlap(nullptr);
 					}
-				}				
+				}
 			}
 			for (auto interactive : *grp_Interactable) {
 				TriggerComp* interactiveTrigger = interactive->getComponent<TriggerComp>();
@@ -87,7 +89,7 @@ void CollisionsManager::overlap() {
 					}
 				}
 			}
-			
+
 			for (auto thiefs : *grp_Thiefs) {
 				TriggerComp* thiefTrigger = thiefs->getComponent<TriggerComp>();
 				if (thiefTrigger != nullptr) {
@@ -101,6 +103,7 @@ void CollisionsManager::overlap() {
 				}
 			}
 		}
+
 
 	}
 
