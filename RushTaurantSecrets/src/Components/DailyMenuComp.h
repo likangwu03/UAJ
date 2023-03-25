@@ -17,8 +17,11 @@ private:
 	Scene* parentScene;
 	vector<_ecs::DishInfo>* menu;
 	void randomMenu();
-	uint8_t menuSize;
-	uint8_t spriteSize;
+	float menuSize;
+	float dishSpriteSize;
+	float ingredientSpriteSize;
+	float ingOffset;
+	float fontSize;
 	bool random;
 	struct rend
 	{
@@ -28,8 +31,9 @@ private:
 	public:
 		rend(Texture* t, float _x, float _y) : tex(t), x(_x), y(_y) { };
 	};
-	vector<rend> textures;
-	vector<rend> prices;
+	vector<rend> dishTextures;
+	vector<rend> ingTextures;
+	vector<rend> menuText;
 
 	bool murder;
 
@@ -38,7 +42,7 @@ private:
 	void init(GameObject* parent);
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
-	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, uint8_t mSize = 4);
+	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id);
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu);
 	virtual ~DailyMenuComp();
 
