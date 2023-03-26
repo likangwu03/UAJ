@@ -21,9 +21,8 @@ bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 				coords.first -= ING_OFFSET / 2;
 			}
 			//Nuevas coordenadas del nuevo ingrediente
-			int aaa = coord.size() - 1;
-			coord.push_back({ coord[aaa].first, ING_Y});
-			coord[coord.size() - 1].first += ING_OFFSET;
+			coord.push_back({ coord.back().first, ING_Y});
+			coord.back().first += ING_OFFSET;
 		}
 		return true;
 	}
@@ -32,7 +31,7 @@ bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 
 void Ingredients::removeLastIngredient() {
 	if (!ingredients.empty()) {
- 		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
+ 		kitchenIsland->returnIngredient(ingredients.back());
 		ingredients.pop_back();
 
 		for (auto& coords : coord)

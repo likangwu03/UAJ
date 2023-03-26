@@ -17,7 +17,6 @@ ButtonComp::ButtonComp(GameObject* parent, string hl, std::function<void()> call
 	dest.w = tf->getW();
 	dest.h = tf->getH();
 
-	ih().initialiseJoysticks();
 	if (ih().joysticksInitialised())
 		_joy = ih().getPlayerController(0);
 }

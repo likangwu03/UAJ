@@ -11,7 +11,7 @@ using namespace std;
 class GameObject;
 
 class DailyMenuScene : public Scene {
-	const int DISTANCE = 40;
+	const int DISTANCE = 20, POS_Y = 30;
 
 	SDLUtils* sdl;
 	uint8_t menuSize;
