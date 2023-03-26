@@ -19,9 +19,9 @@
 
 #include "../Utilities/checkML.h"
 
-GameManager::GameManager() : reputation(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
+GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), days(nullptr), killedNum(0) { };
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), killedNum(0) { };
 
 
 void GameManager::initialize() {
@@ -46,7 +46,7 @@ void GameManager::initialize() {
 		days = new DayManager();
 	} catch(std::exception e) { std::cout << e.what(); }
 
-	//beforeDayStartScene = new BeforeDayStartScene();
+	beforeDayStartScene = new BeforeDayStartScene();
 
 
 	pantry->callAfterCreating();
@@ -72,6 +72,7 @@ GameManager::~GameManager() {
 	delete pauseMenu;
 	delete optionsMenu;
 	delete dailyMenu;
+	delete beforeDayStartScene;
 
 	delete reputation;
 	delete money;

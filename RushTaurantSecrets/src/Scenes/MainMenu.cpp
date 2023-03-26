@@ -10,10 +10,12 @@
 #include "OptionsMenu.h"
 #include "../Components/Transform.h"
 #include "../Components/Image.h"
+#include "../Scenes/BeforeDayStartScene.h"
 
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
+	//GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 	GameManager::get()->changeScene(GameManager::get()->getDailyMenu());
 }
 
