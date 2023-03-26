@@ -12,6 +12,7 @@ image(parent->getComponent<Image>()), gameInfo(GameManager::get())
 		isClosedWhenKilled();
 	}
 	else image->setActive(false);
+	//isOpenWhenKilled();
 
 };
 

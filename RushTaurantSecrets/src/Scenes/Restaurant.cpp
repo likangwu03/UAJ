@@ -68,6 +68,7 @@ void Restaurant::createMap() {
 }
 
 void Restaurant::render() {
+	//Scene::render();
 	renderLayer();
 	if (ui != nullptr)
 	ui->render();	

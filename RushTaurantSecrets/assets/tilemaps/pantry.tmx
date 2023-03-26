@@ -230,8 +230,8 @@
   <object id="27" x="1309" y="508" width="30" height="251"/>
   <object id="28" x="1168.67" y="627.333" width="66" height="29.6667"/>
  </objectgroup>
- <objectgroup id="12" name="obj" visible="0">
-  <object id="30" name="pantryExit" x="956" y="793.333" width="56" height="68"/>
+ <objectgroup id="12" name="obj">
+  <object id="30" name="pantryExit" x="960" y="784.333" width="49.5" height="78.5"/>
   <object id="31" name="Freezer" x="720.008" y="213.033" width="120" height="127"/>
  </objectgroup>
 </map>

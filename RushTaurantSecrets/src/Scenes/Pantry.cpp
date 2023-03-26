@@ -23,8 +23,6 @@ void Pantry::init() {
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
 	ThiefsManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 4 * 1000, 2);
-
-	initRender();
 	Scene::initComponent();
 }
 
@@ -40,9 +38,11 @@ void Pantry::createMap() {
 void Pantry::callAfterCreating() {
 	rest = GameManager::get()->getRestaurant();
 	createMap();
+	initRender();
 }
 
 void Pantry::render() {
+	//Scene::render();
 	Scene::renderLayer();
 }
 

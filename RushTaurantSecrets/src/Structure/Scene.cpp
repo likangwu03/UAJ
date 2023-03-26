@@ -123,7 +123,10 @@ void Scene::initRender(){
 		}
 	}
 	
+
 	SortList(renderListMiddle);
+	SortList(renderListTop);
+	SortList(renderListDown);
 }
 
 void Scene::SortList(std::list<GameObject*>& v) {
