@@ -73,7 +73,7 @@ void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
 		parent->setActive<ShoppingMenuComp>(true);
 		ing = _id;
 		number = 1;
-		price = _ecs::MarketIngs[ing - HARINA].price;
+		price = _ecs::MarketIngs[ing - FLOUR].price;
 		totalPrice = number * price;
 		numberTex = new Texture(sdl->renderer(), to_string(number), *font, build_sdlcolor(0xf3e5c2ff));
 		priceTex = new Texture(sdl->renderer(), to_string(price), *font, build_sdlcolor(0x504631ff));

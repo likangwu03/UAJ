@@ -14,7 +14,7 @@ InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
 		dishesBool.push_back(false);
 	}
 	for (int i = 0; i < MAX_DISHES; i++) {
-		dishes.push_back(_ecs::ALBONDIGAS);
+		dishes.push_back(_ecs::MEATBALLS);
 	}
 
 	cellSelected = -1;

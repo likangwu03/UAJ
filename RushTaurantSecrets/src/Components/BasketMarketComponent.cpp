@@ -70,7 +70,7 @@ void BasketMarketComponent::renderBasket() {
 		if (selectedIngr->first == it->first) {
 			renderTexture(x * col, y * fil, ING_SIZE + 5, ING_SIZE + 5, "INGREDIENT_HIGHLIGHT");
 			menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
-			int cost = _ecs::MarketIngs[it->first - _ecs::HARINA].price;
+			int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
 		}
 
 		col++;
