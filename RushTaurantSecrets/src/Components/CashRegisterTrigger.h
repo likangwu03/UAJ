@@ -14,6 +14,7 @@ class PlayerMovementController;
 class Image;
 class CashRegisterTrigger :public TriggerComp
 {
+private:
 	ClientsManager* cM;
 	Money* money;
 	Image* highlight;
@@ -32,7 +33,5 @@ public:
 
 	virtual void isOverlapping();
 	virtual void onTriggerExit();
-private:
-
 };
 

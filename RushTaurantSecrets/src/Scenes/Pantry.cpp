@@ -58,7 +58,6 @@ void Pantry::_update() {
 }
 
 
-
 void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		GameManager::get()->changeScene(GameManager::get()->getRestaurant());

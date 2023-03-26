@@ -73,13 +73,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 	float frequency = 1000;
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
 	new Warning(thiefExclamation, frequency);
-
 	
-	//new Dialogue(this, Vector(100, 200), 700, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro"});
+	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("MAIN_CHARACTER_PORTRAIT"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
 	//new FreeText(this, Vector(300, 300), 20, 30, 500, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro" });
 
-
-	// Racha de cobros 
+	// Racha de cobros
 	GameObject* streak = new GameObject(this, _ecs::grp_HUD, _ecs::hdr_STREAK);
 	new Streak(streak, 10, Vector(820, 260), 430, 30, 2, font);
 

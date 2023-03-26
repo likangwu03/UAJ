@@ -110,7 +110,7 @@ void Text::newText(string newText) {
 	init(newText);
 }
 
-Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox) :
+Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos) :
 	Component(parent, id), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency), 
 	font(font), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing), boxText(nullptr) {
 
@@ -121,8 +121,8 @@ Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightL
 	this->texts.pop_front();
 
 	transform = parent->getComponent<Transform>();
-	this->pos.setX(transform->getPos().getX() + (getWidthTextBox() * 1.2) / 11);
-	this->pos.setY(transform->getPos().getY() + (getNumLines() * 90) / 4.5);
+	this->pos.setX(transform->getPos().getX() + (getWidthTextBox() * offsetPos.getX()));
+	this->pos.setY(transform->getPos().getY() + (getNumLines() * offsetPos.getY()));
 }
 
 Text::~Text() {

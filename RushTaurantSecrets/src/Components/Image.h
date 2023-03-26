@@ -5,62 +5,42 @@
 #include "../Utilities/Texture.h"
 #include "../Utilities/SDLUtils.h"
 #include "../Structure/GameObject.h";
+
 using namespace std;
+
 class Image : public Component {
 private:
-	// componente transform para consultar las características físicas del gameobject
-	Transform* transform = nullptr;
-	Texture* texture = nullptr;
+	Transform* transform;
+	Texture* texture;
 	SDLUtils* sdl;
-	Vector pos;
-	float w, h;
+	Vector offset;
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_IMAGE;
 
-	// REVISAR RELACIÓN CON TRANSFORM
-	Image(GameObject* parent, Texture* texture, Vector _pos = { 0,0 }, float _w = -1, float _h = -1) : Component(parent, id), texture(texture), sdl(SDLUtils::instance()) {
-		// importante que se añada el Transform antes de Image porque sino no se va a encontrar la ref
-		// se guarda la referencia al Transform de la entidad
+	Image(GameObject* parent, Texture* texture, Vector _offset = Vector::zero) 
+		: Component(parent, id), texture(texture), sdl(SDLUtils::instance()), offset(_offset) {
 		transform = parent->getComponent<Transform>();
-		// se produce un error si no se encuentra
+
 		assert(texture != nullptr);
-
-		pos = _pos;
-
-		if (_w == -1 || _h == -1) {
-			h = transform->getH();
-			w = transform->getW();
-		}
-		else {
-			h = _h; w = _w;
-		}
 	}
-	Image(GameObject* parent, string s, Vector _pos = { 0,0 }, float _w = -1, float _h = -1) : Component(parent, id), sdl(SDLUtils::instance()) {
+
+	Image(GameObject* parent, string s, Vector _offset = Vector::zero) 
+		: Component(parent, id), sdl(SDLUtils::instance()), offset(_offset) {
 		transform = parent->getComponent<Transform>();
 		texture = &((*sdl).images().at(s));
 
-		pos = _pos;
-
-		if (_w == -1 || _h == -1) {
-			h = transform->getH();
-			w = transform->getW();
-		}
-		else {
-			h = _h; w = _w;
-		}
 		assert(texture != nullptr);
 	}
 
 	void setTexture(Texture* t) { texture = t; }
 	void setTexture(string s) { texture = &((*sdl).images().at(s)); }
-	void setPos(Vector _pos) { pos = _pos;}
-	void setW(float _w) { w = _w; }
-	void setH(float _h) { h = _h; }
+	void setOffset(Vector _offset) { offset = _offset;}
 
 	virtual void render() {
 		SDL_Rect dest;
-		dest.x = transform->getPos().getX()+pos.getX();
-		dest.y = transform->getPos().getY()+pos.getY();
+		dest.x = transform->getPos().getX() + offset.getX();
+		dest.y = transform->getPos().getY() + offset.getY();
 		dest.w = transform->getW();
 		dest.h = transform->getH();
 		// renderiza la textura

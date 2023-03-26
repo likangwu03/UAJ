@@ -1,6 +1,7 @@
 #pragma once
 #include "../Structure/TriggerComp.h"
 #include "../Structure/GameObject.h"
+#include "ThiefState.h"
 #include "ThiefMovement.h"
 #include "MurderRender.h"
 #include "ShooRender.h"
@@ -8,13 +9,16 @@
 
 class ThiefTrigger : public TriggerComp
 {
-	ThiefMovement* tMovement;
+	ThiefState* thiefState;
+	ThiefMovement* thiefMovement;
 	MurderRender* mRender;
 	ShooRender* sRender;
+
+	void hideButtons();
+
 public:
 	ThiefTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 
-	void killPressed();
 
 	virtual void isOverlapping();
 	virtual void onTriggerEnter();

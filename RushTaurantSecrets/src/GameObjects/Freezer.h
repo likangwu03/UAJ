@@ -18,4 +18,3 @@ public:
 		new FreezerComp(this);
 	};
 };
-

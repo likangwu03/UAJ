@@ -50,7 +50,7 @@ void ClientState::update() {
 #ifdef _DEBUG
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(TAKEMYORDER);	// TAKEYMYORDER
+			setState(EATING);	// TAKEYMYORDER
 			render->renderTakingNoteState();
 		}
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja

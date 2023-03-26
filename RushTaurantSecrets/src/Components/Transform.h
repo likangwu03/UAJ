@@ -36,8 +36,7 @@ public:
 	// setters
 	inline void setVel(Vector const& vel) { this->vel = vel; }
 	inline void setRot(float rot) { r = rot; }
-	inline void setPos(Vector const& pos) { 
-		this->pos = pos; }
+	inline void setPos(Vector const& pos) { this->pos = pos; }
 	inline void setMovState(movementState ms) { this->movState = ms; }
 	inline void setW(float width) { w = width; }
 	inline void setH(float height) { h = height; }

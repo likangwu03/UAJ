@@ -100,6 +100,7 @@ private:
 	}
 
 	void updateData() {
+		// PARA CREAR EL EFECTO DE LA SOMBRA LO QUE SE MUEVE ES EL FG
 		updateDataAux(Vector(-3, -3), letterX);
 		// ajusto a ojo, no es del todo exacto
 		// no se tiene en cuenta comó van creciendo los números
@@ -110,8 +111,8 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STREAK;
 
-	Streak(GameObject* parent, float moneyStreak, Vector pos, float timer, float increase, float size, Font* font, int streak = 0) :
-		Component(parent, id), moneyStreak(moneyStreak), actNumber(0), sdl(SDLUtils::instance()), elapsedTime(0), timer(timer), increase(increase), size(size), streak(streak) {
+	Streak(GameObject* parent, float moneyStreak, Vector pos, float timer, float increase, float size, Font* font) :
+		Component(parent, id), moneyStreak(moneyStreak), actNumber(0), sdl(SDLUtils::instance()), elapsedTime(0), timer(timer), increase(increase), size(size), streak(0) {
 
 		number = { Vector::zero, Vector::zero, 0, 0, 0 };
 		letterX = { Vector::zero, Vector::zero, 0, 0, 0 };

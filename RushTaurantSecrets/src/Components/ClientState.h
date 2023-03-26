@@ -11,7 +11,7 @@ using namespace _ecs;
 
 class ClientState : public Component {
 public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENTSTATE;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_STATE;
 	ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu);
 
 	enum States {

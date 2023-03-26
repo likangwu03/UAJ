@@ -528,6 +528,12 @@
       "rows": 1
     },
     {
+      "id": "DOOR_HIGHLIGHT",
+      "file": "assets/Sprites/UI/door_highlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "COOK_HIGHLIGHT",
       "file": "assets/Sprites/UI/kitchen_highlight.png",
       "cols": 1,
@@ -643,7 +649,15 @@
     },
     {
       "id": "DIALOG_BOX",
-      "file": "assets/Sprites/UI/dialog box big.png"
+      "file": "assets/Sprites/UI/dialogBox.png"
+    },
+    {
+      "id": "DIALOG_BOX_PORTRAIT",
+      "file": "assets/Sprites/UI/dialogBox_PortraitFrame.png"
+    },
+    {
+      "id": "MAIN_CHARACTER_PORTRAIT",
+      "file": "assets/Sprites/UI/mainCharacter_dialogPortrait.png"
     },
     {
       "id": "DAILY_MENU",

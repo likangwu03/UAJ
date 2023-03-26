@@ -77,7 +77,7 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;
 
-	Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox);
+	Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos = Vector::zero);
 
 	virtual ~Text();
 

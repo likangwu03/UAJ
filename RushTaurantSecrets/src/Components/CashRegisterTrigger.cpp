@@ -55,9 +55,6 @@ void CashRegisterTrigger::isOverlapping() {
 		cM->collectAndLeave();
 
 	}
-
-
-
 }
 
 void CashRegisterTrigger::onTriggerExit() {

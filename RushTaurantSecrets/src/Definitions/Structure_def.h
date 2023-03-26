@@ -5,12 +5,11 @@ namespace _ecs {
 	using id_type = uint8_t;
 
 	// Components
-	// EL ORDEN DE EJECUCIÓN DE LOS COMPONENTES EST?DETERMINADO POR COMO SE AÑADEN
+	// EL ORDEN DE EJECUCIÓN DE LOS COMPONENTES ESTA DETERMINADO POR COMO SE AÑADEN
 	enum _cmp_id : id_type {
 		cmp_MAPCREATOR,
 		cmp_MAPRENDER,
-		cmp_CLIENTS_MANAGER,
-		cmp_THIEFS_MANAGER,
+		cmp_MANAGER,
 		cmp_MONEY,
 		cmp_TRANSFORM,
 		cmp_STRAIGHT_MOVEMENT,
@@ -21,7 +20,7 @@ namespace _ecs {
 		cmp_BIN,
 		cmp_THIEF_TRIGGER,
 		cmp_COOKMACHINE,
-		cmp_CLIENTSTATE,
+		cmp_STATE,
 		cmp_KITCHENISLAND,
 		cmp_INGREDIENTS,
 		cmp_DAILYMENU,

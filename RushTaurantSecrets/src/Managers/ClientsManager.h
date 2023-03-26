@@ -109,7 +109,7 @@ private:
 
 public:
 
-	static constexpr _ecs::_cmp_id id = _ecs::cmp_CLIENTS_MANAGER;
+	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;
 
 	// devuelve al primero grupo de clientes que hay en la entrada esperando a ser atendido
 	inline vector<Client*> getFirstEntrance() {

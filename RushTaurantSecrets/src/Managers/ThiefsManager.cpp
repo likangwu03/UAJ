@@ -8,13 +8,11 @@ void ThiefsManager::createThief() {
 
 	int pos = randomPos();
 
-	Objective objective = randomObjective();
-
 	// posición de cada ladrón respecto de la puerta
 	Vector aux = _ecs::DOOR;
 	aux.setY(_ecs::DOOR.getY() - pos);
 
-	new Thief(scene, RelativeToGlobal::pointPantry(aux), sprite, generalSpeed, escapeSpeed, objective, pos);
+	new Thief(scene, RelativeToGlobal::pointPantry(aux), sprite, generalSpeed, escapeSpeed, canGetFreezer, pos);
 }
 
 void ThiefsManager::addFrequently() {
@@ -43,12 +41,6 @@ int ThiefsManager::randomPos() {
 	selectedPosition[pos] = true;
 
 	return pos;
-}
-
-Objective ThiefsManager::randomObjective() {
-	// elegir un camino u otro dependiendo de si puede ir al congelador o no
-	int max = canGetFreezer ? 2 : 1;
-	return (Objective)sdl->rand().nextInt(0, max);
 }
 
 ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int numThiefs) :

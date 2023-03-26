@@ -88,6 +88,7 @@ void Scene::renderLayer() {
 		obj->render();
 	}
 }
+
 void Scene::render() {
 	for (auto& objGroup : objGroups) {
 		for (auto obj : objGroup) obj->render();

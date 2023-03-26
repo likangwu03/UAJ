@@ -36,12 +36,10 @@ private:
 
 	int randomPos();
 
-	Objective randomObjective();
-
 	ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int numThiefs);
 
 public:
-	static constexpr _ecs::_cmp_id id = _ecs::cmp_THIEFS_MANAGER;
+	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;
 
 	bool isThereThieves() const {
 		return !thiefs->empty();

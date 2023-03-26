@@ -48,7 +48,6 @@ void GameManager::initialize() {
 
 	beforeDayStartScene = new BeforeDayStartScene();
 
-
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();

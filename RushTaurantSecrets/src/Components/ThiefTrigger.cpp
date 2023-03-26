@@ -2,44 +2,47 @@
 #include "../Utilities/checkML.h"
 
 ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
-	TriggerComp(parent, pos_, width_, height_)
-{
-	tMovement = parent->getComponent<ThiefMovement>();
+	TriggerComp(parent, pos_, width_, height_) {
+	thiefMovement = parent->getComponent<ThiefMovement>();
+	thiefState = parent->getComponent<ThiefState>();
 	mRender = parent->getComponent<MurderRender>();
 	sRender = parent->getComponent<ShooRender>();
 }
 
-void ThiefTrigger::killPressed()
+void ThiefTrigger::hideButtons()
 {
-	tMovement->die();
 	mRender->setActive(false);
 	sRender->setActive(false);
 }
 
-void ThiefTrigger::isOverlapping()
-{
-	if (ih->joysticksInitialised()) {
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
-			tMovement->escape();
+void ThiefTrigger::isOverlapping() {
+	if (thiefState->getState() == ThiefState::OBJECTIVE_SECRET && ThiefState::OBJECTIVE_FREEZER) {
+		if (ih->joysticksInitialised()) {
+			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
+				thiefMovement->escape();
+				hideButtons();
+			}
+			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
+				thiefMovement->die();
+				hideButtons();
+			}
 		}
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-			killPressed();
+		else {
+			if (ih->isKeyDown(SDLK_q)) {
+				thiefMovement->escape();
+				hideButtons();
+			}
+			else if (ih->isKeyDown(SDLK_e)) {
+				thiefMovement->die();
+				hideButtons();
+			}
 		}
 	}
-	else {
-		if (ih->isKeyDown(SDLK_q)) {
-			tMovement->escape();
-		}
-		else if (ih->isKeyDown(SDLK_e)) {
-			killPressed();
-		}
-	}
-
 }
 
 void ThiefTrigger::onTriggerEnter()
 {
-	if (tMovement->getState() != ThiefMovement::DEAD) {
+	if (thiefState->getState() == ThiefState::OBJECTIVE_SECRET && ThiefState::OBJECTIVE_FREEZER) {
 		mRender->setActive(true);
 		sRender->setActive(true);
 	}
@@ -47,7 +50,6 @@ void ThiefTrigger::onTriggerEnter()
 
 void ThiefTrigger::onTriggerExit()
 {
-	mRender->setActive(false);
-	sRender->setActive(false);
+	hideButtons();
 }
 
