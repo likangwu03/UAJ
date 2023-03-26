@@ -17,31 +17,34 @@ void DailyMenuComp::drawDishes() {
 		//textura plato
 		Texture* plateTex = &((*SDLUtils::instance()).images().at(std::to_string(menu->at(i).id)));
 		float dishx = t.getX() + (DISH_SIZE) + STARTING_X;
-		float dishy = (t.getY() * 4) + (i * (INGREDIENT_SIZE * 2) + STARTING_Y);
+		float dishy = (t.getY() * 4) + (i * (INGREDIENT_SIZE * 2.3) + STARTING_Y);
 		dishTextures.push_back({ plateTex, dishx, dishy });
 		//textura "="
 		std::string equalString = ("=");
 		float equalX = t.getX() + (DISH_SIZE * 1.75f) + FONT_SIZE + STARTING_X;
 		Texture* equalTex = new Texture(sdlutils().renderer(), equalString, *font, build_sdlcolor(0x725644FF));
-		menuText.push_back({ equalTex, equalX, dishy + (DISH_SIZE / 2) - STARTING_Y });
+		menuText.push_back({ equalTex, equalX, dishy + (DISH_SIZE / 2) - 5});
 
 		int temp = 0;
 		int count = 0;
 		//se dibujan los ingredientes
 		for (auto ing : menu->at(i).ingredients) {
-			float ingx = t.getX() + FONT_SIZE;
-			float ingy = (t.getY() * 4) + (i * (INGREDIENT_SIZE * 2));
+			float ingx = equalX + 2 * ING_OFFSET_X;
+			float ingy = dishy;
+			float plusx = ingx + INGREDIENT_SIZE + ING_OFFSET_X;
+			float ingDistance = plusx - ingx;
 			if (count > 2) {
 				temp = 0;
-				ingx += (INGREDIENT_SIZE * 0.75f);
+				ingx = equalX + ingDistance;
+				plusx = ingx + INGREDIENT_SIZE + ING_OFFSET_X;
 				ingy += INGREDIENT_SIZE;
 			}
 			Texture* ingTex = &((*SDLUtils::instance()).images().at(std::to_string(ing)));
-			ingTextures.push_back({ ingTex,  ingx + (DISH_SIZE * 2.1f) + (72 * temp) + STARTING_X, ingy + ING_OFFSET_Y - STARTING_Y });
+			ingTextures.push_back({ ingTex, ingx + (ingDistance + INGREDIENT_SIZE / 2) * temp, ingy + INGREDIENT_SIZE / 5});
 
 			std::string plusString = ("+");
 			Texture* plusTex = new Texture(sdlutils().renderer(), plusString, *font, build_sdlcolor(0x725644FF));
-			menuText.push_back({ plusTex, equalX + INGREDIENT_SIZE * 1.5f * (count + 1) - STARTING_X/2, ingy + (DISH_SIZE / 2)});
+			menuText.push_back({ plusTex, plusx + (ingDistance + INGREDIENT_SIZE / 2) * temp, ingy + (DISH_SIZE / 2) - 5 });
 
 			++temp;
 			++count;
@@ -52,8 +55,8 @@ void DailyMenuComp::drawDishes() {
 
 		//se dibuja el precio
 		std::string priceString = (std::to_string(menu->at(i).price) + "$");
-		float textX = t.getX() + (DISH_SIZE * 2) + (50 * 5) + STARTING_X;
-		float textY = (t.getY() * 4) + (i * (INGREDIENT_SIZE * 2)) + 6 + STARTING_Y * 1.7;
+		float textX = t.getX() + (DISH_SIZE * 6.7) + STARTING_X;
+		float textY = dishy + FONT_SIZE;
 
 		Texture* tempOutline = new Texture(sdlutils().renderer(), priceString, *fontOutline, build_sdlcolor(0xa2770dFF));
 		tempOutline->setWidth((tempOutline->width() + CENTER_OUTLINE) * TEXT_RESIZE);

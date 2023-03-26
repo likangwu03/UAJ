@@ -20,7 +20,8 @@ DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuS
 
 
 void DailyMenuScene::init() {
-	dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8 - DISTANCE / 2, sdl->height() / 15), 479.0f, 640.0f,
+
+	dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8 - DISTANCE / 2, POS_Y), 479.0f, 640.0f,
 		[=]() { 
 			GameManager::get()->setTodaysMenu(dailyMenu1->getComponent<DailyMenuComp>()->getMenu());
 			GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
@@ -28,7 +29,7 @@ void DailyMenuScene::init() {
 			GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 		});
 
-	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2 + DISTANCE / 2, sdl->height() / 15), 479.0f, 640.0f,
+	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2 + DISTANCE / 2, POS_Y), 479.0f, 640.0f,
 		[=]() { 
 			GameManager::get()->setTodaysMenu(dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
 			GameManager::get()->getRestaurant()->getUI()->setDailyMenu();

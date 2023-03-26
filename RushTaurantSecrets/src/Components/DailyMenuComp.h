@@ -11,9 +11,9 @@
 
 class DailyMenuComp : public Component {
 private:
-	const float STARTING_X = -10, STARTING_Y = 10, ING_OFFSET_Y = 25,
+	const float STARTING_X = -30, STARTING_Y = 70, ING_OFFSET_X = 10,
 				MENU_SIZE = 4, DISH_SIZE = 64, INGREDIENT_SIZE = 48,
-				FONT_SIZE = 24, CENTER_OUTLINE = 4, TEXT_RESIZE = 1.2;
+				FONT_SIZE = 20, CENTER_OUTLINE = 4, TEXT_RESIZE = 1.2;
 	const string FONT_PATH = "assets/Fonts/light_pixel-7.ttf";
 
 	Transform* tf;
