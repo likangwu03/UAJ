@@ -1,5 +1,7 @@
 #include "HeartRender.h"
 
+#include "../Utilities/checkML.h"
+
 int HeartRender::approximateHearts(float happiness) const {
 	float numFloat = happiness / (2 * 10);
 	if (happiness <= 0) {

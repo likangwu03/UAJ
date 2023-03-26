@@ -9,22 +9,21 @@
 #include "Image.h"
 #include <set>
 
-class DailyMenuComp : public Component
-{
+class DailyMenuComp : public Component {
 private:
+	const float STARTING_X = -10, STARTING_Y = 10, ING_OFFSET_Y = 25,
+				MENU_SIZE = 4, DISH_SIZE = 64, INGREDIENT_SIZE = 48,
+				FONT_SIZE = 24, CENTER_OUTLINE = 4, TEXT_RESIZE = 1.2;
+	const string FONT_PATH = "assets/Fonts/light_pixel-7.ttf";
+
 	Transform* tf;
 	void drawDishes();
 	Scene* parentScene;
 	vector<_ecs::DishInfo>* menu;
 	void randomMenu();
-	float menuSize;
-	float dishSpriteSize;
-	float ingredientSpriteSize;
-	float ingOffset;
-	float fontSize;
+	
 	bool random;
-	struct rend
-	{
+	struct rend {
 		Texture* tex;
 		float x;
 		float y;
@@ -32,12 +31,15 @@ private:
 		rend(Texture* t, float _x, float _y) : tex(t), x(_x), y(_y) { };
 	};
 	vector<rend> dishTextures;
+	vector<rend> textTextures;
+	vector<rend> textOutlines;
 	vector<rend> ingTextures;
 	vector<rend> menuText;
 
 	bool murder;
 
 	Font* font;
+	Font* fontOutline;
 
 	void init(GameObject* parent);
 public:

@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include "Component.h"
 
+#include "../Utilities/checkML.h"
+
 GameObject::GameObject(Scene* scene, _ecs::_grp_id grp, _ecs::_hdr_id handler) : scene(scene), alive(true) {
 	scene->addObject(this, grp, handler);
 }

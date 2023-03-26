@@ -1,5 +1,8 @@
 #include "ThiefsManager.h"
 
+#include "../Utilities/checkML.h"
+
+
 void ThiefsManager::createThief() {
 	string sprite = "Thief_" + to_string(sdl->rand().nextInt(1, 9));
 

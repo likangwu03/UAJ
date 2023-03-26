@@ -56,7 +56,15 @@ void BeforeDayStartScene::toDailyMenu() {
 }
 
 BeforeDayStartScene::~BeforeDayStartScene() {
-	
+	delete target;
+	delete buttonTxt;
+	delete moneyTarget;
+	delete dayTxt;
+	delete text;
+	delete pressButtonText;
+	delete dayText;
+	delete background;
+
 }
 
 void BeforeDayStartScene::handleEvents() {

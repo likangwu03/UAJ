@@ -20,10 +20,12 @@ class DailyMenuScene : public Scene {
 	static void select2();
 	DailyMenu* dailyMenu1;
 	DailyMenu* dailyMenu2;
+	bool changeMenu;
 
 public:
 	DailyMenuScene(uint8_t msize = 4);
-	void handleEvents();
 	void init();
+	void update();
+	void reset();
 };
 
