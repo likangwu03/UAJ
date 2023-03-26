@@ -10,8 +10,20 @@
 void DayManager::readLine(std::string& line) {
 	do {
 		std::getline(file, line);
-	} while(!file.eof() && (line.empty() || line[0] != '#')); // Si la línea que se lee está vacía o es un comentario (empieza con '#'), se lee la siguiente.
+		while(!line.empty() && line[0] == '\t') line = line.substr(1);
+	} while(!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee está vacía o es un comentario (empieza con '#'), se lee la siguiente.
 	if(file.eof()) { line = ""; }
+}
+
+int DayManager::to_int(std::string str) {
+	int i = 0;
+
+	for(auto& ch : str) {
+		if(ch < '0' || ch > '9') return -1;
+		i = i * 10 + ch - '0';
+	}
+
+	return i;
 }
 
 DayManager::DayManager() : day(0) {
@@ -39,11 +51,14 @@ DayManager::~DayManager() {
 
 void DayManager::checkDayFinished() {
 	if(clock->dayHasFinished() && ClientsManager::get()->noClients()) {
-		if (GameManager::get()->getReputation()->getReputation() < 0)
+		/*if(GameManager::get()->getReputation()->getReputation() < 0)
 			GameManager::get()->setGameOver(_ecs::BadRep);
 		else if (GameManager::get()->getMoney()->getMoney() < 0)
 			GameManager::get()->setGameOver(_ecs::Broke);
-		else GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
+		else*/ {
+			nextDay();
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
+		}
 	}
 }
 
@@ -69,6 +84,10 @@ void DayManager::nextDay() {
 		readLine(line);
 
 		// Recoger los parámetros de este día
+		if(line.substr(0, 9) == "objective") {
+			std::string aux = line.substr(10);
+			dailyObjective = to_int(aux);
+		}
 	}
 }
 

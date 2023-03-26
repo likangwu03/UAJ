@@ -11,6 +11,7 @@ private:
 	int dailyObjective;
 
 	void readLine(std::string& line);
+	static int to_int(std::string str);
 public:
 	DayManager();
 	~DayManager();

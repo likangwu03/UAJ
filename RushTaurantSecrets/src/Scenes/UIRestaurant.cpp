@@ -13,6 +13,7 @@
 #include "../GameObjects/ButtonGO.h"
 #include "../GameObjects/FreeText.h"
 #include "../Components/Streak.h"
+#include "../Managers/DayManager.h"
 #include "../Utilities/checkML.h"
 
 UIRestaurant::UIRestaurant() : Scene() {
@@ -62,20 +63,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyOutlineRect.y -= CENTEROUTLINE/2; moneyOutlineRect.h += CENTEROUTLINE;
 
 
-	// Objetivo diario
-	intObjective = 30; moneyDiff = 0;
-	// Icono
-	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS);
-	// Texto
-	std::string strObjective = "0/" + std::to_string(intObjective);
-	objectiveTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x3a3a50FF));
-	objectiveOutline = new Texture(sdl->renderer(), strObjective, *outline, build_sdlcolor(0xFFFFFFFF));
-	objectiveRect = { 80, (int)(ICONY * 3 + ICONSIZE * 2), objectiveTexture->width(), objectiveTexture->height() };
-	objectiveOutlineRect = objectiveRect;
-	objectiveOutlineRect.x -= CENTEROUTLINE/2; objectiveOutlineRect.w += CENTEROUTLINE;
-	objectiveOutlineRect.y -= CENTEROUTLINE/2; objectiveOutlineRect.h += CENTEROUTLINE;
-
-
 	// inventario (fondo)
 	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
 
@@ -107,6 +94,21 @@ UIRestaurant::~UIRestaurant() {
 	delete moneyOutline;
 	delete objectiveTexture;
 	delete objectiveOutline;
+}
+
+void UIRestaurant::callAfterCreating() {
+	// Objetivo diario
+	intObjective = GameManager::get()->getDayManager()->getDailyObjective(); moneyDiff = 0;
+	// Icono
+	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS);
+	// Texto
+	std::string strObjective = "0/" + std::to_string(intObjective);
+	objectiveTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x3a3a50FF));
+	objectiveOutline = new Texture(sdl->renderer(), strObjective, *outline, build_sdlcolor(0xFFFFFFFF));
+	objectiveRect = { 80, (int)(ICONY * 3 + ICONSIZE * 2), objectiveTexture->width(), objectiveTexture->height() };
+	objectiveOutlineRect = objectiveRect;
+	objectiveOutlineRect.x -= CENTEROUTLINE / 2; objectiveOutlineRect.w += CENTEROUTLINE;
+	objectiveOutlineRect.y -= CENTEROUTLINE / 2; objectiveOutlineRect.h += CENTEROUTLINE;
 }
 
 GameObject* UIRestaurant::dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
@@ -168,7 +170,7 @@ void UIRestaurant::showMoneyText() {
 }
 
 void UIRestaurant::update() {
-	Scene::update(); // cleon: falta el delta de tiempo (frametime)
+	Scene::update();
 	showMoneyText();
 	//checkTime();
 	reputationManager();

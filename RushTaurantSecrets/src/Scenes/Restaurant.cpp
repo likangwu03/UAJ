@@ -40,6 +40,8 @@ void Restaurant::callAfterCreating() {
 	initRender();
 
 	initComponent();
+
+	ui->callAfterCreating();
 }
 
 

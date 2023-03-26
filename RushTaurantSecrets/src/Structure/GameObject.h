@@ -33,6 +33,7 @@ public:
 	void render();
 	void handleEvents();
 	void initComponent();
+	void nextDay();
 
 	template<typename Comp>
 	inline Comp* getComponent() {

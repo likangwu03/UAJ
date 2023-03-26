@@ -47,7 +47,7 @@ void DailyMenuComp::drawDishes() {
 			++count;
 		}
 		//se quita el ultimo +
-		delete menuText[menuText.size() - 1].tex;
+		delete menuText.back().tex;
 		menuText.pop_back();
 
 		//se dibuja el precio

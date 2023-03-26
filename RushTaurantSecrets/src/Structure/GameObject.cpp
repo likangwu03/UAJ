@@ -65,6 +65,10 @@ void GameObject::initComponent() {
 		i->initComponent();
 }
 
+void GameObject::nextDay() {
+	for(auto i : cmpOrder)
+		i->nextDay();
+}
 
 void GameObject::setActives(bool b) {
 	for (auto &comp : components) {

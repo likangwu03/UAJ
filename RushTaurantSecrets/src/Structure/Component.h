@@ -22,5 +22,5 @@ public:
 	virtual void handleEvents() { }
 	virtual void setActive(bool b); //activar/desactivar componente
 	virtual void initComponent(){};
-
+	virtual void nextDay() { }
 };

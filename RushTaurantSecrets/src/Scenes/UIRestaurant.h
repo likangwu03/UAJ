@@ -70,6 +70,7 @@ private:
 public:
 	UIRestaurant();
 	~UIRestaurant();
+	void callAfterCreating();
 
 	Inventory* getInventory() const { return inventory; };
 	void showMoneyText();
