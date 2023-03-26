@@ -66,6 +66,7 @@ int DayManager::getDay() { return day; }
 
 void DayManager::nextDay() {
 	day++;
+	GameManager::get()->getRestaurant()->nextDay();
 
 	if(day > maxDays) {
 		// Activar final, ya que no hay más días
@@ -85,8 +86,7 @@ void DayManager::nextDay() {
 
 		// Recoger los parámetros de este día
 		if(line.substr(0, 9) == "objective") {
-			std::string aux = line.substr(10);
-			dailyObjective = to_int(aux);
+			dailyObjective = to_int(line.substr(10));
 		}
 	}
 }
