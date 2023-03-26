@@ -68,7 +68,7 @@ BeforeDayStartScene::~BeforeDayStartScene() {
 }
 
 void BeforeDayStartScene::handleEvents() {
-	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->isKeyDown(SDL_KEYDOWN || SDL_MOUSEBUTTONDOWN)) {
+	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->isKeyDown(SDL_KEYDOWN) || ih->isKeyDown(SDL_MOUSEBUTTONDOWN)) {
 		toDailyMenu();
 	}
 }

@@ -207,9 +207,10 @@ public:
 		{
 			SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 		}
-		if (SDL_NumJoysticks() > 0)
+		int joysticks = SDL_NumJoysticks();
+		if (joysticks > 0)
 		{
-			for (int i = 0; i < SDL_NumJoysticks(); i++)
+			for (int i = 0; i < joysticks; i++)
 			{
 				SDL_Joystick* joy = SDL_JoystickOpen(i);
 				joys.push_back(joy);
@@ -235,9 +236,10 @@ public:
 				}
 			}
 			SDL_JoystickEventState(SDL_ENABLE);
-			if(joyInit)
-				m_bJoysticksInitialised = true;
-			std::cout << "Initialised " << m_joysticks.size() << "joystick(s)" << std::endl;
+
+			m_bJoysticksInitialised = joyInit;
+			
+			std::cout << "Initialised " << m_joysticks.size() << " joystick(s)\n";
 		}
 		else
 		{

@@ -17,7 +17,7 @@
 #include "../Scenes/PauseMenu.h"
 #include "../Scenes/OptionsMenu.h"
 
-#include "../Utilities/checkML.h"
+#include "../Utilities/checkML.h" 
 
 GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
