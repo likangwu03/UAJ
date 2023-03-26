@@ -9,6 +9,8 @@
 void ClientsManager::addFrequently() {
 	// se crea un grupo si: el día no ha terminado y el restaurante y la cola de entrada no están llenas
 	if (!clock->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+		elapsedTime += deltaTime;
+
 		if (elapsedTime > timer) {
 			elapsedTime = 0;
 			// se crea un nuevo grupo de clientes
@@ -223,7 +225,7 @@ void ClientsManager::assignFirstGroup(int table) {
 			}
 			else {
 				int table = -1;
-				if (checkFirstTableEmpty(table) && table < 3) {
+				if (checkFirstTableEmpty(table)) {
 					assignTable(table, firstGroup);
 				}
 			}
@@ -283,8 +285,6 @@ void ClientsManager::initComponent() {
 }
 
 void ClientsManager::update() {
-	elapsedTime += deltaTime;
-
 	// se añade con frecuencia un cliente
 	addFrequently();
 

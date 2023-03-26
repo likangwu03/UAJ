@@ -32,7 +32,7 @@ void Restaurant::callAfterCreating() {
 	pantry = GameManager::get()->getPantry();
 
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 2);
+	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 5);
 
 	dm = GameManager::get()->getDayManager();
 

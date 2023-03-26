@@ -16,9 +16,8 @@ void ThiefsManager::createThief() {
 }
 
 void ThiefsManager::addFrequently() {
-	elapsedTime += deltaTime;
-
 	if (thiefs->size() <= 0) {
+		elapsedTime += deltaTime;
 		if (elapsedTime > timer) {
 			elapsedTime = 0;
 
