@@ -189,7 +189,13 @@ void MapCreator::createObject() {
 				}
 				else if (name == "Cartel") {
 					Vector aux = { p[3].getFloatValue() * RESIZEFACTOR,p[4].getFloatValue() * RESIZEFACTOR };
-					new Cartel(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
+					new Cartel2(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
+				}else if (name == "Cartel1") {
+					Vector aux = { p[3].getFloatValue() * RESIZEFACTOR,p[4].getFloatValue() * RESIZEFACTOR };
+					new Cartel1(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
+				}else if (name == "Cartel3") {
+					Vector aux = { p[3].getFloatValue() * RESIZEFACTOR,p[4].getFloatValue() * RESIZEFACTOR };
+					new Cartel3(scene, (_ecs::_ingredients_id)p[1].getIntValue(), pos, width_, height_,aux , p[2].getFloatValue(), p[0].getFloatValue());
 				}
 				else if (name == "KitchenIsland") {
 					KitchenIsland* kitchenIsland = new KitchenIsland(scene, pos, width_, height_);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="117">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="25" nextobjectid="117">
  <tileset firstgid="1" source="atlas.tsx"/>
  <tileset firstgid="1537" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="9821" source="16_Grocery_store_48x48.tsx"/>
@@ -334,7 +334,7 @@
 </data>
  </layer>
  <objectgroup id="16" name="obj">
-  <object id="1" name="Cartel" x="385" y="431" width="47" height="62.5">
+  <object id="1" name="Cartel1" x="385" y="431" width="47" height="62.5">
    <properties>
     <property name="h" type="float" value="100"/>
     <property name="id" type="int" value="51"/>
@@ -460,7 +460,7 @@
     <property name="y" type="float" value="688"/>
    </properties>
   </object>
-  <object id="16" name="Cartel" x="384.5" y="625.5" width="47" height="63">
+  <object id="16" name="Cartel1" x="384.5" y="625.5" width="47" height="63">
    <properties>
     <property name="h" type="float" value="115"/>
     <property name="id" type="int" value="50"/>
@@ -469,7 +469,7 @@
     <property name="y" type="float" value="615"/>
    </properties>
   </object>
-  <object id="17" name="Cartel" x="528.5" y="813.5" width="47" height="63">
+  <object id="17" name="Cartel3" x="528.5" y="813.5" width="47" height="63">
    <properties>
     <property name="h" type="float" value="77.33"/>
     <property name="id" type="int" value="48"/>
@@ -478,7 +478,7 @@
     <property name="y" type="float" value="794"/>
    </properties>
   </object>
-  <object id="18" name="Cartel" x="624.5" y="815" width="47" height="63">
+  <object id="18" name="Cartel3" x="624.5" y="815" width="47" height="63">
    <properties>
     <property name="h" type="float" value="79.33"/>
     <property name="id" type="int" value="49"/>
@@ -487,7 +487,7 @@
     <property name="y" type="float" value="794"/>
    </properties>
   </object>
-  <object id="20" name="Cartel" x="768" y="813.5" width="47" height="63">
+  <object id="20" name="Cartel3" x="768" y="813.5" width="47" height="63">
    <properties>
     <property name="h" type="float" value="76"/>
     <property name="id" type="int" value="47"/>
