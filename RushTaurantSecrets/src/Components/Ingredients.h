@@ -15,16 +15,15 @@ using namespace _ecs;
 
 class KitchenIslandComp;
 class Ingredients: public Component {
-	const int BUBBLE_X = 780, BUBBLE_Y = 10, BUBBLE_W = 322, BUBBLE_H = 83;
-	const float ING_SIZE = 40, ING_Y = 40, ING_OFFSET = 60, ING_CENTER = 4;
-	const pair<float,float> STARTING_COORDS = { BUBBLE_X + BUBBLE_W / 2 + ING_CENTER, ING_Y };
+	const int BUBBLE_X = 780, BUBBLE_Y = 10, BUBBLE_W = 252, BUBBLE_H = 65;
+	const float ING_SIZE = 30, ING_Y = 33, ING_OFFSET = 48, ING_CENTER = 19;
+	const pair<float,float> STARTING_COORDS = { BUBBLE_X + BUBBLE_W / 2 - ING_CENTER, ING_Y };
 
 
 private:
 	const int MAX_INGREDIENTS = 5;
 	// vector de ingredientes
 	vector<_ecs::_ingredients_id> ingredients;
-	Texture* texture;
 	Texture* bubble_tex;
 	SDLUtils* sdl;
 	//vector de coordenadas de ingredientes para renderizarlos
@@ -42,11 +41,10 @@ public:
 	void setKitchenIsland(KitchenIslandComp* k) { kitchenIsland = k; }
 	//devuelve por ref
 	vector<_ecs::_ingredients_id>& getIngredients() { return ingredients; };
-	void addIngredient(_ecs::_ingredients_id ingr);
+	bool addIngredient(_ecs::_ingredients_id ingr);
 	void removeLastIngredient();
 	void removeAllIngredients();
 	void cookingIngredients();
-	void removeWhenExit();
 	void render();
 
 };

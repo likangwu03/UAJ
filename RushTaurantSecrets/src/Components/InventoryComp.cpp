@@ -48,6 +48,8 @@ void InventoryComp::freeDish() {
 		dishesBool[cellSelected] = false;
 		nextDish();
 		cellsOcuppied--;
+
+		if(cellsOcuppied == 0) cellSelected = -1;
 	}
 }
 
@@ -139,7 +141,6 @@ void InventoryComp::prevDish() {
 		if (dishesBool[cellSelected]) return;
 		i++;
 	}
-	cellSelected = -1;
 }
 
 // busca la primera casilla posterior a la seleccionada que esté ocupada
@@ -157,5 +158,4 @@ void InventoryComp::nextDish() {
 		if (dishesBool[cellSelected]) return;
 		i++;
 	}
-	cellSelected = -1;
 }

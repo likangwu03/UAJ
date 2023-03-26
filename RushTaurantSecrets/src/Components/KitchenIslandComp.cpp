@@ -42,10 +42,8 @@ void KitchenIslandComp::render() {
 }
 
 void KitchenIslandComp::pickIngredient(int i) {
-	if (i < ing.size() && ing[auxID[i]].n > 0) {
-		//if(ingCloud->addIngredient(auxID[i]))
+	if (i < ing.size() && ing[auxID[i]].n > 0  && ingCloud->addIngredient(auxID[i]) ) {
 		--ing[auxID[i]].n;
-		ingCloud->addIngredient(auxID[i]);
 		delete ing[auxID[i]].f;
 		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(ing[auxID[i]].n), *font, build_sdlcolor(0xFAF2E6ff));
 	}
@@ -76,7 +74,7 @@ void KitchenIslandComp::setIngredients(vector<pair<_ecs::_ingredients_id, int>> 
 	auxID = vector<_ecs::_ingredients_id>(_ing.size());
 
 	int i = 0;
-	for (auto& ingredient : _ing) {
+	for (auto ingredient : _ing) {
 		auto texture = new Texture(sdl->renderer(), to_string(_ing[i].second), *font, build_sdlcolor(0xFAF2E6ff));
 		ing.insert( { ingredient.first, {ingredient.second, &sdl->images().at(to_string(ingredient.first)), texture, KI_icon} });
 		auxID[i] = ingredient.first;

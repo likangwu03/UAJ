@@ -21,7 +21,7 @@ void ClientState::setState(States state) {
 
 
 void ClientState::update() {
-	// Si est?en estados en los que el jugador tenga que interactuar con él, va bajando la felicidad poco a poco
+	// Si est?en estados en los que el jugador tenga que interactuar con ï¿½l, va bajando la felicidad poco a poco
 	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING || state == FINISH_EAT) {
 		
 		timer += deltaTime;
@@ -32,15 +32,16 @@ void ClientState::update() {
 
 		// Si la felicidad llega a 0, se pone el estado a OUT
 		if (happiness <= 0) {
+			if(state < FINISH_EAT)
+				GameManager::get()->getReputation()->reduceReputation(5);
 			setState(OUT);
-			GameManager::get()->getReputation()->reduceReputation(5);
 			render->renderFinishEatState();
 #ifdef _DEBUG
 			cout << "Happiness reached 0, leaving restaurant" << endl;
 #endif
 		}
 	}
-	// Si no, si est?pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acción
+	// Si no, si est?pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acciï¿½n
 	else if (state == THINKING || state == EATING) {
 		timer += deltaTime;
 
@@ -66,8 +67,8 @@ void ClientState::update() {
 }
 
 
-// Función que asigna al plato pedido uno aleatorio de entre los
-// disponibles en el men?del día y cambia el estado a ORDERED
+// Funciï¿½n que asigna al plato pedido uno aleatorio de entre los
+// disponibles en el men?del dï¿½a y cambia el estado a ORDERED
 void ClientState::takeOrder() {
 	int rndDish;
 	// Si no se ha cambiado el plato, escoge uno aleatorio
@@ -93,11 +94,11 @@ void ClientState::takeOrder() {
 }
 
 
-// Función que devuelve el plato que se ha pedido
+// Funciï¿½n que devuelve el plato que se ha pedido
 _ecs::_dish_id ClientState::getOrderedDish() { return orderedDish; }
 
 
-// Función que informa que ha sido servido y cambia el estado a EATING
+// Funciï¿½n que informa que ha sido servido y cambia el estado a EATING
 void ClientState::getServed() {
 #ifdef _DEBUG
 	cout << "Thanks for the food" << endl;
@@ -107,7 +108,7 @@ void ClientState::getServed() {
 }
 
 
-// Función que hace que el cliente vuelva al estado de pensar si no se le ha 
+// Funciï¿½n que hace que el cliente vuelva al estado de pensar si no se le ha 
 // cambiado y le baja la felicidad o hace que se vaya si se le ha cambiado antes 
 void ClientState::changeDish() {
 	if (!dishChanged) {
@@ -120,7 +121,7 @@ void ClientState::changeDish() {
 }
 
 
-// Función que devuelve la felicidad del cliente
+// Funciï¿½n que devuelve la felicidad del cliente
 float ClientState::getHappiness() {
 	return happiness;
 }

@@ -17,17 +17,17 @@ public:
 private:
 	const float 
 		BUBBLE_OFFSETX = -4,
-		BUBBLE_OFFSETY = -63,
-		BUBBLE_WIDTH = 41,
-		BUBBLE_HEIGHT = 48,
+		BUBBLE_OFFSETY = -47,
+		BUBBLE_WIDTH = 35,
+		BUBBLE_HEIGHT = 41,
 		DISH_OFFSETX = -1, //respecto de bubble
 		DISH_OFFSETY = -5,
-		DISH_WIDTH = 32,
-		DISH_HEIGHT = 32,
+		DISH_WIDTH = 24,
+		DISH_HEIGHT = 24,
 		CROSS_WIDTH = 32,
 		CROSS_HEIGHT = 32 ;
 		
-		const float CROSS_TIME =0.5;
+		const float CROSS_TIME = 0.5;
 
 	struct CookingTex {
 		Texture* bubble = nullptr;

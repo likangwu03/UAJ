@@ -2,30 +2,32 @@
 #include "Ingredients.h"
 
 
-Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), texture(nullptr) {
-	coord = { STARTING_COORDS };
+Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), coord() {
+	bubble_tex = &((*sdl).images().at("BUBBLE")); 
 	dest_bubble = { BUBBLE_X, BUBBLE_Y, BUBBLE_W, BUBBLE_H };
 	dest.w = dest.h = ING_SIZE;
 }
 
-void Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
-	// si el iterador llega al final, es que el iterador no está
-	if (std::find(ingredients.begin(), ingredients.end(), ingr) == ingredients.end()) {
-		if (ingredients.size() == MAX_INGREDIENTS) {
-			removeLastIngredient(); //elimina el ultimo ingrediente añadido
-		}
+bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
+	// si el iterador llega al final, es que el iterador no estï¿½
+	if (ingredients.size() < MAX_INGREDIENTS && std::find(ingredients.begin(), ingredients.end(), ingr) == ingredients.end()) {
+
 		ingredients.push_back(ingr);
 
-		if (!ingredients.empty()) {
-			int i = 0;
-			for (i = 0; i < coord.size(); ++i) {
-				coord[i].first -= ING_OFFSET / 2;
+		if (ingredients.size() == 1)
+			coord.push_back(STARTING_COORDS);
+		else {
+			for (auto& coords : coord) {
+				coords.first -= ING_OFFSET / 2;
 			}
 			//Nuevas coordenadas del nuevo ingrediente
-			coord.push_back( {coord[i - 1].first, ING_Y} );
-			coord[i].first += ING_OFFSET;
+			int aaa = coord.size() - 1;
+			coord.push_back({ coord[aaa].first, ING_Y});
+			coord[coord.size() - 1].first += ING_OFFSET;
 		}
+		return true;
 	}
+	else return false;
 }
 
 void Ingredients::removeLastIngredient() {
@@ -33,9 +35,9 @@ void Ingredients::removeLastIngredient() {
  		kitchenIsland->returnIngredient(ingredients[ingredients.size() - 1]);
 		ingredients.pop_back();
 
-		for (int i = 0; i < coord.size(); ++i) {
-			coord[i].first += ING_OFFSET / 2;
-		}
+		for (auto& coords : coord)
+			coords.first += ING_OFFSET / 2;
+
 		coord.pop_back();
 	}
 }
@@ -45,8 +47,6 @@ void Ingredients::removeAllIngredients() {
 		//devolver a la mesa
 		removeLastIngredient();
 	}
-	coord = { STARTING_COORDS };
-
 }
 
 void Ingredients::cookingIngredients() {
@@ -54,34 +54,27 @@ void Ingredients::cookingIngredients() {
 	while (i != 0) {
 		ingredients.pop_back();
 
-		for (auto& coords : coord) {
+		for (auto& coords : coord)
 			coords.first += (0.5 * ING_OFFSET);
-		}
+
 		coord.pop_back();
 		--i;
 	}
-	coord = { STARTING_COORDS };
 }
 
-void Ingredients::removeWhenExit() {
-	//el método actual solo se llama cuando el personaje sale de la cocina
-	removeAllIngredients();	
-}
 
 void Ingredients::render() {
 	if (!ingredients.empty()) {
-		bubble_tex = &((*sdl).images().at("BUBBLE"));
 		bubble_tex->renderFrame(dest_bubble, 0, ingredients.size() - 1, 0);
-	}
 	
-	int k = 0; // mejor con un iterador.
-	for (auto& ingredient : ingredients) {
-		_ecs::_ingredients_id ingr = ingredient;
-		texture = &((*sdl).images().at(to_string(ingr)));
-		dest.x = coord[k].first;
-		dest.y = ING_Y;
-		texture->render(dest);
-		++k;
+		int k = 0; // mejor con un iterador.
+		for (auto ingredient : ingredients) {
+			Texture* texture = &((*sdl).images().at(to_string(ingredient)));
+			dest.x = coord[k].first;
+			dest.y = ING_Y;
+			texture->render(dest);
+			++k;
+		}
 	}
 	
 }
