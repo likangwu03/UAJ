@@ -14,6 +14,7 @@ private:
 
 	GameObject* obj; //objeto para background
 	GameObject* targetObj; //objeto para diana
+	GameObject* bannerObj; //objeto para el banner
 
 	Font* dayText;
 	Font* pressButtonText;
@@ -28,6 +29,7 @@ private:
 	Texture* dayTxt;
 	Texture* buttonTxt;
 	Texture* moneyTarget;
+	Texture* bannerTexture;
 	
 	
 public:

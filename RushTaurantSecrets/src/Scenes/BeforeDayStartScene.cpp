@@ -16,7 +16,7 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	//string con texto correspondiente
 	wordDay = "DAY: " + std::to_string(day->getDay());
 	press = "PRESS ANY BUTTON TO CONTINUE...";
-	mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(day->getDailyObjective()) + " DOLLARS";
+	mnyTarget = "TODAY'S GOAL IS TO ACHIEVE: " + std::to_string(day->getDailyObjective()) + " DOLLARS";
 
 	//background
 	obj = new GameObject(this);
@@ -37,10 +37,17 @@ BeforeDayStartScene::BeforeDayStartScene() {
 
 	//diana
 	targetObj = new GameObject(this);
-	new Transform(targetObj, { 100, 100 }, {0,0}, 58, 58);
+	new Transform(targetObj, { 75, 300 }, {0,0}, 100, 100);
 	target = new Texture(sdlutils().renderer(), "assets/Sprites/UI/HUD/target_icon.png");
 	new Image(targetObj, target);
+
+	bannerObj = new GameObject(this);
+	new Transform(bannerObj, { (float)sdlutils().width() /4 +50, 25 }, {0,0}, 500, 300);
+	bannerTexture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/UI_Flat_Banner_01_Upward.png");
+	new Image(bannerObj, bannerTexture);
 }
+
+
 
 void BeforeDayStartScene::update() {
 	wordDay = "DAY: " + std::to_string(day->getDay());
@@ -68,7 +75,7 @@ BeforeDayStartScene::~BeforeDayStartScene() {
 }
 
 void BeforeDayStartScene::handleEvents() {
-	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->isKeyDown(SDL_KEYDOWN) || ih->isKeyDown(SDL_MOUSEBUTTONDOWN)) {
+	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->keyDownEvent()) {
 		toDailyMenu();
 	}
 }
@@ -76,9 +83,10 @@ void BeforeDayStartScene::handleEvents() {
 void BeforeDayStartScene::render() {
 	Scene::render();
 	//hacer render de todos los images llamando a sus render
-	background->render({ 0,0 }, { sdlutils().width(), sdlutils().height()});
-	dayTxt->render({ 150, 100 }, { 58, 58 });
-	target->render({ 100, 100 }, { 58, 58 });
-	moneyTarget->render({ 150, 100 }, { 58, 58 });
+	//background->render({ 0,0, sdlutils().width(), sdlutils().height()});
+	dayTxt->render({ sdlutils().width()/3 + 50, 100, 300, 150});
+	//target->render({ 100, 100, 50, 100 });
+	moneyTarget->render({ 200, 300, sdlutils().width() - 300, 100});
+	buttonTxt->render({ 100, 500, 1000, 200 });
 	
 }

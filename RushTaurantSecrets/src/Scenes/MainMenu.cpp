@@ -15,8 +15,7 @@
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
-	//GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-	GameManager::get()->changeScene(GameManager::get()->getDailyMenu());
+	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 }
 
 void MainMenu::opt() {
