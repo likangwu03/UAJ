@@ -14,6 +14,8 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	menu = &((*sdl).images().at("BASKET_BUY_MENU"));
 
 	chooseHMMode = false;
+
+	money = GameManager::get()->getMoney();
 }
 
 BasketMarketComponent::~BasketMarketComponent() {
@@ -37,6 +39,7 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 			}
 			totalPrize += addPrice;
 			selectedIngr = ingredients.find(ing);
+			setTotalPrize();
 		}
 	}
 }
@@ -163,8 +166,8 @@ void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
 	}
 }
 
-bool BasketMarketComponent::getTotalPrize() {
-	return totalPrize;
+void BasketMarketComponent::setTotalPrize() {
+	money->setPrize(totalPrize);
 }
 
 void BasketMarketComponent::cleanEmptyBasket() {

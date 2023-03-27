@@ -8,6 +8,8 @@
 #include "../Managers/CollisionsManager.h"
 #include "Image.h"
 #include "../Definitions/Food_def.h"
+#include "../Managers/Money.h"
+#include "../Structure/GameManager.h"
 
 using namespace std;
 using namespace _ecs;
@@ -37,6 +39,8 @@ private:
 	bool basketON;
 	Texture* menu;
 	bool chooseHMMode;
+
+	Money* money;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);
@@ -50,7 +54,7 @@ public:
 	void setBasketON(bool value);
 	bool getBasketON();
 	void changeAmount(SDL_KeyCode key);
-	bool getTotalPrize();
+	void setTotalPrize();
 	void cleanEmptyBasket();
 
 	virtual void handleEvents();
