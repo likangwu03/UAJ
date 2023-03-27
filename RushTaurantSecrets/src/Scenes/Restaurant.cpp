@@ -14,7 +14,6 @@ Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
-	player->getComponent<Transform>()->setPos({ 750, 240 });
 }
 
 Restaurant::~Restaurant() {
@@ -23,8 +22,8 @@ Restaurant::~Restaurant() {
 }
 
 void Restaurant::reset() {
-
-	player->getComponent<PlayerMovementController>()->initP();
+	player->getComponent<Transform>()->setPos(INITIAL_POS);
+	ui->reset();
 }
 
 void Restaurant::callAfterCreating() {
@@ -42,6 +41,9 @@ void Restaurant::callAfterCreating() {
 	initComponent();
 
 	ui->callAfterCreating();
+	player->getComponent<PlayerMovementController>()->initP();
+	player->getComponent<Transform>()->setPos(PANTRY_POS);
+
 }
 
 

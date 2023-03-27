@@ -38,6 +38,8 @@ void SuperMarket::callAfterCreating() {
 	createMap();
 	initRender();
 	initComponent();
+	player->getComponent<PlayerMovementController>()->initP();
+
 }
 
 void SuperMarket::createMap() {
@@ -53,6 +55,7 @@ SuperMarket::~SuperMarket() {
 }
 
 void SuperMarket::reset() {
-	player->getComponent<PlayerMovementController>()->initP();
+	Transform* playerTransform = player->getComponent<Transform>();
+	playerTransform->setPos(INITIAL_POS);
+	playerTransform->setOrientation(west);
 }
-

@@ -96,7 +96,6 @@ void GameManager::refresh() {
 void GameManager::changeScene(Scene* scene) {
 	previousScene = currentScene;
 	currentScene = scene;
-	scene->reset();
 	sdlutils().setResizeFactor(scene->getResizeFactor());
 
 

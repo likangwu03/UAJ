@@ -16,6 +16,7 @@
 
 void MainMenu::start() {
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->getDailyMenu()->reset();
 }
 
 void MainMenu::opt() {

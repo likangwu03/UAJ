@@ -6,6 +6,8 @@ class Image;
 
 class GoToPantryTrigger : public TriggerComp {
 private:
+	const Vector PANTRY_POS = { 800, 580 };
+
 	GameManager* gm;
 	GameObject* playerRestaurant;
 	GameObject* playerPantry;

@@ -9,6 +9,7 @@
 class SuperMarket: public Scene {
 private:
 	const float RESIZEFACTOR = 0.6666666667;
+	const Vector INITIAL_POS = { 1136, 165 };
 
 	CollisionsManager* cm;
 	GameObject* map;
@@ -16,6 +17,7 @@ private:
 	UIMarket* uiMarket;
 	CartelManager* cartelM;
 	Player* player;
+	
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI == nullptr ? new UIMarket(this) : marketUI),
 		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr) { init(); }

@@ -1,9 +1,12 @@
 #include "DayManager.h"
+
 #include "../scenes/UIRestaurant.h"
 #include "../structure/GameManager.h"
 #include "ClientsManager.h"
 #include "Reputation.h"
 #include "Money.h"
+#include "../scenes/DailyMenuScene.h"
+
 
 #include "../Utilities/checkML.h"
 
@@ -28,10 +31,7 @@ int DayManager::to_int(std::string str) {
 
 DayManager::DayManager() : day(0) {
 	// clock
-	for(auto i : *GameManager::get()->getRestaurant()->getUI()->getGroup(grp_ICONS)) {
-		clock = i->getComponent<ClockComponent>();
-		if(clock != nullptr) break;
-	}
+	clock = GameManager::get()->getRestaurant()->getUI()->getClock()->getComponent<ClockComponent>();
 	assert(clock != nullptr);
 
 	// file
@@ -57,6 +57,7 @@ void DayManager::checkDayFinished() {
 			GameManager::get()->setGameOver(_ecs::Broke);
 		else*/ {
 			nextDay();
+			GameManager::get()->getDailyMenu()->reset();
 			GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
 		}
 	}

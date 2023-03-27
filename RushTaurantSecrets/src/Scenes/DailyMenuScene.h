@@ -16,18 +16,14 @@ class DailyMenuScene : public Scene {
 	SDLUtils* sdl;
 	uint8_t menuSize;
 	uint8_t spriteSize;
-	static void select1();
-	static void select2();
 	DailyMenu* dailyMenu1;
 	DailyMenu* dailyMenu2;
-	bool changeMenu;
 	bool executed;
 	void buttonPress();
 
 public:
 	DailyMenuScene(uint8_t msize = 4);
 	void init();
-	void update();
 	void reset();
 };
 

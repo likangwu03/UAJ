@@ -24,7 +24,7 @@ void GoToPantryTrigger::isOverlapping() {
 		playerRestaurant->setActives(false);
 		// se activa y recoloca el jugador de la despensa
 		playerPantry->setActives(true);
-		playerPantryTransform->setPos(Vector(800, 580));
+		playerPantryTransform->setPos(PANTRY_POS);
 		playerPantryTransform->setOrientation(north);
 		// se cambia a la escena de la despensa
 		gm->changeScene(gm->getPantry());

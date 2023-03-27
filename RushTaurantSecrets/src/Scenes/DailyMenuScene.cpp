@@ -6,13 +6,14 @@
 
 #include "../Utilities/checkML.h"
 
-DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64) {
+DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64), executed(false) {
 	init();
 }
 
 void DailyMenuScene::buttonPress() {
 	GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
 	GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
+	GameManager::get()->getSupermarket()->reset();
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 	executed = true;
 }
@@ -37,17 +38,10 @@ void DailyMenuScene::init() {
 }
 
 
-void DailyMenuScene::update() {
-	if (changeMenu) {
-		changeMenu = false;
-		init();
-	}
-}
-
-
 void DailyMenuScene::reset() {
-	if (dailyMenu1 != nullptr) dailyMenu1->setAlive(false);
-	if (dailyMenu2 != nullptr) dailyMenu1->setAlive(false);
-	changeMenu = true;
-	executed = false;
+	DailyMenu* aux1 = dailyMenu1;
+	DailyMenu* aux2 = dailyMenu2;
+	aux1->setAlive(false);
+	aux2->setAlive(false);
+	init();
 }

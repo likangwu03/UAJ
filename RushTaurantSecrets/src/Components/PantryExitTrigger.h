@@ -7,6 +7,7 @@ class Image;
 
 class PantryExitTrigger : public TriggerComp {
 private:
+	const Vector RESTAURANT_POS = { 640, 130 };
 	GameObject* playerPantry;
 	GameObject* playerRestaurant;
 	GameManager* gm;

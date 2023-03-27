@@ -11,9 +11,6 @@ Pantry::~Pantry() {
 	delete collisionsManager;
 }
 
-void Pantry::reset() {
-	player->getComponent<PlayerMovementController>()->initP();
-}
 
 void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
@@ -41,6 +38,8 @@ void Pantry::callAfterCreating() {
 	rest = GameManager::get()->getRestaurant();
 	createMap();
 	initRender();
+	player->getComponent<PlayerMovementController>()->initP();
+
 }
 
 void Pantry::render() {

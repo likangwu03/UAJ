@@ -11,6 +11,8 @@ class DayManager;
 class Restaurant : public Scene {
 private:
 	const float RESIZEFACTOR = 0.6666666667;
+	const Vector INITIAL_POS = { 750, 240 }, PANTRY_POS = { 750, 240 };
+
 	Pantry* pantry;
 	DishCombinator* dc;
 	UIRestaurant* ui;

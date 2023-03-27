@@ -43,13 +43,15 @@ private:
 	SDL_Rect moneyOutlineRect;
 
 
-	int intMoney, intObjective, moneyDiff;
+	int startingMoney, currentMoney, intObjective, moneyDiff;
 	Texture* objectiveTexture;
 	Texture* objectiveOutline;
 	SDL_Rect objectiveRect;
 	SDL_Rect objectiveOutlineRect;
 
 	Inventory* inventory;
+
+	Clock* clock;
 
 	float lastTime;
 	DailyMenu* menu;
@@ -79,7 +81,9 @@ public:
 	void checkStarsArray();
 	void checkRenderStar();
 	void setDailyMenu();
-	void updateClock();
+	Clock* getClock() const { return clock; }
+
 	void update();
 	void render();
+	void reset();
 };

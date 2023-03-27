@@ -15,5 +15,8 @@ public:
 
 	virtual void isOverlapping();
 	virtual void onTriggerExit();
+
+private:
+	void payAndLeave();
 };
 

@@ -143,6 +143,15 @@ void BasketMarketComponent::handleEvents() {
 	}
 }
 
+vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients() {
+ 	vector<pair<_ecs::_ingredients_id, int>> aux;
+
+	for (auto ing : ingredients)
+		aux.push_back({ ing.first, ing.second });
+
+	return aux;
+}
+
 void BasketMarketComponent::setBasketON(bool value) {
 	basketON = value;
 }

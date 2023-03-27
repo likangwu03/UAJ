@@ -64,3 +64,10 @@ void ClockComponent::render() {
 	renderData(clock);
 	renderData(arrow);
 }
+
+void ClockComponent::reset() {
+	numFullClock = 0;
+	elapsedTime = 0;
+	fillData(clock, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2);
+	fillData(arrow, "ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE);
+}

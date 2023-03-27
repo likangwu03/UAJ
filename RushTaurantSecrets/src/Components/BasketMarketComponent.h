@@ -58,4 +58,6 @@ public:
 	void cleanEmptyBasket();
 
 	virtual void handleEvents();
+
+	vector<pair<_ecs::_ingredients_id, int>> getIngredients();
 };

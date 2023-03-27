@@ -50,11 +50,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 
 	// Dinero
-	intMoney = moneyTxt->getMoney();
+	startingMoney = currentMoney = moneyTxt->getMoney();
 	// icono
 	createIcon("MONEY_ICON", Vector(ICONX, ICONY * 2 + ICONSIZE), ICONSIZE, ICONSIZE, 0, grp_ICONS);
 	// Texto
-	std::string strMoney = std::to_string(intMoney);
+	std::string strMoney = std::to_string(currentMoney);
 	moneyTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
 	moneyOutline = new Texture(sdl->renderer(), strMoney, *outline, build_sdlcolor(0xFFFFFFFF));
 	moneyRect = { 80, (int)(ICONY * 2 + ICONSIZE - 5), moneyTexture->width() ,moneyTexture->height() };
@@ -82,7 +82,14 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Streak(streak, 10, Vector(820, 260), 430, 30, 2, font);
 
 	// Reloj
-	new Clock(this);
+	clock = new Clock(this);
+
+
+	// icono de menú del día
+	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,
+		[&]() {
+			toggleDailyMenu();
+		});
 }
 
 UIRestaurant::~UIRestaurant() {
@@ -141,10 +148,10 @@ void UIRestaurant::toggleDailyMenu()
 
 void UIRestaurant::showMoneyText() {
 	// si la cantidad de dinero ha variado, lo muestra por pantalla
-	if (intMoney != moneyTxt->getMoney()) {
-		moneyDiff += moneyTxt->getMoney() - intMoney;
-		intMoney = moneyTxt->getMoney();
-		std::string strMoney = std::to_string(intMoney);
+	if (currentMoney != moneyTxt->getMoney()) {
+		moneyDiff += moneyTxt->getMoney() - startingMoney;
+		currentMoney = moneyTxt->getMoney();
+		std::string strMoney = std::to_string(currentMoney);
 		
 		delete moneyTexture;
 		delete moneyOutline;
@@ -265,15 +272,6 @@ void UIRestaurant::setDailyMenu() {
 	toggleDailyMenu();
 	menu->getComponent<ButtonComp>()->setActive(false);
 
-	// icono de menú del día
-	//createIcon("DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0, grp_ICONS);
-	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,
-		[&]() {
-			toggleDailyMenu();
-		});
-
-	//menu->getComponent<DailyMenuComp>()->setMenu(_menu);
-	//dmen = menu->getComponent<DailyMenuComp>()->getMenu();
 }
 
 void UIRestaurant::render() {
@@ -285,4 +283,11 @@ void UIRestaurant::render() {
 	
 	Scene::render();
 	checkRenderStar();
+}
+
+void UIRestaurant::reset() {
+	clock->getComponent<ClockComponent>()->reset();
+	startingMoney = moneyTxt->getMoney();
+	currentMoney = -1;
+	showMoneyText();
 }

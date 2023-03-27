@@ -26,7 +26,7 @@ void PantryExitTrigger::isOverlapping() {
 		gm->changeScene(gm->getRestaurant());
 		// se activa el jugador del restaurante y se recoloca
 		playerRestaurant->setActives(true);
-		playerRestaurantTransform->setPos(Vector(640, 130));
+		playerRestaurantTransform->setPos(RESTAURANT_POS);
 		playerRestaurantTransform->setOrientation(south);
 	}
 }

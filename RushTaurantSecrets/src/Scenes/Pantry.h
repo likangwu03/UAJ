@@ -13,7 +13,6 @@ private:
 public:
 	Pantry();
 	~Pantry();
-	void reset();
 	void render();
 	void update();
 	void _update();
