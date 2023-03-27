@@ -21,6 +21,8 @@ class DailyMenuScene : public Scene {
 	DailyMenu* dailyMenu1;
 	DailyMenu* dailyMenu2;
 	bool changeMenu;
+	bool executed;
+	void buttonPress();
 
 public:
 	DailyMenuScene(uint8_t msize = 4);
