@@ -75,12 +75,12 @@ void BasketMarketComponent::renderBasket() {
 				menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
 				int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
 
-				/*Texture* textureTotal = new Texture(sdl->renderer(), to_string(cost), *font, build_sdlcolor(0x000000FF));
-				dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
-				dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
-				dest.w = ING_SIZE;
-				dest.h = ING_SIZE;
-				textureTotal->render(dest);*/
+				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second.amount), *font, build_sdlcolor(0xf3e5c2ff));
+				dest.x = x * col;
+				dest.y = y * fil + ING_SIZE;
+				dest.w = ING_SIZE / 2;
+				dest.h = ING_SIZE / 2;
+				textureAmount->render(dest);
 
 			}
 		}
@@ -153,4 +153,8 @@ bool BasketMarketComponent::getBasketON() {
 
 void BasketMarketComponent::changeAmount() {
 
+}
+
+bool BasketMarketComponent::getTotalPrize() {
+	return totalPrize;
 }

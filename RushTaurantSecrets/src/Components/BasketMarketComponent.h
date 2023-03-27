@@ -55,6 +55,7 @@ public:
 	void setBasketON(bool value);
 	bool getBasketON();
 	void changeAmount();
+	bool getTotalPrize();
 
 	virtual void handleEvents();
 };
