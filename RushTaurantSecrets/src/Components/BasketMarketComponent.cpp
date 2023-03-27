@@ -18,9 +18,6 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 
 BasketMarketComponent::~BasketMarketComponent() {
 	delete font;
-	for (auto t : ingredients) {
-		delete t.second.text;
-	}
 }
 
 void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int addPrice) {
@@ -31,13 +28,11 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 	if (totalDifIngr < MAX_ING || it != ingredients.end()) { // si no ha superado el límite de ingredientes a comprar o el ingrediente ya está en la cesta
 		if (totalDifIngr < MAX_ING || it->first == ing) {
 			if (it != ingredients.end()) {
-				it->second.amount += n;
-				Texture* texture = new Texture(sdl->renderer(), to_string(it->second.amount), *font, build_sdlcolor(0xFFFFFFFF));
-				it->second.text = texture;
+				it->second += n;
 			}
 			else {
 				Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
-				ingredients.insert({ ing, { texture, n} });
+				ingredients.insert({ ing, n });
 				totalDifIngr++; //num de dif ing
 			}
 			totalPrize += addPrice;
@@ -66,7 +61,8 @@ void BasketMarketComponent::renderBasket() {
 		dest.w = ING_SIZE / 3;
 		dest.h = ING_SIZE / 3;
 		renderTexture(x * col + ING_SIZE / 2, y * fil + ING_SIZE / 2, ING_SIZE / 2, ING_SIZE / 2, "KI_ICON");
-		it->second.text->render(dest);
+		Texture* textureAmountC = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xffffffff));
+		textureAmountC->render(dest);
 
 		// render highlight de ingrediente y para añadir o quitar ingredientes de la cesta
 		if (selectedIngr->first == it->first) {
@@ -75,13 +71,12 @@ void BasketMarketComponent::renderBasket() {
 				menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
 				int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
 
-				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second.amount), *font, build_sdlcolor(0xf3e5c2ff));
-				dest.x = x * col;
-				dest.y = y * fil + ING_SIZE;
+				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xf3e5c2ff));
+				dest.x = x * col + 8;
+				dest.y = y * fil + (3*ING_SIZE) / 2;
 				dest.w = ING_SIZE / 2;
 				dest.h = ING_SIZE / 2;
 				textureAmount->render(dest);
-
 			}
 		}
 
@@ -130,18 +125,20 @@ void BasketMarketComponent::handleEvents() {
 		if (!chooseHMMode) {
 			if (ih->isKeyDown(SDLK_LEFT)) selectIngredientInBasket(SDLK_LEFT);
 			else if (ih->isKeyDown(SDLK_RIGHT)) selectIngredientInBasket(SDLK_RIGHT);
+			else if (ih->isKeyDown(SDLK_RETURN)) chooseHMMode = true;
 		}
-		if (ih->isKeyDown(SDLK_RETURN)) {
-			if (!chooseHMMode) chooseHMMode = true;
-			else {
+		else { // (chooseHMMode)
+			if (ih->isKeyDown(SDLK_LEFT)) 
+				changeAmount(SDLK_LEFT);
+			else if (ih->isKeyDown(SDLK_RIGHT)) 
+				changeAmount(SDLK_RIGHT);
+			else if (ih->isKeyDown(SDLK_RETURN)) {
 				chooseHMMode = false;
-				// método para cambiar el número de ingredientes
-				changeAmount();
+				if (selectedIngr->second == 0) cleanEmptyBasket();
 			}
 		}
 	}
 }
-
 
 void BasketMarketComponent::setBasketON(bool value) {
 	basketON = value;
@@ -151,10 +148,25 @@ bool BasketMarketComponent::getBasketON() {
 	return basketON;
 }
 
-void BasketMarketComponent::changeAmount() {
-
+void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
+	if (key == SDLK_LEFT) {
+		if (selectedIngr->second > 0) {
+			selectedIngr->second--;
+			int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
+			totalPrize -= cost;
+		}
+	}
+	else if (key == SDLK_RIGHT) {
+		selectedIngr->second++;
+		int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
+		totalPrize += cost;
+	}
 }
 
 bool BasketMarketComponent::getTotalPrize() {
 	return totalPrize;
+}
+
+void BasketMarketComponent::cleanEmptyBasket() {
+	ingredients.erase(selectedIngr);
 }

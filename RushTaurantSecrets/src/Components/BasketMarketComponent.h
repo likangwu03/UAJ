@@ -19,14 +19,9 @@ private:
 	const int ING_SIZE = 50;
 	const int MAX_ING = 11;
 
-	struct ingText {
-		Texture* text;
-		int amount;
-	};
-
 	// lista de ingredientes en la cesta y su cantidad
-	map<_ecs::_ingredients_id, ingText> ingredients; // ingredientes, sus cantidades y texturas
-	map<_ecs::_ingredients_id, ingText>::iterator selectedIngr;
+	map<_ecs::_ingredients_id, int> ingredients; // ingredientes y sus cantidades
+	map<_ecs::_ingredients_id, int>::iterator selectedIngr;
 	//unordered_map<_ecs::_ingredients_id, ingText> ingredients; // ingredientes, sus cantidades y texturas
 	//unordered_map<_ecs::_ingredients_id, unordered_map<Texture*, int>::iterator> ingredients; // ingredientes y un iterador a su textura y cantidad
 	//unordered_map<Texture*, int> ingTextures; // textura y cantidad de un ingrediente
@@ -54,8 +49,9 @@ public:
 	void selectIngredientInBasket(SDL_KeyCode key);
 	void setBasketON(bool value);
 	bool getBasketON();
-	void changeAmount();
+	void changeAmount(SDL_KeyCode key);
 	bool getTotalPrize();
+	void cleanEmptyBasket();
 
 	virtual void handleEvents();
 };
