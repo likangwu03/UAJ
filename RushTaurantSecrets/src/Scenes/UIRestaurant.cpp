@@ -259,7 +259,7 @@ void UIRestaurant::checkRenderStar() {
 
 void UIRestaurant::setDailyMenu() {
 	//menú del día
-	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, sdl->height() / 15), 
+	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, 30),
 		479.0f, 640.0f, GameManager::get()->getTodaysMenu(), []() {});
 	menuToggled = true;
 	toggleDailyMenu();
