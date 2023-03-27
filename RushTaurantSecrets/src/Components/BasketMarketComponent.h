@@ -41,6 +41,7 @@ private:
 	int totalPrize;
 	bool basketON;
 	Texture* menu;
+	bool chooseHMMode;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);
@@ -53,6 +54,7 @@ public:
 	void selectIngredientInBasket(SDL_KeyCode key);
 	void setBasketON(bool value);
 	bool getBasketON();
+	void changeAmount();
 
 	virtual void handleEvents();
 };

@@ -12,6 +12,8 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	totalPrize = 0;
 	basketON = false;
 	menu = &((*sdl).images().at("BASKET_BUY_MENU"));
+
+	chooseHMMode = false;
 }
 
 BasketMarketComponent::~BasketMarketComponent() {
@@ -69,15 +71,27 @@ void BasketMarketComponent::renderBasket() {
 		// render highlight de ingrediente y para añadir o quitar ingredientes de la cesta
 		if (selectedIngr->first == it->first) {
 			renderTexture(x * col, y * fil, ING_SIZE + 5, ING_SIZE + 5, "INGREDIENT_HIGHLIGHT");
-			menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
-			int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
+			if (chooseHMMode) {
+				menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
+				int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
+
+				/*Texture* textureTotal = new Texture(sdl->renderer(), to_string(cost), *font, build_sdlcolor(0x000000FF));
+				dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
+				dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
+				dest.w = ING_SIZE;
+				dest.h = ING_SIZE;
+				textureTotal->render(dest);*/
+
+			}
 		}
 
 		col++;
 		it++;
 	}
 	// render de precio total
-	Texture* textureTotal = new Texture(sdl->renderer(), to_string(totalPrize), *font, build_sdlcolor(0x000000FF));
+	string totalP = to_string(totalPrize);
+	totalP += "$";
+	Texture* textureTotal = new Texture(sdl->renderer(), totalP, *font, build_sdlcolor(0x504631ff));
 	dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
 	dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
 	dest.w = ING_SIZE;
@@ -113,8 +127,18 @@ void BasketMarketComponent::selectIngredientInBasket(SDL_KeyCode key) {
 
 void BasketMarketComponent::handleEvents() {
 	if (basketON) {
-		if (ih->isKeyDown(SDLK_LEFT)) selectIngredientInBasket(SDLK_LEFT);
-		else if (ih->isKeyDown(SDLK_RIGHT)) selectIngredientInBasket(SDLK_RIGHT);
+		if (!chooseHMMode) {
+			if (ih->isKeyDown(SDLK_LEFT)) selectIngredientInBasket(SDLK_LEFT);
+			else if (ih->isKeyDown(SDLK_RIGHT)) selectIngredientInBasket(SDLK_RIGHT);
+		}
+		if (ih->isKeyDown(SDLK_RETURN)) {
+			if (!chooseHMMode) chooseHMMode = true;
+			else {
+				chooseHMMode = false;
+				// método para cambiar el número de ingredientes
+				changeAmount();
+			}
+		}
 	}
 }
 
@@ -125,4 +149,8 @@ void BasketMarketComponent::setBasketON(bool value) {
 
 bool BasketMarketComponent::getBasketON() {
 	return basketON;
+}
+
+void BasketMarketComponent::changeAmount() {
+
 }
