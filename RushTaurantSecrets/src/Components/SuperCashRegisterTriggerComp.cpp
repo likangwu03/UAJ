@@ -11,16 +11,24 @@ SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, V
 {
 	highlight = parent->getComponent<Image>();
 	highlight->setActive(false);
+	money = GameManager::get()->getMoney();
 };
-
 
 void SuperCashRegisterTriggerComp::isOverlapping() {
 	highlight->setActive(true);
 	// cleon: mejor en 1 if
 	if (ih->joysticksInitialised()) {
-		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
+			money->subtractMoney(money->getPrize());
+			money->setPrize(0);
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getRestaurant());
+		}
 	}
-	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
+	else if (ih->isKeyDown(SDLK_SPACE)) {
+		money->subtractMoney(money->getPrize());
+		money->setPrize(0);
+		GameManager::get()->changeScene((Scene*)GameManager::get()->getRestaurant());
+	}
 }
 
 void SuperCashRegisterTriggerComp::onTriggerExit() {

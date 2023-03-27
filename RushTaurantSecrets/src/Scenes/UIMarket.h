@@ -48,6 +48,7 @@ public:
 	void handleEvents() override;
 	void render();
 	void setDailyMenu();
+
 	virtual Scene* getConnectedScene() { return market; }
 };
 
