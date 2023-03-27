@@ -1,6 +1,8 @@
+#pragma once
 #include "../Structure/Scene.h"
-#include "../Components/Image.h"
 #include "../Managers/DayManager.h"
+
+class Image;
 
 class BeforeDayStartScene : public Scene {
 	const int OFFSET_DAY = 50;

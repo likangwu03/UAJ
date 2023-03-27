@@ -1,3 +1,4 @@
+#pragma once
 #include "../Structure/GameObject.h"
 #include "../Components/Transform.h"
 #include "../Components/KitchenTriggerComp.h"

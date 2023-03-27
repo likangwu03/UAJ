@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include <vector>
+#pragma once
 #include "../Definitions/Structure_def.h"
 
 class Component;

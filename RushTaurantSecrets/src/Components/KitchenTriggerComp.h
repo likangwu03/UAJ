@@ -1,3 +1,4 @@
+#pragma once
 #include "../Structure/TriggerComp.h"
 #include "../Structure/GameObject.h"
 
