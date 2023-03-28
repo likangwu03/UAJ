@@ -22,7 +22,6 @@ private:
 	vector<_ecs::DishInfo>* menu;
 	void randomMenu();
 	
-	bool random;
 	struct rend {
 		Texture* tex;
 		float x;

@@ -69,7 +69,6 @@ void DailyMenuComp::drawDishes() {
 		tempTex->setHeigth(tempTex->height() * TEXT_RESIZE);
 		textTextures.push_back({ tempTex, textX, textY});
 
-
 	}
 }
 
@@ -114,7 +113,7 @@ void DailyMenuComp::init(GameObject* parent) {
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id)
-	: Component(parent, id), random(true)
+	: Component(parent, id)
 {
 	menu = new vector<_ecs::DishInfo>();
 	randomMenu();
@@ -123,13 +122,12 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu)
-	: Component(parent, id), menu(_menu), random(false)
+	: Component(parent, id), menu(_menu)
 {
 	init(parent);
 }
 
 DailyMenuComp::~DailyMenuComp() {
-	if(random) delete menu;
 	for (auto e : menuText) delete e.tex;
 	for (auto e : textTextures) delete e.tex;
 	for (auto e : textOutlines) delete e.tex;
@@ -158,4 +156,9 @@ vector<_ecs::DishInfo>* DailyMenuComp::getMenu()
 void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 {
 	menu = _menu;
+	menuText.clear();
+	textTextures.clear();
+	textOutlines.clear();
+
+	drawDishes();
 }
