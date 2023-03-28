@@ -136,6 +136,7 @@ void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
 	if (hasKilled) {
 		ing.push_back({ _ecs::MEAT,killedNum });
 		killedNum = 0;
+		hasKilled = false;
 	}
 	kitchenIsland->setIngredients(ing);
 }

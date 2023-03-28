@@ -80,7 +80,7 @@ void DailyMenuComp::randomMenu() {
 
 	int i = 0;
 	//si el jugador ha matado a alguien se a�ade un plato de carne aleatorio
-	if (murder) {
+	if (GameManager::get()->getHasKill()) {
 		dish = rand() % _ecs::NUM_MEAT_DISH;
 		aux.insert(_ecs::MeatDishes[dish].id);
 		menu->push_back(_ecs::MeatDishes[dish]);

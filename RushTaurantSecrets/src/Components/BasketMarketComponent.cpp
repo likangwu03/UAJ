@@ -148,7 +148,7 @@ vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients()
 
 	for (auto ing : ingredients)
 		aux.push_back({ ing.first, ing.second });
-
+	ingredients.clear();
 	return aux;
 }
 
