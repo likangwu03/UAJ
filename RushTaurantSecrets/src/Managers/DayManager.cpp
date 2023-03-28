@@ -6,6 +6,7 @@
 #include "Reputation.h"
 #include "Money.h"
 #include "../scenes/DailyMenuScene.h"
+#include "../Scenes/BeforeDayStartScene.h"
 
 
 #include "../Utilities/checkML.h"
@@ -57,8 +58,9 @@ void DayManager::checkDayFinished() {
 			GameManager::get()->setGameOver(_ecs::Broke);
 		else*/ {
 			nextDay();
-			GameManager::get()->getDailyMenu()->reset();
-			GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
+			GameManager::get()->getBeforeDayStart()->reset();
+			GameManager::get()->getBeforeDayStart()->init();
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
 		}
 	}
 }

@@ -12,11 +12,13 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	ih= InputHandler::instance();
 
 	day = gm->getDayManager();
+	accDay = 0;
+	accGoal = 0;
 
 	//string con texto correspondiente
-	wordDay = "DAY: " + std::to_string(day->getDay());
+	wordDay = "DAY: " + std::to_string(accDay);
 	press = "PRESS ANY BUTTON TO CONTINUE...";
-	mnyTarget = "TODAY'S GOAL IS TO ACHIEVE: " + std::to_string(day->getDailyObjective()) + " DOLLARS";
+	mnyTarget = "TODAY'S GOAL IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
 
 	//background
 	obj = new GameObject(this);
@@ -29,44 +31,58 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	pressButtonText = new Font("assets/Fonts/EpilepsySansBold.ttf", 30);
 	text = new Font("assets/Fonts/EpilepsySansBold.ttf", 50);
 
-	//Textura asociada a las fuentes y strings (ordenados en funcion de lugar de aparicion en escena)
-	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
-	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
-	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
-	
-
 	//diana
 	targetObj = new GameObject(this);
-	new Transform(targetObj, { 75, 300 }, {0,0}, 100, 100);
+	new Transform(targetObj, { 75, 300 }, { 0,0 }, 100, 100);
 	target = new Texture(sdlutils().renderer(), "assets/Sprites/UI/HUD/target_icon.png");
 	new Image(targetObj, target);
 
 	bannerObj = new GameObject(this);
-	new Transform(bannerObj, { (float)sdlutils().width() /4 +50, 25 }, {0,0}, 500, 300);
+	new Transform(bannerObj, { (float)sdlutils().width() / 4 + 50, 25 }, { 0,0 }, 500, 300);
 	bannerTexture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/UI_Flat_Banner_01_Upward.png");
 	new Image(bannerObj, bannerTexture);
+	
+	init();
 }
 
-
-
-void BeforeDayStartScene::update() {
-	wordDay = "DAY: " + std::to_string(day->getDay());
-	mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(day->getDailyObjective()) + " DOLLARS";
+void BeforeDayStartScene::init() {
+	//Textura asociada a las fuentes y strings (ordenados en funcion de lugar de aparicion en escena)
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
 	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
+}
 
+
+void BeforeDayStartScene::update() {
+
+	//Si el dia cambia, estas variables también
+	if (accDay < day->getDay()) {
+		accDay = day->getDay();
+		accGoal = day->getDailyObjective();
+		wordDay = "DAY: " + std::to_string(accDay);
+		mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
+		dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
+		moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
+		buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
+	}
+}
+
+void BeforeDayStartScene::reset() {
+	accDay = 0;
+	accGoal = 0;
+	delete dayTxt;
+	delete moneyTarget;
+	delete buttonTxt;
 }
 
 void BeforeDayStartScene::toDailyMenu() {
+	gm->get()->getDailyMenu()->reset();
 	gm->changeScene(GameManager::get()->getDailyMenu());
 }
 
 BeforeDayStartScene::~BeforeDayStartScene() {
 	delete target;
-	delete buttonTxt;
-	delete moneyTarget;
-	delete dayTxt;
+	reset();
 	delete text;
 	delete pressButtonText;
 	delete dayText;

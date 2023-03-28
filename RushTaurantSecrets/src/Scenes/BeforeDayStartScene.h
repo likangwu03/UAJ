@@ -30,6 +30,9 @@ private:
 	Texture* buttonTxt;
 	Texture* moneyTarget;
 	Texture* bannerTexture;
+
+	int accDay;
+	int accGoal;
 	
 	
 public:
@@ -39,4 +42,6 @@ public:
 	virtual void render();
 	virtual void update();
 	void toDailyMenu();
+	void init();
+	void reset();
 };
