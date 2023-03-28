@@ -59,7 +59,7 @@ void DayManager::checkDayFinished() {
 		else*/ {
 			nextDay();
 			GameManager::get()->getBeforeDayStart()->reset();
-			GameManager::get()->getBeforeDayStart()->init();
+			//GameManager::get()->getBeforeDayStart()->init();
 			GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
 		}
 	}

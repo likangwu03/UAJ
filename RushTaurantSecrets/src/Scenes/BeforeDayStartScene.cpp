@@ -12,8 +12,8 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	ih= InputHandler::instance();
 
 	day = gm->getDayManager();
-	accDay = 0;
-	accGoal = 0;
+	accDay = day->getDay();
+	accGoal = day->getDailyObjective();
 
 	//string con texto correspondiente
 	wordDay = "DAY: " + std::to_string(accDay);
@@ -55,24 +55,19 @@ void BeforeDayStartScene::init() {
 
 void BeforeDayStartScene::update() {
 
-	//Si el dia cambia, estas variables también
-	if (accDay < day->getDay()) {
-		accDay = day->getDay();
-		accGoal = day->getDailyObjective();
-		wordDay = "DAY: " + std::to_string(accDay);
-		mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
-		dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
-		moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
-		buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
-	}
 }
 
 void BeforeDayStartScene::reset() {
-	accDay = 0;
-	accGoal = 0;
+	accDay = day->getDay();
+	accGoal = day->getDailyObjective();
+	wordDay = "DAY: " + std::to_string(accDay);
+	mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
 	delete dayTxt;
 	delete moneyTarget;
 	delete buttonTxt;
+	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
+	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
+	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
 }
 
 void BeforeDayStartScene::toDailyMenu() {
@@ -82,12 +77,14 @@ void BeforeDayStartScene::toDailyMenu() {
 
 BeforeDayStartScene::~BeforeDayStartScene() {
 	delete target;
-	reset();
+	delete dayTxt;
+	delete moneyTarget;
+	delete buttonTxt;
 	delete text;
 	delete pressButtonText;
 	delete dayText;
 	delete background;
-
+	delete bannerTexture;
 }
 
 void BeforeDayStartScene::handleEvents() {
@@ -98,10 +95,8 @@ void BeforeDayStartScene::handleEvents() {
 
 void BeforeDayStartScene::render() {
 	Scene::render();
-	//hacer render de todos los images llamando a sus render
-	//background->render({ 0,0, sdlutils().width(), sdlutils().height()});
+	
 	dayTxt->render({ sdlutils().width()/3 + 50, 100, 300, 150});
-	//target->render({ 100, 100, 50, 100 });
 	moneyTarget->render({ 200, 300, sdlutils().width() - 300, 100});
 	buttonTxt->render({ 100, 500, 1000, 200 });
 	
