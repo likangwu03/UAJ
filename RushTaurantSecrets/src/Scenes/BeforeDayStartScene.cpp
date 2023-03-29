@@ -8,8 +8,8 @@
 
 BeforeDayStartScene::BeforeDayStartScene() {
 
-	gm= GameManager::instance();
-	ih= InputHandler::instance();
+	gm = GameManager::instance();
+	ih = InputHandler::instance();
 
 	day = gm->getDayManager();
 	accDay = day->getDay();
@@ -54,7 +54,7 @@ void BeforeDayStartScene::init() {
 
 
 void BeforeDayStartScene::update() {
-
+	//no borrar aun
 }
 
 void BeforeDayStartScene::reset() {

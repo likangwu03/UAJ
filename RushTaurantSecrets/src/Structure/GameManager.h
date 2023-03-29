@@ -16,6 +16,7 @@ class OptionsMenu;
 class Reputation;
 class Money;
 class DayManager;
+class EndOfDayScene;
 
 class KitchenIslandComp;
 
@@ -44,6 +45,7 @@ private:
 	SuperMarket* supermarket;
 	PauseMenu* pauseMenu;
 	OptionsMenu* optionsMenu;
+	EndOfDayScene* endScene;
 
 	Reputation* reputation;
 	Money* money;
@@ -80,6 +82,7 @@ public:
 	PauseMenu* getPauseMenu();
 	OptionsMenu* getOptionsMenu();
 	BeforeDayStartScene* getBeforeDayStart();
+	EndOfDayScene* getEndOfDay();
 
 	Reputation* getReputation();
 	Money* getMoney();
