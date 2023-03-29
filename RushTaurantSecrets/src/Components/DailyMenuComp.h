@@ -35,8 +35,7 @@ private:
 	vector<rend> ingTextures;
 	vector<rend> menuText;
 
-	bool murder;
-
+	bool initialized;
 	Font* font;
 	Font* fontOutline;
 
