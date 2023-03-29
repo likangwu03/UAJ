@@ -18,7 +18,6 @@ class DailyMenuScene : public Scene {
 	uint8_t spriteSize;
 	DailyMenu* dailyMenu1;
 	DailyMenu* dailyMenu2;
-	bool executed;
 	void buttonPress();
 
 public:
