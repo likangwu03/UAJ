@@ -34,14 +34,14 @@ private:
 	int accDay;
 	int accGoal;
 	
-	
+	void toDailyMenu();
+
 public:
 	BeforeDayStartScene();
 	~BeforeDayStartScene();
 	virtual void handleEvents();
 	virtual void render();
 	virtual void update();
-	void toDailyMenu();
 	void init();
 	void reset();
 };

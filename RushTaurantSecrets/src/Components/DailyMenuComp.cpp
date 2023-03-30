@@ -103,8 +103,7 @@ void DailyMenuComp::init(GameObject* parent) {
 	tf = parent->getComponent<Transform>();
 	parentScene = parent->getScene();
 
-	murder = GameManager::get()->getHasKill();
-
+	initialized = true;
 	font = new Font(FONT_PATH, FONT_SIZE);
 	fontOutline = new Font(FONT_PATH, FONT_SIZE);
 	TTF_SetFontOutline(fontOutline->getTTFFont(), 2);
@@ -128,6 +127,7 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 }
 
 DailyMenuComp::~DailyMenuComp() {
+	if (initialized) delete menu;
 	for (auto e : menuText) delete e.tex;
 	for (auto e : textTextures) delete e.tex;
 	for (auto e : textOutlines) delete e.tex;
@@ -155,10 +155,19 @@ vector<_ecs::DishInfo>* DailyMenuComp::getMenu()
 
 void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 {
-	menu = _menu;
+	//se borran los platos anteriores y se indica que ya se han asignado platos
+	initialized = false;
+	delete menu;
+	for (auto e : menuText) delete e.tex;
+	for (auto e : textTextures) delete e.tex;
+	for (auto e : textOutlines) delete e.tex;
 	menuText.clear();
 	textTextures.clear();
 	textOutlines.clear();
+	dishTextures.clear();
+	ingTextures.clear();
+	menu = _menu;
 
+	//se dibujan de nuevo los platos
 	drawDishes();
 }

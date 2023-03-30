@@ -16,12 +16,13 @@
 #include "../Scenes/SuperMarket.h"
 #include "../Scenes/PauseMenu.h"
 #include "../Scenes/OptionsMenu.h"
+#include "../Scenes/EndOfDayScene.h"
 
 #include "../Utilities/checkML.h" 
 
 GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), killedNum(0) { };
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0) { };
 
 
 void GameManager::initialize() {
@@ -47,11 +48,12 @@ void GameManager::initialize() {
 	} catch(std::exception e) { std::cout << e.what(); }
 
 	beforeDayStartScene = new BeforeDayStartScene();
+	endScene = new EndOfDayScene();
 
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
-
+	
 
 	currentScene = nullptr;
 	previousScene = nullptr;
@@ -124,6 +126,7 @@ Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
 DayManager* GameManager::getDayManager() { return days; }
 OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
+EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
