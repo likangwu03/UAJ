@@ -25,7 +25,7 @@ void ClientTrigger::isOverlapping()
 				break;
 			}
 		}
-		else if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_c) )
+		else if (state== ClientState::ORDERED && (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_c)) )
 			clientState->changeDish();
 }
 

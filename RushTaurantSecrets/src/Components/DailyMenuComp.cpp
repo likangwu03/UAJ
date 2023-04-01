@@ -156,6 +156,7 @@ vector<_ecs::DishInfo>* DailyMenuComp::getMenu()
 void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 {
 	//se borran los platos anteriores y se indica que ya se han asignado platos
+	if (!initialized)return;
 	initialized = false;
 	delete menu;
 	for (auto e : menuText) delete e.tex;
@@ -167,7 +168,6 @@ void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 	dishTextures.clear();
 	ingTextures.clear();
 	menu = _menu;
-
 	//se dibujan de nuevo los platos
 	drawDishes();
 }
