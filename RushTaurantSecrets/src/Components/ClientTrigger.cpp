@@ -6,7 +6,7 @@
 void ClientTrigger::isOverlapping()
 {
 		ClientState::States state = clientState->getState();
-		if (ih->isKeyDown(SDLK_SPACE) || ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
+		if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) || !ih->joysticksInitialised() &&ih->isKeyDown(SDLK_SPACE)  ) {
 			switch (state)
 			{
 			case ClientState::ENTRANCE:
@@ -25,7 +25,7 @@ void ClientTrigger::isOverlapping()
 				break;
 			}
 		}
-		else if (ih->isKeyDown(SDLK_c) || ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))
+		else if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_c) )
 			clientState->changeDish();
 }
 
