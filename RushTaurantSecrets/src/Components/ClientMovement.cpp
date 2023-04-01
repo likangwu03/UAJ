@@ -107,12 +107,14 @@ void ClientMovement::abandonEntrance() {
 
 ClientMovement::ClientMovement(GameObject* parent, int posEntrance, int posGroup) :
 	Component(parent, id), assignedTable(-1), posEntrance(posEntrance), posPay(-1), 
+	arriveSound(&sdlutils().soundEffects().at("ENTER_CLIENT")),
+	finishEatingSound(&sdlutils().soundEffects().at("DIRTY_TABLE")),
 	posGroup(posGroup), clientState(nullptr), render(nullptr), placedPay(false) {
 	sdl = SDLUtils::instance();
 	straightMovement = parent->getComponent<StraightMovement>();
 	transform = parent->getComponent<Transform>();
 	clientsManager = ClientsManager::get();
-
+	arriveSound->setVolume(40);
 	colocateEntrance();
 }
 
@@ -172,6 +174,7 @@ void ClientMovement::update() {
 		if (straightMovement->hasFinishedPath()) {
 			clientState->setState(ClientState::ENTRANCE);
 			transform->setMovState(idle);
+			arriveSound->play();
 		}
 		break;
 	case ClientState::ENTRANCE:
@@ -196,6 +199,7 @@ void ClientMovement::update() {
 		// es decir, todos los integrantes del grupo han terminado de comer y la cola de pagar tiene espacio
 		if (hasEveryoneEaten() && clientsManager->canOccupyPay(mates)) {
 			clientState->setState(ClientState::HAS_LEFT);
+			finishEatingSound->play();
 		}
 		break;
 		// un ciclo de espera para que las mesas oportunas se desocupen

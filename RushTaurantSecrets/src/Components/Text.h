@@ -56,6 +56,9 @@ private:
 	bool showAllText;	// mostrar todo el texto de una sola vez
 	bool nextText;	// mostrar el siguiente texto
 
+	SoundEffect* nextTextSound;
+	SoundEffect* nextLetterSound;
+
 	void createLetter(string l);
 
 	void nextWord();

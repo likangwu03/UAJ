@@ -2,11 +2,13 @@
 
 #include "../Utilities/checkML.h"
 
-InventoryComp::InventoryComp(GameObject* parent):Component(parent, id) {
+InventoryComp::InventoryComp(GameObject* parent) :Component(parent, id), 
+sdl(SDLUtils::instance()),
+serveDishSound(&sdl->soundEffects().at("SERVE_CLIENT"))
+{
 	
-	sdl = SDLUtils::instance();
 	ih = InputHandler::instance();
-
+	serveDishSound->setVolume(10);
 	dishes.reserve(MAX_DISHES);
 	dishesBool.reserve(MAX_DISHES);
 	// inicializa el vector de booleanos
@@ -72,6 +74,7 @@ bool InventoryComp::serveDish(_ecs::_dish_id dish) {
 	if (cellsOcuppied > 0) {
 		if (dishes[cellSelected] == dish) {
 			freeDish();
+			serveDishSound->play();
 			return true;
 		}
 		else return false;

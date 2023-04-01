@@ -32,7 +32,8 @@ private:
 	SDL_Rect dest;
 	SDL_Rect dest_bubble;	
 	KitchenIslandComp* kitchenIsland; //para devolver ing a la mesa
-
+	SoundEffect* pickIng;
+	SoundEffect* returnIng;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;

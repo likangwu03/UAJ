@@ -1,7 +1,7 @@
 #pragma once
 #include "../Structure/Scene.h"
 #include "../Managers/DayManager.h"
-
+#include "../Utilities/SDLUtils.h"
 class Image;
 
 class BeforeDayStartScene : public Scene {
@@ -30,6 +30,8 @@ private:
 	Texture* buttonTxt;
 	Texture* moneyTarget;
 	Texture* bannerTexture;
+
+	SoundEffect* beginSound;
 
 	int accDay;
 	int accGoal;

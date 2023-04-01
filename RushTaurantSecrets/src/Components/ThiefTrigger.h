@@ -14,6 +14,9 @@ class ThiefTrigger : public TriggerComp
 	MurderRender* mRender;
 	ShooRender* sRender;
 
+	SoundEffect* escapeSound;
+	SoundEffect* dieSound;
+
 	void hideButtons();
 
 public:

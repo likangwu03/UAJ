@@ -8,7 +8,8 @@
 #include "Image.h"
 #include "../Utilities/checkML.h"
 
-PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_) {
+PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_),
+doorSound(&sdlutils().soundEffects().at("OPEN_DOOR")) {
 	gm = GameManager::get();
 	playerPantry = parent->getScene()->getGameObject(_ecs::hdr_PLAYER);
 	playerRestaurant = gm->getRestaurant()->getGameObject(_ecs::hdr_PLAYER);
@@ -24,6 +25,7 @@ void PantryExitTrigger::isOverlapping() {
 		playerPantry->setActives(false);
 		// se cambia al restaurant
 		gm->changeScene(gm->getRestaurant());
+		doorSound->play();
 		// se activa el jugador del restaurante y se recoloca
 		playerRestaurant->setActives(true);
 		playerRestaurantTransform->setPos(RESTAURANT_POS);

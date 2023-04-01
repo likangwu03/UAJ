@@ -8,6 +8,8 @@
 
 BeforeDayStartScene::BeforeDayStartScene() {
 
+	beginSound=&sdlutils().soundEffects().at("DAILY_OBJECTIVE");
+	
 	gm = GameManager::instance();
 	ih = InputHandler::instance();
 
@@ -46,6 +48,7 @@ BeforeDayStartScene::BeforeDayStartScene() {
 }
 
 void BeforeDayStartScene::init() {
+	
 	//Textura asociada a las fuentes y strings (ordenados en funcion de lugar de aparicion en escena)
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
@@ -58,6 +61,7 @@ void BeforeDayStartScene::update() {
 }
 
 void BeforeDayStartScene::reset() {
+	//beginSound->play();
 	accDay = day->getDay();
 	accGoal = day->getDailyObjective();
 	wordDay = "DAY: " + std::to_string(accDay);
@@ -72,6 +76,7 @@ void BeforeDayStartScene::reset() {
 
 void BeforeDayStartScene::toDailyMenu() {
 	gm->get()->getDailyMenu()->reset();
+	//sdlutils().soundEffects().at("CLICK_BUTTON").play();
 	gm->changeScene(GameManager::get()->getDailyMenu());
 }
 

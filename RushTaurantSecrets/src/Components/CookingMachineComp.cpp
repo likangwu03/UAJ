@@ -3,13 +3,17 @@
 
 #include "../Utilities/checkML.h"
 
-CookingMachineComp::CookingMachineComp(GameObject* _parent) : Component(_parent, id), 
-	state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0),  transform(parent->getComponent<Transform>()), 
-	anim(parent->getComponent<UIAnimator>()), dishComb(DishCombinator::instance()), sdl(SDLUtils::instance())
+CookingMachineComp::CookingMachineComp(GameObject* _parent) : Component(_parent, id),
+state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0), transform(parent->getComponent<Transform>()),
+anim(parent->getComponent<UIAnimator>()), dishComb(DishCombinator::instance()), sdl(SDLUtils::instance()),
+cookSound(&sdl->soundEffects().at("COOK")),
+cookedSound(&sdl->soundEffects().at("COOKED")),
+cannotCookSound(&sdl->soundEffects().at("CANNOT_COOK")),
+pickDishSound(&sdl->soundEffects().at("PICK_DISH"))
 {
 	textures.bubble = &((*sdl).images().at("BUBBLE_ICON"));
 	textures.cross = &((*sdl).images().at("CROSS"));
-	
+
 	renderPos = transform->getPos();
 	anim->setActive(false);
 };
@@ -18,10 +22,12 @@ pair<_ecs::_dish_id, bool> CookingMachineComp::canFormDish(vector<_ecs::_ingredi
 }
 void CookingMachineComp::informCannotCook() {
 	cookingTime = CROSS_TIME;
+	cannotCookSound->play();
 	state = informing;
 	cont = 0;
 }
 void CookingMachineComp::cook(_ecs::_dish_id d) {
+	cookSound->play();
 	dish = d;
 	cookingTime = _ecs::Dishes[d].cookingTime;
 	cont = 0;
@@ -32,6 +38,7 @@ void CookingMachineComp::cook(_ecs::_dish_id d) {
 }
 
 void CookingMachineComp::finishCooking() {
+	cookedSound->play();
 	state = finished;
 	anim->setActive(false);
 	textures.dishTex = &((*sdl).images().at(to_string(dish)));
@@ -41,7 +48,7 @@ _ecs::_dish_id CookingMachineComp::pickDish() {
 	_ecs::_dish_id dish_aux = dish;
 	state = available;
 	dish = _ecs::NONE_DISH;
-
+	pickDishSound->play();
 	return dish_aux;
 }
 
@@ -64,7 +71,7 @@ void CookingMachineComp::render() {
 	case CookingMachineComp::cooking: //puntos suspensivos
 		break;
 	case CookingMachineComp::informing: //cruz
-		textures.cross->render(build_sdlrect(renderPos.getX() , renderPos.getY() + BUBBLE_OFFSETY, CROSS_WIDTH, CROSS_HEIGHT) );
+		textures.cross->render(build_sdlrect(renderPos.getX(), renderPos.getY() + BUBBLE_OFFSETY, CROSS_WIDTH, CROSS_HEIGHT));
 		break;
 	case CookingMachineComp::finished:
 		SDL_Rect dest;

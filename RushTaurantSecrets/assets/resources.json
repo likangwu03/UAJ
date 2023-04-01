@@ -707,8 +707,47 @@
   ], 
   "sounds" : [
     { "id" : "CLICK_BUTTON", "file" : "assets/Sound/clicks/Minimalist10.mp3" },
+    { "id" : "DAILY_OBJECTIVE", "file" : "assets/Sound/ui/objective.mp3" },
+    { "id" : "GAIN_REPUTATION", "file" : "assets/Sound/ui/reputation.mp3" },
+    { "id" : "LOSE_REPUTATION", "file" : "assets/Sound/ui/loseReputation.mp3" },
+    { "id" : "TIME_UP", "file" : "assets/Sound/ui/timeUp.mp3" },
+    { "id" : "TEXT_TYPING", "file" : "assets/Sound/ui/typing.mp3" },
+    { "id" : "DIALOG_BOX", "file" : "assets/Sound/ui/dialogBox.mp3" },
+    { "id" : "NEXT_TEXT", "file" : "assets/Sound/ui/NextText.mp3" },
+    
+    { "id" : "SELECT", "file" : "assets/Sound/ui/select.mp3" },
+    { "id" : "OPEN_BASKET", "file" : "assets/Sound/ui/openBasket.mp3" },
+    { "id" : "SELECT_NUM", "file" : "assets/Sound/ui/selectNum.mp3" },
+    { "id" : "OPEN_SHOPMENU", "file" : "assets/Sound/actions/openShopmenu.mp3" },
+    { "id" : "PAY_ING", "file" : "assets/Sound/actions/payIng.mp3" },
+    { "id" : "ADD_ING", "file" : "assets/Sound/actions/addIng.mp3" },
+    { "id" : "QUIT_ING", "file" : "assets/Sound/actions/quitIng.mp3" },
+
+    { "id" : "ENTER_CLIENT", "file" : "assets/Sound/actions/enterClient.mp3" },
+    { "id" : "TAKE_NOTE", "file" : "assets/Sound/actions/takeNote.mp3" },
+    { "id" : "DIRTY_TABLE", "file" : "assets/Sound/actions/dirtyTable.mp3" },
+    { "id" : "TIP", "file" : "assets/Sound/actions/tip.mp3" },
+
+    { "id" : "OPEN_DOOR", "file" : "assets/Sound/actions/door.mp3" },
+    { "id" : "COOK", "file" : "assets/Sound/actions/cook.mp3" },
+    { "id" : "COOKED", "file" : "assets/Sound/actions/dirtyTable.mp3" },
+    { "id" : "CANNOT_COOK", "file" : "assets/Sound/actions/cannotCook.mp3" },
+    { "id" : "PICK_ING", "file" : "assets/Sound/actions/pickIng.mp3" },
+    { "id" : "PICK_DISH", "file" : "assets/Sound/actions/pickDish.mp3" },
+    { "id" : "RETURN_ING", "file" : "assets/Sound/actions/returnIng.mp3" },
+    { "id" : "THROW_DISH", "file" : "assets/Sound/actions/throwDish.mp3" },
+    { "id" : "SERVE_CLIENT", "file" : "assets/Sound/actions/serveClient.mp3" },
+    { "id" : "CLEAN_TABLE", "file" : "assets/Sound/actions/cleanTable.mp3" },
+    { "id" : "ASSIGN_TABLE", "file" : "assets/Sound/actions/serveClient.mp3" },
+
     { "id" : "CASH_REGISTER1", "file" : "assets/Sound/cashRegister/CashRegister1.mp3" },
-    { "id" : "CASH_REGISTER2", "file" : "assets/Sound/cashRegister/CashRegister2.mp3" }
+    { "id" : "CASH_REGISTER2", "file" : "assets/Sound/cashRegister/CashRegister2.mp3" },
+
+    { "id" : "ALERT", "file" : "assets/Sound/actions/alert.mp3" },
+    { "id" : "KILL_THIEF", "file" : "assets/Sound/actions/kill.mp3" },
+    { "id" : "ESCAPE_THIEF", "file" : "assets/Sound/actions/escape.mp3" },
+    { "id" : "OPEN_FRIDGE", "file" : "assets/Sound/actions/fridge.mp3" },
+    { "id" : "REACH_FORMULA", "file" : "assets/Sound/actions/formula.mp3" }
 
   ]
 }

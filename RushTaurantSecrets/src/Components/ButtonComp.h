@@ -22,7 +22,10 @@ private:
 	bool highlighted;
 	SDL_Rect dest;
 	Transform* tf;
+	SoundEffect* buttonSound;
+	SoundEffect* buttonHoverSound;
 
+	bool selected;
 	void playSound();
 
 public:

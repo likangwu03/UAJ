@@ -49,6 +49,11 @@ private:
 	Transform* transform; //puede que posteriormente no sea necesario...
 	UIAnimator* anim;
 
+	SoundEffect* cookSound;
+	SoundEffect* cookedSound;
+	SoundEffect* cannotCookSound;
+	SoundEffect* pickDishSound;
+
 	//ha terminado de cocinar el plato
 	void finishCooking();
 

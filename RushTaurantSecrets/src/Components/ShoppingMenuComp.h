@@ -49,6 +49,12 @@ private:
 	BasketMarketComponent* basket;
 	SDLUtils* sdl;
 	InputHandler* ih;
+
+	SoundEffect* menuSound;
+	SoundEffect* selectNum;
+	SoundEffect* addIng;
+	SoundEffect* confirmSound;
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SHOP_MENU;
 	ShoppingMenuComp(GameObject* parent);

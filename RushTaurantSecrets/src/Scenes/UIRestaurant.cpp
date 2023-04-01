@@ -23,8 +23,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = GameManager::get()->getMoney();
 
-	// pensé en hacerlo pasando un struct como parámetro, pero el struct tenía que redefinirse demasiadas veces,
-	// así que Cleon me dijo que pasara directamente la información del struct como parámetro
+	// pens?en hacerlo pasando un struct como parámetro, pero el struct tenía que redefinirse demasiadas veces,
+	// as?que Cleon me dijo que pasara directamente la información del struct como parámetro
 	
 	// Reputación
 	reputation = GameManager::get()->getReputation();
@@ -37,7 +37,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	fullStarTexture = &((*sdl).images().at("STAR"));
 	actReputation = reputation->getReputation();
 
-	// inicializa array de estrellas (define qué estrellas se muestran y cuáles no)
+	// inicializa array de estrellas (define qu?estrellas se muestran y cuáles no)
 	for (int i = 0; i < stars.size(); i++) {
 		stars[i] = true;
 	}
@@ -70,9 +70,8 @@ UIRestaurant::UIRestaurant() : Scene() {
 	inventory = new Inventory(this);
 
 	// Exclamación de la despensa
-	float frequency = 1000;
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
-	new Warning(thiefExclamation, frequency);
+	new Warning(thiefExclamation);
 	
 	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("MAIN_CHARACTER_PORTRAIT"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
 	//new FreeText(this, Vector(300, 300), 20, 30, 500, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro" });
@@ -85,7 +84,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	clock = new Clock(this);
 
 
-	// icono de menú del día
+	// icono de men?del día
 	menuToggled = true;
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, 30),
 		479.0f, 640.0f, []() {});

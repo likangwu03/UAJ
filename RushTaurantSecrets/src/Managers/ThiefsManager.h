@@ -19,8 +19,11 @@ private:
 	float escapeSpeed;
 	bool canGetFreezer;
 	float timer;
+	float minFrec, maxFrec;
 	float elapsedTime;
 	int numThiefs;
+	bool played;
+	SoundEffect* warningSound;
 	// array que se utiliza para saber que posición de las puerta han sido ocupadas y cuales no
 	array<bool, _ecs::MAX_THIEFS> selectedPosition;
 
@@ -36,7 +39,7 @@ private:
 
 	int randomPos();
 
-	ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int numThiefs);
+	ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max);
 
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;
@@ -45,5 +48,11 @@ public:
 		return !thiefs->empty();
 	}
 
+	void setFrec(float min, float max) {
+		minFrec = min;
+		maxFrec = max;
+	}
+
 	virtual void update();
+	void stopSound();
 };

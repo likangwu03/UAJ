@@ -15,7 +15,7 @@ void DayManager::readLine(std::string& line) {
 	do {
 		std::getline(file, line);
 		while(!line.empty() && line[0] == '\t') line = line.substr(1);
-	} while(!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee está vacía o es un comentario (empieza con '#'), se lee la siguiente.
+	} while(!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee est?vacía o es un comentario (empieza con '#'), se lee la siguiente.
 	if(file.eof()) { line = ""; }
 }
 
@@ -30,7 +30,7 @@ int DayManager::to_int(std::string str) {
 	return i;
 }
 
-DayManager::DayManager() : day(0) {
+DayManager::DayManager() : day(0), timeUpSound(&sdlutils().soundEffects().at("TIME_UP")) {
 	// clock
 	clock = GameManager::get()->getRestaurant()->getUI()->getClock()->getComponent<ClockComponent>();
 	assert(clock != nullptr);
@@ -61,6 +61,7 @@ void DayManager::checkDayFinished() {
 			GameManager::get()->getBeforeDayStart()->reset();
 			//GameManager::get()->getBeforeDayStart()->init();
 			GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
+			timeUpSound->play();
 		}
 	}
 }
@@ -70,6 +71,7 @@ int DayManager::getDay() { return day; }
 void DayManager::nextDay() {
 	day++;
 	GameManager::get()->getRestaurant()->nextDay();
+	GameManager::get()->getRestaurant()->getUI()->nextDay();
 
 	if(day > maxDays) {
 		// Activar final, ya que no hay más días

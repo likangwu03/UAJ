@@ -8,7 +8,7 @@ class BinTriggerComp : public TriggerComp
 private:
 	InventoryComp* inventory;
 	Image* highlight;
-
+	SoundEffect* throwDish;
 public:
 	BinTriggerComp(GameObject* parent, Vector pos_, float width_, float height_);
 

@@ -9,20 +9,20 @@ private:
 	Image* image;
 	ThiefsManager* thiefsManager;
 	float elapsedTime;
-	float timer;
+	const float TIMER=400;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_WARNING;
 
-	Warning(GameObject* parent, float timer) :
-		Component(parent, id), thiefsManager(ThiefsManager::get()), elapsedTime(0), timer(timer) {
+	Warning(GameObject* parent) :
+		Component(parent, id), thiefsManager(ThiefsManager::get()), elapsedTime(0) {
 		image = parent->getComponent<Image>();
 	}
 
 	virtual void update() {
 		if (thiefsManager->isThereThieves()) {
 			elapsedTime += deltaTime;
-			if (elapsedTime > timer) {
+			if (elapsedTime > TIMER) {
 				elapsedTime = 0;
 				image->setActive(!image->isActive());
 			}
@@ -30,5 +30,8 @@ public:
 		else {
 			image->setActive(false);
 		}
+	}
+	virtual void nextDay() {
+		thiefsManager->stopSound();
 	}
 };

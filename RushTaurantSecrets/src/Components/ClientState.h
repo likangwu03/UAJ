@@ -48,7 +48,7 @@ private:
 	ClientStateRender* render;
 	_ecs::_dish_id orderedDish;
 	bool dishChanged;
-
+	SoundEffect* takeNote;
 public:
 
 	void update();

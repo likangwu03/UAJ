@@ -33,7 +33,7 @@ public:
 	PlayerMovementController(GameObject* parent, int _player);
 	~PlayerMovementController();
 
-	// cleon: no sé si es aquí, pero frametime. frametime es felicidad. frametime es maravilloso. frametime, por lo visto, es vuestro padre (no son mis palabras).
+	// cleon: no s?si es aqu? pero frametime. frametime es felicidad. frametime es maravilloso. frametime, por lo visto, es vuestro padre (no son mis palabras).
 	virtual void handleEvents();
 	virtual void update();
 

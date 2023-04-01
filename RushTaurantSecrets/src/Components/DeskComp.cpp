@@ -7,7 +7,12 @@
 #include "../GameObjects/Client.h"
 #include "../Utilities/checkML.h"
 
-DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : TriggerComp(parent, Vector(0, 0), width, height, DeskComp::id), sucia(false), num(id) {
+DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : TriggerComp(parent, Vector(0, 0), width, height, DeskComp::id),
+sucia(false), num(id), 
+cleanSound(&sdlutils().soundEffects().at("CLEAN_TABLE")),
+assignSound(&sdlutils().soundEffects().at("ASSIGN_TABLE"))
+{
+	assignSound->setVolume(10);
 	trans = parent->getComponent<Transform>();
 	if (trans == nullptr) {
 		throw exceptions::CompNotFound("Transform", "DeskComp");
@@ -18,6 +23,7 @@ DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : Trig
 }
 
 void DeskComp::assignClients(const std::vector<Client*>& clients) {
+	assignSound->play();
 	assigned = clients;
 }
 
@@ -29,6 +35,7 @@ void DeskComp::spreadOverlap() {
 
 void DeskComp::cleanDesk() {
 	sucia = false;
+	cleanSound->play();
 }
 
 bool DeskComp::isOccupied() {

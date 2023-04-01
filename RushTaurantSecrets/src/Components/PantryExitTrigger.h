@@ -1,5 +1,6 @@
 #pragma once
 #include "../Structure/TriggerComp.h"
+#include "../Utilities/SDLUtils.h"
 
 class GameManager;
 class Transform;
@@ -13,7 +14,7 @@ private:
 	GameManager* gm;
 	Transform* playerRestaurantTransform;
 	Image* image;
-
+	SoundEffect* doorSound;
 public:
 	PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 	virtual void isOverlapping();

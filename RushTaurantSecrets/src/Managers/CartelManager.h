@@ -11,6 +11,7 @@ private:
 	CartelTrigger* selectedCartel;
 	ShoppingMenuComp* menu;
 	Scene* scene;
+	SoundEffect* selectSound;
 public:
 	CartelManager(Scene* scene);
 	void signIn(CartelTrigger* c); //llamado por onTriggerEnter de cartelTrigger 

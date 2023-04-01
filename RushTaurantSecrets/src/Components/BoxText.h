@@ -55,7 +55,7 @@ private:
 		comp.size.actHeight += increment / comp.proportionBoxComplementH;
 		// se coloca en el centro
 		// se hace cada iteración porque la posición
-		// cambia en función de la caja y la caja se está moviendo
+		// cambia en función de la caja y la caja se est?moviendo
 		// hasta terminar de crecer
 		comp.size.centerPos = transform->getPos() + offset;
 		// se recoloca para que crezca desde el centro

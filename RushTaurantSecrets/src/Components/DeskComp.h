@@ -20,7 +20,8 @@ private:
 		PLATE_HEIGHT = 30;
 	Texture* dirtyIcon;
 	Texture* dirtyPlate;
-
+	SoundEffect* cleanSound;
+	SoundEffect* assignSound;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DESK;
 

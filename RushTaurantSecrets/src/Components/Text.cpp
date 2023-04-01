@@ -8,7 +8,8 @@ void Text::createLetter(string l) {
 	letter.texture = new Texture(sdl->renderer(), l, *font, build_sdlcolor(0x000000FF));
 	letter.pos = Vector(pos.getX() + widthLetter * cont + space, pos.getY() + (heightLetter + offset) * actLine);
 	letterTextures.push_back(letter);
-
+	nextLetterSound->play();
+	
 	++actLetter;
 	++cont;
 }
@@ -96,6 +97,8 @@ void Text::init(string text) {
 	letterTextures.reserve(text.size());
 
 	numLines = wrapText(words);
+	
+	
 }
 
 void Text::releaseLetters() {
@@ -108,13 +111,18 @@ void Text::releaseLetters() {
 void Text::newText(string newText) {
 	releaseLetters();
 	init(newText);
+	
 }
 
 Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos) :
-	Component(parent, id), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency), 
-	font(font), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing), boxText(nullptr) {
+	Component(parent, id), sdl(SDLUtils::instance()), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency),
+	font(font), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing), boxText(nullptr) ,
+	nextLetterSound(&sdl->soundEffects().at("TEXT_TYPING")), nextTextSound(&sdl->soundEffects().at("NEXT_TEXT"))
+{
+	nextLetterSound->setVolume(3);
+	nextTextSound->setVolume(50);
+	nextLetterSound->setNumberofChannels(100);
 
-	sdl = SDLUtils::instance();
 	ih = InputHandler::instance();
 
 	init(this->texts.front());
@@ -189,6 +197,7 @@ void Text::handleEvents() {
 			break;
 		case Written:
 			nextText = true;
+			nextTextSound->play();
 			break;
 		}
 	}

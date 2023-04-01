@@ -6,7 +6,9 @@
 
 ClientState::ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu) :
 	Component(parent, id), state(START), happiness(60), timer(0), availableDishes(menu), 
-	orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) {
+	orderedDish(NONE_DISH), dishChanged(false), render(parent->getComponent<ClientStateRender>()) , 
+	takeNote(&sdlutils().soundEffects().at("TAKE_NOTE"))
+{
 	availableDishes = menu;
 	render->clientStateIsReady(); //decirle que ya esta creado
 }
@@ -51,6 +53,8 @@ void ClientState::update() {
 			cout << "I know what I want to eat" << endl;
 #endif
 			setState(TAKEMYORDER);	// TAKEYMYORDER
+			
+			takeNote->play();
 			render->renderTakingNoteState();
 		}
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja

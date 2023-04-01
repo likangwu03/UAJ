@@ -55,7 +55,7 @@ void CharacterAnimator::update() {
 	//}
 
 	// si no ha cambiado, se comprueba si la dirección ha cambiado
-	// si es así, se cogen los frames oportunos
+	// si es as? se cogen los frames oportunos
 	if (currOrientation != parentOrientation || movHaveChanged) {
 
 		currOrientation = parentOrientation;

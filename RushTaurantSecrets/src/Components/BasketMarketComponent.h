@@ -40,13 +40,19 @@ private:
 	Texture* menu;
 	bool chooseHMMode;
 
+	SoundEffect* basketSound;
+	SoundEffect* selectNum;
+	SoundEffect* quitIng;
+	SoundEffect* selectSound;
+	SoundEffect* confirmSound;
+
 	Money* money;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);
 	~BasketMarketComponent();
 	void buyIngredient();
-	//llamado por menú de compra
+	//llamado por men?de compra
 	void addToBasket(_ecs::_ingredients_id ing, int n, int addPrice);
 	void renderBasket();
 	void renderTexture(int x, int y, int w, int h, string text);

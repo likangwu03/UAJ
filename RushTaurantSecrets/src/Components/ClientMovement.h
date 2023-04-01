@@ -30,8 +30,11 @@ private:
 	ClientsManager* clientsManager;
 	vector<Client*> mates;
 	int posGroup;
-	// colocado en la cola de pagar, es decir, está quieto
+	// colocado en la cola de pagar, es decir, est?quieto
 	bool placedPay;
+	SoundEffect* arriveSound;
+	SoundEffect* finishEatingSound;
+
 
 	void addPath(const vector<Vector>& points);
 
@@ -48,7 +51,7 @@ private:
 	// comprobar si todos los integrantes del grupo están sentados
 	bool isEveryoneSit() const;
 
-	// se comprueba si un cliente no está en la cola esperando a pagar
+	// se comprueba si un cliente no est?en la cola esperando a pagar
 	static bool isNotPaying(Client* mate);
 
 	// se comprueba si alguno de sus compañero se ha marchado para que él también se vaya

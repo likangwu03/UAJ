@@ -2,7 +2,10 @@
 #include "Ingredients.h"
 
 
-Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), coord() {
+Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), coord(),
+returnIng(&sdlutils().soundEffects().at("RETURN_ING")),
+pickIng(&sdlutils().soundEffects().at("PICK_ING"))
+{
 	bubble_tex = &((*sdl).images().at("BUBBLE")); 
 	dest_bubble = { BUBBLE_X, BUBBLE_Y, BUBBLE_W, BUBBLE_H };
 	dest.w = dest.h = ING_SIZE;
@@ -24,6 +27,7 @@ bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 			coord.push_back({ coord.back().first, ING_Y});
 			coord.back().first += ING_OFFSET;
 		}
+		pickIng->play();
 		return true;
 	}
 	else return false;
@@ -36,7 +40,8 @@ void Ingredients::removeLastIngredient() {
 
 		for (auto& coords : coord)
 			coords.first += ING_OFFSET / 2;
-
+		
+		returnIng->play();
 		coord.pop_back();
 	}
 }

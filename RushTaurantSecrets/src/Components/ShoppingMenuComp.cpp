@@ -8,8 +8,14 @@
 
 ShoppingMenuComp::ShoppingMenuComp(GameObject* parent) :Component(parent, id),
 sdl(SDLUtils::instance()), ih(InputHandler::instance()),
-priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), ing(_ecs::NONE_ING) {
-
+priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), ing(_ecs::NONE_ING),
+menuSound(&sdl->soundEffects().at("OPEN_SHOPMENU")),
+selectNum(&sdl->soundEffects().at("SELECT_NUM")),
+addIng (&sdl->soundEffects().at("ADD_ING")),
+confirmSound(&sdl->soundEffects().at("ADD_ING"))
+{
+	menuSound->setVolume(7);
+	addIng->setVolume(100);
 	menu = &((*sdl).images().at("SHOP_MENU"));
 	font = new Font("assets/Fonts/8-bit Madness.ttf", 40);
 	parent->setActive<ShoppingMenuComp>(false);
@@ -30,11 +36,12 @@ ShoppingMenuComp::~ShoppingMenuComp() {
 		delete totalPriceTex;
 }
 void ShoppingMenuComp::handleEvents() {
-
+	if (basket->getBasketON())return;
 	if (ih->joysticksInitialised()) {
 		if(ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) decreaseN();
 		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) decreaseN();
 		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B && ing != NONE_ING)) {
+			addIng->play();
 			basket->addToBasket(ing, number, totalPrice);
 			closeMenu();
 		}
@@ -43,6 +50,7 @@ void ShoppingMenuComp::handleEvents() {
 	else if (ih->isKeyDown(SDLK_RIGHT)) increaseN(); //disminuir cantidad
 	else if (ih->isKeyDown(SDLK_RETURN) && ing != NONE_ING) { //añadir a la cesta
 		basket->addToBasket(ing, number, totalPrice);
+		confirmSound->play();
 		closeMenu();
 	}
 
@@ -61,14 +69,17 @@ void ShoppingMenuComp::render() {
 void  ShoppingMenuComp::increaseN() {
 	if (number >= 99)return;
 	++number;
+	selectNum->play();
 	changePrice();
 }
 void  ShoppingMenuComp::decreaseN() {
 	if (number <= 0)return;
 	--number;
+	selectNum->play();
 	changePrice();
 }
 void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
+	if (basket->getBasketON())return;
 	if (!active) {
 		parent->setActive<ShoppingMenuComp>(true);
 		ing = _id;
@@ -79,6 +90,7 @@ void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
 		priceTex = new Texture(sdl->renderer(), to_string(price), *font, build_sdlcolor(0x504631ff));
 		ingTex = &((*sdl).images().at(to_string(ing)));
 		changePrice();
+		menuSound->play();
 	}
 	else closeMenu();
 }
@@ -91,9 +103,11 @@ void  ShoppingMenuComp::closeMenu() {
 		delete totalPriceTex;
 		totalPriceTex = nullptr;
 		parent->setActive<ShoppingMenuComp>(false);
+		
 	}
 }
 void  ShoppingMenuComp::changePrice() {
+	
 	totalPrice = number * price;
 	delete numberTex;
 	delete totalPriceTex;

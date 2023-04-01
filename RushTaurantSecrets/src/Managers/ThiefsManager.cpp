@@ -13,17 +13,24 @@ void ThiefsManager::createThief() {
 	aux.setY(_ecs::DOOR.getY() - pos);
 
 	new Thief(scene, RelativeToGlobal::pointPantry(aux), sprite, generalSpeed, escapeSpeed, canGetFreezer, pos);
+
+	warningSound->play(-1);
+	played = true;
 }
 
 void ThiefsManager::addFrequently() {
 	if (thiefs->size() <= 0) {
+		if (played) {
+			played = false;
+			warningSound->haltChannel();
+		}
 		elapsedTime += deltaTime;
-		if (elapsedTime > timer) {
+		if (elapsedTime > timer * 1000) {
 			elapsedTime = 0;
-
+			timer = sdl->rand().nextInt(minFrec, maxFrec);
 			allFalse();
-
-			for (int i = 0; i < numThiefs; ++i) {
+			int auxNum = sdl->rand().nextInt(1, numThiefs + 1);
+			for (int i = 0; i < auxNum; ++i) {
 				createThief();
 			}
 		}
@@ -33,7 +40,7 @@ void ThiefsManager::addFrequently() {
 int ThiefsManager::randomPos() {
 	// posición random
 	int pos = sdl->rand().nextInt(0, _ecs::MAX_THIEFS);
-	// se comprueba si esa posición está ocupada y si lo está, se coge la siguiente
+	// se comprueba si esa posición est?ocupada y si lo est? se coge la siguiente
 	while (selectedPosition[pos]) {
 		pos = (pos + 1) % _ecs::MAX_THIEFS;
 	}
@@ -42,13 +49,19 @@ int ThiefsManager::randomPos() {
 	return pos;
 }
 
-ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, float frequencyThiefs, int numThiefs) :
-	Manager(parent), generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), timer(frequencyThiefs), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
+ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max) :
+	Manager(parent), sdl(SDLUtils::instance()), warningSound(&sdl->soundEffects().at("ALERT")), played(false),
+	generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), minFrec(min), maxFrec(max), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
 	scene = parent->getScene();
 	thiefs = scene->getGroup(_ecs::grp_THIEFS);
-	sdl = SDLUtils::instance();
+	timer = sdl->rand().nextInt(minFrec, maxFrec);
+	warningSound->setVolume(40);
 }
 
 void ThiefsManager::update() {
 	addFrequently();
+}
+
+void ThiefsManager::stopSound() {
+	warningSound->haltChannel();
 }

@@ -9,7 +9,7 @@ private:
 	int day, maxDays;
 	std::ifstream file;
 	int dailyObjective;
-
+	SoundEffect* timeUpSound;
 	void readLine(std::string& line);
 	static int to_int(std::string str);
 public:

@@ -5,8 +5,9 @@
 #include "../Utilities/checkML.h"
 
 ButtonComp::ButtonComp(GameObject* parent, string hl, std::function<void()> callback)
-	: Component(parent, id),
-	transform(parent->getComponent<Transform>()), highlighted(false)
+	: Component(parent, id),buttonSound( &sdlutils().soundEffects().at("CLICK_BUTTON")),
+	buttonHoverSound(&sdlutils().soundEffects().at("SELECT")),
+	transform(parent->getComponent<Transform>()), highlighted(false),selected(false)
 {
 	tf = parent->getComponent<Transform>();
 
@@ -30,7 +31,9 @@ void ButtonComp::handleEvents()
 	SDL_Rect dest = { transform->getPos().getX(), transform->getPos().getY(), transform->getW(), transform->getH() };
 
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
+		if(!selected) buttonHoverSound->play();
 		highlighted = true;
+		selected = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
 			playSound();
 			ih().setControls(true);
@@ -38,7 +41,10 @@ void ButtonComp::handleEvents()
 		}
 	}
 	else if (ih().joysticksInitialised()) {
+		if (!selected) buttonHoverSound->play();
 		highlighted = true;
+		selected = true;
+		buttonHoverSound->play();
 		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
 			ih().clean();
 			ih().setControls(false);
@@ -47,7 +53,9 @@ void ButtonComp::handleEvents()
 		}
 	}
 	else {
+		
 		highlighted = false;
+		selected = false;
 	}
 }
 
@@ -63,5 +71,5 @@ void ButtonComp::render() {
 
 
 void ButtonComp::playSound() {
-	sdlutils().soundEffects().at("CLICK_BUTTON").play();
+	buttonSound->play();
 }

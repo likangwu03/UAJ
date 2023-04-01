@@ -20,16 +20,12 @@ private:
 	Image* highlight;
 	list<Client*>* list;
 	Streak* streak;
-
+	SoundEffect* cashSound1;
+	SoundEffect* cashSound2;
+	SoundEffect* tipSound;
+	SoundEffect* addSound; //reputation
 public:
-	CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
-		TriggerComp(parent, pos_, width_, height_), money(GameManager::get()->getMoney()),
-		cM(ClientsManager::get()), highlight(parent->getComponent<Image>()) {
-
-		highlight->setActive(false);
-		list = cM->getPayQueue();
-		streak = GameManager::get()->getRestaurant()->getUI()->getGameObject(_ecs::hdr_STREAK)->getComponent<Streak>();
-	}
+	CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 
 	virtual void isOverlapping();
 	virtual void onTriggerExit();

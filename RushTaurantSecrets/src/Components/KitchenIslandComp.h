@@ -39,6 +39,8 @@ private:
 	int selected;
 	float w, h;// para cada ing
 	float x, y;
+	SoundEffect* selectSound;
+
 
 public:
 	KitchenIslandComp(GameObject* parent);

@@ -1,7 +1,17 @@
 ﻿#include "BasketMarketComponent.h"
 #include "../Utilities/checkML.h"
 
-BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(parent, id), totalDifIngr(0) {
+BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(parent, id), totalDifIngr(0),
+basketSound(&sdl->soundEffects().at("OPEN_BASKET")),
+selectNum(&sdl->soundEffects().at("SELECT_NUM")),
+quitIng(&sdl->soundEffects().at("QUIT_ING")),
+selectSound(&sdl->soundEffects().at("SELECT")),
+confirmSound(&sdl->soundEffects().at("ADD_ING"))
+{
+	selectNum->setVolume(10);
+	basketSound->setVolume(50);
+	quitIng->setVolume(50);
+
 	//cartelM = new CartelManager();
 	ih = InputHandler::instance();
 
@@ -16,13 +26,15 @@ BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(par
 	chooseHMMode = false;
 
 	money = GameManager::get()->getMoney();
+
+	selectedIngr = ingredients.end();
 }
 
 BasketMarketComponent::~BasketMarketComponent() {
 	delete font;
 }
 
-void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int addPrice) {
+void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int addPrice) {
 	//hacer algo para addPrice................................
 	//addPrice es el dinero total según n cantidades del ingrediente ing añadida a la cesta
 
@@ -36,6 +48,7 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 				Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
 				ingredients.insert({ ing, n });
 				totalDifIngr++; //num de dif ing
+				delete texture;
 			}
 			totalPrize += addPrice;
 			selectedIngr = ingredients.find(ing);
@@ -47,11 +60,23 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n,int add
 void BasketMarketComponent::renderBasket() {
 	// renderiza menú de cesta
 	renderTexture(basketPosX, basketPosY, BASKET_SIZE, BASKET_SIZE - 100, "BASKET_LIST");
+	SDL_Rect dest;
+
+	// render de precio total
+	string totalP = to_string(totalPrize);
+	totalP += "$";
+	Texture* textureTotal = new Texture(sdl->renderer(), totalP, *font, build_sdlcolor(0x504631ff));
+	dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
+	dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
+	dest.w = ING_SIZE;
+	dest.h = ING_SIZE;
+	textureTotal->render(dest);
+	delete textureTotal;
 	// render de ingredientes
-	auto it = ingredients.begin();
+	if (ingredients.size() == 0)return;
 	int x = 30 + ING_SIZE, y = sdl->height() - 590 + ING_SIZE, col = 1, fil = 1;
 	string textDish;
-	SDL_Rect dest;
+	auto it = ingredients.begin();
 	while (it != ingredients.end()) {
 		if (col >= 7) {
 			col = 1; fil++;
@@ -66,9 +91,10 @@ void BasketMarketComponent::renderBasket() {
 		renderTexture(x * col + ING_SIZE / 2, y * fil + ING_SIZE / 2, ING_SIZE / 2, ING_SIZE / 2, "KI_ICON");
 		Texture* textureAmountC = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xffffffff));
 		textureAmountC->render(dest);
+		delete textureAmountC;
 
 		// render highlight de ingrediente y para añadir o quitar ingredientes de la cesta
-		if (selectedIngr->first == it->first) {
+		if (selectedIngr != ingredients.end() && selectedIngr->first == it->first) {
 			renderTexture(x * col, y * fil, ING_SIZE + 5, ING_SIZE + 5, "INGREDIENT_HIGHLIGHT");
 			if (chooseHMMode) {
 				menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
@@ -76,25 +102,17 @@ void BasketMarketComponent::renderBasket() {
 
 				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xf3e5c2ff));
 				dest.x = x * col + 8;
-				dest.y = y * fil + (3*ING_SIZE) / 2;
+				dest.y = y * fil + (3 * ING_SIZE) / 2;
 				dest.w = ING_SIZE / 2;
 				dest.h = ING_SIZE / 2;
 				textureAmount->render(dest);
+				delete textureAmount;
 			}
 		}
 
 		col++;
 		it++;
 	}
-	// render de precio total
-	string totalP = to_string(totalPrize);
-	totalP += "$";
-	Texture* textureTotal = new Texture(sdl->renderer(), totalP, *font, build_sdlcolor(0x504631ff));
-	dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
-	dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
-	dest.w = ING_SIZE;
-	dest.h = ING_SIZE;
-	textureTotal->render(dest);
 }
 
 void BasketMarketComponent::renderTexture(int x, int y, int w, int h, string text) {
@@ -113,13 +131,19 @@ void BasketMarketComponent::renderTexture(int x, int y, int w, int h, string tex
 void BasketMarketComponent::selectIngredientInBasket(SDL_KeyCode key) {
 	// izquierda
 	if (key == SDLK_LEFT) {
-		if (selectedIngr != ingredients.begin()) selectedIngr--;
+		if (selectedIngr != ingredients.begin() && selectedIngr != ingredients.end()) {
+			selectedIngr--;
+			selectSound->play();
+		}
 	}
 	// derecha
-	else if (key == SDLK_RIGHT) {
+	else if (key == SDLK_RIGHT && selectedIngr != ingredients.end()) {
 		auto it = selectedIngr;
 		it++;
-		if (it != ingredients.end()) selectedIngr++;
+		if (it != ingredients.end()) {
+			selectedIngr++;
+			selectSound->play();
+		}
 	}
 }
 
@@ -128,23 +152,31 @@ void BasketMarketComponent::handleEvents() {
 		if (!chooseHMMode) {
 			if (ih->isKeyDown(SDLK_LEFT)) selectIngredientInBasket(SDLK_LEFT);
 			else if (ih->isKeyDown(SDLK_RIGHT)) selectIngredientInBasket(SDLK_RIGHT);
-			else if (ih->isKeyDown(SDLK_RETURN)) chooseHMMode = true;
+			else if (ih->isKeyDown(SDLK_RETURN) && ingredients.size() > 0) {
+				chooseHMMode = true;
+				confirmSound->play();
+			}
 		}
 		else { // (chooseHMMode)
-			if (ih->isKeyDown(SDLK_LEFT)) 
+			if (ih->isKeyDown(SDLK_LEFT))
 				changeAmount(SDLK_LEFT);
-			else if (ih->isKeyDown(SDLK_RIGHT)) 
+			else if (ih->isKeyDown(SDLK_RIGHT))
 				changeAmount(SDLK_RIGHT);
 			else if (ih->isKeyDown(SDLK_RETURN)) {
 				chooseHMMode = false;
-				if (selectedIngr->second == 0) cleanEmptyBasket();
+
+				if (selectedIngr->second == 0) {
+					cleanEmptyBasket();
+					quitIng->play();
+				}
+				else confirmSound->play();
 			}
 		}
 	}
 }
 
 vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients() {
- 	vector<pair<_ecs::_ingredients_id, int>> aux;
+	vector<pair<_ecs::_ingredients_id, int>> aux;
 
 	for (auto ing : ingredients)
 		aux.push_back({ ing.first, ing.second });
@@ -154,6 +186,7 @@ vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients()
 
 void BasketMarketComponent::setBasketON(bool value) {
 	basketON = value;
+	basketSound->play();
 }
 
 bool BasketMarketComponent::getBasketON() {
@@ -166,12 +199,14 @@ void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
 			selectedIngr->second--;
 			int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
 			totalPrize -= cost;
+			selectNum->play();
 		}
 	}
-	else if (key == SDLK_RIGHT) {
+	else if (key == SDLK_RIGHT && selectedIngr->second < 100) {
 		selectedIngr->second++;
 		int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
 		totalPrize += cost;
+		selectNum->play();
 	}
 }
 
@@ -180,5 +215,7 @@ void BasketMarketComponent::setTotalPrize() {
 }
 
 void BasketMarketComponent::cleanEmptyBasket() {
-	ingredients.erase(selectedIngr);
+	selectedIngr = ingredients.erase(selectedIngr);
+	if (selectedIngr == ingredients.end())selectedIngr = ingredients.begin();
+	if (ingredients.size() == 0)selectedIngr = ingredients.end();
 }

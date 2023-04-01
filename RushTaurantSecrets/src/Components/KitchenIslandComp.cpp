@@ -8,8 +8,11 @@
 
 using namespace std;
 KitchenIslandComp::KitchenIslandComp(GameObject* parent) :
-	Component(parent, id), sdl(SDLUtils::instance()), ingCloud(parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Ingredients>()) {
-
+	Component(parent, id), sdl(SDLUtils::instance()), 
+	ingCloud(parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Ingredients>()),
+	selectSound(&sdlutils().soundEffects().at("SELECT"))
+{
+	selectSound->setVolume(80);
 	w = parent->getComponent<Transform>()->getW() / 6;
 	h = parent->getComponent<Transform>()->getH() / 2;
 	x = parent->getComponent<Transform>()->getPos().getX();
@@ -53,6 +56,7 @@ void KitchenIslandComp::selectedIng(int i) {
 	if (i < ing.size() && selected != i) {
 		selected = i;
 		hPos = { x + w * (i % 6) , y + w * (i / 6) };
+		selectSound->play();
 	}
 
 }

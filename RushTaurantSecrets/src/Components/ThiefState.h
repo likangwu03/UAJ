@@ -23,7 +23,8 @@ private:
 	FreezerComp* freezer;
 	float elapsedTime;
 	float deadTime;
-
+	SoundEffect* fridgeSound;
+	SoundEffect* formulaSound;
 	States randomObjective(bool canGetFreezer) {
 		int max = canGetFreezer ? 2 : 1;
 		return (States)sdl->rand().nextInt(0, max);
@@ -33,8 +34,12 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STATE;
 
 	ThiefState(GameObject* parent, bool canGetFreezer) :
-		Component(parent, id), sdl(SDLUtils::instance()), gm(GameManager::get()), elapsedTime(0), deadTime(1 * 1000) {
-
+		Component(parent, id), sdl(SDLUtils::instance()),
+		gm(GameManager::get()), elapsedTime(0), deadTime(1 * 1000) ,
+		fridgeSound(&sdlutils().soundEffects().at("OPEN_FRIDGE")),
+		formulaSound(&sdlutils().soundEffects().at("REACH_FORMULA"))
+	{
+		formulaSound->setVolume(50);
 		freezer = parent->getScene()->getGameObject(_ecs::hdr_FREEZER)->getComponent<FreezerComp>();
 		currentState = randomObjective(canGetFreezer);
 	}
@@ -55,13 +60,14 @@ public:
 		switch (currentState) {
 		case ThiefState::SECRET:
 			// se cambia al final en el que los ladrones han descubierto la fórmula secreta
+			//formulaSound->play();
 			parent->setAlive(false);
 			break;
 
 		case ThiefState::FREEZER:
 			// se cambia al final en el que los ladrones han abierto el congelador
 			freezer->isOpen();
-
+			fridgeSound->play();
 			parent->setAlive(false);
 			break;
 
