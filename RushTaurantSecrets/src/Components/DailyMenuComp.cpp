@@ -100,13 +100,7 @@ void DailyMenuComp::randomMenu() {
 }
 
 void DailyMenuComp::init(GameObject* parent) {
-	tf = parent->getComponent<Transform>();
-	parentScene = parent->getScene();
-
-	initialized = true;
-	font = new Font(FONT_PATH, FONT_SIZE);
-	fontOutline = new Font(FONT_PATH, FONT_SIZE);
-	TTF_SetFontOutline(fontOutline->getTTFFont(), 2);
+	
 
 	drawDishes();
 }
@@ -114,15 +108,28 @@ void DailyMenuComp::init(GameObject* parent) {
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id)
 	: Component(parent, id)
 {
-	menu = new vector<_ecs::DishInfo>();
-	randomMenu();
+	tf = parent->getComponent<Transform>();
+	parentScene = parent->getScene();
 
-	init(parent);
+	font = new Font(FONT_PATH, FONT_SIZE);
+	fontOutline = new Font(FONT_PATH, FONT_SIZE);
+	TTF_SetFontOutline(fontOutline->getTTFFont(), 2);
+	initialized = true;
+	menu =nullptr;
+	//randomMenu();
+
+	//init(parent);
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu)
 	: Component(parent, id), menu(_menu)
 {
+	//init(parent);
+}
+
+void DailyMenuComp::initMenu() {
+	menu = new vector<_ecs::DishInfo>();
+	randomMenu();
 	init(parent);
 }
 
@@ -156,9 +163,9 @@ vector<_ecs::DishInfo>* DailyMenuComp::getMenu()
 void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 {
 	//se borran los platos anteriores y se indica que ya se han asignado platos
-	if (!initialized)return;
+	//if (!initialized)return;
 	initialized = false;
-	delete menu;
+	//delete menu;
 	for (auto e : menuText) delete e.tex;
 	for (auto e : textTextures) delete e.tex;
 	for (auto e : textOutlines) delete e.tex;

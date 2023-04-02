@@ -239,7 +239,7 @@ bool ClientsManager::notAllGroupPaying(Client* client) {
 
 bool ClientsManager::canCollect() const {
 	// se comprueba si:
-	// - la cola de pagar no está vacía
+	// - la cola de pagar no est?vacía
 	// - todos los integrantes de cada grupo están en colocados en la cola listos para pagar
 	return !pay.empty() && std::find_if(pay.begin(), pay.end(), notAllGroupPaying) == pay.end();
 }
