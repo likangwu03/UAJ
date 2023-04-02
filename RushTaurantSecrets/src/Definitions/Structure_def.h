@@ -8,7 +8,6 @@ namespace _ecs {
 	// EL ORDEN DE EJECUCIÓN DE LOS COMPONENTES ESTA DETERMINADO POR COMO SE AÑADEN
 	enum _cmp_id : id_type {
 		cmp_MAPCREATOR,
-		cmp_MAPRENDER,
 		cmp_MANAGER,
 		cmp_MONEY,
 		cmp_TRANSFORM,
@@ -56,8 +55,8 @@ namespace _ecs {
 		grp_RENDERTOP,
 		grp_CLIENTS,
 		grp_INTERACTABLE,
-		grp_HUD,
 		grp_ICONS,
+		grp_HUD,
 		grp_COLLISIONS,
 		grp_THIEFS,
 		grp_DESK,

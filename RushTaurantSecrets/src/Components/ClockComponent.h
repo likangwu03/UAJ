@@ -49,4 +49,6 @@ public:
 	virtual void render();
 
 	void reset();
+
+	int getRotation() { return arrow.rotation; }
 };

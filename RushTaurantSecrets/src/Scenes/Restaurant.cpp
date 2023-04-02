@@ -7,6 +7,8 @@
 #include "../Definitions/Paths_def.h"
 #include "../Managers/ClientsManager.h"
 #include "../Managers/DayManager.h"
+#include "TimeOfDay.h"
+
 #include "../Utilities/checkML.h"
 #include <set>
 
@@ -18,6 +20,7 @@ Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) {
 
 Restaurant::~Restaurant() {
 	delete ui;
+	delete timeOfDay;
 	delete cm;
 }
 
@@ -44,6 +47,7 @@ void Restaurant::callAfterCreating() {
 	player->getComponent<PlayerMovementController>()->initP();
 	player->getComponent<Transform>()->setPos(PANTRY_POS);
 
+	timeOfDay = new TimeOfDay(sdlutils().getLoadedTilesets().at("restaurantAfternoon"), sdlutils().getLoadedTilesets().at("restaurantNight") );
 }
 
 
@@ -72,6 +76,7 @@ void Restaurant::createMap() {
 void Restaurant::render() {
 	//Scene::render();
 	renderLayer();
+	timeOfDay->render();
 	if (ui != nullptr)
 	ui->render();	
 }
@@ -83,6 +88,7 @@ void Restaurant::initComponent() {
 void Restaurant::update() {
 	pantry->_update();
 	Scene::update();
+	timeOfDay->update();
 	ui->update();
 	cm->update();
 	dm->checkDayFinished();

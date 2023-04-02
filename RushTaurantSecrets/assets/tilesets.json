@@ -63,6 +63,22 @@
     {
       "id": "signs",
       "file": "assets/Sprites/Restaurant/Signs.png"
+    },
+    {
+      "id": "restaurantAfternoon",
+      "file": "assets/Sprites/Restaurant/restaurantAfternoon.png"
+    },
+    {
+      "id": "pantryAfternoon",
+      "file": "assets/Sprites/Restaurant/pantryAfternoon.png"
+    },
+    {
+      "id": "restaurantNight",
+      "file": "assets/Sprites/Restaurant/restaurantNight.png"
+    },
+    {
+      "id": "pantryNight",
+      "file": "assets/Sprites/Restaurant/pantryNight.png"
     }
   ]
 }

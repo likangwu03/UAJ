@@ -2,6 +2,7 @@
 #include "../Structure/Scene.h"
 #include "../Managers/CollisionsManager.h"
 class Restaurant;
+class TimeOfDay;
 
 class Pantry : public Scene {
 private:
@@ -9,6 +10,7 @@ private:
 	GameObject* player;
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
+	TimeOfDay* timeOfDay;
 
 public:
 	Pantry();

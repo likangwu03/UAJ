@@ -4,10 +4,13 @@
 #include "../Components/MapCreator.h" 
 #include "../GameObjects/Player.h"
 #include "../Managers/ThiefsManager.h"
+#include "TimeOfDay.h"
+
 #include "../Utilities/checkML.h"
 
 Pantry::Pantry() :rest(nullptr) { init(); }
 Pantry::~Pantry() {
+	delete timeOfDay;
 	delete collisionsManager;
 }
 
@@ -39,17 +42,20 @@ void Pantry::callAfterCreating() {
 	createMap();
 	initRender();
 	player->getComponent<PlayerMovementController>()->initP();
+	timeOfDay = new TimeOfDay(sdlutils().getLoadedTilesets().at("pantryAfternoon"), sdlutils().getLoadedTilesets().at("pantryNight"));
 
 }
 
 void Pantry::render() {
 	//Scene::render();
 	Scene::renderLayer();
+	timeOfDay->render();
 }
 
 void Pantry::update() {
 	rest->_update();
 	Scene::update();
+	timeOfDay->update();
 	collisionsManager->update();
 }
 
