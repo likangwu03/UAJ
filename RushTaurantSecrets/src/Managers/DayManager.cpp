@@ -1,5 +1,4 @@
 #include "DayManager.h"
-#include <sstream>
 #include "../scenes/UIRestaurant.h"
 #include "../structure/GameManager.h"
 #include "ClientsManager.h"
@@ -79,7 +78,7 @@ void DayManager::nextDay() {
 
 	// Leer dayConfig
 
-	std::string line;
+	std::string line = "";
 	while(!file.eof() && line != "begin") {
 		readLine(line);
 	}
@@ -104,12 +103,11 @@ void DayManager::setDay(int x) {
 	if (file.fail()) throw std::exception("Data for days not found.\n");
 	file >> maxDays;
 
-	string line;
-	stringstream d;
-	d << "# Día " << x ;
-	std::getline(file, line);
-	while (!file.eof() && line != d.str()) {
-		std::getline(file, line);
+	string line = "";
+	for(int i = 0; i < x - 1; i++) {
+		while(!file.eof() && line != "end") {
+			readLine(line);
+		}
 	}
 	day = x-1;
 	nextDay();
