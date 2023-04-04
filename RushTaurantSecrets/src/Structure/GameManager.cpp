@@ -17,12 +17,15 @@
 #include "../Scenes/PauseMenu.h"
 #include "../Scenes/OptionsMenu.h"
 #include "../Scenes/EndOfDayScene.h"
-
+#include "../Scenes/GameOverScene.h"
+#include "../Scenes/ContinueMenu.h"
+#include <sstream>
 #include "../Utilities/checkML.h" 
 
 GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
-	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0) { };
+	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),optionsMenu(nullptr),gameOverScene(nullptr),
+	continueMenu(nullptr),menu(nullptr), kitchenIsland(nullptr), twoPlayers(false),
+	hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0) { };
 
 
 void GameManager::initialize() {
@@ -33,6 +36,8 @@ void GameManager::initialize() {
 	
 	mainMenu = new MainMenu();
 	dailyMenu = new DailyMenuScene();
+	gameOverScene = new GameOverScene();
+	
 
 	sdlutils().setResizeFactor(PANTRYSIZE);
 	pantry = new Pantry();
@@ -40,6 +45,7 @@ void GameManager::initialize() {
 	sdlutils().setResizeFactor(RESTSUPERSIZE);
 	pauseMenu = new PauseMenu();
 	optionsMenu = new OptionsMenu();
+	continueMenu = new ContinueMenu();
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
 
@@ -60,8 +66,6 @@ void GameManager::initialize() {
 
 	hasKilled = false;
 	dayTime = false;
-
-
 	changeScene(mainMenu);
 }
 
@@ -74,6 +78,9 @@ GameManager::~GameManager() {
 	delete optionsMenu;
 	delete dailyMenu;
 	delete beforeDayStartScene;
+	delete gameOverScene;
+	delete continueMenu;
+	//delete endScene;
 
 	delete reputation;
 	delete money;
@@ -107,13 +114,15 @@ void GameManager::popScene() {
 		currentScene = previousScene;
 		previousScene = nullptr;
 		sdlutils().setResizeFactor(currentScene->getResizeFactor());
-
 	}
 }
+
 void GameManager::setGameOver(int type) {
-	//gameOverScene->setGameOver(type);
-	//changeScene(gameOverScene);
+	gameOverScene->setGameOver(endingType(type));
+	changeScene(gameOverScene);
 }
+
+
 Scene* GameManager::getCurrentScene() { return currentScene; }
 MainMenu* GameManager::getMainMenu() { return mainMenu; }
 Restaurant* GameManager::getRestaurant() { return restaurant; }
@@ -127,9 +136,11 @@ Money* GameManager::getMoney() { return money; }
 DayManager* GameManager::getDayManager() { return days; }
 OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
 EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
+ContinueMenu* GameManager:: getContinueMenu() { return continueMenu; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
+
 
 void GameManager::setKichenIsland(KitchenIslandComp* KIComp) {
 	kitchenIsland = KIComp;
@@ -147,3 +158,59 @@ void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
 bool GameManager::getHasKill() { return hasKilled; }
 void GameManager::killed() { ++killedNum; }
 void GameManager::setHasKill(bool hKill) { hasKilled = hKill; }
+
+
+void GameManager::save() {
+	//crear y abrir fichero
+	stringstream file;
+	file << "assets/savegame" << twoPlayers << ".rsdat";
+	ofstream write(file.str());
+
+	// información
+	write << days->getDay() << endl;//n dia
+	write << money->getMoney() << endl;
+	write << reputation->getReputation() << endl;
+	write << hasKilled << endl;
+	write << killedNum << endl;
+
+	// Close the file
+	write.close();
+}
+
+void GameManager::load() {
+	ifstream load;
+	int aux;
+	stringstream file;
+	file << "assets/savegame" << twoPlayers << ".rsdat";
+	load.open(file.str());
+	if (!load.is_open()) {}
+	load >> aux;
+	days->setDay(aux);
+
+	load >> aux;
+	money->addMoney(aux - money->getMoney());
+	load >> aux;
+	reputation->addReputatiton(aux - reputation->getReputation());
+	load >> aux;
+	hasKilled = aux;
+	load >> killedNum;
+	load.close();
+}
+
+bool GameManager::checkload() {
+	stringstream file;
+	file << "assets/savegame" << twoPlayers << ".rsdat";
+	ifstream load;
+	load.open(file.str());
+	bool aux = load.is_open();
+	load.close();
+	return aux;
+}
+
+void GameManager::newGame() {
+	days->setDay(1);
+	hasKilled = false;
+	killedNum = 0;
+	money->newGame();
+	reputation->newGame();
+}

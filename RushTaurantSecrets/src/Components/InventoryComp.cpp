@@ -162,3 +162,10 @@ void InventoryComp::nextDish() {
 		i++;
 	}
 }
+
+void InventoryComp::nextDay() {
+	cellSelected = -1;
+	for (auto b : dishesBool) {
+		b = false;
+	}
+}

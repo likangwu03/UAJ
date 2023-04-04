@@ -204,59 +204,11 @@ void UIRestaurant::reputationManager() {
 }
 
 void UIRestaurant::checkStarsArray() {
-	// si la reputación es mayor de ochenta
-	if (actReputation > REP5) {
-		stars[0] = true;
-		stars[1] = true;
-		stars[2] = true;
-		stars[3] = true;
-		stars[4] = true;
-	}
-
-	// si la reputación es mayor de sesenta
-	else if (actReputation > REP4) {
-		stars[0] = true;
-		stars[1] = true;
-		stars[2] = true;
-		stars[3] = true;
-		stars[4] = false;
-	}
-
-	// si la reputación es mayor de cuarenta
-	else if (actReputation > REP3) {
-		stars[0] = true;
-		stars[1] = true;
-		stars[2] = true;
-		stars[3] = false;
-		stars[4] = false;
-	}
-
-	// si la reputación es mayor de veinte
-	else if (actReputation > REP2) {
-		stars[0] = true;
-		stars[1] = true;
-		stars[2] = false;
-		stars[3] = false;
-		stars[4] = false;
-	}
-
-	// si la reputación es mayor de cero
-	else if (actReputation > REP1) {
-		stars[0] = true;
-		stars[1] = false;
-		stars[2] = false;
-		stars[3] = false;
-		stars[4] = false;
-	}
-
-	// si la reputación es cero o menor
-	else if (actReputation < REP0) {
-		stars[0] = false;
-		stars[1] = false;
-		stars[2] = false;
-		stars[3] = false;
-		stars[4] = false;
-	}
+	stars[0] = actReputation > REP1;
+	stars[1] = actReputation > REP2;
+	stars[2] = actReputation > REP3;
+	stars[3] = actReputation > REP4;
+	stars[4] = actReputation > REP5;
 }
 
 void UIRestaurant::checkRenderStar() {
@@ -288,4 +240,5 @@ void UIRestaurant::reset() {
 	startingMoney = moneyTxt->getMoney();
 	currentMoney = -1;
 	showMoneyText();
+	nextDay();
 }

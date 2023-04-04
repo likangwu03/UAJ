@@ -66,7 +66,6 @@ void Ingredients::cookingIngredients() {
 	}
 }
 
-
 void Ingredients::render() {
 	if (!ingredients.empty()) {
 		bubble_tex->renderFrame(dest_bubble, 0, ingredients.size() - 1, 0);
@@ -81,4 +80,8 @@ void Ingredients::render() {
 		}
 	}
 	
+}
+
+void Ingredients::nextDay() {
+	ingredients.clear();
 }

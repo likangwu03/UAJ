@@ -27,6 +27,7 @@ Restaurant::~Restaurant() {
 void Restaurant::reset() {
 	player->getComponent<Transform>()->setPos(INITIAL_POS);
 	ui->reset();
+	nextDay();
 }
 
 void Restaurant::callAfterCreating() {

@@ -91,3 +91,9 @@ void CookingMachineComp::render() {
 		break;
 	}
 }
+
+
+void CookingMachineComp::nextDay() {
+	state = available;
+	dish = _ecs::NONE_DISH;
+}

@@ -8,15 +8,22 @@
 #include "Restaurant.h"
 #include "DailyMenuScene.h"
 #include "OptionsMenu.h"
+#include "ContinueMenu.h"
 #include "../Components/Transform.h"
 #include "../Components/Image.h"
-#include "../Scenes/BeforeDayStartScene.h"
+#include "BeforeDayStartScene.h"
 
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-	GameManager::get()->getDailyMenu()->reset();
+	if (GameManager::get()->checkload()) {
+		GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
+	}
+	else {
+		GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+		GameManager::get()->getDailyMenu()->reset();
+	}
+	
 }
 
 void MainMenu::opt() {

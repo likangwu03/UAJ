@@ -46,5 +46,7 @@ public:
 	bool isEmpty() { return cellsOcuppied == 0; }
 	virtual void render();
 	virtual void handleEvents(); //se encarga de comprobar si ha var¨ªado la selecci¨®n de casilla seg¨²n input y se actualiza cellSelected
+
+	void nextDay()override;
 };
 

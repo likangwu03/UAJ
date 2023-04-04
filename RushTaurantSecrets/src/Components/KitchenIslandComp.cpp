@@ -92,3 +92,8 @@ void KitchenIslandComp::returnIngredient(_ecs::_ingredients_id id) {
 	delete ing[id].f;
 	ing[id].f = new Texture(sdl->renderer(), to_string(ing[id].n), *font, build_sdlcolor(0xFAF2E6ff));
 }
+
+
+void KitchenIslandComp::nextDay() {
+	unselectIng(selected);
+}

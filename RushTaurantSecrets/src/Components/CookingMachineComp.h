@@ -76,6 +76,6 @@ public:
 
 	virtual void update(); //para cocinar
 	virtual void render();
-
+	void nextDay()override;
 };
 

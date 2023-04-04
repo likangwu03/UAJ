@@ -1,5 +1,5 @@
 #include "DayManager.h"
-
+#include <sstream>
 #include "../scenes/UIRestaurant.h"
 #include "../structure/GameManager.h"
 #include "ClientsManager.h"
@@ -7,8 +7,6 @@
 #include "Money.h"
 #include "../scenes/DailyMenuScene.h"
 #include "../Scenes/BeforeDayStartScene.h"
-
-
 #include "../Utilities/checkML.h"
 
 void DayManager::readLine(std::string& line) {
@@ -58,6 +56,8 @@ void DayManager::checkDayFinished() {
 			GameManager::get()->setGameOver(_ecs::Broke);
 		else*/ {
 			nextDay();
+			GameManager::get()->save();
+			GameManager::get()->getDailyMenu()->reset();
 			GameManager::get()->getBeforeDayStart()->reset();
 			//GameManager::get()->getBeforeDayStart()->init();
 			GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
@@ -98,3 +98,22 @@ void DayManager::nextDay() {
 }
 
 int DayManager::getDailyObjective() { return dailyObjective; }
+
+
+void DayManager::setDay(int x) {
+	if (file.is_open()) file.close();
+
+	file.open("assets/dayConfig.rsdat");
+	if (file.fail()) throw std::exception("Data for days not found.\n");
+	file >> maxDays;
+
+	string line;
+	stringstream d;
+	d << "# Día " << x ;
+	std::getline(file, line);
+	while (!file.eof() && line != d.str()) {
+		std::getline(file, line);
+	}
+	day = x-1;
+	nextDay();
+}

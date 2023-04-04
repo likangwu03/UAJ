@@ -21,4 +21,5 @@ public:
 		amount -= n; 
 		decreaseSound->play();
 	}
+	void newGame() {amount = INITIALREPUTATION;}
 };

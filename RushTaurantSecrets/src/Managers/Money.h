@@ -16,4 +16,5 @@ public:
 	void subtractMoney(int num) { amount -= num; }
 	void setPrize(int num) { prize = num; }
 	int getPrize() { return prize; }
+	void newGame() { amount = INITIALANMOUNT; }
 };

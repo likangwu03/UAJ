@@ -17,6 +17,8 @@ class Reputation;
 class Money;
 class DayManager;
 class EndOfDayScene;
+class GameOverScene;
+class ContinueMenu;
 
 class KitchenIslandComp;
 
@@ -33,6 +35,7 @@ public:
 private:
 	const float RESTSUPERSIZE = 0.6666666667;
 	const float PANTRYSIZE = 0.8333333333;
+	
 
 	Scene* currentScene;
 	Scene* previousScene;
@@ -46,6 +49,9 @@ private:
 	PauseMenu* pauseMenu;
 	OptionsMenu* optionsMenu;
 	EndOfDayScene* endScene;
+	GameOverScene* gameOverScene;
+	ContinueMenu* continueMenu;
+
 
 	Reputation* reputation;
 	Money* money;
@@ -58,6 +64,7 @@ private:
 	//bool multiplayer;
 	bool hasKilled;
 	bool mapsCreated;
+	bool twoPlayers;
 	int killedNum; //n¨²mero de ladrones matados en el d¨ªa anterior
 	GameManager();
 
@@ -83,6 +90,7 @@ public:
 	OptionsMenu* getOptionsMenu();
 	BeforeDayStartScene* getBeforeDayStart();
 	EndOfDayScene* getEndOfDay();
+	ContinueMenu* getContinueMenu();
 
 	Reputation* getReputation();
 	Money* getMoney();
@@ -98,4 +106,8 @@ public:
 	void setHasKill(bool hKill);
 	void killed();
 
+	void save();
+	void load();
+	bool checkload();
+	void newGame();
 };

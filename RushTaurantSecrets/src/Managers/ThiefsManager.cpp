@@ -65,3 +65,10 @@ void ThiefsManager::update() {
 void ThiefsManager::stopSound() {
 	warningSound->haltChannel();
 }
+
+void ThiefsManager::nextDay() {
+	stopSound();
+	for (auto t : *thiefs) {
+		t->setAlive(false);
+	}
+}

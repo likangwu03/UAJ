@@ -53,5 +53,7 @@ public:
 	void unselectIng(int i);
 
 	void setIngredients(vector<pair<_ecs::_ingredients_id, int>> _ing);
+
+	void nextDay()override;
 };
 

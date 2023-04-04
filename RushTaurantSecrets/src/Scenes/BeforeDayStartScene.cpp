@@ -2,8 +2,6 @@
 #include "../Structure/GameManager.h"
 #include "../Scenes/DailyMenuScene.h"
 #include "../Managers//DayManager.h"
-
-
 #include "../Utilities/checkML.h"
 
 BeforeDayStartScene::BeforeDayStartScene() {
@@ -68,10 +66,10 @@ void BeforeDayStartScene::reset() {
 	mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
 	delete dayTxt;
 	delete moneyTarget;
-	delete buttonTxt;
+	//delete buttonTxt;  //???
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
-	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
+	//buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF)); //???
 }
 
 void BeforeDayStartScene::toDailyMenu() {

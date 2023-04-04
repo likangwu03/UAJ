@@ -36,10 +36,8 @@ void DailyMenuScene::init() {
 
 void DailyMenuScene::reset() {
 	if (dailyMenu1 != nullptr) {
-	DailyMenu* aux1 = dailyMenu1;
-	DailyMenu* aux2 = dailyMenu2;
-	aux1->setAlive(false);
-	aux2->setAlive(false);
+		dailyMenu1->setAlive(false);
+		dailyMenu2->setAlive(false);
 	}
 	init();
 }

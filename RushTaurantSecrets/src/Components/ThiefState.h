@@ -60,15 +60,22 @@ public:
 		switch (currentState) {
 		case ThiefState::SECRET:
 			// se cambia al final en el que los ladrones han descubierto la fórmula secreta
-			//formulaSound->play();
+			formulaSound->play();
 			parent->setAlive(false);
+			gm->setGameOver(endingType::Robbed);
 			break;
 
 		case ThiefState::FREEZER:
 			// se cambia al final en el que los ladrones han abierto el congelador
 			freezer->isOpen();
 			fridgeSound->play();
-			parent->setAlive(false);
+			if (gm->getHasKill()) {
+			    parent->setAlive(false);	
+				gm->setGameOver(endingType::Caught);
+			}
+			else {
+				currentState = ESCAPE;
+			}			
 			break;
 
 		case DEAD:

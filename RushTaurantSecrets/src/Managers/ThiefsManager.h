@@ -55,4 +55,6 @@ public:
 
 	virtual void update();
 	void stopSound();
+
+	void nextDay()override;
 };

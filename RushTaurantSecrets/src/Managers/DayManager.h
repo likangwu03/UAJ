@@ -18,6 +18,6 @@ public:
 	void checkDayFinished();
 	int getDay();
 	void nextDay();
-
+	void setDay(int x);
 	int getDailyObjective();
 };
