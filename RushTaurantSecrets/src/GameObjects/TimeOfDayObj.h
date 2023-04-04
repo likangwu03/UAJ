@@ -1,7 +1,7 @@
 #pragma once
 #include "../Structure/GameObject.h"
 #include "../Components/Transform.h"
-#include "../Scenes/TimeOfDay.h"
+#include "../Components/TimeOfDay.h"
 #include "../Utilities/SDLUtils.h"
 
 using namespace std;

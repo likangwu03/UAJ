@@ -1,6 +1,5 @@
 #pragma once
 #include "../Structure/Component.h"
-#include "../Structure/Scene.h"
 class Texture;
 class ClockComponent;
 using namespace std;
@@ -11,7 +10,7 @@ private:
 	Texture* afternoon;
 	Texture* night;
 	Texture* topTexture;
-	
+
 public:
 	TimeOfDay(Texture* aftTexture, Texture* nightTexture, GameObject* parent);
 	void update();
