@@ -107,9 +107,9 @@ void Scene::nextDay() {
 }
 
 void Scene::initRender(){
-	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_GENERAL].begin(), objGroups[_grp_id::grp_GENERAL].end());
+	//renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_GENERAL].begin(), objGroups[_grp_id::grp_GENERAL].end());
 	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_PLAYER].begin(), objGroups[_grp_id::grp_PLAYER].end());
-	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_RENDERTOP].begin(), objGroups[_grp_id::grp_RENDERTOP].end());
+	//renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_RENDERTOP].begin(), objGroups[_grp_id::grp_RENDERTOP].end());
 	//renderList.insert(renderList.end(), objGroups[_grp_id::grp_CLIENTS].begin(), objGroups[_grp_id::grp_CLIENTS].end());
 	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_INTERACTABLE].begin(), objGroups[_grp_id::grp_INTERACTABLE].end());
 	std::list<GameObject*>::iterator it = renderListMiddle.begin();
@@ -123,7 +123,6 @@ void Scene::initRender(){
 		}
 	}
 	
-
 	SortList(renderListMiddle);
 	SortList(renderListTop);
 	SortList(renderListDown);

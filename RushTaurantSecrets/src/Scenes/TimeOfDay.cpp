@@ -6,7 +6,7 @@
 #include "../Utilities/SDLUtils.h"
 #include "../Utilities/checkML.h"
 
-TimeOfDay::TimeOfDay(Texture* aftTexture, Texture* nightTexture) : topTexture(nullptr),
+TimeOfDay::TimeOfDay(Texture* aftTexture, Texture* nightTexture, GameObject* parent) :Component(parent,_ecs::cmp_INVALID), topTexture(nullptr),
 	afternoon(aftTexture), night(nightTexture) {}
 
 void TimeOfDay::update() {

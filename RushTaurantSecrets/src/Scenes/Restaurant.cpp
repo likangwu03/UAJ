@@ -8,7 +8,7 @@
 #include "../Managers/ClientsManager.h"
 #include "../Managers/DayManager.h"
 #include "TimeOfDay.h"
-
+#include "../GameObjects/TimeOfDayObj.h"
 #include "../Utilities/checkML.h"
 #include <set>
 
@@ -16,11 +16,12 @@ Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
+	
 }
 
 Restaurant::~Restaurant() {
 	delete ui;
-	delete timeOfDay;
+	//delete timeOfDay;
 	delete cm;
 }
 
@@ -31,6 +32,8 @@ void Restaurant::reset() {
 }
 
 void Restaurant::callAfterCreating() {
+
+	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("restaurantAfternoon"), sdlutils().getLoadedTilesets().at("restaurantNight"));
 	// clientsManager
 	pantry = GameManager::get()->getPantry();
 
@@ -40,6 +43,7 @@ void Restaurant::callAfterCreating() {
 	dm = GameManager::get()->getDayManager();
 
 	createMap();
+
 	initRender();
 
 	initComponent();
@@ -48,7 +52,7 @@ void Restaurant::callAfterCreating() {
 	player->getComponent<PlayerMovementController>()->initP();
 	player->getComponent<Transform>()->setPos(PANTRY_POS);
 
-	timeOfDay = new TimeOfDay(sdlutils().getLoadedTilesets().at("restaurantAfternoon"), sdlutils().getLoadedTilesets().at("restaurantNight") );
+	
 }
 
 
@@ -77,7 +81,7 @@ void Restaurant::createMap() {
 void Restaurant::render() {
 	//Scene::render();
 	renderLayer();
-	timeOfDay->render();
+	//timeOfDay->render();
 	if (ui != nullptr)
 	ui->render();	
 }
@@ -89,7 +93,7 @@ void Restaurant::initComponent() {
 void Restaurant::update() {
 	pantry->_update();
 	Scene::update();
-	timeOfDay->update();
+	//timeOfDay->update();
 	ui->update();
 	cm->update();
 	dm->checkDayFinished();

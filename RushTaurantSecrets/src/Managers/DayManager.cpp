@@ -5,6 +5,7 @@
 #include "ClientsManager.h"
 #include "Reputation.h"
 #include "Money.h"
+#include "../Scenes/Pantry.h"
 #include "../scenes/DailyMenuScene.h"
 #include "../Scenes/BeforeDayStartScene.h"
 #include "../Utilities/checkML.h"

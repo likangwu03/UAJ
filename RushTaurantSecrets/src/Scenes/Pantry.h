@@ -5,7 +5,6 @@
 #include "../Scenes/PantryUI.h"
 
 class Restaurant;
-class TimeOfDay;
 
 class Pantry : public Scene {
 private:
@@ -13,7 +12,6 @@ private:
 	GameObject* player;
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
-	TimeOfDay* timeOfDay;
 	PantryUI* pantryUI;
 
 public:

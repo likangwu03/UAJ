@@ -4,13 +4,12 @@
 #include "../Components/MapCreator.h" 
 #include "../GameObjects/Player.h"
 #include "../Managers/ThiefsManager.h"
-#include "TimeOfDay.h"
+#include "../GameObjects/TimeOfDayObj.h"
 
 #include "../Utilities/checkML.h"
 
 Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI) { init(); }
 Pantry::~Pantry() {
-	delete timeOfDay;
 	delete collisionsManager;
 }
 
@@ -19,6 +18,7 @@ void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 
 	player = new Player(this, 0);
+	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("pantryAfternoon"), sdlutils().getLoadedTilesets().at("pantryNight"));
 	// el update no se ejecuta hasta que se est?en la escena
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
@@ -42,21 +42,18 @@ void Pantry::callAfterCreating() {
 	createMap();
 	initRender();
 	player->getComponent<PlayerMovementController>()->initP();
-	timeOfDay = new TimeOfDay(sdlutils().getLoadedTilesets().at("pantryAfternoon"), sdlutils().getLoadedTilesets().at("pantryNight"));
 
 }
 
 void Pantry::render() {
 	//Scene::render();
 	Scene::renderLayer();
-	timeOfDay->render();
 	pantryUI->render();
 }
 
 void Pantry::update() {
 	rest->_update();
 	Scene::update();
-	timeOfDay->update();
 	collisionsManager->update();
 	pantryUI->update();
 }
