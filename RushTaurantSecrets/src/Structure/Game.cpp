@@ -53,7 +53,7 @@ void Game::handleEvents() {
 	if (ih->closeWindowEvent() || ih->isKeyDown(SDLK_ESCAPE)) {
 		exit = true;
 	}
-	else if (ih->isKeyDown(SDLK_F12)) {
+	else if (ih->isKeyDown(SDLK_F11)) {
 		sdl->toggleFullScreen();
 	}
 	else {

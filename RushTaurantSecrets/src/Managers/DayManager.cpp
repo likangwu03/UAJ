@@ -72,6 +72,7 @@ void DayManager::nextDay() {
 	day++;
 	GameManager::get()->getRestaurant()->nextDay();
 	GameManager::get()->getRestaurant()->getUI()->nextDay();
+	GameManager::get()->getPantry()->nextDay();
 
 	if(day > maxDays) {
 		// Activar final, ya que no hay más días
