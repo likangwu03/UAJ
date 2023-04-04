@@ -69,12 +69,20 @@
       "file": "assets/Sprites/Restaurant/restaurantAfternoon.png"
     },
     {
+      "id": "restaurantAfternoonTop",
+      "file": "assets/Sprites/Restaurant/restaurantAfternoonTop.png"
+    },
+    {
       "id": "pantryAfternoon",
       "file": "assets/Sprites/Restaurant/pantryAfternoon.png"
     },
     {
       "id": "restaurantNight",
       "file": "assets/Sprites/Restaurant/restaurantNight.png"
+    },
+    {
+      "id": "restaurantNightTop",
+      "file": "assets/Sprites/Restaurant/restaurantNightTop.png"
     },
     {
       "id": "pantryNight",
