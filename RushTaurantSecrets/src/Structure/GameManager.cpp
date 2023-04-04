@@ -82,7 +82,8 @@ GameManager::~GameManager() {
 	delete beforeDayStartScene;
 	delete gameOverScene;
 	delete continueMenu;
-	//delete endScene;
+	delete endScene;
+	delete pantryUI;
 
 	delete reputation;
 	delete money;

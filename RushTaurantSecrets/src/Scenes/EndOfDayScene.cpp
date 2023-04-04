@@ -33,11 +33,11 @@ EndOfDayScene::EndOfDayScene() {
 
 EndOfDayScene::~EndOfDayScene() {
 
-	delete backgroundT;
-	delete gameOverT;
-	delete reputationT;
-	delete font1;
-	delete font2;
+	//delete backgroundT;
+	//delete gameOverT;
+	//delete reputationT;
+	//delete font1;
+	//delete font2;
 
 }
 
