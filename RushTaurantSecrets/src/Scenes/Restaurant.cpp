@@ -33,7 +33,7 @@ void Restaurant::reset() {
 void Restaurant::callAfterCreating() {
 
 	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("restaurantAfternoon"), sdlutils().getLoadedTilesets().at("restaurantNight"));
-	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("restaurantAfternoonTop"), sdlutils().getLoadedTilesets().at("restaurantNightTop"));
+	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("restaurantAfternoonTop"), sdlutils().getLoadedTilesets().at("restaurantNightTop"),Top);
 
 	// clientsManager
 	pantry = GameManager::get()->getPantry();
