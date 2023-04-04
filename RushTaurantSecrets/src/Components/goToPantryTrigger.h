@@ -8,6 +8,8 @@ class Image;
 class GoToPantryTrigger : public TriggerComp {
 private:
 	const Vector PANTRY_POS = { 800, 580 };
+	// hacer global
+	const int MUSIC_VOL = 30;
 
 	GameManager* gm;
 	GameObject* playerRestaurant;
@@ -15,6 +17,9 @@ private:
 	Transform* playerPantryTransform;
 	Image* image;
 	SoundEffect* doorSound;
+
+	SDLUtils* sdl;
+	Music* pantryMusic;
 public:
 	GoToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 	virtual void isOverlapping();

@@ -15,6 +15,9 @@ private:
 	Transform* playerRestaurantTransform;
 	Image* image;
 	SoundEffect* doorSound;
+
+	SDLUtils* sdl;
+	Music* pantryMusic;
 public:
 	PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 	virtual void isOverlapping();

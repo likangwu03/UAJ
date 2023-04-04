@@ -24,7 +24,6 @@ private:
 	
 	GameObject* player;
 
-
 	vector<_ecs::_dish_id> menu() const;
 	//vector<_ecs::_dish_id> dailyMenu;
 
