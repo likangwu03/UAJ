@@ -2,7 +2,7 @@
 #include "../Utilities/checkML.h"
 
 ClockComponent::ClockComponent(GameObject* parent) :
-	Component(parent, id), sdl(SDLUtils::instance()), elapsedTime(0), numFullClock(0){
+	Manager(parent), sdl(SDLUtils::instance()), elapsedTime(0), numFullClock(0) {
 
 	fillData(clock, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2);
 	fillData(arrow, "ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE);

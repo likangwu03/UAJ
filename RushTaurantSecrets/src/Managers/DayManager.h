@@ -5,7 +5,6 @@
 
 class DayManager {
 private:
-	ClockComponent* clock;
 	int day, maxDays;
 	std::ifstream file;
 	int dailyObjective;

@@ -7,15 +7,12 @@
 #include "../Utilities/checkML.h"
 
 TimeOfDay::TimeOfDay(Texture* aftTexture, Texture* nightTexture) : topTexture(nullptr),
-	afternoon(aftTexture), night(nightTexture)
-{
-	clock = GameManager::get()->getRestaurant()->getUI()->getClock()->getComponent<ClockComponent>();
-}
+	afternoon(aftTexture), night(nightTexture) {}
 
 void TimeOfDay::update() {
-	if (clock->getRotation() >= AFTERNOON && clock->getRotation() <= NIGHT) 
+	if (ClockComponent::get()->getRotation() >= AFTERNOON && ClockComponent::get()->getRotation() <= NIGHT)
 		topTexture = afternoon;
-	else if (clock->getRotation() >= NIGHT)
+	else if (ClockComponent::get()->getRotation() >= NIGHT)
 		topTexture = night;
 	else 
 		topTexture = nullptr;

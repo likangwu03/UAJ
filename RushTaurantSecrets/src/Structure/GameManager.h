@@ -19,6 +19,7 @@ class DayManager;
 class EndOfDayScene;
 class GameOverScene;
 class ContinueMenu;
+class PantryUI;
 
 class KitchenIslandComp;
 
@@ -51,6 +52,7 @@ private:
 	EndOfDayScene* endScene;
 	GameOverScene* gameOverScene;
 	ContinueMenu* continueMenu;
+	PantryUI* pantryUI;
 
 
 	Reputation* reputation;

@@ -46,7 +46,7 @@ private:
 	// se utiliza para indicar si la mesas est�n ocupadas o no 
 	// pasandole el grupo que se sienta en ella
 	array<DeskComp*, _ecs::NUM_TABLES> tables;
-	ClockComponent* clock;
+	//ClockComponent* clock;
 
 	// a�adir un cliente cada cierto tiempo
 	void addFrequently();

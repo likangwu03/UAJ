@@ -8,7 +8,7 @@
 
 #include "../Utilities/checkML.h"
 
-Pantry::Pantry() :rest(nullptr) { init(); }
+Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI) { init(); }
 Pantry::~Pantry() {
 	delete timeOfDay;
 	delete collisionsManager;
@@ -25,7 +25,7 @@ void Pantry::init() {
 	ThiefsManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
 
 	initRender();
-	Scene::initComponent();
+	Scene::initComponent();	
 }
 
 void Pantry::createMap() {
@@ -50,6 +50,7 @@ void Pantry::render() {
 	//Scene::render();
 	Scene::renderLayer();
 	timeOfDay->render();
+	pantryUI->render();
 }
 
 void Pantry::update() {
@@ -57,6 +58,7 @@ void Pantry::update() {
 	Scene::update();
 	timeOfDay->update();
 	collisionsManager->update();
+	pantryUI->update();
 }
 
 void Pantry::_update() {

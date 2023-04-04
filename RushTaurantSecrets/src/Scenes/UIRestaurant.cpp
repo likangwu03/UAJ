@@ -181,9 +181,8 @@ void UIRestaurant::showMoneyText() {
 void UIRestaurant::update() {
 	Scene::update();
 	showMoneyText();
-	//checkTime();
 	reputationManager();
-	//updateClock();
+	ClockComponent::get()->update();
 }
 
 void UIRestaurant::renderStar(int x, int y) {
@@ -233,10 +232,11 @@ void UIRestaurant::render() {
 	
 	Scene::render();
 	checkRenderStar();
+	ClockComponent::get()->render();
 }
 
 void UIRestaurant::reset() {
-	clock->getComponent<ClockComponent>()->reset();
+	ClockComponent::get()->reset();
 	startingMoney = moneyTxt->getMoney();
 	currentMoney = -1;
 	showMoneyText();

@@ -29,10 +29,6 @@ int DayManager::to_int(std::string str) {
 }
 
 DayManager::DayManager() : day(0), timeUpSound(&sdlutils().soundEffects().at("TIME_UP")) {
-	// clock
-	clock = GameManager::get()->getRestaurant()->getUI()->getClock()->getComponent<ClockComponent>();
-	assert(clock != nullptr);
-
 	// file
 	file.open("assets/dayConfig.rsdat");
 	if(file.fail()) throw std::exception("Data for days not found.\n");
@@ -49,7 +45,7 @@ DayManager::~DayManager() {
 }
 
 void DayManager::checkDayFinished() {
-	if(clock->dayHasFinished() && ClientsManager::get()->noClients()) {
+	if(ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients()) {
 		/*if(GameManager::get()->getReputation()->getReputation() < 0)
 			GameManager::get()->setGameOver(_ecs::BadRep);
 		else if (GameManager::get()->getMoney()->getMoney() < 0)

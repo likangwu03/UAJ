@@ -19,6 +19,7 @@
 #include "../Scenes/EndOfDayScene.h"
 #include "../Scenes/GameOverScene.h"
 #include "../Scenes/ContinueMenu.h"
+#include "../Scenes/PantryUI.h"
 #include <sstream>
 #include "../Utilities/checkML.h" 
 
@@ -40,7 +41,8 @@ void GameManager::initialize() {
 	
 
 	sdlutils().setResizeFactor(PANTRYSIZE);
-	pantry = new Pantry();
+	pantryUI = new PantryUI();
+	pantry = new Pantry(pantryUI);
 
 	sdlutils().setResizeFactor(RESTSUPERSIZE);
 	pauseMenu = new PauseMenu();

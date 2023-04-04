@@ -8,7 +8,7 @@
 
 void ClientsManager::addFrequently() {
 	// se crea un grupo si: el día no ha terminado y el restaurante y la cola de entrada no están llenas
-	if (!clock->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
+	if (!ClockComponent::get()->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 		elapsedTime += deltaTime;
 
 		if (elapsedTime > timer) {
@@ -206,7 +206,6 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 		throw new string("Error conversión Scene en UIRestaurant");
 	}
 	GameObject* c = uiRest->getGameObject(_ecs::hdr_CLOCK);
-	clock = c->getComponent<ClockComponent>();
 
 	sdl = SDLUtils::instance();
 }

@@ -11,8 +11,6 @@ private:
 	Texture* afternoon;
 	Texture* night;
 	Texture* topTexture;
-
-	ClockComponent* clock;
 	
 public:
 	TimeOfDay(Texture* aftTexture, Texture* nightTexture);

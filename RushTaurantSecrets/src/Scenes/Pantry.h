@@ -1,6 +1,9 @@
 #pragma once
 #include "../Structure/Scene.h"
 #include "../Managers/CollisionsManager.h"
+#include "../GameObjects/Clock.h"
+#include "../Scenes/PantryUI.h"
+
 class Restaurant;
 class TimeOfDay;
 
@@ -11,9 +14,10 @@ private:
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
 	TimeOfDay* timeOfDay;
+	PantryUI* pantryUI;
 
 public:
-	Pantry();
+	Pantry(PantryUI* pUI);
 	~Pantry();
 	void render();
 	void update();
