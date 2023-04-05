@@ -53,6 +53,7 @@ void GameManager::initialize() {
 
 	try {
 		days = new DayManager();
+		days->nextDay();
 	} catch(std::exception e) { std::cout << e.what(); }
 
 	beforeDayStartScene = new BeforeDayStartScene();

@@ -2,6 +2,7 @@
 
 #include "../Structure/GameManager.h"
 #include "../Managers/Reputation.h"
+#include "../Managers/DayManager.h"
 #include "../Utilities/checkML.h"
 
 ClientState::ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu) :
@@ -11,6 +12,8 @@ ClientState::ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu) :
 {
 	availableDishes = menu;
 	render->clientStateIsReady(); //decirle que ya esta creado
+	decreaseFreq = GameManager::get()->getDayManager()->getHappinessFrequency();
+	reputationDecrease = GameManager::get()->getDayManager()->getReputationDecrease();
 }
 
 ClientState::States ClientState::getState() const { return state; }
@@ -27,7 +30,7 @@ void ClientState::update() {
 	if (state == ENTRANCE || state == TAKEMYORDER || state == ORDERED || state == PAYING || state == FINISH_EAT) {
 		
 		timer += deltaTime;
-		if (timer > DECREASEFREQ) {
+		if (timer > decreaseFreq) {
 			timer = 0;
 			happiness--;
 		}
@@ -35,7 +38,7 @@ void ClientState::update() {
 		// Si la felicidad llega a 0, se pone el estado a OUT
 		if (happiness <= 0) {
 			if(state < FINISH_EAT)
-				GameManager::get()->getReputation()->reduceReputation(5);
+				GameManager::get()->getReputation()->reduceReputation(reputationDecrease);
 			setState(OUT);
 			render->renderFinishEatState();
 #ifdef _DEBUG

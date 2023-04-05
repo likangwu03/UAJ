@@ -150,4 +150,6 @@ public:
 	virtual void update();
 
 	void initComponent();
+
+	void nextDay();
 };

@@ -53,6 +53,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	startingMoney = currentMoney = moneyTxt->getMoney();
 	// icono
 	createIcon("MONEY_ICON", Vector(ICONX, ICONY * 2 + ICONSIZE), ICONSIZE, ICONSIZE, 0, grp_ICONS);
+	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS);
 	// Texto
 	std::string strMoney = std::to_string(currentMoney);
 	moneyTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
@@ -61,7 +62,9 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyOutlineRect = moneyRect;
 	moneyOutlineRect.x -= CENTEROUTLINE/2; moneyOutlineRect.w += CENTEROUTLINE;
 	moneyOutlineRect.y -= CENTEROUTLINE/2; moneyOutlineRect.h += CENTEROUTLINE;
-
+	// Se crea para que no de problemas
+	objectiveTexture = new Texture(sdl->renderer(), "a", *font, build_sdlcolor(0x3a3a50FF));
+	objectiveOutline = new Texture(sdl->renderer(), "a", *outline, build_sdlcolor(0xFFFFFFFF));
 
 	// inventario (fondo)
 	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
@@ -103,21 +106,6 @@ UIRestaurant::~UIRestaurant() {
 	delete moneyOutline;
 	delete objectiveTexture;
 	delete objectiveOutline;
-}
-
-void UIRestaurant::callAfterCreating() {
-	// Objetivo diario
-	intObjective = GameManager::get()->getDayManager()->getDailyObjective(); moneyDiff = 0;
-	// Icono
-	createIcon("TARGET_ICON", Vector(ICONX, ICONY * 3 + ICONSIZE * 2), ICONSIZE, ICONSIZE, 0, grp_ICONS);
-	// Texto
-	std::string strObjective = "0/" + std::to_string(intObjective);
-	objectiveTexture = new Texture(sdl->renderer(), strObjective, *font, build_sdlcolor(0x3a3a50FF));
-	objectiveOutline = new Texture(sdl->renderer(), strObjective, *outline, build_sdlcolor(0xFFFFFFFF));
-	objectiveRect = { 80, (int)(ICONY * 3 + ICONSIZE * 2), objectiveTexture->width(), objectiveTexture->height() };
-	objectiveOutlineRect = objectiveRect;
-	objectiveOutlineRect.x -= CENTEROUTLINE / 2; objectiveOutlineRect.w += CENTEROUTLINE;
-	objectiveOutlineRect.y -= CENTEROUTLINE / 2; objectiveOutlineRect.h += CENTEROUTLINE;
 }
 
 GameObject* UIRestaurant::dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
@@ -240,5 +228,19 @@ void UIRestaurant::reset() {
 	startingMoney = moneyTxt->getMoney();
 	currentMoney = -1;
 	showMoneyText();
-	nextDay();
+}
+
+void UIRestaurant::nextDay() {
+	intObjective = GameManager::get()->getDayManager()->getDailyObjective(); moneyDiff = 0;
+	
+	delete objectiveTexture;
+	delete objectiveOutline;
+	std::string strObj = std::to_string(moneyDiff) + "/" + std::to_string(intObjective);
+	objectiveTexture = new Texture(sdl->renderer(), strObj, *font, build_sdlcolor(0x3a3a50FF));
+	objectiveOutline = new Texture(sdl->renderer(), strObj, *outline, build_sdlcolor(0xFFFFFFFF));
+	objectiveRect = { 80, (int)(ICONY * 3 + ICONSIZE * 2), objectiveTexture->width(), objectiveTexture->height() };
+	objectiveOutlineRect = objectiveRect;
+	objectiveOutlineRect.x -= CENTEROUTLINE / 2; objectiveOutlineRect.w += CENTEROUTLINE;
+	objectiveOutlineRect.y -= CENTEROUTLINE / 2; objectiveOutlineRect.h += CENTEROUTLINE;
+	Scene::nextDay();
 }

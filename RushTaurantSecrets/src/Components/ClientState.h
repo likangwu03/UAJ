@@ -41,7 +41,7 @@ private:
 	States state;
 
 	const int THINKINGTIME = 5000, EATINGTIME = 5000;
-	const float DECREASEFREQ = 1000;
+	float decreaseFreq, reputationDecrease;
 	float happiness, timer;
 
 	vector<_ecs::DishInfo>* availableDishes;

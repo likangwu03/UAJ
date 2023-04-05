@@ -72,7 +72,6 @@ private:
 public:
 	UIRestaurant();
 	~UIRestaurant();
-	void callAfterCreating();
 
 	Inventory* getInventory() const { return inventory; };
 	void showMoneyText();
@@ -86,4 +85,5 @@ public:
 	void update();
 	void render();
 	void reset();
+	void nextDay();
 };

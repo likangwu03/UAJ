@@ -1,4 +1,5 @@
 #include "ThiefsManager.h"
+#include "DayManager.h"
 
 #include "../Utilities/checkML.h"
 
@@ -71,4 +72,7 @@ void ThiefsManager::nextDay() {
 	for (auto t : *thiefs) {
 		t->setAlive(false);
 	}
+
+	minFrec = GameManager::get()->getDayManager()->getMinThiefFrequency();
+	maxFrec = GameManager::get()->getDayManager()->getMaxThiefFrequency();
 }

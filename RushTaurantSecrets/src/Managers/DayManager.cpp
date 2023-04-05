@@ -13,7 +13,7 @@ void DayManager::readLine(std::string& line) {
 	do {
 		std::getline(file, line);
 		while(!line.empty() && line[0] == '\t') line = line.substr(1);
-	} while(!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee est?vacía o es un comentario (empieza con '#'), se lee la siguiente.
+	} while(!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee está vacía o es un comentario (empieza con '#'), se lee la siguiente.
 	if(file.eof()) { line = ""; }
 }
 
@@ -28,12 +28,30 @@ int DayManager::to_int(std::string str) {
 	return i;
 }
 
+float DayManager::to_float(std::string str) {
+	int i = 0; float j = 0;
+	bool decimal = false;
+
+	for(auto& ch : str) {
+		if(ch < '0' || ch > '9') {
+			if(!decimal && ch != '.') return -1;
+			decimal = true;
+		} else if(decimal) {
+			j = j * 10 + ch - '0';
+		} else {
+			i = i * 10 + ch - '0';
+		}
+	}
+	while(j >= 1) j /= 10;
+
+	return i + j;
+}
+
 DayManager::DayManager() : day(0), timeUpSound(&sdlutils().soundEffects().at("TIME_UP")) {
 	// file
 	file.open("assets/dayConfig.rsdat");
 	if(file.fail()) throw std::exception("Data for days not found.\n");
 	file >> maxDays;
-	nextDay();
 
 #ifdef _DEBUG
 	std::cout << "DayManager initiated.\n";
@@ -62,13 +80,8 @@ void DayManager::checkDayFinished() {
 	}
 }
 
-int DayManager::getDay() { return day; }
-
 void DayManager::nextDay() {
 	day++;
-	GameManager::get()->getRestaurant()->nextDay();
-	GameManager::get()->getRestaurant()->getUI()->nextDay();
-	GameManager::get()->getPantry()->nextDay();
 
 	if(day > maxDays) {
 		// Activar final, ya que no hay más días
@@ -89,18 +102,29 @@ void DayManager::nextDay() {
 		// Recoger los parámetros de este día
 		if(line.substr(0, 9) == "objective") {
 			dailyObjective = to_int(line.substr(10));
+		} else if(line.substr(0, 15) == "clientFrequency") {
+			clientFrequency = to_float(line.substr(16));
+		} else if(line.substr(0, 18) == "happinessFrequency") {
+			happinessFrequency = to_float(line.substr(19));
+		} else if(line.substr(0, 18) == "reputationDecrease") {
+			reputationDecrease = to_float(line.substr(19));
+		} else if(line.substr(0, 21) == "minimumThiefFrequency") {
+			minimumThiefFrequency = to_float(line.substr(22));
+		} else if(line.substr(0, 21) == "maximumThiefFrequency") {
+			maximumThiefFrequency = to_float(line.substr(22));
 		}
 	}
+
+	GameManager::get()->getRestaurant()->nextDay();
+	GameManager::get()->getRestaurant()->getUI()->nextDay();
+	GameManager::get()->getPantry()->nextDay();
 }
 
-int DayManager::getDailyObjective() { return dailyObjective; }
-
-
 void DayManager::setDay(int x) {
-	if (file.is_open()) file.close();
+	if(file.is_open()) file.close();
 
 	file.open("assets/dayConfig.rsdat");
-	if (file.fail()) throw std::exception("Data for days not found.\n");
+	if(file.fail()) throw std::exception("Data for days not found.\n");
 	file >> maxDays;
 
 	string line = "";
@@ -109,6 +133,14 @@ void DayManager::setDay(int x) {
 			readLine(line);
 		}
 	}
-	day = x-1;
+	day = x - 1;
 	nextDay();
 }
+
+int DayManager::getDay() { return day; }
+int DayManager::getDailyObjective() { return dailyObjective; }
+float DayManager::getClientFrequency() { return clientFrequency; }
+float DayManager::getHappinessFrequency() { return happinessFrequency; }
+float DayManager::getReputationDecrease() { return reputationDecrease; }
+float DayManager::getMinThiefFrequency() { return minimumThiefFrequency; }
+float DayManager::getMaxThiefFrequency() { return maximumThiefFrequency; }

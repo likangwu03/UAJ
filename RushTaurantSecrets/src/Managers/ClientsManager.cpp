@@ -3,6 +3,7 @@
 
 #include "../Structure/GameManager.h"
 #include "../Scenes/Restaurant.h"
+#include "DayManager.h"
 
 #include "../Utilities/checkML.h"
 
@@ -300,4 +301,8 @@ void ClientsManager::update() {
 	checkHappinessPay();
 
 	refreshClientsGroup();
+}
+
+void ClientsManager::nextDay() {
+	timer = GameManager::get()->getDayManager()->getClientFrequency();
 }
