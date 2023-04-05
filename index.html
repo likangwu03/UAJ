@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+    body, html {
+        height: 100%
+    }
+
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Amatic SC", sans-serif
+    }
+
+    .menu {
+        display: none
+    }
+
+    .bgimg {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("./RushTaurantSecrets/assets/website_header.png");
+        min-height: 90%;
+    }
+</style>
+<head>
+<body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top w3-hide-small">
+        <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
+            <a href="#" class="w3-bar-item w3-button">HOME</a>
+            <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+            <a href="#download" class="w3-bar-item w3-button">DOWNLOAD</a>
+            <a href="#aboutus" class="w3-bar-item w3-button">ABOUT US</a>
+        </div>
+    </div>
+
+    <!-- Header with image -->
+    <header class="bgimg w3-display-container w3-grayscale-min" id="home">
+        <div class="w3-display-bottomleft w3-padding">
+            <span class="w3-tag w3-xlarge">Made with love by Nightmare Dogs</span>
+        </div>
+        <div class="w3-display-middle w3-center">
+            <span class="w3-text-white w3-hide-small" style="font-size:100px">RUSHTAURANT<br>SECRETS</span>
+            <p><a href="#download" class="w3-button w3-xxlarge w3-black">Download now for free!</a></p>
+        </div>
+    </header>
+
+    <!-- About Container -->
+    <div class="w3-container w3-padding-64 w3-red w3-grayscale w3-xlarge" id="about">
+        <div class="w3-content">
+            <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">About</h1>
+            <p>Rushtaurant Secrets is a <strong>top down 2D kitchen simulator game</strong>. You play as a young, ambitious girl that has recently become orphaned. After your parent's deaths under mysterious circumstances, you decide to reopen your parent's old business, an old restaurant. Soon after the reopening, you discover the reason why the restaurant was clased in the first place. The rival restaurants in the area are trying to steal the restaurant's source of success: the secret formula!</p>
+            <p>Will you be able to stop your greedy competitors?<img src="./RushTaurantSecrets/assets/Sprites/UI/HUD/heart.png" ></p>
+            <p>Find out yoursef!</p>
+        </div>
+    </div>
+
+    <!-- Image of location/map -->
+    <img src="./RushTaurantSecrets/assets/Download_image.png" class="w3-image w3-greyscale" style="width:100%;" id="download">
+
+    <!-- Contact -->
+    <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="aboutus">
+        <div class="w3-content">
+            <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">About us</h1>
+            <p>We are a team of videogame developers based in Spain. We are currently a team of 9 members ready to take on the world</p>
+            <p><span class="w3-tag">Our members:</span></p>
+            <ul class="w3-ul">
+                <li>Matt Castellanos Silva</li>
+                <li>Pedro León Miranda</li>
+                <li>Francisco Mollá Astrar</li>
+                <li>Nanxi Qin</li>
+                <li>Muxu Rubia Luque</li>
+                <li>María Sachez Carrasco</li>
+                <li>Santiago Tienda Pérus</li>
+                <li>Jianuo Wen</li>
+                <li>Likang Wu</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
+        <p>Our <a href="https://github.com/UCM-FDI-DISIA/Nightmare-Dogs" title="GitHub" target="_blank" class="w3-hover-text-green">GitHub</a></p>
+    </footer>
+
+    <script>// Tabbed Menu
+function openMenu(evt, menuName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menu");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(menuName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-red";
+}
+document.getElementById("myLink").click();</script>
+
+</body>
+<html>
+
+</html>
+</head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
