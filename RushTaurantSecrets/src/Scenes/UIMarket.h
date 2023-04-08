@@ -50,5 +50,7 @@ public:
 	void setDailyMenu();
 
 	virtual Scene* getConnectedScene() { return market; }
+
+	BasketMarket* basketM();
 };
 

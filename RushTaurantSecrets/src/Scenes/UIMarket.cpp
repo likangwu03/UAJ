@@ -128,3 +128,7 @@ void UIMarket::setDailyMenu() {
 	menu->getComponent<DailyMenuComp>()->setMenu(GameManager::instance()->getTodaysMenu());
 }
 
+BasketMarket* UIMarket::basketM() {
+	return basketMarket;
+}
+

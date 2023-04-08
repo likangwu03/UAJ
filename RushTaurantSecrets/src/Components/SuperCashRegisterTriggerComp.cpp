@@ -6,6 +6,7 @@
 #include "../Components/ShoppingMenuComp.h"
 #include "../Scenes/SuperMarket.h"
 
+
 #include "../Utilities/checkML.h"
 
 SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :
@@ -18,7 +19,14 @@ SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, V
 
 void SuperCashRegisterTriggerComp::isOverlapping() {
 	highlight->setActive(true);
-	
+
+	if (bM == nullptr) {
+		bM = dynamic_cast<SuperMarket*>(parent->getScene())->getBM();
+		bMC = bM->getComponent<BasketMarketComponent>();
+		if (!bMC->getBasketON())
+			bMC->setBasketON(true);
+	}
+
 	// cleon: mejor en 1 if
 	if (ih->joysticksInitialised()) {
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
@@ -27,16 +35,18 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 			payAndLeave();
 		}
 	}
-	else if (ih->isKeyDown(SDLK_SPACE)) {
+ 	else if (ih->isKeyDown(SDLK_SPACE)) {
 		money->subtractMoney(money->getPrize());
 		money->setPrize(0);
 		payAndLeave();
-
 	}
 }
 
 void SuperCashRegisterTriggerComp::onTriggerExit() {
-	highlight->setActive(false); return;
+	highlight->setActive(false);
+	bMC->setBasketON(false);
+	bM = nullptr;
+	bMC = nullptr;
 }
 
 void SuperCashRegisterTriggerComp::payAndLeave() {

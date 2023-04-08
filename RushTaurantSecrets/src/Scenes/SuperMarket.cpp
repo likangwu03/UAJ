@@ -59,3 +59,7 @@ void SuperMarket::reset() {
 	playerTransform->setPos(INITIAL_POS);
 	playerTransform->setOrientation(west);
 }
+
+BasketMarket* SuperMarket::getBM() {
+	return uiMarket->basketM();
+}

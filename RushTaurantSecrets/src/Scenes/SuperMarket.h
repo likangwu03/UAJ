@@ -37,4 +37,5 @@ public:
 	float getResizeFactor() { return RESIZEFACTOR; }
 	void createMap();
 
+	BasketMarket* getBM();
 };
