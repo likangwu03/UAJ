@@ -8,7 +8,7 @@
     {
       "n": 2,
       "Character": "Parents",
-      "Text": "… (No response)"
+      "Text": "..."
     },
     {
       "n": 3,
@@ -18,7 +18,7 @@
     {
       "n": 4,
       "Character": "Parents",
-      "Text": "… (No response)"
+      "Text": "..."
     },
     {
       "n": 5,
@@ -28,19 +28,12 @@
     {
       "n": 6,
       "Character": "Parents",
-      "Text": "… (No response)"
+      "Text": "..."
     },
     {
       "n": 7,
       "Character": "Player",
       "Text": "All I want is to make you guys happy, I want to make you two proud."
-    }
-  ],
-  "Day 1 introduction": [
-    {
-      "n": 1,
-      "Character": "Player",
-      "Text": "Today is the day of the inauguration, I hope everything goes well. I’ll make sure to notify my pops’ old friends. They were all really excited about this, so they’ll surely come to say hi."
     }
   ]
 }

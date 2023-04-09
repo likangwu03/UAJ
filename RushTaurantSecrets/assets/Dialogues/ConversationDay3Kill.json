@@ -1,0 +1,39 @@
+{
+  "Day 3 kill dialogue": [
+    {
+      "n": 1,
+      "Character": "Player",
+      "Text": "Mom, dad, I wasn’t able to hold back. I promised you I wouldn’t hurt a living being ever again, but I broke my promise."
+    },
+    {
+      "n": 2,
+      "Character": "Parents",
+      "Text": "..."
+    },
+    {
+      "n": 3,
+      "Character": "Player",
+      "Text": "It was for a good reason. You two loved the restaurant, it was so important to you, I need to protect it."
+    },
+    {
+      "n": 4,
+      "Character": "Parents",
+      "Text": "..."
+    },
+    {
+      "n": 5,
+      "Character": "Player",
+      "Text": "Family always goes first, it’s what you taught me… I had to cross the line, it was for a good reason, I can’t let the restaurant close."
+    },
+    {
+      "n": 6,
+      "Character": "Parents",
+      "Text": "..."
+    },
+    {
+      "n": 7,
+      "Character": "Player",
+      "Text": "I Will do as I promised, I won’t let anyone laugh at this place… Not while I’m alive."
+    }
+  ]
+}
