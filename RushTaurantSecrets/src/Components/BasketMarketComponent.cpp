@@ -59,7 +59,7 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int ad
 
 void BasketMarketComponent::renderBasket() {
 	// renderiza menú de cesta
-	renderTexture(basketPosX, basketPosY, factorX*BASKET_SIZE, factorY*BASKET_SIZE - 100, "BASKET_LIST");
+	renderTexture(basketPosX, basketPosY, BASKET_SIZE, BASKET_SIZE - 100, "BASKET_LIST");
 	SDL_Rect dest;
 
 	// render de precio total
