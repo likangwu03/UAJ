@@ -10,7 +10,12 @@
 
 Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), 
 pantryMusic(&sdl->musics().at("PANTRY_MUSIC"))
-{ init(); }
+{ 
+	init();
+	pantryMusic->setMusicVolume(MUSIC_VOL);
+	restaurantMusic->setMusicVolume(MUSIC_VOL);
+}
+
 Pantry::~Pantry() {
 	delete collisionsManager;
 }

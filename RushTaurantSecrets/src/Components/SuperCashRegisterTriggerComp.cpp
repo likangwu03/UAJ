@@ -15,6 +15,7 @@ SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, V
 	highlight = parent->getComponent<Image>();
 	highlight->setActive(false);
 	money = GameManager::get()->getMoney();
+	restaurantMusic->setMusicVolume(MUSIC_VOL);
 };
 
 void SuperCashRegisterTriggerComp::isOverlapping() {

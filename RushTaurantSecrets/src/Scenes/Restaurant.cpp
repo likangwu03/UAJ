@@ -16,7 +16,8 @@ pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
-	
+	pantryMusic->setMusicVolume(MUSIC_VOL);
+	restaurantMusic->setMusicVolume(MUSIC_VOL);
 }
 
 Restaurant::~Restaurant() {

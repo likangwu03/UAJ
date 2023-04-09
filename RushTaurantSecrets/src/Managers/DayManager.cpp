@@ -54,6 +54,7 @@ sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")
 	file.open("assets/dayConfig.rsdat");
 	if(file.fail()) throw std::exception("Data for days not found.\n");
 	file >> maxDays;
+	restaurantMusic->setMusicVolume(MUSIC_VOL);
 
 #ifdef _DEBUG
 	std::cout << "DayManager initiated.\n";

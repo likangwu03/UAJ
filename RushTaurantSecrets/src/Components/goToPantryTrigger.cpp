@@ -19,6 +19,7 @@ GoToPantryTrigger::GoToPantryTrigger(GameObject* parent, Vector pos_, float widt
 	image = parent->getComponent<Image>();
 	image->setActive(false);
 	pantryMusic->setMusicVolume(MUSIC_VOL);
+	restaurantMusic->setMusicVolume(MUSIC_VOL);
 }
 
 void GoToPantryTrigger::isOverlapping() {
