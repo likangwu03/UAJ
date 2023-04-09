@@ -8,7 +8,9 @@
 
 #include "../Utilities/checkML.h"
 
-Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI) { init(); }
+Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), 
+pantryMusic(&sdl->musics().at("PANTRY_MUSIC"))
+{ init(); }
 Pantry::~Pantry() {
 	delete collisionsManager;
 }
@@ -67,6 +69,8 @@ void Pantry::_update() {
 void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		GameManager::get()->changeScene(GameManager::get()->getRestaurant());
+		pantryMusic->pauseMusic();
+		restaurantMusic->play();
 	}
 	else {
 		Scene::handleEvents();

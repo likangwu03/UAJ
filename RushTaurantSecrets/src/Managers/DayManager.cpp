@@ -47,7 +47,9 @@ float DayManager::to_float(std::string str) {
 	return i + j;
 }
 
-DayManager::DayManager() : day(0), timeUpSound(&sdlutils().soundEffects().at("TIME_UP")) {
+DayManager::DayManager() : day(0), timeUpSound(&sdlutils().soundEffects().at("TIME_UP")),
+sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC"))
+{
 	// file
 	file.open("assets/dayConfig.rsdat");
 	if(file.fail()) throw std::exception("Data for days not found.\n");
@@ -75,6 +77,7 @@ void DayManager::checkDayFinished() {
 			GameManager::get()->getBeforeDayStart()->reset();
 			//GameManager::get()->getBeforeDayStart()->init();
 			GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
+			restaurantMusic->pauseMusic();
 			timeUpSound->play();
 		}
 	}

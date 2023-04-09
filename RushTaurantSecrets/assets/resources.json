@@ -865,6 +865,10 @@
     {
       "id": "PANTRY_MUSIC",
       "file": "assets/Music/pantry2.mp3"
+    },
+    {
+      "id": "RESTAURANT_MUSIC",
+      "file": "assets/Music/restaurant_super1.mp3"
     }
   ]
 }

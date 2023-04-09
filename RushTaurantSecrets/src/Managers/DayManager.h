@@ -13,6 +13,9 @@ private:
 	void readLine(std::string& line);
 	static int to_int(std::string str);
 	static float to_float(std::string str);
+
+	SDLUtils* sdl;
+	Music* restaurantMusic;
 public:
 	DayManager();
 	~DayManager();

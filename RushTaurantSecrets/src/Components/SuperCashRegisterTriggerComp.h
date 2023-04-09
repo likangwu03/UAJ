@@ -15,6 +15,9 @@ private:
 	BasketMarket* bM = nullptr;
 	BasketMarketComponent* bMC = nullptr;
 
+	SDLUtils* sdl;
+	Music* restaurantMusic;
+
 public:
 	SuperCashRegisterTriggerComp(GameObject* parent, Vector pos_, float width_, float height_);
 

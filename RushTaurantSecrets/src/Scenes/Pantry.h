@@ -14,6 +14,10 @@ private:
 	Restaurant* rest;
 	PantryUI* pantryUI;
 
+	SDLUtils* sdl;
+	Music* restaurantMusic;
+	Music* pantryMusic;
+
 public:
 	Pantry(PantryUI* pUI);
 	~Pantry();

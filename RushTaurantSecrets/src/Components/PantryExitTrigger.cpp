@@ -10,7 +10,7 @@
 
 PantryExitTrigger::PantryExitTrigger(GameObject* parent, Vector pos_, float width_, float height_) : TriggerComp(parent, pos_, width_, height_),
 doorSound(&sdlutils().soundEffects().at("OPEN_DOOR")),
-sdl(SDLUtils::instance()), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
+sdl(SDLUtils::instance()), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")) {
 	gm = GameManager::get();
 	playerPantry = parent->getScene()->getGameObject(_ecs::hdr_PLAYER);
 	playerRestaurant = gm->getRestaurant()->getGameObject(_ecs::hdr_PLAYER);
@@ -28,6 +28,7 @@ void PantryExitTrigger::isOverlapping() {
 		gm->changeScene(gm->getRestaurant());
 		doorSound->play();
 		pantryMusic->pauseMusic();
+		restaurantMusic->play();
 		// se activa el jugador del restaurante y se recoloca
 		playerRestaurant->setActives(true);
 		playerRestaurantTransform->setPos(RESTAURANT_POS);

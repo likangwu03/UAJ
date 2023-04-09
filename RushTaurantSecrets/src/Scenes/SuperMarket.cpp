@@ -20,6 +20,7 @@ void SuperMarket::update() {
 void SuperMarket::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getRestaurant());
+		restaurantMusic->play();
 	}
 	else {
 		Scene::handleEvents();

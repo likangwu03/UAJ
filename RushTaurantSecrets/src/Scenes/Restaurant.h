@@ -27,6 +27,9 @@ private:
 	vector<_ecs::_dish_id> menu() const;
 	//vector<_ecs::_dish_id> dailyMenu;
 
+	SDLUtils* sdl;
+	Music* restaurantMusic;
+	Music* pantryMusic;
 public:
 	Restaurant();
 	~Restaurant();

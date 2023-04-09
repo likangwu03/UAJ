@@ -17,10 +17,13 @@ private:
 	UIMarket* uiMarket;
 	CartelManager* cartelM;
 	Player* player;
-	
+
+	SDLUtils* sdl;
+	Music* restaurantMusic;
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI == nullptr ? new UIMarket(this) : marketUI),
-		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr) { init(); }
+		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")) 
+	{ init(); }
 	~SuperMarket();
 	void reset();
 	

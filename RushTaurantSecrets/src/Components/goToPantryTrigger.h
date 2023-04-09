@@ -20,6 +20,7 @@ private:
 
 	SDLUtils* sdl;
 	Music* pantryMusic;
+	Music* restaurantMusic;
 public:
 	GoToPantryTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 	virtual void isOverlapping();

@@ -10,7 +10,7 @@
 #include "../Utilities/checkML.h"
 
 SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, Vector pos_, float width_, float height_) :
-	TriggerComp(parent, pos_, width_, height_)
+	TriggerComp(parent, pos_, width_, height_), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC"))
 {
 	highlight = parent->getComponent<Image>();
 	highlight->setActive(false);
@@ -55,4 +55,5 @@ void SuperCashRegisterTriggerComp::payAndLeave() {
 	GameManager::get()->setIngredients(ing);
 	GameManager::get()->getRestaurant()->reset();
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getRestaurant());
+	restaurantMusic->play();
 }

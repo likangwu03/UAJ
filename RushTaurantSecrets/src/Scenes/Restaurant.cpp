@@ -11,7 +11,8 @@
 #include "../Utilities/checkML.h"
 #include <set>
 
-Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr) { 
+Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")),
+pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
@@ -109,9 +110,12 @@ void Restaurant::_update() {
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getPantry());
+		restaurantMusic->pauseMusic();
+		pantryMusic->play();
 	}
 	else if (ih->isKeyDown(SDLK_p)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getPauseMenu());
+		restaurantMusic->pauseMusic();
 	}
 	else if (ih->isKeyDown(SDLK_f)) {
 		vector<pair<_ecs::_ingredients_id, int>> _ing;
