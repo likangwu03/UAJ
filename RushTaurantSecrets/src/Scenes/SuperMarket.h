@@ -8,6 +8,8 @@
 
 class SuperMarket: public Scene {
 private:
+	const int MUSIC_VOL = 30;
+
 	const float RESIZEFACTOR = 0.6666666667;
 	const Vector INITIAL_POS = { 1136, 165 };
 
@@ -23,7 +25,10 @@ private:
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI == nullptr ? new UIMarket(this) : marketUI),
 		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")) 
-	{ init(); }
+	{ 
+		init();
+		restaurantMusic->setMusicVolume(MUSIC_VOL);
+	}
 	~SuperMarket();
 	void reset();
 	

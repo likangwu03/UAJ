@@ -17,6 +17,8 @@ sdl(SDLUtils::instance()), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")), resta
 	playerRestaurantTransform = playerRestaurant->getComponent<Transform>();
 	image = parent->getComponent<Image>();
 	image->setActive(false);
+	pantryMusic->setMusicVolume(MUSIC_VOL);
+	restaurantMusic->setMusicVolume(MUSIC_VOL);
 }
 
 void PantryExitTrigger::isOverlapping() {

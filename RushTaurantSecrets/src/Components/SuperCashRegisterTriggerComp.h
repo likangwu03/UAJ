@@ -9,6 +9,8 @@
 class SuperCashRegisterTriggerComp : public TriggerComp
 {
 private:
+	const int MUSIC_VOL = 30;
+
 	Image* highlight;
 	Money* money;
 

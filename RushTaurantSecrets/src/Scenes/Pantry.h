@@ -8,6 +8,8 @@ class Restaurant;
 
 class Pantry : public Scene {
 private:
+	const int MUSIC_VOL = 30;
+
 	const float RESIZEFACTOR = 0.8333333333;
 	GameObject* player;
 	CollisionsManager* collisionsManager;

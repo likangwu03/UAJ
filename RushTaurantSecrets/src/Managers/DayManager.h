@@ -5,6 +5,8 @@
 
 class DayManager {
 private:
+	const int MUSIC_VOL = 30;
+
 	int day, maxDays;
 	std::ifstream file;
 	int dailyObjective;
