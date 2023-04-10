@@ -58,14 +58,6 @@ private:
 	float size;	// tamaño general
 	float moneyStreak;
 
-	SDL_Rect createRect(float x, float y, float width, float height) {
-		SDL_Rect dest;
-		dest.x = x;
-		dest.y = y;
-		dest.w = width;
-		dest.h = height;
-		return dest;
-	}
 
 	void initData(Vector pos) {
 		// TODOS LOS DATOS SON PARAMETRIZABLES
@@ -173,22 +165,22 @@ public:
 		if (actNumber < streak) {
 			// renderizado del fondo de la letraX
 			// se centra la textura para que vaya creciendo desde el centro
-			numbers[actNumber].xBg->render(createRect(
+			numbers[actNumber].xBg->render(build_sdlrect(
 				letterX.posBg.getX() - letterX.width / 2,
 				letterX.posBg.getY() - letterX.height / 2,
 				letterX.width, letterX.height));
 			// renderizado de la parte de arriba de la letraX
-			numbers[actNumber].xFg->render(createRect(
+			numbers[actNumber].xFg->render(build_sdlrect(
 				letterX.posFg.getX() - letterX.width / 2,
 				letterX.posFg.getY() - letterX.height / 2,
 				letterX.width, letterX.height));
 			// renderizado del fondo del número
-			numbers[actNumber].numberBg->render(createRect(
+			numbers[actNumber].numberBg->render(build_sdlrect(
 				number.posBg.getX() - number.width / 2,
 				number.posBg.getY() - number.height / 2,
 				number.width, number.height));
 			// renderizado de la parte de arriba del número
-			numbers[actNumber].numberFg->render(createRect(
+			numbers[actNumber].numberFg->render(build_sdlrect(
 				number.posFg.getX() - number.width / 2,
 				number.posFg.getY() - number.height / 2,
 				number.width, number.height));

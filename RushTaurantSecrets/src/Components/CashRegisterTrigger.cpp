@@ -16,6 +16,18 @@ CashRegisterTrigger::CashRegisterTrigger(GameObject* parent, Vector pos_, float 
 	highlight->setActive(false);
 	list = cM->getPayQueue();
 	streak = GameManager::get()->getRestaurant()->getUI()->getGameObject(_ecs::hdr_STREAK)->getComponent<Streak>();
+
+	tipped = false;
+	font = new Font(FONT_PATH, FONTSIZE);
+	tipTexture = bgTexture = nullptr;
+	
+}
+
+CashRegisterTrigger::~CashRegisterTrigger() {
+	delete font;
+	if (tipTexture != nullptr) delete tipTexture;
+	if (bgTexture != nullptr) delete bgTexture;
+
 }
 
 void CashRegisterTrigger::isOverlapping() {
@@ -46,13 +58,25 @@ void CashRegisterTrigger::isOverlapping() {
 		}
 
 		// PROPINAS
-		if (GameManager::get()->getReputation()->getReputation() > sdlutils().rand().nextInt(0, 101)) {
-			money->addMoney(totalPayment / 10);
+		int rep = GameManager::get()->getReputation()->getReputation() / 20;
+		if (rep >= sdlutils().rand().nextInt(0, 5)) {
+			int tip = totalPayment / 10;
+			money->addMoney(tip);
 			tipSound->play(0);
 #ifdef _DEBUG
 			cout << "You got " << totalPayment / 10 << " coins from tips" << endl;
 #endif
+			delete tipTexture;
+			tipTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x129008FF));
+			bgTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x054400FF));
+			currRect = bgRect = INITRECT;
+			currRect.w = bgRect.w = tipTexture->width();
+			currRect.h = bgRect.h = tipTexture->height();
+			bgRect.x += OUT_OFFSET;
+			bgRect.y += OUT_OFFSET;
+			tipped = true;
 		}
+		
 
 		// RACHA
 		money->addMoney(streak->getMoneyStreak() * list->size());
@@ -66,4 +90,18 @@ void CashRegisterTrigger::isOverlapping() {
 
 void CashRegisterTrigger::onTriggerExit() {
 	 highlight->setActive(false);
+}
+
+
+void CashRegisterTrigger::render() {
+	if (tipped) {
+		if (currRect.y <= ENDY) tipped = false;
+		else {
+			currRect.y -= MOVEMENT;
+			bgRect.y -= MOVEMENT;
+			bgTexture->render(bgRect);
+			tipTexture->render(currRect);
+		}
+	}
+
 }

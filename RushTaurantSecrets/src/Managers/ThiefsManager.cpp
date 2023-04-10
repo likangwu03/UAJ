@@ -56,7 +56,7 @@ ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escap
 	scene = parent->getScene();
 	thiefs = scene->getGroup(_ecs::grp_THIEFS);
 	timer = sdl->rand().nextInt(minFrec, maxFrec);
-	warningSound->setVolume(40);
+	warningSound->setVolume(30);
 }
 
 void ThiefsManager::update() {
