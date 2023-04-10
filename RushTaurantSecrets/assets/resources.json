@@ -412,6 +412,11 @@
       "file": "assets/mainMenu_bg.png",
       "cols": 1,
       "rows": 1
+    },    {
+      "id": "DAILY_MENU_BG",
+      "file": "assets/dailymenu_bg.png",
+      "cols": 1,
+      "rows": 1
     },
     {
       "id": "DAILY_MENU_BUTTON",

@@ -99,7 +99,7 @@ void DailyMenuComp::randomMenu() {
 	}
 }
 
-void DailyMenuComp::init(GameObject* parent) {
+void DailyMenuComp::init() {
 	
 
 	drawDishes();
@@ -116,21 +116,18 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 	TTF_SetFontOutline(fontOutline->getTTFFont(), 2);
 	initialized = true;
 	menu =nullptr;
-	//randomMenu();
 
-	//init(parent);
 }
 
 DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu)
-	: Component(parent, id), menu(_menu)
+	: Component(parent, id), tf(nullptr), parentScene(nullptr), initialized(false), menu(_menu), font(nullptr), fontOutline(nullptr)
 {
-	//init(parent);
 }
 
 void DailyMenuComp::initMenu() {
 	menu = new vector<_ecs::DishInfo>();
 	randomMenu();
-	init(parent);
+	init();
 }
 
 DailyMenuComp::~DailyMenuComp() {

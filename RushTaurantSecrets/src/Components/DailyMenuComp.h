@@ -39,7 +39,7 @@ private:
 	Font* font;
 	Font* fontOutline;
 
-	void init(GameObject* parent);
+	void init();
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id);
