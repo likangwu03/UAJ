@@ -207,8 +207,12 @@ bool GameManager::checkload() {
 	ifstream load;
 	load.open(file.str());
 	bool aux = load.is_open();
+	int d;
+	if (aux) {
+		load >> d;
+	}
 	load.close();
-	return aux;
+	return aux&&d!=1;
 }
 
 void GameManager::newGame() {
@@ -217,4 +221,5 @@ void GameManager::newGame() {
 	killedNum = 0;
 	money->newGame();
 	reputation->newGame();
+	save();
 }
