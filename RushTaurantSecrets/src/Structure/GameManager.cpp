@@ -260,10 +260,7 @@ vector<dialogueInfo> GameManager::getDialogueInfo(std::string d) {
 					std::string chr = vObj["Character"]->AsString();
 					std::string txt = vObj["Text"]->AsString();
 					dialogueInfo dInfo(chr, txt, nullptr);
-#ifdef _DEBUG
-					std::cout << chr << std::endl;
-					std::cout << txt << std::endl;
-#endif
+
 					dialogues.emplace_back(dInfo);
 				}
 				else {

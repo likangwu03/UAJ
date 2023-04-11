@@ -22,5 +22,7 @@ public:
 		new Image(this, &sdl->images().at("DIALOG_BOX"));
 		new Text(this, texts, widthLetter, heightLetter, letterFrequency, font, widthBox, Vector(1.25 / 4, 90 / 4.5));
 		new BoxText(this, &sdl->images().at("KEYBOARD_KEYS_2"), &sdl->images().at("DIALOG_BOX_PORTRAIT"), portrait, Vector(1.4, 90));
+
+		vector<dialogueInfo> dinf = GameManager::instance()->getDialogueInfo("ConversationDay2.json");
 	}
 };
