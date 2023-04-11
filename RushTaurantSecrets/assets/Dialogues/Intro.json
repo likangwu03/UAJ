@@ -1,37 +1,30 @@
 {
-  "Introduction": [
+  "dialogues": [
     {
-      "n": 1,
       "Character": "Player",
       "Text": "Hi, mom, hi, dad."
     },
     {
-      "n": 2,
       "Character": "Parents",
       "Text": "..."
     },
     {
-      "n": 3,
       "Character": "Player",
-      "Text": "Tomorrow is the restaurant’s grand reopening. I have butterflies in my stomach, I hope everything goes well. I have taken up this business for you, it was your dream for me to inherit it after all."
+      "Text": "Tomorrow is the restaurant's grand reopening. I have butterflies in my stomach, I hope everything goes well. I have taken up this business for you, it was your dream for me to inherit it after all."
     },
     {
-      "n": 4,
       "Character": "Parents",
       "Text": "..."
     },
     {
-      "n": 5,
       "Character": "Player",
-      "Text": "I know there’s still a lot of work left to do, I’m also aware that it looks nothing like it did before, but I’ll make sure to work hard until it does."
+      "Text": "I know there's still a lot of work left to do, I'm also aware that it looks nothing like it did before, but I'll make sure to work hard until it does."
     },
     {
-      "n": 6,
       "Character": "Parents",
       "Text": "..."
     },
     {
-      "n": 7,
       "Character": "Player",
       "Text": "All I want is to make you guys happy, I want to make you two proud."
     }

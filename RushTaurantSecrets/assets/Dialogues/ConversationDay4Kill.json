@@ -1,39 +1,32 @@
 {
-  "Day 4 kill dialogue": [
+  "dialogues": [
     {
-      "n": 1,
       "Character": "Player",
-      "Text": "Mom, dad, I wanted to talk to you about all the murders. I know what I’m doing is wrong, but at least their body will have a purpose even after their death."
+      "Text": "Mom, dad, I wanted to talk to you about all the murders. I know what I'm doing is wrong, but at least their body will have a purpose even after their death."
     },
     {
-      "n": 2,
       "Character": "Parents",
       "Text": "..."
     },
     {
-      "n": 3,
       "Character": "Player",
       "Text": "I know, I know, killing people is bad. Do you really think I feel no remorse?"
     },
     {
-      "n": 4,
       "Character": "Parents",
       "Text": "..."
     },
     {
-      "n": 5,
       "Character": "Player",
-      "Text": "Don’t complain so much, it was thanks to them that I learned how to cook."
+      "Text": "Don't complain so much, it was thanks to them that I learned how to cook."
     },
     {
-      "n": 6,
       "Character": "Parents",
       "Text": "..."
     },
     {
-      "n": 7,
       "Character": "Player",
-      "Text": "Look, I know you won’t understand me, but I’m sure you’ll be grateful down the line. You teached me family first, so I will do anything to keep this family going."
+      "Text": "Look, I know you won't understand me, but I'm sure you'll be grateful down the line. You teached me family first, so I will do anything to keep this family going."
     }
   ]
 }

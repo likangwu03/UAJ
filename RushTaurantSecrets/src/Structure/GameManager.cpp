@@ -22,6 +22,9 @@
 #include "../Scenes/PantryUI.h"
 #include "../Scenes/IntroScene.h"
 #include <sstream>
+#include <fstream>
+#include "../Utilities/JSON.h"
+#include "../Utilities/Texture.h"
 #include "../Utilities/checkML.h" 
 
 GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
@@ -234,4 +237,45 @@ void GameManager::newGame() {
 	money->newGame();
 	reputation->newGame();
 	save();
+}
+
+vector<dialogueInfo> GameManager::getDialogueInfo(std::string d) {
+	vector<dialogueInfo> dialogues;
+
+	std::unique_ptr<JSONValue> jValueRoot(JSON::ParseFromFile("assets/Dialogues/" + d));
+	if (jValueRoot == nullptr || !jValueRoot->IsObject()) {
+		throw "Something went wrong while load/parsing '" + d + "'";
+	}
+
+	JSONObject root = jValueRoot->AsObject();
+	JSONValue* jValue = nullptr;
+
+	jValue = root["dialogues"];
+	if (jValue != nullptr) {
+		if (jValue->IsArray()) {
+			dialogues.reserve(jValue->AsArray().size()); // reserve enough space to avoid resizing
+			for (auto& v : jValue->AsArray()) {
+				if (v->IsObject()) {
+					JSONObject vObj = v->AsObject();
+					std::string chr = vObj["Character"]->AsString();
+					std::string txt = vObj["Text"]->AsString();
+					dialogueInfo dInfo(chr, txt, nullptr);
+#ifdef _DEBUG
+					std::cout << chr << std::endl;
+					std::cout << txt << std::endl;
+#endif
+					dialogues.emplace_back(dInfo);
+				}
+				else {
+					throw "'Dialogues' array in '" + d
+						+ "' includes and invalid value";
+				}
+			}
+		}
+		else {
+			throw "'Dialogues' is not an array in '" + d + "'";
+		}
+	}
+
+	return dialogues;
 }

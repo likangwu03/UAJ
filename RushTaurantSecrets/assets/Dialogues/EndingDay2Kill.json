@@ -1,14 +1,12 @@
 {
-  "Day 2 kill ending": [
+  "dialogues": [
     {
-      "n": 1,
       "Character": "Player",
-      "Text": "What have I done!? What are mom and dad going to think of me? I’m sure they’ll be angry at me, but it’s not like I can lie to them, that would disappoint them. I’m sure they’ll understand I’m doing this for them."
+      "Text": "What have I done!? What are mom and dad going to think of me? I'm sure they'll be angry at me, but it's not like I can lie to them, that would disappoint them. I'm sure they'll understand I'm doing this for them."
     },
     {
-      "n": 2,
       "Character": "Rival",
-      "Text": "One of my employees hasn’t come back. I don’t know what you’ve done with him, but I’ll be sure to make you pay if you’ve hurt him. Watch your step, you will not be safe in that “restaurant” of yours."
+      "Text": "One of my employees hasn't come back. I don't know what you've done with him, but I'll be sure to make you pay if you've hurt him. Watch your step, you will not be safe in that “restaurant” of yours."
     }
   ]
 }

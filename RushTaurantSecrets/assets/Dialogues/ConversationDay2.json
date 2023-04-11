@@ -1,74 +1,60 @@
 {
-  "Day 2 conversation": [
+  "dialogues": [
     {
-      "n": 1,
       "Character": "none",
       "Text": "(The phone is ringing; the protagonist picks it up)"
     },
     {
-      "n": 2,
       "Character": "Player",
       "Text": "Hello? Who is this?"
     },
     {
-      "n": 3,
       "Character": "Rival",
-      "Text": "Hi, -protagonist’s name-."
+      "Text": "Hi, my darling."
     },
     {
-      "n": 4,
       "Character": "Player",
-      "Text": "Who is this?! How do you know my name?"
+      "Text": "Who is this?! Do you know me?"
     },
     {
-      "n": 5,
       "Character": "Rival",
-      "Text": "You can ask your parents, I’m sure they will remember me."
+      "Text": "You can ask your parents, I'm sure they will remember me."
     },
     {
-      "n": 6,
       "Character": "Player",
       "Text": "Why? Do you want anything from them?"
     },
     {
-      "n": 7,
       "Character": "Rival",
       "Text": "Have they not talked to you about me? Did they think I would have forgotten about your dear restaurant after all these years?"
     },
     {
-      "n": 8,
       "Character": "Player",
       "Text": "I know you; I know the type of guy you are. My parents have told me everything about you."
     },
     {
-      "n": 9,
       "Character": "Rival",
-      "Text": "You know what I want then, I’m also sure you know I’ll do anything to get my hands on it, should you not give it to me willingly."
+      "Text": "You know what I want then, I'm also sure you know I'll do anything to get my hands on it, should you not give it to me willingly."
     },
     {
-      "n": 10,
       "Character": "Player",
-      "Text": "You have really underestimated me if you think you’ll break me the same way you broke my parents. I will never yield to the likes of you! I will never close this place down!"
+      "Text": "You have really underestimated me if you think you'll break me the same way you broke my parents. I will never yield to the likes of you! I will never close this place down!"
     },
     {
-      "n": 11,
       "Character": "Rival",
       "Text": "That is exactly what your parents said at first, look at how that worked out for them."
     },
     {
-      "n": 12,
       "Character": "Player",
       "Text": "Come for me then! You do not scare me! Come a…-!"
     },
     {
-      "n": 13,
       "Character": "none",
-      "Text": "(RIVAL RESTAURANT’S OWNER hangs up the phone)"
+      "Text": "(RIVAL RESTAURANT'S OWNER hangs up the phone)"
     },
     {
-      "n": 14,
       "Character": "Player",
-      "Text": "Who does he think he is!? How dare he try to mess with ME! Whatever, I need to calm down. Mom, Dad, I hope I don’t do anything I’ll regret later…"
+      "Text": "Who does he think he is!? How dare he try to mess with ME! Whatever, I need to calm down. Mom, Dad, I hope I don't do anything I'll regret later…"
     }
   ]
 }

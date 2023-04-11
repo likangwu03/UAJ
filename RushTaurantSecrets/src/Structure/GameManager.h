@@ -2,6 +2,7 @@
 
 #include "../Utilities/Singleton.h"
 #include "../Definitions/Food_def.h"
+#include <string>
 
 class Scene;
 class MainMenu;
@@ -21,7 +22,16 @@ class GameOverScene;
 class ContinueMenu;
 class PantryUI;
 class IntroScene;
+class Texture;
 class KitchenIslandComp;
+
+struct dialogueInfo {
+	std::string character;
+	std::string text;
+	Texture* portrait;
+public:
+	dialogueInfo(std::string c, std::string t, Texture* p) : character(c), text(t), portrait(p) {};
+};
 
 class GameManager :public Singleton<GameManager> {
 	friend Singleton<GameManager>;
@@ -31,7 +41,6 @@ public:
 	GameManager(GameManager&&) = delete;
 	GameManager& operator=(GameManager&) = delete;
 	GameManager& operator=(GameManager&&) = delete;
-
 	
 private:
 	const float RESTSUPERSIZE = 0.6666666667;
@@ -114,4 +123,6 @@ public:
 	void load();
 	bool checkload();
 	void newGame();
+
+	vector<dialogueInfo> getDialogueInfo(std::string d);
 };
