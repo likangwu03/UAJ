@@ -106,6 +106,12 @@ public:
 		render(src, dest, rotation);
 	}
 
+	inline void setOpacity(float opacityPercent) {
+		assert(texture_ != nullptr);
+		SDL_SetTextureAlphaMod(texture_, (int)((255* opacityPercent)/100));
+	}
+
+
 	inline void renderFrame(const SDL_Rect& dest, int col, int row, float angle) {
 		SDL_Rect src;
 		src.x = fw_ * col;

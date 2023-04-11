@@ -1,6 +1,10 @@
 {
   "images": [
     {
+      "id": "Filter_Black",
+      "file": "assets/Sprites/Cinematic/Filter_black.png"
+    },
+    {
       "id": "Player_1",
       "file": "assets/Sprites/Player/Player_sprite_1.png",
       "cols": 56,
@@ -9,6 +13,12 @@
     {
       "id": "Player_2",
       "file": "assets/Sprites/Player/Player_sprite_1.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Player_Casual",
+      "file": "assets/Sprites/Player/Casual_player_sprite.png",
       "cols": 56,
       "rows": 20
     },
@@ -662,7 +672,39 @@
     },
     {
       "id": "MAIN_CHARACTER_PORTRAIT",
-      "file": "assets/Sprites/UI/mainCharacter_dialogPortrait.png"
+      "file": "assets/Sprites/UI/icons/character_chef_smile.png"
+    }, 
+    {
+      "id": "PROTA_CASUAL_SMILE_CLOSE_EYE",
+      "file": "assets/Sprites/UI/icons/character_casual_smile_closingEyes.png"
+    },
+    {
+      "id": "PROTA_CASUAL_SMILE",
+      "file": "assets/Sprites/UI/icons/character_casual_smile.png"
+    },
+    {
+      "id": "PROTA_CASUAL_SAD_CLOSE_EYE",
+      "file": "assets/Sprites/UI/icons/character_casual_sad_closingEyes.png"
+    },
+    {
+      "id": "PROTA_CASUAL_SIGH",
+      "file": "assets/Sprites/UI/icons/character_casual_sigh_closingEyes.png"
+    },  
+    {
+      "id": "PROTA_CASUAL_SMILE_BORED",
+      "file": "assets/Sprites/UI/icons/character_casual_bored_smile.png"
+    },
+    {
+      "id": "PROTA_CASUAL_BAD_MOOD",
+      "file": "assets/Sprites/UI/icons/character_casual_badMood.png"
+    },  
+    {
+      "id": "CINEMATIC_BG_PARENTS_ROOM",
+      "file": "assets/Sprites/Cinematic/Parent_Room.png"
+    },
+    {
+      "id": "CINEMATIC_BG_PARENTS_ROOM_NIGHT",
+      "file": "assets/Sprites/Cinematic/Parent_Room_Night.png"
     },
     {
       "id": "DAILY_MENU",

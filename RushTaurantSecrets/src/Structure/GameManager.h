@@ -20,7 +20,7 @@ class EndOfDayScene;
 class GameOverScene;
 class ContinueMenu;
 class PantryUI;
-
+class IntroScene;
 class KitchenIslandComp;
 
 class GameManager :public Singleton<GameManager> {
@@ -53,7 +53,7 @@ private:
 	GameOverScene* gameOverScene;
 	ContinueMenu* continueMenu;
 	PantryUI* pantryUI;
-
+	IntroScene* introScene;
 
 	Reputation* reputation;
 	Money* money;
@@ -81,6 +81,7 @@ public:
 
 	void changeScene(Scene* scene);
 	void popScene();
+	void deleteCurrentScene();
 	void setGameOver(int type);
 	Scene* getCurrentScene();
 	MainMenu* getMainMenu();
@@ -91,8 +92,9 @@ public:
 	PauseMenu* getPauseMenu();
 	OptionsMenu* getOptionsMenu();
 	BeforeDayStartScene* getBeforeDayStart();
-	EndOfDayScene* getEndOfDay();
 	ContinueMenu* getContinueMenu();
+	EndOfDayScene* getEndOfDay();
+	IntroScene* getIntroScene();
 
 	Reputation* getReputation();
 	Money* getMoney();

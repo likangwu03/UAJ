@@ -20,6 +20,7 @@
 #include "../Scenes/GameOverScene.h"
 #include "../Scenes/ContinueMenu.h"
 #include "../Scenes/PantryUI.h"
+#include "../Scenes/IntroScene.h"
 #include <sstream>
 #include "../Utilities/checkML.h" 
 
@@ -59,6 +60,8 @@ void GameManager::initialize() {
 	beforeDayStartScene = new BeforeDayStartScene();
 	endScene = new EndOfDayScene();
 
+	introScene = new IntroScene();
+
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
@@ -85,7 +88,7 @@ GameManager::~GameManager() {
 	delete continueMenu;
 	delete endScene;
 	delete pantryUI;
-
+	delete introScene;
 	delete reputation;
 	delete money;
 	delete days;
@@ -120,6 +123,14 @@ void GameManager::popScene() {
 		sdlutils().setResizeFactor(currentScene->getResizeFactor());
 	}
 }
+void GameManager::deleteCurrentScene() {
+	if (previousScene != nullptr) {
+		delete currentScene;
+		currentScene = previousScene;
+		previousScene = nullptr;
+		sdlutils().setResizeFactor(currentScene->getResizeFactor());
+	}
+}
 
 void GameManager::setGameOver(int type) {
 	gameOverScene->setGameOver(endingType(type));
@@ -139,8 +150,9 @@ Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
 DayManager* GameManager::getDayManager() { return days; }
 OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
-EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
 ContinueMenu* GameManager:: getContinueMenu() { return continueMenu; }
+EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
+IntroScene* GameManager::getIntroScene() { return introScene; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
