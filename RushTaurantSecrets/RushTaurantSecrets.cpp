@@ -1,5 +1,8 @@
 // Proyecto2.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 #include "src/structure/Game.h"
+#include <SDL.h>
+#include <SDL_net.h>
+#include <iostream>
 
 int main(int argc, char* argv[]) {
 	// Check Memory Leaks
