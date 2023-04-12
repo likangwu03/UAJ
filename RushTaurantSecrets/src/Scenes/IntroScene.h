@@ -1,9 +1,7 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "../Utilities/Texture.h"
-#include "../Utilities/SDLUtils.h"
+#include "../Scenes/CinematicBaseScene.h"
 #include "../GameObjects/Player.h"
-class IntroScene : public Scene
+class IntroScene : public CinematicBaseScene
 {
 private:
 	Texture* bg;
@@ -12,8 +10,10 @@ private:
 	const float WIDTH, HEIGHT;
 public:
 	IntroScene();
-	void render () override;
-	void handleEvents()override;
+	//void handleEvents()override;
 	void callAfterCreating() override;
+	
+	void renderCinematic () override;
+	void finishScene()override;
 };
 

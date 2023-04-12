@@ -135,6 +135,13 @@ void GameManager::deleteCurrentScene() {
 	}
 }
 
+void GameManager::skipfromTransition() {
+		delete currentScene;
+		currentScene = previousScene;
+		previousScene->finishScene();
+}
+
+
 void GameManager::setGameOver(int type) {
 	gameOverScene->setGameOver(endingType(type));
 	changeScene(gameOverScene);

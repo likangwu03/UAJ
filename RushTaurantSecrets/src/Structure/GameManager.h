@@ -91,6 +91,7 @@ public:
 	void changeScene(Scene* scene);
 	void popScene();
 	void deleteCurrentScene();
+	void skipfromTransition();
 	void setGameOver(int type);
 	Scene* getCurrentScene();
 	MainMenu* getMainMenu();
@@ -104,6 +105,7 @@ public:
 	ContinueMenu* getContinueMenu();
 	EndOfDayScene* getEndOfDay();
 	IntroScene* getIntroScene();
+
 
 	Reputation* getReputation();
 	Money* getMoney();

@@ -7,17 +7,18 @@
 class TransitionScene : public Scene
 {
 private:
+	Scene* scene;
+protected:
 	Texture* filter;
 	const float duration;
 	float cont;
 	const float WIDTH, HEIGHT;
-	Scene* scene;
 	int fadeOutInverter;
 
 public:
 	TransitionScene(Scene* backgroundScene, float duration, bool fadeOut = false, string texture = "");
-	void render() override;
-	void update() override;
+	virtual void render() override;
+	virtual void update() override;
 
 };
 

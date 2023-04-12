@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <array>
 #include <list>
@@ -46,8 +46,10 @@ public:
 	virtual void render();
 	virtual void handleEvents();
 	virtual void nextDay();
+	virtual void finishScene(){};
 
 	void initRender();
+	// QUIZÁS SE PUEDE BORRAR
 	virtual void end() {};
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);

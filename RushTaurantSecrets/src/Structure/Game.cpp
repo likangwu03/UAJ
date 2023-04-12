@@ -56,7 +56,7 @@ void Game::update() {
 }
 
 void Game::handleEvents() {
-	if(ih->closeWindowEvent() || ih->isKeyDown(SDLK_ESCAPE)) {
+	if (ih->closeWindowEvent() ) {
 		exit = true;
 	}
 	else if (ih->isKeyDown(SDLK_F11)) {

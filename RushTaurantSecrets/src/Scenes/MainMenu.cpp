@@ -12,15 +12,21 @@
 #include "../Components/Transform.h"
 #include "../Components/Image.h"
 #include "BeforeDayStartScene.h"
+#include "IntroScene.h"
 
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
+		GameManager::get()->changeScene(GameManager::get()->getIntroScene());
+		GameManager::get()->getCurrentScene()->callAfterCreating();
+
+
 	if (GameManager::get()->checkload()) {
 		GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
 	}
 	else {
-		GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	
+		
 		GameManager::get()->getDailyMenu()->reset();
 	}
 	
