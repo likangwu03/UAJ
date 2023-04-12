@@ -23,6 +23,7 @@ public:
 	~Game();
 	void run();
 	uint32_t& getframeTime() { return frameTime; }
+	CoopHandler* getCoopHandler() { return coop; }
 
 	void init();
 private:
