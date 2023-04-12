@@ -28,17 +28,18 @@ BeforeDayStartScene::BeforeDayStartScene() {
 
 	//fuentes usadas
 	dayText = new Font("assets/Fonts/04B_30__.ttf", 72);
-	pressButtonText = new Font("assets/Fonts/EpilepsySansBold.ttf", 30);
-	text = new Font("assets/Fonts/EpilepsySansBold.ttf", 50);
+	pressButtonText = new Font("assets/Fonts/light_pixel-7.ttf", 40);
+	text = new Font("assets/Fonts/light_pixel-7.ttf", 50);
 
 	//diana
 	targetObj = new GameObject(this);
-	new Transform(targetObj, { 75, 300 }, { 0,0 }, 100, 100);
+	new Transform(targetObj, { 75, 400 }, { 0,0 }, 100, 100);
 	target = new Texture(sdlutils().renderer(), "assets/Sprites/UI/HUD/target_icon.png");
 	new Image(targetObj, target);
 
+	//banner
 	bannerObj = new GameObject(this);
-	new Transform(bannerObj, { (float)sdlutils().width() / 4 + 50, 25 }, { 0,0 }, 500, 300);
+	new Transform(bannerObj, { (float)sdlutils().width() / 4 + 50, 10 }, { 0,0 }, 500, 300);
 	bannerTexture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/UI_Flat_Banner_01_Upward.png");
 	new Image(bannerObj, bannerTexture);
 	
@@ -63,7 +64,7 @@ void BeforeDayStartScene::reset() {
 	accDay = day->getDay();
 	accGoal = day->getDailyObjective();
 	wordDay = "DAY: " + std::to_string(accDay);
-	mnyTarget = "TODAY'S CHALLENGE IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
+	mnyTarget = "TODAY'S GOAL IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
 	delete dayTxt;
 	delete moneyTarget;
 	//delete buttonTxt;  //???
@@ -99,8 +100,8 @@ void BeforeDayStartScene::handleEvents() {
 void BeforeDayStartScene::render() {
 	Scene::render();
 	
-	dayTxt->render({ sdlutils().width()/3 + 50, 100, 300, 150});
-	moneyTarget->render({ 200, 300, sdlutils().width() - 300, 100});
-	buttonTxt->render({ 100, 500, 1000, 200 });
+	dayTxt->render({ sdlutils().width()/3 + 50, 85, 300, 150});
+	moneyTarget->render({ 200, 400, sdlutils().width() - 300, 100});
+	buttonTxt->render({ sdlutils().width()/4 - 50, 600, buttonTxt->width(), buttonTxt->height()});
 	
 }

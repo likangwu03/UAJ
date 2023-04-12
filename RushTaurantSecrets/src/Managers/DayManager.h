@@ -24,6 +24,9 @@ public:
 	void checkDayFinished();
 	void nextDay();
 	void setDay(int x);
+	void newDay();
+
+	SoundEffect* getSound() { return timeUpSound; }
 
 	int getDay();
 	int getDailyObjective();

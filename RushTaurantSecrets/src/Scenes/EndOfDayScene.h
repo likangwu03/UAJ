@@ -9,12 +9,20 @@ class DayManager;
 class EndOfDayScene : public Scene {
 private:
 	GameObject* reputationObj;
-	GameObject* gameOverObj;
 	GameObject* backgroundObj;
+	GameObject* moneyObj;
 
+	//textura de objetos
 	Texture* backgroundT;
-	Texture* gameOverT;
-	Texture* reputationT;
+	Texture* reputationIconT;
+	Texture* moneyIconT;
+
+	//textura de strings
+	Texture* reputationTexture;
+	Texture* moneyTexture;
+	Texture* bankruptTexture;
+	Texture* gameOverTexture;
+	
 	
 	Font* font1;
 	Font* font2;
@@ -29,16 +37,18 @@ private:
 	string bankruptText;
 	string gameOverText;
 	string continueText;
+	string progressSavedtext;
 
 	int accDay;
 	int moneyGoal;
 	int playerReputation;
 	int playerMoney;
 
-	bool gameOver;
+	bool _gameOver;
 
 	void toMainMenu();
 	void toNextDay();
+	void gameOver();
 
 public:
 	EndOfDayScene();
@@ -47,6 +57,4 @@ public:
 	virtual void render();
 	virtual void handleEvents();
 	
-
-
 };

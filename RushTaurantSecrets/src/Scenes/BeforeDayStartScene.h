@@ -42,8 +42,8 @@ public:
 	BeforeDayStartScene();
 	~BeforeDayStartScene();
 	virtual void handleEvents();
-	virtual void render();
-	virtual void update();
+	void render() override;
+	void update();
 	void init();
 	void reset();
 };
