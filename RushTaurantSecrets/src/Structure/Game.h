@@ -13,7 +13,7 @@ private:
 	InputHandler* ih;
 	CoopHandler* coop;
 	SDLUtils* sdl;
-	bool exit;
+	bool exit, exitCoop;
 	uint32_t frameTime;
 public:
 	Game(Game&) = delete;
@@ -26,6 +26,7 @@ public:
 	CoopHandler* getCoopHandler() { return coop; }
 
 	void init();
+	void setExitCoop() { exitCoop = true; }
 private:
 	Game();
 	void refresh();
@@ -34,5 +35,5 @@ private:
 	void handleEvents();
 	void setExit() { exit = true; }
 
-	void runCoop(bool server, std::string ip = "");
+	void runCoop();
 };

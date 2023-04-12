@@ -36,7 +36,8 @@ public:
 
     // Métodos de cliente
 
-    void openClient(std::string ip);
+    bool openClient(std::string ip);
+    std::pair<bool, bool> connectServer();
 
     // Métodos conjuntos
 

@@ -1,6 +1,7 @@
 #include "CoopHandler.h"
 #include <exception>
 #include <cstdint>
+#include "../Structure/Game.h"
 
 #ifdef _DEBUG
 #include <iostream>
@@ -84,7 +85,7 @@ void CoopHandler::openServer() {
 #endif
 }
 
-void CoopHandler::openClient(std::string ipStr) {
+bool CoopHandler::openClient(std::string ipStr) {
 #ifdef _DEBUG
 	std::cout << "Opening connection with ip \"" << ipStr << ":1882\".\n";
 #endif
@@ -96,28 +97,15 @@ void CoopHandler::openClient(std::string ipStr) {
 
 	connectionSocket = SDLNet_TCP_Open(&ip);
 	if(connectionSocket == NULL) {
-		throw std::exception(("SDLNet: Couldn't establish connection with ip \"" + ipStr + ":1882\".").c_str());
+		return false;
 	}
-
-	dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
-
-	if(dataLength != __CONNECTED_LENGTH) {
-		dataLength = 0;
-		throw std::exception("SDLNet: Made wrong connection.");
-	}
-	dataLength = 0;
-	bool achieved = true;
-	for(int i = 0; achieved && i < __CONNECTED_LENGTH; i++) {
-		if(data[i] != connected[i]) achieved = false;
-	}
-	if(!achieved) {
-		throw std::exception("SDLNet: Made wrong connection.");
-	}
+	
 	SDLNet_TCP_AddSocket(set, connectionSocket);
 
 #ifdef _DEBUG
 	std::cout << "Opened connection with server.";
 #endif
+	return true;
 }
 
 bool CoopHandler::connectClient() {
@@ -130,12 +118,35 @@ bool CoopHandler::connectClient() {
 	return connectionSocket;
 }
 
+// Comprobar que el servidor conectado es correcto.
+std::pair<bool, bool> CoopHandler::connectServer() {
+	if(SDLNet_CheckSockets(set, 0) > 0) {
+		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
+
+		if(dataLength != __CONNECTED_LENGTH) {
+			dataLength = 0;
+			return { true, false };
+		}
+		dataLength = 0;
+		bool achieved = true;
+		for(int i = 0; achieved && i < __CONNECTED_LENGTH; i++) {
+			if(data[i] != connected[i]) achieved = false;
+		}
+		if(!achieved) {
+			return { true, false };
+		}
+		return { true, true };
+	}
+	return { false, false };
+}
+
 void CoopHandler::closeConnection() {
 	if(connectionSocket) {
 		SDLNet_TCP_Send(connectionSocket, "Close", 6);
 		SDLNet_TCP_DelSocket(set, connectionSocket);
 		SDLNet_TCP_Close(connectionSocket);
 		connectionSocket = NULL;
+		Game::get()->setExitCoop();
 	}
 }
 
@@ -144,6 +155,10 @@ void CoopHandler::closeConnection() {
 void CoopHandler::receive() {
 	while(SDLNet_CheckSockets(set, 0) > 0) {
 		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
+
+		if(dataLength == 6 /*&& == "Close"*/) {
+			// Cerrar
+		}
 
 		for(int i = 0; i < dataLength;) {
 			char id = data[i];
