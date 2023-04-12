@@ -2,6 +2,7 @@
 #include "../Utilities/Singleton.h"
 #include "../Utilities/SDLUtils.h"
 #include "../Utilities/InputHandler.h"
+#include "../Utilities/CoopHandler.h"
 #include "GameManager.h"
 const uint32_t FRAME_RATE = 25;  //luego a def.h
 
@@ -10,6 +11,7 @@ class Game : public Singleton<Game> {
 private:
 	GameManager* gameManager;
 	InputHandler* ih;
+	CoopHandler* coop;
 	SDLUtils* sdl;
 	bool exit;
 	uint32_t frameTime;
@@ -18,8 +20,10 @@ public:
 	Game(Game&&) = delete;
 	Game& operator=(Game&) = delete;
 	Game& operator=(Game&&) = delete;
+	~Game();
 	void run();
 	uint32_t& getframeTime() { return frameTime; }
+	CoopHandler* getCoopHandler() { return coop; }
 
 	void init();
 private:
@@ -29,4 +33,6 @@ private:
 	void update();
 	void handleEvents();
 	void setExit() { exit = true; }
+
+	void runCoop(bool server, std::string ip = "");
 };
