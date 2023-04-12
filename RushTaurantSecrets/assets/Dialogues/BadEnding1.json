@@ -1,0 +1,108 @@
+{
+  "dialogues": [
+    {
+      "Character": "Player",
+      "Text": "Where are you going? Are you done already? Please, come back!"
+    },
+    {
+      "Character": "Player",
+      "Text": "Oh… No… What have I done…?"
+    },
+    {
+      "Character": "Player",
+      "Text": "Calm down, maybe it’s not that bad. Tomorrow will be a whole new day."
+    },
+    {
+      "Character": "Player",
+      "Text": "Hello?"
+    },
+    {
+      "Character": "Rival",
+      "Text": "Long time no talk… I hope you still remember me."
+    },
+    {
+      "Character": "Player",
+      "Text": "You again!? Leave me alone already!"
+    },
+    {
+      "Character": "Rival",
+      "Text": "Calm down, I won’t waste your time. I just called to check on your business."
+    },
+    {
+      "Character": "Player",
+      "Text": "Why? Are you jealous?"
+    },
+    {
+      "Character": "Player",
+      "Text": "My business is going incredibly well. A lot of clients come to try my food, and they always leave smiling happily."
+    },
+    {
+      "Character": "Rival",
+      "Text": "Really…? I’m not sure about that…"
+    },
+    {
+      "Character": "Player",
+      "Text": "What are you talking about?"
+    },
+    {
+      "Character": "Rival",
+      "Text": "Somebody told me your restaurant sucks. People who try eating there never come twice, and your reputation is just getting worse."
+    },
+    {
+      "Character": "Player",
+      "Text": "..."
+    },
+    {
+      "Character": "Player",
+      "Text": "Haha! Do you think you’re going to make me feel bad by saying a couple of stupid phrases? Don’t make me laugh…"
+    },
+    {
+      "Character": "Player",
+      "Text": "My restaurant is succeeding. Life’s good, I’m not going to let you ruin my project."
+    },
+    {
+      "Character": "Player",
+      "Text": "And stop calling me!"
+    },
+    {
+      "Character": "Player",
+      "Text": "How annoying…"
+    },
+    {
+      "Character": "Player",
+      "Text": "Well, I should rest. Tomorrow is going to be a busy day."
+    },
+    {
+      "Character": "Player",
+      "Text": "What is happening…? Why is no one coming?"
+    },
+    {
+      "Character": "Player",
+      "Text": "..."
+    },
+    {
+      "Character": "Player",
+      "Text": "Maybe that annoying bastard was right… Maybe this is the end…"
+    },
+    {
+      "Character": "Player",
+      "Text": "Dad… Mom… I’ve let you down…"
+    },
+    {
+      "Character": "Player",
+      "Text": "I failed at trying to give the business another go…"
+    },
+    {
+      "Character": "Player",
+      "Text": "I’m sorry… I’m so sorry…"
+    },
+    {
+      "Character": "Player",
+      "Text": "..."
+    },
+    {
+      "Character": "Player",
+      "Text": "I guess I’ll have to close the restaurant again."
+    }
+  ]
+}
