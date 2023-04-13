@@ -12,10 +12,9 @@ private:
 	ClockComponent* clock;
 	Texture* afternoon;
 	Texture* night;
-	Texture* topTexture; 
 	bool isAfternoon, isNight;
 	int lastDeg;
-	float currOpac;
+	float aftOpac, nightOpac;
 
 public:
 	TimeOfDay(Texture* aftTexture, Texture* nightTexture, GameObject* parent);
