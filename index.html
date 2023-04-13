@@ -2,27 +2,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<style>
-    body, html {
-        height: 100%
-    }
 
-    body, h1, h2, h3, h4, h5, h6 {
-        font-family: "Amatic SC", sans-serif
-    }
-
-    .menu {
-        display: none
-    }
-
-    .bgimg {
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-image: url("./RushTaurantSecrets/assets/website_header.png");
-        min-height: 90%;
-    }
-</style>
 <head>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<html>
+
 <body>
 
     <!-- Navbar (sit on top) -->
@@ -30,6 +16,7 @@
         <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
             <a href="#" class="w3-bar-item w3-button">HOME</a>
             <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+            <a href="#howto" class="w3-bar-item w3-button">HOW TO PLAY</a>
             <a href="#download" class="w3-bar-item w3-button">DOWNLOAD</a>
             <a href="#aboutus" class="w3-bar-item w3-button">ABOUT US</a>
         </div>
@@ -51,9 +38,29 @@
         <div class="w3-content">
             <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">About</h1>
             <p>Rushtaurant Secrets is a <strong>top down 2D kitchen simulator game</strong>. You play as a young, ambitious girl that has recently become orphaned. After your parent's deaths under mysterious circumstances, you decide to reopen your parent's old business, an old restaurant. Soon after the reopening, you discover the reason why the restaurant was clased in the first place. The rival restaurants in the area are trying to steal the restaurant's source of success: the secret formula!</p>
-            <p>Will you be able to stop your greedy competitors?<img src="./RushTaurantSecrets/assets/Sprites/UI/HUD/heart.png" ></p>
-            <p>Find out yoursef!</p>
+            <p>Will you be able to stop your greedy competitors?<img src="./RushTaurantSecrets/assets/Sprites/UI/HUD/heart.png"></p>
+            <p>Find out yourself!</p>
         </div>
+    </div>
+
+    <!-- How to play Container -->
+    <div class="w3-container w3-black">
+        <h1 class="w3-center w3-jumbo">How to play</h1>
+    </div>
+    <div style="background-color:burlywood;font-size:xx-large;padding:20px">
+        <h2 class="w3-xxlarge">1 - Choose today's menu</h2>
+        <p style="padding-left:20px">
+            At the start of every day, you'll be able to choose one of the two randomly generated menus. Choose which one you want carefully, since you won't be able to change it for the day!
+        <p class="w3-center">
+            <img src="./RushTaurantSecrets/assets/Website/Dailymenu explanation.png">
+        </p>
+        <h2 class="w3-xxlarge">2 - Buy the ingredients</h2>
+        <p style="padding-left:20px">
+            After choosing your menu, you'll have to buy the ingredients you need. Ingredients expire at the end of the day.
+        <p>
+            <img src="./RushTaurantSecrets/assets/Website/Supermarket explanation1.png">
+            <img style="offset-rotate: 90deg" src="./RushTaurantSecrets/assets/Website/arrow_2.png">
+        </p>
     </div>
 
     <!-- Image of location/map -->
@@ -84,26 +91,25 @@
         <p>Our <a href="https://github.com/UCM-FDI-DISIA/Nightmare-Dogs" title="GitHub" target="_blank" class="w3-hover-text-green">GitHub</a></p>
     </footer>
 
-    <script>// Tabbed Menu
-function openMenu(evt, menuName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("menu");
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-  }
-  document.getElementById(menuName).style.display = "block";
-  evt.currentTarget.firstElementChild.className += " w3-red";
-}
-document.getElementById("myLink").click();</script>
+    <script>
+        // Tabbed Menu
+        function openMenu(evt, menuName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("menu");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(menuName).style.display = "block";
+            evt.currentTarget.firstElementChild.className += " w3-red";
+        }
+        document.getElementById("myLink").click();</script>
 
 </body>
-<html>
 
 </html>
-</head>
-    <title>W3.CSS Template</title>
-    <meta charset="UTF-8">
+<title>Rushtaurant Secrets</title>
+<meta charset="UTF-8">

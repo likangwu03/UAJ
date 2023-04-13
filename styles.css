@@ -1,0 +1,26 @@
+.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+body, html {
+    height: 100%
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: "Amatic SC", sans-serif
+}
+
+.menu {
+    display: none
+}
+
+.bgimg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("./RushTaurantSecrets/assets/Website/website_header.png");
+    min-height: 90%;
+}
