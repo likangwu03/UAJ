@@ -750,6 +750,11 @@
       "id": "bubbly_font",
       "file": "assets/Fonts/04B_30__.TTF",
       "size": 16
+    },
+    {
+      "id": "charybdis_font",
+      "file": "assets/Fonts/chary___.ttf",
+      "size": 16
     }
   ],
   "sounds": [
