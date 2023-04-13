@@ -3,7 +3,10 @@
 #include "../Structure/Scene.h"
 #include "../Utilities/Texture.h"
 #include "../Utilities/SDLUtils.h"
+#include "../GameObjects/Dialogue.h"
+
 using namespace std;
+struct dialogueInfo;
 class CinematicBaseScene : public Scene
 {
 protected:
@@ -14,6 +17,7 @@ protected:
 	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
 	const float FONTSIZE = 50;
 	const float SKIP_WIDTH = 300,SKIP_HEIGHT=50;
+	vector<dialogueInfo>dialogueInfo;
 public:
 	CinematicBaseScene();
 	~CinematicBaseScene();
