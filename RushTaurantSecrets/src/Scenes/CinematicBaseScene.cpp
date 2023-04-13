@@ -1,13 +1,11 @@
 #include "CinematicBaseScene.h"
 #include "../Utilities/InputHandler.h"
 
-CinematicBaseScene::CinematicBaseScene() :Scene(),cont(0) {
-
+CinematicBaseScene::CinematicBaseScene() :Scene(),cont(0), sdl(SDLUtils::instance()) {
 	font = new Font(FONT_PATH, FONTSIZE);
 	if (ih->joysticksInitialised())
 		skipText = new Texture(sdlutils().renderer(), "Press B to skip", *font, build_sdlcolor(0xffffffFF));
 	else skipText = new Texture(sdlutils().renderer(), "Press ESC to skip", *font, build_sdlcolor(0xffffffFF));
-
 }
 
 CinematicBaseScene::~CinematicBaseScene() {
