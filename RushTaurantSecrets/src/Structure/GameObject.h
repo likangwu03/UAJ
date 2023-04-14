@@ -1,7 +1,6 @@
 #pragma once
 #include <unordered_map>
 #include <vector>
-#pragma once
 #include "../Definitions/Structure_def.h"
 
 class Component;
@@ -10,7 +9,6 @@ class Scene;
 class GameObject {
 private:
 	friend class Component;
-	void addComponent(Component* comp, _ecs::_cmp_id id);
 
 	void deleteCompVector(Component* comp);
 protected:
@@ -21,6 +19,7 @@ protected:
 
 public:
 	GameObject(Scene* scene, _ecs::_grp_id grp = _ecs::grp_GENERAL, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
+	void addComponent(Component* comp, _ecs::_cmp_id id);
 	virtual ~GameObject();
 
 	bool isAlive() { return alive; }

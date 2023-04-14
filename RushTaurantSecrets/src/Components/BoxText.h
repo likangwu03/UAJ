@@ -84,7 +84,7 @@ public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_BOX_TEXT;
 
 	BoxText(GameObject* parent, Texture* keys, Texture* portraitBorder, Texture* portrait, Vector offsetSize) :
-		Component(parent, id), keysTexture(keys), portraitBorderTexture(portraitBorder), portraitTexture(portrait), elapsedTime(0), timer(0.001), increment(5) {
+		Component(parent, id), keysTexture(keys), portraitBorderTexture(portraitBorder), portraitTexture(portrait), elapsedTime(0), timer(0.001), increment(17) {
 		text = parent->getComponent<Text>();
 		transform = parent->getComponent<Transform>();
 

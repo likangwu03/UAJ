@@ -3,7 +3,7 @@
 void ShowSkipTransitionScene::render() {
 	cinematicScene->renderCinematic();
 	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
-	cinematicScene->renderSkipText();
+	cinematicScene->renderUI();
 }
 
 

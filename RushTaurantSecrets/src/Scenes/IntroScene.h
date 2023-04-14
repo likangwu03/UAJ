@@ -1,6 +1,10 @@
 #pragma once
 #include "../Scenes/CinematicBaseScene.h"
 #include "../GameObjects/Player.h"
+#include "../Components/StraightMovement.h"
+#include <vector>
+using namespace std;
+struct dialogueInfo;
 class IntroScene : public CinematicBaseScene
 {
 	enum States {
@@ -10,23 +14,34 @@ class IntroScene : public CinematicBaseScene
 		D1,
 		D2,
 		D3,
+		D31,
 		D4,
 		D5,
+		D51,
 		D6,
-		OUT       
+		OUT,
+		NONE
 	};
-private:
 	Texture* bg;
 	Texture* filter;
-	GameObject* player;
-	const float WIDTH, HEIGHT;
+	Texture* top;
+	SoundEffect* nightAmbience;
+	Music* nightMusic;
+	Transform* transform;
+	void addPath(const vector<Vector>& points);
 	States state;
+	
+private:
+	GameObject* player;
+	StraightMovement* straightMovement;
+
+	vector<dialogueInfo> dialogues;
+
 public:
 	IntroScene();
-	//void handleEvents()override;
 	void callAfterCreating() override;
-	void update()override;
 	void renderCinematic () override;
 	void finishScene()override;
+	void update()override;
 };
 

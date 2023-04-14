@@ -45,7 +45,7 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	shopMenu = new GameObject(this, _ecs::grp_GENERAL, hdr_SHOP_MENU1);
 	new ShoppingMenuComp(shopMenu);
 
-	// icono de menú del día
+	// icono de men?del día
 	menuToggled = true;
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, 30),
 		479.0f, 640.0f, []() {});

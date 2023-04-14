@@ -2,31 +2,48 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Hi, mom, hi, dad."
+      "Text": "Hi, mom, hi, dad.",
+      "Portrait":"PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Parents",
-      "Text": "..."
+      "Text": "...",
+      "Portrait":"PARENTS"
     },
     {
       "Character": "Player",
-      "Text": "Tomorrow is the restaurant's grand reopening. I have butterflies in my stomach, I hope everything goes well. I have taken up this business for you, it was your dream for me to inherit it after all."
+      "Text": "Tomorrow is the restaurant's grand reopening. I have butterflies in my stomach, I hope everything goes well.",
+      "Portrait":"PROTA_CASUAL_SIGH"
+    },
+    {
+      "Character": "Player",
+      "Text": "I have taken up this business for you, it was your dream for me to inherit it after all.",
+      "Portrait":"PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Parents",
-      "Text": "..."
+      "Text": "...",
+      "Portrait":"PARENTS"
     },
     {
       "Character": "Player",
-      "Text": "I know there's still a lot of work left to do, I'm also aware that it looks nothing like it did before, but I'll make sure to work hard until it does."
+      "Text": "I know there's still a lot of work left to do, I'm also aware that it looks nothing like it did before.",
+      "Portrait":"PROTA_CASUAL_SIGH"
+    },
+    {
+      "Character": "Player",
+      "Text": "But I'll make sure to work hard until it does.",
+      "Portrait":"PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Parents",
-      "Text": "..."
+      "Text": "...",
+      "Portrait":"PARENTS"
     },
     {
       "Character": "Player",
-      "Text": "All I want is to make you guys happy, I want to make you two proud."
+      "Text": "All I want is to make you guys happy, I want to make you two proud.",
+      "Portrait":"PROTA_CASUAL_SMILE_CLOSE_EYE"
     }
   ]
 }

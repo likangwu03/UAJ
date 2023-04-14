@@ -14,7 +14,7 @@
 	do {
 		std::getline(file, line);
 		while (!line.empty() && line[0] == '\t') line = line.substr(1);
-	} while (!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee está vacía o es un comentario (empieza con '#'), se lee la siguiente.
+	} while (!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee est?vacía o es un comentario (empieza con '#'), se lee la siguiente.
 	if (file.eof()) { line = ""; }
 }
 

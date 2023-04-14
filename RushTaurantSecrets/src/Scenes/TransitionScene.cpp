@@ -1,11 +1,12 @@
 #include "TransitionScene.h"
 #include "../Utilities/checkML.h"
 
-TransitionScene::TransitionScene(Scene* backgroundScene,float duration, bool fadeOut,string texture):scene(backgroundScene), cont(0),WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), duration(duration*1000) {
-	if(texture=="") filter = &sdlutils().images().at("Filter_Black");
+TransitionScene::TransitionScene(Scene* backgroundScene, float duration, bool fadeOut, bool skipScene, string texture) :scene(backgroundScene), cont(0), skipScene(skipScene), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), duration(duration * 1000) {
+	if (texture == "") filter = &sdlutils().images().at("Filter_Black");
 	else filter = &sdlutils().images().at(texture);
 	if (fadeOut)fadeOutInverter = 0;
 	else fadeOutInverter = 100;
+
 }
 
 void TransitionScene::render() {
@@ -16,8 +17,10 @@ void TransitionScene::render() {
 void TransitionScene::update() {
 	cont += frameTime;
 	scene->update();
-	filter->setOpacity(fadeOutInverter-(cont * 100/ duration));
+	filter->setOpacity(abs(fadeOutInverter - (cont * 100 / duration)));
 	if (cont > duration) {
-		GameManager::get()->deleteCurrentScene();
+		if (!skipScene)
+			GameManager::get()->deleteCurrentScene(); //fade in, delete de transici¨®n
+		else GameManager::get()->skipfromTransition();//fade out,delete de 2 escenas seguidas
 	}
 }

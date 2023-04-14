@@ -8,7 +8,7 @@ private:
 	CinematicBaseScene* cinematicScene;
 
 public:
-	ShowSkipTransitionScene(CinematicBaseScene* backgroundScene, float duration, bool fadeOut = false, string texture = "") :TransitionScene(nullptr, duration, fadeOut, texture), cinematicScene(backgroundScene) {};
+	ShowSkipTransitionScene(CinematicBaseScene* backgroundScene, float duration, bool fadeOut = false, string texture = "") :TransitionScene(nullptr, duration, fadeOut,false, texture), cinematicScene(backgroundScene) {};
 	void render()override;
 	void update() override;
 	void handleEvents() override;

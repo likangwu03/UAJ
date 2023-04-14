@@ -42,7 +42,7 @@ namespace _ecs {
 	const Vector FREEZER = Vector(15, 5);
 
 	// los caminos van de abajo a arriba
-	// es decir, el 1 es el que está más abajo
+	// es decir, el 1 es el que est?más abajo
 	static Route thiefsPahts[NUM_THIEFS_PATHS * MAX_THIEFS] = {
 		// fórmula secreta
 		{{Vector(7, 13), Vector(7, 11), Vector(16, 11), Vector(16, 14), Vector(23, 14), Vector(23, 12), Vector(26, 12), SECRET}, north},
@@ -53,6 +53,14 @@ namespace _ecs {
 		{{Vector(7, 13), Vector(7, 11), Vector(15, 11), FREEZER}, north},
 		{{Vector(7, 12), Vector(7, 11), Vector(15, 11), FREEZER}, north},
 		{{Vector(8, 11), Vector(8, 8), Vector(12, 8), Vector(12, 7), Vector(15, 7), FREEZER}, north}
+	};
+
+	static Route introPath[2] = {
+	
+		{{Vector(40, 14), Vector(28, 14)}, west},
+		{{ Vector(18, 14),Vector(18,10)}, west},
+
+	
 	};
 
 

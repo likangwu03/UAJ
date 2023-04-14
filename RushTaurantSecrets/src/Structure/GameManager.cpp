@@ -266,7 +266,10 @@ vector<dialogueInfo> GameManager::getDialogueInfo(std::string d) {
 					JSONObject vObj = v->AsObject();
 					std::string chr = vObj["Character"]->AsString();
 					std::string txt = vObj["Text"]->AsString();
-					dialogueInfo dInfo(chr, txt, nullptr);
+					std::string prt = vObj["Portrait"]->AsString();
+					deque<std::string> text;
+					text.push_back(txt);
+					dialogueInfo dInfo(chr, text, &sdlutils().images().at(prt) );
 
 					dialogues.emplace_back(dInfo);
 				}

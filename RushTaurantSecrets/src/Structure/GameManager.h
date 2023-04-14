@@ -3,6 +3,7 @@
 #include "../Utilities/Singleton.h"
 #include "../Definitions/Food_def.h"
 #include <string>
+#include <deque>
 
 class Scene;
 class MainMenu;
@@ -27,14 +28,14 @@ class KitchenIslandComp;
 
 struct dialogueInfo {
 	std::string character;
-	std::string text;
+	deque<std::string> text;
 	Texture* portrait;
 public:
-	dialogueInfo(std::string c, std::string t, Texture* p) : character(c), text(t), portrait(p) {};
+	dialogueInfo(std::string c, deque<std::string> t, Texture* p) : character(c), text(t), portrait(p) {};
 };
-
 class GameManager :public Singleton<GameManager> {
 	friend Singleton<GameManager>;
+
 
 public:
 	GameManager(GameManager&) = delete;

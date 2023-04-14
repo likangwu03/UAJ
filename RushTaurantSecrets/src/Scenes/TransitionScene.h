@@ -14,9 +14,9 @@ protected:
 	float cont;
 	const float WIDTH, HEIGHT;
 	int fadeOutInverter;
-
+	bool skipScene;
 public:
-	TransitionScene(Scene* backgroundScene, float duration, bool fadeOut = false, string texture = "");
+	TransitionScene(Scene* backgroundScene, float duration, bool fadeOut = false,bool skipScene=false, string texture = "");
 	virtual void render() override;
 	virtual void update() override;
 

@@ -79,7 +79,7 @@ private:
 
 	// actualizar el tamaño de las texturas y la posición de las texturas de la parte de arriba
 	void updateDataAux(Vector shadowPos, measures& data) {
-		// el tamaño cambia en función del número que se esté renderizando
+		// el tamaño cambia en función del número que se est?renderizando
 		// inicialmente cambia de 1 en 1, es por eso que existe la variable increase
 		// para que no crezca tan lento
 		data.width = (data.originalWidth + data.proportion * actNumber * increase) / size;
@@ -95,7 +95,7 @@ private:
 		// PARA CREAR EL EFECTO DE LA SOMBRA LO QUE SE MUEVE ES EL FG
 		updateDataAux(Vector(-3, -3), letterX);
 		// ajusto a ojo, no es del todo exacto
-		// no se tiene en cuenta comó van creciendo los números
+		// no se tiene en cuenta com?van creciendo los números
 		number.posBg.setX(letterX.posBg.getX() + letterX.width + 20 / size);
 		updateDataAux(Vector(-7, -3), number);
 	}
