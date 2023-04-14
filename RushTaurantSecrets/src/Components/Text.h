@@ -26,6 +26,8 @@ class Text : public Component {
 private:
 	enum State {Writing, Written};
 
+	static bool hasFinished;
+
 	Font* font;
 	BoxText* boxText;
 	Transform* transform;
@@ -79,6 +81,8 @@ private:
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;
+
+	static bool isTextFinished() { return hasFinished; }
 
 	Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos = Vector::zero);
 

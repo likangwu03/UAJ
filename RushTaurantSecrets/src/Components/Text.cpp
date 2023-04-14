@@ -3,6 +3,8 @@
 
 #include "../Utilities/checkML.h"
 
+bool Text::hasFinished = false;
+
 void Text::createLetter(string l) {
 	Letter letter;
 	letter.texture = new Texture(sdl->renderer(), l, *font, build_sdlcolor(0x000000FF));
@@ -89,7 +91,7 @@ void Text::init(string text) {
 	cont = 0;
 	actLine = 0;
 	space = 0;
-
+	hasFinished = false;
 	separateText(text);
 
 	letterTextures.clear();
@@ -116,7 +118,7 @@ void Text::newText(string newText) {
 
 Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos) :
 	Component(parent, id), sdl(SDLUtils::instance()), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency),
-	font(font), widthTextBox(widthTextBox), offset(20), showAllText(false), nextText(false), state(Writing), boxText(nullptr) ,
+	font(font), widthTextBox(widthTextBox), offset(10), showAllText(false), nextText(false), state(Writing), boxText(nullptr) ,
 	nextLetterSound(&sdl->soundEffects().at("TEXT_TYPING")), nextTextSound(&sdl->soundEffects().at("NEXT_TEXT"))
 {
 	nextLetterSound->setVolume(3);
@@ -169,6 +171,7 @@ void Text::update() {
 
 				}
 				else {
+					hasFinished = true;
 					parent->setAlive(false);
 				}
 				nextText = false;
