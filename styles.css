@@ -11,7 +11,15 @@ body, html {
 }
 
 body, h1, h2, h3, h4, h5, h6 {
-    font-family: "Amatic SC", sans-serif
+    font-family: "Charybdis", "Amatic SC", sans-serif
+}
+
+ol {
+    margin-left: 60px;
+}
+
+ol li {
+    color: darkred;
 }
 
 .menu {
@@ -23,4 +31,9 @@ body, h1, h2, h3, h4, h5, h6 {
     background-size: cover;
     background-image: url("./RushTaurantSecrets/assets/Website/website_header.png");
     min-height: 90%;
+}
+
+@font-face {
+    font-family: "Charybdis";
+    src: url("./RushTaurantSecrets/assets/Fonts/chary___.ttf");
 }
