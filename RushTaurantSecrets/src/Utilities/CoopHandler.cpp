@@ -199,8 +199,8 @@ void CoopHandler::addMessage(const Message& message) {
 }
 
 // Locurote
-byte CoopHandler::codeChar(char input) { return input; }
-char CoopHandler::decodeChar(byte input) { return input; }
+inline byte CoopHandler::codeChar(char input) { return input; }
+inline char CoopHandler::decodeChar(byte input) { return input; }
 inline byte CoopHandler::codeInt8(int input) { return (int8_t)input; }
 inline int CoopHandler::decodeInt8(byte input) { return input; }
 inline byte CoopHandler::codeUInt8(uint8_t input) { return input; }
