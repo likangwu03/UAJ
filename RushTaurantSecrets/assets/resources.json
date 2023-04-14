@@ -675,8 +675,8 @@
       "file": "assets/Sprites/UI/icons/character_chef_smile.png"
     },  
      {
-      "id": "PROTA_CHEF_SURPRISE",
-      "file": "assets/Sprites/UI/icons/character_chef_surprising.png"
+      "id": "PROTA_CHEF_SURPRISED",
+      "file": "assets/Sprites/UI/icons/character_chef_surprised.png"
     },
     {
       "id": "PROTA_CHEF_ANGRY",
@@ -687,8 +687,8 @@
       "file": "assets/Sprites/UI/icons/character_chef_angry_closingEyes.png"
     },
     {
-      "id": "PROTA_CASUAL_SURPRISE",
-      "file": "assets/Sprites/UI/icons/character_casual_surprising.png"
+      "id": "PROTA_CASUAL_SURPRISED",
+      "file": "assets/Sprites/UI/icons/character_casual_surprised.png"
     },
     {
       "id": "PROTA_CASUAL_ANGRY",
