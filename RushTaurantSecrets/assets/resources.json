@@ -671,9 +671,34 @@
       "file": "assets/Sprites/UI/dialogBox_PortraitFrame.png"
     },
     {
-      "id": "MAIN_CHARACTER_PORTRAIT",
+      "id": "PROTA_CHEF_SMILE",
       "file": "assets/Sprites/UI/icons/character_chef_smile.png"
-    }, 
+    },  
+     {
+      "id": "PROTA_CHEF_SURPRISE",
+      "file": "assets/Sprites/UI/icons/character_chef_surprising.png"
+    },
+    {
+      "id": "PROTA_CHEF_ANGRY",
+      "file": "assets/Sprites/UI/icons/character_chef_badMood_angry.png"
+    },
+    {
+      "id": "PROTA_CHEF_ANGRY_CLOSE_EYE",
+      "file": "assets/Sprites/UI/icons/character_chef_angry_closingEyes.png"
+    },
+    {
+      "id": "PROTA_CASUAL_SURPRISE",
+      "file": "assets/Sprites/UI/icons/character_casual_surprising.png"
+    },
+    {
+      "id": "PROTA_CASUAL_ANGRY",
+      "file": "assets/Sprites/UI/icons/character_casual_angry.png"
+    },
+    {
+      "id": "PROTA_CASUAL_ANGRY_CLOSE_EYE",
+      "file": "assets/Sprites/UI/icons/character_casual_angry_closingEyes.png"
+    },
+    
     {
       "id": "PROTA_CASUAL_SMILE_CLOSE_EYE",
       "file": "assets/Sprites/UI/icons/character_casual_smile_closingEyes.png"

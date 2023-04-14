@@ -76,7 +76,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
 	new Warning(thiefExclamation);
 	
-	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("MAIN_CHARACTER_PORTRAIT"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
+	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("PROTA_CHEF_SMILE"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
 	//new FreeText(this, Vector(300, 300), 20, 30, 500, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro" });
 
 	// Racha de cobros
