@@ -687,6 +687,14 @@
       "file": "assets/Sprites/UI/icons/character_chef_angry_closingEyes.png"
     },
     {
+      "id": "PROTA_CHEF_SAD_CLOSE_EYE",
+      "file": "assets/Sprites/UI/icons/character_chef_sad_closingEyes.png"
+    },
+    {
+      "id": "PROTA_CHEF_SIGH",
+      "file": "assets/Sprites/UI/icons/character_chef_sigh_closingEyes.png"
+    },  
+    {
       "id": "PROTA_CASUAL_SURPRISED",
       "file": "assets/Sprites/UI/icons/character_casual_surprised.png"
     },
