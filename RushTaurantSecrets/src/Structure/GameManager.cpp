@@ -56,18 +56,20 @@ void GameManager::initialize() {
 	continueMenu = new ContinueMenu();
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
+	beforeDayStartScene = new BeforeDayStartScene();
+	secondDayAfterKillScene = new SecondDayAfterKillScene();
+	firstDayAfterKillScene = new FirstDayAfterKillScene();
 
 	try {
 		days = new DayManager();
 		days->nextDay();
 	} catch(std::exception e) { std::cout << e.what(); }
 
-	beforeDayStartScene = new BeforeDayStartScene();
+	beforeDayStartScene->init();
+
 	endScene = new EndOfDayScene();
 
 	introScene = new IntroScene();
-	firstDayAfterKillScene = new FirstDayAfterKillScene();
-	secondDayAfterKillScene = new SecondDayAfterKillScene();
 
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
@@ -91,6 +93,8 @@ GameManager::~GameManager() {
 	delete optionsMenu;
 	delete dailyMenu;
 	delete beforeDayStartScene;
+	delete firstDayAfterKillScene;
+	delete secondDayAfterKillScene;
 	delete gameOverScene;
 	delete continueMenu;
 	delete endScene;

@@ -13,21 +13,23 @@
 #include "../Components/Image.h"
 #include "BeforeDayStartScene.h"
 #include "IntroScene.h"
+#include "FirstDayAfterKillScene.h"
 
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
-		GameManager::get()->changeScene(GameManager::get()->getIntroScene());
-		GameManager::get()->getCurrentScene()->callAfterCreating();
-
+	
+	//GameManager::get()->changeScene(GameManager::get()->getFirstDayAfterKillScene());
+	//GameManager::get()->getFirstDayAfterKillScene()->callAfterCreating();
 
 	if (GameManager::get()->checkload()) {
 		GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
 	}
 	else {
 	
-		
-		GameManager::get()->getDailyMenu()->reset();
+		GameManager::get()->changeScene(GameManager::get()->getIntroScene());
+		GameManager::get()->getCurrentScene()->callAfterCreating();
+		//GameManager::get()->getDailyMenu()->reset();
 	}
 	
 }

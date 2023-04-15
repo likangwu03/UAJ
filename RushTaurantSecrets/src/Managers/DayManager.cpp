@@ -7,6 +7,8 @@
 #include "../Scenes/Pantry.h"
 #include "../scenes/DailyMenuScene.h"
 #include "../Scenes/BeforeDayStartScene.h"
+#include "../Scenes/FirstDayAfterKillScene.h"
+#include "../Scenes/SecondDayAfterKillScene.h"
 #include "../Scenes/EndOfDayScene.h"
 #include "../Utilities/checkML.h"
 
@@ -69,26 +71,7 @@ DayManager::~DayManager() {
 }
 
 void DayManager::checkDayFinished() {
-	//<<<<<<< Updated upstream
-	//	if(ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients()) {
-	//		/*if(GameManager::get()->getReputation()->getReputation() < 0)
-	//			GameManager::get()->setGameOver(_ecs::BadRep);
-	//		else if (GameManager::get()->getMoney()->getMoney() < 0)
-	//			GameManager::get()->setGameOver(_ecs::Broke);
-	//		else*/ {
-	//			nextDay();
-	//			GameManager::get()->save();
-	//			GameManager::get()->getDailyMenu()->reset();
-	//			GameManager::get()->getBeforeDayStart()->reset();
-	//			//GameManager::get()->getBeforeDayStart()->init();
-	//			GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
-	//			restaurantMusic->pauseMusic();
-	//			timeUpSound->play();
-	//		}
-	//	}
-	//}
-	//
-	//=======
+
 	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients()) {
 		if (GameManager::get()->getReputation()->getReputation() < 0)
 
@@ -105,12 +88,10 @@ void DayManager::checkDayFinished() {
 
 void DayManager::newDay() {
 	nextDay();
-	GameManager::get()->getBeforeDayStart()->reset();
-	GameManager::get()->getDailyMenu()->reset();
-	//GameManager::get()->getBeforeDayStart()->init();
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 	restaurantMusic->pauseMusic();
 	timeUpSound->play();
+	GameManager::get()->getBeforeDayStart()->reset();
+	GameManager::get()->getDailyMenu()->reset();
 }
 
 void DayManager::nextDay() {
@@ -121,6 +102,16 @@ void DayManager::nextDay() {
 
 		return;
 	}
+
+	if (GameManager::get()->getHasEverKilled().first) {
+		if (day - GameManager::get()->getHasEverKilled().second ==1)
+		{
+			GameManager::get()->changeScene(GameManager::get()->getFirstDayAfterKillScene());
+			GameManager::get()->getFirstDayAfterKillScene()->callAfterCreating();
+		}
+		/*else if (day - GameManager::get()->getHasEverKilled().second ==2)*/
+	}
+	else GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 
 	// Leer dayConfig
 

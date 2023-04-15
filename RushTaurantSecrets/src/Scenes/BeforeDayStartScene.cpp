@@ -11,10 +11,6 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	gm = GameManager::instance();
 	ih = InputHandler::instance();
 
-	day = gm->getDayManager();
-	accDay = day->getDay();
-	accGoal = day->getDailyObjective();
-
 	//string con texto correspondiente
 	wordDay = "DAY: " + std::to_string(accDay);
 	press = "PRESS ANY BUTTON TO CONTINUE...";
@@ -43,7 +39,7 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	bannerTexture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/UI_Flat_Banner_01_Upward.png");
 	new Image(bannerObj, bannerTexture);
 	
-	init();
+	
 }
 
 void BeforeDayStartScene::init() {
@@ -52,6 +48,11 @@ void BeforeDayStartScene::init() {
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
 	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
+
+	day = gm->getDayManager();
+	/*accDay = day->getDay();
+	accGoal = day->getDailyObjective();*/
+
 }
 
 

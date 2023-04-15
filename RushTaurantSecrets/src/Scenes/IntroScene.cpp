@@ -67,7 +67,7 @@ void IntroScene::update() {
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}
-		else
+		
 			break;
 	case IntroScene::D1:
 		if (Text::isTextFinished()) {
@@ -152,5 +152,6 @@ void IntroScene::renderCinematic() {
 
 void IntroScene::finishScene() {
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->getBeforeDayStart()->reset();
 	GameManager::get()->getDailyMenu()->reset();
 }
