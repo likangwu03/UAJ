@@ -716,8 +716,8 @@
       "file": "assets/Sprites/UI/icons/character_casual_sigh_closingEyes.png"
     },  
     {
-      "id": "PROTA_CASUAL_SMILE_BORED",
-      "file": "assets/Sprites/UI/icons/character_casual_bored_smile.png"
+      "id": "PROTA_CASUAL_BAD_SMILE",
+      "file": "assets/Sprites/UI/icons/character_casual_badSmile.png"
     },
     {
       "id": "PROTA_CASUAL_BAD_MOOD",

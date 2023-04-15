@@ -18,7 +18,7 @@
     {
       "Character": "Player",
       "Text": "I have taken up this business for you, it was your dream for me to inherit it after all.",
-      "Portrait":"PROTA_CASUAL_SAD_CLOSE_EYE"
+      "Portrait":"PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Parents",
@@ -33,7 +33,7 @@
     {
       "Character": "Player",
       "Text": "But I'll make sure to work hard until it does.",
-      "Portrait":"PROTA_CASUAL_SAD_CLOSE_EYE"
+      "Portrait":"PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Parents",

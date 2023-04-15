@@ -21,6 +21,8 @@
 #include "../Scenes/ContinueMenu.h"
 #include "../Scenes/PantryUI.h"
 #include "../Scenes/IntroScene.h"
+#include "../Scenes/FirstDayAfterKillScene.h"
+#include "../Scenes/SecondDayAfterKillScene.h"
 #include <sstream>
 #include <fstream>
 #include "../Utilities/JSON.h"
@@ -30,7 +32,7 @@
 GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),optionsMenu(nullptr),gameOverScene(nullptr),
 	continueMenu(nullptr),menu(nullptr), kitchenIsland(nullptr), twoPlayers(false),
-	hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0) { };
+	hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0),hasEverKilled({false,0}) { };
 
 
 void GameManager::initialize() {
@@ -64,6 +66,8 @@ void GameManager::initialize() {
 	endScene = new EndOfDayScene();
 
 	introScene = new IntroScene();
+	firstDayAfterKillScene = new FirstDayAfterKillScene();
+	secondDayAfterKillScene = new SecondDayAfterKillScene();
 
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
@@ -163,6 +167,8 @@ OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
 ContinueMenu* GameManager:: getContinueMenu() { return continueMenu; }
 EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
 IntroScene* GameManager::getIntroScene() { return introScene; }
+FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }
+SecondDayAfterKillScene* GameManager::getSecondDayAfterKillScene() { return secondDayAfterKillScene; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
@@ -181,9 +187,11 @@ void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
 	kitchenIsland->setIngredients(ing);
 }
 
+pair<bool,int> GameManager::getHasEverKilled() { return hasEverKilled; }
+
 bool GameManager::getHasKill() { return hasKilled; }
 void GameManager::killed() { ++killedNum; }
-void GameManager::setHasKill(bool hKill) { hasKilled = hKill; }
+void GameManager::setHasKill(bool hKill) { hasKilled = hKill; if (!hasEverKilled.first) hasEverKilled={ true,days->getDay() }; }
 
 
 void GameManager::save() {

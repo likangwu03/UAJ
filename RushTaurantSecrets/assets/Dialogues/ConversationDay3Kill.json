@@ -2,31 +2,43 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Mom, dad, I wasn't able to hold back. I promised you I wouldn't hurt a living being ever again, but I broke my promise."
+      "Text": "Mom, dad, I wasn't able to hold back. I promised you I wouldn't hurt a living being ever again, but I broke my promise.",
+      "Portrait":"PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Parents",
-      "Text": "..."
+      "Text": "...",
+      "Portrait":"PARENTS"
     },
     {
       "Character": "Player",
-      "Text": "It was for a good reason. You two loved the restaurant, it was so important to you, I need to protect it."
+      "Text": "It was for a good reason. You two loved the restaurant, it was so important to you, I need to protect it.",
+      "Portrait":"PROTA_CASUAL_ANGRY_CLOSE_EYE"
     },
     {
       "Character": "Parents",
-      "Text": "..."
+      "Text": "...",
+      "Portrait":"PARENTS"
     },
     {
       "Character": "Player",
-      "Text": "Family always goes first, it's what you taught me... I had to cross the line, it was for a good reason, I can't let the restaurant close."
+      "Text": "Family always goes first, it's what you taught me...",
+      "Portrait":"PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "I had to cross the line, it was for a good reason, I can't let the restaurant close.",
+      "Portrait":"PROTA_CASUAL_ANGRY_CLOSE_EYE"
     },
     {
       "Character": "Parents",
-      "Text": "..."
+      "Text": "...",
+      "Portrait":"PARENTS"
     },
     {
       "Character": "Player",
-      "Text": "I Will do as I promised, I won't let anyone laugh at this place... Not while I'm alive."
+      "Text": "I Will do as I promised, I won't let anyone laugh at this place... Not while I'm alive.",
+      "Portrait":"PROTA_CASUAL_BAD_SMILE"
     }
   ]
 }

@@ -22,9 +22,11 @@ class EndOfDayScene;
 class GameOverScene;
 class ContinueMenu;
 class PantryUI;
-class IntroScene;
 class Texture;
 class KitchenIslandComp;
+class IntroScene;
+class FirstDayAfterKillScene;
+class SecondDayAfterKillScene;
 
 struct dialogueInfo {
 	std::string character;
@@ -50,20 +52,30 @@ private:
 
 	Scene* currentScene;
 	Scene* previousScene;
-	MainMenu* mainMenu;
-	BeforeDayStartScene* beforeDayStartScene;
+	
+	//escenas de juego
 	Restaurant* restaurant;
-	UIRestaurant* uiRestaurant;
 	Pantry* pantry;
-	DailyMenuScene* dailyMenu;
 	SuperMarket* supermarket;
-	PauseMenu* pauseMenu;
-	OptionsMenu* optionsMenu;
-	EndOfDayScene* endScene;
-	GameOverScene* gameOverScene;
-	ContinueMenu* continueMenu;
+
+	//ui
+	DailyMenuScene* dailyMenu;
+	UIRestaurant* uiRestaurant;
 	PantryUI* pantryUI;
+
+	//menu
+	MainMenu* mainMenu;
+	OptionsMenu* optionsMenu;
+	PauseMenu* pauseMenu;
+	ContinueMenu* continueMenu;
+	EndOfDayScene* endScene;
+	BeforeDayStartScene* beforeDayStartScene;
+	GameOverScene* gameOverScene;
+	
+	//escenas cinem¨¢ticas
 	IntroScene* introScene;
+	FirstDayAfterKillScene* firstDayAfterKillScene;
+	SecondDayAfterKillScene* secondDayAfterKillScene;
 
 	Reputation* reputation;
 	Money* money;
@@ -75,6 +87,7 @@ private:
 	float dayTime;
 	//bool multiplayer;
 	bool hasKilled;
+	pair<bool,int> hasEverKilled; //si ha matado alguna vex/ el primer d¨ªa que mat¨® a un ladr¨®n
 	bool mapsCreated;
 	bool twoPlayers;
 	int killedNum; //n¨²mero de ladrones matados en el d¨ªa anterior
@@ -106,6 +119,8 @@ public:
 	ContinueMenu* getContinueMenu();
 	EndOfDayScene* getEndOfDay();
 	IntroScene* getIntroScene();
+	FirstDayAfterKillScene* getFirstDayAfterKillScene();
+	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 
 
 	Reputation* getReputation();
@@ -117,7 +132,8 @@ public:
 
 	void setKichenIsland(KitchenIslandComp* KIComp);
 	void setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing);
-
+	
+	pair<bool, int> getHasEverKilled();
 	bool getHasKill();
 	void setHasKill(bool hKill);
 	void killed();
