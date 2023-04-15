@@ -27,5 +27,6 @@ private:
 public:
 	FreezerComp(GameObject* parent);
 	void isOpen();
+	void nextDay() override;
 };
 

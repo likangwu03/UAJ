@@ -8,13 +8,20 @@ image(parent->getComponent<Image>()), gameInfo(GameManager::get())
 	textures.open1 = &sdlutils().images().at("FREEZER_OPEN");
 	textures.close2 = &sdlutils().images().at("FREEZER2_CLOSE");
 	textures.open2 = &sdlutils().images().at("FREEZER2_OPEN");
+		isClosedWhenKilled();
+	//if (gameInfo->getHasKill()) {
+	//}
+	//else image->setActive(false);
+	//isOpenWhenKilled();
+
+};
+
+void FreezerComp::nextDay() {
 	if (gameInfo->getHasKill()) {
 		isClosedWhenKilled();
 	}
 	else image->setActive(false);
-	//isOpenWhenKilled();
-
-};
+}
 
 void FreezerComp::isOpen() {
 	image->setActive(true);
