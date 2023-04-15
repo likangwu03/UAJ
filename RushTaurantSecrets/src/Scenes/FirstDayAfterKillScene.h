@@ -8,17 +8,18 @@ struct dialogueInfo;
 class FirstDayAfterKillScene : public CinematicBaseScene
 {
 	enum States {
+		INIT,
 		START,
-		ENTERING,//sonido puerta
-		ARRIVE,//1
-		D1,
-		D2,
-		D3,
-		D31,
-		D4,
-		D5,
-		D51,
-		D6,
+		M1,
+		P1,
+		M2,
+		P2,
+		MOV1,
+		M3,
+		M4,
+		P3,
+		BACKUP,
+		M5,
 		OUT,
 		NONE
 	};
@@ -30,7 +31,8 @@ class FirstDayAfterKillScene : public CinematicBaseScene
 	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
-
+	float cont;
+	const float START_TIME = 3;
 private:
 	GameObject* player;
 	StraightMovement* straightMovement;

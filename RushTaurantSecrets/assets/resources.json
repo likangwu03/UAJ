@@ -968,8 +968,16 @@
       "file": "assets/Music/restaurant_super1.mp3"
     },
     {
-      "id": "NIGHT_CHILL_MUSIC",
+      "id": "DRAMATIC_MUSIC",
       "file": "assets/Music/3_Night_1_Master.mp3"
+    },
+    {
+      "id": "GOOD_DAY_MUSIC",
+      "file": "assets/Music/4_Dramatic_1_Master.mp3"
+    },
+    {
+      "id": "SILENT_CREEPY_MUSIC",
+      "file": "assets/Music/5_Dramatic_2_Master.mp3"
     }
   ]
 }

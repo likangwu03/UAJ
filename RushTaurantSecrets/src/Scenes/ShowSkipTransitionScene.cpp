@@ -10,7 +10,7 @@ void ShowSkipTransitionScene::render() {
 void ShowSkipTransitionScene::update() {
 	cont += frameTime;
 	cinematicScene->update();
-	filter->setOpacity(fadeOutInverter - (cont * 100 / duration));
+	filter->setOpacity(abs(fadeOutInverter - (cont * 100 / duration)));
 	if (cont > duration) {
 		GameManager::get()->deleteCurrentScene();
 	}

@@ -62,6 +62,15 @@ namespace _ecs {
 
 	
 	};
+	static Route secondDayAfterKillPath[4] = {
+
+		{{ Vector(20, 10),Vector(16,10),Vector(18, 10)}, east},
+		{{ Vector(20, 10),Vector(16,10),Vector(18, 10)}, east},
+		{{ Vector(18, 14),Vector(25, 14),Vector(30,14)}, east},
+		{{ Vector(40, 14)}, east},
+
+
+	};
 
 
 	// CLIENTES

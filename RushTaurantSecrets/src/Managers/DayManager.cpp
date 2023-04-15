@@ -109,7 +109,11 @@ void DayManager::nextDay() {
 			GameManager::get()->changeScene(GameManager::get()->getFirstDayAfterKillScene());
 			GameManager::get()->getFirstDayAfterKillScene()->callAfterCreating();
 		}
-		/*else if (day - GameManager::get()->getHasEverKilled().second ==2)*/
+		else if (day - GameManager::get()->getHasEverKilled().second ==2)
+		{
+			GameManager::get()->changeScene(GameManager::get()->getSecondDayAfterKillScene());
+			GameManager::get()->getSecondDayAfterKillScene()->callAfterCreating();
+		}
 	}
 	else GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 

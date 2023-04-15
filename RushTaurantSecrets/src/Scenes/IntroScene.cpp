@@ -12,7 +12,7 @@ IntroScene::IntroScene() {
 	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
 	
 	state = START;
-	nightMusic = &sdlutils().musics().at("NIGHT_CHILL_MUSIC");
+	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
 	nightAmbience->setVolume(60);
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM");
@@ -128,11 +128,8 @@ void IntroScene::update() {
 	case IntroScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
-			
-			nightMusic->haltMusic();
-			nightAmbience->haltChannel();
-			GameManager::get()->changeScene(new TransitionScene(this, 3,true,true));
 			state = NONE;
+			GameManager::get()->changeScene(new TransitionScene(this, 3,true,true));
 		}
 		break;
 	case IntroScene::NONE:
@@ -151,7 +148,9 @@ void IntroScene::renderCinematic() {
 
 
 void IntroScene::finishScene() {
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	nightMusic->haltMusic();
+	nightAmbience->haltChannel();
 	GameManager::get()->getBeforeDayStart()->reset();
 	GameManager::get()->getDailyMenu()->reset();
+	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 }

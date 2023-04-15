@@ -9,10 +9,10 @@
 #include "../GameObjects/Dialogue.h"
 
 FirstDayAfterKillScene::FirstDayAfterKillScene() {
-	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
-
-	state = START;
-	nightMusic = &sdlutils().musics().at("NIGHT_CHILL_MUSIC");
+	dialogues = GameManager::get()->getDialogueInfo("ConversationDay3Kill.json");
+	cont = 0;
+	state = INIT;
+	nightMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
 	nightAmbience->setVolume(60);
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM");
@@ -21,18 +21,20 @@ FirstDayAfterKillScene::FirstDayAfterKillScene() {
 	filter->setOpacity(80);
 
 	player = new Player(this, 0);
-	straightMovement = new StraightMovement(player, 5);
+	straightMovement = new StraightMovement(player, 0);
+
+	player->getComponent<PlayerMovementController>()->setActive(false);
 
 	transform = player->getComponent<Transform>();
-	transform->setPos(Vector(1658, 772));
-	transform->setMovState(walking);
+	transform->setPos(Vector(576, 230));
+	transform->setMovState(idle);
+	transform->setOrientation(north);
 
 	auto anim = player->getComponent<CharacterAnimator>();
 	anim->setH(96 * 1.8);
 	anim->setW(48 * 1.8);
 	anim->setTexture("Player_Casual", 18, 10, 1);
 	anim->setframeRate(18);
-	//Scene::initRender();
 }
 
 void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
@@ -40,106 +42,115 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void FirstDayAfterKillScene::callAfterCreating() {
-	GameManager::get()->changeScene(new ShowSkipTransitionScene(this, 3));
+	GameManager::get()->changeScene(new ShowSkipTransitionScene(this, START_TIME));
 }
 
 void FirstDayAfterKillScene::update() {
 	CinematicBaseScene::update();
-	/*switch (state)
+	switch (state)
 	{
-	case IntroScene::START:
+	case FirstDayAfterKillScene::INIT:
 		nightAmbience->play(-1);
 		nightMusic->play(-1);
-		addPath(_ecs::introPath[START].points);
-		state = ENTERING;
+
+		state = START;
+
 		break;
-	case IntroScene::ENTERING:
-		if (straightMovement->hasFinishedPath()) {
-			addPath(_ecs::introPath[ENTERING].points);
-			state = ARRIVE;
-			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
-		}
-		break;
-	case IntroScene::ARRIVE:
-		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+	case FirstDayAfterKillScene::START:
+		cont += frameTime;
+		if (cont > START_TIME * 1000) {
+
+			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
-			state = D1;
+			state = M1;
 		}
-		else
-			break;
-	case IntroScene::D1:
+		break;
+	case FirstDayAfterKillScene::M1:
 		if (Text::isTextFinished()) {
+
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
 				font, dialogues[1].portrait, dialogues[1].text);
-			state = D2;
+			state = P1;
 		}
 		break;
-	case IntroScene::D2:
+	case FirstDayAfterKillScene::P1:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
 				font, dialogues[2].portrait, dialogues[2].text);
-			state = D3;
+			state = M2;
 		}
 		break;
-	case IntroScene::D3:
+	case FirstDayAfterKillScene::M2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
 				font, dialogues[3].portrait, dialogues[3].text);
-			state = D31;
+			state = P2;
 		}
 		break;
-	case IntroScene::D31:
+	case FirstDayAfterKillScene::P2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[4].portrait, dialogues[4].text);
-			state = D4;
+			state = MOV1;
+
 		}
 		break;
-	case IntroScene::D4:
+	case FirstDayAfterKillScene::MOV1:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 440), 700, 0.01 * 1000,
+			straightMovement->addPath({ Vector(576,180) });
+			straightMovement->changeSpeed(10);
+			transform->setMovState(walking);
+			state = M3;
+		}
+		break;
+
+
+	case FirstDayAfterKillScene::M3:
+		if (straightMovement->hasFinishedPath()) {
+			transform->setMovState(idle);
+			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
 				font, dialogues[5].portrait, dialogues[5].text);
-			state = D5;
+			state = M4;
 		}
 		break;
-	case IntroScene::D5:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[6].portrait, dialogues[6].text);
-			state = D51;
-		}
-		break;
-	case IntroScene::D51:
+	case FirstDayAfterKillScene::M4:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[7].portrait, dialogues[7].text);
-			state = D6;
+				font, dialogues[6].portrait, dialogues[6].text);
+			state = BACKUP;
 		}
 		break;
-	case IntroScene::D6:
+	case FirstDayAfterKillScene::BACKUP:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[8].portrait, dialogues[8].text);
+			straightMovement->addPath({ Vector(576,250) });
+			straightMovement->changeSpeed(1);
+			transform->setOrientation(north);
+			state = M5;
+		}
+		break;
+
+	case FirstDayAfterKillScene::M5:
+		if (straightMovement->hasFinishedPath()) {
+			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
+				font, dialogues[7].portrait, dialogues[7].text);
+			transform->setMovState(idle);
+
 			state = OUT;
 		}
 		break;
-	case IntroScene::OUT:
+
+	case FirstDayAfterKillScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
-
-			nightMusic->haltMusic();
-			nightAmbience->haltChannel();
-			GameManager::get()->changeScene(new TransitionScene(this, 3, true, true));
 			state = NONE;
+			GameManager::get()->changeScene(new TransitionScene(this, 3, true, true));
 		}
 		break;
-	case IntroScene::NONE:
-
+	case FirstDayAfterKillScene::NONE:
 		break;
-
-	}*/
+	default:
+		break;
+	}
 }
 
 void FirstDayAfterKillScene::renderCinematic() {
@@ -151,6 +162,8 @@ void FirstDayAfterKillScene::renderCinematic() {
 
 
 void FirstDayAfterKillScene::finishScene() {
+	nightMusic->haltMusic();
+	nightAmbience->haltChannel();
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 
 }

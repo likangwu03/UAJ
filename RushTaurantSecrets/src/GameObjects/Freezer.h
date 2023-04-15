@@ -16,5 +16,6 @@ public:
 		new Transform(this, pos, Vector(0, 0), w, h, 0, true); 
 		new Image(this, "FREEZER_OPEN");
 		new FreezerComp(this);
+		scene->pushRenderList(Middle, this);
 	};
 };

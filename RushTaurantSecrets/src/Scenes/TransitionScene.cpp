@@ -17,7 +17,7 @@ void TransitionScene::render() {
 void TransitionScene::update() {
 	cont += frameTime;
 	scene->update();
-	filter->setOpacity(abs(fadeOutInverter - (cont * 100 / duration)));
+	filter->setOpacity(abs(fadeOutInverter - (cont / duration)*100));
 	if (cont > duration) {
 		if (!skipScene)
 			GameManager::get()->deleteCurrentScene(); //fade in, delete de transici¨®n

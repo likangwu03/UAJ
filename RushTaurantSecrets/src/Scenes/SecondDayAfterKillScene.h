@@ -10,16 +10,19 @@ class SecondDayAfterKillScene : public CinematicBaseScene
 {
 	enum States {
 		START,
-		ENTERING,//sonido puerta
-		ARRIVE,//1
-		D1,
-		D2,
-		D3,
-		D31,
-		D4,
-		D5,
-		D51,
-		D6,
+		PAUSE,
+		START2,
+		M1,
+		M2,
+		P1,
+		M3,
+		P2,
+		M4,
+		P3,
+		WALKING,
+		M5,
+		M6,
+		M7,
 		OUT,
 		NONE
 	};
@@ -31,6 +34,8 @@ class SecondDayAfterKillScene : public CinematicBaseScene
 	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
+	float cont;
+	const float STOP_TIME = 1.5;
 
 private:
 	GameObject* player;
