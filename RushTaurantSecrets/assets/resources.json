@@ -972,6 +972,10 @@
       "file": "assets/Music/restaurant_super1.mp3"
     },
     {
+      "id": "SUPERMARKET_MUSIC",
+      "file": "assets/Music/supermarket.mp3"
+    },
+    {
       "id": "DRAMATIC_MUSIC",
       "file": "assets/Music/3_Night_1_Master.mp3"
     },

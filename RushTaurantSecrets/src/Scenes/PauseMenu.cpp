@@ -17,7 +17,7 @@ void PauseMenu::oMenu() {
 	GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
 }
 
-PauseMenu::PauseMenu() {
+PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
@@ -29,6 +29,8 @@ PauseMenu::PauseMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, oMenu);
+
+	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
 
 PauseMenu::~PauseMenu() {
@@ -41,6 +43,7 @@ void PauseMenu::handleEvents() {
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
+		supermarketMusic->play();
 	}
 	else {
 		Scene::handleEvents();

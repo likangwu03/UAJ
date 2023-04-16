@@ -11,7 +11,7 @@ void OptionsMenu::bResume() {
 	GameManager::get()->popScene();
 }
 
-OptionsMenu::OptionsMenu() {
+OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = new Texture(sdlutils().renderer(), "assets/options_bg.png");
@@ -19,6 +19,7 @@ OptionsMenu::OptionsMenu() {
 
 	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.5 * SDLUtils::instance()->height() / 5), 385, 130, bResume);
+	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
 
 OptionsMenu::~OptionsMenu() {
@@ -31,6 +32,7 @@ void OptionsMenu::handleEvents() {
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
+		supermarketMusic->play();
 	}
 	else {
 		Scene::handleEvents();

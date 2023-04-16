@@ -13,6 +13,7 @@ class GameObject;
 class DailyMenuScene : public Scene {
 	const int DISTANCE = 20, POS_Y = 30;
 
+	const int MUSIC_VOL = 30;
 	GameObject* background;
 	Texture* image;
 	SDLUtils* sdl;
@@ -22,6 +23,7 @@ class DailyMenuScene : public Scene {
 	DailyMenu* dailyMenu2;
 	void buttonPress();
 
+	Music* supermarketMusic;
 
 public:
 	DailyMenuScene(uint8_t msize = 4);

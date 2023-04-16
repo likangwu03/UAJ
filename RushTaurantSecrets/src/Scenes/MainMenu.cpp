@@ -39,7 +39,7 @@ void MainMenu::opt() {
 	GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
 }
 
-MainMenu::MainMenu() {
+MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = &(sdlutils().images().at("MAIN_MENU_BG"));
@@ -48,6 +48,7 @@ MainMenu::MainMenu() {
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, start);
 	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, start2);
 	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
+	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
 
 MainMenu::~MainMenu() { }
@@ -58,6 +59,7 @@ void MainMenu::handleEvents() {
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
+		supermarketMusic->play();
 	}
 	else {
 		Scene::handleEvents();

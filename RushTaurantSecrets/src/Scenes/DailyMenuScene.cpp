@@ -6,12 +6,13 @@
 
 #include "../Utilities/checkML.h"
 
-DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64) {
+DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	background = new GameObject(this);
 	new Transform(background, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = &(sdlutils().images().at("DAILY_MENU_BG"));
 	new Image(background, image);
 	dailyMenu1 = dailyMenu2 = nullptr;
+	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
 
 void DailyMenuScene::buttonPress() {
@@ -19,6 +20,7 @@ void DailyMenuScene::buttonPress() {
 	GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
 	GameManager::get()->getSupermarket()->reset();
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
+	supermarketMusic->play();
 }
 
 void DailyMenuScene::init() {

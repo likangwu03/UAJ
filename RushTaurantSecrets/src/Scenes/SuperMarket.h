@@ -22,12 +22,15 @@ private:
 
 	SDLUtils* sdl;
 	Music* restaurantMusic;
+	Music* supermarketMusic;
 public:
 	SuperMarket(UIMarket* marketUI = nullptr) : uiMarket(marketUI == nullptr ? new UIMarket(this) : marketUI),
-		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")) 
+		cm(nullptr), map(nullptr), mapTop(nullptr), cartelM(nullptr), player(nullptr), 
+		sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC"))
 	{ 
 		init();
 		restaurantMusic->setMusicVolume(MUSIC_VOL);
+		supermarketMusic->setMusicVolume(MUSIC_VOL);
 	}
 	~SuperMarket();
 	void reset();
