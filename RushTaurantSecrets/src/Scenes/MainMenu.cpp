@@ -9,6 +9,7 @@
 #include "DailyMenuScene.h"
 #include "OptionsMenu.h"
 #include "ContinueMenu.h"
+#include "CoopMenu.h"
 #include "../Components/Transform.h"
 #include "../Components/Image.h"
 #include "BeforeDayStartScene.h"
@@ -18,7 +19,6 @@
 #include "../Utilities/checkML.h"
 
 void MainMenu::start() {
-	
 	if (GameManager::get()->checkload()) {
 
 		GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
@@ -26,11 +26,13 @@ void MainMenu::start() {
 		GameManager::get()->getDailyMenu()->reset();
 	}
 	else {
-	
 		GameManager::get()->changeScene(GameManager::get()->getIntroScene());
 		GameManager::get()->getCurrentScene()->callAfterCreating();
 	}
-	
+}
+
+void MainMenu::start2() {
+	GameManager::get()->changeScene(GameManager::get()->getCoopMenu());
 }
 
 void MainMenu::opt() {
@@ -44,13 +46,13 @@ MainMenu::MainMenu() {
 	new Image(bg, image);
 
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, start);
-	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, start);
+	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, start2);
 	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
 }
 
 MainMenu::~MainMenu() { }
 
-void MainMenu::handleEvents(){
+void MainMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
 	}

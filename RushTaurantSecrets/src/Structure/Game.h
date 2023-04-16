@@ -27,6 +27,7 @@ public:
 
 	void init();
 	void setExitCoop() { exitCoop = true; }
+	void runCoop();
 private:
 	Game();
 	void refresh();
@@ -35,5 +36,4 @@ private:
 	void handleEvents();
 	void setExit() { exit = true; }
 
-	void runCoop();
 };

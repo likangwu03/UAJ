@@ -23,6 +23,7 @@
 #include "../Scenes/IntroScene.h"
 #include "../Scenes/FirstDayAfterKillScene.h"
 #include "../Scenes/SecondDayAfterKillScene.h"
+#include "../Scenes/CoopMenu.h"
 #include <sstream>
 #include <fstream>
 #include "../Utilities/JSON.h"
@@ -31,7 +32,7 @@
 
 GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
 	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),optionsMenu(nullptr),gameOverScene(nullptr),
-	continueMenu(nullptr),menu(nullptr), kitchenIsland(nullptr), twoPlayers(false),
+	continueMenu(nullptr),menu(nullptr), kitchenIsland(nullptr), twoPlayers(false),coopMenu(nullptr),
 	hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0),hasEverKilled({false,0}) { };
 
 
@@ -59,6 +60,7 @@ void GameManager::initialize() {
 	beforeDayStartScene = new BeforeDayStartScene();
 	secondDayAfterKillScene = new SecondDayAfterKillScene();
 	firstDayAfterKillScene = new FirstDayAfterKillScene();
+	coopMenu = new CoopMenu();
 
 	try {
 		days = new DayManager();
@@ -103,6 +105,7 @@ GameManager::~GameManager() {
 	delete reputation;
 	delete money;
 	delete days;
+	delete coopMenu;
 }
 
 
@@ -169,6 +172,7 @@ Money* GameManager::getMoney() { return money; }
 DayManager* GameManager::getDayManager() { return days; }
 OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
 ContinueMenu* GameManager:: getContinueMenu() { return continueMenu; }
+CoopMenu* GameManager:: getCoopMenu() { return coopMenu; }
 EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
 IntroScene* GameManager::getIntroScene() { return introScene; }
 FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }

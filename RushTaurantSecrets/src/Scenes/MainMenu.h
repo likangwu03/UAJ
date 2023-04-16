@@ -12,6 +12,7 @@ private:
 				BUTTONS_W = 96 * 3.2, BUTTONS_H = 32 * 3.2;
 	
 	static void start();
+	static void start2();
 	static void opt();
 
 	GameObject* bg;

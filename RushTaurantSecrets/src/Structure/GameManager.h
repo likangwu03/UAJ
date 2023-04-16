@@ -27,6 +27,7 @@ class KitchenIslandComp;
 class IntroScene;
 class FirstDayAfterKillScene;
 class SecondDayAfterKillScene;
+class CoopMenu;
 
 struct dialogueInfo {
 	std::string character;
@@ -71,6 +72,7 @@ private:
 	EndOfDayScene* endScene;
 	BeforeDayStartScene* beforeDayStartScene;
 	GameOverScene* gameOverScene;
+	CoopMenu* coopMenu;
 	
 	//escenas cinem¨¢ticas
 	IntroScene* introScene;
@@ -117,6 +119,7 @@ public:
 	OptionsMenu* getOptionsMenu();
 	BeforeDayStartScene* getBeforeDayStart();
 	ContinueMenu* getContinueMenu();
+	CoopMenu* getCoopMenu();
 	EndOfDayScene* getEndOfDay();
 	IntroScene* getIntroScene();
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
