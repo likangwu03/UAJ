@@ -197,39 +197,3 @@ void CoopHandler::addMessage(const Message& message) {
 
 	delete[] msgBuffer;
 }
-
-// Locurote
-inline byte CoopHandler::codeChar(char input) { return input; }
-inline char CoopHandler::decodeChar(byte input) { return input; }
-inline byte CoopHandler::codeInt8(int input) { return (int8_t)input; }
-inline int CoopHandler::decodeInt8(byte input) { return input; }
-inline byte CoopHandler::codeUInt8(uint8_t input) { return input; }
-inline uint8_t CoopHandler::decodeUInt8(byte input) { return input; }
-doubleByte CoopHandler::codeInt16(int input) {
-	doubleByte output;
-	output.first = output.second = 0;
-	for(uint8_t i = 0; i < 8; i++, input >>= 1) {
-		output.second = (output.second << 1) + (input & 1);
-	}
-	for(uint8_t i = 0; i < 8; i++, input >>= 1) {
-		output.first = (output.first << 1) + (input & 1);
-	}
-	return output;
-}
-int CoopHandler::decodeInt16(doubleByte input) {
-	int output = 0;
-	for(int i = 0; i < 8; i++, input.first >>= 1) {
-		output = (output << 1) + (input.first & 1);
-	}
-	for(int i = 0; i < 8; i++, input.second >>= 1) {
-		output = (output << 1) + (input.second & 1);
-	}
-	return output;
-}
-inline doubleByte CoopHandler::codeUInt16(uint16_t input) { return codeInt16(input); }
-inline uint16_t CoopHandler::decodeUInt16(doubleByte input) { return decodeInt16(input); }
-inline doubleByte CoopHandler::codeFloat16(float input) {
-	int aux = (int)(roundf(input * 100));
-	return codeInt16(aux);
-}
-inline float CoopHandler::decodeFloat16(doubleByte input) { return decodeInt16(input) / 100.0f; }

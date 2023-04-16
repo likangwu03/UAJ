@@ -48,16 +48,54 @@ public:
 
     // Locurote
 
-    // Se puede pasar cualquier carácter
-    byte codeChar(char); char decodeChar(byte);
-    // 8 bits va desde el -128 hasta el 127
-    byte codeInt8(int); int decodeInt8(byte);
-    // 8 bits va desde el 0 hasta el 255
-    byte codeUInt8(uint8_t); uint8_t decodeUInt8(byte);
-    // 16 bits va desde el -32768 hasta el 32767
-    doubleByte codeInt16(int); int decodeInt16(doubleByte);
-    // 16 bits va desde el 0 hasta el 65535
-    doubleByte codeUInt16(uint16_t); uint16_t decodeUInt16(doubleByte);
-    // 16 bits va desde el -327.68 hasta el 327.67
-    doubleByte codeFloat16(float); float decodeFloat16(doubleByte);
+    
+    template<typename T>
+    /// <summary>
+    /// Para int: desde el -128 hasta el 127 /
+    /// Para uint: desde el 0 hasta el 255 /
+    /// Para char: todos los carácteres /
+    /// Para float: indefinido
+    /// </summary>
+    byte code8(T input) { return input; }
+    template<typename T>
+    T decode(byte input) { return input; }
+
+    template<> byte code8<int>(int input) { return (int8_t)input; }
+    
+    
+    template<typename T>
+    /// <summary>
+    /// Para int: desde el -32768 hasta el 32767 /
+    /// Para uint: desde el 0 hasta el 65535 /
+    /// Para float: desde el -327.68 hasta el 327.67
+    /// </summary>
+    doubleByte code16(T input) { return { -1, -1 } }
+    template<typename T>
+    T decode(doubleByte input) { return T(); }
+
+    template<> doubleByte code16<int>(int input) {
+        doubleByte output;
+        output.first = output.second = 0;
+        for(uint8_t i = 0; i < 8; i++, input >>= 1) {
+            output.second = (output.second << 1) + (input & 1);
+        }
+        for(uint8_t i = 0; i < 8; i++, input >>= 1) {
+            output.first = (output.first << 1) + (input & 1);
+        }
+        return output;
+    }
+    template<> int decode(doubleByte input) {
+        int output = 0;
+        for(int i = 0; i < 8; i++, input.first >>= 1) {
+            output = (output << 1) + (input.first & 1);
+        }
+        for(int i = 0; i < 8; i++, input.second >>= 1) {
+            output = (output << 1) + (input.second & 1);
+        }
+        return output;
+    }
+    template<> doubleByte code16<uint16_t>(uint16_t input) { return code16<int>(input); }
+    template<> uint16_t decode<uint16_t>(doubleByte input) { return decode<int>(input); }
+    template<> doubleByte code16<float>(float input) { return code16<int>(roundf(input * 100)); }
+    template<> float decode<float>(doubleByte input) { return decode<int>(input) / 100.0f; }
 };
