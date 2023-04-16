@@ -691,6 +691,10 @@
       "file": "assets/Sprites/UI/icons/character_chef_sad_closingEyes.png"
     },
     {
+      "id": "PROTA_CHEF_SMILE_CLOSE_EYE",
+      "file": "assets/Sprites/UI/icons/character_chef_smile_closingEyes.png"
+    },
+    {
       "id": "PROTA_CHEF_SIGH",
       "file": "assets/Sprites/UI/icons/character_chef_sigh_closingEyes.png"
     },  
