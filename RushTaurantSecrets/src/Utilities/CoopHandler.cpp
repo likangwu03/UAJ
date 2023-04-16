@@ -18,13 +18,12 @@ const int CoopHandler::messageLengths[]{
 void CoopHandler::code(const Message& m, byte* buffer) {
 	switch(m.id) {
 	case Message::msg_PLACEHOLDER:
-		buffer[0] = codeUInt8(m.data_placeholder.dataUint);
-		buffer[1] = codeChar(m.data_placeholder.dataChar);
-		buffer[2] = codeInt8(m.data_placeholder.dataInt);
-		// Las IDs están basadas en UInt8
-		buffer[3] = codeUInt8(m.data_placeholder.dataCmpId);
+		buffer[0] = code8(m.data_placeholder.dataUint);
+		buffer[1] = code8(m.data_placeholder.dataChar);
+		buffer[2] = code8(m.data_placeholder.dataInt);
+		buffer[3] = code8(m.data_placeholder.dataCmpId);
 		// El float tiene que codificarse como dos bytes:
-		doubleByte aux = codeFloat16(m.data_placeholder.dataFloat);
+		doubleByte aux = code16(m.data_placeholder.dataFloat);
 		buffer[4] = aux.first; buffer[5] = aux.second;
 		break;
 	}
@@ -34,11 +33,11 @@ void CoopHandler::code(const Message& m, byte* buffer) {
 void CoopHandler::decode(Message::_msg_id id, byte* buffer) {
 	switch(id) {
 	case Message::msg_PLACEHOLDER:
-		uint8_t dataUint = decodeUInt8(buffer[0]);
-		char dataChar = decodeChar(buffer[1]);
-		int dataInt = decodeInt8(buffer[2]);
-		_ecs::_cmp_id dataCmpId = (_ecs::_cmp_id)decodeUInt8(buffer[3]);
-		float dataFloat = decodeFloat16({ buffer[4], buffer[5] });
+		uint8_t dataUint = decode<uint8_t>(buffer[0]);
+		char dataChar = decode<char>(buffer[1]);
+		int dataInt = decode<int>(buffer[2]);
+		_ecs::_cmp_id dataCmpId = decode<_ecs::_cmp_id>(buffer[3]);
+		float dataFloat = decode<float>({ buffer[4], buffer[5] });
 		break;
 	}
 }
@@ -113,6 +112,7 @@ bool CoopHandler::connectClient() {
 
 	if(connectionSocket) {
 		SDLNet_TCP_Send(connectionSocket, connected, __CONNECTED_LENGTH);
+		SDLNet_TCP_AddSocket(set, connectionSocket);
 	}
 
 	return connectionSocket;
