@@ -58,7 +58,7 @@ public:
     /// </summary>
     byte code8(T input) { return input; }
     template<typename T>
-    T decode(byte input) { return input; }
+    T decode(byte input) { return (T)input; }
 
     template<> byte code8<int>(int input) { return (int8_t)input; }
     
@@ -69,7 +69,7 @@ public:
     /// Para uint: desde el 0 hasta el 65535 /
     /// Para float: desde el -327.68 hasta el 327.67
     /// </summary>
-    doubleByte code16(T input) { return { -1, -1 } }
+    doubleByte code16(T input) { return { -1, -1 }; }
     template<typename T>
     T decode(doubleByte input) { return T(); }
 
