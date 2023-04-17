@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Structure/Scene.h"
-#include "../Utilities/SDLUtils.h"
+#include "../../Structure/Scene.h"
+#include "../../Utilities/SDLUtils.h"
 
 class GameObject;
 class ButtonGO;

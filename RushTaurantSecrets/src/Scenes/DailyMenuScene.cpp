@@ -1,7 +1,7 @@
 #include "DailyMenuScene.h"
 #include "SuperMarket.h"
 #include "Restaurant.h"
-#include "UIRestaurant.h"
+#include "HUD/UIRestaurant.h"
 #include "../Structure/GameManager.h"
 
 #include "../Utilities/checkML.h"

@@ -4,6 +4,7 @@
 #include "../Definitions/Food_def.h"
 #include <string>
 #include <deque>
+#include <stack>
 
 class Scene;
 class MainMenu;
@@ -49,10 +50,11 @@ public:
 private:
 	const float RESTSUPERSIZE = 0.6666666667;
 	const float PANTRYSIZE = 0.8333333333;
-	
+	const float TRANSITION_TIME = 0.25;
 
-	Scene* currentScene;
-	Scene* previousScene;
+	stack<Scene*> scenes;
+	Scene* deleteScene;
+	bool deleteTransition;
 	
 	//escenas de juego
 	Restaurant* restaurant;
@@ -61,7 +63,6 @@ private:
 
 	//ui
 	DailyMenuScene* dailyMenu;
-	UIRestaurant* uiRestaurant;
 	PantryUI* pantryUI;
 
 	//menu
@@ -73,11 +74,7 @@ private:
 	BeforeDayStartScene* beforeDayStartScene;
 	GameOverScene* gameOverScene;
 	CoopMenu* coopMenu;
-	
-	//escenas cinem¨¢ticas
-	IntroScene* introScene;
-	FirstDayAfterKillScene* firstDayAfterKillScene;
-	SecondDayAfterKillScene* secondDayAfterKillScene;
+
 
 	Reputation* reputation;
 	Money* money;
@@ -86,13 +83,19 @@ private:
 	vector<_ecs::DishInfo>* menu;
 	KitchenIslandComp* kitchenIsland;
 
-	float dayTime;
-	//bool multiplayer;
 	bool hasKilled;
 	pair<bool,int> hasEverKilled; //si ha matado alguna vex/ el primer d¨ªa que mat¨® a un ladr¨®n
 	bool mapsCreated;
 	bool twoPlayers;
 	int killedNum; //n¨²mero de ladrones matados en el d¨ªa anterior
+
+
+	//escenas cinem¨¢ticas
+	IntroScene* introScene;
+	FirstDayAfterKillScene* firstDayAfterKillScene;
+	SecondDayAfterKillScene* secondDayAfterKillScene;
+
+
 	GameManager();
 
 public:
@@ -104,10 +107,11 @@ public:
 	void render();
 	void refresh();
 
-	void changeScene(Scene* scene);
-	void popScene();
-	void deleteCurrentScene();
+	void changeScene(Scene* scene, bool longerTransition = false);
+	void popScene(Scene* transitionScene = nullptr);
+	void pushScene(Scene* scene, bool longerTransition = false);
 	void skipfromTransition();
+
 	void setGameOver(int type);
 	Scene* getCurrentScene();
 	MainMenu* getMainMenu();

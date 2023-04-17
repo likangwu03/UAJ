@@ -1,12 +1,12 @@
 #include "SecondDayAfterKillScene.h"
-#include "MainMenu.h"
-#include "../Utilities/checkML.h"
-#include "BeforeDayStartScene.h"
-#include "DailyMenuScene.h"
+#include "../Menus/MainMenu.h"
+#include "../../Utilities/checkML.h"
+#include "../BeforeDayStartScene.h"
+#include "../DailyMenuScene.h"
 
 #include "ShowSkipTransitionScene.h"
-#include "../Structure/GameManager.h"
-#include "../GameObjects/Dialogue.h"
+#include "../../Structure/GameManager.h"
+#include "../../GameObjects/Dialogue.h"
 
 SecondDayAfterKillScene::SecondDayAfterKillScene() {
 	dialogues = GameManager::get()->getDialogueInfo("ConversationDay4Kill.json");
@@ -42,7 +42,7 @@ void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void SecondDayAfterKillScene::callAfterCreating() {
-	GameManager::get()->changeScene(new ShowSkipTransitionScene(this, 3,false));
+	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, 3,false));
 }
 
 void SecondDayAfterKillScene::update() {
@@ -155,7 +155,7 @@ void SecondDayAfterKillScene::update() {
 		if (straightMovement->hasFinishedPath()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			GameManager::get()->changeScene(new TransitionScene(this, 3, true, true));
+			GameManager::get()->pushScene(new TransitionScene(this, 3, true, true));
 		}
 		break;
 	case SecondDayAfterKillScene::NONE:

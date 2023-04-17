@@ -1,24 +1,25 @@
 #pragma once
-#include "../Scenes/CinematicBaseScene.h"
-#include "../GameObjects/Player.h"
-#include "../Components/StraightMovement.h"
+#include "../../Scenes/Cutscenes/CinematicBaseScene.h"
+#include "../../GameObjects/Player.h"
+#include "../../Components/StraightMovement.h"
 #include <vector>
 using namespace std;
 struct dialogueInfo;
-class IntroScene : public CinematicBaseScene
+class FirstDayAfterKillScene : public CinematicBaseScene
 {
 	enum States {
-		START, 
-		ENTERING,//sonido puerta
-		ARRIVE,//1
-		D1,
-		D2,
-		D3,
-		D31,
-		D4,
-		D5,
-		D51,
-		D6,
+		INIT,
+		START,
+		M1,
+		P1,
+		M2,
+		P2,
+		MOV1,
+		M3,
+		M4,
+		P3,
+		BACKUP,
+		M5,
 		OUT,
 		NONE
 	};
@@ -30,7 +31,8 @@ class IntroScene : public CinematicBaseScene
 	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
-	
+	float cont;
+	const float START_TIME = 3;
 private:
 	GameObject* player;
 	StraightMovement* straightMovement;
@@ -38,9 +40,9 @@ private:
 	vector<dialogueInfo> dialogues;
 
 public:
-	IntroScene();
+	FirstDayAfterKillScene();
 	void callAfterCreating() override;
-	void renderCinematic () override;
+	void renderCinematic() override;
 	void finishScene()override;
 	void update()override;
 };

@@ -1,6 +1,6 @@
 #include "GameOverScene.h"
 #include "../Structure/GameManager.h"
-#include "MainMenu.h"
+#include "Menus/MainMenu.h"
 #include "../Utilities/checkML.h"
 
 void GameOverScene::mMenu() {

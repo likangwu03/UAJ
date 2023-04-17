@@ -1,12 +1,12 @@
 #include "FirstDayAfterKillScene.h"
-#include "MainMenu.h"
-#include "../Utilities/checkML.h"
-#include "BeforeDayStartScene.h"
-#include "DailyMenuScene.h"
+#include "../Menus/MainMenu.h"
+#include "../../Utilities/checkML.h"
+#include "../BeforeDayStartScene.h"
+#include "../DailyMenuScene.h"
 
 #include "ShowSkipTransitionScene.h"
-#include "../Structure/GameManager.h"
-#include "../GameObjects/Dialogue.h"
+#include "../../Structure/GameManager.h"
+#include "../../GameObjects/Dialogue.h"
 
 FirstDayAfterKillScene::FirstDayAfterKillScene() {
 	dialogues = GameManager::get()->getDialogueInfo("ConversationDay3Kill.json");
@@ -42,7 +42,7 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void FirstDayAfterKillScene::callAfterCreating() {
-	GameManager::get()->changeScene(new ShowSkipTransitionScene(this, START_TIME));
+	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, START_TIME));
 }
 
 void FirstDayAfterKillScene::update() {
@@ -143,7 +143,7 @@ void FirstDayAfterKillScene::update() {
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			GameManager::get()->changeScene(new TransitionScene(this, 3, true, true));
+			GameManager::get()->pushScene(new TransitionScene(this, 3, true, true));
 		}
 		break;
 	case FirstDayAfterKillScene::NONE:
@@ -164,6 +164,6 @@ void FirstDayAfterKillScene::renderCinematic() {
 void FirstDayAfterKillScene::finishScene() {
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->pushScene(GameManager::get()->getBeforeDayStart());
 
 }

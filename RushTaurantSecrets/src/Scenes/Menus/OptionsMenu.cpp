@@ -1,7 +1,7 @@
 #include "OptionsMenu.h"
-#include "../Structure/GameManager.h"
+#include "../../Structure/GameManager.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
 void OptionsMenu::mMenu() {
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());

@@ -2,7 +2,7 @@
 #include "../Structure/Scene.h"
 #include "../Managers/CollisionsManager.h"
 #include "../GameObjects/Clock.h"
-#include "../Scenes/PantryUI.h"
+#include "../Scenes/HUD/PantryUI.h"
 
 class Restaurant;
 

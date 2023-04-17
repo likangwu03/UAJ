@@ -1,9 +1,9 @@
 #include "PauseMenu.h"
-#include "../Structure/GameManager.h"
+#include "../../Structure/GameManager.h"
 #include "MainMenu.h"
 #include "OptionsMenu.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
 void PauseMenu::mMenu() {
 	GameManager::get()->changeScene(GameManager::get()->getMainMenu());
@@ -38,15 +38,7 @@ PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::handleEvents() {
-	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
-	}
-	else if (ih->isKeyDown(SDLK_2)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
-		supermarketMusic->play();
-	}
-	else {
-		Scene::handleEvents();
-	}
+	if (ih->isKeyDown(SDLK_p)) bResume();
+	Scene::handleEvents();
 }
 

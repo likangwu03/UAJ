@@ -1,7 +1,8 @@
 #include "TransitionScene.h"
 #include "../Utilities/checkML.h"
 
-TransitionScene::TransitionScene(Scene* backgroundScene, float duration, bool fadeOut, bool skipScene, string texture) :scene(backgroundScene), cont(0), skipScene(skipScene), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), duration(duration * 1000) {
+TransitionScene::TransitionScene(Scene* backgroundScene, float duration, bool fadeOut, bool skipScene, string texture) :
+	scene(backgroundScene), cont(0), skipScene(skipScene), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), duration(duration * 1000) {
 	if (texture == "") filter = &sdlutils().images().at("Filter_Black");
 	else filter = &sdlutils().images().at(texture);
 	if (fadeOut)fadeOutInverter = 0;
@@ -20,7 +21,7 @@ void TransitionScene::update() {
 	filter->setOpacity(abs(fadeOutInverter - (cont / duration)*100));
 	if (cont > duration) {
 		if (!skipScene)
-			GameManager::get()->deleteCurrentScene(); //fade in, delete de transici¨®n
+			GameManager::get()->popScene(this); //fade in, delete de transici¨®n
 		else GameManager::get()->skipfromTransition();//fade out,delete de 2 escenas seguidas
 	}
 }

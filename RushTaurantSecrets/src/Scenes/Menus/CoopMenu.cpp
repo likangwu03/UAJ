@@ -1,12 +1,12 @@
 #include "CoopMenu.h"
-#include "../Structure/GameManager.h"
-#include "DailyMenuScene.h"
-#include "../Components/Transform.h"
-#include "../Components/Image.h"
-#include "BeforeDayStartScene.h"
-#include "../Utilities/checkML.h"
-#include "../Structure/Game.h"
-#include "../Utilities/CoopHandler.h"
+#include "../../Structure/GameManager.h"
+#include "../DailyMenuScene.h"
+#include "../../Components/Transform.h"
+#include "../../Components/Image.h"
+#include "../BeforeDayStartScene.h"
+#include "../../Utilities/checkML.h"
+#include "../../Structure/Game.h"
+#include "../../Utilities/CoopHandler.h"
 
 
 void CoopMenu::bResume() {

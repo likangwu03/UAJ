@@ -1,4 +1,4 @@
-#include "./ThiefMovement.h"
+#include "ThiefMovement.h"
 #include "../Utilities/checkML.h"
 #include "../Structure/Scene.h"
 

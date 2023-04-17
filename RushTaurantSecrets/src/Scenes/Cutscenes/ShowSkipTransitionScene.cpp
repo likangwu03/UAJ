@@ -1,5 +1,7 @@
 #include "ShowSkipTransitionScene.h"
-#include "../Utilities/InputHandler.h"
+#include "../../Utilities/InputHandler.h"
+
+
 void ShowSkipTransitionScene::render() {
 	cinematicScene->renderCinematic();
 	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
@@ -12,7 +14,7 @@ void ShowSkipTransitionScene::update() {
 	cinematicScene->update();
 	filter->setOpacity(abs(fadeOutInverter - (cont * 100 / duration)));
 	if (cont > duration) {
-		GameManager::get()->deleteCurrentScene();
+		GameManager::get()->popScene(this);
 	}
 }
 

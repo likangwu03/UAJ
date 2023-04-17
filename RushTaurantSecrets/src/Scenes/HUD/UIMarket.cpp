@@ -1,9 +1,9 @@
 #include "UIMarket.h"
-#include "../Structure/GameManager.h"
-#include "../Managers/Money.h"
+#include "../../Structure/GameManager.h"
+#include "../../Managers/Money.h"
 
-#include "../Components/ShoppingMenuComp.h"
-#include "../Utilities/checkML.h"
+#include "../../Components/ShoppingMenuComp.h"
+#include "../../Utilities/checkML.h"
 
 void UIMarket::toggleDailyMenu() {
 	menuToggled = !menuToggled;

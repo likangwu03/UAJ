@@ -1,5 +1,5 @@
 #pragma once
-#include "TransitionScene.h"
+#include "../TransitionScene.h"
 #include "CinematicBaseScene.h"
 //muestra el texto de skip de la cinem¨¢tica
 class ShowSkipTransitionScene :public TransitionScene

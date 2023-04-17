@@ -1,6 +1,6 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "../GameObjects/Clock.h"
+#include "../../Structure/Scene.h"
+#include "../../GameObjects/Clock.h"
 
 class PantryUI : public Scene
 {

@@ -1,5 +1,5 @@
 #include "DayManager.h"
-#include "../scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "../structure/GameManager.h"
 #include "ClientsManager.h"
 #include "Reputation.h"
@@ -7,8 +7,8 @@
 #include "../Scenes/Pantry.h"
 #include "../scenes/DailyMenuScene.h"
 #include "../Scenes/BeforeDayStartScene.h"
-#include "../Scenes/FirstDayAfterKillScene.h"
-#include "../Scenes/SecondDayAfterKillScene.h"
+#include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
+#include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/EndOfDayScene.h"
 #include "../Utilities/checkML.h"
 

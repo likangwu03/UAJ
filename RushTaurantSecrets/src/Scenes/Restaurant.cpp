@@ -109,13 +109,8 @@ void Restaurant::_update() {
 	dm->checkDayFinished();
 }
 void Restaurant::handleEvents() {
-	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getPantry());
-		restaurantMusic->pauseMusic();
-		pantryMusic->play();
-	}
-	else if (ih->isKeyDown(SDLK_p)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getPauseMenu());
+	if (ih->isKeyDown(SDLK_p)) {
+		GameManager::get()->pushScene((Scene*)GameManager::get()->getPauseMenu());
 		restaurantMusic->pauseMusic();
 	}
 	else if (ih->isKeyDown(SDLK_f)) {

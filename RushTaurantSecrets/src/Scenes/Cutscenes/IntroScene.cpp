@@ -1,12 +1,12 @@
 #include "IntroScene.h"
-#include "MainMenu.h"
-#include "../Utilities/checkML.h"
-#include "BeforeDayStartScene.h"
-#include "DailyMenuScene.h"
+#include "../Menus/MainMenu.h"
+#include "../../Utilities/checkML.h"
+#include "../BeforeDayStartScene.h"
+#include "../DailyMenuScene.h"
 
 #include "ShowSkipTransitionScene.h"
-#include "../Structure/GameManager.h"
-#include "../GameObjects/Dialogue.h"
+#include "../../Structure/GameManager.h"
+#include "../../GameObjects/Dialogue.h"
 
 IntroScene::IntroScene() {
 	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
@@ -40,7 +40,7 @@ void IntroScene::addPath(const vector<Vector>& points) {
 }
 
 void IntroScene::callAfterCreating() {
-	GameManager::get()->changeScene(new ShowSkipTransitionScene(this, 3));
+	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, 3), true);
 }
 
 void IntroScene::update() {
@@ -129,7 +129,7 @@ void IntroScene::update() {
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			GameManager::get()->changeScene(new TransitionScene(this, 3,true,true));
+			GameManager::get()->pushScene(new TransitionScene(this, 3,true,true), true);
 		}
 		break;
 	case IntroScene::NONE:

@@ -1,6 +1,6 @@
 #include "CinematicBaseScene.h"
-#include "../Utilities/InputHandler.h"
-#include "../Structure/GameObject.h"
+#include "../../Utilities/InputHandler.h"
+#include "../../Structure/GameObject.h"
 CinematicBaseScene::CinematicBaseScene() :Scene(), cont(0), sdl(SDLUtils::instance()), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), dialogueBox(nullptr) {
 	font = new Font(FONT_PATH, FONTSIZE);
 	if (ih->joysticksInitialised())

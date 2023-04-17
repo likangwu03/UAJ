@@ -3,7 +3,7 @@
 #include "../Structure/GameManager.h"
 #include "../Managers/Reputation.h"
 #include "../Managers/Money.h"
-#include "../Scenes/MainMenu.h"
+#include "../Scenes/Menus/MainMenu.h"
 #include "../Scenes/BeforeDayStartScene.h"
 
 #include "../Utilities/checkML.h"

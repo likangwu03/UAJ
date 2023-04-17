@@ -1,22 +1,22 @@
 #include "MainMenu.h"
 
-#include "../Structure/Scene.h"
-#include "../GameObjects/ButtonGO.h"
-#include "../Utilities/Texture.h"
+#include "../../Structure/Scene.h"
+#include "../../GameObjects/ButtonGO.h"
+#include "../../Utilities/Texture.h"
 
-#include "../Structure/GameManager.h"
-#include "Restaurant.h"
-#include "DailyMenuScene.h"
+#include "../../Structure/GameManager.h"
+#include "../Restaurant.h"
+#include "../DailyMenuScene.h"
 #include "OptionsMenu.h"
 #include "ContinueMenu.h"
 #include "CoopMenu.h"
-#include "../Components/Transform.h"
-#include "../Components/Image.h"
-#include "BeforeDayStartScene.h"
-#include "IntroScene.h"
+#include "../../Components/Transform.h"
+#include "../../Components/Image.h"
+#include "../BeforeDayStartScene.h"
+#include "../Cutscenes/IntroScene.h"
 //#include "FirstDayAfterKillScene.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
 void MainMenu::start() {
 	if (GameManager::get()->checkload()) {
@@ -26,7 +26,7 @@ void MainMenu::start() {
 		GameManager::get()->getDailyMenu()->reset();
 	}
 	else {
-		GameManager::get()->changeScene(GameManager::get()->getIntroScene());
+		GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);
 		GameManager::get()->getCurrentScene()->callAfterCreating();
 	}
 }

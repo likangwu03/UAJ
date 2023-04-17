@@ -1,10 +1,10 @@
 #include "ContinueMenu.h"
-#include "../Structure/GameManager.h"
-#include "DailyMenuScene.h"
-#include "../Components/Transform.h"
-#include "../Components/Image.h"
-#include "BeforeDayStartScene.h"
-#include "../Utilities/checkML.h"
+#include "../../Structure/GameManager.h"
+#include "../DailyMenuScene.h"
+#include "../../Components/Transform.h"
+#include "../../Components/Image.h"
+#include "../BeforeDayStartScene.h"
+#include "../../Utilities/checkML.h"
 
 
 void ContinueMenu::bResume() {

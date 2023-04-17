@@ -1,9 +1,9 @@
 
 #pragma once
-#include "../Structure/Scene.h"
-#include "../Utilities/Texture.h"
-#include "../Utilities/SDLUtils.h"
-#include "../Definitions/Paths_def.h"
+#include "../../Structure/Scene.h"
+#include "../../Utilities/Texture.h"
+#include "../../Utilities/SDLUtils.h"
+#include "../../Definitions/Paths_def.h"
 #include <vector>
 using namespace std;
 class CinematicBaseScene : public Scene

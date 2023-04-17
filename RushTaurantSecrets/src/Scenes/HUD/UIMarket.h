@@ -1,13 +1,13 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "../Utilities/SDLUtils.h"
-#include "../Structure/GameObject.h"
-#include "../Components/Transform.h"
-#include "../Components/Image.h"
-#include "../Managers/Money.h" // cambiar cuando se cambie la clase Money
-#include "../GameObjects/BasketMarket.h"
-#include "../GameObjects/ButtonGO.h"
-#include "../GameObjects/DailyMenu.h"
+#include "../../Structure/Scene.h"
+#include "../../Utilities/SDLUtils.h"
+#include "../../Structure/GameObject.h"
+#include "../../Components/Transform.h"
+#include "../../Components/Image.h"
+#include "../../Managers/Money.h"
+#include "../../GameObjects/BasketMarket.h"
+#include "../../GameObjects/ButtonGO.h"
+#include "../../GameObjects/DailyMenu.h"
 
 // UI del supermercado
 class UIMarket : public Scene

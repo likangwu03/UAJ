@@ -1,7 +1,7 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "../Utilities/Texture.h"
-#include "../GameObjects/ButtonGO.h"
+#include "../../Structure/Scene.h"
+#include "../../Utilities/Texture.h"
+#include "../../GameObjects/ButtonGO.h"
 
 class OptionsMenu : public Scene
 {

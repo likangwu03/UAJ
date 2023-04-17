@@ -1,7 +1,7 @@
 #pragma once
 #include "../Structure/TriggerComp.h"
 #include "InventoryComp.h"
-#include "../Scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "Ingredients.h"
 #include "ClientState.h"
 #include "../Definitions/Paths_def.h"

@@ -4,7 +4,7 @@
 #include "../Structure/Component.h"
 class GameObject;
 
-#include "./tmxlite/Map.hpp"
+#include "tmxlite/Map.hpp"
 #include "../Utilities/Texture.h"
 #include <map>
 

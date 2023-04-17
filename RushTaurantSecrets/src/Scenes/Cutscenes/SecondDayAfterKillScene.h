@@ -1,8 +1,8 @@
 
 #pragma once
-#include "../Scenes/CinematicBaseScene.h"
-#include "../GameObjects/Player.h"
-#include "../Components/StraightMovement.h"
+#include "../../Scenes/Cutscenes/CinematicBaseScene.h"
+#include "../../GameObjects/Player.h"
+#include "../../Components/StraightMovement.h"
 #include <vector>
 using namespace std;
 struct dialogueInfo;

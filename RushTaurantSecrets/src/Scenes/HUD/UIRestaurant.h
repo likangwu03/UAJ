@@ -1,8 +1,8 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "../Utilities/SDLUtils.h"
-#include "../GameObjects/Inventory.h"
-#include "../GameObjects/Clock.h"
+#include "../../Structure/Scene.h"
+#include "../../Utilities/SDLUtils.h"
+#include "../../GameObjects/Inventory.h"
+#include "../../GameObjects/Clock.h"
 #include <string>
 #include <array>
 #include <vector>

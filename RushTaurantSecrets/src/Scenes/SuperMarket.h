@@ -4,7 +4,7 @@
 #include "../Structure/Scene.h"
 #include "../Managers/CartelManager.h"
 #include "../Components/MapCreator.h"
-#include "../Scenes/UIMarket.h"
+#include "../Scenes/HUD/UIMarket.h"
 
 class SuperMarket: public Scene {
 private:

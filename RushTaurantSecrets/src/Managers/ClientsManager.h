@@ -6,7 +6,7 @@
 #include "../Definitions/Paths_def.h"
 #include "../Utilities/checkML.h"
 #include "../Utilities/RelativeToGlobal.h"
-#include "../Scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "../Components/ClockComponent.h"
 #include <vector>
 #include <array>

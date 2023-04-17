@@ -1,7 +1,7 @@
 #pragma once
 #include "CookingMachineComp.h"
 #include "InventoryComp.h"
-#include "../Scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "Ingredients.h"
 #include "../Structure/TriggerComp.h"
 #include "Transform.h"
