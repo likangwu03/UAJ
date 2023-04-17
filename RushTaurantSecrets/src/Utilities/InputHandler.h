@@ -41,12 +41,21 @@ public:
 	// update the state with a new event
 	inline void update(const SDL_Event& event) {
 		switch (event.type) {
+		case SDL_CONTROLLERDEVICEADDED:
+			initialiseJoysticks();
+			break;
+		case SDL_CONTROLLERDEVICEREMOVED:
+			clean();
+			break;
 		case SDL_JOYBUTTONDOWN:
 			joybuttonDownEvent(event);
+			break;
 		case SDL_JOYBUTTONUP:
 			joybuttonUpEvent(event);
+			break;
 		case SDL_JOYAXISMOTION:
 			joystickEvent(event);	
+			break;
 		case SDL_KEYDOWN:
 			onKeyDown(event);
 			break;
@@ -238,6 +247,8 @@ public:
 			SDL_JoystickEventState(SDL_ENABLE);
 
 			m_bJoysticksInitialised = joyInit;
+
+			control = true;
 			
 			std::cout << "Initialised " << m_joysticks.size() << " joystick(s)\n";
 		}
