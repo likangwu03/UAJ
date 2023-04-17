@@ -4,12 +4,12 @@
 #include "ClientsManager.h"
 #include "Reputation.h"
 #include "Money.h"
-#include "../Scenes/Pantry.h"
-#include "../scenes/DailyMenuScene.h"
-#include "../Scenes/BeforeDayStartScene.h"
+#include "../Scenes/GameScenes/Pantry.h"
+#include "../scenes/GameScenes/DailyMenuScene.h"
+#include "../Scenes/GameScenes/BeforeDayStartScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
-#include "../Scenes/EndOfDayScene.h"
+#include "../Scenes/GameScenes/EndOfDayScene.h"
 #include "../Utilities/checkML.h"
 
 	void DayManager::readLine(std::string & line) {

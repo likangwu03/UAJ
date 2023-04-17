@@ -2,9 +2,9 @@
 
 #include "../Scenes/HUD/UIRestaurant.h"
 #include "../Structure/GameManager.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 #include "../Components/ShoppingMenuComp.h"
-#include "../Scenes/SuperMarket.h"
+#include "../Scenes/GameScenes/SuperMarket.h"
 
 
 #include "../Utilities/checkML.h"

@@ -1,7 +1,7 @@
 #include "SuperMarket.h"
-#include "../Structure/GameManager.h"
+#include "../../Structure/GameManager.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
  void SuperMarket::initComponent() {
 	 Scene::initComponent();

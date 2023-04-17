@@ -3,7 +3,7 @@
 #include "../Components/ShoppingMenuComp.h"
 
 #include "../Structure/GameManager.h"
-#include "../Scenes/SuperMarket.h"
+#include "../Scenes/GameScenes/SuperMarket.h"
 
 class CartelManager {
 

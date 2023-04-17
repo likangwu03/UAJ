@@ -2,9 +2,9 @@
 #include "../Structure/GameManager.h"
 #include "../Structure/Scene.h"
 #include "../Structure/GameObject.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 #include "Transform.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 #include "Image.h"
 #include "../Utilities/checkML.h"
 

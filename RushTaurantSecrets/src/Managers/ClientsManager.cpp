@@ -2,7 +2,7 @@
 #include "../Components/DeskComp.h"
 
 #include "../Structure/GameManager.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 #include "DayManager.h"
 
 #include "../Utilities/checkML.h"

@@ -3,7 +3,7 @@
 #include "../Structure/GameManager.h"
 #include "../Structure/Scene.h"
 #include "../Structure/GameObject.h"
-#include "../Scenes/Pantry.h"
+#include "../Scenes/GameScenes/Pantry.h"
 #include "../Components/Image.h"
 #include "Transform.h"
 #include "../Utilities/checkML.h"

@@ -7,7 +7,7 @@
 #include "../Definitions/Paths_def.h"
 
 #include "../Structure/GameManager.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 
 class ClientTrigger : public TriggerComp
 {

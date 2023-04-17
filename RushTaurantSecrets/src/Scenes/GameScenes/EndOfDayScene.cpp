@@ -1,12 +1,12 @@
 #include "EndOfDayScene.h"
-#include "../Managers/DayManager.h"
-#include "../Structure/GameManager.h"
-#include "../Managers/Reputation.h"
-#include "../Managers/Money.h"
-#include "../Scenes/Menus/MainMenu.h"
-#include "../Scenes/BeforeDayStartScene.h"
+#include "../../Managers/DayManager.h"
+#include "../../Structure/GameManager.h"
+#include "../../Managers/Reputation.h"
+#include "../../Managers/Money.h"
+#include "../Menus/MainMenu.h"
+#include "BeforeDayStartScene.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
 
 EndOfDayScene::EndOfDayScene() {

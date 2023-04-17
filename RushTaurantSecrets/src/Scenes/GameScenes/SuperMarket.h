@@ -1,10 +1,10 @@
 #pragma once
-#include "../GameObjects/Player.h"
-#include "../Managers/CollisionsManager.h"
-#include "../Structure/Scene.h"
-#include "../Managers/CartelManager.h"
-#include "../Components/MapCreator.h"
-#include "../Scenes/HUD/UIMarket.h"
+#include "../../GameObjects/Player.h"
+#include "../../Managers/CollisionsManager.h"
+#include "../../Structure/Scene.h"
+#include "../../Managers/CartelManager.h"
+#include "../../Components/MapCreator.h"
+#include "../../Scenes/HUD/UIMarket.h"
 
 class SuperMarket: public Scene {
 private:

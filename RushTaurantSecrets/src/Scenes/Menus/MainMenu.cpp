@@ -5,14 +5,14 @@
 #include "../../Utilities/Texture.h"
 
 #include "../../Structure/GameManager.h"
-#include "../Restaurant.h"
-#include "../DailyMenuScene.h"
+#include "../GameScenes/Restaurant.h"
+#include "../GameScenes/DailyMenuScene.h"
 #include "OptionsMenu.h"
 #include "ContinueMenu.h"
 #include "CoopMenu.h"
 #include "../../Components/Transform.h"
 #include "../../Components/Image.h"
-#include "../BeforeDayStartScene.h"
+#include "../GameScenes/BeforeDayStartScene.h"
 #include "../Cutscenes/IntroScene.h"
 //#include "FirstDayAfterKillScene.h"
 

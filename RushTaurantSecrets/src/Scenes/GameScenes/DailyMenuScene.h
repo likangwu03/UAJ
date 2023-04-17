@@ -1,10 +1,10 @@
 #pragma once
-#include "../Utilities/SDLUtils.h"
-#include "../Structure/Component.h"
-#include "../Structure/Scene.h"
-#include "../Definitions/Structure_def.h"
-#include "../Structure/GameObject.h"
-#include "../GameObjects/DailyMenu.h"
+#include "../../Utilities/SDLUtils.h"
+#include "../../Structure/Component.h"
+#include "../../Structure/Scene.h"
+#include "../../Definitions/Structure_def.h"
+#include "../../Structure/GameObject.h"
+#include "../../GameObjects/DailyMenu.h"
 
 using namespace std;
 

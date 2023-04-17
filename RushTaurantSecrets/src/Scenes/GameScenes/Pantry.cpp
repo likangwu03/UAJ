@@ -1,12 +1,12 @@
 #include "Pantry.h"
 #include "Restaurant.h"
-#include "../Structure/GameManager.h"
-#include "../Components/MapCreator.h" 
-#include "../GameObjects/Player.h"
-#include "../Managers/ThiefsManager.h"
-#include "../GameObjects/TimeOfDayObj.h"
+#include "../../Structure/GameManager.h"
+#include "../../Components/MapCreator.h" 
+#include "../../GameObjects/Player.h"
+#include "../../Managers/ThiefsManager.h"
+#include "../../GameObjects/TimeOfDayObj.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
 Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), 
 pantryMusic(&sdl->musics().at("PANTRY_MUSIC"))

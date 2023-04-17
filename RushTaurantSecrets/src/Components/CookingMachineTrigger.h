@@ -8,7 +8,7 @@
 #include "Image.h"
 
 #include "../Structure/GameManager.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 
 /*gestiona la cocina cuando se colisiona con player*/
 class CookingMachineTrigger :public TriggerComp

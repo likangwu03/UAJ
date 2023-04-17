@@ -1,8 +1,8 @@
 #include "FirstDayAfterKillScene.h"
 #include "../Menus/MainMenu.h"
 #include "../../Utilities/checkML.h"
-#include "../BeforeDayStartScene.h"
-#include "../DailyMenuScene.h"
+#include "../GameScenes/BeforeDayStartScene.h"
+#include "../GameScenes/DailyMenuScene.h"
 
 #include "ShowSkipTransitionScene.h"
 #include "../../Structure/GameManager.h"

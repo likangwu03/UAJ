@@ -3,7 +3,7 @@
 #include "../Managers/CartelManager.h"
 
 #include "../Structure/GameManager.h"
-#include "../Scenes/SuperMarket.h"
+#include "../Scenes/GameScenes/SuperMarket.h"
 
 CartelTrigger::CartelTrigger(GameObject* parent, _ecs::_ingredients_id id, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_), ingId(id), highlighted(false),

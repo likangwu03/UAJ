@@ -1,7 +1,7 @@
 #include "GameOverScene.h"
-#include "../Structure/GameManager.h"
-#include "Menus/MainMenu.h"
-#include "../Utilities/checkML.h"
+#include "../../Structure/GameManager.h"
+#include "../Menus/MainMenu.h"
+#include "../../Utilities/checkML.h"
 
 void GameOverScene::mMenu() {
 	GameManager::get()->changeScene(GameManager::get()->getMainMenu());

@@ -1,6 +1,6 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "HUD/UIRestaurant.h"
+#include "../../Structure/Scene.h"
+#include "../HUD/UIRestaurant.h"
 #include "Pantry.h"
 
 class DishCombinator;

@@ -1,6 +1,6 @@
 #pragma once
-#include "../Structure/Scene.h"
-#include "../Managers/DayManager.h"
+#include "../../Structure/Scene.h"
+#include "../../Managers/DayManager.h"
 
 
 class Image;

@@ -1,8 +1,8 @@
 #include "BeforeDayStartScene.h"
-#include "../Structure/GameManager.h"
-#include "../Scenes/DailyMenuScene.h"
-#include "../Managers//DayManager.h"
-#include "../Utilities/checkML.h"
+#include "../../Structure/GameManager.h"
+#include "DailyMenuScene.h"
+#include "../../Managers//DayManager.h"
+#include "../../Utilities/checkML.h"
 
 BeforeDayStartScene::BeforeDayStartScene() {
 

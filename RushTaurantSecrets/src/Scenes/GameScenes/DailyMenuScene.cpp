@@ -1,10 +1,10 @@
 #include "DailyMenuScene.h"
 #include "SuperMarket.h"
 #include "Restaurant.h"
-#include "HUD/UIRestaurant.h"
-#include "../Structure/GameManager.h"
+#include "../HUD/UIRestaurant.h"
+#include "../../Structure/GameManager.h"
 
-#include "../Utilities/checkML.h"
+#include "../../Utilities/checkML.h"
 
 DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	background = new GameObject(this);
