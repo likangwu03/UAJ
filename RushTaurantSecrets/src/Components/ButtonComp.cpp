@@ -32,35 +32,47 @@ void ButtonComp::handleEvents()
 
 	if (SDL_HasIntersection(&mouseRect, &dest)) {
 		if(!selected) buttonHoverSound->play();
-		highlighted = true;
+		//highlighted = true;
 		selected = true;
 		if (ih().getMouseButtonState(ih().LEFT)) {
 			playSound();
-			ih().setControls(true);
+			//ih().setControls(true);
+			_callback();
+		}
+	}
+	else if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
+		//if (!highlighted) buttonHoverSound->play();
+		if (highlighted) {
+			playSound();
+			//ih().setControls(true);
 			_callback();
 		}
 	}
 	else if (ih().joysticksInitialised()) {
+		ih().refresh();
 		if (!selected) buttonHoverSound->play();
 		highlighted = true;
 		selected = true;
 		buttonHoverSound->play();
 		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
 			ih().clean();
-			ih().setControls(false);
+			//ih().setControls(false);
 			playSound();
 			_callback();
 		}
 	}
 	else {
-		
-		highlighted = false;
+		//highlighted = false;
 		selected = false;
 	}
 }
 
 bool ButtonComp::isHighlighted() {
 	return highlighted;
+}
+
+void ButtonComp::setHighlighted(bool isH) {
+	highlighted = isH;
 }
 
 void ButtonComp::render() {

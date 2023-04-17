@@ -22,6 +22,9 @@ private:
 	std::list<GameObject*> renderListDown;
 
 protected:
+
+	enum DPAD_XBOX { UP, DOWN, RIGHT, LEFT };
+
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 

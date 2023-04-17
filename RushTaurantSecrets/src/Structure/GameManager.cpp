@@ -7,39 +7,42 @@
 #include "../Managers/DayManager.h"
 
 #include "Scene.h"
-#include "../Scenes/BeforeDayStartScene.h"
-#include "../Scenes/MainMenu.h"
-#include "../Scenes/Restaurant.h"
-#include "../Scenes/UIRestaurant.h"
-#include "../Scenes/Pantry.h"
-#include "../Scenes/DailyMenuScene.h"
-#include "../Scenes/SuperMarket.h"
-#include "../Scenes/PauseMenu.h"
-#include "../Scenes/OptionsMenu.h"
-#include "../Scenes/EndOfDayScene.h"
-#include "../Scenes/GameOverScene.h"
-#include "../Scenes/ContinueMenu.h"
-#include "../Scenes/PantryUI.h"
-#include "../Scenes/IntroScene.h"
-#include "../Scenes/FirstDayAfterKillScene.h"
-#include "../Scenes/SecondDayAfterKillScene.h"
-#include "../Scenes/CoopMenu.h"
+#include "../Scenes/GameScenes/BeforeDayStartScene.h"
+#include "../Scenes/Menus/MainMenu.h"
+#include "../Scenes/GameScenes/Restaurant.h"
+#include "../Scenes/GameScenes/Pantry.h"
+#include "../Scenes/GameScenes/DailyMenuScene.h"
+#include "../Scenes/GameScenes/SuperMarket.h"
+#include "../Scenes/Menus/PauseMenu.h"
+#include "../Scenes/Menus/OptionsMenu.h"
+#include "../Scenes/GameScenes/EndOfDayScene.h"
+#include "../Scenes/GameScenes/GameOverScene.h"
+#include "../Scenes/Menus/ContinueMenu.h"
+#include "../Scenes/HUD/PantryUI.h"
+#include "../Scenes/Cutscenes/IntroScene.h"
+#include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
+#include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
+#include "../Scenes/Menus/CoopMenu.h"
+#include "../Scenes/TransitionScene.h"
 #include <sstream>
 #include <fstream>
+
 #include "../Utilities/JSON.h"
 #include "../Utilities/Texture.h"
 #include "../Utilities/checkML.h" 
 
-GameManager::GameManager() : reputation(nullptr), days(nullptr), money(nullptr), pantry(nullptr), pauseMenu(nullptr), supermarket(nullptr), restaurant(nullptr),
-	mainMenu(nullptr), dailyMenu(nullptr), beforeDayStartScene(nullptr), currentScene(nullptr), previousScene(nullptr),optionsMenu(nullptr),gameOverScene(nullptr),
-	continueMenu(nullptr),menu(nullptr), kitchenIsland(nullptr), twoPlayers(false),coopMenu(nullptr),
-	hasKilled(false), dayTime(0), mapsCreated(false), uiRestaurant(nullptr), endScene(nullptr), killedNum(0),hasEverKilled({false,0}) { };
+GameManager::GameManager() : scenes(), deleteScene(nullptr), deleteTransition(false),
+	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), dailyMenu(nullptr), pantryUI(nullptr),
+	mainMenu(nullptr), optionsMenu(nullptr), pauseMenu(nullptr), continueMenu(nullptr), endScene(nullptr), beforeDayStartScene(nullptr), gameOverScene(nullptr), coopMenu(nullptr),
+	reputation(nullptr), days(nullptr), money(nullptr),
+	menu(nullptr), kitchenIsland(nullptr),
+	hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0),
+	introScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr) { };
 
 
 void GameManager::initialize() {
 	reputation = new Reputation();
 	money = new Money();
-	//menu = new vector<_ecs::_dish_id>();
 
 	
 	mainMenu = new MainMenu();
@@ -65,6 +68,7 @@ void GameManager::initialize() {
 	try {
 		days = new DayManager();
 		days->nextDay();
+		delete deleteScene;
 	} catch(std::exception e) { std::cout << e.what(); }
 
 	beforeDayStartScene->init();
@@ -78,78 +82,100 @@ void GameManager::initialize() {
 	supermarket->callAfterCreating();
 	
 
-	currentScene = nullptr;
-	previousScene = nullptr;
-
 	hasKilled = false;
-	dayTime = false;
+
 	changeScene(mainMenu);
+
 }
 
 GameManager::~GameManager() {
-	delete mainMenu;
-	delete restaurant;
-	delete pantry;
-	delete supermarket;
+	delete secondDayAfterKillScene;
+	delete firstDayAfterKillScene;
+	delete introScene;
+
+	delete days;
+	delete money;
+	delete reputation;
+
+	delete coopMenu;
+	delete gameOverScene;
+	delete beforeDayStartScene;
+	delete endScene;
+	delete continueMenu;
 	delete pauseMenu;
 	delete optionsMenu;
-	delete dailyMenu;
-	delete beforeDayStartScene;
-	delete firstDayAfterKillScene;
-	delete secondDayAfterKillScene;
-	delete gameOverScene;
-	delete continueMenu;
-	delete endScene;
+	delete mainMenu;
 	delete pantryUI;
-	delete introScene;
-	delete reputation;
-	delete money;
-	delete days;
-	delete coopMenu;
+	delete dailyMenu;
+
+	delete supermarket;
+	delete pantry;
+	delete restaurant;
+
+	if (deleteScene != nullptr)
+		delete scenes.top();
 }
 
 
 void GameManager::update() {
-	currentScene->update();
+	if (!scenes.empty())
+		scenes.top()->update();
 }
 void GameManager::render() {
-	currentScene->render();
+	if (!scenes.empty())
+		scenes.top()->render();
 }
 void GameManager::handleEvents() {
-	currentScene->handleEvents();
+	if (!scenes.empty())
+		scenes.top()->handleEvents();
 }
 void GameManager::refresh() {
-	currentScene->refresh();
+	if (!scenes.empty())
+		scenes.top()->refresh();
+
+	if (deleteTransition && deleteScene != nullptr){
+		deleteTransition = false;
+		delete deleteScene;
+		deleteScene = nullptr;
+	}
 }
 
 
-void GameManager::changeScene(Scene* scene) {
-	previousScene = currentScene;
-	currentScene = scene;
+void GameManager::changeScene(Scene* scene, bool longerTransition) {
+	if (!scenes.empty())
+		if (scenes.top() != scene) popScene();
+
+	pushScene(scene);
+	if (!longerTransition) {
+		deleteScene = new TransitionScene(scene, TRANSITION_TIME);
+		scenes.push(deleteScene);
+	}
+}
+void GameManager::popScene(Scene* transitionScene) {
+	if (!scenes.empty()) {
+		if (transitionScene != nullptr) {
+			deleteTransition = true;
+			deleteScene = transitionScene;
+		}
+		scenes.pop();
+		if (!scenes.empty()) sdlutils().setResizeFactor(scenes.top()->getResizeFactor());
+	}
+}
+void GameManager::pushScene(Scene* scene, bool longerTransition) {
 	sdlutils().setResizeFactor(scene->getResizeFactor());
+	scenes.push(scene);
 
-
+	if(longerTransition)
+		deleteScene = scene;
 }
-void GameManager::popScene() {
-	if (previousScene != nullptr) {
-		currentScene = previousScene;
-		previousScene = nullptr;
-		sdlutils().setResizeFactor(currentScene->getResizeFactor());
-	}
-}
-void GameManager::deleteCurrentScene() {
-	if (previousScene != nullptr) {
-		delete currentScene;
-		currentScene = previousScene;
-		previousScene = nullptr;
-		sdlutils().setResizeFactor(currentScene->getResizeFactor());
-	}
-}
-
 void GameManager::skipfromTransition() {
-		delete currentScene;
-		currentScene = previousScene;
-		previousScene->finishScene();
+	deleteScene = scenes.top();
+	popScene();
+	scenes.top()->finishScene();
+}
+
+bool GameManager::canChangeScene() {
+	return scenes.top() != deleteScene;
 }
 
 
@@ -159,7 +185,7 @@ void GameManager::setGameOver(int type) {
 }
 
 
-Scene* GameManager::getCurrentScene() { return currentScene; }
+Scene* GameManager::getCurrentScene() { return scenes.top(); }
 MainMenu* GameManager::getMainMenu() { return mainMenu; }
 Restaurant* GameManager::getRestaurant() { return restaurant; }
 Pantry* GameManager::getPantry() { return pantry; }

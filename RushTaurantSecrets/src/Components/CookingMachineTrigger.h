@@ -1,14 +1,14 @@
 #pragma once
 #include "CookingMachineComp.h"
 #include "InventoryComp.h"
-#include "../Scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "Ingredients.h"
 #include "../Structure/TriggerComp.h"
 #include "Transform.h"
 #include "Image.h"
 
 #include "../Structure/GameManager.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 
 /*gestiona la cocina cuando se colisiona con player*/
 class CookingMachineTrigger :public TriggerComp

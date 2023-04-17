@@ -1,8 +1,8 @@
 #include "BinTriggerComp.h"
 
-#include "../Scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "../Structure/GameManager.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 
 #include "../Utilities/checkML.h"
 

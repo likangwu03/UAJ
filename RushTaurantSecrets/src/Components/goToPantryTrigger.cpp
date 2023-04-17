@@ -3,7 +3,7 @@
 #include "../Structure/GameManager.h"
 #include "../Structure/Scene.h"
 #include "../Structure/GameObject.h"
-#include "../Scenes/Pantry.h"
+#include "../Scenes/GameScenes/Pantry.h"
 #include "../Components/Image.h"
 #include "Transform.h"
 #include "../Utilities/checkML.h"
@@ -24,7 +24,7 @@ GoToPantryTrigger::GoToPantryTrigger(GameObject* parent, Vector pos_, float widt
 
 void GoToPantryTrigger::isOverlapping() {
 	image->setActive(true);
-	if (ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))) {
+	if ((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))) && GameManager::get()->canChangeScene()) {
 		// se desactiva el jugador del restaurant
 		playerRestaurant->setActives(false);
 		// se activa y recoloca el jugador de la despensa

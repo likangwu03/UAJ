@@ -62,7 +62,7 @@ public:
 			// se cambia al final en el que los ladrones han descubierto la fórmula secreta
 			formulaSound->play();
 			parent->setAlive(false);
-			gm->setGameOver(endingType::Robbed);
+			//gm->setGameOver(endingType::Robbed);
 			break;
 
 		case ThiefState::FREEZER:

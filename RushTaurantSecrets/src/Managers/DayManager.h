@@ -1,6 +1,6 @@
 #pragma once
 #include "../Components/ClockComponent.h"
-#include "../Scenes/Restaurant.h"
+#include "../Scenes/GameScenes/Restaurant.h"
 #include <fstream>
 
 class DayManager {

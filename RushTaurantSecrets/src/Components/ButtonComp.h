@@ -34,6 +34,7 @@ public:
 	ButtonComp(GameObject* parent, string hl, std::function<void()> callback);
 	void handleEvents() override;
 	bool isHighlighted();
+	void setHighlighted(bool isH);
 	void render();
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Scenes/UIRestaurant.h"
+#include "../Scenes/HUD/UIRestaurant.h"
 #include "../Structure/TriggerComp.h"
 #include "../Structure/GameObject.h"
 #include "../Managers/Money.h"

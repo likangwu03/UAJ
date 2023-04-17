@@ -124,7 +124,10 @@ void ClientState::changeDish() {
 		setState(THINKING);
 		render->renderThinkingState();
 	}
-	else setState(OUT);
+	else {
+		setState(OUT);
+		render->renderFinishEatState();
+	}
 }
 
 
