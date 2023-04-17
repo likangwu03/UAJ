@@ -2,7 +2,7 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Stop! Don’t move!"
+      "Text": "Stop! Don't move!"
     },
     {
       "Character": "Player",
@@ -14,7 +14,7 @@
     },
     {
       "Character": "Player",
-      "Text": "Damn… He’s already gone."
+      "Text": "Damn... He's already gone."
     },
     {
       "Character": "Player",
@@ -22,7 +22,7 @@
     },
     {
       "Character": "Player",
-      "Text": "I should go back to work… I hope my clients are not alarmed… I was kind of noisy…"
+      "Text": "I should go back to work... I hope my clients are not alarmed... I was kind of noisy..."
     },
     {
       "Character": "TV",
@@ -46,7 +46,7 @@
     },
     {
       "Character": "Rival",
-      "Text": "It’s a pleasure."
+      "Text": "It's a pleasure."
     },
     {
       "Character": "Player",
@@ -54,7 +54,7 @@
     },
     {
       "Character": "Player",
-      "Text": "This can’t be true… How did he get there…? My restaurant is much more successful…"
+      "Text": "This can't be true... How did he get there...? My restaurant is much more successful..."
     },
     {
       "Character": "Rival",
@@ -74,7 +74,7 @@
     },
     {
       "Character": "Player",
-      "Text": "But… That place… Is completely brand new."
+      "Text": "But... That place... Is completely brand new."
     },
     {
       "Character": "Player",
@@ -82,7 +82,7 @@
     },
     {
       "Character": "Player",
-      "Text": "Wait a minute… That book in the back…"
+      "Text": "Wait a minute... That book in the back..."
     },
     {
       "Character": "Player",
@@ -90,75 +90,39 @@
     },
     {
       "Character": "Player",
-      "Text": "That’s my recipe book!"
+      "Text": "That's my recipe book!"
     },
     {
       "Character": "Player",
-      "Text": "That book is my parents’ hidden treasure!"
+      "Text": "That book is my parents' hidden treasure!"
     },
     {
       "Character": "Player",
-      "Text": "Having that book in his possession, he will discover all of my family’s cooking secrets…"
+      "Text": "Having that book in his possession, he will discover all of my family's cooking secrets..."
     },
     {
       "Character": "Player",
-      "Text": "Is that the reason why his restaurant is succeeding now…?"
+      "Text": "Is that the reason why his restaurant is succeeding now...?"
     },
     {
       "Character": "Player",
-      "Text": "It can’t be. That doesn’t mean anything. That book won’t make him better than me."
+      "Text": "It can't be. That doesn't mean anything. That book won't make him better than me."
     },
     {
       "Character": "Player",
-      "Text": "I’ve been cooking those dishes for a long time… I obviously do it much better!"
+      "Text": "I've been cooking those dishes for a long time... I obviously do it much better!"
     },
     {
       "Character": "TV",
-      "Text": "And that’s all! Please, say goodbye to the most wealthy and prosperous business in the city."
+      "Text": "And that's all! Please, say goodbye to the most wealthy and prosperous business in the city."
     },
     {
       "Character": "Player",
-      "Text": "What a liar… My restaurant is so much better than that."
+      "Text": "What a liar... My restaurant is so much better than that."
     },
     {
       "Character": "Player",
-      "Text": "I’ll check the bills…"
-    },
-    {
-      "Character": "Player",
-      "Text": "..."
-    },
-    {
-      "Character": "Player",
-      "Text": "It can’t be…"
-    },
-    {
-      "Character": "Player",
-      "Text": "The number of customers that come to my restaurant has been declining… Just like my income…"
-    },
-    {
-      "Character": "Player",
-      "Text": "Then… What was announced on TV was true…?"
-    },
-    {
-      "Character": "Player",
-      "Text": "No…"
-    },
-    {
-      "Character": "Player",
-      "Text": "I can’t give up yet!"
-    },
-    {
-      "Character": "Player",
-      "Text": "I have to keep going! I’ll do it for my parents!"
-    },
-    {
-      "Character": "Player",
-      "Text": "I won’t let them down."
-    },
-    {
-      "Character": "Player",
-      "Text": "I’ll prepare everything for tomorrow."
+      "Text": "I'll check the bills..."
     },
     {
       "Character": "Player",
@@ -166,19 +130,55 @@
     },
     {
       "Character": "Player",
-      "Text": "I have… no money left…?"
+      "Text": "It can't be..."
     },
     {
       "Character": "Player",
-      "Text": "Oh, no…"
+      "Text": "The number of customers that come to my restaurant has been declining... Just like my income..."
     },
     {
       "Character": "Player",
-      "Text": "So this is the end… Dad, mom…"
+      "Text": "Then... What was announced on TV was true...?"
     },
     {
       "Character": "Player",
-      "Text": "I’m sorry…"
+      "Text": "No..."
+    },
+    {
+      "Character": "Player",
+      "Text": "I can't give up yet!"
+    },
+    {
+      "Character": "Player",
+      "Text": "I have to keep going! I'll do it for my parents!"
+    },
+    {
+      "Character": "Player",
+      "Text": "I won't let them down."
+    },
+    {
+      "Character": "Player",
+      "Text": "I'll prepare everything for tomorrow."
+    },
+    {
+      "Character": "Player",
+      "Text": "..."
+    },
+    {
+      "Character": "Player",
+      "Text": "I have... no money left...?"
+    },
+    {
+      "Character": "Player",
+      "Text": "Oh, no..."
+    },
+    {
+      "Character": "Player",
+      "Text": "So this is the end... Dad, mom..."
+    },
+    {
+      "Character": "Player",
+      "Text": "I'm sorry..."
     }
   ]
 }
