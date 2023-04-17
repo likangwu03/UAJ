@@ -33,8 +33,8 @@ private:
 	GameManager* gm;
 	InputHandler* ih;
 
-	ButtonGO* continueDay;
-	ButtonGO* toMainMenu;
+	ButtonGO* continueButton;
+	ButtonGO* mainMenuButton;
 
 	string reputationtext;
 	string moneyText;
@@ -51,7 +51,7 @@ private:
 	bool _gameOver;
 
 	void toMainMenu();
-	void toNextDay();
+	//void toNextDay();
 	void gameOver();
 
 public:

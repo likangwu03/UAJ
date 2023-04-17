@@ -57,6 +57,10 @@ EndOfDayScene::EndOfDayScene() {
 	//texturas que se mantienen iguales
 	bankruptTexture = new Texture(sdlutils().renderer(), bankruptText, *font1, build_sdlcolor(0x000000FF));
 	gameOverTexture = new Texture(sdlutils().renderer(), gameOverText, *font1, build_sdlcolor(0x000000FF));
+
+	//botones
+	//continueDay = new ButtonGO();
+	
 }
 
 EndOfDayScene::~EndOfDayScene() {
@@ -108,10 +112,6 @@ void EndOfDayScene::render() {
 		}
 		else if (playerMoney < moneyGoal || playerMoney <=0) bankruptTexture->render({200, 450, bankruptTexture->width(), bankruptTexture->height() });
 		else if (playerReputation <= 0) gameOverTexture->render({50, 450, gameOverTexture->width(), gameOverTexture->height() });
-		
-		if (_gameOver) {
-
-		}
 
 		gameOver();
 	}
