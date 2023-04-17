@@ -14,6 +14,7 @@
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
 #include "../Cutscenes/IntroScene.h"
+#include "../../Structure/GameObject.h"
 //#include "FirstDayAfterKillScene.h"
 
 #include "../../Utilities/checkML.h"
@@ -45,7 +46,9 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	image = &(sdlutils().images().at("MAIN_MENU_BG"));
 	new Image(bg, image);
 
+	button = 0;
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, start);
+	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
 	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, start2);
 	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
@@ -63,5 +66,33 @@ void MainMenu::handleEvents() {
 	}
 	else {
 		Scene::handleEvents();
+	}
+	if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		button = (button - 1) % NUM_BUTTON;
+		if (button < 0)
+			button = button + NUM_BUTTON;
+		selectedButton(button);
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		button = (button + 1) % NUM_BUTTON;
+		selectedButton(button);
+	}
+}
+
+void MainMenu::selectedButton(int selected) {
+	oneplayer->getComponent<ButtonComp>()->setHighlighted(false);
+	twoplayer->getComponent<ButtonComp>()->setHighlighted(false);
+	options->getComponent<ButtonComp>()->setHighlighted(false);
+	switch (selected)
+	{
+	case 0:
+		oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 1:
+		twoplayer->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 2:
+		options->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
 	}
 }

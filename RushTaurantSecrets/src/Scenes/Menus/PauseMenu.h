@@ -9,6 +9,9 @@ private:
 	// hacer global para que sea modificable
 	const int MUSIC_VOL = 30;
 
+	const int NUM_BUTTON = 3;
+	int button;
+
 	static void mMenu();
 	static void bResume();
 	static void oMenu();
@@ -26,5 +29,6 @@ public:
 	~PauseMenu();
 
 	void handleEvents();
+	void selectedButton(int selected);
 };
 

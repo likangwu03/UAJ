@@ -23,8 +23,10 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
 	new Image(bg, image);
 
+	button = 0;
 	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.8 * SDLUtils::instance()->height() / 5), 385, 130, bResume);
+	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
@@ -40,5 +42,34 @@ PauseMenu::~PauseMenu() {
 void PauseMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_p)) bResume();
 	Scene::handleEvents();
+
+	if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		button = (button - 1) % NUM_BUTTON;
+		if (button < 0)
+			button = button + NUM_BUTTON;
+		selectedButton(button);
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		button = (button + 1) % NUM_BUTTON;
+		selectedButton(button);
+	}
+}
+
+void PauseMenu::selectedButton(int selected) {
+	buttonResume->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonMainMenu->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonOptions->getComponent<ButtonComp>()->setHighlighted(false);
+	switch (selected)
+	{
+	case 0:
+		buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 1:
+		buttonMainMenu->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 2:
+		buttonOptions->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	}
 }
 
