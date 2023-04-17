@@ -148,7 +148,7 @@ void GameManager::changeScene(Scene* scene, bool longerTransition) {
 	pushScene(scene);
 	if (!longerTransition) {
 		deleteScene = new TransitionScene(scene, TRANSITION_TIME);
-		pushScene(deleteScene);
+		scenes.push(deleteScene);
 	}
 }
 void GameManager::popScene(Scene* transitionScene) {
@@ -157,9 +157,8 @@ void GameManager::popScene(Scene* transitionScene) {
 			deleteTransition = true;
 			deleteScene = transitionScene;
 		}
-		
 		scenes.pop();
-		if(!scenes.empty()) sdlutils().setResizeFactor(scenes.top()->getResizeFactor());
+		if (!scenes.empty()) sdlutils().setResizeFactor(scenes.top()->getResizeFactor());
 	}
 }
 void GameManager::pushScene(Scene* scene, bool longerTransition) {
@@ -173,6 +172,10 @@ void GameManager::skipfromTransition() {
 	deleteScene = scenes.top();
 	popScene();
 	scenes.top()->finishScene();
+}
+
+bool GameManager::canChangeScene() {
+	return scenes.top() != deleteScene;
 }
 
 

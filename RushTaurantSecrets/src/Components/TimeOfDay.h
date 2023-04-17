@@ -7,7 +7,7 @@ using namespace std;
 class TimeOfDay : public Component {
 private:
 	const int DAY = 15, AFTERNOON = 130, NIGHT = 230, END = 360;
-	float increaseOpacAfternoon, increaseOpacNight;
+	float increaseOpac;
 
 	ClockComponent* clock;
 	Texture* afternoonTxt;

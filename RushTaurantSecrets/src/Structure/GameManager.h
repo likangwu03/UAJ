@@ -111,6 +111,7 @@ public:
 	void popScene(Scene* transitionScene = nullptr);
 	void pushScene(Scene* scene, bool longerTransition = false);
 	void skipfromTransition();
+	bool canChangeScene();
 
 	void setGameOver(int type);
 	Scene* getCurrentScene();

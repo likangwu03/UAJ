@@ -5,6 +5,7 @@
 #include "../../GameObjects/Player.h"
 #include "../../Managers/ThiefsManager.h"
 #include "../../GameObjects/TimeOfDayObj.h"
+#include "EndOfDayScene.h"
 
 #include "../../Utilities/checkML.h"
 
@@ -53,21 +54,19 @@ void Pantry::callAfterCreating() {
 }
 
 void Pantry::render() {
-	//Scene::render();
 	Scene::renderLayer();
 	pantryUI->render();
 }
 
 void Pantry::update() {
 	rest->_update();
-	Scene::update();
+	rest->refresh();
 	collisionsManager->update();
-	pantryUI->update();
+	_update();
 }
 
 void Pantry::_update() {
 	Scene::update();
-	//collisionsManager->update();
 }
 
 

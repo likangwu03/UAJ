@@ -124,7 +124,7 @@ public:
 	// mejor comprobar con el grupo de clientes
 	// porque de la lista de clientes se quitan cuando se están marchando del local
 	inline bool noClients() const {
-		return parent->getScene()->getGroup(_ecs::grp_CLIENTS)->empty();
+		return GameManager::get()->getRestaurant()->getGroup(_ecs::grp_CLIENTS)->empty();
 	}
 
 	// se llama cuando se quiera asignar una mesa al primer grupo de clientes

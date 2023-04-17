@@ -42,7 +42,7 @@ void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void SecondDayAfterKillScene::callAfterCreating() {
-	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, 3,false));
+	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, 3,false), true);
 }
 
 void SecondDayAfterKillScene::update() {

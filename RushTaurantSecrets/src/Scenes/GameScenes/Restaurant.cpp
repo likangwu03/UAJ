@@ -27,7 +27,7 @@ Restaurant::~Restaurant() {
 }
 
 void Restaurant::reset() {
-	player->getComponent<Transform>()->setPos(INITIAL_POS);
+ 	player->getComponent<Transform>()->setPos(INITIAL_POS);
 	ui->reset();
 	nextDay();
 }
@@ -95,17 +95,13 @@ void Restaurant::initComponent() {
 }
 void Restaurant::update() {
 	pantry->_update();
-	Scene::update();
-	//timeOfDay->update();
-	ui->update();
-	cm->update();
-	dm->checkDayFinished();
+	_update();
 }
 
 void Restaurant::_update() {
 	Scene::update();
 	ui->update();
-	//cm->update();
+	cm->update();
 	dm->checkDayFinished();
 }
 void Restaurant::handleEvents() {
