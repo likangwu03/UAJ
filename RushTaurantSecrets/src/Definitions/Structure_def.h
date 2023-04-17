@@ -69,6 +69,7 @@ namespace _ecs {
 	// Handlers
 	enum _hdr_id : id_type {
 		hdr_PLAYER,
+		hdr_OTHERPLAYER,
 		hdr_CLOCK,
 		hdr_FREEZER,
 		hdr_KITCHENISLAND,

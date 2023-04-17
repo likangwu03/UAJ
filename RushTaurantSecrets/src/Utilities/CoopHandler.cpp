@@ -3,6 +3,10 @@
 #include <cstdint>
 #include "../Structure/Game.h"
 
+#include "../Structure/Scene.h"
+#include "../Structure/GameObject.h"
+#include "../Components/Transform.h"
+
 #ifdef _DEBUG
 #include <iostream>
 #endif
@@ -11,20 +15,17 @@
 
 // Almacena cuantos espacios ocupa cada id de mensaje
 const int CoopHandler::messageLengths[]{
-	6, // msg_PLACEHOLDER
+	8, // msg_PLAYER
 };
 
 // Recoge la información pertinente del mensaje y la mete en el buffer
 void CoopHandler::code(const Message& m, byte* buffer) {
 	switch(m.id) {
-	case Message::msg_PLACEHOLDER:
-		buffer[0] = code8(m.data_placeholder.dataUint);
-		buffer[1] = code8(m.data_placeholder.dataChar);
-		buffer[2] = code8(m.data_placeholder.dataInt);
-		buffer[3] = code8(m.data_placeholder.dataCmpId);
-		// El float tiene que codificarse como dos bytes:
-		doubleByte aux = code16(m.data_placeholder.dataFloat);
-		buffer[4] = aux.first; buffer[5] = aux.second;
+	case Message::msg_PLAYER:
+		doubleByte aux = code16(m.data_player.x);
+		buffer[1] = aux.first; buffer[2] = aux.second;
+		aux = code16(m.data_player.y);
+		buffer[3] = aux.first; buffer[4] = aux.second;
 		break;
 	}
 }
@@ -32,19 +33,18 @@ void CoopHandler::code(const Message& m, byte* buffer) {
 // Recoge la información del buffer y ejecuta las acciones pertinentes
 void CoopHandler::decode(Message::_msg_id id, byte* buffer) {
 	switch(id) {
-	case Message::msg_PLACEHOLDER:
-		uint8_t dataUint = decode<uint8_t>(buffer[0]);
-		char dataChar = decode<char>(buffer[1]);
-		int dataInt = decode<int>(buffer[2]);
-		_ecs::_cmp_id dataCmpId = decode<_ecs::_cmp_id>(buffer[3]);
-		float dataFloat = decode<float>({ buffer[4], buffer[5] });
+	case Message::msg_PLAYER:
+		GameObject* pl = GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER);
+		if(pl != nullptr) {
+			pl->getComponent<Transform>()->setPos({ decode<float>({ buffer[0], buffer[1] }), decode<float>({ buffer[2], buffer[3] }) });
+		}
 		break;
 	}
 }
 
 // Constructoras y destructoras
 
-CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSocket(nullptr), dataLength(0), bufferLength(0), data(), buffer() {
+CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSocket(nullptr), dataLength(0), data(), client(false) {
 #ifdef _DEBUG
 	std::cout << "Initializing SDL_net.\n";
 #endif
@@ -135,6 +135,7 @@ std::pair<bool, bool> CoopHandler::connectServer() {
 		if(!achieved) {
 			return { true, false };
 		}
+		client = true;
 		return { true, true };
 	}
 	return { false, false };
@@ -146,6 +147,7 @@ void CoopHandler::closeConnection() {
 		SDLNet_TCP_DelSocket(set, connectionSocket);
 		SDLNet_TCP_Close(connectionSocket);
 		connectionSocket = NULL;
+		client = false;
 		Game::get()->setExitCoop();
 	}
 }
@@ -155,6 +157,8 @@ void CoopHandler::closeConnection() {
 void CoopHandler::receive() {
 	while(SDLNet_CheckSockets(set, 0) > 0) {
 		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
+
+		if(dataLength == -1) return; // Desconexión
 
 		if(dataLength == 6 /*&& == "Close"*/) {
 			// Cerrar
@@ -176,24 +180,13 @@ void CoopHandler::receive() {
 	}
 }
 
-void CoopHandler::send() {
-	if(bufferLength > 0) {
-		SDLNet_TCP_Send(connectionSocket, buffer, bufferLength);
-		bufferLength = 0;
-	}
-}
-
-void CoopHandler::addMessage(const Message& message) {
-	if(1024 - bufferLength < messageLengths[message.id] + 1) send();
-
-	char* msgBuffer = new char[messageLengths[message.id]];
+void CoopHandler::send(const Message& message) {
+	char* msgBuffer = new char[messageLengths[message.id] + 1];
+	msgBuffer[0] = message.id;
 
 	code(message, msgBuffer);
 
-	buffer[bufferLength] = message.id; bufferLength++;
-	for(int i = 0; i < messageLengths[message.id]; i++, bufferLength++) {
-		buffer[bufferLength] = msgBuffer[i];
-	}
+	SDLNet_TCP_Send(connectionSocket, msgBuffer, messageLengths[message.id] + 1);
 
 	delete[] msgBuffer;
 }

@@ -6,9 +6,10 @@
 
 class OtherPlayer : public GameObject {
 public:
-	OtherPlayer(Scene* scene) : GameObject(scene) {
+	OtherPlayer(Scene* scene) : GameObject(scene, _ecs::grp_GENERAL, _ecs::hdr_OTHERPLAYER) {
 		new Transform(this);
 		new CollisionComp(this, { 0,48 * sdlutils().getResizeFactor() }, 48 * sdlutils().getResizeFactor(), 48 * sdlutils().getResizeFactor());
 		new CharacterAnimator(this, "Player_2", 18, 10, 1);
+		scene->pushRenderList(Middle, this);
 	}
 };

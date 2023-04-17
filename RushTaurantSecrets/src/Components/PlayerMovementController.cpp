@@ -1,8 +1,10 @@
 #include "PlayerMovementController.h"
 
+#include "../Structure/Game.h"
+
 #include "../Utilities/checkML.h"
 
-PlayerMovementController::PlayerMovementController(GameObject* parent, int _player) : Component(parent, id), player(_player) {
+PlayerMovementController::PlayerMovementController(GameObject* parent, int _player) : Component(parent, id), player(_player), time(0) {
 	transform = parent->getComponent<Transform>();
 	input = InputHandler::instance();
 }
@@ -127,6 +129,11 @@ void PlayerMovementController::update() {
 	transform->setVel(speed);
 	if (!keyboard) {
 		speed = Vector(0, 0);
+	}
+	time += deltaTime;
+	if(time > 1000) {
+		Message msg; msg.id = Message::msg_PLAYER; msg.data_player.x = transform->getPos().getX(); msg.data_player.y = transform->getPos().getY();
+		Game::get()->getCoopHandler()->send(msg);
 	}
 }
 

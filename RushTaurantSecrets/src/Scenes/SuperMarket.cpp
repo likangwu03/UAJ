@@ -1,5 +1,6 @@
 #include "SuperMarket.h"
 #include "../Structure/GameManager.h"
+#include "../GameObjects/OtherPlayer.h"
 
 #include "../Utilities/checkML.h"
 
@@ -32,7 +33,7 @@ void SuperMarket::handleEvents() {
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
-
+	new OtherPlayer(this);
 }
 
 void SuperMarket::callAfterCreating() {
