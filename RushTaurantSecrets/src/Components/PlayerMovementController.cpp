@@ -130,11 +130,11 @@ void PlayerMovementController::update() {
 	if (!keyboard) {
 		speed = Vector(0, 0);
 	}
-	time += deltaTime;
-	if(time > 1000) {
-		Message msg; msg.id = Message::msg_PLAYER; msg.data_player.x = transform->getPos().getX(); msg.data_player.y = transform->getPos().getY();
-		Game::get()->getCoopHandler()->send(msg);
-	}
+	//time += deltaTime;
+	//if(time > 1000) {
+	//	Message msg; msg.id = Message::msg_PLAYER; msg.data_player.x = transform->getPos().getX(); msg.data_player.y = transform->getPos().getY();
+	//	Game::get()->getCoopHandler()->send(msg);
+	//}
 }
 
 bool PlayerMovementController::nonKeyPressed() {

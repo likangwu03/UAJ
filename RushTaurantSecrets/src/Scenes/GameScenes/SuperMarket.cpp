@@ -1,6 +1,6 @@
 #include "SuperMarket.h"
-#include "../Structure/GameManager.h"
-#include "../GameObjects/OtherPlayer.h"
+#include "../../Structure/GameManager.h"
+#include "../../GameObjects/OtherPlayer.h"
 
 #include "../../Utilities/checkML.h"
 
