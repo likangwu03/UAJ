@@ -76,7 +76,7 @@ void EndOfDayScene::reset() {
 	accDay = dayM->getDay();
 	moneyGoal = dayM->getDailyObjective();
 	playerReputation = gm->getReputation()->getReputation();
-	playerMoney = gm->getMoney()->getMoney();
+	playerMoney = gm->getMoney()->getEarnedMoney();
 
 	gameOver();
 
@@ -100,14 +100,18 @@ void EndOfDayScene::render() {
 
 	}
 	else { //el juego se ha perdido
-		if (playerMoney < moneyGoal && playerReputation <= 0)
+		if ((playerMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
 		{
 			bankruptTexture->render({50, 450, bankruptTexture->width(), bankruptTexture->height()});
 			gameOverTexture->render({50, 550, gameOverTexture->width(), gameOverTexture->height()});
 			
 		}
-		else if (playerMoney < moneyGoal) bankruptTexture->render({50, 450, bankruptTexture->width(), bankruptTexture->height() });
+		else if (playerMoney < moneyGoal || playerMoney <=0) bankruptTexture->render({200, 450, bankruptTexture->width(), bankruptTexture->height() });
 		else if (playerReputation <= 0) gameOverTexture->render({50, 450, gameOverTexture->width(), gameOverTexture->height() });
+		
+		if (_gameOver) {
+
+		}
 
 		gameOver();
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Structure/Scene.h"
 #include "../../Managers/DayManager.h"
+#include "../../GameObjects/ButtonGO.h"
 
 
 class Image;
@@ -31,6 +32,9 @@ private:
 
 	GameManager* gm;
 	InputHandler* ih;
+
+	ButtonGO* continueDay;
+	ButtonGO* toMainMenu;
 
 	string reputationtext;
 	string moneyText;

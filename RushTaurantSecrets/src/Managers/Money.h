@@ -17,4 +17,5 @@ public:
 	void setPrize(int num) { prize = num; }
 	int getPrize() { return prize; }
 	void newGame() { amount = INITIALANMOUNT; }
+	int getEarnedMoney() { return (INITIALANMOUNT - amount); }
 };
