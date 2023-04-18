@@ -22,6 +22,9 @@ private:
 	std::list<GameObject*> renderListDown;
 
 protected:
+
+	enum DPAD_XBOX { UP, DOWN, RIGHT, LEFT };
+
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 
@@ -49,8 +52,6 @@ public:
 	virtual void finishScene(){};
 
 	void initRender();
-	// QUIZÁS SE PUEDE BORRAR
-	virtual void end() {};
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);
 

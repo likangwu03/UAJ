@@ -12,7 +12,7 @@ class Vector;
 
 using namespace std;
 
-class ButtonGO : GameObject
+class ButtonGO : public GameObject
 {
 public:
 	ButtonGO(Scene* scene, string t, string ht, Vector pos, float w, float h, std::function<void()>&& callback) : GameObject(scene, _ecs::grp_HUD) {

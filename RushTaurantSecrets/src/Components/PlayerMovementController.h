@@ -27,6 +27,8 @@ private:
 
 	Transform* transform = nullptr;
 	InputHandler* input;
+
+	Uint32 time;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_MOVEMENT;
 

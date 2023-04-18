@@ -14,13 +14,10 @@ void ContinueMenu::bResume() {
 void ContinueMenu::bNewGame() {
 	GameManager::get()->newGame();
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-	GameManager::get()->getDailyMenu()->reset();
 }
 void ContinueMenu::bContinue() {
 	GameManager::get()->load();
-	GameManager::get()->getBeforeDayStart()->reset();
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-	GameManager::get()->getDailyMenu()->reset();
 }
 
 ContinueMenu::ContinueMenu() {

@@ -75,7 +75,6 @@ void Game::runCoop() {
 	while(!exit && !exitCoop) {
 		startTime = sdlutils().currRealTime();
 		
-		coop->send();
 		ih->refresh();
 		coop->receive();
 		handleEvents();

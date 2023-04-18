@@ -1,18 +1,16 @@
 #include "DayManager.h"
-#include "../Scenes/HUD/UIRestaurant.h"
 #include "../structure/GameManager.h"
 #include "ClientsManager.h"
 #include "Reputation.h"
 #include "Money.h"
-#include "../Scenes/GameScenes/Pantry.h"
-#include "../scenes/GameScenes/DailyMenuScene.h"
-#include "../Scenes/GameScenes/BeforeDayStartScene.h"
+
+#include "../Scenes/GameScenes/EndOfDayScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
-#include "../Scenes/GameScenes/EndOfDayScene.h"
+
 #include "../Utilities/checkML.h"
 
-	void DayManager::readLine(std::string & line) {
+void DayManager::readLine(std::string & line) {
 	do {
 		std::getline(file, line);
 		while (!line.empty() && line[0] == '\t') line = line.substr(1);
@@ -80,18 +78,15 @@ void DayManager::checkDayFinished() {
 			GameManager::get()->setGameOver(_ecs::Broke);
 		else {
 			GameManager::get()->save();
-			GameManager::get()->getEndOfDay()->reset();
-			GameManager::get()->changeScene(GameManager::get()->getEndOfDay());
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getEndOfDay());
 		}
 	}
 }
 
 void DayManager::newDay() {
-	nextDay();
 	restaurantMusic->pauseMusic();
 	timeUpSound->play();
-	GameManager::get()->getBeforeDayStart()->reset();
-	GameManager::get()->getDailyMenu()->reset();
+	nextDay();
 }
 
 void DayManager::nextDay() {
@@ -104,21 +99,21 @@ void DayManager::nextDay() {
 	}
 
 	if (GameManager::get()->getHasEverKilled().first) {
-		if (day - GameManager::get()->getHasEverKilled().second ==1)
+		if (day - GameManager::get()->getHasEverKilled().second == 1)
 		{
-			GameManager::get()->changeScene(GameManager::get()->getFirstDayAfterKillScene());
+			GameManager::get()->changeScene(GameManager::get()->getFirstDayAfterKillScene(), true);
 			GameManager::get()->getFirstDayAfterKillScene()->callAfterCreating();
 		}
-		else if (day - GameManager::get()->getHasEverKilled().second ==2)
+		else if (day - GameManager::get()->getHasEverKilled().second == 2)
 		{
-			GameManager::get()->changeScene(GameManager::get()->getSecondDayAfterKillScene());
+			GameManager::get()->changeScene(GameManager::get()->getSecondDayAfterKillScene(), true);
 			GameManager::get()->getSecondDayAfterKillScene()->callAfterCreating();
 		}
 	}
-	else GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	else GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
+
 
 	// Leer dayConfig
-
 	std::string line = "";
 	while (!file.eof() && line != "begin") {
 		readLine(line);
@@ -148,9 +143,7 @@ void DayManager::nextDay() {
 		}
 	}
 
-	GameManager::get()->getRestaurant()->nextDay();
-	GameManager::get()->getRestaurant()->getUI()->nextDay();
-	GameManager::get()->getPantry()->nextDay();
+	GameManager::get()->resetScenes();
 }
 
 void DayManager::setDay(int x) {

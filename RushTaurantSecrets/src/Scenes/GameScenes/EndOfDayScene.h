@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Structure/Scene.h"
 #include "../../Managers/DayManager.h"
+#include "../../GameObjects/ButtonGO.h"
 
 
 class Image;
@@ -8,6 +9,20 @@ class DayManager;
 
 class EndOfDayScene : public Scene {
 private:
+
+	const int NUM_BUTTON = 2;
+	int button;
+
+	//boton continue
+	const int BUTTON1_X = 300;
+	const int BUTTON1_Y = 450;
+	const float BUTTON_W = 96 * 3.2;
+	const float BUTTON_H = 32 * 3.2;
+
+	//boton a main menu
+	const int BUTTON2_X = 700;
+	const int BUTTON2_Y = 450;
+
 	GameObject* reputationObj;
 	GameObject* backgroundObj;
 	GameObject* moneyObj;
@@ -25,12 +40,15 @@ private:
 	
 	
 	Font* font1;
-	Font* font2;
+	//Font* font2;
 
 	DayManager* dayM;
 
 	GameManager* gm;
 	InputHandler* ih;
+
+	ButtonGO* continueButton;
+	ButtonGO* mainMenuButton;
 
 	string reputationtext;
 	string moneyText;
@@ -46,8 +64,8 @@ private:
 
 	bool _gameOver;
 
-	void toMainMenu();
-	void toNextDay();
+	static void toMainMenu();
+	static void toNextDay();
 	void gameOver();
 
 public:
@@ -57,4 +75,5 @@ public:
 	virtual void render();
 	virtual void handleEvents();
 	
+	void selectedButton(int selected);
 };

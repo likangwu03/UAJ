@@ -17,7 +17,6 @@ Scene::Scene():frameTime(Game::instance()->getframeTime()) {
 }
 
 Scene::~Scene() {
-	end();
 	for (int n = 0; n < _ecs::grpNum; n++) {
 		for (auto obj : objGroups[n]) delete obj;
 	}

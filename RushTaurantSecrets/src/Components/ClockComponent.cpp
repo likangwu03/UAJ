@@ -66,7 +66,7 @@ void ClockComponent::render() {
 	renderData(arrow);
 }
 
-void ClockComponent::reset() {
+void ClockComponent::nextDay() {
 	numFullClock = 0;
 	elapsedTime = 0;
 	fillData(clock, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2);

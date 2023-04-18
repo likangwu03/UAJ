@@ -12,6 +12,9 @@ private:
 	const float BUTTONS_X = 175, BUTTONS_Y = 365,
 				BUTTONS_W = 96 * 3.2, BUTTONS_H = 32 * 3.2;
 	const int MUSIC_VOL = 30;
+
+	const int NUM_BUTTON = 3;
+	int button;
 	
 	static void start();
 	static void start2();
@@ -31,4 +34,6 @@ public:
 	~MainMenu();
 
 	void handleEvents();
+
+	void selectedButton(int selected);
 };

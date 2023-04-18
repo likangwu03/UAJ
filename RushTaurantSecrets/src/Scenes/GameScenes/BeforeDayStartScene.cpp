@@ -72,10 +72,10 @@ void BeforeDayStartScene::reset() {
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
 	//buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF)); //???
+
 }
 
 void BeforeDayStartScene::toDailyMenu() {
-	//gm->get()->getDailyMenu()->reset();
 	//sdlutils().soundEffects().at("CLICK_BUTTON").play();
 	gm->changeScene(GameManager::get()->getDailyMenu());
 }

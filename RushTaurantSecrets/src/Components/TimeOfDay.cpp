@@ -6,12 +6,11 @@
 #include "../Utilities/checkML.h"
 
 TimeOfDay::TimeOfDay(Texture* aftTexture, Texture* nightTxtTexture, GameObject* parent) :
-	Component(parent, _ecs::cmp_INVALID), afternoonTxt(aftTexture), nightTxt(nightTxtTexture), increaseOpacAfternoon(0), increaseOpacNight(0),
+	Component(parent, _ecs::cmp_INVALID), afternoonTxt(aftTexture), nightTxt(nightTxtTexture), increaseOpac(0),
 	lastDeg(0), aftOpac(0), nightOpac(0), isAfternoon(false), isNight(false)
 {
 	clock = ClockComponent::get();
-	increaseOpacAfternoon = (100.0f / clock->timeToReachDeg(AFTERNOON)) * 10;
-	increaseOpacNight = (100.0f / clock->timeToReachDeg(NIGHT - AFTERNOON)) * 10;
+	increaseOpac = (100.0f / clock->timeToReachDeg(AFTERNOON)) * 10;
 }
 
 void TimeOfDay::update() {
@@ -32,20 +31,20 @@ void TimeOfDay::render() {
 		afternoonTxt->setOpacity(aftOpac);
 		afternoonTxt->render(build_sdlrect(0, 0, afternoonTxt->width() * sdlutils().getResizeFactor(), afternoonTxt->height() * sdlutils().getResizeFactor()));
 		if (aftOpac < 100)
-			aftOpac += increaseOpacAfternoon;
+			aftOpac += increaseOpac;
 		else aftOpac = 100;
 	}
 	else if (isNight) {
 		afternoonTxt->setOpacity(aftOpac);
 		afternoonTxt->render(build_sdlrect(0, 0, afternoonTxt->width() * sdlutils().getResizeFactor(), afternoonTxt->height() * sdlutils().getResizeFactor()));
 		if (aftOpac > 0)
-			aftOpac -= increaseOpacAfternoon;
+			aftOpac -= increaseOpac;
 		else aftOpac = 0;
 
 		nightTxt->setOpacity(nightOpac);
 		nightTxt->render(build_sdlrect(0, 0, nightTxt->width() * sdlutils().getResizeFactor(), nightTxt->height() * sdlutils().getResizeFactor()));
 		if (nightOpac < 100)
-			nightOpac += increaseOpacNight;
+			nightOpac += increaseOpac;
 		else nightOpac = 100;
 	}
 	lastDeg = clock->getRotation();

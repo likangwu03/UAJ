@@ -67,6 +67,7 @@ CoopMenu::~CoopMenu() {
 void CoopMenu::update(){
 	if (wait) {
 		if (server && coop->connectClient()) {
+			GameManager::get()->newGame();
 			GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 			Game::instance()->runCoop();
 		}
@@ -74,11 +75,13 @@ void CoopMenu::update(){
 
 			pair<bool, bool> connect = coop->connectServer();
 			if (connect.first && connect.second) {
+				GameManager::get()->newGame();
 				GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 				Game::instance()->runCoop();
 			}
 			else if (connect.first || connect.second) {
-				//Error 
+				// CAMBIAR
+				throw std::exception("Server not ok.");
 			}
 		}
 	}

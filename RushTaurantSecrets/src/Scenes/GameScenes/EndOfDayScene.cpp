@@ -57,6 +57,22 @@ EndOfDayScene::EndOfDayScene() {
 	//texturas que se mantienen iguales
 	bankruptTexture = new Texture(sdlutils().renderer(), bankruptText, *font1, build_sdlcolor(0x000000FF));
 	gameOverTexture = new Texture(sdlutils().renderer(), gameOverText, *font1, build_sdlcolor(0x000000FF));
+
+	//botones
+	continueButton = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H, 
+		[&] {
+			dayM->newDay();
+		});
+	continueButton->setAlive(false);
+	continueButton->getComponent<ButtonComp>()->setHighlighted(true);
+
+	mainMenuButton = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H, 
+		[&] {
+		   gm->get()->changeScene((gm->get()->getMainMenu()));
+		});
+	mainMenuButton->setAlive(false);
+	
+	button = 0;
 }
 
 EndOfDayScene::~EndOfDayScene() {
@@ -76,9 +92,10 @@ void EndOfDayScene::reset() {
 	accDay = dayM->getDay();
 	moneyGoal = dayM->getDailyObjective();
 	playerReputation = gm->getReputation()->getReputation();
-	playerMoney = gm->getMoney()->getMoney();
+	playerMoney = gm->getMoney()->getEarnedMoney();
 
-	gameOver();
+	//gameOver();
+	_gameOver = false;
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
 	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$ OUT OF " + to_string(moneyGoal) + "$";
@@ -97,16 +114,17 @@ void EndOfDayScene::render() {
 	moneyTexture->render({250, 325, moneyTexture->width(), moneyTexture->height()});
 
 	if (!_gameOver) { //el juego no se ha perdido
-
+		continueButton->setAlive(true);
+		mainMenuButton->setAlive(true);
 	}
 	else { //el juego se ha perdido
-		if (playerMoney < moneyGoal && playerReputation <= 0)
+		if ((playerMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
 		{
 			bankruptTexture->render({50, 450, bankruptTexture->width(), bankruptTexture->height()});
 			gameOverTexture->render({50, 550, gameOverTexture->width(), gameOverTexture->height()});
 			
 		}
-		else if (playerMoney < moneyGoal) bankruptTexture->render({50, 450, bankruptTexture->width(), bankruptTexture->height() });
+		else if (playerMoney < moneyGoal || playerMoney <=0) bankruptTexture->render({200, 450, bankruptTexture->width(), bankruptTexture->height() });
 		else if (playerReputation <= 0) gameOverTexture->render({50, 450, gameOverTexture->width(), gameOverTexture->height() });
 
 		gameOver();
@@ -119,17 +137,14 @@ void EndOfDayScene::gameOver() {
 	if (playerReputation <= 0 || playerMoney < moneyGoal) _gameOver = true;
 }
 
-
-void EndOfDayScene::toMainMenu() {
-	gm->get()->changeScene((gm->get()->getMainMenu()));
-}
+//
+//void EndOfDayScene::toMainMenu() {
+//	gm->get()->changeScene((gm->get()->getMainMenu()));
+//}
 
 
 //void EndOfDayScene::toNextDay() {
-//	dayM->nextDay();
-//	GameManager::get()->getBeforeDayStart()->reset();
-//	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-//	dayM->getSound()->play();
+//	dayM->newDay();
 //}
 
 
@@ -137,7 +152,32 @@ void EndOfDayScene::handleEvents() {
 	//aqui toMainMenu
 
 	//aqui toNextDay-> no se puede hacer si se pierde la partida
-	if ((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->keyDownEvent()) {
+	/*if ((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->keyDownEvent()) {
 		dayM->newDay();
+	}*/
+	if (ih->isKeyDown(SDL_SCANCODE_A)) {
+		button = (button - 1) % NUM_BUTTON;
+		if (button < 0)
+			button = button + NUM_BUTTON;
+		selectedButton(button);
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+		button = (button + 1) % NUM_BUTTON;
+		selectedButton(button);
+	}
+	Scene::handleEvents();
+}
+
+void EndOfDayScene::selectedButton(int selected) {
+	continueButton->getComponent<ButtonComp>()->setHighlighted(false);
+	mainMenuButton->getComponent<ButtonComp>()->setHighlighted(false);
+	switch (selected)
+	{
+	case 0:
+		continueButton->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 1:
+		mainMenuButton->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
 	}
 }

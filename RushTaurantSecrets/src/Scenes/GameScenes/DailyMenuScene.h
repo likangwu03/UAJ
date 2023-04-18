@@ -13,6 +13,9 @@ class GameObject;
 class DailyMenuScene : public Scene {
 	const int DISTANCE = 20, POS_Y = 30;
 
+	const int NUM_BUTTON = 2;
+	int button;
+
 	const int MUSIC_VOL = 30;
 	GameObject* background;
 	Texture* image;
@@ -29,5 +32,8 @@ public:
 	DailyMenuScene(uint8_t msize = 4);
 	void init();
 	void reset();
+
+	void handleEvents();
+	void selectedButton(int selected);
 };
 

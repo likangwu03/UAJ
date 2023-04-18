@@ -12,14 +12,15 @@ class CoopHandler {
 private:
     SDLNet_SocketSet set;
     TCPsocket connectionSocket, serverSocket;
+    bool client;
 
     static const int __CONNECTED_LENGTH = 10;
     // Mensaje recibido al conectarse al servidor (si todo ha ido bien)
     const char connected[__CONNECTED_LENGTH] = "Connected";
 
-    byte data[1024], buffer[1024];
+    byte data[1024];
 
-    int dataLength, bufferLength;
+    int dataLength;
 
     static const int messageLengths[Message::msg_INVALID];
 
@@ -43,8 +44,7 @@ public:
 
     void closeConnection();
     void receive();
-    void send();
-    void addMessage(const Message& message);
+    void send(const Message& message);
 
     // Locurote
 

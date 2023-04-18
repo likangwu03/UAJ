@@ -22,6 +22,9 @@ protected:
 	const float WIDTH, HEIGHT; //ancho y alto de pantalla
 	GameObject* dialogueBox;
 	SDLUtils* sdl;
+
+	Scene* transition;
+
 public:
 	CinematicBaseScene();
 	~CinematicBaseScene();
@@ -31,4 +34,5 @@ public:
 	virtual void renderCinematic(){}; //escena
 	void handleEvents()override;
 	virtual void finishScene(){}; //lo que se ejecuta al terminar la escena
+	void transitionEnded() { transition = nullptr; }
 };

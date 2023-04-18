@@ -18,7 +18,6 @@ DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuS
 void DailyMenuScene::buttonPress() {
 	GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
 	GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
-	GameManager::get()->getSupermarket()->reset();
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 	supermarketMusic->play();
 }
@@ -33,12 +32,15 @@ void DailyMenuScene::init() {
 			buttonPress();
 		});
 	dailyMenu1->getComponent<DailyMenuComp>()->initMenu();
+	dailyMenu1->getComponent<ButtonComp>()->setHighlighted(true);
 	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2 + DISTANCE / 2, POS_Y), 479.0f, 640.0f,
 		[&]() {
 			GameManager::get()->setTodaysMenu(this->dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
 			buttonPress();
 		});
 	dailyMenu2->getComponent<DailyMenuComp>()->initMenu();
+
+	button = 0;
 }
 
 
@@ -48,4 +50,32 @@ void DailyMenuScene::reset() {
 		dailyMenu2->setAlive(false);
 	}
 	init();
+}
+
+void DailyMenuScene::handleEvents() {
+	if (ih->isKeyDown(SDL_SCANCODE_A)) {
+		button = (button - 1) % NUM_BUTTON;
+		if (button < 0)
+			button = button + NUM_BUTTON;
+		selectedButton(button);
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+		button = (button + 1) % NUM_BUTTON;
+		selectedButton(button);
+	}
+	Scene::handleEvents();
+}
+
+void DailyMenuScene::selectedButton(int selected) {
+	dailyMenu1->getComponent<ButtonComp>()->setHighlighted(false);
+	dailyMenu2->getComponent<ButtonComp>()->setHighlighted(false);
+	switch (selected)
+	{
+	case 0:
+		dailyMenu1->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 1:
+		dailyMenu2->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	}
 }
