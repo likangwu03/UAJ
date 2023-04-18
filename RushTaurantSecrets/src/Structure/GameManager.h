@@ -25,6 +25,7 @@ class ContinueMenu;
 class PantryUI;
 class Texture;
 class KitchenIslandComp;
+class CinematicBaseScene;
 class IntroScene;
 class FirstDayAfterKillScene;
 class SecondDayAfterKillScene;
@@ -108,12 +109,13 @@ public:
 	void refresh();
 
 	void changeScene(Scene* scene, bool longerTransition = false);
-	void popScene(Scene* transitionScene = nullptr);
+	void popScene(Scene* transitionScene = nullptr, CinematicBaseScene* cinematic = nullptr);
 	void pushScene(Scene* scene, bool longerTransition = false);
 	void skipfromTransition();
 	bool canChangeScene();
 
 	void setGameOver(int type);
+
 	Scene* getCurrentScene();
 	MainMenu* getMainMenu();
 	Restaurant* getRestaurant();
@@ -146,6 +148,7 @@ public:
 	void setHasKill(bool hKill);
 	void killed();
 
+	void resetScenes();
 	void save();
 	void load();
 	bool checkload();

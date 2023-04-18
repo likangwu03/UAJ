@@ -1,4 +1,5 @@
 #include "Restaurant.h"
+
 #include "../../Structure/GameManager.h"
 #include "../../Managers/DishCombinator.h"
 #include "../../Managers/CollisionsManager.h"
@@ -8,6 +9,8 @@
 #include "../../Managers/ClientsManager.h"
 #include "../../Managers/DayManager.h"
 #include "../../GameObjects/TimeOfDayObj.h"
+#include "../../Structure/GameObject.h"
+
 #include "../../Utilities/checkML.h"
 #include <set>
 
@@ -27,9 +30,10 @@ Restaurant::~Restaurant() {
 }
 
 void Restaurant::reset() {
- 	player->getComponent<Transform>()->setPos(INITIAL_POS);
+	getGameObject(_ecs::hdr_PLAYER)->setActives(true);
+	player->getComponent<Transform>()->setPos(INITIAL_POS);
+	player->getComponent<Transform>()->setOrientation(south);
 	ui->reset();
-	nextDay();
 }
 
 void Restaurant::callAfterCreating() {
@@ -82,9 +86,7 @@ void Restaurant::createMap() {
 }
 
 void Restaurant::render() {
-	//Scene::render();
 	renderLayer();
-	//timeOfDay->render();
 	if (ui != nullptr)
 	ui->render();	
 }

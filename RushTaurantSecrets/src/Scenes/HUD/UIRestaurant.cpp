@@ -224,7 +224,6 @@ void UIRestaurant::render() {
 }
 
 void UIRestaurant::reset() {
-	ClockComponent::get()->reset();
 	startingMoney = moneyTxt->getMoney();
 	currentMoney = -1;
 	showMoneyText();
@@ -242,5 +241,8 @@ void UIRestaurant::nextDay() {
 	objectiveOutlineRect = objectiveRect;
 	objectiveOutlineRect.x -= CENTEROUTLINE / 2; objectiveOutlineRect.w += CENTEROUTLINE;
 	objectiveOutlineRect.y -= CENTEROUTLINE / 2; objectiveOutlineRect.h += CENTEROUTLINE;
+
+	ClockComponent::get()->nextDay();
+
 	Scene::nextDay();
 }

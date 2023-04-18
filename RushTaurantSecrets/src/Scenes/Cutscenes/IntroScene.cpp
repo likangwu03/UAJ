@@ -40,7 +40,8 @@ void IntroScene::addPath(const vector<Vector>& points) {
 }
 
 void IntroScene::callAfterCreating() {
-	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, 3), true);
+	transition = new ShowSkipTransitionScene(this, 3);
+	GameManager::get()->pushScene(transition, true);
 }
 
 void IntroScene::update() {
@@ -129,7 +130,8 @@ void IntroScene::update() {
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			GameManager::get()->pushScene(new TransitionScene(this, 3,true,true), true);
+			transition = new TransitionScene(this, 3, true, true);
+			GameManager::get()->pushScene(transition, true);
 		}
 		break;
 	case IntroScene::NONE:
@@ -148,9 +150,9 @@ void IntroScene::renderCinematic() {
 
 
 void IntroScene::finishScene() {
+	if(transition != nullptr)
+		delete transition;
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
-	GameManager::get()->getBeforeDayStart()->reset();
-	GameManager::get()->getDailyMenu()->reset();
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 }

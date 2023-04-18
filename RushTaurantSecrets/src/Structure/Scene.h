@@ -52,8 +52,6 @@ public:
 	virtual void finishScene(){};
 
 	void initRender();
-	// QUIZÁS SE PUEDE BORRAR
-	virtual void end() {};
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);
 

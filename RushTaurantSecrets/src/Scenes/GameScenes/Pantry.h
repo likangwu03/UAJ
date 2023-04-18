@@ -23,10 +23,13 @@ private:
 public:
 	Pantry(PantryUI* pUI);
 	~Pantry();
+
 	void render();
 	void update();
 	void _update();
 	void handleEvents();
+	void reset();
+	
 	Restaurant* getRestaurant() { return rest; }
 	void init();
 

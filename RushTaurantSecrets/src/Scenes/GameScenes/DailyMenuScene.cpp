@@ -18,7 +18,6 @@ DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuS
 void DailyMenuScene::buttonPress() {
 	GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
 	GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
-	GameManager::get()->getSupermarket()->reset();
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
 	supermarketMusic->play();
 }

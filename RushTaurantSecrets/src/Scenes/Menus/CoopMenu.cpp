@@ -69,8 +69,6 @@ void CoopMenu::update(){
 		if (server && coop->connectClient()) {
 			GameManager::get()->newGame();
 			GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-			GameManager::get()->getDailyMenu()->reset();
-
 			Game::instance()->runCoop();
 		}
 		else if (!server) {
@@ -79,7 +77,6 @@ void CoopMenu::update(){
 			if (connect.first && connect.second) {
 				GameManager::get()->newGame();
 				GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
-				GameManager::get()->getDailyMenu()->reset();
 				Game::instance()->runCoop();
 			}
 			else if (connect.first || connect.second) {

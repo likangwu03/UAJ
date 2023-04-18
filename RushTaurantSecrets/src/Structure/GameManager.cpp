@@ -43,6 +43,7 @@ GameManager::GameManager() : scenes(), deleteScene(nullptr), deleteTransition(fa
 void GameManager::initialize() {
 	reputation = new Reputation();
 	money = new Money();
+	hasKilled = false;
 
 	
 	mainMenu = new MainMenu();
@@ -67,22 +68,19 @@ void GameManager::initialize() {
 
 	try {
 		days = new DayManager();
-		days->nextDay();
-		delete deleteScene;
 	} catch(std::exception e) { std::cout << e.what(); }
 
 	beforeDayStartScene->init();
 
 	endScene = new EndOfDayScene();
-
 	introScene = new IntroScene();
 
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
-	
+	days->nextDay();
+	delete deleteScene;
 
-	hasKilled = false;
 
 	changeScene(mainMenu);
 
@@ -151,12 +149,14 @@ void GameManager::changeScene(Scene* scene, bool longerTransition) {
 		scenes.push(deleteScene);
 	}
 }
-void GameManager::popScene(Scene* transitionScene) {
+void GameManager::popScene(Scene* transitionScene, CinematicBaseScene* cinematic) {
 	if (!scenes.empty()) {
 		if (transitionScene != nullptr) {
 			deleteTransition = true;
 			deleteScene = transitionScene;
 		}
+		if (cinematic != nullptr) cinematic->transitionEnded();
+
 		scenes.pop();
 		if (!scenes.empty()) sdlutils().setResizeFactor(scenes.top()->getResizeFactor());
 	}
@@ -171,7 +171,9 @@ void GameManager::pushScene(Scene* scene, bool longerTransition) {
 void GameManager::skipfromTransition() {
 	deleteScene = scenes.top();
 	popScene();
+	
 	scenes.top()->finishScene();
+	
 }
 
 bool GameManager::canChangeScene() {
@@ -228,13 +230,34 @@ void GameManager::killed() { ++killedNum; }
 void GameManager::setHasKill(bool hKill) { hasKilled = hKill; if (!hasEverKilled.first) hasEverKilled={ true,days->getDay() }; }
 
 
+void GameManager::resetScenes() {
+	beforeDayStartScene->reset();
+	beforeDayStartScene->nextDay();
+
+	dailyMenu->reset();
+	dailyMenu->nextDay();
+
+	supermarket->reset();
+	supermarket->nextDay();
+
+	restaurant->reset();
+	restaurant->nextDay();
+	restaurant->getUI()->nextDay();
+
+	pantry->reset();
+	pantry->nextDay();
+	
+	endScene->reset();
+	endScene->nextDay();
+}
+
 void GameManager::save() {
 	//crear y abrir fichero
 	stringstream file;
 	file << "assets/savegame" << twoPlayers << ".rsdat";
 	ofstream write(file.str());
 
-	// información
+	// informaciÃ³n
 	write << days->getDay() << endl;//n dia
 	write << money->getMoney() << endl;
 	write << reputation->getReputation() << endl;
@@ -263,6 +286,8 @@ void GameManager::load() {
 	hasKilled = aux;
 	load >> killedNum;
 	load.close();
+
+	resetScenes();
 }
 
 bool GameManager::checkload() {
@@ -286,7 +311,10 @@ void GameManager::newGame() {
 	money->newGame();
 	reputation->newGame();
 	save();
+
+	resetScenes();
 }
+
 
 vector<dialogueInfo> GameManager::getDialogueInfo(std::string d) {
 	vector<dialogueInfo> dialogues;

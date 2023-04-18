@@ -33,7 +33,6 @@ public:
 		supermarketMusic->setMusicVolume(MUSIC_VOL);
 	}
 	~SuperMarket();
-	void reset();
 	
 	void callAfterCreating();
 
@@ -42,6 +41,8 @@ public:
 	void update();
 	void handleEvents();
 	void init();
+	void reset();
+
 	UIMarket* getUI() { return uiMarket; }
 	CartelManager* getCartelManager() { return cartelM; }
 

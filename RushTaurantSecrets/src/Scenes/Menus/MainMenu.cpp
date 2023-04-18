@@ -21,10 +21,7 @@
 
 void MainMenu::start() {
 	if (GameManager::get()->checkload()) {
-
 		GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
-		GameManager::get()->getBeforeDayStart()->reset();
-		GameManager::get()->getDailyMenu()->reset();
 	}
 	else {
 		GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);

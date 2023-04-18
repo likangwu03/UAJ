@@ -54,7 +54,7 @@ void SuperCashRegisterTriggerComp::payAndLeave() {
 	vector<pair<_ecs::_ingredients_id, int>> ing;
 	ing = GameManager::get()->getSupermarket()->getUI()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>()->getIngredients();
 	GameManager::get()->setIngredients(ing);
-	GameManager::get()->getRestaurant()->reset();
 	GameManager::get()->changeScene((Scene*)GameManager::get()->getRestaurant());
+	GameManager::get()->getRestaurant()->reset();
 	restaurantMusic->play();
 }

@@ -80,3 +80,7 @@ void Pantry::handleEvents() {
 		Scene::handleEvents();
 	}
 }
+
+void Pantry::reset() {
+	getGameObject(_ecs::hdr_PLAYER)->setActives(false);
+}

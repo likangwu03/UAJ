@@ -14,7 +14,7 @@ void ShowSkipTransitionScene::update() {
 	cinematicScene->update();
 	filter->setOpacity(abs(fadeOutInverter - (cont * 100 / duration)));
 	if (cont > duration) {
-		GameManager::get()->popScene(this);
+		GameManager::get()->popScene(this, cinematicScene);
 	}
 }
 
