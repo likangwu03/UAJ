@@ -22,6 +22,7 @@ IntroScene::IntroScene() {
 
 	player = new Player(this, 0);
 	straightMovement = new StraightMovement(player, 5);
+	player->getComponent<PlayerMovementController>()->setActive(false);
 
 	transform = player->getComponent<Transform>();
 	transform->setPos(Vector(1658, 772));
