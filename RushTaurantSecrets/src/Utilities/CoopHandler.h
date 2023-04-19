@@ -106,6 +106,8 @@ public:
         return output;
     }
 
-    template<> void code16<float>(float input) { code16<int>(roundf(input * 10)); }
-    template<> float decode16<float>(uint16_t& last) { return decode16<int>(last) / 10.0f; }
+    template<> void code16<int>(int input) { code16<int16_t>(input); }
+    template<> int decode16<int>(uint16_t& last) { return decode16<int16_t>(last); }
+    template<> void code16<float>(float input) { code16<int16_t>(roundf(input * 10)); }
+    template<> float decode16<float>(uint16_t& last) { return decode16<int16_t>(last) / 10.0f; }
 };

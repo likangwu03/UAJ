@@ -64,6 +64,8 @@ public:
 	void cleanEmptyBasket();
 
 	virtual void handleEvents();
+	void receive(const Message& message);
+	void addToBasketOnline(_ecs::_ingredients_id ing, int n);
 
 	vector<pair<_ecs::_ingredients_id, int>> getIngredients();
 };

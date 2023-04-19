@@ -23,10 +23,14 @@ const int CoopHandler::messageLengths[]{
 void CoopHandler::code(const Message& m) {
 	switch(m.id) {
 	case Message::msg_PLAYER:
-		code16(m.data_player.pos.getX());
-		code16(m.data_player.pos.getY());
-		code16(m.data_player.vel.getX());
-		code16(m.data_player.vel.getY());
+		code16(m.player.pos.getX());
+		code16(m.player.pos.getY());
+		code16(m.player.vel.getX());
+		code16(m.player.vel.getY());
+		break;
+	case Message::msg_BASKET:
+		code8(m.basket.ing);
+		code8(m.basket.n);
 		break;
 	}
 }
@@ -37,11 +41,14 @@ Message CoopHandler::decode(Message::_msg_id id, uint16_t& last) {
 	m.id = id;
 	switch(id) {
 	case Message::msg_PLAYER:
-		m.data_player.pos.setX(decode16<float>(last));
-		m.data_player.pos.setY(decode16<float>(last));
-		m.data_player.vel.setX(decode16<float>(last));
-		m.data_player.vel.setY(decode16<float>(last));
+		m.player.pos.setX(decode16<float>(last));
+		m.player.pos.setY(decode16<float>(last));
+		m.player.vel.setX(decode16<float>(last));
+		m.player.vel.setY(decode16<float>(last));
 		break;
+	case Message::msg_BASKET:
+		m.basket.ing = decode8<_ecs::_ingredients_id>(last);
+		m.basket.n = decode8<int>(last);
 	}
 	return m;
 }

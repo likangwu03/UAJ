@@ -1,5 +1,7 @@
 ﻿#include "BasketMarketComponent.h"
 #include "../Utilities/checkML.h"
+#include "../Structure/Game.h"
+#include "../Utilities/CoopHandler.h"
 
 BasketMarketComponent::BasketMarketComponent(GameObject* parent) : Component(parent, id), totalDifIngr(0),
 basketSound(&sdl->soundEffects().at("OPEN_BASKET")),
@@ -53,6 +55,10 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int ad
 			totalPrize += addPrice;
 			selectedIngr = ingredients.find(ing);
 			setTotalPrize();
+			Message m;
+			m.id = Message::msg_BASKET;
+			m.basket.ing = ing; m.basket.n = n;
+			Game::get()->getCoopHandler()->send(m);
 		}
 	}
 }
@@ -218,4 +224,25 @@ void BasketMarketComponent::cleanEmptyBasket() {
 	selectedIngr = ingredients.erase(selectedIngr);
 	if (selectedIngr == ingredients.end())selectedIngr = ingredients.begin();
 	if (ingredients.size() == 0)selectedIngr = ingredients.end();
+}
+
+void BasketMarketComponent::receive(const Message& message) {
+	if(message.id == Message::msg_BASKET) {
+		auto it = ingredients.find(message.basket.ing);
+		if(totalDifIngr < MAX_ING || it != ingredients.end()) { // si no ha superado el límite de ingredientes a comprar o el ingrediente ya está en la cesta
+			if(totalDifIngr < MAX_ING || it->first == message.basket.ing) {
+				if(it != ingredients.end()) {
+					it->second += message.basket.n;
+				} else {
+					Texture* texture = new Texture(sdl->renderer(), to_string(message.basket.n), *font, build_sdlcolor(0xFFFFFFFF));
+					ingredients.insert({ message.basket.ing, message.basket.n });
+					totalDifIngr++; //num de dif ing
+					delete texture;
+				}
+				totalPrize += _ecs::MarketIngs[message.basket.ing - FLOUR].price * message.basket.n;
+				selectedIngr = ingredients.find(message.basket.ing);
+				setTotalPrize();
+			}
+		}
+	}
 }
