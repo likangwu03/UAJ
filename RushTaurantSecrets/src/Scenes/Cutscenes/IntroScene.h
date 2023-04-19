@@ -20,11 +20,15 @@ class IntroScene : public CinematicBaseScene
 		D51,
 		D6,
 		OUT,
+		D71,
+		D72,
+		WAITD7,
 		NONE
 	};
 	Texture* bg;
 	Texture* filter;
 	Texture* top;
+	Texture* black;
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
 	Transform* transform;

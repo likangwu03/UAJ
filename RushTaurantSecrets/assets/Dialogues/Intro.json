@@ -43,7 +43,17 @@
     {
       "Character": "Player",
       "Text": "All I want is to make you guys happy, I want to make you two proud.",
-      "Portrait":"PROTA_CASUAL_SMILE_CLOSE_EYE"
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Today is the day of the inauguration, I hope everything goes well. I'll make sure to notify my pops' old friends.",
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "They were all really excited about this, so they'll surely come to say hi.",
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
     }
   ]
 }

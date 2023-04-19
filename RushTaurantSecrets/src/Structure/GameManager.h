@@ -57,6 +57,7 @@ private:
 	Scene* deleteScene;
 	bool deleteTransition;
 	
+
 	//escenas de juego
 	Restaurant* restaurant;
 	Pantry* pantry;
@@ -108,8 +109,8 @@ public:
 	void render();
 	void refresh();
 
-	void changeScene(Scene* scene, bool longerTransition = false);
-	void popScene(Scene* transitionScene = nullptr, CinematicBaseScene* cinematic = nullptr);
+	void changeScene(Scene* scene, bool longerTransition = false, bool fadeOut = false);
+	void popScene(Scene* transitionScene = nullptr, Scene* cinematic = nullptr);
 	void pushScene(Scene* scene, bool longerTransition = false);
 	void skipfromTransition();
 	bool canChangeScene();
