@@ -42,6 +42,7 @@ void IntroScene::addPath(const vector<Vector>& points) {
 }
 
 void IntroScene::callAfterCreating() {
+	state = START;
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }

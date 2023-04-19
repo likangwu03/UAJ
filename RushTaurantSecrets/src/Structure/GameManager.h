@@ -51,7 +51,7 @@ public:
 private:
 	const float RESTSUPERSIZE = 0.6666666667;
 	const float PANTRYSIZE = 0.8333333333;
-	const float TRANSITION_TIME = 0.25;
+	const float TRANSITION_TIME = 0.1;
 
 	stack<Scene*> scenes;
 	Scene* deleteScene;

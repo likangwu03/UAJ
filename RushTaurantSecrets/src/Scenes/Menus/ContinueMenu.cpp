@@ -4,6 +4,7 @@
 #include "../../Components/Transform.h"
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
+#include "../Cutscenes/IntroScene.h"
 #include "../../Utilities/checkML.h"
 
 
@@ -14,7 +15,8 @@ void ContinueMenu::bMainMenu() {
 
 void ContinueMenu::bNewGame() {
 	GameManager::get()->newGame();
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);
+	GameManager::get()->getCurrentScene()->callAfterCreating();
 }
 void ContinueMenu::bContinue() {
 	GameManager::get()->load();
