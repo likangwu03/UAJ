@@ -507,6 +507,12 @@
       "rows": 1
     },
     {
+      "id": "NEWGAME_BUTTON",
+      "file": "assets/Sprites/UI/Menu/newGame_button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_YELLOW",
       "file": "assets/Sprites/UI/HUD/basket_yellow.png",
       "cols": 1,

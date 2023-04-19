@@ -28,7 +28,7 @@ ContinueMenu::ContinueMenu() {
 	new Image(bg, image);
 	buttonResume = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.5 * SDLUtils::instance()->height()*2 / 5), 385, 130, bMainMenu);
-	buttonNewGame = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2)-250, 1.5 * SDLUtils::instance()->height() / 5), 385, 130, bNewGame);
 	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2)+250, 1.5 * SDLUtils::instance()->height() / 5), 385, 130, bContinue);
