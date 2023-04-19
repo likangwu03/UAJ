@@ -258,7 +258,7 @@ void GameManager::save() {
 	ofstream write(file.str());
 
 	// información
-	write << days->getDay() << endl;//n dia
+	write << days->getDay()+1 << endl;//n dia
 	write << money->getMoney() << endl;
 	write << reputation->getReputation() << endl;
 	write << hasKilled << endl;

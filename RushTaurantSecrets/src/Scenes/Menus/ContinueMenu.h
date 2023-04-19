@@ -6,7 +6,7 @@
 class ContinueMenu : public Scene
 {
 private:
-	static void bResume();
+	static void bMainMenu();
 	static void bNewGame();
 	static void bContinue();
 
