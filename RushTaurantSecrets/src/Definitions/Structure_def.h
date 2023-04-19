@@ -43,6 +43,7 @@ namespace _ecs {
 		cmp_BOX_TEXT,
 		cmp_FINISH_DAY,
 		cmp_STREAK,
+		cmp_OTHERPLAYER,
 		// Do not erase pls
 		cmp_INVALID
 	};

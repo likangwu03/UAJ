@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include "../Definitions/Structure_def.h"
+#include"../Definitions/Message_def.h"
 
 class GameObject;
 class GameManager;
@@ -49,13 +50,14 @@ public:
 	virtual void render();
 	virtual void handleEvents();
 	virtual void nextDay();
-	virtual void finishScene(){};
+	virtual void receive(const Message& message);
+	virtual void finishScene() { };
 
 	void initRender();
 	virtual void renderLayer();
 	void pushRenderList(RenderPos pos, GameObject* obj);
 
-	virtual void callAfterCreating() {};
-	virtual void reset() {};
+	virtual void callAfterCreating() { };
+	virtual void reset() { };
 	virtual float getResizeFactor() { return 1; };
 };

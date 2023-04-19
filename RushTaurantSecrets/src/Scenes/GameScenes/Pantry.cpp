@@ -60,7 +60,6 @@ void Pantry::render() {
 
 void Pantry::update() {
 	rest->_update();
-	rest->refresh();
 	collisionsManager->update();
 	_update();
 }
@@ -83,4 +82,9 @@ void Pantry::handleEvents() {
 
 void Pantry::reset() {
 	getGameObject(_ecs::hdr_PLAYER)->setActives(false);
+}
+
+void Pantry::refresh() {
+	Scene::refresh();
+	rest->Scene::refresh();
 }

@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <vector>
 #include "../Definitions/Structure_def.h"
+#include"../Definitions/Message_def.h"
 
 class Component;
 class Scene;
@@ -34,6 +35,7 @@ public:
 	void handleEvents();
 	void initComponent();
 	void nextDay();
+	void receive(const Message& message);
 
 	template<typename Comp>
 	inline Comp* getComponent() {

@@ -1,4 +1,5 @@
 #pragma once
+#include "../Utilities/Vector.h"
 
 // Mensajes para enviar a través de internet
 
@@ -13,6 +14,6 @@ struct Message {
 	_msg_id id;
 
 	struct {
-		float x, y, vX, vY;
+		Vector pos, vel;
 	} data_player;
 };

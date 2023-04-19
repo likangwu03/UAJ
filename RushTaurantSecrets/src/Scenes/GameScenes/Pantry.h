@@ -29,6 +29,7 @@ public:
 	void _update();
 	void handleEvents();
 	void reset();
+	void refresh();
 	
 	Restaurant* getRestaurant() { return rest; }
 	void init();

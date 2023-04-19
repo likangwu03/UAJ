@@ -5,6 +5,7 @@
 #include <string>
 #include <deque>
 #include <stack>
+#include"../Definitions/Message_def.h"
 
 class Scene;
 class MainMenu;
@@ -107,6 +108,7 @@ public:
 	void handleEvents();
 	void render();
 	void refresh();
+	void receive(const Message& message);
 
 	void changeScene(Scene* scene, bool longerTransition = false);
 	void popScene(Scene* transitionScene = nullptr, CinematicBaseScene* cinematic = nullptr);

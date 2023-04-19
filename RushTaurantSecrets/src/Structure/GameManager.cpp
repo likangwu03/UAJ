@@ -137,7 +137,10 @@ void GameManager::refresh() {
 		deleteScene = nullptr;
 	}
 }
-
+void GameManager::receive(const Message& message) {
+	if(!scenes.empty())
+		scenes.top()->receive(message);
+}
 
 void GameManager::changeScene(Scene* scene, bool longerTransition) {
 	if (!scenes.empty())

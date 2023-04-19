@@ -106,6 +106,7 @@ void Restaurant::_update() {
 	cm->update();
 	dm->checkDayFinished();
 }
+
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_p)) {
 		GameManager::get()->pushScene((Scene*)GameManager::get()->getPauseMenu());
@@ -149,4 +150,5 @@ void Restaurant::handleEvents() {
 void Restaurant::refresh() {
 	Scene::refresh();
 	ui->refresh();
+	pantry->Scene::refresh();
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "../Definitions/Structure_def.h"
+#include "../Definitions/Message_def.h"
 
 class GameObject;
 class Component {
@@ -23,4 +24,5 @@ public:
 	virtual void setActive(bool b); //activar/desactivar componente
 	virtual void initComponent(){};
 	virtual void nextDay() { }
+	virtual void receive(const Message& message) { }
 };

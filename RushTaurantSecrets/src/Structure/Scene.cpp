@@ -105,6 +105,11 @@ void Scene::nextDay() {
 		for(auto obj : objGroup) obj->nextDay();
 }
 
+void Scene::receive(const Message& message) {
+	for(auto& objGroup : objGroups)
+		for(auto obj : objGroup) obj->receive(message);
+}
+
 void Scene::initRender(){
 	//renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_GENERAL].begin(), objGroups[_grp_id::grp_GENERAL].end());
 	renderListMiddle.insert(renderListMiddle.end(), objGroups[_grp_id::grp_PLAYER].begin(), objGroups[_grp_id::grp_PLAYER].end());

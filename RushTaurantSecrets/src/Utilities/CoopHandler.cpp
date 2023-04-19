@@ -6,6 +6,7 @@
 #include "../Structure/Scene.h"
 #include "../Structure/GameObject.h"
 #include "../Components/Transform.h"
+#include "checkML.h"
 
 #ifdef _DEBUG
 #include <iostream>
@@ -19,27 +20,30 @@ const int CoopHandler::messageLengths[]{
 };
 
 // Recoge la información pertinente del mensaje y la mete en el buffer
-void CoopHandler::code(const Message& m, byte* buffer) {
+void CoopHandler::code(const Message& m) {
 	switch(m.id) {
 	case Message::msg_PLAYER:
-		doubleByte aux = code16(m.data_player.x);
-		buffer[1] = aux.first; buffer[2] = aux.second;
-		aux = code16(m.data_player.y);
-		buffer[3] = aux.first; buffer[4] = aux.second;
+		code16(m.data_player.pos.getX());
+		code16(m.data_player.pos.getY());
+		code16(m.data_player.vel.getX());
+		code16(m.data_player.vel.getY());
 		break;
 	}
 }
 
 // Recoge la información del buffer y ejecuta las acciones pertinentes
-void CoopHandler::decode(Message::_msg_id id, byte* buffer) {
+Message CoopHandler::decode(Message::_msg_id id, uint16_t& last) {
+	Message m{ };
+	m.id = id;
 	switch(id) {
 	case Message::msg_PLAYER:
-		GameObject* pl = GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER);
-		if(pl != nullptr) {
-			pl->getComponent<Transform>()->setPos({ decode<float>({ buffer[0], buffer[1] }), decode<float>({ buffer[2], buffer[3] }) });
-		}
+		m.data_player.pos.setX(decode16<float>(last));
+		m.data_player.pos.setY(decode16<float>(last));
+		m.data_player.vel.setX(decode16<float>(last));
+		m.data_player.vel.setY(decode16<float>(last));
 		break;
 	}
+	return m;
 }
 
 // Constructoras y destructoras
@@ -54,12 +58,17 @@ CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSock
 	}
 
 	set = SDLNet_AllocSocketSet(1);
+	gm = GameManager::get();
 }
 
 CoopHandler::~CoopHandler() {
 	if(serverSocket) SDLNet_TCP_Close(serverSocket);
 	SDLNet_FreeSocketSet(set);
 	SDLNet_Quit();
+}
+
+void CoopHandler::update() {
+	
 }
 
 // Conexiones
@@ -164,29 +173,22 @@ void CoopHandler::receive() {
 			// Cerrar
 		}
 
-		for(int i = 0; i < dataLength;) {
-			char id = data[i];
-			char* msgBuffer = new char[messageLengths[id]];
-			i++;
+		char id = data[0];
+		uint16_t last = 1;
 
-			for(int j = 0; j < messageLengths[id]; j++, i++) {
-				msgBuffer[j] = data[i];
-			}
+		Message m = decode((Message::_msg_id)id, last);
 
-			decode((Message::_msg_id)id, msgBuffer);
-
-			delete[] msgBuffer;
-		}
+		gm->receive(m);
 	}
 }
 
 void CoopHandler::send(const Message& message) {
-	char* msgBuffer = new char[messageLengths[message.id] + 1];
-	msgBuffer[0] = message.id;
+	if(connectionSocket == nullptr) return;
 
-	code(message, msgBuffer);
+	data[0] = message.id;
+	dataLength = 1;
 
-	SDLNet_TCP_Send(connectionSocket, msgBuffer, messageLengths[message.id] + 1);
+	code(message);
 
-	delete[] msgBuffer;
+	SDLNet_TCP_Send(connectionSocket, data, dataLength);
 }

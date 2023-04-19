@@ -70,6 +70,11 @@ void GameObject::nextDay() {
 		i->nextDay();
 }
 
+void GameObject::receive(const Message& message) {
+	for(auto cmp : cmpOrder)
+		cmp->receive(message);
+}
+
 void GameObject::setActives(bool b) {
 	for (auto &comp : components) {
 		comp.second->setActive(b);
