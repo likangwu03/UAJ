@@ -1,0 +1,56 @@
+{
+  "dialogues": [
+    {
+      "Character": "Player",
+      "Text": "Another wonderful day ahead."
+    },
+    {
+      "Character": "Player",
+      "Text": "The sun is out, the birds are singing... And it looks like it’s warm outside!"
+    },
+    {
+      "Character": "Player",
+      "Text": "..."
+    },
+    {
+      "Character": "Player",
+      "Text": "If I'm right, I should already have enough money to improve the restaurant..."
+    },
+    {
+      "Character": "Player",
+      "Text": "Luckily, I will be able to hire waiters!"
+    },
+    {
+      "Character": "Player",
+      "Text": "I still cannot believe I'm fulfilling my dream..."
+    },
+    {
+      "Character": "Player",
+      "Text": "Mom! Dad! DId you hear that?"
+    },
+    {
+      "Character": "Player",
+      "Text": "I knew I would make it... Hahah!"
+    },
+    {
+      "Character": "Player",
+      "Text": "Thank you all so much for coming to the restaurant's reopening."
+    },
+    {
+      "Character": "Player",
+      "Text": "I hope you are enjoying the food. We prepared everything with lots of love!"
+    },
+    {
+      "Character": "Player",
+      "Text": "I wouldn't have been able to make it without all of your visits."
+    },
+    {
+      "Character": "Player",
+      "Text": "Thank you for coming to eat here. I hope you don't get tired of doing so!"
+    },
+    {
+      "Character": "Player",
+      "Text": "Well, I won't bother you anymore. Enjoy your meal!"
+    }
+  ]
+}
