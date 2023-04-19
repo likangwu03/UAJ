@@ -699,6 +699,18 @@
       "file": "assets/Sprites/UI/icons/character_chef_sigh_closingEyes.png"
     },  
     {
+      "id": "PROTA_CHEF_ENRAGED",
+      "file": "assets/Sprites/UI/icons/character_chef_enraged.png"
+    },  
+    {
+      "id": "PROTA_CHEF_STRESSED_OUT",
+      "file": "assets/Sprites/UI/icons/character_chef_stressedOut.png"
+    },
+    {
+      "id": "PROTA_CHEF_MANIC",
+      "file": "assets/Sprites/UI/icons/character_chef_manic.png"
+    },  
+    {
       "id": "PROTA_CASUAL_SURPRISED",
       "file": "assets/Sprites/UI/icons/character_casual_surprised.png"
     },
@@ -734,6 +746,18 @@
     {
       "id": "PROTA_CASUAL_BAD_MOOD",
       "file": "assets/Sprites/UI/icons/character_casual_badMood.png"
+    },  
+    {
+      "id": "PROTA_CASUAL_ENRAGED",
+      "file": "assets/Sprites/UI/icons/character_casual_enraged.png"
+    },  
+    {
+      "id": "PROTA_CASUAL_STRESSED_OUT",
+      "file": "assets/Sprites/UI/icons/character_casual_stressedOut.png"
+    },
+    {
+      "id": "PROTA_CASUAL_MANIC",
+      "file": "assets/Sprites/UI/icons/character_casual_manic.png"
     },  
     {
       "id": "PARENTS",
