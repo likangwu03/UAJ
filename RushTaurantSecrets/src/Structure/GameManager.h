@@ -52,12 +52,13 @@ public:
 private:
 	const float RESTSUPERSIZE = 0.6666666667;
 	const float PANTRYSIZE = 0.8333333333;
-	const float TRANSITION_TIME = 0.25;
+	const float TRANSITION_TIME = 0.1;
 
 	stack<Scene*> scenes;
 	Scene* deleteScene;
 	bool deleteTransition;
 	
+
 	//escenas de juego
 	Restaurant* restaurant;
 	Pantry* pantry;
@@ -110,8 +111,8 @@ public:
 	void refresh();
 	void receive(const Message& message);
 
-	void changeScene(Scene* scene, bool longerTransition = false);
-	void popScene(Scene* transitionScene = nullptr, CinematicBaseScene* cinematic = nullptr);
+	void changeScene(Scene* scene, bool longerTransition = false, bool fadeOut = false);
+	void popScene(Scene* transitionScene = nullptr, Scene* cinematic = nullptr);
 	void pushScene(Scene* scene, bool longerTransition = false);
 	void skipfromTransition();
 	bool canChangeScene();

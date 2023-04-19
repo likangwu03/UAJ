@@ -142,23 +142,23 @@ void GameManager::receive(const Message& message) {
 		scenes.top()->receive(message);
 }
 
-void GameManager::changeScene(Scene* scene, bool longerTransition) {
+void GameManager::changeScene(Scene* scene, bool longerTransition, bool fadeOut) {
 	if (!scenes.empty())
 		if (scenes.top() != scene) popScene();
 
 	pushScene(scene);
 	if (!longerTransition) {
-		deleteScene = new TransitionScene(scene, TRANSITION_TIME);
+		deleteScene = new TransitionScene(scene, TRANSITION_TIME, fadeOut);
 		scenes.push(deleteScene);
 	}
 }
-void GameManager::popScene(Scene* transitionScene, CinematicBaseScene* cinematic) {
+void GameManager::popScene(Scene* transitionScene, Scene* scene) {
 	if (!scenes.empty()) {
 		if (transitionScene != nullptr) {
 			deleteTransition = true;
 			deleteScene = transitionScene;
 		}
-		if (cinematic != nullptr) cinematic->transitionEnded();
+		if (scene != nullptr) scene->transitionEnded();
 
 		scenes.pop();
 		if (!scenes.empty()) sdlutils().setResizeFactor(scenes.top()->getResizeFactor());
@@ -261,7 +261,7 @@ void GameManager::save() {
 	ofstream write(file.str());
 
 	// información
-	write << days->getDay() << endl;//n dia
+	write << days->getDay()+1 << endl;//n dia
 	write << money->getMoney() << endl;
 	write << reputation->getReputation() << endl;
 	write << hasKilled << endl;

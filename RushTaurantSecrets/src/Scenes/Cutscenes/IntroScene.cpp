@@ -19,6 +19,7 @@ IntroScene::IntroScene() {
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	filter->setOpacity(80);
+	black = &sdlutils().images().at("Filter_Black");
 
 	player = new Player(this, 0);
 	straightMovement = new StraightMovement(player, 5);
@@ -41,6 +42,7 @@ void IntroScene::addPath(const vector<Vector>& points) {
 }
 
 void IntroScene::callAfterCreating() {
+	state = START;
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }
@@ -130,16 +132,40 @@ void IntroScene::update() {
 	case IntroScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
-			state = NONE;
-			transition = new TransitionScene(this, 3, true, true);
+			state = D71;
+			transition = new TransitionScene(this, 3, true, false);
 			GameManager::get()->pushScene(transition, true);
 		}
 		break;
+	case IntroScene::D71:
+		if (Text::isTextFinished() && GameManager::get()->getCurrentScene() != transition) {
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[9].portrait, dialogues[9].text);
+			state = D72;
+		}
+		break;
+	case IntroScene::D72:
+		if (Text::isTextFinished()) {
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
+				font, dialogues[10].portrait, dialogues[10].text);
+			state = WAITD7;
+		}
+		break;
+	case IntroScene::WAITD7:
+		if (Text::isTextFinished()) {
+			dialogueBox = nullptr;
+			transition = new TransitionScene(this, 1, true, true);
+			GameManager::get()->pushScene(transition, true);
+			state = NONE;
+		}
+		break;
+
 	case IntroScene::NONE:
 		
 		break;
 	
 	}
+	
 }
 
 void IntroScene::renderCinematic() {
@@ -147,13 +173,20 @@ void IntroScene::renderCinematic() {
 	player->render();
 	top->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
+
+	if ((state >= D71 && state < NONE && GameManager::get()->getCurrentScene() != transition) || state == NONE) {
+		black->setOpacity(100);
+		black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
+	}
 }
 
 
 void IntroScene::finishScene() {
+	black->setOpacity(100);
+	black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
 	if(transition != nullptr)
 		delete transition;
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart(), false);
 }

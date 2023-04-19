@@ -19,23 +19,6 @@
 
 #include "../../Utilities/checkML.h"
 
-void MainMenu::start() {
-	if (GameManager::get()->checkload()) {
-		GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
-	}
-	else {
-		GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);
-		GameManager::get()->getCurrentScene()->callAfterCreating();
-	}
-}
-
-void MainMenu::start2() {
-	GameManager::get()->changeScene(GameManager::get()->getCoopMenu());
-}
-
-void MainMenu::opt() {
-	GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
-}
 
 MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
@@ -44,10 +27,20 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	new Image(bg, image);
 
 	button = 0;
-	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, start);
+	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
+		[&]() { 
+			GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
+		});
+
 	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
-	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, start2);
-	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, opt);
+	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, 
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getCoopMenu());
+		});
+	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, 
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
+		});
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
 

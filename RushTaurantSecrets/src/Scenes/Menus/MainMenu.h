@@ -16,10 +16,6 @@ private:
 	const int NUM_BUTTON = 3;
 	int button;
 	
-	static void start();
-	static void start2();
-	static void opt();
-
 	GameObject* bg;
 	Texture* image;
 	ButtonGO* oneplayer;
