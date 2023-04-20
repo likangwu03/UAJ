@@ -42,6 +42,8 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
 		});
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
+
+	button = 0;
 }
 
 MainMenu::~MainMenu() { }

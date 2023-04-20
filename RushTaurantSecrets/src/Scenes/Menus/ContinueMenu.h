@@ -6,6 +6,8 @@
 class ContinueMenu : public Scene
 {
 private:
+	const int NUM_BUTTON = 2;
+	int button;
 
 	GameObject* bg;
 	ButtonGO* buttonMainMenu;
@@ -15,5 +17,7 @@ private:
 public:
 	ContinueMenu();
 	~ContinueMenu();
+	void handleEvents();
+	void selectedButton(int selected);
 };
 

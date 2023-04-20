@@ -26,14 +26,61 @@ ContinueMenu::ContinueMenu() {
 			GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);
 			GameManager::get()->getCurrentScene()->callAfterCreating();
 		});
+	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
+
 	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2)+250, 1.5 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&] {
 			GameManager::get()->load();
 			GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
 		});
+	button = 0;
 }
 
 ContinueMenu::~ContinueMenu() {
 	delete image;
+}
+
+void ContinueMenu::handleEvents() {
+
+	if (ih->isKeyDown(SDL_SCANCODE_A)) {
+		button = (button - 1) % NUM_BUTTON;
+		if (button < 0)
+			button = button + NUM_BUTTON;
+		selectedButton(button);
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+		button = (button + 1) % NUM_BUTTON;
+		if (button > NUM_BUTTON)
+			button = 0;
+		selectedButton(button);
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		
+		selectedButton(0);
+		button = 0;
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+	
+		selectedButton(2);
+	}
+	Scene::handleEvents();
+}
+
+void ContinueMenu::selectedButton(int selected) {
+	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonContinue->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonMainMenu->getComponent<ButtonComp>()->setHighlighted(false);
+	switch (selected)
+	{
+	case 0:
+		buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 1:
+		buttonContinue->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 2:
+		buttonMainMenu->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	}
 }
