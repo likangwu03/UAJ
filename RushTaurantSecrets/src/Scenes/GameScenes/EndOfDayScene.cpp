@@ -25,7 +25,7 @@ EndOfDayScene::EndOfDayScene() {
 	//fondo de la escena
 	backgroundObj = new GameObject(this);
 	new Transform(backgroundObj, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	backgroundT = new Texture(sdlutils().renderer(), "assets/options_bg.png");
+	backgroundT = new Texture(sdlutils().renderer(), "assets/night_background.png");
 	new Image(backgroundObj, backgroundT);
 
 	//icono reputación
@@ -41,7 +41,8 @@ EndOfDayScene::EndOfDayScene() {
 
 	//fuente
 	font1 = new Font("assets/Fonts/light_pixel-7.ttf", 30);
-	//font2 = new Font("assets / Fonts / light_pixel-7.ttf", 50);
+	font2 = new Font("assets/Fonts/light_pixel-7.ttf", 50);
+	TTF_SetFontOutline(font2->getTTFFont(), 2);
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
 	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$";
@@ -81,7 +82,7 @@ EndOfDayScene::~EndOfDayScene() {
 	delete reputationIconT;
 	delete moneyIconT;
 	delete font1;
-	//delete font2;
+	delete font2;
 	delete reputationTexture;
 	delete moneyTexture;
 	delete bankruptTexture;
@@ -95,7 +96,7 @@ void EndOfDayScene::reset() {
 	playerMoney = gm->getMoney()->getEarnedMoney();
 
 	//gameOver();
-	_gameOver = false;
+	_gameOver = false; //PARA PRUEBAS SOLAMENTE
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
 	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$ OUT OF " + to_string(moneyGoal) + "$";
@@ -134,27 +135,12 @@ void EndOfDayScene::render() {
 }
 
 void EndOfDayScene::gameOver() {
-	if (playerReputation <= 0 || playerMoney < moneyGoal) _gameOver = true;
+	if (playerReputation <= 0 || playerMoney < moneyGoal) _gameOver = true; 
 }
-
-//
-//void EndOfDayScene::toMainMenu() {
-//	gm->get()->changeScene((gm->get()->getMainMenu()));
-//}
-
-
-//void EndOfDayScene::toNextDay() {
-//	dayM->newDay();
-//}
 
 
 void EndOfDayScene::handleEvents() {
-	//aqui toMainMenu
-
-	//aqui toNextDay-> no se puede hacer si se pierde la partida
-	/*if ((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->keyDownEvent()) {
-		dayM->newDay();
-	}*/
+	
 	if (ih->isKeyDown(SDL_SCANCODE_A)) {
 		button = (button - 1) % NUM_BUTTON;
 		if (button < 0)

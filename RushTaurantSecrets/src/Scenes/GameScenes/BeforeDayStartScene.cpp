@@ -19,13 +19,18 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	//background
 	obj = new GameObject(this);
 	new Transform(obj, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	background = new Texture(sdlutils().renderer(), "assets/options_bg.png");
+	background = new Texture(sdlutils().renderer(), "assets/morning_background1.png");
 	new Image(obj, background);
 
 	//fuentes usadas
 	dayText = new Font("assets/Fonts/04B_30__.ttf", 72);
 	pressButtonText = new Font("assets/Fonts/light_pixel-7.ttf", 40);
 	text = new Font("assets/Fonts/light_pixel-7.ttf", 50);
+	pressButtonText1 = new Font("assets/Fonts/light_pixel-7.ttf", 40);
+	text1 = new Font("assets/Fonts/light_pixel-7.ttf", 50);
+	TTF_SetFontOutline(pressButtonText1->getTTFFont(), 2);
+	TTF_SetFontOutline(text1->getTTFFont(), 2);
+
 
 	//diana
 	targetObj = new GameObject(this);

@@ -18,7 +18,9 @@ private:
 
 	Font* dayText;
 	Font* pressButtonText;
+	Font* pressButtonText1;
 	Font* text;
+	Font* text1;
 
 	string wordDay;
 	string press;

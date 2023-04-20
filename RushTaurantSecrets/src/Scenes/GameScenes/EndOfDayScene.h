@@ -40,7 +40,7 @@ private:
 	
 	
 	Font* font1;
-	//Font* font2;
+	Font* font2;
 
 	DayManager* dayM;
 
@@ -64,8 +64,6 @@ private:
 
 	bool _gameOver;
 
-	static void toMainMenu();
-	static void toNextDay();
 	void gameOver();
 
 public:
