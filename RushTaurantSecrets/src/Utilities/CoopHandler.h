@@ -73,13 +73,12 @@ public:
 
     template<> void code8<int>(int input) { code8<int8_t>(input); }
     
-    
-    template<typename T>
     /// <summary>
     /// Para int: desde el -32768 hasta el 32767 /
     /// Para uint: desde el 0 hasta el 65535 /
     /// Para float: desde el -3276.8 hasta el 3276.7
     /// </summary>
+    template<typename T>
     void code16(T input) {
         doubleByte output;
         output.first = output.second = 0;

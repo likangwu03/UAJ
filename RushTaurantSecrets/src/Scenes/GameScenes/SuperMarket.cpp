@@ -67,3 +67,8 @@ void SuperMarket::reset() {
 BasketMarket* SuperMarket::getBM() {
 	return uiMarket->basketM();
 }
+
+void SuperMarket::receive(const Message& message) {
+	Scene::receive(message);
+	uiMarket->receive(message);
+}

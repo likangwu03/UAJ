@@ -174,7 +174,16 @@ void CoopHandler::receive() {
 	while(SDLNet_CheckSockets(set, 0) > 0) {
 		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
 
-		if(dataLength == -1) return; // Desconexión
+		if(dataLength == -1) { // Desconexión
+			GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER)
+				->getComponent<Transform>()->setPos(Vector(-100, -100));
+
+			SDLNet_TCP_DelSocket(set, connectionSocket);
+			SDLNet_TCP_Close(connectionSocket);
+			connectionSocket = NULL; client = false;
+			Game::get()->setExitCoop();
+			return;
+		}
 
 		if(dataLength == 6 /*&& == "Close"*/) {
 			// Cerrar

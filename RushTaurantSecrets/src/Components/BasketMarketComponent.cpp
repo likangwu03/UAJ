@@ -48,7 +48,7 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int ad
 			}
 			else {
 				Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
-				ingredients.insert({ ing, n });
+				it = ingredients.insert({ ing, n }).first;
 				totalDifIngr++; //num de dif ing
 				delete texture;
 			}
@@ -57,7 +57,7 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int ad
 			setTotalPrize();
 			Message m;
 			m.id = Message::msg_BASKET;
-			m.basket.ing = ing; m.basket.n = n;
+			m.basket.ing = ing; m.basket.n = it->second;
 			Game::get()->getCoopHandler()->send(m);
 		}
 	}
@@ -171,6 +171,12 @@ void BasketMarketComponent::handleEvents() {
 			else if (ih->isKeyDown(SDLK_RETURN)) {
 				chooseHMMode = false;
 
+				Message m;
+				m.id = Message::msg_BASKET;
+				m.basket.ing = selectedIngr->first;
+				m.basket.n = selectedIngr->second;
+				Game::get()->getCoopHandler()->send(m);
+
 				if (selectedIngr->second == 0) {
 					cleanEmptyBasket();
 					quitIng->play();
@@ -229,20 +235,16 @@ void BasketMarketComponent::cleanEmptyBasket() {
 void BasketMarketComponent::receive(const Message& message) {
 	if(message.id == Message::msg_BASKET) {
 		auto it = ingredients.find(message.basket.ing);
-		if(totalDifIngr < MAX_ING || it != ingredients.end()) { // si no ha superado el límite de ingredientes a comprar o el ingrediente ya está en la cesta
-			if(totalDifIngr < MAX_ING || it->first == message.basket.ing) {
-				if(it != ingredients.end()) {
-					it->second += message.basket.n;
-				} else {
-					Texture* texture = new Texture(sdl->renderer(), to_string(message.basket.n), *font, build_sdlcolor(0xFFFFFFFF));
-					ingredients.insert({ message.basket.ing, message.basket.n });
-					totalDifIngr++; //num de dif ing
-					delete texture;
-				}
-				totalPrize += _ecs::MarketIngs[message.basket.ing - FLOUR].price * message.basket.n;
-				selectedIngr = ingredients.find(message.basket.ing);
-				setTotalPrize();
-			}
+		if(it != ingredients.end()) {
+			totalPrize -= _ecs::MarketIngs[message.basket.ing - FLOUR].price * it->second;
+			it->second = message.basket.n;
+			if(message.basket.n == 0) cleanEmptyBasket();
+		} else {
+			ingredients.insert({ message.basket.ing, message.basket.n });
+			totalDifIngr++; //num de dif ing
 		}
+		totalPrize += _ecs::MarketIngs[message.basket.ing - FLOUR].price * message.basket.n;
+		selectedIngr = ingredients.find(message.basket.ing);
+		setTotalPrize();
 	}
 }

@@ -42,6 +42,7 @@ public:
 	void handleEvents();
 	void init();
 	void reset();
+	void receive(const Message& message);
 
 	UIMarket* getUI() { return uiMarket; }
 	CartelManager* getCartelManager() { return cartelM; }
