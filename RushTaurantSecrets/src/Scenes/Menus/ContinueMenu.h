@@ -6,12 +6,9 @@
 class ContinueMenu : public Scene
 {
 private:
-	static void bMainMenu();
-	static void bNewGame();
-	static void bContinue();
 
 	GameObject* bg;
-	ButtonGO* buttonResume;
+	ButtonGO* buttonMainMenu;
 	ButtonGO* buttonNewGame;
 	ButtonGO* buttonContinue;
 	Texture* image;
