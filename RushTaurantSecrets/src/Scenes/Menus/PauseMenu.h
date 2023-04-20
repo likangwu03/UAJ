@@ -12,10 +12,6 @@ private:
 	const int NUM_BUTTON = 3;
 	int button;
 
-	static void mMenu();
-	static void bResume();
-	static void oMenu();
-
 	GameObject* bg;
 	ButtonGO* buttonResume;
 	ButtonGO* buttonMainMenu;

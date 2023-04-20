@@ -5,18 +5,6 @@
 
 #include "../../Utilities/checkML.h"
 
-void PauseMenu::mMenu() {
-	GameManager::get()->changeScene(GameManager::get()->getMainMenu());
-}
-
-void PauseMenu::bResume() {
-	GameManager::get()->popScene();
-}
-
-void PauseMenu::oMenu() {
-	GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
-}
-
 PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
@@ -25,12 +13,21 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 
 	button = 0;
 	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.8 * SDLUtils::instance()->height() / 5), 385, 130, bResume);
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.8 * SDLUtils::instance()->height() / 5), 385, 130, 
+		[&] {
+			GameManager::get()->popScene();
+		});
 	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, 
+		[&] {
+			GameManager::get()->changeScene(GameManager::get()->getMainMenu());
+		});
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, oMenu);
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, 
+		[&] {
+			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
+		});
 
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
