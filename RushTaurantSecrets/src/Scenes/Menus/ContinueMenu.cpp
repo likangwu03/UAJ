@@ -26,8 +26,8 @@ ContinueMenu::ContinueMenu() {
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&] {
-			GameManager::get()->getMainMenu();
-			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu(), true);
+
 		});
 
 	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT",

@@ -89,7 +89,7 @@ void DayManager::newDay() {
 	nextDay();
 }
 
-void DayManager::nextDay() {
+void DayManager::nextDay(bool loadingGame) {
 	day++;
 
 	if (day > maxDays) {
@@ -110,7 +110,7 @@ void DayManager::nextDay() {
 			GameManager::get()->getSecondDayAfterKillScene()->callAfterCreating();
 		}
 	}
-	else GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
+	else if(!loadingGame) GameManager::get()->changeScene((Scene*)GameManager::get()->getBeforeDayStart());
 
 
 	// Leer dayConfig
@@ -160,7 +160,7 @@ void DayManager::setDay(int x) {
 		}
 	}
 	day = x - 1;
-	nextDay();
+	nextDay(true);
 }
 
 int DayManager::getDay() { return day; }

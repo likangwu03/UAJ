@@ -6,11 +6,6 @@ class CoopHandler;
 class CoopMenu : public Scene
 {
 private:
-
-	static void bResume();
-	static void bServer();
-	static void bClient();
-
 	GameObject* bg;
 	ButtonGO* buttonResume;
 	ButtonGO* buttonServer;

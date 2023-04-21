@@ -9,19 +9,6 @@
 #include "../../Utilities/CoopHandler.h"
 
 
-void CoopMenu::bResume() {
-	GameManager::get()->popScene();
-}
-
-void CoopMenu::bServer() {
-	Game::instance()->getCoopHandler()->openServer();
-}
-void CoopMenu::bClient() {
-	
-}
-void CoopMenu::init() {
-
-}
 CoopMenu::CoopMenu() {
 	server = true;
 	wait = false;
@@ -51,9 +38,8 @@ CoopMenu::CoopMenu() {
 
 	buttonResume = new ButtonGO(this, "RETURN_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
-		[&] {
-			GameManager::get()->getMainMenu();
-			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());
+		[&]() {
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu(), false);
 		});
 
 	text = new Font("assets/Fonts/light_pixel-7.ttf", 50);

@@ -6,7 +6,6 @@
 class GameOverScene : public Scene
 {
 private:
-	static void mMenu();
 	GameObject* bg;
 	ButtonGO* buttonMainMenu;
 	Texture* image;

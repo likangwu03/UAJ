@@ -14,19 +14,19 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 	button = 0;
 	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.8 * SDLUtils::instance()->height() / 5), 385, 130, 
-		[&] {
+		[&]() {
 			GameManager::get()->popScene();
 		});
 	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, 
-		[&] {
+		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getMainMenu());
 		});
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, 
-		[&] {
-			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu(), true);
 		});
 
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
@@ -37,7 +37,8 @@ PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::handleEvents() {
-	if (ih->isKeyDown(SDLK_p));// bResume();
+	if (ih->isKeyDown(SDLK_p)) 	GameManager::get()->popScene();
+
 	Scene::handleEvents();
 
 	if (ih->joysticksInitialised()) {

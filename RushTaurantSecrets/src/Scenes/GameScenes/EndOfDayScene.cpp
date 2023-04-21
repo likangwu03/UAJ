@@ -67,14 +67,14 @@ EndOfDayScene::EndOfDayScene() {
 
 	//botones
 	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H, 
-		[&] {
+		[&]() {
 			dayM->newDay();
 		});
 	continueButton->setAlive(false);
 	continueButton->getComponent<ButtonComp>()->setHighlighted(true);
 
 	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H, 
-		[&] {
+		[&]() {
 		   gm->get()->changeScene((gm->get()->getMainMenu()));
 		});
 	mainMenuButton->setAlive(false);

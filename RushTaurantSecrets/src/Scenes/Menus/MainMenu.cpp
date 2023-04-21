@@ -29,13 +29,13 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	button = 0;
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
 		[&]() { 
-			GameManager::get()->changeScene(GameManager::get()->getContinueMenu());
+			GameManager::get()->changeScene(GameManager::get()->getContinueMenu(), true);
 		});
 
 	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
 	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, 
 		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getCoopMenu());
+			GameManager::get()->changeScene(GameManager::get()->getCoopMenu(), true);
 		});
 	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, 
 		[&]() {
@@ -44,6 +44,8 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
 
 	button = 0;
+
+	exit = nullptr;
 }
 
 MainMenu::~MainMenu() { }

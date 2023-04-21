@@ -42,7 +42,9 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void FirstDayAfterKillScene::callAfterCreating() {
-	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, START_TIME), true);
+	state = START;
+	transition = new ShowSkipTransitionScene(this, START_TIME);
+	GameManager::get()->pushScene(transition, true);
 }
 
 void FirstDayAfterKillScene::update() {
@@ -143,7 +145,8 @@ void FirstDayAfterKillScene::update() {
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			GameManager::get()->pushScene(new TransitionScene(this, 3, true, true));
+			transition = new TransitionScene(this, 3, true, true);
+			GameManager::get()->pushScene(transition);
 		}
 		break;
 	case FirstDayAfterKillScene::NONE:
@@ -162,6 +165,9 @@ void FirstDayAfterKillScene::renderCinematic() {
 
 
 void FirstDayAfterKillScene::finishScene() {
+	if (transition != nullptr)
+		delete transition;
+
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
 	GameManager::get()->pushScene(GameManager::get()->getBeforeDayStart());

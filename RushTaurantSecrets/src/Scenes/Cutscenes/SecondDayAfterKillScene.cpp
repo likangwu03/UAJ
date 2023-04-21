@@ -42,7 +42,9 @@ void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void SecondDayAfterKillScene::callAfterCreating() {
-	GameManager::get()->pushScene(new ShowSkipTransitionScene(this, 3,false), true);
+	state = START;
+	transition = new ShowSkipTransitionScene(this, 3, false);
+	GameManager::get()->pushScene(transition, true);
 }
 
 void SecondDayAfterKillScene::update() {
@@ -155,7 +157,8 @@ void SecondDayAfterKillScene::update() {
 		if (straightMovement->hasFinishedPath()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			GameManager::get()->pushScene(new TransitionScene(this, 3, true, true));
+			transition = new TransitionScene(this, 3, true, true);
+			GameManager::get()->pushScene(transition);
 		}
 		break;
 	case SecondDayAfterKillScene::NONE:
@@ -175,6 +178,9 @@ void SecondDayAfterKillScene::renderCinematic() {
 
 
 void SecondDayAfterKillScene::finishScene() {
+	if (transition != nullptr)
+		delete transition;
+
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());

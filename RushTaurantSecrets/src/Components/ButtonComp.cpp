@@ -4,10 +4,8 @@
 
 #include "../Utilities/checkML.h"
 
-ButtonComp::ButtonComp(GameObject* parent, string hl, std::function<void()> callback)
-	: Component(parent, id),buttonSound( &sdlutils().soundEffects().at("CLICK_BUTTON")),
-	buttonHoverSound(&sdlutils().soundEffects().at("SELECT")),
-	transform(parent->getComponent<Transform>()), highlighted(false),selected(false)
+ButtonComp::ButtonComp(GameObject* parent, string hl, std::function<void()> callback) : Component(parent, id),buttonSound( &sdlutils().soundEffects().at("CLICK_BUTTON")),
+	buttonHoverSound(&sdlutils().soundEffects().at("SELECT")), transform(parent->getComponent<Transform>()), highlighted(false),selected(false)
 {
 	tf = parent->getComponent<Transform>();
 

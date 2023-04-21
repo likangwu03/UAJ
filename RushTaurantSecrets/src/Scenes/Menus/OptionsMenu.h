@@ -8,11 +8,8 @@ class OptionsMenu : public Scene
 private:
 	const int MUSIC_VOL = 30;
 
-	static void mMenu();
-	static void bResume();
-
 	GameObject* bg;
-	ButtonGO* buttonResume;
+	ButtonGO* buttonReturn;
 	Texture* image;
 
 	SDLUtils* sdl;
@@ -20,8 +17,6 @@ private:
 public:
 	OptionsMenu();
 	~OptionsMenu();
-
-	void handleEvents();
 
 };
 

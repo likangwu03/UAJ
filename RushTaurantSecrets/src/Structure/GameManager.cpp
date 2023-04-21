@@ -78,8 +78,8 @@ void GameManager::initialize() {
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
-	days->nextDay();
-	delete deleteScene;
+	
+	days->nextDay(true);
 
 
 	changeScene(mainMenu);

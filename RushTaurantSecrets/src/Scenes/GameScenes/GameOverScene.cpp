@@ -3,9 +3,6 @@
 #include "../Menus/MainMenu.h"
 #include "../../Utilities/checkML.h"
 
-void GameOverScene::mMenu() {
-	GameManager::get()->changeScene(GameManager::get()->getMainMenu());
-}
 
 GameOverScene::GameOverScene() {
 	bg = new GameObject(this);
@@ -15,7 +12,10 @@ GameOverScene::GameOverScene() {
 
 
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, mMenu);
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, 
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getMainMenu());
+		});
 }
 
 GameOverScene::~GameOverScene() {
