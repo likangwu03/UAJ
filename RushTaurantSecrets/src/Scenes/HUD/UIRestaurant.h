@@ -30,6 +30,8 @@ private:
 	SDLUtils* sdl = SDLUtils::instance();
 	Font* font;
 	Font* outline;
+	Font* font1;
+	Font* outline1;
 	
 	Reputation* reputation;
 	int actReputation;
@@ -57,6 +59,10 @@ private:
 	DailyMenu* menu;
 	bool menuToggled;
 
+	int accDay;
+	Texture* dayTexture;
+	Texture* dayOutline;
+	string dayText;
 
 	GameObject* dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
 		_ecs::_grp_id grp, _ecs::_hdr_id handler);

@@ -45,9 +45,12 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// Fuente
 	font = new Font(FONT_PATH, FONTSIZE);
+	font1 = new Font(FONT_PATH, FONTSIZE + 10);
 	outline = new Font(FONT_PATH, FONTSIZE);
+	outline1 = new Font(FONT_PATH, FONTSIZE + 10);
 	TTF_SetFontOutline(outline->getTTFFont(), 2);
-
+	TTF_SetFontOutline(outline1->getTTFFont(), 2);
+	
 
 	// Dinero
 	startingMoney = currentMoney = moneyTxt->getMoney();
@@ -97,6 +100,11 @@ UIRestaurant::UIRestaurant() : Scene() {
 		[&]() {
 			toggleDailyMenu();
 		});
+
+	accDay = 1;
+	dayText = "DAY: " + to_string(accDay);
+	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
+	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 }
 
 UIRestaurant::~UIRestaurant() {
@@ -106,6 +114,10 @@ UIRestaurant::~UIRestaurant() {
 	delete moneyOutline;
 	delete objectiveTexture;
 	delete objectiveOutline;
+	delete dayTexture;
+	delete dayOutline;
+	delete font1;
+	delete outline1;
 }
 
 GameObject* UIRestaurant::dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
@@ -218,6 +230,9 @@ void UIRestaurant::render() {
 	objectiveOutline->render(objectiveOutlineRect);
 	objectiveTexture->render(objectiveRect);
 	
+	dayOutline->render({ 1100 - 2, 100 - 2, dayOutline->width(), dayOutline->height() });
+	dayTexture->render({ 1100, 100, dayTexture->width(), dayTexture->height() });
+	
 	Scene::render();
 	checkRenderStar();
 	ClockComponent::get()->render();
@@ -227,6 +242,14 @@ void UIRestaurant::reset() {
 	startingMoney = moneyTxt->getMoney();
 	currentMoney = -1;
 	showMoneyText();
+
+	delete dayTexture;
+	delete dayOutline;
+
+	accDay = GameManager::get()->getDayManager()->getDay();
+	dayText = "DAY: " + to_string(accDay);
+	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
+	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 }
 
 void UIRestaurant::nextDay() {
@@ -241,6 +264,14 @@ void UIRestaurant::nextDay() {
 	objectiveOutlineRect = objectiveRect;
 	objectiveOutlineRect.x -= CENTEROUTLINE / 2; objectiveOutlineRect.w += CENTEROUTLINE;
 	objectiveOutlineRect.y -= CENTEROUTLINE / 2; objectiveOutlineRect.h += CENTEROUTLINE;
+
+	delete dayTexture;
+	delete dayOutline;
+
+	accDay = GameManager::get()->getDayManager()->getDay();
+	dayText = "DAY: " + to_string(accDay);
+	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
+	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 
 	ClockComponent::get()->nextDay();
 
