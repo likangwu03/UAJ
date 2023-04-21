@@ -37,7 +37,7 @@ PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::handleEvents() {
-	if (ih->isKeyDown(SDLK_p)) bResume();
+	if (ih->isKeyDown(SDLK_p));// bResume();
 	Scene::handleEvents();
 
 	if (ih->joysticksInitialised()) {

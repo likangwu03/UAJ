@@ -6,7 +6,7 @@
 class ContinueMenu : public Scene
 {
 private:
-	const int NUM_BUTTON = 2;
+	const int NUM_BUTTON = 3;
 	int button;
 
 	GameObject* bg;
