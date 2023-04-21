@@ -91,7 +91,9 @@ BeforeDayStartScene::~BeforeDayStartScene() {
 	delete moneyTarget;
 	delete buttonTxt;
 	delete text;
+	delete text1;
 	delete pressButtonText;
+	delete pressButtonText1;
 	delete dayText;
 	delete background;
 	delete bannerTexture;
