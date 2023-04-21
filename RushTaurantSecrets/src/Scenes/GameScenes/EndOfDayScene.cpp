@@ -42,7 +42,7 @@ EndOfDayScene::EndOfDayScene() {
 	//fuente
 	font1 = new Font("assets/Fonts/light_pixel-7.ttf", 30);
 	font2 = new Font("assets/Fonts/light_pixel-7.ttf", 50);
-	TTF_SetFontOutline(font2->getTTFFont(), 2);
+	TTF_SetFontOutline(font2->getTTFFont(), 1);
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
 	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$";
@@ -53,11 +53,17 @@ EndOfDayScene::EndOfDayScene() {
 
 	//texturas que cambian cada dia
 	reputationTexture = new Texture(sdlutils().renderer(), reputationtext, *font1, build_sdlcolor(0x000000FF));
+	reputationOutline = new Texture(sdlutils().renderer(), reputationtext, *font2, build_sdlcolor(0xFFFFFFFF));
+
 	moneyTexture = new Texture(sdlutils().renderer(), moneyText, *font1, build_sdlcolor(0x000000FF));
+	moneyOutline = new Texture(sdlutils().renderer(), moneyText, *font2, build_sdlcolor(0xFFFFFFFF));
 
 	//texturas que se mantienen iguales
 	bankruptTexture = new Texture(sdlutils().renderer(), bankruptText, *font1, build_sdlcolor(0x000000FF));
 	gameOverTexture = new Texture(sdlutils().renderer(), gameOverText, *font1, build_sdlcolor(0x000000FF));
+
+	bankruptOutline = new Texture(sdlutils().renderer(), bankruptText, *font2, build_sdlcolor(0xFFFFFFFF));
+	gameOverOutline = new Texture(sdlutils().renderer(), gameOverText, *font2, build_sdlcolor(0xFFFFFFFF));
 
 	//botones
 	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H, 
@@ -77,7 +83,6 @@ EndOfDayScene::EndOfDayScene() {
 }
 
 EndOfDayScene::~EndOfDayScene() {
-
 	delete backgroundT;
 	delete reputationIconT;
 	delete moneyIconT;
@@ -87,6 +92,10 @@ EndOfDayScene::~EndOfDayScene() {
 	delete moneyTexture;
 	delete bankruptTexture;
 	delete gameOverTexture;
+	delete reputationOutline;
+	delete moneyOutline;
+	delete bankruptOutline;
+	delete gameOverOutline;
 }
 
 void EndOfDayScene::reset() {
@@ -103,9 +112,14 @@ void EndOfDayScene::reset() {
 	
 	delete reputationTexture;
 	delete moneyTexture;
+	delete reputationOutline;
+	delete moneyOutline;
 
 	reputationTexture = new Texture(sdlutils().renderer(), reputationtext, *font1, build_sdlcolor(0x000000FF));
+	reputationOutline = new Texture(sdlutils().renderer(), reputationtext, *font2, build_sdlcolor(0xFFFFFFFF));
+
 	moneyTexture = new Texture(sdlutils().renderer(), moneyText, *font1, build_sdlcolor(0x000000FF));
+	moneyOutline = new Texture(sdlutils().renderer(), moneyText, *font2, build_sdlcolor(0xFFFFFFFF));
 }
 
 void EndOfDayScene::render() {
@@ -113,6 +127,9 @@ void EndOfDayScene::render() {
 
 	reputationTexture->render({250, 225, reputationTexture->width(), reputationTexture->height()});
 	moneyTexture->render({250, 325, moneyTexture->width(), moneyTexture->height()});
+
+	reputationOutline->render({ 250, 225, reputationTexture->width(), reputationTexture->height() });
+	moneyOutline->render({ 250, 325, moneyTexture->width(), moneyTexture->height() });
 
 	if (!_gameOver) { //el juego no se ha perdido
 		continueButton->setAlive(true);
@@ -122,11 +139,20 @@ void EndOfDayScene::render() {
 		if ((playerMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
 		{
 			bankruptTexture->render({50, 450, bankruptTexture->width(), bankruptTexture->height()});
+			bankruptOutline->render({ 50, 450, bankruptTexture->width(), bankruptTexture->height() });
+
 			gameOverTexture->render({50, 550, gameOverTexture->width(), gameOverTexture->height()});
+			gameOverOutline->render({ 50, 550, gameOverTexture->width(), gameOverTexture->height() });
 			
 		}
-		else if (playerMoney < moneyGoal || playerMoney <=0) bankruptTexture->render({200, 450, bankruptTexture->width(), bankruptTexture->height() });
-		else if (playerReputation <= 0) gameOverTexture->render({50, 450, gameOverTexture->width(), gameOverTexture->height() });
+		else if (playerMoney < moneyGoal || playerMoney <= 0) {
+			bankruptTexture->render({ 200, 450, bankruptTexture->width(), bankruptTexture->height() });
+			bankruptOutline->render({ 200, 450, bankruptTexture->width(), bankruptTexture->height() });
+		}
+		else if (playerReputation <= 0) {
+			gameOverTexture->render({ 50, 450, gameOverTexture->width(), gameOverTexture->height() });
+			gameOverOutline->render({ 50, 450, gameOverTexture->width(), gameOverTexture->height() });
+		}
 
 		gameOver();
 	}

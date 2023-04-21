@@ -37,6 +37,11 @@ private:
 	Texture* moneyTexture;
 	Texture* bankruptTexture;
 	Texture* gameOverTexture;
+	//texturas para textos con outline
+	Texture* reputationOutline;
+	Texture* moneyOutline;
+	Texture* bankruptOutline;
+	Texture* gameOverOutline;
 	
 	
 	Font* font1;
