@@ -24,15 +24,17 @@ private:
 	bool wait;
 	Font* text;
 
+	const int NUM_BUTTON = 3;
+	int button;
 public:
 	CoopMenu();
 	~CoopMenu();
 
-	void update() override;
-
+	void update() ;
+	void handleEvents() override;
 	void init();
+	void selectedButton(int selected);
 
-	//virtual void handleEvents();
 	
 };
 

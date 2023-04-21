@@ -27,21 +27,21 @@ CoopMenu::CoopMenu() {
 	wait = false;
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/options_bg.png");
+	image = new Texture(sdlutils().renderer(), "assets/continue_bg.png");
+
 	new Image(bg, image);
 	
 	coop = Game::instance()->getCoopHandler();
-	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.5 * SDLUtils::instance()->height() * 2 / 5), 385, 130, bResume);
-	buttonServer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2) - 250, 1.5 * SDLUtils::instance()->height() / 5), 385, 130, [&]()
-		{
+	buttonServer = new ButtonGO(this, "HOST_BUTTON", "BUTTON2_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130, 
+		[&]() {
 			wait = true;
 			server = true;
 			coop->openServer();
 		});
-	buttonClient = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2) + 250, 1.5 * SDLUtils::instance()->height() / 5), 385, 130,
+	buttonServer->getComponent<ButtonComp>()->setHighlighted(true);
+	buttonClient = new ButtonGO(this, "JOIN_BUTTON", "BUTTON2_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&]()
 		{
 			wait = true;
@@ -49,9 +49,16 @@ CoopMenu::CoopMenu() {
 			coop->openClient(ip);
 		});
 
+	buttonResume = new ButtonGO(this, "RETURN_BUTTON", "BUTTON2_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
+		[&] {
+			GameManager::get()->getMainMenu();
+			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());
+		});
 
 	text = new Font("assets/Fonts/light_pixel-7.ttf", 50);
 	waiting = new Texture(sdlutils().renderer(), "Waiting for other player", *text, build_sdlcolor(0x000000FF));
+	button = 0;
 
 }
 
@@ -87,4 +94,54 @@ void CoopMenu::update(){
 	}
 	Scene::update();
 	
+}
+
+void CoopMenu::handleEvents() {
+
+	if (ih->joysticksInitialised()) {
+		ih->refresh();
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
+			|| ih->getHatState(UP)) {
+			button = (button - 1) % NUM_BUTTON;
+			if (button < 0)
+				button = button + NUM_BUTTON;
+			selectedButton(button);
+		}
+		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_DOWN)
+			|| ih->getHatState(DOWN)) {
+			button = (button + 1) % NUM_BUTTON;
+			selectedButton(button);
+		}
+	}
+	else {
+		if (ih->isKeyDown(SDL_SCANCODE_W)) {
+			button = (button - 1) % NUM_BUTTON;
+			if (button < 0)
+				button = button + NUM_BUTTON;
+			selectedButton(button);
+		}
+		else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+			button = (button + 1) % NUM_BUTTON;
+			selectedButton(button);
+		}
+	}
+	Scene::handleEvents();
+}
+
+void CoopMenu::selectedButton(int selected) {
+	buttonServer->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonClient->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonResume->getComponent<ButtonComp>()->setHighlighted(false);
+	switch (selected)
+	{
+	case 0:
+		buttonServer->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 1:
+		buttonClient->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	case 2:
+		buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
+		break;
+	}
 }

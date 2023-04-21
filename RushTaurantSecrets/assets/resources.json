@@ -412,6 +412,24 @@
       "rows": 1
     },
     {
+      "id": "RETURN_BUTTON",
+      "file": "assets/Sprites/UI/Menu/Return_Button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "HOST_BUTTON",
+      "file": "assets/Sprites/UI/Menu/host_button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "JOIN_BUTTON",
+      "file": "assets/Sprites/UI/Menu/join_button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "KI_ICON",
       "file": "assets/Sprites/UI/HUD/kitchenIsland_icon.png",
       "cols": 1,
