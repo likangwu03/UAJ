@@ -22,6 +22,7 @@
 #include "../Scenes/Cutscenes/IntroScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
+#include "../Scenes/Cutscenes/BadEnding1Scene.h"
 #include "../Scenes/Menus/CoopMenu.h"
 #include "../Scenes/TransitionScene.h"
 #include <sstream>
@@ -64,6 +65,7 @@ void GameManager::initialize() {
 	beforeDayStartScene = new BeforeDayStartScene();
 	secondDayAfterKillScene = new SecondDayAfterKillScene();
 	firstDayAfterKillScene = new FirstDayAfterKillScene();
+	badEnding1Scene = new BadEnding1Scene();
 	coopMenu = new CoopMenu();
 
 	try {
@@ -90,6 +92,7 @@ GameManager::~GameManager() {
 	delete secondDayAfterKillScene;
 	delete firstDayAfterKillScene;
 	delete introScene;
+	delete badEnding1Scene;
 
 	delete days;
 	delete money;
@@ -208,6 +211,7 @@ EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
 IntroScene* GameManager::getIntroScene() { return introScene; }
 FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }
 SecondDayAfterKillScene* GameManager::getSecondDayAfterKillScene() { return secondDayAfterKillScene; }
+BadEnding1Scene* GameManager::getBadEnding1Scene() { return badEnding1Scene; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }

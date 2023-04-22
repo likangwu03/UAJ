@@ -34,7 +34,8 @@ void DailyMenuComp::drawDishes() {
 			float plusx = ingx + INGREDIENT_SIZE + ING_OFFSET_X;
 			float ingDistance = plusx - ingx;
 			if (count > 2) {
-				temp = 0;
+				if(temp > 2)
+					temp = 0;
 				ingx = equalX + ingDistance;
 				plusx = ingx + INGREDIENT_SIZE + ING_OFFSET_X;
 				ingy += INGREDIENT_SIZE;

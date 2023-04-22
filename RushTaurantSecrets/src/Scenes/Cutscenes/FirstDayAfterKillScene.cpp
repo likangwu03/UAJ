@@ -54,14 +54,11 @@ void FirstDayAfterKillScene::update() {
 	case FirstDayAfterKillScene::INIT:
 		nightAmbience->play(-1);
 		nightMusic->play(-1);
-
 		state = START;
-
 		break;
 	case FirstDayAfterKillScene::START:
 		cont += frameTime;
 		if (cont > START_TIME * 1000) {
-
 			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = M1;
@@ -69,7 +66,6 @@ void FirstDayAfterKillScene::update() {
 		break;
 	case FirstDayAfterKillScene::M1:
 		if (Text::isTextFinished()) {
-
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
 				font, dialogues[1].portrait, dialogues[1].text);
 			state = P1;

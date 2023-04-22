@@ -30,6 +30,7 @@ class CinematicBaseScene;
 class IntroScene;
 class FirstDayAfterKillScene;
 class SecondDayAfterKillScene;
+class BadEnding1Scene;
 class CoopMenu;
 
 struct dialogueInfo {
@@ -97,6 +98,7 @@ private:
 	IntroScene* introScene;
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
+	BadEnding1Scene* badEnding1Scene;
 
 
 	GameManager();
@@ -134,6 +136,7 @@ public:
 	IntroScene* getIntroScene();
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
+	BadEnding1Scene* getBadEnding1Scene();
 
 
 	Reputation* getReputation();
