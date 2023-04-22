@@ -752,7 +752,6 @@
       "id": "PROTA_CASUAL_ANGRY_CLOSE_EYE",
       "file": "assets/Sprites/UI/icons/character_casual_angry_closingEyes.png"
     },
-    
     {
       "id": "PROTA_CASUAL_SMILE_CLOSE_EYE",
       "file": "assets/Sprites/UI/icons/character_casual_smile_closingEyes.png"
@@ -794,6 +793,10 @@
       "file": "assets/Sprites/UI/icons/parents.png"
     },  
     {
+      "id": "OWNER",
+      "file": "assets/Sprites/UI/icons/owner.png"
+    },  
+    {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
       "file": "assets/Sprites/Cinematic/Parent_Room.png"
     },
@@ -804,6 +807,18 @@
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_NIGHT",
       "file": "assets/Sprites/Cinematic/Parent_Room_Night.png"
+    },
+    {
+      "id": "CINEMATIC_BG_RESTAURANT",
+      "file": "assets/Sprites/Cinematic/Restaurant.png"
+    },
+    {
+      "id": "CINEMATIC_BG_RESTAURANT_TOP",
+      "file": "assets/Sprites/Cinematic/Restaurant_top.png"
+    },
+    {
+      "id": "CINEMATIC_BG_HOUSE",
+      "file": "assets/Sprites/Cinematic/house.png"
     },
     {
       "id": "DAILY_MENU",

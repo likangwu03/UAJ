@@ -7,6 +7,7 @@
 #include "../Scenes/GameScenes/EndOfDayScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
+#include "../Scenes/Cutscenes/BadEnding1Scene.h"
 
 #include "../Utilities/checkML.h"
 
@@ -96,6 +97,11 @@ void DayManager::nextDay(bool loadingGame) {
 		// Activar final, ya que no hay más días
 
 		return;
+	}
+
+	if (GameManager::get()->getReputation() < 0) {
+		GameManager::get()->changeScene(GameManager::get()->getBadEnding1Scene(), true);
+		GameManager::get()->getBadEnding1Scene()->callAfterCreating();
 	}
 
 	if (GameManager::get()->getHasEverKilled().first) {

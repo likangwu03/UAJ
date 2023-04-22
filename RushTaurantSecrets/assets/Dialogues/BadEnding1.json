@@ -2,107 +2,138 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Where are you going? Are you done already? Please, come back!"
+      "Text": "Where are you going? Are you done already? Please, come back!",
+      "Portrait": "PROTA_CHEF_SURPRISED"
     },
     {
       "Character": "Player",
-      "Text": "Oh… No… What have I done…?"
+      "Text": "Oh... No... What have I done...?",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Calm down, maybe it’s not that bad. Tomorrow will be a whole new day."
+      "Text": "Calm down, maybe it's not that bad. Tomorrow will be a whole new day.",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Hello?"
+      "Text": "(RING, RING, RING, RI-)",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Hello?",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Rival",
-      "Text": "Long time no talk… I hope you still remember me."
+      "Text": "Long time no talk... I hope you still remember me.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "You again!? Leave me alone already!"
+      "Text": "You again!? Leave me alone already!",
+      "Portrait": "PROTA_CHEF_ANGRY"
     },
     {
       "Character": "Rival",
-      "Text": "Calm down, I won’t waste your time. I just called to check on your business."
+      "Text": "Calm down, I won't waste your time. I just called to check on your business.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "Why? Are you jealous?"
+      "Text": "Why? Are you jealous?",
+      "Portrait": "PROTA_CHEF_ANGRY_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "My business is going incredibly well. A lot of clients come to try my food, and they always leave smiling happily."
+      "Text": "My business is going incredibly well. A lot of clients come to try my food, and they always leave smiling happily.",
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Rival",
-      "Text": "Really…? I’m not sure about that…"
+      "Text": "Really...? I'm not sure about that...",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "What are you talking about?"
+      "Text": "What are you talking about?",
+      "Portrait": "PROTA_CHEF_SURPRISED"
     },
     {
       "Character": "Rival",
-      "Text": "Somebody told me your restaurant sucks. People who try eating there never come twice, and your reputation is just getting worse."
+      "Text": "Somebody told me your restaurant sucks. People who try eating there never come twice, and your reputation is just getting worse.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_ANGRY"
     },
     {
       "Character": "Player",
-      "Text": "Haha! Do you think you’re going to make me feel bad by saying a couple of stupid phrases? Don’t make me laugh…"
+      "Text": "Haha! Do you think you're going to make me feel bad just because of some stupid words? Don't make me laugh...",
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "My restaurant is succeeding. Life’s good, I’m not going to let you ruin my project."
+      "Text": "My restaurant is succeeding. Life's good, I'm not going to let you ruin my project.",
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "And stop calling me!"
+      "Text": "And stop calling me!",
+      "Portrait": "PROTA_CHEF_ANGRY"
     },
     {
       "Character": "Player",
-      "Text": "How annoying…"
+      "Text": "How annoying...",
+      "Portrait": "PROTA_CHEF_ANGRY"
     },
     {
       "Character": "Player",
-      "Text": "Well, I should rest. Tomorrow is going to be a busy day."
+      "Text": "Well, I should rest. Tomorrow is going to be a busy day.",
+      "Portrait": "PROTA_CHEF_SIGH"
     },
     {
       "Character": "Player",
-      "Text": "What is happening…? Why is no one coming?"
+      "Text": "What is happening...? Why is no one coming?",
+      "Portrait": "PROTA_CHEF_SURPRISED"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Maybe that annoying bastard was right… Maybe this is the end…"
+      "Text": "Maybe that annoying bastard was right... Maybe this is the end...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Dad… Mom… I’ve let you down…"
+      "Text": "Mom... Dad... I've let you down...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "I failed at trying to give the business another go…"
+      "Text": "I failed at trying to give the business another go...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "I’m sorry… I’m so sorry…"
+      "Text": "I'm sorry... I'm so sorry...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_SIGH"
     },
     {
       "Character": "Player",
-      "Text": "I guess I’ll have to close the restaurant again."
+      "Text": "I guess I'll have to close the restaurant again.",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     }
   ]
 }

@@ -72,6 +72,22 @@ namespace _ecs {
 
 	};
 
+	static Route BadEnding1PlayerPath[2] = {
+
+		{{Vector(27, 15), Vector(40, 15)}, east}
+	};
+
+	static Route BadEnding1Client1Path[1] = {
+
+		{{ Vector(25, 16),Vector(40, 16)}, east }
+
+	};
+
+	static Route BadEnding1Client2Path[1] = {
+
+		{{ Vector(24, 13),Vector(28, 13)}, east}
+
+	};
 
 	// CLIENTES
 	const int NUM_TABLES = 7;
