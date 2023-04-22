@@ -57,6 +57,7 @@ public:
 			joystickEvent(event);	
 			break;
 		case SDL_KEYDOWN:
+			currentKey = event.key.keysym.sym;
 			onKeyDown(event);
 			break;
 		case SDL_KEYUP:
@@ -134,6 +135,8 @@ public:
 	inline bool isKeyUp(SDL_Keycode key) {
 		return isKeyUp(SDL_GetScancodeFromKey(key));
 	}
+
+	inline char getCurrentKey() { return currentKey; }
 
 	// mouse
 	inline bool mouseMotionEvent() {
@@ -425,6 +428,7 @@ private:
 	std::pair<Sint32, Sint32> mousePos_;
 	std::array<bool, 3> mbState_;
 	const Uint8* kbState_;
+	char currentKey;
 };
 
 // This macro defines a compact way for using the singleton InputHandler, instead of
