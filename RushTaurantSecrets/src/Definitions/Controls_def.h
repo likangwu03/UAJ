@@ -12,7 +12,7 @@ namespace _ecs {
 		xbox_LS,
 		xbox_RS,
 
-		play_Triangule,
+		play_Triangle,
 		play_Circle,
 		play_Cross,
 		play_Rectangle,
