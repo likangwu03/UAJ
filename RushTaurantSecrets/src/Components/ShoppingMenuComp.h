@@ -5,6 +5,8 @@
 #include "../Utilities/SDLUtils.h"
 #include "../Utilities/InputHandler.h"
 #include "../Components/BasketMarketComponent.h"
+#include "../Components/ShowControlComp.h"
+
 class ShoppingMenuComp :public Component
 {
 private:
@@ -55,6 +57,7 @@ private:
 	SoundEffect* addIng;
 	SoundEffect* confirmSound;
 
+	ShowControlComp* showControl;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SHOP_MENU;
 	ShoppingMenuComp(GameObject* parent);

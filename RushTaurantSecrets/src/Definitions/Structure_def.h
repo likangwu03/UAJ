@@ -44,6 +44,7 @@ namespace _ecs {
 		cmp_FINISH_DAY,
 		cmp_STREAK,
 		cmp_OTHERPLAYER,
+		cmp_SHOWCONTROL,
 		// Do not erase pls
 		cmp_INVALID
 	};

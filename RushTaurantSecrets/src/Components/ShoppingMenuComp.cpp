@@ -3,7 +3,6 @@
 #include "../Scenes/HUD/UIMarket.h"
 #include "../Structure/GameManager.h"
 #include "../Scenes/GameScenes/SuperMarket.h"
-
 #include "../Utilities/checkML.h"
 
 ShoppingMenuComp::ShoppingMenuComp(GameObject* parent) :Component(parent, id),
@@ -24,6 +23,7 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
 	playerTransform = GameManager::get()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
+	showControl=new ShowControlComp(parent, playerTransform,{ {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-10,-25),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(50,-25),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Circle,ControlsType::xbox_B,Vector(120,-25),80,40}});
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {
@@ -65,6 +65,7 @@ void ShoppingMenuComp::render() {
 	priceTex->render(build_sdlrect(menuPos.getX() + PRICE_OFFSETX, menuPos.getY() + PRICE_OFFSETY, PRICE_WIDTH, PRICE_HEIGHT));
 	totalPriceTex->render(build_sdlrect(menuPos.getX() + TOT_OFFSETX, menuPos.getY() + TOT_OFFSETY, TOT_WIDTH*aux.size(), TOT_HEIGHT));
 	ingTex->render(build_sdlrect(menuPos.getX() + ING_OFFSETX, menuPos.getY() + ING_OFFSETY, ING_WIDTH, ING_HEIGHT));
+
 }
 void  ShoppingMenuComp::increaseN() {
 	if (number >= 99)return;
@@ -91,6 +92,7 @@ void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
 		ingTex = &((*sdl).images().at(to_string(ing)));
 		changePrice();
 		menuSound->play();
+		showControl->setActive(true);
 	}
 	else closeMenu();
 }
@@ -103,7 +105,7 @@ void  ShoppingMenuComp::closeMenu() {
 		delete totalPriceTex;
 		totalPriceTex = nullptr;
 		parent->setActive<ShoppingMenuComp>(false);
-		
+		showControl->setActive(false);
 	}
 }
 void  ShoppingMenuComp::changePrice() {

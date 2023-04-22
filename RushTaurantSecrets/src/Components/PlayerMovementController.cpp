@@ -243,3 +243,7 @@ const char* PlayerMovementController::getControllerType()
 {
 	return controller;
 }
+ bool PlayerMovementController::isXbox()
+{
+	return xbox;
+}

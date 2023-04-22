@@ -117,11 +117,11 @@ void UIMarket::render() {
 	moneyOutline->render(moneyOutlineRect);
 	moneyTexture->render(moneyRect);
 
-	Scene::render();
 	if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON()) {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();
 	}
 
+	Scene::render();
 }
 
 void UIMarket::setDailyMenu() {

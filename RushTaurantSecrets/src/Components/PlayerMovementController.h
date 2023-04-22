@@ -47,6 +47,6 @@ public:
 	void moveDown();
 	void moveRight();
 	void moveLeft();
-
+	bool isXbox();
 	const char* getControllerType();
 };
