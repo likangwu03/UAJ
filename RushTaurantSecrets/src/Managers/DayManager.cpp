@@ -99,7 +99,7 @@ void DayManager::nextDay(bool loadingGame) {
 		return;
 	}
 
-	if (GameManager::get()->getReputation() < 0) {
+	if (GameManager::get()->getReputation()->getReputation() < 0) {
 		GameManager::get()->changeScene(GameManager::get()->getBadEnding1Scene(), true);
 		GameManager::get()->getBadEnding1Scene()->callAfterCreating();
 	}

@@ -797,6 +797,10 @@
       "file": "assets/Sprites/UI/icons/owner.png"
     },  
     {
+      "id": "PHONE",
+      "file": "assets/Sprites/UI/icons/phone.png"
+    },  
+    {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
       "file": "assets/Sprites/Cinematic/Parent_Room.png"
     },

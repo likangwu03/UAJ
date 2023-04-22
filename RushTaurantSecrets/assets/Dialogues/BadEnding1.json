@@ -16,9 +16,9 @@
       "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
     },
     {
-      "Character": "Player",
+      "Character": "Phone",
       "Text": "(RING, RING, RING, RI-)",
-      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+      "Portrait": "PHONE"
     },
     {
       "Character": "Player",
