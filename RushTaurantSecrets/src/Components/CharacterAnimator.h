@@ -14,11 +14,13 @@ protected:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CHARACANIM;
 
-	CharacterAnimator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim = 0, int frRate = FRAMERATE, float w = 0, float h = 0) :
-		Animator(parent, t, iniFrame, endFrame, currAnim, frRate, w, h,id) {init();}
+	//CharacterAnimator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim = 0, int frRate = FRAMERATE, float w = 0, float h = 0) :
+	//	Animator(parent, t, iniFrame, endFrame, currAnim, frRate, w, h,id) {init();}
+	CharacterAnimator(GameObject* parent, Texture* t, AnimParams aP) :
+		Animator(parent, t, aP, id) {init();}
 
-	CharacterAnimator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim = 0, int frRate = FRAMERATE, float w = 0, float h = 0) :
-		Animator(parent, s, iniFrame, endFrame, currAnim, frRate, w, h,id) {init();}
+	CharacterAnimator(GameObject* parent, string s, AnimParams aP) :
+		Animator(parent, s, aP, id) {init();}
 	
 	virtual void update();
 };

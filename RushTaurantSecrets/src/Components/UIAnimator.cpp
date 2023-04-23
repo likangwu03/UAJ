@@ -19,14 +19,14 @@ void UIAnimator::render() {
 	temp.x = plTf->getPos().getX();
 	temp.y = plTf->getPos().getY();
 	}
-	temp.w = width * sdlutils().getResizeFactor();
-	temp.h = height * sdlutils().getResizeFactor();
+	temp.w = animationParameters.width * sdlutils().getResizeFactor();
+	temp.h = animationParameters.height * sdlutils().getResizeFactor();
 	// indicas la columna y la fila del frame del spritesheet que quieres que se renderice
-	texture->renderFrame(temp, currFrame, currentAnim, angle);
+	texture->renderFrame(temp, currFrame, animationParameters.currAnim, angle);
 }
 
-int UIAnimator::getFramesNumber() { return endFrame - 1; }
+int UIAnimator::getFramesNumber() { return animationParameters.endFrame - 1; }
 
 void UIAnimator::changeFrameRate(int newFrameRate) {
-	frameRate = newFrameRate;
+	animationParameters.frameRate = newFrameRate;
 }

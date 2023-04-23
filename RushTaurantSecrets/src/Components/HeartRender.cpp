@@ -15,7 +15,7 @@ int HeartRender::approximateHearts(float happiness) const {
 	}
 }
 
-HeartRender::HeartRender(GameObject* parent, Texture* texture, int widthHeart, int heightHeart, int offsetY, int offsetX) :
+HeartRender::HeartRender(GameObject* parent, Texture* texture, int widthHeart, int heightHeart, int offsetX, int offsetY) :
 	Component(parent, id), texture(texture), widthHeart(widthHeart), heightHeart(heightHeart), posStartX(0), posStartY(0) {
 	clientState = parent->getComponent<ClientState>();
 	transform = parent->getComponent<Transform>();

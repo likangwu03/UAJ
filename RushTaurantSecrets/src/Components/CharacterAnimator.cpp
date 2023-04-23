@@ -33,26 +33,25 @@ void CharacterAnimator::update() {
 		movHaveChanged = true;
 
 		if (currMov == idle) {
-			currentAnim = 1;
+			animationParameters.currAnim = 1;
 		}
 		else if (currMov == walking) {
-			currentAnim = 2;
+			animationParameters.currAnim = 2;
 		}
 		else if (currMov == sitting) {
 			if (parentOrientation == west || parentOrientation == east) {
-				currentAnim = 4;
+				animationParameters.currAnim = 4;
 			}
 			else if (parentOrientation == north || parentOrientation == south) {
-				currentAnim = 1;
+				animationParameters.currAnim = 1;
 			}
 		}
 		else if (currMov == dead) {
-			currentAnim = 19;
+			animationParameters.currAnim = 19;
 			// se cambia el ángulo para que se tumbe el sprite
 			angle = 90;
 		}
 	}
-	//}
 
 	// si no ha cambiado, se comprueba si la dirección ha cambiado
 	// si es as? se cogen los frames oportunos
@@ -62,46 +61,46 @@ void CharacterAnimator::update() {
 
 		if (currOrientation == east) {
 			// muerto
-			if (currentAnim == 19) {
-				setCurrentAnim(3, 5, currentAnim);
+			if (animationParameters.currAnim == 19) {
+				setCurrentAnim(3, 5, animationParameters.currAnim);
 			}
 			// idle, corriendo y sentado
 			else {
-				setCurrentAnim(0, 6, currentAnim);
+				setCurrentAnim(0, 6, animationParameters.currAnim);
 			}
 		}
 		else if (currOrientation == north) {
 			// muerto
-			if (currentAnim == 19) {
-				setCurrentAnim(3, 5, currentAnim);
+			if (animationParameters.currAnim == 19) {
+				setCurrentAnim(3, 5, animationParameters.currAnim);
 			}
 			// idle, corriendo y sentado
 			else {
-				setCurrentAnim(6, 12, currentAnim);
+				setCurrentAnim(6, 12, animationParameters.currAnim);
 			}
 		}
 		else if (currOrientation == west) {
 			// sentado
-			if (currentAnim == 4) {
-				setCurrentAnim(6, 12, currentAnim);
+			if (animationParameters.currAnim == 4) {
+				setCurrentAnim(6, 12, animationParameters.currAnim);
 			}
 			// muerto
-			else if (currentAnim == 19) {
-				setCurrentAnim(3, 5, currentAnim);
+			else if (animationParameters.currAnim == 19) {
+				setCurrentAnim(3, 5, animationParameters.currAnim);
 			}
 			// idle y corriendo
 			else {
-				setCurrentAnim(12, 18, currentAnim);
+				setCurrentAnim(12, 18, animationParameters.currAnim);
 			}
 		}
 		else if (plTf->getOrientation() == south) {
 			// muerto
-			if (currentAnim == 19) {
-				setCurrentAnim(3, 5, currentAnim);
+			if (animationParameters.currAnim == 19) {
+				setCurrentAnim(3, 5, animationParameters.currAnim);
 			}
 			// idle, corriendo y sentado
 			else {
-				setCurrentAnim(18, 24, currentAnim);
+				setCurrentAnim(18, 24, animationParameters.currAnim);
 			}
 		}
 	}

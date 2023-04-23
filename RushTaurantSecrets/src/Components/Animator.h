@@ -8,30 +8,38 @@
 using namespace std;
 class Animator : public Component
 {
+public:
+	struct AnimParams
+	{
+		int initFrame;
+		int endFrame;
+		//fila de la anim
+		int currAnim = 0;
+		int frameRate = FRAMERATE;
+		float width = 0;
+		float height = 0;
+	//public:
+	//	AnimParams(int inFr, int enFr, int crAnim = 0, int fr = FRAMERATE, float w = 0, float h = 0) 
+	//		: initFrame(inFr), endFrame(enFr), currAnim(crAnim), width(w), height(h) {}
+	};
 protected:
 	static const int FRAMERATE = 7;
 	Texture* texture;
-	//fila de la anim
-	int currentAnim;
-	int initFrame;
-	int endFrame;
+
 	//columna de la anim
 	int currFrame;
 	float lastTic;
-	int frameRate;
 	float angle;
 
-	float width;
-	float height;
-	//Vector pos;
+	AnimParams animationParameters;
 
 	SDLUtils* sdl;
 	Transform* plTf;
 
-	void init(int iniFrame, int endFrame, int currAnim, int frRate,float w , float h);
+	void init(AnimParams aP);
 
-	Animator(GameObject* parent, Texture* t, int iniFrame, int endFrame, int currAnim, int frRate,float w,float h,_ecs:: _cmp_id id);
-	Animator(GameObject* parent, string s, int iniFrame, int endFrame, int currAnim, int frRate,float w, float h, _ecs::_cmp_id id);
+	Animator(GameObject* parent, Texture* t, AnimParams aP, _ecs::_cmp_id id);
+	Animator(GameObject* parent, string s, AnimParams aP, _ecs::_cmp_id id);
 
 public:
 	//constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
@@ -45,13 +53,13 @@ public:
 	/*cambiar de textura dado el nombre de textura*/
 	void setTexture(string s, int iniFrame, int endFrame, int currAnim=0, int frRate = FRAMERATE);
 	/*cambiar de frameRate*/
-	void setframeRate(int frRate) { frameRate = frRate; };
+	void setframeRate(int frRate) { animationParameters.frameRate = frRate; };
 	
 	
 	/*cambiar de ancho*/
-	void setW(float w) { width = w; }
+	void setW(float w) { animationParameters.width = w; }
 	/*cambiar de alto*/
-	void setH(float h) { height = h; }
+	void setH(float h) { animationParameters.height = h; }
 
 	virtual void update();
 	virtual void render(); //renderiza según tamaño de transform

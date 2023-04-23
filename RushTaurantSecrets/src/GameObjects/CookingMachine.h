@@ -20,7 +20,14 @@ private:
 public:
 	CookingMachine(Scene* scene, Vector pos, float w, float h) :GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, pos, Vector(0, 0), w, h,0,true); //para saber en qu¨¦ posici¨®n renderizar el bocadillo 
-		new UIAnimator(this, "KITCHEN_PROCESSING_ICON_ANIM", 0, 8, 0, 0, THINKING_WIDTH, THINKING_HEIGHT, Vector(pos.getX(), pos.getY()+ THINKING_OFFSETY));
+		Animator::AnimParams ap;
+		ap.initFrame = 0;
+		ap.endFrame = 8;
+		ap.currAnim = 0;
+		ap.frameRate = 0;
+		ap.width = THINKING_WIDTH;
+		ap.height = THINKING_HEIGHT;
+		new UIAnimator(this, "KITCHEN_PROCESSING_ICON_ANIM", ap, Vector(pos.getX(), pos.getY()+ THINKING_OFFSETY));
 		new CookingMachineComp(this);
 		new Image(this, "COOK_HIGHLIGHT"); //renderizar el highlight  Vector(pos.getX() + OFFSETX, pos.getY() + OFFSETY), w + OFFSETW, h + OFFSETH
 		new CookingMachineTrigger(this, Vector(0,OFFSET_Y), w, h);
