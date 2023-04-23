@@ -72,12 +72,13 @@ void BasketMarketComponent::renderBasket() {
 	string totalP = to_string(totalPrize);
 	totalP += "$";
 	Texture* textureTotal = new Texture(sdl->renderer(), totalP, *font, build_sdlcolor(0x504631ff));
-	dest.x = BASKET_SIZE - ING_SIZE * 3 + 5;
-	dest.y = BASKET_SIZE - ING_SIZE * 2 + 5;
-	dest.w = ING_SIZE;
-	dest.h = ING_SIZE;
+	dest.x = basketPosX + ING_SIZE * 1.75;
+	dest.y = BASKET_SIZE - ING_SIZE * 1.75;
+	dest.w = textureTotal->width();
+	dest.h = textureTotal->height();
 	textureTotal->render(dest);
 	delete textureTotal;
+
 	// render de ingredientes
 	if (ingredients.size() == 0)return;
 	int x = 30 + ING_SIZE, y = sdl->height() - 590 + ING_SIZE, col = 1, fil = 1;
@@ -89,8 +90,9 @@ void BasketMarketComponent::renderBasket() {
 		}
 		textDish = to_string(it->first);
 		renderTexture(x * col, y * fil, ING_SIZE, ING_SIZE, textDish);
+		
 		// renderizar número
-		dest.x = x * col + 2 * ING_SIZE / 3;
+		dest.x = x * col + 2 * ING_SIZE / 3 - ING_AMT_OFFSET_X;
 		dest.y = y * fil + ING_SIZE / 2 + 3;
 		dest.w = ING_SIZE / 3;
 		dest.h = ING_SIZE / 3;
@@ -107,10 +109,11 @@ void BasketMarketComponent::renderBasket() {
 				int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
 
 				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xf3e5c2ff));
-				dest.x = x * col + 8;
+				dest.x = x * col;
 				dest.y = y * fil + (3 * ING_SIZE) / 2;
-				dest.w = ING_SIZE / 2;
-				dest.h = ING_SIZE / 2;
+				dest.w = textureAmount->width() / 1.5;
+				dest.h = textureAmount->height() / 1.5;
+				if (it->second < 10) dest.x += textureAmount->width() / 3;
 				textureAmount->render(dest);
 				delete textureAmount;
 			}
@@ -214,7 +217,7 @@ void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
 			selectNum->play();
 		}
 	}
-	else if (key == SDLK_RIGHT && selectedIngr->second < 100) {
+	else if (key == SDLK_RIGHT && selectedIngr->second < 99) {
 		selectedIngr->second++;
 		int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
 		totalPrize += cost;

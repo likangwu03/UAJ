@@ -23,7 +23,8 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
 	playerTransform = GameManager::get()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
-	showControl=new ShowControlComp(parent, playerTransform,{ {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-10,-25),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(50,-25),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Circle,ControlsType::xbox_B,Vector(120,-25),80,40}});
+	showControl = new ShowControlComp(parent, playerTransform,
+		{ {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-10,-25),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(50,-25),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Circle,ControlsType::xbox_B,Vector(120,-25),80,40}});
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {
@@ -57,13 +58,14 @@ void ShoppingMenuComp::handleEvents() {
 }
 void ShoppingMenuComp::render() {
 
-	Vector menuPos = { playerTransform->getPos().getX() + playerTransform->getW() / 2 - MENU_WIDTH / 2,
-		playerTransform->getPos().getY() + PLAYER_OFFSETY - MENU_HEIGHT };
+	Vector menuPos = { playerTransform->getPos().getX() + playerTransform->getW() / 4 - MENU_WIDTH / 2,
+						playerTransform->getPos().getY() + PLAYER_OFFSETY - MENU_HEIGHT };
 	menu->render(build_sdlrect(menuPos.getX(), menuPos.getY(), MENU_WIDTH, MENU_HEIGHT));
-	string aux = to_string(totalPrice);
-	numberTex->render(build_sdlrect(menuPos.getX() + NUM_OFFSETX, menuPos.getY() + NUM_OFFSETY, NUM_WIDTH, NUM_HEIGHT));
-	priceTex->render(build_sdlrect(menuPos.getX() + PRICE_OFFSETX, menuPos.getY() + PRICE_OFFSETY, PRICE_WIDTH, PRICE_HEIGHT));
-	totalPriceTex->render(build_sdlrect(menuPos.getX() + TOT_OFFSETX, menuPos.getY() + TOT_OFFSETY, TOT_WIDTH*aux.size(), TOT_HEIGHT));
+	SDL_Rect quantRect = { menuPos.getX() + NUM_OFFSETX , menuPos.getY() + NUM_OFFSETY, numberTex->width(), numberTex->height() };
+	if (number < 10) quantRect.x += numberTex->width() / 2;
+	numberTex->render(quantRect);
+	priceTex->render(build_sdlrect(menuPos.getX() + PRICE_OFFSETX, menuPos.getY() + PRICE_OFFSETY, priceTex->width(), priceTex->height()));
+	totalPriceTex->render(build_sdlrect(menuPos.getX() + TOT_OFFSETX, menuPos.getY() + TOT_OFFSETY, totalPriceTex->width(), totalPriceTex->height()));
 	ingTex->render(build_sdlrect(menuPos.getX() + ING_OFFSETX, menuPos.getY() + ING_OFFSETY, ING_WIDTH, ING_HEIGHT));
 
 }
@@ -109,7 +111,6 @@ void  ShoppingMenuComp::closeMenu() {
 	}
 }
 void  ShoppingMenuComp::changePrice() {
-	
 	totalPrice = number * price;
 	delete numberTex;
 	delete totalPriceTex;

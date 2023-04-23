@@ -20,6 +20,7 @@ private:
 	const int BASKET_SIZE = 600;
 	const int ING_SIZE = 50;
 	const int MAX_ING = 11;
+	const int ING_AMT_OFFSET_X = 2;
 
 	// lista de ingredientes en la cesta y su cantidad
 	map<_ecs::_ingredients_id, int> ingredients; // ingredientes y sus cantidades
