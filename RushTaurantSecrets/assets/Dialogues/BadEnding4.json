@@ -2,183 +2,228 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Stop! Don't move!"
+      "Text": "Stop! Don't move!",
+      "Portrait": "PROTA_CHEF_SHOUTING"
     },
     {
       "Character": "Player",
-      "Text": "I told you to stay still!"
+      "Text": "I told you to stay still!",
+      "Portrait": "PROTA_CHEF_SHOUTING"
     },
     {
       "Character": "Player",
-      "Text": "Hey! Come back here, you thief!"
+      "Text": "Hey! Come back here, you thief!",
+      "Portrait": "PROTA_CHEF_SHOUTING"
     },
     {
       "Character": "Player",
-      "Text": "Damn... He's already gone."
+      "Text": "Damn... He's already gone.",
+      "Portrait": "PROTA_CHEF_FURIOUS"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_FURIOUS"
     },
     {
       "Character": "Player",
-      "Text": "I should go back to work... I hope my clients are not alarmed... I was kind of noisy..."
+      "Text": "I should go back to work... I hope my clients are not alarmed... I was kind of noisy...",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "TV",
-      "Text": "Up next, local business news!"
+      "Text": "Up next, local business news!",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "TV",
-      "Text": "Today we will be talking about a restaurant that has been succeeding lately."
+      "Text": "Today we will be talking about a restaurant that has been succeeding lately.",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "Player",
-      "Text": "!!!"
+      "Text": "!!!",
+      "Portrait": "PROTA_CASUAL_SURPRISED"
     },
     {
       "Character": "TV",
-      "Text": "Its charismatic owner gave us the chance to share a lovely interview with him."
+      "Text": "Its charismatic owner gave us the chance to share a lovely interview with him.",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "TV",
-      "Text": "Welcome to our program!"
+      "Text": "Welcome to our program!",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "Rival",
-      "Text": "It's a pleasure."
+      "Text": "It's a pleasure.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "WHAT!?"
+      "Text": "WHAT!?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "This can't be true... How did he get there...? My restaurant is much more successful..."
+      "Text": "This can't be true... How did he get there...? My restaurant is much more successful...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Rival",
-      "Text": "We finally made it."
+      "Text": "We finally made it.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Rival",
-      "Text": "All of these years trying new recipes and techniques have finally paid off."
+      "Text": "All of these years trying new recipes and techniques have finally paid off.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "TV",
-      "Text": "What a wonderful place!"
+      "Text": "What a wonderful place!",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "TV",
-      "Text": "Without a doubt, this is a restaurant worthy of its fortune."
+      "Text": "Without a doubt, this is a restaurant worthy of its fortune.",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "Player",
-      "Text": "But... That place... Is completely brand new."
+      "Text": "But... That place... Is completely brand new.",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "Wait a minute... That book in the back..."
+      "Text": "Wait a minute... That book in the back...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "That's my recipe book!"
+      "Text": "That's my recipe book!",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "That book is my parents' hidden treasure!"
+      "Text": "That book is my parents' hidden treasure!",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
     },
     {
       "Character": "Player",
-      "Text": "Having that book in his possession, he will discover all of my family's cooking secrets..."
+      "Text": "Having that book in his possession, he will discover all of my family's cooking secrets...",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
     },
     {
       "Character": "Player",
-      "Text": "Is that the reason why his restaurant is succeeding now...?"
+      "Text": "Is that the reason why his restaurant is succeeding now...?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "It can't be. That doesn't mean anything. That book won't make him better than me."
+      "Text": "It can't be. That doesn't mean anything. That book won't make him better than me.",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "I've been cooking those dishes for a long time... I obviously do it much better!"
+      "Text": "I've been cooking those dishes for a long time... I obviously do it much better!",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
     },
     {
       "Character": "TV",
-      "Text": "And that's all! Please, say goodbye to the most wealthy and prosperous business in the city."
+      "Text": "And that's all! Please, say goodbye to the most wealthy and prosperous business in the city.",
+      "Portrait": "WOMAN2"
     },
     {
       "Character": "Player",
-      "Text": "What a liar... My restaurant is so much better than that."
+      "Text": "What a liar... My restaurant is so much better than that.",
+      "Portrait": "PROTA_CASUAL_ANGRY"
     },
     {
       "Character": "Player",
-      "Text": "I'll check the bills..."
+      "Text": "I'll go check the bills...",
+      "Portrait": "PROTA_CASUAL_ANGRY"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "It can't be..."
+      "Text": "It can't be...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "The number of customers that come to my restaurant has been declining... Just like my income..."
+      "Text": "The number of customers that come to my restaurant has been declining... Just like my income...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "Then... What was announced on TV was true...?"
+      "Text": "Then... What was announced on TV was true...?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "No..."
+      "Text": "No...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "I can't give up yet!"
+      "Text": "I can't give up yet!",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
     },
     {
       "Character": "Player",
-      "Text": "I have to keep going! I'll do it for my parents!"
+      "Text": "I have to keep going! I'll do it for my parents!",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
     },
     {
       "Character": "Player",
-      "Text": "I won't let them down."
+      "Text": "I won't let them down.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "I'll prepare everything for tomorrow."
+      "Text": "I'll prepare everything for tomorrow.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "I have... no money left...?"
+      "Text": "I have... no money left...?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
     },
     {
       "Character": "Player",
-      "Text": "Oh, no..."
+      "Text": "Oh, no...",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "So this is the end... Dad, mom..."
+      "Text": "So this is the end... Dad, mom...",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "I'm sorry..."
+      "Text": "I'm sorry...",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
     }
   ]
 }

@@ -860,6 +860,10 @@
       "file": "assets/Sprites/UI/icons/owner.png"
     },
     {
+      "id": "WOMAN2",
+      "file": "assets/Sprites/UI/icons/woman2.png"
+    },
+    {
       "id": "PHONE",
       "file": "assets/Sprites/UI/icons/phone.png"
     },
