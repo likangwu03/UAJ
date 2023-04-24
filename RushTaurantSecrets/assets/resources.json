@@ -1103,10 +1103,14 @@
     {
       "id": "REACH_FORMULA",
       "file": "assets/Sound/actions/formula.mp3"
-    } ,
+    },
     {
       "id": "NIGHT_AMBIENCE",
       "file": "assets/Sound/cinematic/night.mp3"
+    },
+    {
+      "id": "PHONECALL",
+      "file": "assets/Sound/cinematic/smartphone_vibrating.mp3"
     }
 
   ],

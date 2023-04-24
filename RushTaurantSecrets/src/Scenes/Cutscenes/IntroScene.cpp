@@ -70,8 +70,7 @@ void IntroScene::update() {
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}
-		
-			break;
+		break;
 	case IntroScene::D1:
 		if (Text::isTextFinished()) {
 			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,

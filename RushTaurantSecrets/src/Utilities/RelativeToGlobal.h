@@ -18,6 +18,9 @@ namespace RelativeToGlobal {
 	const int tilesWPantry = 32;
 	const int tilesHPantry = 18;
 
+	const int tilesWHouse = 26;
+	const int tilesHHouse = 15;
+
 	// convertir un punto relativo en global
 	inline static Vector point(const Vector& point, int tilesW, int tilesH) {
 		int fWidth = SDLUtils::instance()->width() / tilesW;
@@ -48,5 +51,13 @@ namespace RelativeToGlobal {
 	}
 	inline static vector<Vector> pointsPantry(const vector<Vector>& _points) {
 		return points(_points, tilesWPantry, tilesHPantry);
+	}
+
+	// casa
+	inline static Vector pointHouse(const Vector& _point) {
+		return point(_point, tilesWHouse, tilesHHouse);
+	}
+	inline static vector<Vector> pointsHouse(const vector<Vector>& _points) {
+		return points(_points, tilesWHouse, tilesHHouse);
 	}
 };
