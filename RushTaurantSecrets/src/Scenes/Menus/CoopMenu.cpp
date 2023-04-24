@@ -14,7 +14,7 @@ CoopMenu::CoopMenu() {
 	wait = false;
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/continue_bg.png");
+	image = &(sdlutils().images().at("CONTINUE_BG"));
 
 	new Image(bg, image);
 	
@@ -50,7 +50,6 @@ CoopMenu::CoopMenu() {
 
 
 CoopMenu::~CoopMenu() {
-	delete image;
 	delete text;
 	delete waiting;
 }

@@ -25,18 +25,18 @@ EndOfDayScene::EndOfDayScene() {
 	//fondo de la escena
 	backgroundObj = new GameObject(this);
 	new Transform(backgroundObj, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	backgroundT = new Texture(sdlutils().renderer(), "assets/night_background.png");
+	backgroundT = &(sdlutils().images().at("NIGHT_BG"));
 	new Image(backgroundObj, backgroundT);
 
 	//icono reputación
 	reputationObj = new GameObject(this);
 	new Transform(reputationObj, { 150,200 }, { 0,0 }, 75, 75);
-	reputationIconT = new Texture(sdlutils().renderer(), "assets/sprites/UI/HUD/reputation_icon.png");
+	reputationIconT = &(sdlutils().images().at("REPUTATION_ICON"));
 	new Image(reputationObj, reputationIconT);
 
 	moneyObj = new GameObject(this);
 	new Transform(moneyObj, { 150, 300 }, { 0,0 }, 75, 75);
-	moneyIconT = new Texture(sdlutils().renderer(), "assets/sprites/UI/HUD/money_icon.png");
+	moneyIconT = &(sdlutils().images().at("MONEY_ICON"));
 	new Image(moneyObj, moneyIconT);
 
 	//fuente
@@ -83,9 +83,6 @@ EndOfDayScene::EndOfDayScene() {
 }
 
 EndOfDayScene::~EndOfDayScene() {
-	delete backgroundT;
-	delete reputationIconT;
-	delete moneyIconT;
 	delete font1;
 	delete font2;
 	delete reputationTexture;

@@ -8,30 +8,36 @@
 #include"../Definitions/Message_def.h"
 
 class Scene;
+
 class MainMenu;
 class BeforeDayStartScene;
 class Restaurant;
 class UIRestaurant;
 class Pantry;
+class PantryUI;
 class DailyMenuScene;
 class SuperMarket;
-class PauseMenu;
-class OptionsMenu;
-class Reputation;
-class Money;
-class DayManager;
 class EndOfDayScene;
 class GameOverScene;
+
+class PauseMenu;
+class CoopMenu;
 class ContinueMenu;
-class PantryUI;
-class Texture;
-class KitchenIslandComp;
-class CinematicBaseScene;
+class OptionsMenu;
+
 class IntroScene;
 class FirstDayAfterKillScene;
 class SecondDayAfterKillScene;
 class BadEnding1Scene;
-class CoopMenu;
+class EndingDay2NoKill;
+
+class Reputation;
+class Money;
+class DayManager;
+class Texture;
+class KitchenIslandComp;
+class CinematicBaseScene;
+
 
 struct dialogueInfo {
 	std::string character;
@@ -64,6 +70,9 @@ private:
 	Restaurant* restaurant;
 	Pantry* pantry;
 	SuperMarket* supermarket;
+	EndOfDayScene* endScene;
+	BeforeDayStartScene* beforeDayStartScene;
+	GameOverScene* gameOverScene;
 
 	//ui
 	DailyMenuScene* dailyMenu;
@@ -74,9 +83,6 @@ private:
 	OptionsMenu* optionsMenu;
 	PauseMenu* pauseMenu;
 	ContinueMenu* continueMenu;
-	EndOfDayScene* endScene;
-	BeforeDayStartScene* beforeDayStartScene;
-	GameOverScene* gameOverScene;
 	CoopMenu* coopMenu;
 
 
@@ -99,7 +105,7 @@ private:
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
 	BadEnding1Scene* badEnding1Scene;
-
+	EndingDay2NoKill* endingDay2NoKill;
 
 	GameManager();
 
@@ -137,7 +143,7 @@ public:
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 	BadEnding1Scene* getBadEnding1Scene();
-
+	EndingDay2NoKill* getEndingDay2NoKillScene();
 
 	Reputation* getReputation();
 	Money* getMoney();

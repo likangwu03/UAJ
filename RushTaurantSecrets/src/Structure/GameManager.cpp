@@ -23,6 +23,7 @@
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
+#include "../Scenes/Cutscenes/EndingDay2NoKill.h"
 #include "../Scenes/Menus/CoopMenu.h"
 #include "../Scenes/TransitionScene.h"
 #include <sstream>
@@ -38,7 +39,7 @@ GameManager::GameManager() : scenes(), deleteScene(nullptr), deleteTransition(fa
 	reputation(nullptr), days(nullptr), money(nullptr),
 	menu(nullptr), kitchenIsland(nullptr),
 	hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0),
-	introScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr) { };
+	introScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr), endingDay2NoKill(nullptr) { };
 
 
 void GameManager::initialize() {
@@ -63,9 +64,6 @@ void GameManager::initialize() {
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
 	beforeDayStartScene = new BeforeDayStartScene();
-	secondDayAfterKillScene = new SecondDayAfterKillScene();
-	firstDayAfterKillScene = new FirstDayAfterKillScene();
-	badEnding1Scene = new BadEnding1Scene();
 	coopMenu = new CoopMenu();
 
 	try {
@@ -84,6 +82,13 @@ void GameManager::initialize() {
 	days->nextDay(true);
 
 
+	secondDayAfterKillScene = new SecondDayAfterKillScene();
+	firstDayAfterKillScene = new FirstDayAfterKillScene();
+	badEnding1Scene = new BadEnding1Scene();
+	endingDay2NoKill = new EndingDay2NoKill();
+
+
+
 	changeScene(mainMenu);
 
 }
@@ -93,6 +98,7 @@ GameManager::~GameManager() {
 	delete firstDayAfterKillScene;
 	delete introScene;
 	delete badEnding1Scene;
+	delete endingDay2NoKill;
 
 	delete days;
 	delete money;
@@ -212,6 +218,7 @@ IntroScene* GameManager::getIntroScene() { return introScene; }
 FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }
 SecondDayAfterKillScene* GameManager::getSecondDayAfterKillScene() { return secondDayAfterKillScene; }
 BadEnding1Scene* GameManager::getBadEnding1Scene() { return badEnding1Scene; }
+EndingDay2NoKill* GameManager::getEndingDay2NoKillScene() { return endingDay2NoKill; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }

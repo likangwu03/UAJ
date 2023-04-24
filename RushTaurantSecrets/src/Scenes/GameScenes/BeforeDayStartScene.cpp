@@ -19,7 +19,7 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	//background
 	obj = new GameObject(this);
 	new Transform(obj, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	background = new Texture(sdlutils().renderer(), "assets/morning_background1.png");
+	background = &(sdlutils().images().at("MORNING_BG"));
 	new Image(obj, background);
 
 	//fuentes usadas
@@ -35,13 +35,13 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	//diana
 	targetObj = new GameObject(this);
 	new Transform(targetObj, { 75, 400 }, { 0,0 }, 100, 100);
-	target = new Texture(sdlutils().renderer(), "assets/Sprites/UI/HUD/target_icon.png");
+	target = &(sdlutils().images().at("TARGET_ICON"));
 	new Image(targetObj, target);
 
 	//banner
 	bannerObj = new GameObject(this);
 	new Transform(bannerObj, { (float)sdlutils().width() / 4 + 50, 10 }, { 0,0 }, 500, 300);
-	bannerTexture = new Texture(sdlutils().renderer(), "assets/Sprites/UI/UI_Flat_Banner_01_Upward.png");
+	bannerTexture = &(sdlutils().images().at("BANNER"));
 	new Image(bannerObj, bannerTexture);
 	
 	
@@ -86,7 +86,6 @@ void BeforeDayStartScene::toDailyMenu() {
 }
 
 BeforeDayStartScene::~BeforeDayStartScene() {
-	delete target;
 	delete dayTxt;
 	delete moneyTarget;
 	delete buttonTxt;
@@ -95,8 +94,6 @@ BeforeDayStartScene::~BeforeDayStartScene() {
 	delete pressButtonText;
 	delete pressButtonText1;
 	delete dayText;
-	delete background;
-	delete bannerTexture;
 }
 
 void BeforeDayStartScene::handleEvents() {
