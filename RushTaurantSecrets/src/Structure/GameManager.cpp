@@ -68,9 +68,6 @@ void GameManager::initialize() {
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
 	beforeDayStartScene = new BeforeDayStartScene();
-	secondDayAfterKillScene = new SecondDayAfterKillScene();
-	firstDayAfterKillScene = new FirstDayAfterKillScene();
-	badEnding1Scene = new BadEnding1Scene();
 	coopMenu = new CoopMenu();
 
 	
