@@ -5,7 +5,6 @@
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
 #include "../Cutscenes/IntroScene.h"
-#include "../Cutscenes/Day2KillEndingScene.h"
 #include "../../Utilities/checkML.h"
 
 
@@ -19,7 +18,7 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->newGame();
-			GameManager::get()->changeScene(GameManager::get()->getDay2KillEndingScene(), true);
+			GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);
 			GameManager::get()->getCurrentScene()->callAfterCreating();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
