@@ -22,7 +22,7 @@ class ClockComponent : public Manager<ClockComponent> {
 private:
 	// parametrizable: 1000 (cada segundo) / 10000 (cada diez segundos)
 	const int TIME_CLOCK_REFRESH = 2500, ANGLE = 90, ANGLE_UPDATE = 5;
-	const int ICONX = 20, ICONY = 15, ICONSIZE = 48;
+	const int ICONX = 35, ICONY = 90, ICONSIZE = 48;
 	const int MAX_LAPS = 1;
 
 	SDLUtils* sdl;

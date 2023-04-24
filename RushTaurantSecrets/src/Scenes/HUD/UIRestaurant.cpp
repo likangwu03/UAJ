@@ -230,8 +230,8 @@ void UIRestaurant::render() {
 	objectiveOutline->render(objectiveOutlineRect);
 	objectiveTexture->render(objectiveRect);
 	
-	dayOutline->render({ 1100 - 2, 100 - 2, dayOutline->width(), dayOutline->height() });
-	dayTexture->render({ 1100, 100, dayTexture->width(), dayTexture->height() });
+	dayOutline->render({ 1100 - 2, 15 - 2, dayOutline->width(), dayOutline->height() });
+	dayTexture->render({ 1100, 15, dayTexture->width(), dayTexture->height() });
 	
 	Scene::render();
 	checkRenderStar();
