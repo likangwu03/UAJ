@@ -568,6 +568,24 @@
       "rows": 1
     },
     {
+      "id": "SLIDER_BAR",
+      "file": "assets/Sprites/UI/Menu/slider/sliderBar.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "SLIDER_BUTTON",
+      "file": "assets/Sprites/UI/Menu/slider/sliderCenter.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "SLIDER_HIGHLIGHT",
+      "file": "assets/Sprites/UI/Menu/slider/sliderCenterHighlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_YELLOW",
       "file": "assets/Sprites/UI/HUD/basket_yellow.png",
       "cols": 1,
