@@ -741,6 +741,14 @@
       "file": "assets/Sprites/UI/icons/character_chef_manic.png"
     },  
     {
+      "id": "PROTA_CHEF_SHOUTING",
+      "file": "assets/Sprites/UI/icons/character_chef_shouting.png"
+    },
+    {
+      "id": "PROTA_CHEF_FURIOUS",
+      "file": "assets/Sprites/UI/icons/character_chef_furious.png"
+    },
+    {
       "id": "PROTA_CASUAL_SURPRISED",
       "file": "assets/Sprites/UI/icons/character_casual_surprised.png"
     },
