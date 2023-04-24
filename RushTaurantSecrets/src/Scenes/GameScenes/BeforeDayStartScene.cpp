@@ -55,15 +55,9 @@ void BeforeDayStartScene::init() {
 	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
 
 	day = gm->getDayManager();
-	/*accDay = day->getDay();
-	accGoal = day->getDailyObjective();*/
 
 }
 
-
-void BeforeDayStartScene::update() {
-	//no borrar aun
-}
 
 void BeforeDayStartScene::reset() {
 	//beginSound->play();

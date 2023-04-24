@@ -1,6 +1,7 @@
 #include "UIMarket.h"
 #include "../../Structure/GameManager.h"
 #include "../../Managers/Money.h"
+#include "../../Managers/DayManager.h"
 
 #include "../../Components/ShoppingMenuComp.h"
 #include "../../Utilities/checkML.h"
@@ -23,6 +24,9 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	font = new Font(FONT_PATH, FONTSIZE);
 	outline = new Font(FONT_PATH, FONTSIZE);
 	TTF_SetFontOutline(outline->getTTFFont(), 2);
+	font1 = new Font(FONT_PATH, FONTSIZE + 10);
+	outline1 = new Font(FONT_PATH, FONTSIZE + 10);
+	TTF_SetFontOutline(outline1->getTTFFont(), 2);
 
 	// Dinero
 	intMoney = moneyTxt->getMoney();
@@ -37,6 +41,16 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	moneyOutlineRect.x -= CENTEROUTLINE / 2; moneyOutlineRect.w += CENTEROUTLINE;
 	moneyOutlineRect.y -= CENTEROUTLINE / 2; moneyOutlineRect.h += CENTEROUTLINE;
 
+	//objetivo diario
+	createGameObjects(_ecs::grp_ICONS, "TARGET_ICON", Vector(ICONX - 2, ICONY + TARGETOFFSET), ICONSIZE +5, ICONSIZE + 5, 0);
+	target = GameManager::get()->getDayManager()->getDailyObjective();
+	targetText = to_string(target);
+	targetTexture = new Texture(sdl->renderer(), targetText, *font, build_sdlcolor(0x3a3a50FF));
+	targetOutline = new Texture(sdl->renderer(), targetText, *outline, build_sdlcolor(0xFFFFFFFF));
+	targetRect = { 80, (int)(ICONY + TARGETOFFSET - 2), targetTexture->width() ,targetTexture->height() };
+	targetOutlineRect = targetRect;
+	targetOutlineRect.x -= CENTEROUTLINE / 2; targetOutlineRect.w += CENTEROUTLINE;
+	targetOutlineRect.y -= CENTEROUTLINE / 2; targetOutlineRect.h += CENTEROUTLINE;
 
 	// icono de cesta
 	createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
@@ -55,13 +69,48 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 		[&]() {
 			toggleDailyMenu();
 		});
+
+	accDay = 1;
+	dayText = "DAY: " + to_string(accDay);
+	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
+	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 }
 
 UIMarket::~UIMarket() {
 	delete font;
 	delete outline;
+	delete font1;
+	delete outline1;
 	delete moneyTexture;
 	delete moneyOutline;
+	delete targetTexture;
+	delete targetOutline;
+	delete dayTexture;
+	delete dayOutline;
+}
+
+void UIMarket::reset() {
+	target = GameManager::get()->getDayManager()->getDailyObjective();
+	targetText = to_string(target);
+
+	delete targetTexture;
+	delete targetOutline;
+
+	targetTexture = new Texture(sdl->renderer(), targetText, *font, build_sdlcolor(0x3a3a50FF));
+	targetOutline = new Texture(sdl->renderer(), targetText, *outline, build_sdlcolor(0xFFFFFFFF));
+	targetRect = { 80, (int)(ICONY + TARGETOFFSET - 2), targetTexture->width() ,targetTexture->height() };
+	targetOutlineRect = targetRect;
+	targetOutlineRect.x -= CENTEROUTLINE / 2; targetOutlineRect.w += CENTEROUTLINE;
+	targetOutlineRect.y -= CENTEROUTLINE / 2; targetOutlineRect.h += CENTEROUTLINE;
+
+	delete dayTexture;
+	delete dayOutline;
+
+	accDay = GameManager::get()->getDayManager()->getDay();
+	dayText = "DAY: " + to_string(accDay);
+	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
+	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
+
 }
 
 
@@ -116,6 +165,12 @@ void UIMarket::handleEvents() {
 void UIMarket::render() {
 	moneyOutline->render(moneyOutlineRect);
 	moneyTexture->render(moneyRect);
+
+	targetOutline->render(targetOutlineRect);
+	targetTexture->render(targetRect);
+
+	dayOutline->render({ sdl->width() - 25 - dayTexture->width() -2, 15 - 2, dayOutline->width(), dayOutline->height()});
+	dayTexture->render({ sdl->width() - 25 - dayTexture->width(), 15, dayTexture->width(), dayTexture->height()});
 
 	if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON()) {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();

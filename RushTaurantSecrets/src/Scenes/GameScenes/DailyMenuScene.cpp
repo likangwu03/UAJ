@@ -41,6 +41,7 @@ void DailyMenuScene::init() {
 	dailyMenu2->getComponent<DailyMenuComp>()->initMenu();
 
 	button = 0;
+	GameManager::get()->getSupermarket()->getUI()->reset();
 }
 
 

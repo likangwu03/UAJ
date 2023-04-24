@@ -14,12 +14,15 @@ class UIMarket : public Scene
 {
 private:
 	const string FONT_PATH = "assets/Fonts/EpilepsySansBold.ttf";
-	const float FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15, CENTEROUTLINE = 4;
+	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15, CENTEROUTLINE = 4;
+	const int TARGETOFFSET = 60;
 
 	Scene* market;
 	SDLUtils* sdl = SDLUtils::instance();
 	Font* font;
+	Font* font1;
 	Font* outline;
+	Font* outline1;
 
 	Money* moneyTxt;
 	Texture* moneyTexture;
@@ -28,11 +31,24 @@ private:
 	SDL_Rect moneyOutlineRect;
 	int intMoney;
 
+	int target;
+	Texture* targetTexture;
+	Texture* targetOutline;
+	string targetText;
+	SDL_Rect targetRect;
+	SDL_Rect targetOutlineRect;
+
+
 	InputHandler* ih;
 	BasketMarket* basketMarket;
 	GameObject* shopMenu;
 	DailyMenu* menu;
 	bool menuToggled;
+
+	int accDay;
+	string dayText;
+	Texture* dayTexture;
+	Texture* dayOutline;
 
 	void toggleDailyMenu();
 
@@ -48,6 +64,7 @@ public:
 	void handleEvents() override;
 	void render();
 	void setDailyMenu();
+	void reset();
 
 	virtual Scene* getConnectedScene() { return market; }
 

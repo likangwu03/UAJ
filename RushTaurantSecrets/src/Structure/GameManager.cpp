@@ -52,6 +52,10 @@ void GameManager::initialize() {
 	dailyMenu = new DailyMenuScene();
 	gameOverScene = new GameOverScene();
 	
+	try {
+		days = new DayManager();
+	}
+	catch (std::exception e) { std::cout << e.what(); }
 
 	sdlutils().setResizeFactor(PANTRYSIZE);
 	pantryUI = new PantryUI();
@@ -66,9 +70,7 @@ void GameManager::initialize() {
 	beforeDayStartScene = new BeforeDayStartScene();
 	coopMenu = new CoopMenu();
 
-	try {
-		days = new DayManager();
-	} catch(std::exception e) { std::cout << e.what(); }
+	
 
 	beforeDayStartScene->init();
 
