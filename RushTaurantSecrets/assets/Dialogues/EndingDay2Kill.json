@@ -2,11 +2,18 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "What have I done!? What are mom and dad going to think of me? I'm sure they'll be angry at me, but it's not like I can lie to them, that would disappoint them. I'm sure they'll understand I'm doing this for them."
+      "Text": "What have I done!? What are mom and dad going to think of me? I'm sure they'll be angry at me, but it's not like I can lie to them. That would disappoint them. I'm sure they'll understand I'm doing this for them.",
+      "Portrait": "PROTA_CASUAL_SIGH"
+    },
+    {
+      "Character": "Phone",
+      "Text": "(BUZZ, BUZZ, BUZZ, BU-)",
+      "Portrait": "PHONE"
     },
     {
       "Character": "Rival",
-      "Text": "One of my employees hasn't come back. I don't know what you've done with him, but I'll be sure to make you pay if you've hurt him. Watch your step, you will not be safe in that “restaurant” of yours."
+      "Text": "One of my employees hasn't come back yet. I don't know what you've done with him, but I'll make sure you pay the price if you've hurt him. Watch your step, you will not be safe in that 'restaurant' of yours.",
+      "Portrait": "OWNER"
     }
   ]
 }

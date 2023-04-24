@@ -26,10 +26,10 @@ class ContinueMenu;
 class OptionsMenu;
 
 class IntroScene;
+class Day2KillEndingScene;
 class FirstDayAfterKillScene;
 class SecondDayAfterKillScene;
 class BadEnding1Scene;
-class EndingDay2NoKill;
 
 class Reputation;
 class Money;
@@ -43,10 +43,9 @@ struct dialogueInfo {
 	std::string character;
 	deque<std::string> text;
 	Texture* portrait;
-public:
 	dialogueInfo(std::string c, deque<std::string> t, Texture* p) : character(c), text(t), portrait(p) {};
 };
-class GameManager :public Singleton<GameManager> {
+class GameManager : public Singleton<GameManager> {
 	friend Singleton<GameManager>;
 
 
@@ -102,10 +101,10 @@ private:
 
 	//escenas cinem¨¢ticas
 	IntroScene* introScene;
+	Day2KillEndingScene* day2KillEndingScene;
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
 	BadEnding1Scene* badEnding1Scene;
-	EndingDay2NoKill* endingDay2NoKill;
 
 	GameManager();
 
@@ -140,10 +139,10 @@ public:
 	CoopMenu* getCoopMenu();
 	EndOfDayScene* getEndOfDay();
 	IntroScene* getIntroScene();
+	Day2KillEndingScene* getDay2KillEndingScene();
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 	BadEnding1Scene* getBadEnding1Scene();
-	EndingDay2NoKill* getEndingDay2NoKillScene();
 
 	Reputation* getReputation();
 	Money* getMoney();
@@ -166,5 +165,5 @@ public:
 	bool checkload();
 	void newGame();
 
-	vector<dialogueInfo> getDialogueInfo(std::string d);
+	vector<dialogueInfo> getDialogueInfo(string d);
 };
