@@ -23,8 +23,7 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
 	playerTransform = GameManager::get()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
-	showControl = new ShowControlComp(parent, playerTransform,
-		{ {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-10,-25),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(50,-25),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Circle,ControlsType::xbox_B,Vector(120,-25),80,40}});
+	showControl = new ShowControlAuto(parent,{{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-5,-5),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-5),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(145,-5),80,40}}, playerTransform);
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {
@@ -41,7 +40,7 @@ void ShoppingMenuComp::handleEvents() {
 	if (ih->joysticksInitialised()) {
 		if(ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) decreaseN();
 		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) decreaseN();
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B && ing != NONE_ING)) {
+		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A && ing != NONE_ING)) {
 			addIng->play();
 			basket->addToBasket(ing, number, totalPrice);
 			closeMenu();

@@ -13,7 +13,8 @@ using namespace _ecs;
 using namespace std;
 class ShowControlComp :public Component
 {
-
+private:
+public:
 	struct ControlsInfo {
 		ControlsType key;
 		ControlsType play;
@@ -31,11 +32,13 @@ class ShowControlComp :public Component
 		int col;
 		Texture* texture;
 	};
+protected:
 	vector<showControlInfo> controls_;
-	Transform* parentTransform;
+	
 public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_SHOO_RENDER;
-	ShowControlComp(GameObject* parent, Transform* transform, vector<ControlsInfo> controls);
-	void render() override;
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_SHOWCONTROL;
+	ShowControlComp(GameObject* parent, vector<ControlsInfo> controls);
+	void render(Vector pos);
+	void changeOffset(Vector off,int i);
 };
 

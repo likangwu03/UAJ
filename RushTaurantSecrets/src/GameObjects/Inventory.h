@@ -7,7 +7,6 @@ class Inventory:public GameObject
 public:
 	Inventory(Scene* scene):GameObject(scene, _ecs::grp_ICONS) {
 		new InventoryComp(this);
-		//hay que añadir otros componentes para renderizar el inventario,etc...
 		
 	};
 };

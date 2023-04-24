@@ -78,8 +78,7 @@ bool InventoryComp::serveDish(_ecs::_dish_id dish) {
 			return true;
 		}
 		else return false;
-		/*freeDish();
-		return true;*/
+
 	}
 	else return false;
 }
@@ -122,11 +121,11 @@ void InventoryComp::setPosition(int i, int& x, int& y) {
 
 
 void InventoryComp::handleEvents() {
-	// flecha hacia arriba
-	if (ih->isKeyDown(SDLK_UP) && cellSelected > -1)
+	//  hacia arriba
+	if (cellSelected > -1 &&(ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_LEFT))) )
 		prevDish();
-	// flecha hacia abajo
-	else if (ih->isKeyDown(SDLK_DOWN) && cellSelected > -1)
+	//  hacia abajo
+	else if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_RIGHT)) )
 		nextDish();
 }
 

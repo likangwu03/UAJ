@@ -2,8 +2,7 @@
 #include "../Utilities/checkML.h"
 #include "../Structure/Scene.h"
 #include "../Components/PlayerMovementController.h"
-ShowControlComp::ShowControlComp(GameObject* parent, Transform* transform ,vector<ControlsInfo> controls)
-	: Component(parent, id), parentTransform(transform)
+ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> controls): Component(parent, id)
 {
 	controls_ = vector<showControlInfo>(controls.size());
 	if (!ih().joysticksInitialised()) {
@@ -40,12 +39,14 @@ ShowControlComp::ShowControlComp(GameObject* parent, Transform* transform ,vecto
 			}
 		}
 	}
-	//parentTransform = parent->getComponent<Transform>();
 	setActive(false);
 }
 
-void ShowControlComp::render()
-{
+void ShowControlComp::render(Vector pos) {
 	for (auto c : controls_)
-		c.texture->renderFrame(build_sdlrect(parentTransform->getPos().getX() + c.offset.getX(), parentTransform->getPos().getY() + c.offset.getY(), c.width, c.height), c.col, c.row, 0);
+		c.texture->renderFrame(build_sdlrect(pos.getX() + c.offset.getX(), pos.getY() + c.offset.getY(), c.width, c.height), c.col, c.row, 0);
+}
+
+void ShowControlComp::changeOffset(Vector off, int i) {
+	controls_[i].offset = off;
 }

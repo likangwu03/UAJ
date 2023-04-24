@@ -5,7 +5,7 @@
 #include "../Utilities/SDLUtils.h"
 #include "../Utilities/InputHandler.h"
 #include "../Components/BasketMarketComponent.h"
-#include "../Components/ShowControlComp.h"
+#include "../Components/ShowControlAuto.h"
 
 class ShoppingMenuComp :public Component
 {

@@ -53,27 +53,26 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	targetOutlineRect.y -= CENTEROUTLINE / 2; targetOutlineRect.h += CENTEROUTLINE;
 
 	// icono de cesta
-	createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
+	GameObject* aux=createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
+	(new ShowControlAuto(aux,{{ControlsType::key_Z,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(70,60),40,40}}))->setActive(true);
 
-	//men¨² de compra
+	//menï¿½ï¿½ de compra
 	shopMenu = new GameObject(this, _ecs::grp_GENERAL, hdr_SHOP_MENU1);
 	new ShoppingMenuComp(shopMenu);
 
-	// icono de men?del día
+	// icono de men?del dï¿½a
 	menuToggled = true;
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, 30),
 		479.0f, 640.0f, []() {});
 	menu->getComponent<ButtonComp>()->setActive(false);
 	toggleDailyMenu();
-	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,
-		[&]() {
-			toggleDailyMenu();
-		});
-
+	
 	accDay = 1;
 	dayText = "DAY: " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
+	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,0);
+	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
 }
 
 UIMarket::~UIMarket() {
@@ -119,11 +118,12 @@ void UIMarket::update() {
 	showMoneyText();
 }
 
-void UIMarket::createGameObjects(_ecs::_grp_id grp, string textureName,
+GameObject* UIMarket::createGameObjects(_ecs::_grp_id grp, string textureName,
 	Vector position, float width, float height, float rotation, _ecs::_hdr_id handler) {
 	GameObject* gameObject = new GameObject(this, grp, handler);
 	new Transform(gameObject, position, Vector(0, 0), width, height, rotation);
 	new Image(gameObject, &((*sdl).images().at(textureName)));
+	return gameObject;
 }
 
 
@@ -145,7 +145,8 @@ void UIMarket::showMoneyText() {
 }
 
 void UIMarket::handleEvents() {
-	if (ih->isKeyDown(SDLK_z)) { 
+
+	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_Y) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_z)) {
 		// si el men?de cesta ya est?abierto, lo cierra
 		if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON())
 			basketMarket->getComponent<BasketMarketComponent>()->setBasketON(false);
@@ -153,13 +154,11 @@ void UIMarket::handleEvents() {
 		else
 			basketMarket->getComponent<BasketMarketComponent>()->setBasketON(true);
 	}
+	else if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_X) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_v)) {
+		toggleDailyMenu();
+	}
 	else
 		Scene::handleEvents();
-	/*
-	if (ih->isKeyDown(SDLK_SPACE)){
-		basketMarket->buyIngredient();
-	}
-	*/
 }
 
 void UIMarket::render() {

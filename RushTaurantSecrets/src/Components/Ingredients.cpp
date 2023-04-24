@@ -4,11 +4,12 @@
 
 Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), coord(),
 returnIng(&sdlutils().soundEffects().at("RETURN_ING")),
-pickIng(&sdlutils().soundEffects().at("PICK_ING"))
-{
+pickIng(&sdlutils().soundEffects().at("PICK_ING")), return_icon(&sdlutils().images().at("RETURN_ICON")), clean_icon(&sdlutils().images().at("CLEAN_ICON"))
+{												  
 	bubble_tex = &((*sdl).images().at("BUBBLE")); 
 	dest_bubble = { BUBBLE_X, BUBBLE_Y, BUBBLE_W, BUBBLE_H };
 	dest.w = dest.h = ING_SIZE;
+	showControl = new ShowControlComp(parent, { {ControlsType::key_R,ControlsType::play_Cross,ControlsType::xbox_A,Vector(5,5),30,30} ,{ControlsType::key_X,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(5,35),30,30}});
 }
 
 bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
@@ -69,7 +70,10 @@ void Ingredients::cookingIngredients() {
 void Ingredients::render() {
 	if (!ingredients.empty()) {
 		bubble_tex->renderFrame(dest_bubble, 0, ingredients.size() - 1, 0);
-	
+		showControl->render(Vector(dest_bubble.x+ dest_bubble.w-(MAX_INGREDIENTS- ingredients.size()*20)-96, dest_bubble.y));
+		return_icon->render(build_sdlrect(dest_bubble.x + dest_bubble.w - 50 - (MAX_INGREDIENTS - ingredients.size() * 20), dest_bubble.y+5,30,30));
+		clean_icon->render(build_sdlrect(dest_bubble.x + dest_bubble.w - 50- (MAX_INGREDIENTS - ingredients.size() * 20), dest_bubble.y + 35, 30, 30));
+		
 		int k = 0; // mejor con un iterador.
 		for (auto ingredient : ingredients) {
 			Texture* texture = &((*sdl).images().at(to_string(ingredient)));
