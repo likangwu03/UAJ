@@ -45,6 +45,8 @@ namespace _ecs {
 		cmp_STREAK,
 		cmp_OTHERPLAYER,
 		cmp_SHOWCONTROL,
+		cmp_TEXT2,
+		cmp_TEXTBOX,
 		// Do not erase pls
 		cmp_INVALID
 	};

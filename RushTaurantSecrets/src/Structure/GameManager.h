@@ -43,7 +43,6 @@ struct dialogueInfo {
 	std::string character;
 	deque<std::string> text;
 	Texture* portrait;
-public:
 	dialogueInfo(std::string c, deque<std::string> t, Texture* p) : character(c), text(t), portrait(p) {};
 };
 class GameManager : public Singleton<GameManager> {
@@ -166,5 +165,5 @@ public:
 	bool checkload();
 	void newGame();
 
-	vector<dialogueInfo> getDialogueInfo(std::string d);
+	vector<dialogueInfo> getDialogueInfo(string d);
 };

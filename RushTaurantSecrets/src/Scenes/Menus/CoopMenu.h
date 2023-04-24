@@ -7,17 +7,31 @@ class CoopMenu : public Scene
 {
 private:
 	GameObject* bg;
+
 	ButtonGO* buttonResume;
 	ButtonGO* buttonServer;
 	ButtonGO* buttonClient;
 
+	ButtonGO* buttonResume2;
+	ButtonGO* buttonConfir;
+
+	GameObject* IP;
 	CoopHandler* coop;
+
 	Texture* image;
 	Texture* waiting;
-	string ip="localhost";
+	Texture* textBox;
+
+	string ip_="localhost";
+
+
+
 	bool server;
 	bool wait;
+	bool enterIp_;
+
 	Font* text;
+	Font* text_ip;
 
 	const int NUM_BUTTON = 3;
 	int button;
@@ -27,9 +41,15 @@ public:
 
 	void update() ;
 	void handleEvents() override;
-	void init();
+	
 	void selectedButton(int selected);
 
-	
+
+	void onWaiting();
+
+	void enterIp();
+
+	void goBack();
+
 };
 

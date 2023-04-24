@@ -45,7 +45,7 @@ public:
     std::pair<bool, bool> connectServer();
 
     // Métodos conjuntos
-
+    void close();
     void closeConnection();
     void receive();
     void send(const Message& message);

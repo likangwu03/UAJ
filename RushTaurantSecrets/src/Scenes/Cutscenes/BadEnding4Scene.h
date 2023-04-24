@@ -5,14 +5,16 @@
 #include <vector>
 
 using namespace std;
-struct dialogueInfo;
+//struct dialogueInfo {
+//
+//};
 
 class BadEnding4Scene: public CinematicBaseScene
 {
 private:
 	GameObject* player;
 	StraightMovement* straightMovement;
-	vector<dialogueInfo> dialogues;
+	//vector<dialogueInfo> dialogues;
 public:
 	BadEnding4Scene();
 	void renderCinematic() override;
