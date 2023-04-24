@@ -3,6 +3,7 @@
 #include "../../Utilities/SDLUtils.h"
 #include "../../GameObjects/Inventory.h"
 #include "../../GameObjects/Clock.h"
+#include "../../Components/ShowControlAuto.h"
 #include <string>
 #include <array>
 #include <vector>
@@ -87,7 +88,7 @@ public:
 	void checkRenderStar();
 	void setDailyMenu();
 	Clock* getClock() const { return clock; }
-
+	void handleEvents()override;
 	void update();
 	void render();
 	void reset();

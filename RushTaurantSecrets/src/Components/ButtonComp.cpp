@@ -28,17 +28,30 @@ void ButtonComp::handleEvents()
 
 	SDL_Rect dest = { transform->getPos().getX(), transform->getPos().getY(), transform->getW(), transform->getH() };
 
-	if (SDL_HasIntersection(&mouseRect, &dest)) {
-		if(!selected) buttonHoverSound->play();
-		//highlighted = true;
+	//if (SDL_HasIntersection(&mouseRect, &dest)) {
+	//	if(!selected) buttonHoverSound->play();
+	//	//highlighted = true;
+	//	selected = true;
+	//	if (ih().getMouseButtonState(ih().LEFT)) {
+	//		playSound();
+	//		//ih().setControls(true);
+	//		_callback();
+	//	}
+	//}
+	 if (ih().joysticksInitialised()) {
+		ih().refresh();
+		if (!selected) buttonHoverSound->play();
+		highlighted = true;
 		selected = true;
-		if (ih().getMouseButtonState(ih().LEFT)) {
+		buttonHoverSound->play();
+		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
+			ih().clean();
+			//ih().setControls(false);
 			playSound();
-			//ih().setControls(true);
 			_callback();
 		}
 	}
-	else if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
+	 else if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
 		//if (!highlighted) buttonHoverSound->play();
 		if (highlighted) {
 			playSound();
@@ -46,23 +59,10 @@ void ButtonComp::handleEvents()
 			_callback();
 		}
 	}
-	else if (ih().joysticksInitialised()) {
-		ih().refresh();
-		if (!selected) buttonHoverSound->play();
-		highlighted = true;
-		selected = true;
-		buttonHoverSound->play();
-		if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-			ih().clean();
-			//ih().setControls(false);
-			playSound();
-			_callback();
-		}
-	}
-	else {
-		//highlighted = false;
-		selected = false;
-	}
+	//else {
+	//	//highlighted = false;
+	//	selected = false;
+	//}
 }
 
 bool ButtonComp::isHighlighted() {

@@ -23,21 +23,18 @@ UIRestaurant::UIRestaurant() : Scene() {
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = GameManager::get()->getMoney();
 
-	// pens?en hacerlo pasando un struct como parámetro, pero el struct tenía que redefinirse demasiadas veces,
-	// as?que Cleon me dijo que pasara directamente la información del struct como parámetro
-	
-	// Reputación
+	// Reputaciï¿½n
 	reputation = GameManager::get()->getReputation();
 	// icono 
 	createIcon("REPUTATION_ICON", Vector(ICONX, ICONY), ICONSIZE, ICONSIZE, 0, grp_ICONS);
-	// estrellas vacías
-	for (int i = 0; i < stars.size(); i++) 
+	// estrellas vacï¿½as
+	for (int i = 0; i < stars.size(); i++)
 		createIcon("EMPTY_STAR", Vector(80 + i * 40, 25), 30, 32, 0, grp_ICONS);
 
 	fullStarTexture = &((*sdl).images().at("STAR"));
 	actReputation = reputation->getReputation();
 
-	// inicializa array de estrellas (define qu?estrellas se muestran y cuáles no)
+	// inicializa array de estrellas (define qu?estrellas se muestran y cuï¿½les no)
 	for (int i = 0; i < stars.size(); i++) {
 		stars[i] = true;
 	}
@@ -50,7 +47,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	outline1 = new Font(FONT_PATH, FONTSIZE + 10);
 	TTF_SetFontOutline(outline->getTTFFont(), 2);
 	TTF_SetFontOutline(outline1->getTTFFont(), 2);
-	
+
 
 	// Dinero
 	startingMoney = currentMoney = moneyTxt->getMoney();
@@ -63,24 +60,24 @@ UIRestaurant::UIRestaurant() : Scene() {
 	moneyOutline = new Texture(sdl->renderer(), strMoney, *outline, build_sdlcolor(0xFFFFFFFF));
 	moneyRect = { 80, (int)(ICONY * 2 + ICONSIZE - 5), moneyTexture->width() ,moneyTexture->height() };
 	moneyOutlineRect = moneyRect;
-	moneyOutlineRect.x -= CENTEROUTLINE/2; moneyOutlineRect.w += CENTEROUTLINE;
-	moneyOutlineRect.y -= CENTEROUTLINE/2; moneyOutlineRect.h += CENTEROUTLINE;
+	moneyOutlineRect.x -= CENTEROUTLINE / 2; moneyOutlineRect.w += CENTEROUTLINE;
+	moneyOutlineRect.y -= CENTEROUTLINE / 2; moneyOutlineRect.h += CENTEROUTLINE;
 	// Se crea para que no de problemas
 	objectiveTexture = new Texture(sdl->renderer(), "a", *font, build_sdlcolor(0x3a3a50FF));
 	objectiveOutline = new Texture(sdl->renderer(), "a", *outline, build_sdlcolor(0xFFFFFFFF));
 
 	// inventario (fondo)
-	createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
+	GameObject* aux = createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
+	(new ShowControlAuto(aux, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(25,-10),40,40},{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-10),40,40} }))->setActive(true);
 
 	// inventario (platos)
 	inventory = new Inventory(this);
 
-	// Exclamación de la despensa
+	// Exclamaciï¿½n de la despensa
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
 	new Warning(thiefExclamation);
-	
-	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("PROTA_CHEF_SMILE"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
-	//new FreeText(this, Vector(300, 300), 20, 30, 500, 0.01 * 1000, font, { "Al venir al mundo fueron delicadamente mecidas por las manos de la lustral Doniazada, su buena tia.", "Hola hola hola hola me llamo \n Pedro" });
+
+	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("PROTA_CHEF_SMILE"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people." });
 
 	// Racha de cobros
 	GameObject* streak = new GameObject(this, _ecs::grp_HUD, _ecs::hdr_STREAK);
@@ -89,17 +86,16 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// Reloj
 	clock = new Clock(this);
 
-
-	// icono de men?del día
+	// icono de men?del dï¿½a
 	menuToggled = true;
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, 30),
 		479.0f, 640.0f, []() {});
 	menu->getComponent<ButtonComp>()->setActive(false);
 	toggleDailyMenu();
-	new ButtonGO(this, "DAILY_MENU_BUTTON", "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,
-		[&]() {
-			toggleDailyMenu();
-		});
+    aux = new GameObject(this, _ecs::grp_ICONS);
+	new Transform(aux, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), ICONSIZE, ICONSIZE);
+	new Image(aux, "DAILY_MENU_BUTTON");
+	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
 
 	accDay = 1;
 	dayText = "DAY: " + to_string(accDay);
@@ -156,15 +152,15 @@ void UIRestaurant::showMoneyText() {
 		moneyDiff += moneyTxt->getMoney() - startingMoney;
 		currentMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(currentMoney);
-		
+
 		delete moneyTexture;
 		delete moneyOutline;
 		moneyTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
 		moneyOutline = new Texture(sdl->renderer(), strMoney, *outline, build_sdlcolor(0xFFFFFFFF));
 		moneyRect = { 80, (int)(ICONY * 2 + ICONSIZE - 5), moneyTexture->width() ,moneyTexture->height() };
 		moneyOutlineRect = moneyRect;
-		moneyOutlineRect.x -= CENTEROUTLINE/2; moneyOutlineRect.w += CENTEROUTLINE;
-		moneyOutlineRect.y -= CENTEROUTLINE/2; moneyOutlineRect.h += CENTEROUTLINE;
+		moneyOutlineRect.x -= CENTEROUTLINE / 2; moneyOutlineRect.w += CENTEROUTLINE;
+		moneyOutlineRect.y -= CENTEROUTLINE / 2; moneyOutlineRect.h += CENTEROUTLINE;
 
 		delete objectiveTexture;
 		delete objectiveOutline;
@@ -173,8 +169,8 @@ void UIRestaurant::showMoneyText() {
 		objectiveOutline = new Texture(sdl->renderer(), strObj, *outline, build_sdlcolor(0xFFFFFFFF));
 		objectiveRect = { 80, (int)(ICONY * 3 + ICONSIZE * 2), objectiveTexture->width(), objectiveTexture->height() };
 		objectiveOutlineRect = objectiveRect;
-		objectiveOutlineRect.x -= CENTEROUTLINE/2; objectiveOutlineRect.w += CENTEROUTLINE;
-		objectiveOutlineRect.y -= CENTEROUTLINE/2; objectiveOutlineRect.h += CENTEROUTLINE;
+		objectiveOutlineRect.x -= CENTEROUTLINE / 2; objectiveOutlineRect.w += CENTEROUTLINE;
+		objectiveOutlineRect.y -= CENTEROUTLINE / 2; objectiveOutlineRect.h += CENTEROUTLINE;
 	}
 }
 
@@ -185,6 +181,13 @@ void UIRestaurant::update() {
 	ClockComponent::get()->update();
 }
 
+
+void UIRestaurant::handleEvents() {
+	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_X) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_v)) {
+		toggleDailyMenu();
+	}
+	else Scene::handleEvents();
+}
 void UIRestaurant::renderStar(int x, int y) {
 	SDL_Rect dest;
 	dest.x = x;
@@ -197,9 +200,9 @@ void UIRestaurant::renderStar(int x, int y) {
 }
 
 void UIRestaurant::reputationManager() {
-	// comprueba si la reputación ha cambiado
+	// comprueba si la reputaciï¿½n ha cambiado
 	actReputation = reputation->getReputation();
-	checkStarsArray();	
+	checkStarsArray();
 }
 
 void UIRestaurant::checkStarsArray() {
@@ -254,7 +257,7 @@ void UIRestaurant::reset() {
 
 void UIRestaurant::nextDay() {
 	intObjective = GameManager::get()->getDayManager()->getDailyObjective(); moneyDiff = 0;
-	
+
 	delete objectiveTexture;
 	delete objectiveOutline;
 	std::string strObj = std::to_string(moneyDiff) + "/" + std::to_string(intObjective);

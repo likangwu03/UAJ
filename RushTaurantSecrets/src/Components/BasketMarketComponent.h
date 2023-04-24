@@ -10,6 +10,7 @@
 #include "../Definitions/Food_def.h"
 #include "../Managers/Money.h"
 #include "../Structure/GameManager.h"
+#include "../Components/ShowControlComp.h"
 
 using namespace std;
 using namespace _ecs;
@@ -25,9 +26,6 @@ private:
 	// lista de ingredientes en la cesta y su cantidad
 	map<_ecs::_ingredients_id, int> ingredients; // ingredientes y sus cantidades
 	map<_ecs::_ingredients_id, int>::iterator selectedIngr;
-	//unordered_map<_ecs::_ingredients_id, ingText> ingredients; // ingredientes, sus cantidades y texturas
-	//unordered_map<_ecs::_ingredients_id, unordered_map<Texture*, int>::iterator> ingredients; // ingredientes y un iterador a su textura y cantidad
-	//unordered_map<Texture*, int> ingTextures; // textura y cantidad de un ingrediente
 	SDLUtils* sdl = SDLUtils::instance();
 	InputHandler* ih;
 	int totalDifIngr;
@@ -48,6 +46,7 @@ private:
 	SoundEffect* confirmSound;
 
 	Money* money;
+	ShowControlComp* showControl;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);

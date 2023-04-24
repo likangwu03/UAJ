@@ -32,7 +32,6 @@ void DailyMenuScene::init() {
 			buttonPress();
 		});
 	dailyMenu1->getComponent<DailyMenuComp>()->initMenu();
-	dailyMenu1->getComponent<ButtonComp>()->setHighlighted(true);
 	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2 + DISTANCE / 2, POS_Y), 479.0f, 640.0f,
 		[&]() {
 			GameManager::get()->setTodaysMenu(this->dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
@@ -40,6 +39,7 @@ void DailyMenuScene::init() {
 		});
 	dailyMenu2->getComponent<DailyMenuComp>()->initMenu();
 
+	selectedButton(0);
 	button = 0;
 	GameManager::get()->getSupermarket()->getUI()->reset();
 }

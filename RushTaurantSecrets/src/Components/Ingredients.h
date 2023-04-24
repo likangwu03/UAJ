@@ -9,6 +9,7 @@
 #include "../Utilities/InputHandler.h"
 #include <vector>
 #include <utility>
+#include "../Components/ShowControlComp.h"
 
 using namespace std;
 using namespace _ecs;
@@ -25,6 +26,8 @@ private:
 	// vector de ingredientes
 	vector<_ecs::_ingredients_id> ingredients;
 	Texture* bubble_tex;
+	Texture* return_icon;
+	Texture* clean_icon;
 	SDLUtils* sdl;
 	//vector de coordenadas de ingredientes para renderizarlos
 	vector<pair<float, float>> coord;
@@ -34,7 +37,7 @@ private:
 	KitchenIslandComp* kitchenIsland; //para devolver ing a la mesa
 	SoundEffect* pickIng;
 	SoundEffect* returnIng;
-
+	ShowControlComp* showControl;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
 	Ingredients(GameObject* parent);

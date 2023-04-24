@@ -8,6 +8,7 @@
 #include "../../GameObjects/BasketMarket.h"
 #include "../../GameObjects/ButtonGO.h"
 #include "../../GameObjects/DailyMenu.h"
+#include "../../Components/ShowControlAuto.h"
 
 // UI del supermercado
 class UIMarket : public Scene
@@ -58,7 +59,7 @@ public:
 	UIMarket(Scene* market);
 	~UIMarket();
 	void showMoneyText();
-	void createGameObjects(_ecs::_grp_id grp, string textureName, Vector position,
+	GameObject* createGameObjects(_ecs::_grp_id grp, string textureName, Vector position,
 		float width, float height, float rotation, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
 	void update();
 	void handleEvents() override;

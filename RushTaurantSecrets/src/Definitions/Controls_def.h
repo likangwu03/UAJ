@@ -24,6 +24,8 @@ namespace _ecs {
 		key_Z,
 		key_V,
 		key_C,
+		key_R,
+		key_X,
 
 		key_LEFT,
 		key_RIGHT,
@@ -59,6 +61,8 @@ namespace _ecs {
 		{"KEYBOARD_KEYS",1,5},
 		{"KEYBOARD_KEYS",5,4},
 		{"KEYBOARD_KEYS",2,2},
+		{"KEYBOARD_KEYS",1,4},
+		{"KEYBOARD_KEYS",7,4},
 		
 		{"KEYBOARD_KEYS",2,0},
 		{"KEYBOARD_KEYS",3,0},

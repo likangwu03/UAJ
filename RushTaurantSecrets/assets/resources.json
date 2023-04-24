@@ -406,6 +406,12 @@
       "rows": 1
     },
     {
+      "id": "CHANGE_ICON",
+      "file": "assets/Sprites/UI/HUD/change_plate.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "PAUSE_BUTTON",
       "file": "assets/Sprites/UI/Menu/pause_button.png",
       "cols": 1,
@@ -744,6 +750,18 @@
     {
       "id": "EXCLAMATION",
       "file": "assets/Sprites/UI/HUD/exclamation_icon.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "RETURN_ICON",
+      "file": "assets/Sprites/UI/HUD/return_ing.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "CLEAN_ICON",
+      "file": "assets/Sprites/UI/HUD/clean_ing.png",
       "cols": 1,
       "rows": 1
     },
