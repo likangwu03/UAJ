@@ -437,12 +437,49 @@
     },
     {
       "id": "MAIN_MENU_BG",
-      "file": "assets/mainMenu_bg.png",
+      "file": "assets/Sprites/Backgrounds/mainMenu_bg.png",
       "cols": 1,
       "rows": 1
-    },    {
+    },
+    {
+      "id": "PAUSE_BG",
+      "file": "assets/Sprites/Backgrounds/pauseMenuTemp.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "OPTIONS_BG",
+      "file": "assets/Sprites/Backgrounds/options_bg.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "DAILY_MENU_BG",
-      "file": "assets/dailymenu_bg.png",
+      "file": "assets/Sprites/Backgrounds/dailymenu_bg.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "CONTINUE_BG",
+      "file": "assets/Sprites/Backgrounds/continue_bg.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "MORNING_BG",
+      "file": "assets/Sprites/Backgrounds/morning_bg.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "NIGHT_BG",
+      "file": "assets/Sprites/Backgrounds/night_bg.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "BANNER",
+      "file": "assets/Sprites//UI/UI_Flat_Banner_01_Upward.png",
       "cols": 1,
       "rows": 1
     },
@@ -703,8 +740,8 @@
     {
       "id": "PROTA_CHEF_SMILE",
       "file": "assets/Sprites/UI/icons/character_chef_smile.png"
-    },  
-     {
+    },
+    {
       "id": "PROTA_CHEF_SURPRISED",
       "file": "assets/Sprites/UI/icons/character_chef_surprised.png"
     },
@@ -727,11 +764,11 @@
     {
       "id": "PROTA_CHEF_SIGH",
       "file": "assets/Sprites/UI/icons/character_chef_sigh_closingEyes.png"
-    },  
+    },
     {
       "id": "PROTA_CHEF_ENRAGED",
       "file": "assets/Sprites/UI/icons/character_chef_enraged.png"
-    },  
+    },
     {
       "id": "PROTA_CHEF_STRESSED_OUT",
       "file": "assets/Sprites/UI/icons/character_chef_stressedOut.png"
@@ -739,7 +776,7 @@
     {
       "id": "PROTA_CHEF_MANIC",
       "file": "assets/Sprites/UI/icons/character_chef_manic.png"
-    },  
+    },
     {
       "id": "PROTA_CASUAL_SURPRISED",
       "file": "assets/Sprites/UI/icons/character_casual_surprised.png"
@@ -767,7 +804,7 @@
     {
       "id": "PROTA_CASUAL_SIGH",
       "file": "assets/Sprites/UI/icons/character_casual_sigh_closingEyes.png"
-    },  
+    },
     {
       "id": "PROTA_CASUAL_BAD_SMILE",
       "file": "assets/Sprites/UI/icons/character_casual_badSmile.png"
@@ -775,11 +812,11 @@
     {
       "id": "PROTA_CASUAL_BAD_MOOD",
       "file": "assets/Sprites/UI/icons/character_casual_badMood.png"
-    },  
+    },
     {
       "id": "PROTA_CASUAL_ENRAGED",
       "file": "assets/Sprites/UI/icons/character_casual_enraged.png"
-    },  
+    },
     {
       "id": "PROTA_CASUAL_STRESSED_OUT",
       "file": "assets/Sprites/UI/icons/character_casual_stressedOut.png"
@@ -787,19 +824,19 @@
     {
       "id": "PROTA_CASUAL_MANIC",
       "file": "assets/Sprites/UI/icons/character_casual_manic.png"
-    },  
+    },
     {
       "id": "PARENTS",
       "file": "assets/Sprites/UI/icons/parents.png"
-    },  
+    },
     {
       "id": "OWNER",
       "file": "assets/Sprites/UI/icons/owner.png"
-    },  
+    },
     {
       "id": "PHONE",
       "file": "assets/Sprites/UI/icons/phone.png"
-    },  
+    },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
       "file": "assets/Sprites/Cinematic/Parent_Room.png"
@@ -823,6 +860,14 @@
     {
       "id": "CINEMATIC_BG_HOUSE",
       "file": "assets/Sprites/Cinematic/house.png"
+    },
+    {
+      "id": "CINEMATIC_BG_ENTRANCE_GENERAL",
+      "file": "assets/Sprites/Cinematic/Entrance_General.png"
+    },
+    {
+      "id": "CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT",
+      "file": "assets/Sprites/Cinematic/Entrance_General_Night.png"
     },
     {
       "id": "DAILY_MENU",

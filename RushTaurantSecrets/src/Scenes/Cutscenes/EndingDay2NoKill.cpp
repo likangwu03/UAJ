@@ -1,4 +1,4 @@
-#include "Day2EndingNoKill.h"
+#include "EndingDay2NoKill.h"
 #include "../Menus/MainMenu.h"
 #include "../../Utilities/checkML.h"
 #include "../GameScenes/BeforeDayStartScene.h"
@@ -8,11 +8,15 @@
 #include "../../Structure/GameManager.h"
 #include "../../GameObjects/Dialogue.h"
 
-Day2EndingNoKill::Day2EndingNoKill() {
-	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
+EndingDay2NoKill::EndingDay2NoKill() {
+	//dialogues = GameManager::get()->getDialogueInfo("EndingDay2NoKill.json");
 	
 	state = START;
 	
+	bg = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL");
+	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
+	filter->setOpacity(80);
+
 	player = new Player(this, 0);
 	straightMovement = new StraightMovement(player, 5);
 	player->getComponent<PlayerMovementController>()->setActive(false);
@@ -20,6 +24,7 @@ Day2EndingNoKill::Day2EndingNoKill() {
 	transform = player->getComponent<Transform>();
 	transform->setPos(Vector(1658, 772));
 	transform->setMovState(walking);
+	transform->setOrientation(north);
 	
 	auto anim = player->getComponent<CharacterAnimator>();
 	anim->setH(96 * 1.8);
@@ -28,24 +33,26 @@ Day2EndingNoKill::Day2EndingNoKill() {
 	anim->setframeRate(18);
 }
 
-void Day2EndingNoKill::addPath(const vector<Vector>& points) {
+void EndingDay2NoKill::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-void Day2EndingNoKill::callAfterCreating() {
+void EndingDay2NoKill::callAfterCreating() {
+	state = START;
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }
 
-void Day2EndingNoKill::update() {
+void EndingDay2NoKill::update() {
 	CinematicBaseScene::update();
 	switch (state)
 	{
-	case Day2EndingNoKill::START:
+	case EndingDay2NoKill::START:
 		addPath(_ecs::introPath[START].points);
 		state = NONE;
 		break;
-	case Day2EndingNoKill::NONE:
+
+	case EndingDay2NoKill::NONE:
 		
 		break;
 	
@@ -53,13 +60,15 @@ void Day2EndingNoKill::update() {
 	
 }
 
-void Day2EndingNoKill::renderCinematic() {
-	
+void EndingDay2NoKill::renderCinematic() {
+	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
+	player->render();
+	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 
 }
 
 
-void Day2EndingNoKill::finishScene() {
+void EndingDay2NoKill::finishScene() {
 	if(transition != nullptr)
 		delete transition;
 	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart(), false);

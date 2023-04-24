@@ -7,7 +7,7 @@
 GameOverScene::GameOverScene() {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
+	image = &(sdlutils().images().at("PAUSE_BG"));
 	new Image(bg, image);
 
 
@@ -19,7 +19,6 @@ GameOverScene::GameOverScene() {
 }
 
 GameOverScene::~GameOverScene() {
-	delete image;
 }
 
 

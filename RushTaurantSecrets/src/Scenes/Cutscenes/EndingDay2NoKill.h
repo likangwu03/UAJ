@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 struct dialogueInfo;
-class Day2EndingNoKill : public CinematicBaseScene
+class EndingDay2NoKill : public CinematicBaseScene
 {
 	enum States {
 		START,
@@ -17,13 +17,15 @@ class Day2EndingNoKill : public CinematicBaseScene
 	States state;
 	
 private:
+	Texture* filter;
+	Texture* bg;
 	GameObject* player;
 	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
 
 public:
-	Day2EndingNoKill();
+	EndingDay2NoKill();
 	void callAfterCreating() override;
 	void renderCinematic () override;
 	void finishScene()override;

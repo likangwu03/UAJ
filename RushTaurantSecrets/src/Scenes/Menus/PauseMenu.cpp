@@ -8,7 +8,7 @@
 PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/pauseMenuTemp.png");
+	image = &(sdlutils().images().at("PAUSE_BG"));
 	new Image(bg, image);
 
 	button = 0;
@@ -33,7 +33,6 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 }
 
 PauseMenu::~PauseMenu() {
-	delete image;
 }
 
 void PauseMenu::handleEvents() {

@@ -11,7 +11,7 @@
 ContinueMenu::ContinueMenu() {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/continue_bg.png");
+	image = &(sdlutils().images().at("CONTINUE_BG"));
 	new Image(bg, image);
 
 	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON2_HIGHLIGHT",
@@ -40,7 +40,7 @@ ContinueMenu::ContinueMenu() {
 }
 
 ContinueMenu::~ContinueMenu() {
-	delete image;
+
 }
 
 void ContinueMenu::handleEvents() {

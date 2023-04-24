@@ -7,7 +7,7 @@
 OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
-	image = new Texture(sdlutils().renderer(), "assets/options_bg.png");
+	image = &(sdlutils().images().at("OPTIONS_BG"));
 	new Image(bg, image);
 
 	buttonReturn = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
@@ -24,6 +24,5 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 }
 
 OptionsMenu::~OptionsMenu() {
-	delete image;
 }
 
