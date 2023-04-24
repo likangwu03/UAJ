@@ -33,8 +33,7 @@ IntroScene::IntroScene() {
 	anim->setH(96 * 1.8);
 	anim->setW(48 * 1.8);
 	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(18);
-	//Scene::initRender();
+	anim->setframeRate(10);
 }
 
 void IntroScene::addPath(const vector<Vector>& points) {

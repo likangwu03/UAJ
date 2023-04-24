@@ -5,10 +5,17 @@
 #include <vector>
 using namespace std;
 struct dialogueInfo;
-class EndingDay2NoKill : public CinematicBaseScene
-{
+
+class EndingDay2NoKill : public CinematicBaseScene {
+private:
+	const int TURNAROUNDTIME = 500;
+	const vector<Vector> paths[1] = {
+		{ Vector(19.5, 15) }
+	};
+
 	enum States {
 		START,
+		TURNTORIGHT,
 		NONE
 	};
 
@@ -16,13 +23,13 @@ class EndingDay2NoKill : public CinematicBaseScene
 	void addPath(const vector<Vector>& points);
 	States state;
 	
-private:
 	Texture* filter;
 	Texture* bg;
 	GameObject* player;
 	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
+	int timer;
 
 public:
 	EndingDay2NoKill();

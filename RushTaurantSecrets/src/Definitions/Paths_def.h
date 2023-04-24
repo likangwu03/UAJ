@@ -69,7 +69,6 @@ namespace _ecs {
 		{{ Vector(18, 14),Vector(25, 14),Vector(30,14)}, east},
 		{{ Vector(40, 14)}, east},
 
-
 	};
 
 	static Route BadEnding1PlayerPath[2] = {
@@ -88,6 +87,9 @@ namespace _ecs {
 		{{ Vector(24, 13),Vector(28, 13)}, east}
 
 	};
+
+
+
 
 	// CLIENTES
 	const int NUM_TABLES = 7;

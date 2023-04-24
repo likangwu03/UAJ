@@ -33,7 +33,7 @@ SecondDayAfterKillScene::SecondDayAfterKillScene() {
 	anim->setH(96 * 1.8);
 	anim->setW(48 * 1.8);
 	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(18);
+	anim->setframeRate(10);
 	//Scene::initRender();
 }
 
