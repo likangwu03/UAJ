@@ -2,55 +2,68 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Another wonderful day ahead."
+      "Text": "Another wonderful day ahead.",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "The sun is out, the birds are singing... And it looks like it’s warm outside!"
+      "Text": "The sun is out, the birds are singing... And it looks like it’s warm outside!",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "..."
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "If I'm right, I should already have enough money to improve the restaurant..."
+      "Text": "If I'm right, I should already have enough money to improve the restaurant...",
+      "Portrait": "PROTA_CASUAL_SURPRISED"
     },
     {
       "Character": "Player",
-      "Text": "Luckily, I will be able to hire waiters!"
+      "Text": "Luckily, I will be able to hire waiters!",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "I still cannot believe I'm fulfilling my dream..."
+      "Text": "I still cannot believe I'm fulfilling my dream...",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "Mom! Dad! DId you hear that?"
+      "Text": "Mom! Dad! Did you hear that?",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "I knew I would make it... Hahah!"
+      "Text": "I knew I would make it... Hahah!",
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Thank you all so much for coming to the restaurant's reopening."
+      "Text": "Thank you all so much for coming to the restaurant's reopening.",
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "I hope you are enjoying the food. We prepared everything with lots of love!"
+      "Text": "I hope you are enjoying the food. We prepared everything with lots of love!",
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "I wouldn't have been able to make it without all of your visits."
+      "Text": "I wouldn't have been able to make it without all of your visits.",
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Thank you for coming to eat here. I hope you don't get tired of doing so!"
+      "Text": "Thank you for coming to eat here. I hope you don't get tired of doing so!",
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
-      "Text": "Well, I won't bother you anymore. Enjoy your meal!"
+      "Text": "Well, I won't bother you anymore. Enjoy your meal!",
+      "Portrait": "PROTA_CHEF_SMILE"
     }
   ]
 }
