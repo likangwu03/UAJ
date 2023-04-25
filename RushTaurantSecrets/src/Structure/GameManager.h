@@ -30,6 +30,7 @@ class Day2KillEndingScene;
 class FirstDayAfterKillScene;
 class SecondDayAfterKillScene;
 class BadEnding1Scene;
+class EndingDay1Scene;
 
 class Reputation;
 class Money;
@@ -105,6 +106,7 @@ private:
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
 	BadEnding1Scene* badEnding1Scene;
+	EndingDay1Scene* endingDay1Scene;
 
 	GameManager();
 
@@ -143,6 +145,7 @@ public:
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 	BadEnding1Scene* getBadEnding1Scene();
+	EndingDay1Scene* getEndingDay1Scene();
 
 	Reputation* getReputation();
 	Money* getMoney();

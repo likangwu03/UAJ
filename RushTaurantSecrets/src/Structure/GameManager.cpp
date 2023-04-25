@@ -24,6 +24,7 @@
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
 #include "../Scenes/Cutscenes/Day2KillEndingScene.h"
+#include "../Scenes/Cutscenes/EndingDay1Scene.h"
 #include "../Scenes/Menus/CoopMenu.h"
 #include "../Scenes/TransitionScene.h"
 #include <sstream>
@@ -39,7 +40,8 @@ GameManager::GameManager() : scenes(), deleteScene(nullptr), deleteTransition(fa
 	reputation(nullptr), days(nullptr), money(nullptr),
 	menu(nullptr), kitchenIsland(nullptr),
 	hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0),
-	introScene(nullptr), day2KillEndingScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr), badEnding1Scene(nullptr) { };
+	introScene(nullptr), day2KillEndingScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr), 
+	badEnding1Scene(nullptr), endingDay1Scene(nullptr) { };
 
 
 void GameManager::initialize() {
@@ -88,7 +90,7 @@ void GameManager::initialize() {
 	firstDayAfterKillScene = new FirstDayAfterKillScene();
 	badEnding1Scene = new BadEnding1Scene();
 	day2KillEndingScene = new Day2KillEndingScene();
-
+	endingDay1Scene = new EndingDay1Scene();
 
 
 	changeScene(mainMenu);
@@ -101,6 +103,7 @@ GameManager::~GameManager() {
 	delete introScene;
 	delete badEnding1Scene;
 	delete day2KillEndingScene;
+	delete endingDay1Scene;
 
 	delete days;
 	delete money;
@@ -221,6 +224,7 @@ Day2KillEndingScene* GameManager::getDay2KillEndingScene() { return day2KillEndi
 FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }
 SecondDayAfterKillScene* GameManager::getSecondDayAfterKillScene() { return secondDayAfterKillScene; }
 BadEnding1Scene* GameManager::getBadEnding1Scene() { return badEnding1Scene; }
+EndingDay1Scene* GameManager::getEndingDay1Scene() { return endingDay1Scene; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
