@@ -5,8 +5,6 @@
 #include "../Components/CharacterAnimator.h"
 #include "../Components/Transform.h"
 #include "../Components/Image.h"
-#include "../Components/MurderRender.h"
-#include "../Components/ShooRender.h"
 #include "../Components/ThiefTrigger.h"
 
 class Thief : public GameObject {
@@ -27,8 +25,6 @@ public:
 		new StraightMovement(this, generalSpeed);
 		new ThiefState(this, canGetFreezer);
 		new ThiefMovement(this, pos, escapeSpeed);
-		new MurderRender(this);
-		new ShooRender(this);
 		new ThiefTrigger(this, Vector(0, 0), 48, 96);
 	}
 };

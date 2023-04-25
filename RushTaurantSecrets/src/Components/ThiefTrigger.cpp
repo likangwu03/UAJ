@@ -1,21 +1,28 @@
 #include "ThiefTrigger.h"
 #include "../Utilities/checkML.h"
+#include "Transform.h"
 
 ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_),
 	escapeSound(&sdlutils().soundEffects().at("ESCAPE_THIEF")),
 	dieSound(&sdlutils().soundEffects().at("KILL_THIEF"))
 {
+	parentTransform = parent->getComponent<Transform>();
 	thiefMovement = parent->getComponent<ThiefMovement>();
 	thiefState = parent->getComponent<ThiefState>();
-	mRender = parent->getComponent<MurderRender>();
-	sRender = parent->getComponent<ShooRender>();
+	showControl = new ShowControlAuto(parent, { {ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(X_OFFSET, KILL_Y_OFFSET),WIDTH,HEIGHT}, 
+		{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(X_OFFSET,RUN_Y_OFFSET),WIDTH,HEIGHT} }, parentTransform);
+	runTexture = &((sdlutils()).images().at("RUN_ICON"));
+	killTexture = &((sdlutils()).images().at("KILL_ICON"));
+
+	//controles encima
+	//showControl = new ShowControlAuto(parent, { {ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(0,-16),32,32}, 
+	//	{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(40,-16),32,32} }, parent->getComponent<Transform>());
 }
 
 void ThiefTrigger::hideButtons()
 {
-	mRender->setActive(false);
-	sRender->setActive(false);
+	showControl->setActive(false);
 }
 
 void ThiefTrigger::isOverlapping() {
@@ -50,13 +57,28 @@ void ThiefTrigger::isOverlapping() {
 void ThiefTrigger::onTriggerEnter()
 {
 	if (thiefState->getState() == ThiefState::OBJECTIVE_SECRET && ThiefState::OBJECTIVE_FREEZER) {
-		mRender->setActive(true);
-		sRender->setActive(true);
+		showControl->setActive(true);
 	}
 }
 
 void ThiefTrigger::onTriggerExit()
 {
 	hideButtons();
+}
+
+void ThiefTrigger::render()
+{
+	if (showControl->isActive())
+	{
+		SDL_Rect dest;
+		dest.x = parentTransform->getPos().getX() + (X_OFFSET * 1.3);
+		dest.y = parentTransform->getPos().getY() + RUN_Y_OFFSET - 15;
+		dest.w = WIDTH;
+		dest.h = HEIGHT;
+		runTexture->render(dest);
+
+		dest.y = parentTransform->getPos().getY() + KILL_Y_OFFSET - 15;
+		killTexture->render(dest);
+	}
 }
 

@@ -30,7 +30,7 @@ void ThiefsManager::addFrequently() {
 			elapsedTime = 0;
 			timer = sdl->rand().nextInt(minFrec, maxFrec);
 			allFalse();
-			int auxNum = sdl->rand().nextInt(1, numThiefs + 1);
+			int auxNum = sdl->rand().nextInt(2, numThiefs + 1);
 			for (int i = 0; i < auxNum; ++i) {
 				createThief();
 			}
@@ -52,7 +52,7 @@ int ThiefsManager::randomPos() {
 
 ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max) :
 	Manager(parent), sdl(SDLUtils::instance()), warningSound(&sdl->soundEffects().at("ALERT")), played(false),
-	generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), minFrec(min), maxFrec(max), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
+	generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), minFrec(0), maxFrec(5), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
 	scene = parent->getScene();
 	thiefs = scene->getGroup(_ecs::grp_THIEFS);
 	timer = sdl->rand().nextInt(minFrec, maxFrec);

@@ -442,6 +442,18 @@
       "rows": 1
     },
     {
+      "id": "KILL_ICON",
+      "file": "assets/Sprites/UI/HUD/KillIcon.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "RUN_ICON",
+      "file": "assets/Sprites/UI/HUD/RunIcon.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "MAIN_MENU_BG",
       "file": "assets/Sprites/Backgrounds/mainMenu_bg.png",
       "cols": 1,
