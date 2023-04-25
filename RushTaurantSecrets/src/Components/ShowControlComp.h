@@ -26,10 +26,10 @@ public:
 	struct showControlInfo
 	{
 		Vector offset;
-		float width;
 		float height;
 		int row;
 		int col;
+		float proportion;
 		Texture* texture;
 	};
 protected:
@@ -40,5 +40,7 @@ public:
 	ShowControlComp(GameObject* parent, vector<ControlsInfo> controls);
 	void render(Vector pos);
 	void changeOffset(Vector off,int i);
+	void changeHeight(float height,int i);
+	Texture* getTexture(int i);
 };
 

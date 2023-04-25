@@ -28,7 +28,7 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 
 	money = GameManager::get()->getMoney();
 
-	showControl = new ShowControlComp(parent, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(15,50),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(80,50),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(25, -35),80,40} });
+	showControl = new ShowControlComp(parent, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -60),40,40} });
 
 	selectedIngr = ingredients.end();
 }
@@ -107,7 +107,7 @@ void BasketMarketComponent::renderBasket() {
 			if (chooseHMMode) {
 				menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
 				int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
-				showControl->render({(float)( x * col - ING_SIZE),(float) (y * fil + ING_SIZE + 5) });
+				showControl->render({ (float)(x * col - ING_SIZE + 25),(float) (y * fil + ING_SIZE + 80) });
 				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xf3e5c2ff));
 				dest.x = x * col;
 				dest.y = y * fil + (3 * ING_SIZE) / 2;
@@ -118,7 +118,7 @@ void BasketMarketComponent::renderBasket() {
 				delete textureAmount;
 			}
 			else {
-				showControl->render({ (float)(x * col - ING_SIZE+10),(float)(y * fil + ING_SIZE - 50) });
+				showControl->render({ (float)(x * col - ING_SIZE+30),(float)(y * fil + ING_SIZE - 10) });
 			}
 		}
 
@@ -167,7 +167,7 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))selectIngredientInBasket(SDLK_RIGHT);
 				else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) && ingredients.size() > 0) {
 					chooseHMMode = true;
-					showControl->changeOffset(Vector(145, 50), 2);
+					showControl->changeOffset(Vector(165, 0), 2);
 					confirmSound->play();
 				}
 			}
@@ -177,7 +177,7 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->isKeyDown(SDLK_RETURN) && ingredients.size() > 0) {
 					chooseHMMode = true;
 					
-					showControl->changeOffset(Vector(145, 50), 2);
+					showControl->changeOffset(Vector(165, 0), 2);
 					confirmSound->play();
 				}
 
@@ -193,7 +193,7 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->isKeyDown(SDL_CONTROLLER_BUTTON_A)) {
 					chooseHMMode = false;
 					
-					showControl->changeOffset(Vector(25, -35), 2);
+					showControl->changeOffset(Vector(45, -60), 2);
 					Message m;
 					m.id = Message::msg_BASKET;
 					m.basket.ing = selectedIngr->first;
@@ -213,7 +213,7 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->isKeyDown(SDLK_RIGHT)) changeAmount(SDLK_RIGHT);
 				else if (ih->isKeyDown(SDLK_RETURN)) {
 					chooseHMMode = false;
-					showControl->changeOffset(Vector(25, -35), 2);
+					showControl->changeOffset(Vector(45, -60), 2);
 
 					Message m;
 					m.id = Message::msg_BASKET;

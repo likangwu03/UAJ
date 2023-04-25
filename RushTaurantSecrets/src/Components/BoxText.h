@@ -4,7 +4,7 @@
 #include "../Structure/GameObject.h"
 #include "Text.h"
 #include "../Utilities/checkML.h"
-
+#include "ShowControlComp.h"
 struct Size {
 	float desiredWidth;	// ancho al que tiene que llegar el objeto
 	float desiredHeight;	// alto al que tiene que llegar el objeot
@@ -37,6 +37,11 @@ private:
 	Complement key;
 	Complement portraitBorder;
 	Complement portrait;
+	ShowControlComp* showControl;
+
+	//localizar frame del teclado
+	int filKey;
+	int colKey;
 
 	void enlargeBox() {
 		// se aumenta el tamaño de al caja
@@ -83,10 +88,11 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_BOX_TEXT;
 
-	BoxText(GameObject* parent, Texture* keys, Texture* portraitBorder, Texture* portrait, Vector offsetSize) :
-		Component(parent, id), keysTexture(keys), portraitBorderTexture(portraitBorder), portraitTexture(portrait), elapsedTime(0), timer(0.001), increment(17) {
+	BoxText(GameObject* parent, Texture* portraitBorder, Texture* portrait, Vector offsetSize) :
+		Component(parent, id), portraitBorderTexture(portraitBorder), portraitTexture(portrait), elapsedTime(0), timer(0.001), increment(17) {
 		text = parent->getComponent<Text>();
 		transform = parent->getComponent<Transform>();
+		showControl= parent->getComponent<ShowControlComp>();
 
 		// tamaños deseados de la caja
 		initSize(box, text->getWidthTextBox() * offsetSize.getX(), text->getNumLines() * offsetSize.getY());
@@ -98,7 +104,7 @@ public:
 			transform->getPos().getY() + box.desiredHeight / 2);
 
 		// tamaños deseados de la tecla
-		initComplement(key, keys->fwidth() * 5 / 1.4, keys->fheight() * 5 / 1.4);
+		initComplement(key, showControl->getTexture(0)->fwidth() * 5 / 1.4, showControl->getTexture(0)->fheight() * 5 / 1.4);
 
 		// borde
 		float wBorder = portraitBorderTexture->fwidth() - 15;
@@ -126,8 +132,9 @@ public:
 				elapsedTime = 0;
 
 				enlargeBox();
-
+				
 				enlargeComplement(key, Vector(3.3 * box.actWidth / 4, box.actHeight / 1.2));
+				showControl->changeHeight(key.size.actHeight,0);
 
 				enlargeComplement(portraitBorder, Vector(box.actWidth / 10, box.actHeight / 2));
 
@@ -152,11 +159,7 @@ public:
 		dest.h = portrait.size.actHeight;
 		portraitTexture->render(dest);
 
-		// render de la tecla
-		dest.x = key.pos.getX();
-		dest.y = key.pos.getY();
-		dest.w = key.size.actWidth;
-		dest.h = key.size.actHeight;
-		keysTexture->renderFrame(dest, 2, 2, 0);
+		showControl->render(key.pos);
+	
 	}
 };

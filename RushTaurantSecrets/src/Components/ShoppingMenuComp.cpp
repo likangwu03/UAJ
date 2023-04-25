@@ -23,7 +23,7 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
 	playerTransform = GameManager::get()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
-	showControl = new ShowControlAuto(parent,{{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-5,-5),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-5),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(145,-5),80,40}}, playerTransform);
+	showControl = new ShowControlAuto(parent,{{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-5,-5),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-5),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(145,-5),40,40}}, playerTransform);
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {

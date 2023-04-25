@@ -40,35 +40,36 @@ namespace _ecs {
 		string textureName;
 		int col;
 		int fil;
+		float proportion; //width/height
 	};
 	static ControlsTextureInfo Controls[CONTROLS_NUM]{
-		{"XBOX_KEYS",3,2},
-		{"XBOX_KEYS",3,3},
-		{"XBOX_KEYS",3,4},
-		{"XBOX_KEYS",3,5},
-		{"XBOX_KEYS",21,5},
-		{"XBOX_KEYS",21,6},
+		{"XBOX_KEYS",3,2,1},
+		{"XBOX_KEYS",3,3,1},
+		{"XBOX_KEYS",3,4,1},
+		{"XBOX_KEYS",3,5,1},
+		{"XBOX_KEYS",21,5,1},
+		{"XBOX_KEYS",21,6,1},
 
-		{"PLAYSTATION_KEYS",3,2},
-		{"PLAYSTATION_KEYS",3,3},
-		{"PLAYSTATION_KEYS",3,4},
-		{"PLAYSTATION_KEYS",3,5},
-		{"PLAYSTATION_KEYS",21,5},
-		{"PLAYSTATION_KEYS",21,6},
+		{"PLAYSTATION_KEYS",3,2,1},
+		{"PLAYSTATION_KEYS",3,3,1},
+		{"PLAYSTATION_KEYS",3,4,1},
+		{"PLAYSTATION_KEYS",3,5,1},
+		{"PLAYSTATION_KEYS",21,5,1},
+		{"PLAYSTATION_KEYS",21,6,1},
 
-		{"KEYBOARD_KEYS",0,4},
-		{"KEYBOARD_KEYS",4,2},
-		{"KEYBOARD_KEYS",1,5},
-		{"KEYBOARD_KEYS",5,4},
-		{"KEYBOARD_KEYS",2,2},
-		{"KEYBOARD_KEYS",1,4},
-		{"KEYBOARD_KEYS",7,4},
+		{"KEYBOARD_KEYS",0,4,1},
+		{"KEYBOARD_KEYS",4,2,1},
+		{"KEYBOARD_KEYS",1,5,1},
+		{"KEYBOARD_KEYS",5,4,1},
+		{"KEYBOARD_KEYS",2,2,1},
+		{"KEYBOARD_KEYS",1,4,1},
+		{"KEYBOARD_KEYS",7,4,1},
 		
-		{"KEYBOARD_KEYS",2,0},
-		{"KEYBOARD_KEYS",3,0},
+		{"KEYBOARD_KEYS",2,0,1},
+		{"KEYBOARD_KEYS",3,0,1},
 
-		{"KEYBOARD_KEYS_2",2,2},
-		{"KEYBOARD_KEYS_2",3,1},
-		{"KEYBOARD_KEYS_2",1,0},
+		{"KEYBOARD_KEYS_2",2,2,2},
+		{"KEYBOARD_KEYS_2",3,1,2},
+		{"KEYBOARD_KEYS_2",1,0,2},
 	};
 }
