@@ -45,14 +45,14 @@ public:
     std::pair<bool, bool> connectServer();
 
     // Métodos conjuntos
-    void close();
+    void closeServer();
     void closeConnection();
     void receive();
     void send(const Message& message);
 
     // Locurote
 
-    
+
     /// <summary>
     /// Para int: desde el -128 hasta el 127 /
     /// Para uint: desde el 0 hasta el 255 /
@@ -72,7 +72,7 @@ public:
     }
 
     template<> void code8<int>(int input) { code8<int8_t>(input); }
-    
+
     /// <summary>
     /// Para int: desde el -32768 hasta el 32767 /
     /// Para uint: desde el 0 hasta el 65535 /
@@ -82,10 +82,10 @@ public:
     void code16(T input) {
         doubleByte output;
         output.first = output.second = 0;
-        for(uint8_t i = 0; i < 8; i++, input >>= 1) {
+        for (uint8_t i = 0; i < 8; i++, input >>= 1) {
             output.second = (output.second << 1) + (input & 1);
         }
-        for(uint8_t i = 0; i < 8; i++, input >>= 1) {
+        for (uint8_t i = 0; i < 8; i++, input >>= 1) {
             output.first = (output.first << 1) + (input & 1);
         }
         data[dataLength] = output.first; data[dataLength + 1] = output.second;
@@ -96,10 +96,10 @@ public:
         T output{}; std::pair<char, char> input;
         input.first = data[last]; input.second = data[last + 1];
         last += 2;
-        for(uint8_t i = 0; i < 8; i++, input.first >>= 1) {
+        for (uint8_t i = 0; i < 8; i++, input.first >>= 1) {
             output = (output << 1) + (input.first & 1);
         }
-        for(uint8_t i = 0; i < 8; i++, input.second >>= 1) {
+        for (uint8_t i = 0; i < 8; i++, input.second >>= 1) {
             output = (output << 1) + (input.second & 1);
         }
         return output;

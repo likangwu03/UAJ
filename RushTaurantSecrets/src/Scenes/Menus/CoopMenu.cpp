@@ -180,6 +180,7 @@ void CoopMenu::selectedButton(int selected) {
 
 
 void CoopMenu::onWaiting() {
+	ih->refresh();
 	buttonServer->setActives(false);
 	buttonClient->setActives(false);
 	buttonResume->setActives(false);
@@ -201,7 +202,7 @@ void CoopMenu::enterIp() {
 
 
 void CoopMenu::goBack() {
-
+	coop->closeServer();
 	IP->setActives(false);
 	buttonServer->setActives(true);
 	buttonClient->setActives(true);

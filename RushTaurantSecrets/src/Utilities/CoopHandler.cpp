@@ -84,7 +84,6 @@ void CoopHandler::openServer() {
 #ifdef _DEBUG
 	std::cout << "Opening server on port 1882.\n";
 #endif
-
 	IPaddress ip;
 	if(SDLNet_ResolveHost(&ip, NULL, 1882) < 0) {
 		throw std::exception("SDLNet: Couldn't open server (ResolveHost).");
@@ -207,4 +206,8 @@ void CoopHandler::send(const Message& message) {
 	code(message);
 
 	SDLNet_TCP_Send(connectionSocket, data, dataLength);
+}
+
+void CoopHandler::closeServer() {
+	if (serverSocket) SDLNet_TCP_Close(serverSocket);
 }
