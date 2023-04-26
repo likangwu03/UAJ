@@ -105,6 +105,7 @@ public:
 
 		// tamaños deseados de la tecla
 		initComplement(key, showControl->getTexture(0)->fwidth() * 5 / 1.4, showControl->getTexture(0)->fheight() * 5 / 1.4);
+		showControl->changeHeight(key.size.actHeight, 0);
 
 		// borde
 		float wBorder = portraitBorderTexture->fwidth() - 15;
