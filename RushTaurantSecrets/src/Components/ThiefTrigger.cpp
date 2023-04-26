@@ -10,8 +10,8 @@ ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float 
 	parentTransform = parent->getComponent<Transform>();
 	thiefMovement = parent->getComponent<ThiefMovement>();
 	thiefState = parent->getComponent<ThiefState>();
-	showControl = new ShowControlAuto(parent, { {ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(X_OFFSET, KILL_Y_OFFSET),WIDTH,HEIGHT}, 
-		{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(X_OFFSET,RUN_Y_OFFSET),WIDTH,HEIGHT} }, parentTransform);
+	showControl = new ShowControlAuto(parent, { {ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(KILL_X_OFFSET, KILL_Y_OFFSET),WIDTH,HEIGHT}, 
+		{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(RUN_X_OFFSET,RUN_Y_OFFSET),WIDTH,HEIGHT} }, parentTransform);
 	runTexture = &((sdlutils()).images().at("RUN_ICON"));
 	killTexture = &((sdlutils()).images().at("KILL_ICON"));
 
@@ -71,14 +71,23 @@ void ThiefTrigger::render()
 	if (showControl->isActive())
 	{
 		SDL_Rect dest;
-		dest.x = parentTransform->getPos().getX() + (X_OFFSET * 1.3);
-		dest.y = parentTransform->getPos().getY() + RUN_Y_OFFSET - 15;
+		dest.x = parentTransform->getPos().getX() + (RUN_X_OFFSET - 15);
+		dest.y = parentTransform->getPos().getY() + (RUN_Y_OFFSET * -3);
 		dest.w = WIDTH;
 		dest.h = HEIGHT;
 		runTexture->render(dest);
 
-		dest.y = parentTransform->getPos().getY() + KILL_Y_OFFSET - 15;
+		dest.x = parentTransform->getPos().getX() + KILL_X_OFFSET - 15;
 		killTexture->render(dest);
+
+		//dest.x = parentTransform->getPos().getX() + (X_OFFSET * 1.3);
+		//dest.y = parentTransform->getPos().getY() + RUN_Y_OFFSET - 15;
+		//dest.w = WIDTH;
+		//dest.h = HEIGHT;
+		//runTexture->render(dest);
+
+		//dest.y = parentTransform->getPos().getY() + KILL_Y_OFFSET - 15;
+		//killTexture->render(dest);
 	}
 }
 
