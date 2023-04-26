@@ -27,6 +27,7 @@ void CoopHandler::code(const Message& m) {
 		code16(m.player.pos.getY());
 		code16(m.player.vel.getX());
 		code16(m.player.vel.getY());
+		code8(m.player.scene);
 		break;
 	case Message::msg_BASKET:
 		code8(m.basket.ing);
@@ -45,6 +46,7 @@ Message CoopHandler::decode(Message::_msg_id id, uint16_t& last) {
 		m.player.pos.setY(decode16<float>(last));
 		m.player.vel.setX(decode16<float>(last));
 		m.player.vel.setY(decode16<float>(last));
+		m.player.scene = decode8<uint8_t>(last);
 		break;
 	case Message::msg_BASKET:
 		m.basket.ing = decode8<_ecs::_ingredients_id>(last);
