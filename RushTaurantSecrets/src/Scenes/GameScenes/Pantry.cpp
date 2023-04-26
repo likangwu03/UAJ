@@ -6,6 +6,7 @@
 #include "../../Managers/ThiefsManager.h"
 #include "../../GameObjects/TimeOfDayObj.h"
 #include "EndOfDayScene.h"
+#include "../../GameObjects/OtherPlayer.h"
 
 #include "../../Utilities/checkML.h"
 
@@ -26,6 +27,7 @@ void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 
 	player = new Player(this, 0);
+	new OtherPlayer(this);
 	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("pantryAfternoon"), sdlutils().getLoadedTilesets().at("pantryNight"));
 	// el update no se ejecuta hasta que se est?en la escena
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa

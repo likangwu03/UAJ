@@ -34,6 +34,8 @@ public:
 
     void update();
 
+    bool isClient() { return client; }
+
     // Métodos de servidor
 
     void openServer();

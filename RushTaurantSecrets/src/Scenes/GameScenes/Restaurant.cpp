@@ -10,6 +10,7 @@
 #include "../../Managers/DayManager.h"
 #include "../../GameObjects/TimeOfDayObj.h"
 #include "../../Structure/GameObject.h"
+#include "../../GameObjects/OtherPlayer.h"
 
 #include "../../Utilities/checkML.h"
 #include <set>
@@ -19,6 +20,7 @@ pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
+	new OtherPlayer(this);
 	pantryMusic->setMusicVolume(MUSIC_VOL);
 	restaurantMusic->setMusicVolume(MUSIC_VOL);
 }
