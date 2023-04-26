@@ -115,7 +115,11 @@ void OptionsMenu::createSlider() {
 }
 
 void OptionsMenu::SliderHandleEvents(){
-	if (ih->isKeyDown(SDL_SCANCODE_SPACE)) {
-
+	auto t = sliderButton->getComponent<Transform>();
+	if (ih->isKeyDown(SDL_SCANCODE_A)) {
+		t->setPos(Vector(t->getPos().getX() - 10, t->getPos().getY()));
+	}
+	else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+		t->setPos(Vector(t->getPos().getX() + 10, t->getPos().getY()));
 	}
 }

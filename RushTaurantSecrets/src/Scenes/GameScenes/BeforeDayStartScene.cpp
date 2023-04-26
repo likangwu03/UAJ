@@ -43,8 +43,7 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	new Transform(bannerObj, { (float)sdlutils().width() / 4 + 50, 10 }, { 0,0 }, 500, 300);
 	bannerTexture = &(sdlutils().images().at("BANNER"));
 	new Image(bannerObj, bannerTexture);
-	
-	
+
 }
 
 void BeforeDayStartScene::init() {
@@ -55,7 +54,6 @@ void BeforeDayStartScene::init() {
 	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
 
 	day = gm->getDayManager();
-
 }
 
 
@@ -91,7 +89,7 @@ BeforeDayStartScene::~BeforeDayStartScene() {
 }
 
 void BeforeDayStartScene::handleEvents() {
-	if((ih->joysticksInitialised() && ih->getButtonState(0, SDL_JOYBUTTONDOWN)) || ih->keyDownEvent()) {
+	if((ih->joysticksInitialised() && ih->joyButtonDown()) || ih->keyDownEvent()) {
 		toDailyMenu();
 	}
 }

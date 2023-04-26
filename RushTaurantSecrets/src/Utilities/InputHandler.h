@@ -157,6 +157,14 @@ public:
 
 	// controller (mando)
 
+	inline bool joyButtonDown() {
+		return isControllerButtonDown;
+	}
+
+	inline bool joyButtonUp() {
+		isControllerButtonDown;
+	}
+
 	int numButtons() {
 		return numB;
 	}
@@ -268,9 +276,11 @@ public:
 	{
 		if (m_bJoysticksInitialised)
 		{
-			for (unsigned int i = 0; i < SDL_NumJoysticks(); i++)
-			{
-				SDL_JoystickClose(m_joysticks[i]);
+			for (auto it : m_joysticks) {
+				SDL_JoystickClose(it);
+				m_joysticks.pop_back();
+				//joys.pop_back();
+				//m_buttonStates.pop_back();
 			}
 		}
 		m_bJoysticksInitialised = false;
@@ -355,6 +365,7 @@ private:
 	inline void joybuttonDownEvent(const SDL_Event& event) {
 		if (event.type == SDL_JOYBUTTONDOWN)
 		{
+			isControllerButtonDown = true;
 			int whichOne = event.jaxis.which;
 			m_buttonStates[whichOne][event.jbutton.button] = true;
 		}
@@ -363,6 +374,7 @@ private:
 	inline void joybuttonUpEvent(const SDL_Event& event) {
 		if (event.type == SDL_JOYBUTTONUP)
 		{
+			isControllerButtonUp = true;
 			int whichOne = event.jaxis.which;
 			m_buttonStates[whichOne][event.jbutton.button] = false;
 		}
@@ -424,6 +436,8 @@ private:
 	bool isMouseButtonEvent_;
 	bool isControllerEventX;
 	bool isControllerEventY;
+	bool isControllerButtonDown;
+	bool isControllerButtonUp;
 	float controllerI;
 	std::pair<Sint32, Sint32> mousePos_;
 	std::array<bool, 3> mbState_;
