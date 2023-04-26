@@ -55,10 +55,17 @@ void StraightMovement::newPath(const vector<Vector>& newPath) {
 }
 
 StraightMovement::StraightMovement(GameObject* parent, float speed) :
-	Component(parent, id), offsetZone(3), speed(speed) {
+	Component(parent, id), offsetZone(3), speed(speed), roundTrip(false),
+	roundTripTime(-1), elapsedTime1(0), numLaps(-1), actNumLaps(0),
+	loop(false), loopTime(0) {
 	path.cont = 0;
 	transform = parent->getComponent<Transform>();
-	startingPoint = transform->getPos();
+	Vector pos = transform->getPos();
+	// se quedan quietos cuando se crean
+	end = pos;
+
+	// se guarda el punto inicial
+	path.points.push_back(transform->getPos());
 }
 
 void StraightMovement::addPath(const vector<Vector>& points) {
@@ -67,7 +74,8 @@ void StraightMovement::addPath(const vector<Vector>& points) {
 		newPath(points);
 	}
 	// si no lo ha terminado de recorrer, el camino nuevo se añade al actual
-	// solo va a suceder cuando se recoloquen clientes
+	// va a sucede cuando se recoloquen clientes y la primera vez
+	// que se crean porque el punto inicial se guarda en el vector
 	else {
 		path.points.reserve(path.points.size() + points.size());
 		path.points.insert(path.points.end(), points.begin(), points.end());
@@ -77,19 +85,17 @@ void StraightMovement::addPath(const vector<Vector>& points) {
 void StraightMovement::stop() {
 	end = transform->getPos();
 	path.cont = path.points.size();
-	path.points.clear();
+	//path.points.clear();
 }
 
 void StraightMovement::goBack() {
 	vector<Vector> aux;
-	aux.reserve(path.cont + 1);
+	aux.reserve(path.cont);
 
 	// se guardan en un vector auxiliar los puntos que ya se han recorrido
 	for (int i = path.cont - 1; i >= 0; --i) {
 		aux.push_back(path.points[i]);
 	}
-	// se guarda el punto de partida
-	aux.push_back(startingPoint);
 
 	newPath(aux);
 }
@@ -105,6 +111,42 @@ void StraightMovement::update() {
 		// si no ha terminado de recorrer el camino, recorre la siguiente recta
 		if (!hasFinishedPath()) {
 			newStraight(path.points[path.cont]);
+		}
+		else if (roundTrip) {
+			goBack();
+ 			if (numLaps != -1) {
+				actNumLaps += 1;
+				if (actNumLaps >= numLaps - 1) {
+					numLaps = -1;
+					roundTrip = false;
+				}
+			}
+		}
+		else if (loop) {
+ 			path.cont = 0;
+			newStraight(path.points[path.cont]);
+		}
+		else {
+			transform->setMovState(idle);
+		}
+	}
+
+	if (roundTripTime > 0 && roundTrip) {
+		elapsedTime1 += deltaTime;
+		if (elapsedTime1 > roundTripTime) {
+			elapsedTime1 = 0;
+			roundTrip = false;
+			roundTripTime = -1;
+			stop();
+		}
+	}
+
+	if (loop) {
+		elapsedTime1 += deltaTime;
+		if (elapsedTime1 > loopTime) {
+			elapsedTime1 = 0;
+			loop = false;
+			stop();
 		}
 	}
 }

@@ -7,13 +7,18 @@ using namespace std;
 struct dialogueInfo;
 class IntroScene : public CinematicBaseScene
 {
+	const vector<Vector> introPath[2] = {
+		{Vector(40, 14), Vector(28, 14)},
+		{Vector(18, 14),Vector(18,10)}
+	};
+
 	enum States {
 		START, 
 		ENTERING,//sonido puerta
 		ARRIVE,//1
 		D1,
 		D2,
-		D3,
+		D3, 
 		D31,
 		D4,
 		D5,

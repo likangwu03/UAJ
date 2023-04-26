@@ -1,13 +1,13 @@
 #include "Pantry.h"
 #include "Restaurant.h"
+#include "EndOfDayScene.h"
 #include "../../Structure/GameManager.h"
 #include "../../Components/MapCreator.h" 
 #include "../../GameObjects/Player.h"
-#include "../../Managers/ThiefsManager.h"
+#include "../../Managers/ThievesManager.h"
 #include "../../GameObjects/TimeOfDayObj.h"
 #include "EndOfDayScene.h"
 #include "../../GameObjects/OtherPlayer.h"
-
 #include "../../Utilities/checkML.h"
 
 Pantry::Pantry(PantryUI* pUI) : rest(nullptr), pantryUI(pUI), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), 
@@ -32,7 +32,7 @@ void Pantry::init() {
 	// el update no se ejecuta hasta que se est?en la escena
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
-	ThiefsManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
+	ThievesManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
 
 	initRender();
 	Scene::initComponent();	

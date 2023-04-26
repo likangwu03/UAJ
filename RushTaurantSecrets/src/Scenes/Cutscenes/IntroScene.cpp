@@ -21,19 +21,37 @@ IntroScene::IntroScene() {
 	filter->setOpacity(80);
 	black = &sdlutils().images().at("Filter_Black");
 
-	player = new Player(this, 0);
+	player = new GameObject(this, _ecs::grp_PLAYER);
+	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(50, 14)), Vector(0, 0), WIDTH, HEIGHT);
+	//player = new Player(this, 0);
 	straightMovement = new StraightMovement(player, 5);
-	player->getComponent<PlayerMovementController>()->setActive(false);
+	//player->getComponent<PlayerMovementController>()->setActive(false);
 
+	/*
 	transform = player->getComponent<Transform>();
+	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
 	transform->setPos(Vector(1658, 772));
 	transform->setMovState(walking);
+	*/
+
+	Animator::AnimParams ap;
+	ap.initFrame = 18;
+	ap.endFrame = 10;
+	ap.currAnim = 1;
+	ap.width = 48 * 1.8;
+	ap.height = 96 * 1.8;
+	ap.frameRate = 10;
+	auto anim = new CharacterAnimator(player, "Player_Casual", ap);
 	
+	/*
 	auto anim = player->getComponent<CharacterAnimator>();
 	anim->setH(96 * 1.8);
 	anim->setW(48 * 1.8);
 	anim->setTexture("Player_Casual", 18, 10, 1);
 	anim->setframeRate(10);
+	*/
+
+	addPath(introPath[START]);
 }
 
 void IntroScene::addPath(const vector<Vector>& points) {
@@ -53,12 +71,11 @@ void IntroScene::update() {
 	case IntroScene::START:
 		nightAmbience->play(-1);
 		nightMusic->play(-1);
-		addPath(_ecs::introPath[START].points);
 		state = ENTERING;
 		break;
 	case IntroScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
-			addPath(_ecs::introPath[ENTERING].points);
+			addPath(introPath[ENTERING]);
 			state = ARRIVE;
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 		}
@@ -66,7 +83,7 @@ void IntroScene::update() {
 	case IntroScene::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
-			dialogueBox=new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}

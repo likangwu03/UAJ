@@ -57,6 +57,7 @@ private:
 
 	bool showAllText;	// mostrar todo el texto de una sola vez
 	bool nextText;	// mostrar el siguiente texto
+	bool textFinished;
 
 	SoundEffect* nextTextSound;
 	SoundEffect* nextLetterSound;
@@ -82,8 +83,6 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;
 
-	static bool isTextFinished() { return hasFinished; }
-
 	Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos = Vector::zero);
 
 	virtual ~Text();
@@ -96,12 +95,17 @@ public:
 		return widthTextBox;
 	}
 
-	inline void addText(string text) {
-		texts.push_back(text);
+	inline static bool isTextFinished() {
+		return hasFinished;
 	}
 
-	inline bool checkAllTextWritten() const {
-		return texts.empty();
+	inline bool getTextFinished() const {
+		parent->setAlive(false);
+		return textFinished;
+	}
+
+	inline void addText(string text) {
+		texts.push_back(text);
 	}
 
 	virtual void initComponent();

@@ -23,9 +23,17 @@ private:
 	Transform* transform;
 	Path path;
 	Vector end;
-	Vector startingPoint;	// guardar el punto desde el que parte el personaje
 	float speed;	// velocidad en ir de un punto a otro
 	float offsetZone;	// tiene que ser un número pequeño
+
+	bool roundTrip;
+	float roundTripTime;
+	float elapsedTime1;
+	int numLaps;
+	int actNumLaps;
+
+	bool loop;
+	float loopTime;
 
 	// recorrer recta
 	Vector pointStraight(float t);
@@ -63,6 +71,26 @@ public:
 
 	inline Vector getLastPoint() const {
 		return path.points.back();
+	}
+
+	inline void enableRoundTrip(int numLaps) {
+		roundTrip = true;
+		this->numLaps = numLaps * 2;
+	}
+
+	// en segundos
+	inline void enableRoundTrip(float time) {
+		roundTrip = true;
+		roundTripTime = time * 1000;
+	}
+
+	inline bool roundTripEnded() const {
+		return roundTrip;
+	}
+
+	inline void enableLoop(float time) {
+		loop = true;
+		loopTime = time * 1000;
 	}
 
 	virtual void update();

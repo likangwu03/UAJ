@@ -1,10 +1,10 @@
-#include "ThiefsManager.h"
+#include "ThievesManager.h"
 #include "DayManager.h"
 
 #include "../Utilities/checkML.h"
 
 
-void ThiefsManager::createThief() {
+void ThievesManager::createThief() {
 	string sprite = "Thief_" + to_string(sdl->rand().nextInt(1, 9));
 
 	int pos = randomPos();
@@ -19,7 +19,7 @@ void ThiefsManager::createThief() {
 	played = true;
 }
 
-void ThiefsManager::addFrequently() {
+void ThievesManager::addFrequently() {
 	if (thiefs->size() <= 0) {
 		if (played) {
 			played = false;
@@ -38,7 +38,7 @@ void ThiefsManager::addFrequently() {
 	}
 }
 
-int ThiefsManager::randomPos() {
+int ThievesManager::randomPos() {
 	// posición random
 	int pos = sdl->rand().nextInt(0, _ecs::MAX_THIEFS);
 	// se comprueba si esa posición est?ocupada y si lo est? se coge la siguiente
@@ -50,7 +50,7 @@ int ThiefsManager::randomPos() {
 	return pos;
 }
 
-ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max) :
+ThievesManager::ThievesManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max) :
 	Manager(parent), sdl(SDLUtils::instance()), warningSound(&sdl->soundEffects().at("ALERT")), played(false),
 	generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), minFrec(0), maxFrec(5), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
 	scene = parent->getScene();
@@ -59,15 +59,15 @@ ThiefsManager::ThiefsManager(GameObject* parent, float generalSpeed, float escap
 	warningSound->setVolume(30);
 }
 
-void ThiefsManager::update() {
+void ThievesManager::update() {
 	addFrequently();
 }
 
-void ThiefsManager::stopSound() {
+void ThievesManager::stopSound() {
 	warningSound->haltChannel();
 }
 
-void ThiefsManager::nextDay() {
+void ThievesManager::nextDay() {
 	stopSound();
 	for (auto t : *thiefs) {
 		t->setAlive(false);

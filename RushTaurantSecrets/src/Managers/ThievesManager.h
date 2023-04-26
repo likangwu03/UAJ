@@ -6,9 +6,9 @@
 #include "../Utilities/RelativeToGlobal.h"
 #include "../Utilities/checkML.h"
 
-class ThiefsManager : public Manager<ThiefsManager> {
+class ThievesManager : public Manager<ThievesManager> {
 
-	friend Manager<ThiefsManager>;
+	friend Manager<ThievesManager>;
 
 private:
 	const int MAX_THIEFS = 2;
@@ -39,7 +39,7 @@ private:
 
 	int randomPos();
 
-	ThiefsManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max);
+	ThievesManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max);
 
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;

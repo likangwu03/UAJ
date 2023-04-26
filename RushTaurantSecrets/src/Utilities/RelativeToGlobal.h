@@ -12,10 +12,10 @@ namespace RelativeToGlobal {
 	// Cada casilla extra supone que se suben 1
 	
 	// En este caso, hay 1 sola casilla extra añadida respecto al tilemap
-	const int tilesWRest = 40;
+	const int tilesWRest = 39;
 	const int tilesHRest = 23;
 
-	const int tilesWPantry = 32;
+	const int tilesWPantry = 31;
 	const int tilesHPantry = 18;
 
 	const int tilesWHouse = 26;

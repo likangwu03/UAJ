@@ -24,6 +24,5 @@ public:
 		new Text(this, texts, widthLetter, heightLetter, letterFrequency, font, widthBox, Vector(1.25 / 4, 90 / 4.5));
 		new ShowControlComp(this, {{ControlsType::key_SPACE,ControlsType::play_Circle,ControlsType::xbox_B,Vector(0,45),40,40}});
 		new BoxText(this, &sdl->images().at("DIALOG_BOX_PORTRAIT"), portrait, Vector(1.4, 90));
-
 	}
 };

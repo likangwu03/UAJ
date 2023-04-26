@@ -49,6 +49,15 @@ void Restaurant::callAfterCreating() {
 	GameObject* managerContainer = new GameObject(this);
 	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 5);
 
+	/*
+	GameObject* prueba = new GameObject(this, _ecs::grp_CLIENTS);
+	new Transform(prueba, RelativeToGlobal::pointRestaurant(Vector(30, 18)), Vector(0, 0), 48, 96);
+	new CharacterAnimator(prueba, "Client_1", 18, 24, 1);
+	StraightMovement* s = new StraightMovement(prueba, 3);
+	s->addPath(RelativeToGlobal::pointsRestaurant({ Vector(25, 18), Vector(25, 15), Vector(30,15) }));
+	s->enableLoop(10.0f);
+	*/
+
 	dm = GameManager::get()->getDayManager();
 
 	createMap();
@@ -60,8 +69,6 @@ void Restaurant::callAfterCreating() {
 	ui->callAfterCreating();
 	player->getComponent<PlayerMovementController>()->initP();
 	player->getComponent<Transform>()->setPos(PANTRY_POS);
-
-	
 }
 
 

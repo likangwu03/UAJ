@@ -52,7 +52,7 @@ void SecondDayAfterKillScene::update() {
 	switch (state)
 	{
 	case SecondDayAfterKillScene::START:
-		addPath(secondDayAfterKillPath[0].points);
+		addPath(secondDayAfterKillPath[0]);
 		nightAmbience->play(-1);
 		nightMusic->play(-1);
 		state = PAUSE;
@@ -67,7 +67,7 @@ void SecondDayAfterKillScene::update() {
 	case SecondDayAfterKillScene::START2:
 		cont += frameTime;
 		if (cont > STOP_TIME * 1000) {
-			addPath(secondDayAfterKillPath[1].points);
+			addPath(secondDayAfterKillPath[1]);
 			state = M1;
 		}
 		break;
@@ -126,7 +126,7 @@ void SecondDayAfterKillScene::update() {
 		if (Text::isTextFinished()) {
 			straightMovement->changeSpeed(5);
 			player->getComponent<CharacterAnimator>()->setframeRate(12);
-			addPath(secondDayAfterKillPath[2].points);
+			addPath(secondDayAfterKillPath[2]);
 			state = M5;
 		}
 		break;
@@ -149,7 +149,7 @@ void SecondDayAfterKillScene::update() {
 		break;
 	case SecondDayAfterKillScene::M7:
 		if (Text::isTextFinished()) {
-			addPath(secondDayAfterKillPath[3].points);
+			addPath(secondDayAfterKillPath[3]);
 			state = OUT;
 		}
 		break;

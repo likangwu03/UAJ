@@ -118,9 +118,8 @@ void Text::newText(string newText) {
 
 Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos) :
 	Component(parent, id), sdl(SDLUtils::instance()), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency),
-	font(font), widthTextBox(widthTextBox), offset(10), showAllText(false), nextText(false), state(Writing), boxText(nullptr) ,
-	nextLetterSound(&sdl->soundEffects().at("TEXT_TYPING")), nextTextSound(&sdl->soundEffects().at("NEXT_TEXT"))
-{
+	font(font), widthTextBox(widthTextBox), offset(10), showAllText(false), nextText(false), state(Writing), boxText(nullptr), textFinished(true),
+	nextLetterSound(&sdl->soundEffects().at("TEXT_TYPING")), nextTextSound(&sdl->soundEffects().at("NEXT_TEXT")) {
 	nextLetterSound->setVolume(3);
 	nextTextSound->setVolume(50);
 	nextLetterSound->setNumberofChannels(100);
@@ -171,6 +170,9 @@ void Text::update() {
 
 				}
 				else {
+					// 1ª forma
+					textFinished = true;
+					// 2ª forma
 					hasFinished = true;
 					parent->setAlive(false);
 				}
