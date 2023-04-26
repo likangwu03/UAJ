@@ -28,6 +28,7 @@ class OptionsMenu;
 class IntroScene;
 class Day2KillEndingScene;
 class FirstDayAfterKillScene;
+class EndingDay2NoKillScene;
 class SecondDayAfterKillScene;
 class BadEnding1Scene;
 class EndingDay1Scene;
@@ -106,6 +107,7 @@ private:
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
 	BadEnding1Scene* badEnding1Scene;
+	EndingDay2NoKillScene* endingDay2NoKill;
 	EndingDay1Scene* endingDay1Scene;
 
 	GameManager();
@@ -145,6 +147,7 @@ public:
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 	BadEnding1Scene* getBadEnding1Scene();
+	EndingDay2NoKillScene* getEndingDay2NoKillScene();
 	EndingDay1Scene* getEndingDay1Scene();
 
 	Reputation* getReputation();

@@ -10,23 +10,27 @@
 #include "../Scenes/GameScenes/BeforeDayStartScene.h"
 #include "../Scenes/Menus/MainMenu.h"
 #include "../Scenes/GameScenes/Restaurant.h"
+#include "../Scenes/HUD/PantryUI.h"
 #include "../Scenes/GameScenes/Pantry.h"
 #include "../Scenes/GameScenes/DailyMenuScene.h"
 #include "../Scenes/GameScenes/SuperMarket.h"
+
 #include "../Scenes/Menus/PauseMenu.h"
 #include "../Scenes/Menus/OptionsMenu.h"
 #include "../Scenes/GameScenes/EndOfDayScene.h"
 #include "../Scenes/GameScenes/GameOverScene.h"
 #include "../Scenes/Menus/ContinueMenu.h"
-#include "../Scenes/HUD/PantryUI.h"
+#include "../Scenes/Menus/CoopMenu.h"
+
+#include "../Scenes/TransitionScene.h"
 #include "../Scenes/Cutscenes/IntroScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
+#include "../Scenes/Cutscenes/EndingDay2NoKillScene.h"
 #include "../Scenes/Cutscenes/Day2KillEndingScene.h"
 #include "../Scenes/Cutscenes/EndingDay1Scene.h"
-#include "../Scenes/Menus/CoopMenu.h"
-#include "../Scenes/TransitionScene.h"
+
 #include <sstream>
 #include <fstream>
 
@@ -40,7 +44,7 @@ GameManager::GameManager() : scenes(), deleteScene(nullptr), deleteTransition(fa
 	reputation(nullptr), days(nullptr), money(nullptr),
 	menu(nullptr), kitchenIsland(nullptr),
 	hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0),
-	introScene(nullptr), day2KillEndingScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr), 
+	introScene(nullptr), day2KillEndingScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr), endingDay2NoKill(nullptr),
 	badEnding1Scene(nullptr), endingDay1Scene(nullptr) { };
 
 
@@ -89,12 +93,12 @@ void GameManager::initialize() {
 	secondDayAfterKillScene = new SecondDayAfterKillScene();
 	firstDayAfterKillScene = new FirstDayAfterKillScene();
 	badEnding1Scene = new BadEnding1Scene();
+	endingDay2NoKill = new EndingDay2NoKillScene();
 	day2KillEndingScene = new Day2KillEndingScene();
 	endingDay1Scene = new EndingDay1Scene();
 
 
 	changeScene(mainMenu);
-
 }
 
 GameManager::~GameManager() {
@@ -102,6 +106,7 @@ GameManager::~GameManager() {
 	delete firstDayAfterKillScene;
 	delete introScene;
 	delete badEnding1Scene;
+	delete endingDay2NoKill;
 	delete day2KillEndingScene;
 	delete endingDay1Scene;
 

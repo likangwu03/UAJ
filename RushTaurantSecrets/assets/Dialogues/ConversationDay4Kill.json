@@ -7,7 +7,7 @@
 
     },   {
       "Character": "Player",
-      "Text": "I know what I'm doing is wrong, but at least their body will have a purpose even after their death.",
+      "Text": "I know what I'm doing is wrong, but at least their bodies will serve a purpose even after their death.",
       "Portrait":"PROTA_CASUAL_BAD_SMILE"
 
     },
@@ -18,7 +18,7 @@
     },
     {
       "Character": "Player",
-      "Text": "I know, I know, killing people is bad. Do you really think I feel no remorse?",
+      "Text": "I know, I know. Killing people is bad... Do you really think I don't feel guilty'?",
       "Portrait":"PROTA_CASUAL_ANGRY_CLOSE_EYE"
     },
     {
@@ -43,7 +43,7 @@
     },
     {
       "Character": "Player",
-      "Text": "You teached me family first, so I will do anything to keep this family going.",
+      "Text": "You taught me family comes first, so I will do anything to keep this family going.",
       "Portrait":"PROTA_CASUAL_SMILE_CLOSE_EYE"
     }
   ]
