@@ -89,8 +89,6 @@ namespace _ecs {
 	};
 
 
-
-
 	// CLIENTES
 	const int NUM_TABLES = 7;
 	const int NUM_CLIENTS_PATHS = 3;

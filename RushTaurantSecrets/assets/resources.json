@@ -930,6 +930,10 @@
       "file": "assets/Sprites/Cinematic/Entrance_General_Night.png"
     },
     {
+      "id": "CINEMATIC_BG_PANTRY",
+      "file": "assets/Sprites/Cinematic/Pantry.png"
+    },
+    {
       "id": "DAILY_MENU",
       "file": "assets/Sprites/UI/dailymenu.png"
     },
