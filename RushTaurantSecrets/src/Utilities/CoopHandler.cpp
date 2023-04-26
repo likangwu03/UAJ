@@ -14,11 +14,6 @@
 
 // Codificación de mensajes
 
-// Almacena cuantos espacios ocupa cada id de mensaje
-const int CoopHandler::messageLengths[]{
-	8, // msg_PLAYER
-};
-
 // Recoge la información pertinente del mensaje y la mete en el buffer
 void CoopHandler::code(const Message& m) {
 	switch(m.id) {

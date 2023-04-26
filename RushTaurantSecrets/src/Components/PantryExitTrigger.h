@@ -11,8 +11,8 @@ private:
 	const int MUSIC_VOL = 30;
 
 	const Vector RESTAURANT_POS = { 640, 130 };
-	GameObject* playerPantry;
-	GameObject* playerRestaurant;
+	GameObject* playerPantry, *otherPPantry;
+	GameObject* playerRestaurant, *otherPRest;
 	GameManager* gm;
 	Transform* playerRestaurantTransform;
 	Image* image;

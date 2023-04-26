@@ -24,8 +24,6 @@ private:
 
     int dataLength;
 
-    static const int messageLengths[Message::msg_INVALID];
-
     void code(const Message& message);
     Message decode(Message::_msg_id id, uint16_t& last);
 public:

@@ -28,6 +28,7 @@ class OptionsMenu;
 class IntroScene;
 class Day2KillEndingScene;
 class FirstDayAfterKillScene;
+class EndingDay2NoKillScene;
 class SecondDayAfterKillScene;
 class BadEnding1Scene;
 class BadEnding4Scene;
@@ -95,19 +96,20 @@ private:
 	KitchenIslandComp* kitchenIsland;
 
 	bool hasKilled;
-	pair<bool,int> hasEverKilled; //si ha matado alguna vez el primer día que mató a un ladrón
+	pair<bool,int> hasEverKilled; //si ha matado alguna vez el primer dÃ­a que matÃ³ a un ladrÃ³n
 	bool mapsCreated;
 	bool twoPlayers;
-	int killedNum; //número de ladrones matados en el día anterior
+	int killedNum; //nÃºmero de ladrones matados en el dÃ­a anterior
 
 
-	//escenas cinemáticas
+	//escenas cinemÃ¡ticas
 	IntroScene* introScene;
 	Day2KillEndingScene* day2KillEndingScene;
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
 	BadEnding1Scene* badEnding1Scene;
 	BadEnding4Scene* badEnding4Scene;
+	EndingDay2NoKillScene* endingDay2NoKill;
 	EndingDay1Scene* endingDay1Scene;
 
 	GameManager();
@@ -148,6 +150,7 @@ public:
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 	BadEnding1Scene* getBadEnding1Scene();
 	BadEnding4Scene* getBadEnding4Scene();
+	EndingDay2NoKillScene* getEndingDay2NoKillScene();
 	EndingDay1Scene* getEndingDay1Scene();
 
 	Reputation* getReputation();

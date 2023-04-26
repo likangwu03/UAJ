@@ -7,7 +7,7 @@
     },
     {
       "Character": "Player",
-      "Text": "The sun is out, the birds are singing... And it looks like it’s warm outside!",
+      "Text": "The sun is out, the birds are singing... And it looks like itï¿½s warm outside!",
       "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
@@ -37,12 +37,12 @@
     },
     {
       "Character": "Player",
-      "Text": "I knew I would make it... Hahah!",
+      "Text": "I knew I would make it... Hahaha!",
       "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Thank you all so much for coming to the restaurant's reopening.",
+      "Text": "Thank you all so much for coming to my restaurant's grand reopening.",
       "Portrait": "PROTA_CHEF_SMILE"
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "Character": "Player",
-      "Text": "I wouldn't have been able to make it without all of your visits.",
+      "Text": "I wouldn't have been able to make it without your help.",
       "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
     },
     {

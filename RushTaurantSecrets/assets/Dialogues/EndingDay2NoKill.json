@@ -3,17 +3,17 @@
     {
       "Character": "Player",
       "Text": "Ooof... I didn't think he would be serious about his threats.",
-      "Portrait": "PROTA_CASUAL_SMILE"
+      "Portrait": "PROTA_CHEF_SIGH"
     },
     {
       "Character": "Player",
-      "Text": "It doesn't matter though, let them come, I'll kick them all out.",
-      "Portrait": "PROTA_CASUAL_SMILE"
+      "Text": "It doesn't matter though. Keep coming, I'll kick you all out.",
+      "Portrait": "PROTA_CHEF_FURIOUS"
     },
     {
       "Character": "Player",
-      "Text": "I'll do this for mom and dad, the restaurant will be open, I'll make sure of it.",
-      "Portrait": "PROTA_CASUAL_SMILE"
+      "Text": "I'll do this for mom and dad. The restaurant will be open, I'll make sure of it.",
+      "Portrait": "PROTA_CHEF_SHOUTING"
     }
   ]
 }

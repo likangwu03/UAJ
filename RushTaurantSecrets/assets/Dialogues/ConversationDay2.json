@@ -6,7 +6,7 @@
     },
     {
       "Character": "Player",
-      "Text": "Hello? Who is this?"
+      "Text": "Hello? Whos this?"
     },
     {
       "Character": "Rival",
@@ -14,7 +14,7 @@
     },
     {
       "Character": "Player",
-      "Text": "Who is this?! Do you know me?"
+      "Text": "Who's this?! How do you know me?"
     },
     {
       "Character": "Rival",
@@ -34,7 +34,7 @@
     },
     {
       "Character": "Rival",
-      "Text": "You know what I want then, I'm also sure you know I'll do anything to get my hands on it, should you not give it to me willingly."
+      "Text": "You know what I want then. I'm also sure you know I'll do anything to get my hands on it, wether you give it to me willingly or not."
     },
     {
       "Character": "Player",
