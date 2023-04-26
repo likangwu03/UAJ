@@ -12,8 +12,8 @@ private:
 	const int MUSIC_VOL = 30;
 
 	GameManager* gm;
-	GameObject* playerRestaurant;
-	GameObject* playerPantry;
+	GameObject* playerRestaurant, *otherPRest;
+	GameObject* playerPantry, *otherPPantry;
 	Transform* playerPantryTransform;
 	Image* image;
 	SoundEffect* doorSound;

@@ -5,7 +5,7 @@
 // Mensajes para enviar a través de internet
 
 struct Message {
-	enum _msg_id : unsigned char {
+	enum _msg_id : uint8_t {
 		msg_PLAYER,
 		msg_BASKET,
 

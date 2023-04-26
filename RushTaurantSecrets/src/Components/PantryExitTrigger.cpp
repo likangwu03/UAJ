@@ -13,7 +13,9 @@ doorSound(&sdlutils().soundEffects().at("OPEN_DOOR")),
 sdl(SDLUtils::instance()), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")) {
 	gm = GameManager::get();
 	playerPantry = parent->getScene()->getGameObject(_ecs::hdr_PLAYER);
+	otherPPantry = parent->getScene()->getGameObject(_ecs::hdr_OTHERPLAYER);
 	playerRestaurant = gm->getRestaurant()->getGameObject(_ecs::hdr_PLAYER);
+	otherPRest = gm->getRestaurant()->getGameObject(_ecs::hdr_OTHERPLAYER);
 	playerRestaurantTransform = playerRestaurant->getComponent<Transform>();
 	image = parent->getComponent<Image>();
 	image->setActive(false);
@@ -26,6 +28,7 @@ void PantryExitTrigger::isOverlapping() {
 	if ((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))) && GameManager::get()->canChangeScene()) {
 		// se desactiva el jugador de la despensa
 		playerPantry->setActives(false);
+		otherPPantry->setActives(false);
 		// se cambia al restaurant
 		gm->changeScene(gm->getRestaurant());
 		doorSound->play();
@@ -33,6 +36,7 @@ void PantryExitTrigger::isOverlapping() {
 		restaurantMusic->play();
 		// se activa el jugador del restaurante y se recoloca
 		playerRestaurant->setActives(true);
+		otherPRest->setActives(true);
 		playerRestaurantTransform->setPos(RESTAURANT_POS);
 		playerRestaurantTransform->setOrientation(south);
 	}
