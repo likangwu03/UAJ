@@ -27,6 +27,7 @@
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
+#include "../Scenes/Cutscenes/BadEnding4Scene.h"
 #include "../Scenes/Cutscenes/EndingDay2NoKillScene.h"
 #include "../Scenes/Cutscenes/Day2KillEndingScene.h"
 #include "../Scenes/Cutscenes/EndingDay1Scene.h"
@@ -93,6 +94,7 @@ void GameManager::initialize() {
 	secondDayAfterKillScene = new SecondDayAfterKillScene();
 	firstDayAfterKillScene = new FirstDayAfterKillScene();
 	badEnding1Scene = new BadEnding1Scene();
+	badEnding4Scene = new BadEnding4Scene();
 	endingDay2NoKill = new EndingDay2NoKillScene();
 	day2KillEndingScene = new Day2KillEndingScene();
 	endingDay1Scene = new EndingDay1Scene();
@@ -106,6 +108,7 @@ GameManager::~GameManager() {
 	delete firstDayAfterKillScene;
 	delete introScene;
 	delete badEnding1Scene;
+	delete badEnding4Scene;
 	delete endingDay2NoKill;
 	delete day2KillEndingScene;
 	delete endingDay1Scene;
@@ -229,6 +232,7 @@ Day2KillEndingScene* GameManager::getDay2KillEndingScene() { return day2KillEndi
 FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }
 SecondDayAfterKillScene* GameManager::getSecondDayAfterKillScene() { return secondDayAfterKillScene; }
 BadEnding1Scene* GameManager::getBadEnding1Scene() { return badEnding1Scene; }
+BadEnding4Scene* GameManager::getBadEnding4Scene() { return badEnding4Scene; }
 EndingDay1Scene* GameManager::getEndingDay1Scene() { return endingDay1Scene; }
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }

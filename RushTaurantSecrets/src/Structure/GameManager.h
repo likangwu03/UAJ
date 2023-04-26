@@ -31,6 +31,7 @@ class FirstDayAfterKillScene;
 class EndingDay2NoKillScene;
 class SecondDayAfterKillScene;
 class BadEnding1Scene;
+class BadEnding4Scene;
 class EndingDay1Scene;
 
 class Reputation;
@@ -95,18 +96,19 @@ private:
 	KitchenIslandComp* kitchenIsland;
 
 	bool hasKilled;
-	pair<bool,int> hasEverKilled; //si ha matado alguna vex/ el primer d®™a que mat®Æ a un ladr®Æn
+	pair<bool,int> hasEverKilled; //si ha matado alguna vez el primer d√≠a que mat√≥ a un ladr√≥n
 	bool mapsCreated;
 	bool twoPlayers;
-	int killedNum; //n®≤mero de ladrones matados en el d®™a anterior
+	int killedNum; //n√∫mero de ladrones matados en el d√≠a anterior
 
 
-	//escenas cinem®¢ticas
+	//escenas cinem√°ticas
 	IntroScene* introScene;
 	Day2KillEndingScene* day2KillEndingScene;
 	FirstDayAfterKillScene* firstDayAfterKillScene;
 	SecondDayAfterKillScene* secondDayAfterKillScene;
 	BadEnding1Scene* badEnding1Scene;
+	BadEnding4Scene* badEnding4Scene;
 	EndingDay2NoKillScene* endingDay2NoKill;
 	EndingDay1Scene* endingDay1Scene;
 
@@ -147,6 +149,7 @@ public:
 	FirstDayAfterKillScene* getFirstDayAfterKillScene();
 	SecondDayAfterKillScene * getSecondDayAfterKillScene();
 	BadEnding1Scene* getBadEnding1Scene();
+	BadEnding4Scene* getBadEnding4Scene();
 	EndingDay2NoKillScene* getEndingDay2NoKillScene();
 	EndingDay1Scene* getEndingDay1Scene();
 
