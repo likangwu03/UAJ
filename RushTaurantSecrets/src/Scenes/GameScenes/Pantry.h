@@ -30,6 +30,7 @@ public:
 	void handleEvents();
 	void reset();
 	void refresh();
+	void receive(const Message& m);
 	
 	Restaurant* getRestaurant() { return rest; }
 	void init();

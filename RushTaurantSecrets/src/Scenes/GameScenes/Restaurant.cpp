@@ -20,7 +20,7 @@ pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
-	new OtherPlayer(this);
+	new OtherPlayer(this, 1);
 	pantryMusic->setMusicVolume(MUSIC_VOL);
 	restaurantMusic->setMusicVolume(MUSIC_VOL);
 }
@@ -103,6 +103,14 @@ void Restaurant::render() {
 void Restaurant::initComponent() {
 	Scene::initComponent();
 	ui->initComponent();
+}
+void Restaurant::receive(const Message& m) {
+	pantry->Scene::receive(m);
+	_receive(m);
+}
+void Restaurant::_receive(const Message& m) {
+	ui->receive(m);
+	Scene::receive(m);
 }
 void Restaurant::update() {
 	pantry->_update();
