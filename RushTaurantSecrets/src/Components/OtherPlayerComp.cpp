@@ -17,11 +17,12 @@ void OtherPlayerComp::update() {
 	m.id = Message::msg_PLAYER;
 	m.player.pos = theirTrans->getPos();
 	m.player.vel = theirTrans->getVel();
+	m.player.scene = scene;
 	Game::get()->getCoopHandler()->send(m);
 }
 
 void OtherPlayerComp::receive(const Message& message) {
-	if(message.id == Message::msg_PLAYER) {
+	if(message.id == Message::msg_PLAYER && message.player.scene == scene) {
 		myTrans->setPos(message.player.pos);
 		myTrans->setVel(message.player.vel);
 		myTrans->setMovState(message.player.vel.magnitude() == 0 ? idle : walking);
