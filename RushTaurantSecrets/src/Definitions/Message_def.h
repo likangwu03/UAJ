@@ -18,6 +18,7 @@ struct Message {
 
 	struct data_player {
 		Vector pos, vel;
+		uint8_t scene; // 0 - Restaurant, 1 - Pantry, 2 - Supermarket
 	} player;
 
 	struct data_basket {

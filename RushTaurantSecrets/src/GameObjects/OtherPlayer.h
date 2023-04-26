@@ -12,7 +12,7 @@ class OtherPlayer : public GameObject {
 	const int END_FRAME = 10;
 	const int CURRENT_ANIM = 1;
 public:
-	OtherPlayer(Scene* scene) : GameObject(scene, _ecs::grp_GENERAL, _ecs::hdr_OTHERPLAYER) {
+	OtherPlayer(Scene* scene, uint8_t sceneID) : GameObject(scene, _ecs::grp_GENERAL, _ecs::hdr_OTHERPLAYER) {
 		new Transform(this, Vector(-100, -100), Vector::zero, WIDTH, HEIGHT);
 		new CollisionComp(this, { 0,WIDTH * sdlutils().getResizeFactor() }, WIDTH * sdlutils().getResizeFactor(), WIDTH * sdlutils().getResizeFactor());
 		Animator::AnimParams ap;
@@ -20,7 +20,7 @@ public:
 		ap.endFrame = END_FRAME;
 		ap.currAnim = CURRENT_ANIM;
 		new CharacterAnimator(this, "Player_2", ap);
-		new OtherPlayerComp(this);
+		new OtherPlayerComp(this, sceneID);
 		scene->pushRenderList(Middle, this);
 	}
 };

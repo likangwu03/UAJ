@@ -33,7 +33,7 @@ void SuperMarket::handleEvents() {
 void SuperMarket::init() {
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
-	new OtherPlayer(this);
+	new OtherPlayer(this, 2);
 }
 
 void SuperMarket::callAfterCreating() {

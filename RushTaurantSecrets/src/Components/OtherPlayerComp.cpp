@@ -5,10 +5,9 @@
 #include "../Structure/Scene.h"
 
 
-OtherPlayerComp::OtherPlayerComp(GameObject* parent) : Component(parent, id), timer(0) {
+OtherPlayerComp::OtherPlayerComp(GameObject* parent, uint8_t scene) : Component(parent, id), timer(0), scene(scene) {
 	myTrans = parent->getComponent<Transform>();
 	theirTrans = parent->getScene()->getGameObject(_ecs::hdr_PLAYER)->getComponent<Transform>();
-	algo = &(*SDLUtils::get()).images().at("BIN_HIGHLIGHT");
 }
 
 void OtherPlayerComp::update() {

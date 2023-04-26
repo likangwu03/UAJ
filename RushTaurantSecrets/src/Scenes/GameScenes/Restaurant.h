@@ -48,6 +48,8 @@ public:
 	void handleEvents();
 	void refresh();
 	virtual void initComponent();
+	void receive(const Message& m);
+	void _receive(const Message& m);
 
 	float getResizeFactor() { return RESIZEFACTOR; }
 	void createMap();
