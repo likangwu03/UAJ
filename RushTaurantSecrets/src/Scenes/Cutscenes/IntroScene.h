@@ -48,7 +48,7 @@ private:
 
 public:
 	IntroScene();
-	void callAfterCreating() override;
+	void reset() override;
 	void renderCinematic () override;
 	void finishScene()override;
 	void update()override;

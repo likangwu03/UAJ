@@ -52,7 +52,7 @@ private:
 
 public:
 	SecondDayAfterKillScene();
-	void callAfterCreating() override;
+	void reset() override;
 	void renderCinematic() override;
 	void finishScene()override;
 	void update()override;

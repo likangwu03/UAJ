@@ -41,7 +41,7 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-void FirstDayAfterKillScene::callAfterCreating() {
+void FirstDayAfterKillScene::reset() {
 	state = START;
 	transition = new ShowSkipTransitionScene(this, START_TIME);
 	GameManager::get()->pushScene(transition, true);

@@ -75,7 +75,7 @@ private:
 	vector<Vector> client2Points;
 public:
 	BadEnding1Scene();
-	void callAfterCreating() override;
+	void reset() override;
 	void renderCinematic() override;
 	void finishScene()override;
 	void update()override;

@@ -18,7 +18,7 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->newGame();
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO), true);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1), true);
 			GameManager::get()->getCurrentScene()->callAfterCreating();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);

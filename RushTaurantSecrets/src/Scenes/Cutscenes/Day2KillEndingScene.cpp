@@ -9,13 +9,12 @@
 #include "../../Structure/GameManager.h"
 #include "../../GameObjects/Dialogue.h"
 
-void Day2KillEndingScene::addPath(const vector<Vector>& points)
-{
+
+void Day2KillEndingScene::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsHouse(points));
 }
 
-Day2KillEndingScene::Day2KillEndingScene()
-{
+Day2KillEndingScene::Day2KillEndingScene() {
 	dialogues = GameManager::get()->getDialogueInfo("EndingDay2Kill.json");
 	enterPoints = { {Vector(13, 6)} };
 	phonePoints = { {Vector(13, 13)}, {Vector(12, 13)} };
@@ -41,7 +40,7 @@ Day2KillEndingScene::Day2KillEndingScene()
 	anim->setframeRate(18);
 }
 
-void Day2KillEndingScene::callAfterCreating()
+void Day2KillEndingScene::reset()
 {
 	state = START;
 	transition = new ShowSkipTransitionScene(this, 3);

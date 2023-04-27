@@ -22,7 +22,7 @@ public:
 	DayManager();
 	~DayManager();
 	void checkDayFinished();
-	void nextDay(bool loadingGame = false);
+	void nextDay();
 	void setDay(int x);
 	void newDay();
 

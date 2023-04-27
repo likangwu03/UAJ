@@ -84,9 +84,9 @@ void GameManager::initialize() {
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
 	
-	days->nextDay(true);
+	days->nextDay();
 
-	allScenes.insert({ _ecs::sc_INTRO, new IntroScene() });
+	allScenes.insert({ _ecs::sc_INTRO1, new IntroScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY1, new EndingDay1Scene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new EndingDay2NoKillScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2KillEndingScene() });

@@ -39,7 +39,7 @@ EndingDay1Scene::EndingDay1Scene()
 	addPath(paths[START]);
 }
 
-void EndingDay1Scene::callAfterCreating()
+void EndingDay1Scene::reset()
 {
 	state = START;
 	addPath(paths[START]);
@@ -52,14 +52,6 @@ void EndingDay1Scene::renderCinematic()
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	player->render();
 	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
-}
-
-void EndingDay1Scene::finishScene()
-{
-	dialogueBox = nullptr;
-	if (transition != nullptr)
-		delete transition;
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
 }
 
 void EndingDay1Scene::update()
@@ -89,4 +81,16 @@ void EndingDay1Scene::update()
 		break;
 
 	}
+}
+
+
+
+void EndingDay1Scene::finishScene()
+{
+	dialogueBox = nullptr;
+	if (transition != nullptr)
+		delete transition;
+	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
+
 }

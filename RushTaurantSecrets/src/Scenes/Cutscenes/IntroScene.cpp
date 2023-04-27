@@ -58,7 +58,7 @@ void IntroScene::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-void IntroScene::callAfterCreating() {
+void IntroScene::reset() {
 	state = START;
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);

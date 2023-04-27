@@ -11,8 +11,6 @@
 EndingDay2NoKillScene::EndingDay2NoKillScene() {
 	dialogues = GameManager::get()->getDialogueInfo("EndingDay2NoKill.json");
 	
-	state = START;
-	
 	bg = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL");
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	filter->setOpacity(80);
@@ -24,28 +22,24 @@ EndingDay2NoKillScene::EndingDay2NoKillScene() {
 	player = new GameObject(this);
 	transform = new Transform(player, Vector(0, 0), 0, 48, 96, 0);
 	straightMovement = new StraightMovement(player, 7);
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(19.5, 20)));
-	transform->setMovState(walking);
-	transform->setOrientation(north);
-	
 
 	auto anim = new CharacterAnimator(player, &sdlutils().images().at("Player_1"), AP);
 	anim->setH(96 * 1.4);
 	anim->setW(48 * 1.4);
 	anim->setframeRate(10);
-
-	timer = 0;
-	dialogueN = 0;
 }
 
 void EndingDay2NoKillScene::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-void EndingDay2NoKillScene::callAfterCreating() {
+void EndingDay2NoKillScene::reset() {
+	state = START;
 	timer = 0;
 	dialogueN = 0;
-	state = START;
+	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(19.5, 20)));
+	transform->setMovState(walking);
+	transform->setOrientation(north);
 
 	nightAmbience->play(-1);
 	nightMusic->play(-1);
@@ -132,5 +126,7 @@ void EndingDay2NoKillScene::finishScene() {
 		delete transition;
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
+//	GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3), false);
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
+
 }

@@ -58,7 +58,7 @@ void BadEnding4Scene::addPathPantry(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsPantry(points));
 }
 
-void BadEnding4Scene::callAfterCreating() {
+void BadEnding4Scene::reset() {
 	state = START;
 	//state = NONE; // BORRAR
 	transition = new ShowSkipTransitionScene(this, 3);

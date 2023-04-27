@@ -9,13 +9,11 @@
 #include "../../Structure/GameManager.h"
 #include "../../GameObjects/Dialogue.h"
 
-void BadEnding1Scene::addPath(const vector<Vector>& points)
-{
+void BadEnding1Scene::addPath(const vector<Vector>& points) {
 	straightMovementP->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-BadEnding1Scene::BadEnding1Scene()
-{
+BadEnding1Scene::BadEnding1Scene() {
 	dialogues = GameManager::get()->getDialogueInfo("BadEnding1.json");
 
 	playerPoints = { {Vector(26, 11)} };
@@ -23,7 +21,6 @@ BadEnding1Scene::BadEnding1Scene()
 	client1Points = { {Vector(40, 14)} };
 	client2Points = { {Vector(40, 15)} };
 
-	state = START;
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
 	nightAmbience->setVolume(60);
@@ -31,27 +28,27 @@ BadEnding1Scene::BadEnding1Scene()
 	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
 
-	transition = nullptr;
-	cont = 0;
-
 	player = new Player(this, 0);
 	player->getComponent<PlayerMovementController>()->setActive(false);
 	straightMovementP = new StraightMovement(player, 5);
 
 	transform = player->getComponent<Transform>();
-	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-	transform->setMovState(walking);
 
 	//Scene* scene, string sprite, Vector origin, float speed
 	client1 = new CinematicNPC(this, "Client_3", RelativeToGlobal::pointRestaurant({ 25, 14 }), 1);
 	straightMovementc1 = new StraightMovement(client1, 3);
 	client2 = new CinematicNPC(this, "Client_5", RelativeToGlobal::pointRestaurant({ 25, 15 }), 1);
 	straightMovementc2 = new StraightMovement(client2, 3);
-
 }
 
-void BadEnding1Scene::callAfterCreating()
-{
+void BadEnding1Scene::reset() {
+	state = START;
+	transition = nullptr;
+	cont = 0;
+
+	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+	transform->setMovState(walking);
+
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }
