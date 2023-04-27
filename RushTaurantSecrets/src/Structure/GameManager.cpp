@@ -49,10 +49,10 @@ void GameManager::initialize() {
 	reputation = new Reputation();
 	money = new Money();
 	hasKilled = false;
-
+	dailyMenu = new DailyMenuScene();
 	
 	allScenes.insert({ _ecs::sc_MAINMENU, new MainMenu() });
-	allScenes.insert({ _ecs::sc_DAILYMENU, new DailyMenuScene() });
+	allScenes.insert({ _ecs::sc_DAILYMENU, dailyMenu});
 	allScenes.insert({ _ecs::sc_GAMEOVER, new GameOverScene() });
 	try {
 		days = new DayManager();
@@ -189,6 +189,7 @@ Scene* GameManager::getScene(_ecs::_scene_id id) { return allScenes.at(id); }
 Restaurant* GameManager::getRestaurant() { return restaurant; }
 Pantry* GameManager::getPantry() { return pantry; }
 SuperMarket* GameManager::getSupermarket() { return supermarket; }
+DailyMenuScene* GameManager::getDailyMenu() { return dailyMenu; }
 
 
 Reputation* GameManager::getReputation() { return reputation; }

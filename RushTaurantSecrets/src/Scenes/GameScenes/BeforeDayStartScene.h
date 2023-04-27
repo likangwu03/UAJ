@@ -48,4 +48,9 @@ public:
 	//void update() { };
 	void init();
 	void reset();
+
+	virtual void initCoopMode(bool server);
+	virtual void quitCoopMode(bool server);
+
+	virtual void receive(const Message& message);
 };

@@ -3,11 +3,14 @@
 #include "DailyMenuScene.h"
 #include "../../Managers//DayManager.h"
 #include "../../Utilities/checkML.h"
+#include "../../Utilities/CoopHandler.h"
+#include "../../Structure/Game.h"
+
 
 BeforeDayStartScene::BeforeDayStartScene() {
 
-	beginSound=&sdlutils().soundEffects().at("DAILY_OBJECTIVE");
-	
+	beginSound = &sdlutils().soundEffects().at("DAILY_OBJECTIVE");
+
 	gm = GameManager::instance();
 	ih = InputHandler::instance();
 
@@ -47,7 +50,7 @@ BeforeDayStartScene::BeforeDayStartScene() {
 }
 
 void BeforeDayStartScene::init() {
-	
+
 	//Textura asociada a las fuentes y strings (ordenados en funcion de lugar de aparicion en escena)
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
@@ -74,7 +77,7 @@ void BeforeDayStartScene::reset() {
 
 void BeforeDayStartScene::toDailyMenu() {
 	//sdlutils().soundEffects().at("CLICK_BUTTON").play();
-	gm->changeScene(GameManager::get()->getScene(_ecs::sc_DAILYMENU));
+	gm->changeScene(gm->getScene(_ecs::sc_DAILYMENU));
 }
 
 BeforeDayStartScene::~BeforeDayStartScene() {
@@ -89,16 +92,36 @@ BeforeDayStartScene::~BeforeDayStartScene() {
 }
 
 void BeforeDayStartScene::handleEvents() {
-	if((ih->joysticksInitialised() && ih->joyButtonDown()) || ih->keyDownEvent()) {
+	if (!active)return;
+	if ((ih->joysticksInitialised() && ih->joyButtonDown()) || ih->keyDownEvent()) {
 		toDailyMenu();
+		Message m{};
+		m.id = Message::msg_TO_DAILY_MENU;
+		gm->getDailyMenu()->getMenus(m.daily_menus.menu1, m.daily_menus.menu2);
+		Game::get()->getCoopHandler()->send(m);
 	}
 }
 
 void BeforeDayStartScene::render() {
 	Scene::render();
-	
-	dayTxt->render({ sdlutils().width()/3 + 50, 85, 300, 150});
-	moneyTarget->render({ 200, 400, sdlutils().width() - 300, 100});
-	buttonTxt->render({ sdlutils().width()/4 - 50, 600, buttonTxt->width(), buttonTxt->height()});
-	
+
+	dayTxt->render({ sdlutils().width() / 3 + 50, 85, 300, 150 });
+	moneyTarget->render({ 200, 400, sdlutils().width() - 300, 100 });
+	buttonTxt->render({ sdlutils().width() / 4 - 50, 600, buttonTxt->width(), buttonTxt->height() });
+
+}
+
+void BeforeDayStartScene::initCoopMode(bool server) {
+	active = server;
+}
+
+void BeforeDayStartScene::quitCoopMode(bool server) {
+	active = true;
+}
+
+void BeforeDayStartScene::receive(const Message& message) {
+	if (message.id == Message::msg_TO_DAILY_MENU) {
+		gm->getDailyMenu()->setMenus(message.daily_menus.menu1, message.daily_menus.menu2);
+		toDailyMenu();
+	}
 }

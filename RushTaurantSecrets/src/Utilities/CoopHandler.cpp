@@ -16,7 +16,7 @@
 
 // Recoge la información pertinente del mensaje y la mete en el buffer
 void CoopHandler::code(const Message& m) {
-	switch(m.id) {
+	switch (m.id) {
 	case Message::msg_PLAYER:
 		code16(m.player.pos.getX());
 		code16(m.player.pos.getY());
@@ -28,6 +28,14 @@ void CoopHandler::code(const Message& m) {
 		code8(m.basket.ing);
 		code8(m.basket.n);
 		break;
+	case Message::msg_TO_DAILY_MENU:
+		for (uint8_t d : m.daily_menus.menu1) {
+			code8(d);
+		}
+		for (uint8_t d : m.daily_menus.menu2) {
+			code8(d);
+		}
+		break;
 	}
 }
 
@@ -35,7 +43,7 @@ void CoopHandler::code(const Message& m) {
 Message CoopHandler::decode(Message::_msg_id id, uint16_t& last) {
 	Message m{ };
 	m.id = id;
-	switch(id) {
+	switch (id) {
 	case Message::msg_PLAYER:
 		m.player.pos.setX(decode16<float>(last));
 		m.player.pos.setY(decode16<float>(last));
@@ -46,6 +54,17 @@ Message CoopHandler::decode(Message::_msg_id id, uint16_t& last) {
 	case Message::msg_BASKET:
 		m.basket.ing = decode8<_ecs::_ingredients_id>(last);
 		m.basket.n = decode8<int>(last);
+	case Message::msg_TO_DAILY_MENU:
+		for (int i = 0; i < 4; ++i) {
+			m.daily_menus.menu1.push_back((_ecs::_ingredients_id)decode8<uint8_t>(last));
+		}
+		for (int i = 0; i < 4; ++i) {
+			m.daily_menus.menu2.push_back((_ecs::_ingredients_id)decode8<uint8_t>(last));
+		}
+		break;
+	case Message::msg_TO_SUPERMARKET:
+
+		break;
 	}
 	return m;
 }
@@ -57,7 +76,7 @@ CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSock
 	std::cout << "Initializing SDL_net.\n";
 #endif
 
-	if(SDLNet_Init() < 0) {
+	if (SDLNet_Init() < 0) {
 		throw std::exception("SDLNet couldn't initialize.");
 	}
 
@@ -66,13 +85,13 @@ CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSock
 }
 
 CoopHandler::~CoopHandler() {
-	if(serverSocket) SDLNet_TCP_Close(serverSocket);
+	if (serverSocket) SDLNet_TCP_Close(serverSocket);
 	SDLNet_FreeSocketSet(set);
 	SDLNet_Quit();
 }
 
 void CoopHandler::update() {
-	
+
 }
 
 // Conexiones
@@ -82,12 +101,12 @@ void CoopHandler::openServer() {
 	std::cout << "Opening server on port 1882.\n";
 #endif
 	IPaddress ip;
-	if(SDLNet_ResolveHost(&ip, NULL, 1882) < 0) {
+	if (SDLNet_ResolveHost(&ip, NULL, 1882) < 0) {
 		throw std::exception("SDLNet: Couldn't open server (ResolveHost).");
 	}
 
 	serverSocket = SDLNet_TCP_Open(&ip);
-	if(serverSocket == NULL) {
+	if (serverSocket == NULL) {
 		throw std::exception("SDLNet: Couldn't open server (TCP_Open).");
 	}
 
@@ -102,15 +121,15 @@ bool CoopHandler::openClient(std::string ipStr) {
 #endif
 
 	IPaddress ip;
-	if(SDLNet_ResolveHost(&ip, ipStr.c_str(), 1882) < 0) {
+	if (SDLNet_ResolveHost(&ip, ipStr.c_str(), 1882) < 0) {
 		throw std::exception(("SDLNet: Couldn't resolve ip \"" + ipStr + ":1882\".").c_str());
 	}
 
 	connectionSocket = SDLNet_TCP_Open(&ip);
-	if(connectionSocket == NULL) {
+	if (connectionSocket == NULL) {
 		return false;
 	}
-	
+
 	SDLNet_TCP_AddSocket(set, connectionSocket);
 
 #ifdef _DEBUG
@@ -122,7 +141,7 @@ bool CoopHandler::openClient(std::string ipStr) {
 bool CoopHandler::connectClient() {
 	connectionSocket = SDLNet_TCP_Accept(serverSocket);
 
-	if(connectionSocket) {
+	if (connectionSocket) {
 		SDLNet_TCP_Send(connectionSocket, connected, __CONNECTED_LENGTH);
 		SDLNet_TCP_AddSocket(set, connectionSocket);
 	}
@@ -132,19 +151,19 @@ bool CoopHandler::connectClient() {
 
 // Comprobar que el servidor conectado es correcto.
 std::pair<bool, bool> CoopHandler::connectServer() {
-	if(SDLNet_CheckSockets(set, 0) > 0) {
+	if (SDLNet_CheckSockets(set, 0) > 0) {
 		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
 
-		if(dataLength != __CONNECTED_LENGTH) {
+		if (dataLength != __CONNECTED_LENGTH) {
 			dataLength = 0;
 			return { true, false };
 		}
 		dataLength = 0;
 		bool achieved = true;
-		for(int i = 0; achieved && i < __CONNECTED_LENGTH; i++) {
-			if(data[i] != connected[i]) achieved = false;
+		for (int i = 0; achieved && i < __CONNECTED_LENGTH; i++) {
+			if (data[i] != connected[i]) achieved = false;
 		}
-		if(!achieved) {
+		if (!achieved) {
 			return { true, false };
 		}
 		client = true;
@@ -154,7 +173,7 @@ std::pair<bool, bool> CoopHandler::connectServer() {
 }
 
 void CoopHandler::closeConnection() {
-	if(connectionSocket) {
+	if (connectionSocket) {
 		SDLNet_TCP_Send(connectionSocket, "Close", 6);
 		SDLNet_TCP_DelSocket(set, connectionSocket);
 		SDLNet_TCP_Close(connectionSocket);
@@ -167,10 +186,10 @@ void CoopHandler::closeConnection() {
 // Mensajes
 
 void CoopHandler::receive() {
-	while(SDLNet_CheckSockets(set, 0) > 0) {
+	while (SDLNet_CheckSockets(set, 0) > 0) {
 		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
 
-		if(dataLength == -1) { // Desconexión
+		if (dataLength == -1) { // Desconexión
 			GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER)
 				->getComponent<Transform>()->setPos(Vector(-100, -100));
 
@@ -181,7 +200,7 @@ void CoopHandler::receive() {
 			return;
 		}
 
-		if(dataLength == 6 /*&& == "Close"*/) {
+		if (dataLength == 6 /*&& == "Close"*/) {
 			// Cerrar
 		}
 
@@ -195,7 +214,7 @@ void CoopHandler::receive() {
 }
 
 void CoopHandler::send(const Message& message) {
-	if(connectionSocket == nullptr) return;
+	if (connectionSocket == nullptr) return;
 
 	data[0] = message.id;
 	dataLength = 1;

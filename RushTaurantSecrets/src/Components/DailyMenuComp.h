@@ -46,6 +46,7 @@ public:
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id, vector<_ecs::DishInfo>* _menu);
 	virtual ~DailyMenuComp();
 	void initMenu();
+	void initMenu(const vector<uint8_t>& menu_);
 	virtual void render();
 	vector<_ecs::DishInfo>* getMenu();
 	void setMenu(vector<_ecs::DishInfo>* _menu);

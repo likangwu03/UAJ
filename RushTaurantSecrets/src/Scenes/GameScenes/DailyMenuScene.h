@@ -35,5 +35,13 @@ public:
 
 	void handleEvents();
 	void selectedButton(int selected);
+
+	virtual void initCoopMode(bool server);
+	virtual void quitCoopMode(bool server);
+	virtual void receive(const Message& message);
+
+	void setMenus(const vector<uint8_t>& menu1,const vector<uint8_t>& menu2);
+
+	void getMenus(vector<uint8_t>& menu1, vector<uint8_t>& menu2);
 };
 

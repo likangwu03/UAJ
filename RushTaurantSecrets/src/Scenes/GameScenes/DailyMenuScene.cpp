@@ -81,19 +81,41 @@ void DailyMenuScene::handleEvents() {
 			selectedButton(button);
 		}
 	}
+	if (!active) return;
 	Scene::handleEvents();
 }
 
 void DailyMenuScene::selectedButton(int selected) {
-	dailyMenu1->getComponent<ButtonComp>()->setHighlighted(false);
-	dailyMenu2->getComponent<ButtonComp>()->setHighlighted(false);
-	switch (selected)
-	{
-	case 0:
-		dailyMenu1->getComponent<ButtonComp>()->setHighlighted(true);
-		break;
-	case 1:
-		dailyMenu2->getComponent<ButtonComp>()->setHighlighted(true);
-		break;
+	dailyMenu1->getComponent<ButtonComp>()->setHighlighted(selected==0);
+	dailyMenu2->getComponent<ButtonComp>()->setHighlighted(selected==1);
+}
+
+void DailyMenuScene::initCoopMode(bool server) {
+	active = server;
+}
+
+void DailyMenuScene::quitCoopMode(bool server) {
+	active = true;
+}
+
+void DailyMenuScene::receive(const Message& message) {
+	
+
+}
+
+void DailyMenuScene::setMenus(const vector<uint8_t>& menu1, const vector<uint8_t>& menu2) {
+	dailyMenu1->getComponent<DailyMenuComp>()->initMenu(menu1);
+	dailyMenu2->getComponent<DailyMenuComp>()->initMenu(menu2);
+}
+
+void DailyMenuScene::getMenus(vector<uint8_t>& menu1, vector<uint8_t>& menu2) {
+	auto m1=dailyMenu1->getComponent<DailyMenuComp>()->getMenu();
+	auto m2 = dailyMenu2->getComponent<DailyMenuComp>()->getMenu();
+	
+	for (auto m : *m1) {
+		menu1.push_back(m.id);
+	}
+	for (auto m : *m2) {
+		menu2.push_back(m.id);
 	}
 }

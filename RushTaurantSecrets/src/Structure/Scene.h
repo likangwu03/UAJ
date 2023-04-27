@@ -28,7 +28,7 @@ protected:
 
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
-
+	bool active;
 
 	// se utiliza para conectar objetos de una misma escena
 	std::array<GameObject*, _ecs::hdrNum> handlers;
@@ -61,4 +61,7 @@ public:
 	virtual void reset() { };
 	virtual float getResizeFactor() { return 1; };
 	virtual void transitionEnded() {};
+
+	virtual void initCoopMode(bool server) {};
+	virtual void quitCoopMode(bool server) {};
 };
