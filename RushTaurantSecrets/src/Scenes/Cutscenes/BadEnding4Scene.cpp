@@ -4,18 +4,23 @@
 #include "ShowSkipTransitionScene.h"
 
 BadEnding4Scene::BadEnding4Scene() {
-	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
+	dialogues = GameManager::get()->getDialogueInfo("BadEnding4.json");
 	bg = &sdlutils().images().at("CINEMATIC_BG_PANTRY");
-	//state = START;
-	state = NONE; // BORRAR
+	state = START;
 	player = new Player(this, 0);
-	thief = new CinematicNPC(this, "Thief_2", RelativeToGlobal::pointRestaurant({ 25, 14 }), 1); // CAMBIAR
+	player->getComponent<PlayerMovementController>()->setActive(false);
+	thief = new CinematicNPC(this, "Thief_2", RelativeToGlobal::pointPantry({ 19, 5 }), 1); // CAMBIAR
+	straightMovement = new StraightMovement(player, 5);
+
+	playerPoints = { {Vector(20, 15)} };
+	transform = player->getComponent<Transform>();
+	transform->setMovState(idle);
 }
 
 void BadEnding4Scene::renderCinematic() {
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	player->render();
-
+	thief->render();
 }
 
 void BadEnding4Scene::finishScene() {
@@ -27,13 +32,24 @@ void BadEnding4Scene::update() {
 	switch (state)
 	{
 	case BadEnding4Scene::START:
+		addPathPantry(playerPoints);
+		addPathPantry(BE4PathPlayer[START]);
+		state = ARRIVE;
+		break;
+	case BadEnding4Scene::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
-			addPathPantry(BE4Path[START]);
+			transform->setMovState(idle);
+			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
+				font, dialogues[0].portrait, dialogues[0].text);
+			state = D1;
 		}
-		//state = ENTERING;
+		break;
+	case BadEnding4Scene::D1:
+		if (Text::isTextFinished()) {
+			dialogueBox = nullptr;
+		}
 		break;
 	case BadEnding4Scene::NONE:
-
 		break;
 	}
 }
@@ -43,8 +59,8 @@ void BadEnding4Scene::addPathPantry(const vector<Vector>& points) {
 }
 
 void BadEnding4Scene::callAfterCreating() {
-	//state = START;
-	state = NONE; // BORRAR
+	state = START;
+	//state = NONE; // BORRAR
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }
