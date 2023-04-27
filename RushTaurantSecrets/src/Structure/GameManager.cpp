@@ -96,7 +96,6 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });
 
 
-	resetScenes();
 	changeScene(allScenes.at(_ecs::sc_MAINMENU));
 }
 

@@ -142,7 +142,7 @@ void DayManager::nextDay(bool loadingGame) {
 		}
 	}
 
-	GameManager::get()->resetScenes();
+	if (!loadingGame) GameManager::get()->resetScenes();
 }
 
 void DayManager::setDay(int x) {
