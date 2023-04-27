@@ -67,7 +67,7 @@ CoopMenu::CoopMenu() {
 	buttonResume = new ButtonGO(this, "RETURN_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&]() {
-			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu(), false);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), true);
 		});
 
 
@@ -111,14 +111,14 @@ void CoopMenu::update() {
 	if (wait) {
 		if (server && coop->connectClient()) {
 			GameManager::get()->newGame();
-			GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 			Game::instance()->runCoop();
 		}
 		else if (!server) {
 			pair<bool, bool> connect = coop->connectServer();
 			if (connect.first && connect.second) {
 				GameManager::get()->newGame();
-				GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+				GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 				Game::instance()->runCoop();
 			}
 			else if (connect.first || connect.second) {

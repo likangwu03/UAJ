@@ -183,6 +183,6 @@ void SecondDayAfterKillScene::finishScene() {
 
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 
 }

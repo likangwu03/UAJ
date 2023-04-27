@@ -59,7 +59,7 @@ void EndingDay1Scene::finishScene()
 	dialogueBox = nullptr;
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart(), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
 }
 
 void EndingDay1Scene::update()

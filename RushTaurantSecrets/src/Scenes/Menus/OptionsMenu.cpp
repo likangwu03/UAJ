@@ -29,10 +29,6 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 
 
 	button = 3;
-
-	//[&]() {
-	//	GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu());
-	//});
 }
 
 OptionsMenu::~OptionsMenu() {

@@ -74,7 +74,7 @@ void BeforeDayStartScene::reset() {
 
 void BeforeDayStartScene::toDailyMenu() {
 	//sdlutils().soundEffects().at("CLICK_BUTTON").play();
-	gm->changeScene(GameManager::get()->getDailyMenu());
+	gm->changeScene(GameManager::get()->getScene(_ecs::sc_DAILYMENU));
 }
 
 BeforeDayStartScene::~BeforeDayStartScene() {

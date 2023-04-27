@@ -19,14 +19,12 @@ void SuperMarket::update() {
 	uiMarket->update();
 }
 void SuperMarket::handleEvents() {
-	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getRestaurant());
-		supermarketMusic->pauseMusic();
-		restaurantMusic->play();
-	}
-	else {
-		Scene::handleEvents();
-		uiMarket->handleEvents();
+	Scene::handleEvents();
+	uiMarket->handleEvents();
+	
+	if (ih->isKeyDown(SDLK_p)) {
+		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
+		//->pauseMusic();
 	}
 }
 

@@ -60,7 +60,7 @@ void Day2KillEndingScene::finishScene()
 	black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart(), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
 }
 
 void Day2KillEndingScene::update()

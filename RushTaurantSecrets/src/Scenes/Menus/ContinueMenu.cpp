@@ -18,7 +18,7 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->newGame();
-			GameManager::get()->changeScene(GameManager::get()->getIntroScene(), true);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO), true);
 			GameManager::get()->getCurrentScene()->callAfterCreating();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
@@ -26,7 +26,7 @@ ContinueMenu::ContinueMenu() {
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&] {
-			GameManager::get()->changeScene((Scene*)GameManager::get()->getMainMenu(), true);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), true);
 
 		});
 
@@ -34,7 +34,7 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->load();
-			GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 		});
 	button = 0;
 }

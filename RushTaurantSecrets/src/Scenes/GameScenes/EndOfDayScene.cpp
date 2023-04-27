@@ -75,7 +75,7 @@ EndOfDayScene::EndOfDayScene() {
 
 	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H, 
 		[&]() {
-		   gm->get()->changeScene((gm->get()->getMainMenu()));
+		   gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));
 		});
 	mainMenuButton->setAlive(false);
 	

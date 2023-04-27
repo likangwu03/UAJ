@@ -2,11 +2,11 @@
 #include "../../Structure/Scene.h"
 #include "../../GameObjects/Clock.h"
 
-class PantryUI : public Scene
+class UIPantry : public Scene
 {
 private:
 	Clock* clock;
 
 public:
-	PantryUI() { clock = new Clock(this); };
+	UIPantry() { clock = new Clock(this); };
 };

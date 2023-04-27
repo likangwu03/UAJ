@@ -10,7 +10,7 @@
 #include "../Scenes/GameScenes/BeforeDayStartScene.h"
 #include "../Scenes/Menus/MainMenu.h"
 #include "../Scenes/GameScenes/Restaurant.h"
-#include "../Scenes/HUD/PantryUI.h"
+#include "../Scenes/HUD/UIPantry.h"
 #include "../Scenes/GameScenes/Pantry.h"
 #include "../Scenes/GameScenes/DailyMenuScene.h"
 #include "../Scenes/GameScenes/SuperMarket.h"
@@ -39,14 +39,10 @@
 #include "../Utilities/Texture.h"
 #include "../Utilities/checkML.h" 
 
-GameManager::GameManager() : scenes(), deleteScene(nullptr), deleteTransition(false),
-	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), dailyMenu(nullptr), pantryUI(nullptr),
-	mainMenu(nullptr), optionsMenu(nullptr), pauseMenu(nullptr), continueMenu(nullptr), endScene(nullptr), beforeDayStartScene(nullptr), gameOverScene(nullptr), coopMenu(nullptr),
-	reputation(nullptr), days(nullptr), money(nullptr),
-	menu(nullptr), kitchenIsland(nullptr),
-	hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0),
-	introScene(nullptr), day2KillEndingScene(nullptr), firstDayAfterKillScene(nullptr), secondDayAfterKillScene(nullptr), endingDay2NoKill(nullptr),
-	badEnding1Scene(nullptr), endingDay1Scene(nullptr) { };
+GameManager::GameManager() : scenes(), allScenes(), deleteScene(nullptr), deleteTransition(false),
+	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr),
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0) 
+	{ };
 
 
 void GameManager::initialize() {
@@ -55,34 +51,34 @@ void GameManager::initialize() {
 	hasKilled = false;
 
 	
-	mainMenu = new MainMenu();
-	dailyMenu = new DailyMenuScene();
-	gameOverScene = new GameOverScene();
-	
+	allScenes.insert({ _ecs::sc_MAINMENU, new MainMenu() });
+	allScenes.insert({ _ecs::sc_DAILYMENU, new DailyMenuScene() });
+	allScenes.insert({ _ecs::sc_GAMEOVER, new GameOverScene() });
 	try {
 		days = new DayManager();
 	}
 	catch (std::exception e) { std::cout << e.what(); }
 
 	sdlutils().setResizeFactor(PANTRYSIZE);
-	pantryUI = new PantryUI();
+	UIPantry* pantryUI = new UIPantry();
 	pantry = new Pantry(pantryUI);
+	allScenes.insert({ _ecs::sc_PANTRY, pantry });
 
 	sdlutils().setResizeFactor(RESTSUPERSIZE);
-	pauseMenu = new PauseMenu();
-	optionsMenu = new OptionsMenu();
-	continueMenu = new ContinueMenu();
+	allScenes.insert({ _ecs::sc_PAUSEMENU, new PauseMenu() });
+	allScenes.insert({ _ecs::sc_OPTIONSMENU, new OptionsMenu() });
+	allScenes.insert({ _ecs::sc_CONTINUEMENU, new ContinueMenu() });
+	BeforeDayStartScene* beforeDayStartScene = new BeforeDayStartScene();
+	allScenes.insert({ _ecs::sc_BEFOREDAYSTART, beforeDayStartScene });
+	allScenes.insert({ _ecs::sc_COOPMENU, new CoopMenu() });
+
 	supermarket = new SuperMarket();
 	restaurant = new Restaurant();
-	beforeDayStartScene = new BeforeDayStartScene();
-	coopMenu = new CoopMenu();
-
-	
+	allScenes.insert({ _ecs::sc_SUPERMARKET, supermarket });
+	allScenes.insert({ _ecs::sc_RESTAURANT, restaurant });
 
 	beforeDayStartScene->init();
-
-	endScene = new EndOfDayScene();
-	introScene = new IntroScene();
+	allScenes.insert({ _ecs::sc_ENDOFDAY, new EndOfDayScene() });
 
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
@@ -90,47 +86,29 @@ void GameManager::initialize() {
 	
 	days->nextDay(true);
 
+	allScenes.insert({ _ecs::sc_INTRO, new IntroScene() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY1, new EndingDay1Scene() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new EndingDay2NoKillScene() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2KillEndingScene() });
+	allScenes.insert({ _ecs::sc_FIRSTDAYAFTERKILL, new FirstDayAfterKillScene() });
+	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });
+	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });
+	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });
 
-	secondDayAfterKillScene = new SecondDayAfterKillScene();
-	firstDayAfterKillScene = new FirstDayAfterKillScene();
-	badEnding1Scene = new BadEnding1Scene();
-	badEnding4Scene = new BadEnding4Scene();
-	endingDay2NoKill = new EndingDay2NoKillScene();
-	day2KillEndingScene = new Day2KillEndingScene();
-	endingDay1Scene = new EndingDay1Scene();
 
-
-	changeScene(mainMenu);
+	resetScenes();
+	changeScene(allScenes.at(_ecs::sc_MAINMENU));
 }
 
 GameManager::~GameManager() {
-	delete secondDayAfterKillScene;
-	delete firstDayAfterKillScene;
-	delete introScene;
-	delete badEnding1Scene;
-	delete badEnding4Scene;
-	delete endingDay2NoKill;
-	delete day2KillEndingScene;
-	delete endingDay1Scene;
+	for (auto& sc : allScenes) {
+		delete sc.second;
+		sc.second = nullptr;
+	}
 
 	delete days;
 	delete money;
 	delete reputation;
-
-	delete coopMenu;
-	delete gameOverScene;
-	delete beforeDayStartScene;
-	delete endScene;
-	delete continueMenu;
-	delete pauseMenu;
-	delete optionsMenu;
-	delete mainMenu;
-	delete pantryUI;
-	delete dailyMenu;
-
-	delete supermarket;
-	delete pantry;
-	delete restaurant;
 
 	if (deleteScene != nullptr)
 		delete scenes.top();
@@ -163,6 +141,7 @@ void GameManager::receive(const Message& message) {
 	if(!scenes.empty())
 		scenes.top()->receive(message);
 }
+
 
 void GameManager::changeScene(Scene* scene, bool longerTransition, bool fadeOut) {
 	if (!scenes.empty())
@@ -198,7 +177,6 @@ void GameManager::skipfromTransition() {
 	popScene();
 	
 	scenes.top()->finishScene();
-	
 }
 
 bool GameManager::canChangeScene() {
@@ -206,43 +184,24 @@ bool GameManager::canChangeScene() {
 }
 
 
-void GameManager::setGameOver(int type) {
-	gameOverScene->setGameOver(endingType(type));
-	changeScene(gameOverScene);
-}
-
-
 Scene* GameManager::getCurrentScene() { return scenes.top(); }
-MainMenu* GameManager::getMainMenu() { return mainMenu; }
+Scene* GameManager::getScene(_ecs::_scene_id id) { return allScenes.at(id); }
+
 Restaurant* GameManager::getRestaurant() { return restaurant; }
 Pantry* GameManager::getPantry() { return pantry; }
-DailyMenuScene* GameManager::getDailyMenu() { return dailyMenu; }
 SuperMarket* GameManager::getSupermarket() { return supermarket; }
-PauseMenu* GameManager::getPauseMenu() { return pauseMenu; }
-BeforeDayStartScene* GameManager::getBeforeDayStart() { return beforeDayStartScene; }
+
+
 Reputation* GameManager::getReputation() { return reputation; }
 Money* GameManager::getMoney() { return money; }
 DayManager* GameManager::getDayManager() { return days; }
-OptionsMenu* GameManager::getOptionsMenu() { return optionsMenu; }
-ContinueMenu* GameManager:: getContinueMenu() { return continueMenu; }
-CoopMenu* GameManager:: getCoopMenu() { return coopMenu; }
-EndOfDayScene* GameManager::getEndOfDay() { return endScene; }
-IntroScene* GameManager::getIntroScene() { return introScene; }
-Day2KillEndingScene* GameManager::getDay2KillEndingScene() { return day2KillEndingScene; }
-FirstDayAfterKillScene* GameManager::getFirstDayAfterKillScene() { return firstDayAfterKillScene; }
-SecondDayAfterKillScene* GameManager::getSecondDayAfterKillScene() { return secondDayAfterKillScene; }
-BadEnding1Scene* GameManager::getBadEnding1Scene() { return badEnding1Scene; }
-BadEnding4Scene* GameManager::getBadEnding4Scene() { return badEnding4Scene; }
-EndingDay1Scene* GameManager::getEndingDay1Scene() { return endingDay1Scene; }
+
 
 vector<_ecs::DishInfo>* GameManager::getTodaysMenu() { return menu; }
 void GameManager::setTodaysMenu(vector<_ecs::DishInfo>* tmenu) { menu = tmenu; }
-
-
 void GameManager::setKichenIsland(KitchenIslandComp* KIComp) {
 	kitchenIsland = KIComp;
 }
-
 void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
 	if (hasKilled) {
 		ing.push_back({ _ecs::MEAT,killedNum });
@@ -252,6 +211,7 @@ void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
 	kitchenIsland->setIngredients(ing);
 }
 
+
 pair<bool,int> GameManager::getHasEverKilled() { return hasEverKilled; }
 
 bool GameManager::getHasKill() { return hasKilled; }
@@ -260,25 +220,13 @@ void GameManager::setHasKill(bool hKill) { hasKilled = hKill; if (!hasEverKilled
 
 
 void GameManager::resetScenes() {
-	beforeDayStartScene->reset();
-	beforeDayStartScene->nextDay();
-
-	dailyMenu->reset();
-	dailyMenu->nextDay();
-
-	supermarket->reset();
-	supermarket->nextDay();
-
-	restaurant->reset();
-	restaurant->nextDay();
-	restaurant->getUI()->nextDay();
-
-	pantry->reset();
-	pantry->nextDay();
-	
-	endScene->reset();
-	endScene->nextDay();
+	for (auto& sc : allScenes) {
+		sc.second->reset();
+		sc.second->nextDay();
+	}
 }
+
+
 
 void GameManager::save() {
 	//crear y abrir fichero

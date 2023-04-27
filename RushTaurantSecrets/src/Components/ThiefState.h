@@ -71,7 +71,7 @@ public:
 			fridgeSound->play();
 			if (gm->getHasKill()) {
 			    parent->setAlive(false);	
-				gm->setGameOver(endingType::Caught);
+				//gm->setGameOver(endingType::Caught);
 			}
 			else {
 				currentState = ESCAPE;

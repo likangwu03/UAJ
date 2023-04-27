@@ -21,12 +21,12 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getMainMenu());
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
 		});
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu(), true);
+			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU), true);
 		});
 
 	supermarketMusic->setMusicVolume(MUSIC_VOL);

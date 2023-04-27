@@ -83,9 +83,47 @@ namespace _ecs {
 		// Do not erase pls
 		hdr_INVALID
 	};
+
 	constexpr id_type hdrNum = hdr_INVALID;
 
 	enum RenderPos { Top, Middle, Down };
 
 	enum endingType { BadRep, Broke, Caught, Robbed, Normal, Happy };
+
+
+	// Escenas
+	enum _scene_id : id_type {
+		sc_MAINMENU,
+		sc_CONTINUEMENU,
+		sc_COOPMENU,
+		sc_OPTIONSMENU,
+		sc_PAUSEMENU,
+
+		sc_BEFOREDAYSTART,
+		sc_DAILYMENU,
+		sc_SUPERMARKET,
+		sc_RESTAURANT,
+		sc_PANTRY,
+		sc_ENDOFDAY,
+		sc_GAMEOVER,
+
+		sc_INTRO,
+		sc_ENDINGDAY1,
+		sc_ENDINGDAY2KILL,
+		sc_ENDINGDAY2NOKILL,
+		sc_FIRSTDAYAFTERKILL,
+		sc_SECONDDAYAFTERKILL,
+
+
+		sc_BADENDING1,
+		sc_BADENDING2,
+		sc_BADENDING3,
+		sc_BADENDING4,
+		sc_NORMALENDING,
+		sc_HAPPYENDING,
+
+		// Do not erase pls
+		sc_INVALID
+	};
+	constexpr id_type scNum = sc_INVALID;
 }

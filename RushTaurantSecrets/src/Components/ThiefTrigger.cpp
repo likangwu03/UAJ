@@ -10,8 +10,10 @@ ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float 
 	parentTransform = parent->getComponent<Transform>();
 	thiefMovement = parent->getComponent<ThiefMovement>();
 	thiefState = parent->getComponent<ThiefState>();
-	showControl = new ShowControlAuto(parent, { {ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(KILL_X_OFFSET, KILL_Y_OFFSET),WIDTH,HEIGHT}, 
-		{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(RUN_X_OFFSET,RUN_Y_OFFSET),WIDTH,HEIGHT} }, parentTransform);
+	showControl = new ShowControlAuto(parent, { 
+		{ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(KILL_X_OFFSET, KILL_Y_OFFSET),WIDTH,HEIGHT}, 
+		{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(RUN_X_OFFSET,RUN_Y_OFFSET),WIDTH,HEIGHT} 
+	}, parentTransform);
 	runTexture = &((sdlutils()).images().at("RUN_ICON"));
 	killTexture = &((sdlutils()).images().at("KILL_ICON"));
 
@@ -20,8 +22,7 @@ ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float 
 	//	{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(40,-16),32,32} }, parent->getComponent<Transform>());
 }
 
-void ThiefTrigger::hideButtons()
-{
+void ThiefTrigger::hideButtons() {
 	showControl->setActive(false);
 }
 
@@ -54,22 +55,18 @@ void ThiefTrigger::isOverlapping() {
 	}
 }
 
-void ThiefTrigger::onTriggerEnter()
-{
+void ThiefTrigger::onTriggerEnter() {
 	if (thiefState->getState() == ThiefState::OBJECTIVE_SECRET && ThiefState::OBJECTIVE_FREEZER) {
 		showControl->setActive(true);
 	}
 }
 
-void ThiefTrigger::onTriggerExit()
-{
+void ThiefTrigger::onTriggerExit() {
 	hideButtons();
 }
 
-void ThiefTrigger::render()
-{
-	if (showControl->isActive())
-	{
+void ThiefTrigger::render() {
+	if (showControl->isActive()) {
 		SDL_Rect dest;
 		dest.x = parentTransform->getPos().getX() + (RUN_X_OFFSET - 15);
 		dest.y = parentTransform->getPos().getY() + (RUN_Y_OFFSET * -3);

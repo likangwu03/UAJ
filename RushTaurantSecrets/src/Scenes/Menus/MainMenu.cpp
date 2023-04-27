@@ -29,17 +29,17 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	button = 0;
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
 		[&]() { 
-			GameManager::get()->changeScene(GameManager::get()->getContinueMenu(), true);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_CONTINUEMENU), true);
 		});
 
 	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
 	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, 
 		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getCoopMenu(), true);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_COOPMENU), true);
 		});
 	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, 
 		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getOptionsMenu());
+			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
 		});
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
 
@@ -52,10 +52,10 @@ MainMenu::~MainMenu() { }
 
 void MainMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getDailyMenu());
+		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_DAILYMENU));
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
-		GameManager::get()->changeScene((Scene*)GameManager::get()->getSupermarket());
+		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SUPERMARKET));
 		supermarketMusic->play();
 	}
 	else {

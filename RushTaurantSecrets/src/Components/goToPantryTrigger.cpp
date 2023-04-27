@@ -37,7 +37,7 @@ void GoToPantryTrigger::isOverlapping() {
 		playerPantryTransform->setOrientation(north);
 		doorSound->play();
 		// se cambia a la escena de la despensa
-		gm->changeScene(gm->getPantry());
+		gm->changeScene(gm->getScene(_ecs::sc_PANTRY));
 		restaurantMusic->pauseMusic();
 		pantryMusic->play();
 	}

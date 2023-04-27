@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="83">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="48" tileheight="48" infinite="0" nextlayerid="21" nextobjectid="84">
  <tileset firstgid="1" source="Room_Builder_48x48.tsx"/>
  <tileset firstgid="8285" source="atlas.tsx"/>
  <tileset firstgid="9821" source="12_Kitchen_48x48.tsx"/>
@@ -279,7 +279,7 @@
   <object id="48" x="1590.67" y="941.91" width="36" height="38.8468"/>
   <object id="50" x="919.333" y="948.577" width="36" height="38.8468"/>
  </objectgroup>
- <objectgroup id="20" name="obj" visible="0">
+ <objectgroup id="20" name="obj">
   <object id="38" name="CookingMachine" x="1346.56" y="200.197" width="44.6667" height="67.8333"/>
   <object id="40" name="Bin" x="1054.66" y="345.667" width="49.3333" height="52.3333"/>
   <object id="51" name="CashRegister" x="1226.95" y="440.667" width="66.375" height="23.3333"/>
@@ -294,27 +294,22 @@
     <property name="ID" type="int" value="6"/>
    </properties>
   </object>
-  <object id="57" name="table" x="459.5" y="433" width="88" height="108">
-   <properties>
-    <property name="ID" type="int" value="5"/>
-   </properties>
-  </object>
-  <object id="58" name="table" x="793" y="431" width="92.5" height="114">
+  <object id="58" name="table" x="791" y="429" width="97.5" height="116">
    <properties>
     <property name="ID" type="int" value="4"/>
    </properties>
   </object>
-  <object id="60" name="table" x="1030" y="719.5" width="99" height="108.5">
+  <object id="60" name="table" x="1030" y="716.5" width="99" height="111.5">
    <properties>
     <property name="ID" type="int" value="1"/>
    </properties>
   </object>
-  <object id="61" name="table" x="358.5" y="718.5" width="99" height="114">
+  <object id="61" name="table" x="357.5" y="717.5" width="99" height="115">
    <properties>
     <property name="ID" type="int" value="3"/>
    </properties>
   </object>
-  <object id="62" name="table" x="696" y="719" width="99" height="108">
+  <object id="62" name="table" x="696" y="717" width="97" height="110">
    <properties>
     <property name="ID" type="int" value="2"/>
    </properties>
@@ -396,5 +391,10 @@
   <object id="79" name="CookingMachine" x="1442" y="200.083" width="44.6667" height="67.8333"/>
   <object id="80" name="CookingMachine" x="1488.78" y="200.932" width="44.6667" height="67.8333"/>
   <object id="81" name="goToPantry" x="962" y="175.333" width="44" height="75"/>
+  <object id="83" name="table" x="455.25" y="429" width="97.5" height="116">
+   <properties>
+    <property name="ID" type="int" value="4"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

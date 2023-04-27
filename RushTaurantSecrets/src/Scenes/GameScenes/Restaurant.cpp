@@ -27,7 +27,6 @@ pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 
 Restaurant::~Restaurant() {
 	delete ui;
-	//delete timeOfDay;
 	delete cm;
 }
 
@@ -36,6 +35,7 @@ void Restaurant::reset() {
 	player->getComponent<Transform>()->setPos(INITIAL_POS);
 	player->getComponent<Transform>()->setOrientation(south);
 	ui->reset();
+	ui->nextDay();
 }
 
 void Restaurant::callAfterCreating() {
@@ -126,7 +126,7 @@ void Restaurant::_update() {
 
 void Restaurant::handleEvents() {
 	if (ih->isKeyDown(SDLK_p)) {
-		GameManager::get()->pushScene((Scene*)GameManager::get()->getPauseMenu());
+		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
 	}
 	else if (ih->isKeyDown(SDLK_f)) {

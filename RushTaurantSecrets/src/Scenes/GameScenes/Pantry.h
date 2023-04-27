@@ -2,7 +2,7 @@
 #include "../../Structure/Scene.h"
 #include "../../Managers/CollisionsManager.h"
 #include "../../GameObjects/Clock.h"
-#include "../../Scenes/HUD/PantryUI.h"
+#include "../../Scenes/HUD/UIPantry.h"
 
 class Restaurant;
 
@@ -14,14 +14,14 @@ private:
 	GameObject* player;
 	CollisionsManager* collisionsManager;
 	Restaurant* rest;
-	PantryUI* pantryUI;
+	UIPantry* pantryUI;
 
 	SDLUtils* sdl;
 	Music* restaurantMusic;
 	Music* pantryMusic;
 
 public:
-	Pantry(PantryUI* pUI);
+	Pantry(UIPantry* pUI);
 	~Pantry();
 
 	void render();

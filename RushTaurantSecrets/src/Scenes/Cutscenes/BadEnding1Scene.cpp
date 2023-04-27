@@ -67,11 +67,11 @@ void BadEnding1Scene::renderCinematic()
 
 void BadEnding1Scene::finishScene()
 {
-	GameManager::get()->changeScene(GameManager::get()->getBeforeDayStart());
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->getBeforeDayStart()->reset();
-	GameManager::get()->getDailyMenu()->reset();
+	GameManager::get()->getScene(sc_BEFOREDAYSTART)->reset();
+	GameManager::get()->getScene(_ecs::sc_DAILYMENU)->reset();
 }
 
 void BadEnding1Scene::update()

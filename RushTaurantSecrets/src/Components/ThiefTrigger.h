@@ -9,11 +9,11 @@
 class ThiefTrigger : public TriggerComp
 {
 	//CONTROLES ARRIBA
-	const float KILL_X_OFFSET = 0,
-		RUN_X_OFFSET = 40,
-		KILL_Y_OFFSET = 10,
-		RUN_Y_OFFSET = 10,
-		WIDTH = 30, HEIGHT = 30;
+	const float RUN_X_OFFSET = 0,
+				KILL_X_OFFSET = 40,
+				RUN_Y_OFFSET = 10,
+				KILL_Y_OFFSET  = 10,
+				WIDTH = 30, HEIGHT = 30;
 
 	//CONTROLES A LOS LADOS
 	//const float KILL_X_OFFSET = 48,

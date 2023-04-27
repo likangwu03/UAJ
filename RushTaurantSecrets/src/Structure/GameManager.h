@@ -2,37 +2,19 @@
 
 #include "../Utilities/Singleton.h"
 #include "../Definitions/Food_def.h"
+#include "../Definitions/Message_def.h"
+#include "../Definitions/Structure_def.h"
 #include <string>
 #include <deque>
 #include <stack>
-#include"../Definitions/Message_def.h"
+#include <unordered_map>
+
 
 class Scene;
 
-class MainMenu;
-class BeforeDayStartScene;
 class Restaurant;
-class UIRestaurant;
 class Pantry;
-class PantryUI;
-class DailyMenuScene;
 class SuperMarket;
-class EndOfDayScene;
-class GameOverScene;
-
-class PauseMenu;
-class CoopMenu;
-class ContinueMenu;
-class OptionsMenu;
-
-class IntroScene;
-class Day2KillEndingScene;
-class FirstDayAfterKillScene;
-class EndingDay2NoKillScene;
-class SecondDayAfterKillScene;
-class BadEnding1Scene;
-class BadEnding4Scene;
-class EndingDay1Scene;
 
 class Reputation;
 class Money;
@@ -51,7 +33,6 @@ struct dialogueInfo {
 class GameManager : public Singleton<GameManager> {
 	friend Singleton<GameManager>;
 
-
 public:
 	GameManager(GameManager&) = delete;
 	GameManager(GameManager&&) = delete;
@@ -67,26 +48,13 @@ private:
 	Scene* deleteScene;
 	bool deleteTransition;
 	
+	std::unordered_map<_ecs::_scene_id, Scene*> allScenes;
 
-	//escenas de juego
+
+	// Escenas de las que se necesita el puntero
 	Restaurant* restaurant;
 	Pantry* pantry;
 	SuperMarket* supermarket;
-	EndOfDayScene* endScene;
-	BeforeDayStartScene* beforeDayStartScene;
-	GameOverScene* gameOverScene;
-
-	//ui
-	DailyMenuScene* dailyMenu;
-	PantryUI* pantryUI;
-
-	//menu
-	MainMenu* mainMenu;
-	OptionsMenu* optionsMenu;
-	PauseMenu* pauseMenu;
-	ContinueMenu* continueMenu;
-	CoopMenu* coopMenu;
-
 
 	Reputation* reputation;
 	Money* money;
@@ -101,16 +69,6 @@ private:
 	bool twoPlayers;
 	int killedNum; //número de ladrones matados en el día anterior
 
-
-	//escenas cinemáticas
-	IntroScene* introScene;
-	Day2KillEndingScene* day2KillEndingScene;
-	FirstDayAfterKillScene* firstDayAfterKillScene;
-	SecondDayAfterKillScene* secondDayAfterKillScene;
-	BadEnding1Scene* badEnding1Scene;
-	BadEnding4Scene* badEnding4Scene;
-	EndingDay2NoKillScene* endingDay2NoKill;
-	EndingDay1Scene* endingDay1Scene;
 
 	GameManager();
 
@@ -130,28 +88,13 @@ public:
 	void skipfromTransition();
 	bool canChangeScene();
 
-	void setGameOver(int type);
 
 	Scene* getCurrentScene();
-	MainMenu* getMainMenu();
+	Scene* getScene(_ecs::_scene_id id);
+
 	Restaurant* getRestaurant();
 	Pantry* getPantry();
-	DailyMenuScene* getDailyMenu();
 	SuperMarket* getSupermarket();
-	PauseMenu* getPauseMenu();
-	OptionsMenu* getOptionsMenu();
-	BeforeDayStartScene* getBeforeDayStart();
-	ContinueMenu* getContinueMenu();
-	CoopMenu* getCoopMenu();
-	EndOfDayScene* getEndOfDay();
-	IntroScene* getIntroScene();
-	Day2KillEndingScene* getDay2KillEndingScene();
-	FirstDayAfterKillScene* getFirstDayAfterKillScene();
-	SecondDayAfterKillScene * getSecondDayAfterKillScene();
-	BadEnding1Scene* getBadEnding1Scene();
-	BadEnding4Scene* getBadEnding4Scene();
-	EndingDay2NoKillScene* getEndingDay2NoKillScene();
-	EndingDay1Scene* getEndingDay1Scene();
 
 	Reputation* getReputation();
 	Money* getMoney();
