@@ -24,6 +24,7 @@
 
 #include "../Scenes/TransitionScene.h"
 #include "../Scenes/Cutscenes/IntroScene.h"
+#include "../scenes/Cutscenes/IntroDay3ScareScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
@@ -87,6 +88,7 @@ void GameManager::initialize() {
 	days->nextDay();
 
 	allScenes.insert({ _ecs::sc_INTRO1, new IntroScene() });
+	allScenes.insert({ _ecs::sc_INTRO_NO_KILL_3 , new IntroDay3ScareScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY1, new EndingDay1Scene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new EndingDay2NoKillScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2KillEndingScene() });

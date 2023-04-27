@@ -5,6 +5,10 @@
       "file": "assets/Sprites/Cinematic/Filter_black.png"
     },
     {
+      "id": "Filter_White",
+      "file": "assets/Sprites/Cinematic/Filter_white.png"
+    },
+    {
       "id": "Player_1",
       "file": "assets/Sprites/Player/Player_sprite_1.png",
       "cols": 56,
@@ -910,6 +914,10 @@
       "file": "assets/Sprites/Cinematic/Parent_Room_Night.png"
     },
     {
+      "id": "CINEMATIC_BG_PARENTS_ROOM_RAINY",
+      "file": "assets/Sprites/Cinematic/Parent_Room_Rainy.png"
+    },
+    {
       "id": "CINEMATIC_BG_RESTAURANT",
       "file": "assets/Sprites/Cinematic/Restaurant.png"
     },
@@ -1145,6 +1153,14 @@
     {
       "id": "PHONECALL",
       "file": "assets/Sound/cinematic/smartphone_vibrating.mp3"
+    },
+    {
+      "id": "RAIN_AMBIENCE",
+      "file": "assets/Sound/cinematic/rain.mp3"
+    },
+    {
+      "id": "THUNDER",
+      "file": "assets/Sound/cinematic/thunder.mp3"
     }
 
   ],
@@ -1172,6 +1188,10 @@
     {
       "id": "SILENT_CREEPY_MUSIC",
       "file": "assets/Music/5_Dramatic_2_Master.mp3"
+    },
+    {
+      "id": "ATMOSPHERE_CREEPY_MUSIC",
+      "file": "assets/Music/NDKG_CreepyAtmosphere_Looped.wav"
     }
   ]
 }
