@@ -11,7 +11,6 @@
 IntroScene::IntroScene() {
 	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
 	
-	state = START;
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
 	nightAmbience->setVolume(60);
@@ -59,7 +58,11 @@ void IntroScene::addPath(const vector<Vector>& points) {
 }
 
 void IntroScene::reset() {
+	dialogueBox = nullptr;
+	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
 	state = START;
+
+
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }

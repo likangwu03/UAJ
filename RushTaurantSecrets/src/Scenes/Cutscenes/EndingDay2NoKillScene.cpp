@@ -34,6 +34,7 @@ void EndingDay2NoKillScene::addPath(const vector<Vector>& points) {
 }
 
 void EndingDay2NoKillScene::reset() {
+	dialogueBox = nullptr;
 	state = START;
 	timer = 0;
 	dialogueN = 0;

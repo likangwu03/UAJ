@@ -29,9 +29,6 @@ Day2KillEndingScene::Day2KillEndingScene() {
 	straightMovement = new StraightMovement(player, 5);
 
 	transform = player->getComponent<Transform>();
-	transform->setPos(RelativeToGlobal::pointHouse({ 13, 14 }));
-	transform->setMovState(walking);
-	addPath(enterPoints);
 
 	auto anim = player->getComponent<CharacterAnimator>();
 	anim->setH(96);
@@ -40,9 +37,14 @@ Day2KillEndingScene::Day2KillEndingScene() {
 	anim->setframeRate(18);
 }
 
-void Day2KillEndingScene::reset()
-{
+void Day2KillEndingScene::reset() {
+	dialogueBox = nullptr;
 	state = START;
+
+	transform->setPos(RelativeToGlobal::pointHouse({ 13, 14 }));
+	transform->setMovState(walking);
+	addPath(enterPoints);
+
 	transition = new ShowSkipTransitionScene(this, 3);
 	GameManager::get()->pushScene(transition, true);
 }

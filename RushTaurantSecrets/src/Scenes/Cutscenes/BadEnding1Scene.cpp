@@ -42,6 +42,7 @@ BadEnding1Scene::BadEnding1Scene() {
 }
 
 void BadEnding1Scene::reset() {
+	dialogueBox = nullptr;
 	state = START;
 	transition = nullptr;
 	cont = 0;
