@@ -20,12 +20,6 @@ private:
     static constexpr std::size_t bufferSize_ = 1024;
     Uint8 data[bufferSize_];
 
-    int dataLength;
-
-    void code(const Message& message);
-
-    Message decode(Message::_msg_id id, uint16_t& last);
-
     Uint8* receiveMsg(TCPsocket sock);
     bool Receive(Message& v);
     

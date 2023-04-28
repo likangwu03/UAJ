@@ -17,6 +17,7 @@ struct Message {
 		msg_BASKET,
 		msg_TO_DAILY_MENU,
 		msg_TO_SUPERMARKET,
+		msg_TO_RESTAURANT,
 
 		// Do not erase pls
 		msg_INVALID
@@ -115,6 +116,9 @@ struct Message {
 		return msg;
 	};
 #pragma endregion
+
+
+
 public:
 	Uint8* code(Uint8* msg) {
 		msg = code8(id, msg);
@@ -138,7 +142,11 @@ public:
 				msg=code8(d,msg);
 			}
 			break;
+		case Message::msg_TO_SUPERMARKET:
+			msg = code8(daily_menu.menu, msg);
+			break;
 		}
+	
 		return msg;
 	}
 
@@ -180,7 +188,7 @@ public:
 			}
 			break;
 		case Message::msg_TO_SUPERMARKET:
-
+			msg= decode8<uint8_t>(daily_menu.menu, msg);
 			break;
 		}
 		return msg;

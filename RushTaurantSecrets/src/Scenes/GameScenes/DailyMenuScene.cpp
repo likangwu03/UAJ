@@ -3,7 +3,7 @@
 #include "Restaurant.h"
 #include "../HUD/UIRestaurant.h"
 #include "../../Structure/GameManager.h"
-
+#include "../../Structure/Game.h"
 #include "../../Utilities/checkML.h"
 
 DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuSize(msize), spriteSize(64), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
@@ -15,7 +15,13 @@ DailyMenuScene::DailyMenuScene(uint8_t msize) : sdl(SDLUtils::instance()), menuS
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
 }
 
-void DailyMenuScene::buttonPress() {
+void DailyMenuScene::buttonPress(int menu) {
+	if (menu == 0)GameManager::get()->setTodaysMenu(dailyMenu1->getComponent<DailyMenuComp>()->getMenu());
+	else GameManager::get()->setTodaysMenu(dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
+	Message m;
+	m.id = Message::msg_TO_SUPERMARKET;
+	m.daily_menu.menu = menu;
+	Game::get()->getCoopHandler()->send(m);
 	GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
 	GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
 	GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SUPERMARKET));
@@ -28,14 +34,12 @@ void DailyMenuScene::init() {
 	SDL_RenderPresent(sdl->renderer());
 	dailyMenu1 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 8 - DISTANCE / 2, POS_Y), 479.0f, 640.0f,
 		[&]() {
-			GameManager::get()->setTodaysMenu(dailyMenu1->getComponent<DailyMenuComp>()->getMenu());
-			buttonPress();
+			buttonPress(0);
 		});
 	dailyMenu1->getComponent<DailyMenuComp>()->initMenu();
 	dailyMenu2 = new DailyMenu(this, "DAILY_MENU", Vector(sdl->width() / 2 + DISTANCE / 2, POS_Y), 479.0f, 640.0f,
 		[&]() {
-			GameManager::get()->setTodaysMenu(this->dailyMenu2->getComponent<DailyMenuComp>()->getMenu());
-			buttonPress();
+			buttonPress(1);
 		});
 	dailyMenu2->getComponent<DailyMenuComp>()->initMenu();
 
@@ -99,7 +103,10 @@ void DailyMenuScene::quitCoopMode(bool server) {
 }
 
 void DailyMenuScene::receive(const Message& message) {
-	
+	if (message.id == Message::msg_TO_SUPERMARKET) {
+		int aux = message.daily_menu.menu;
+		buttonPress(aux);
+	}
 
 }
 

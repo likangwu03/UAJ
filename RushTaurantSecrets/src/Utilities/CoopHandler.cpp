@@ -18,7 +18,7 @@
 
 // Constructoras y destructoras
 
-CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSocket(nullptr), dataLength(0), data(), client(false) {
+CoopHandler::CoopHandler() : set(nullptr), connectionSocket(nullptr), serverSocket(nullptr),data(), client(false) {
 #ifdef _DEBUG
 	std::cout << "Initializing SDL_net.\n";
 #endif
@@ -99,7 +99,7 @@ bool CoopHandler::connectClient() {
 // Comprobar que el servidor conectado es correcto.
 std::pair<bool, bool> CoopHandler::connectServer() {
 	if (SDLNet_CheckSockets(set, 0) > 0) {
-		dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
+		int dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
 
 		if (dataLength != __CONNECTED_LENGTH) {
 			dataLength = 0;
@@ -181,15 +181,14 @@ void CoopHandler::receive() {
 			GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER)
 				->getComponent<Transform>()->setPos(Vector(-100, -100));
 			SDLNet_TCP_DelSocket(set, connectionSocket);
-			SDLNet_TCP_Close(connectionSocket);
-			connectionSocket = NULL; client = false;
+			/*SDLNet_TCP_Close(connectionSocket);
+			connectionSocket = NULL; client = false;*/
 			Game::get()->setExitCoop();
 			return;
 		}
 		gm->receive(m);
 	}
 }
-
 
 void CoopHandler::closeServer() {
 	if (serverSocket) SDLNet_TCP_Close(serverSocket);
