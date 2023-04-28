@@ -1,6 +1,7 @@
 #include "DayManager.h"
 #include "../structure/GameManager.h"
 #include "ClientsManager.h"
+#include "ThievesManager.h"
 #include "Reputation.h"
 #include "Money.h"
 
@@ -71,7 +72,7 @@ DayManager::~DayManager() {
 
 void DayManager::checkDayFinished() {
 
-	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients()) {
+	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients() && !ThievesManager::get()->areThereThieves()) {
 		GameManager::get()->save();
 		GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDOFDAY));
 	}
@@ -131,12 +132,12 @@ void DayManager::nextDay() {
 	else {
 		// Escena final del día 2 si no ha matado (en la propia escena se pasa a la intro del día 3 si no se ha matado)
 		if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
-		else if (day > 0) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+		else if (day > 0 && day != 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 
 	}
 
 	day++;
-	if (day > 1)
+	if (day > 0)
 		GameManager::get()->resetScenes();
 
 	// Leer dayConfig

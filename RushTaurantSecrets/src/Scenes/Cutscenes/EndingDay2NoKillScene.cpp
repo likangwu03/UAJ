@@ -45,8 +45,10 @@ void EndingDay2NoKillScene::reset() {
 	nightAmbience->play(-1);
 	nightMusic->play(-1);
 
-	transition = new ShowSkipTransitionScene(this, 3);
-	GameManager::get()->pushScene(transition, true);
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void EndingDay2NoKillScene::update() {

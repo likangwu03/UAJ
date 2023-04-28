@@ -14,23 +14,22 @@ ContinueMenu::ContinueMenu() {
 	image = &(sdlutils().images().at("CONTINUE_BG"));
 	new Image(bg, image);
 
-	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
-			GameManager::get()->newGame();
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1), true);
-			GameManager::get()->getCurrentScene()->callAfterCreating();
+			GameManager::get()->newGame();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
 
-	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), true);
 
 		});
 
-	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->load();

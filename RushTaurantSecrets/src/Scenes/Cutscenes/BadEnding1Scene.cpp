@@ -50,8 +50,10 @@ void BadEnding1Scene::reset() {
 	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
 	transform->setMovState(walking);
 
-	transition = new ShowSkipTransitionScene(this, 3);
-	GameManager::get()->pushScene(transition, true);
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void BadEnding1Scene::renderCinematic()

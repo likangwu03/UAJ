@@ -288,8 +288,6 @@ void GameManager::newGame() {
 	money->newGame();
 	reputation->newGame();
 	save();
-
-	resetScenes();
 }
 
 

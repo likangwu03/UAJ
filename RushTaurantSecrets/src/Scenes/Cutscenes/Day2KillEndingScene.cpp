@@ -45,8 +45,10 @@ void Day2KillEndingScene::reset() {
 	transform->setMovState(walking);
 	addPath(enterPoints);
 
-	transition = new ShowSkipTransitionScene(this, 3);
-	GameManager::get()->pushScene(transition, true);
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void Day2KillEndingScene::renderCinematic()

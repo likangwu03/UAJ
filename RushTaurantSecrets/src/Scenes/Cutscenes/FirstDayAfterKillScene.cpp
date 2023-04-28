@@ -43,8 +43,11 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 
 void FirstDayAfterKillScene::reset() {
 	state = START;
-	transition = new ShowSkipTransitionScene(this, START_TIME);
-	GameManager::get()->pushScene(transition, true);
+
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, START_TIME);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void FirstDayAfterKillScene::update() {

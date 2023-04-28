@@ -9,7 +9,7 @@ class TransitionScene;
 class EndingDay1Scene : public CinematicBaseScene
 {
 	const vector<Vector> paths[1] = {
-		{ Vector(12, 5) }
+		{ Vector(12,13), Vector(12, 5) }
 	};
 
 	enum States {

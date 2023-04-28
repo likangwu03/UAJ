@@ -66,14 +66,14 @@ EndOfDayScene::EndOfDayScene() {
 	gameOverOutline = new Texture(sdlutils().renderer(), gameOverText, *font2, build_sdlcolor(0xFFFFFFFF));
 
 	//botones
-	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H, 
+	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H, 
 		[&]() {
 			dayM->newDay();
 		});
 	continueButton->setAlive(false);
 	continueButton->getComponent<ButtonComp>()->setHighlighted(true);
 
-	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H, 
+	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H, 
 		[&]() {
 		   gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));
 		});

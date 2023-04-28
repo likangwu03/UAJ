@@ -21,8 +21,10 @@ void BadEnding4Scene::reset() {
 	transform->setMovState(idle);
 	state = START;
 
-	transition = new ShowSkipTransitionScene(this, 3);
-	GameManager::get()->pushScene(transition, true);
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void BadEnding4Scene::renderCinematic() {

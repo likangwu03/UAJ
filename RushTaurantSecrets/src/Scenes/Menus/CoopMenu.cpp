@@ -33,14 +33,14 @@ CoopMenu::CoopMenu() {
 	new Transform(IP, { (float)(SDLUtils::instance()->width() / 2) - 385 / 2, (float)SDLUtils::instance()->height() / 4 - 130 / 2 }, { 0,0 }, 385, 100);
 	new Image(IP, textBox);
 	new Text2(IP, "localhost", text_ip);
-	new TextBox(IP, "BUTTON2_HIGHLIGHT");
+	new TextBox(IP, "BUTTON_HIGHLIGHT");
 
 	IP->getComponent<Text2>()->Setoffset(Vector(50, 20));
 	IP->setActives(false);
 
 	coop = Game::instance()->getCoopHandler();
 
-	buttonServer = new ButtonGO(this, "HOST_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonServer = new ButtonGO(this, "HOST_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&]() {
 			try {
@@ -55,7 +55,7 @@ CoopMenu::CoopMenu() {
 		});
 
 	buttonServer->getComponent<ButtonComp>()->setHighlighted(true);
-	buttonClient = new ButtonGO(this, "JOIN_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonClient = new ButtonGO(this, "JOIN_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&]()
 		{
@@ -64,20 +64,20 @@ CoopMenu::CoopMenu() {
 
 		});
 
-	buttonResume = new ButtonGO(this, "RETURN_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonResume = new ButtonGO(this, "RETURN_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), true);
 		});
 
 
-	buttonResume2 = new ButtonGO(this, "RETURN_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonResume2 = new ButtonGO(this, "RETURN_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			goBack();
 		});
 
-	buttonConfir = new ButtonGO(this, "JOIN_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonConfir = new ButtonGO(this, "JOIN_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&]()
 		{

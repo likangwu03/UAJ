@@ -50,7 +50,6 @@ IntroScene::IntroScene() {
 	anim->setframeRate(10);
 	*/
 
-	addPath(introPath[START]);
 }
 
 void IntroScene::addPath(const vector<Vector>& points) {
@@ -60,11 +59,14 @@ void IntroScene::addPath(const vector<Vector>& points) {
 void IntroScene::reset() {
 	dialogueBox = nullptr;
 	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+
+	addPath(introPath[START]);
 	state = START;
 
-
-	transition = new ShowSkipTransitionScene(this, 3);
-	GameManager::get()->pushScene(transition, true);
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void IntroScene::update() {
@@ -86,64 +88,55 @@ void IntroScene::update() {
 	case IntroScene::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}
 		break;
 	case IntroScene::D1:
 		if (Text::isTextFinished()) {
-			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
 			state = D2;
 		}
 		break;
 	case IntroScene::D2:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
-				font, dialogues[2].portrait, dialogues[2].text);
+			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text);
 			state = D3;
 		}
 		break;
 	case IntroScene::D3:
 		if (Text::isTextFinished()) {
-			dialogueBox= new Dialogue(this, Vector(150,430), 700, 0.01 * 1000,
-				font, dialogues[3].portrait, dialogues[3].text);
+			dialogueBox= new Dialogue(this, Vector(150,430), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text);
 			state = D31;
 		}
 		break;
 	case IntroScene::D31:
 		if (Text::isTextFinished()) {
-			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[4].portrait, dialogues[4].text);
+			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text);
 			state = D4;
 		}
 		break;
 	case IntroScene::D4:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 440), 700, 0.01 * 1000,
-				font, dialogues[5].portrait, dialogues[5].text);
+			dialogueBox=new Dialogue(this, Vector(150, 440), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text);
 			state = D5;
 		}
 		break;
 	case IntroScene::D5:
 		if (Text::isTextFinished()) {
- 			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[6].portrait, dialogues[6].text);
+ 			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text);
 			state = D51;
 		}
 		break;
 	case IntroScene::D51:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[7].portrait, dialogues[7].text);
+			dialogueBox=new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[7].portrait, dialogues[7].text);
 			state = D6;
 		}
 		break;
 	case IntroScene::D6:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[8].portrait, dialogues[8].text);
+			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[8].portrait, dialogues[8].text);
 			state = OUT;
 		}
 		break;
@@ -157,8 +150,7 @@ void IntroScene::update() {
 		break;
 	case IntroScene::D71:
 		if (Text::isTextFinished() && GameManager::get()->getCurrentScene() != transition) {
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[9].portrait, dialogues[9].text);
+			dialogueBox = new Dialogue(this, Vector(150, 400), 700, 0.01 * 1000, font, dialogues[9].portrait, dialogues[9].text);
 			state = D72;
 		}
 		break;
