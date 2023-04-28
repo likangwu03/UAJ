@@ -144,8 +144,9 @@ public:
 
 	// Recoge la información del buffer y ejecuta las acciones pertinentes
 	Uint8* decode(Uint8* msg) {
-		Message m{ };
-		m.id = id;
+		Uint8 id_;
+		msg = decode8< uint8_t>(id_, msg);
+		id = (_msg_id)id_;
 		switch (id) {
 		case Message::msg_PLAYER:
 			float aux;
@@ -170,12 +171,12 @@ public:
 			for (int i = 0; i < 4; ++i) {
 				uint8_t aux;
 				msg = decode8<uint8_t>(aux, msg);
-				m.daily_menus.menu1.push_back((_ecs::_ingredients_id)aux);
+				daily_menus.menu1.push_back((_ecs::_ingredients_id)aux);
 			}
 			for (int i = 0; i < 4; ++i) {
 				uint8_t aux;
 				msg = decode8<uint8_t>(aux, msg);
-				m.daily_menus.menu2.push_back((_ecs::_ingredients_id)aux);
+				daily_menus.menu2.push_back((_ecs::_ingredients_id)aux);
 			}
 			break;
 		case Message::msg_TO_SUPERMARKET:
