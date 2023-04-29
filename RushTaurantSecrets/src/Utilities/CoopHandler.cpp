@@ -133,6 +133,7 @@ void CoopHandler::closeConnection() {
 // Mensajes
 
 bool CoopHandler::send(Message& message) {
+	if (!connectionSocket)return false;
 	Uint8* end = message.code(data);
 	Uint16 size = end - data;
 	assert(size <= bufferSize_);
