@@ -84,22 +84,33 @@ struct Message {
 		}
 		msg = code8(output.first, msg);
 		msg = code8(output.second, msg);
+
 		return msg;
 	}
 	template<typename T>
 	Uint8* decode16(T& v, Uint8* msg) {
-		Uint8 input[2];
-		msg = decode8<int8_t>(input[0], msg);
-		msg = decode8<int8_t>(input[1], msg);
-
-		v = *reinterpret_cast<Uint16*>(input);
-		/*for (uint8_t i = 0; i < 8; i++, input.first >>= 1) {
-			v = (v << 1) + (input.first & 1);
+		Uint16 output{}; std::pair<char, char> input;
+		input.first = msg[0]; input.second = msg[1];
+		for (uint8_t i = 0; i < 8; i++, input.first >>= 1) {
+			output = (output << 1) + (input.first & 1);
 		}
 		for (uint8_t i = 0; i < 8; i++, input.second >>= 1) {
-			v = (v << 1) + (input.second & 1);
+			output = (output << 1) + (input.second & 1);
+		}
+		v = output;
+	/*	Uint8 input[2];*/
+		/*msg = decode8<int8_t>(input[0], msg);
+		msg = decode8<int8_t>(input[1], msg);*/
+
+		//v = *reinterpret_cast<Uint16*>(input);
+		/*v = *reinterpret_cast<Uint16*>(input);*/
+		/*for (uint8_t i = 0; i < 8; i++, input[0] >>= 1) {
+			v = (v << 1) + (input[0] & 1);
+		}
+		for (uint8_t i = 0; i < 8; i++, input[1] >>= 1) {
+			v = (v << 1) + (input[1] & 1);
 		}*/
-		return msg;
+		return msg+sizeof(Uint16);
 	};
 	Uint8* code16(int input, Uint8* msg) { return code16<int16_t>(input, msg); };
 	Uint8* decode16(int& v, Uint8* msg) {
@@ -126,6 +137,9 @@ public:
 		case Message::msg_PLAYER:
 			msg=code16(player.pos.getX(),msg);
 			msg=code16(player.pos.getY(),msg);
+			if (player.vel.getX() < 0) {
+				int algo=1234;
+			}
 			msg=code16(player.vel.getX(),msg);
 			msg=code16(player.vel.getY(),msg);
 			msg=code8(player.scene,msg);
@@ -158,13 +172,13 @@ public:
 		switch (id) {
 		case Message::msg_PLAYER:
 			float aux;
-			msg = decode16<float>(aux, msg);
+			msg = decode16(aux, msg);
 			player.pos.setX(aux);
-			msg = decode16<float>(aux, msg);
+			msg = decode16(aux, msg);
 			player.pos.setY(aux);
-			msg = decode16<float>(aux, msg);
+			msg = decode16(aux, msg);
 			player.vel.setX(aux);
-			msg = decode16<float>(aux, msg);
+			msg = decode16(aux, msg);
 			player.vel.setY(aux);
 			msg = decode8< uint8_t>(player.scene, msg);
 			break;
