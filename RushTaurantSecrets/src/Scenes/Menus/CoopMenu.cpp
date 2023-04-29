@@ -13,9 +13,9 @@
 
 CoopMenu::CoopMenu() {
 
-	text = new Font("assets/Fonts/light_pixel-7.ttf", 50);
 	text_ip = new Font("assets/Fonts/chary___.ttf", 40);
-	waiting = new Texture(sdlutils().renderer(), "Waiting for other player", *text, build_sdlcolor(0x000000FF));
+	waiting = new Texture(sdlutils().renderer(), "Waiting for the ", *text_ip, build_sdlcolor(0x513a2bFF));
+	waiting2= new Texture(sdlutils().renderer(), "other player...", *text_ip, build_sdlcolor(0x513a2bFF));
 	button = 0;
 
 	server = true;
@@ -99,10 +99,21 @@ CoopMenu::CoopMenu() {
 
 
 CoopMenu::~CoopMenu() {
-	delete text;
 	delete waiting;
+	delete waiting2;
 	delete text_ip;
 	delete textBox;
+}
+
+
+
+void CoopMenu::render() {
+	Scene::render();
+	if (wait)
+	{
+		waiting->render(build_sdlrect(WIDTH / 2 - 385 / 2, HEIGHT / 2 - 180, 385, 80));
+		waiting2->render(build_sdlrect(WIDTH / 2 - 385 / 2, HEIGHT / 2-80, 385, 80));
+	}
 }
 
 
@@ -149,13 +160,13 @@ void CoopMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		if (ih->isKeyDown(SDLK_UP)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		else if (ih->isKeyDown(SDLK_DOWN)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}
@@ -198,6 +209,7 @@ void CoopMenu::enterIp() {
 	buttonResume2->setActives(true);
 	buttonConfir->setActives(true);
 	enterIp_ = true;
+	button = 0;
 }
 
 

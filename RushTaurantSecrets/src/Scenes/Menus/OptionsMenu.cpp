@@ -65,21 +65,21 @@ void OptionsMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDL_SCANCODE_A)) {
+		if (ih->isKeyDown(SDLK_LEFT)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+		else if (ih->isKeyDown(SDLK_RIGHT)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		else if (ih->isKeyDown(SDLK_DOWN)) {
 			button = 3;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		else if (ih->isKeyDown(SDLK_UP)) {
 			button = 0;
 			selectedButton(button);
 		}
@@ -112,10 +112,10 @@ void OptionsMenu::createSlider() {
 
 void OptionsMenu::SliderHandleEvents(){
 	auto t = sliderButton->getComponent<Transform>();
-	if (ih->isKeyDown(SDL_SCANCODE_A)) {
+	if (ih->isKeyDown(SDLK_LEFT)) {
 		t->setPos(Vector(t->getPos().getX() - 10, t->getPos().getY()));
 	}
-	else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+	else if (ih->isKeyDown(SDLK_RIGHT)) {
 		t->setPos(Vector(t->getPos().getX() + 10, t->getPos().getY()));
 	}
 }

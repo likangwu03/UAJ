@@ -61,13 +61,13 @@ void ContinueMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		if (ih->isKeyDown(SDLK_UP)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		else if (ih->isKeyDown(SDLK_DOWN)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

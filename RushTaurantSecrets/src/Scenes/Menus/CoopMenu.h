@@ -20,17 +20,18 @@ private:
 
 	Texture* image;
 	Texture* waiting;
+	Texture* waiting2;
 	Texture* textBox;
 
 	string ip_="localhost";
 
-
+	const float WIDTH = SDLUtils::instance()->width();
+	const float HEIGHT = SDLUtils::instance()->height();
 
 	bool server;
 	bool wait;
 	bool enterIp_;
 
-	Font* text;
 	Font* text_ip;
 
 	const int NUM_BUTTON = 3;
@@ -44,6 +45,7 @@ public:
 	
 	void selectedButton(int selected);
 
+	void render()override;
 
 	void onWaiting();
 

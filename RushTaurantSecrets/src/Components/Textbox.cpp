@@ -29,16 +29,14 @@ void TextBox::handleEvents() {
 			else if (x == '\b' && t.length() > 0) {
 				t.pop_back();
 			}
-			else if (x != '\b' && t.length() < MAX_CHAR) {
+			else if (x != '\b' && !ih_->isKeyDown(SDLK_UP) && !ih_->isKeyDown(SDLK_DOWN) && t.length() < MAX_CHAR) {
 				t.push_back(x);
 			}
 			text->setText(t);
 		}
 		else if(ih_->isKeyDown(SDL_SCANCODE_SPACE)) {
 			select_ = true;
-		}
-
-		
+		}	
 	}
 
 }
