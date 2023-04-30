@@ -906,6 +906,10 @@
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_NIGHT",
       "file": "assets/Sprites/Cinematic/Parent_Room_Night.png"
+    }, 
+     {
+      "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
+      "file": "assets/Sprites/Cinematic/Prota_Room_Night.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_RAINY",
