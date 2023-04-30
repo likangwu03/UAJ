@@ -86,7 +86,7 @@ public:
 
 	void changeScene(Scene* scene, bool longerTransition = false, bool fadeOut = false);
 	void popScene(Scene* transitionScene = nullptr, Scene* cinematic = nullptr);
-	void pushScene(Scene* scene, bool longerTransition = false);
+	void pushScene(Scene* scene, bool isTransition = false);
 	void skipfromTransition();
 	bool canChangeScene();
 

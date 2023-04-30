@@ -170,9 +170,9 @@ void Text::update() {
 
 				}
 				else {
-					// 1ª forma
+					// 1?forma
 					textFinished = true;
-					// 2ª forma
+					// 2?forma
 					hasFinished = true;
 					parent->setAlive(false);
 				}

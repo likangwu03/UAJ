@@ -1,0 +1,44 @@
+  {
+  "dialogues": [
+    {
+      "Character": "Player",
+      "Text": "Mom, dad, today was a tough day. Our rivals have threatened me.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "I wanted to hurt them so badly, but I held back, for you. I promised I would never hurt anyone or anything again.",
+      "Portrait": "PROTA_CASUAL_SMILE"
+    },
+    {
+      "Character": "Parents",
+      "Text": "...",
+      "Portrait": "PARENTS"
+    },
+    {
+      "Character": "Player",
+      "Text": "I know this was the right choice. I hope I can continue to keep my word, no promises though...",
+      "Portrait": "PROTA_CASUAL_SIGH"
+    },
+    {
+      "Character": "Parents",
+      "Text": "...",
+      "Portrait": "PARENTS"
+    },
+    {
+      "Character": "Player",
+      "Text": "The business is going well. If I can keep this up, I'll soon be able to renovate the place.",
+      "Portrait": "PROTA_CASUAL_SMILE"
+    },
+    {
+      "Character": "Parents",
+      "Text": "...",
+      "Portrait": "PARENTS"
+    },
+    {
+      "Character": "Player",
+      "Text": "Don't worry, I won't completely change it, I'll just upgrade it. I'll make sure it keeps its identity, this place is yours after all.",
+      "Portrait": "PROTA_CASUAL_SMILE"
+    }
+  ]
+}

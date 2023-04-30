@@ -1,0 +1,88 @@
+{
+  "dialogues": [
+    {
+      "Character": "none",
+      "Text": "(The phone is ringing; the protagonist picks it up)"
+    },
+    {
+      "Character": "Player",
+      "Text": "Hello? Who's this?"
+    },
+    {
+      "Character": "Rival",
+      "Text": "Hi, my darling."
+    },
+    {
+      "Character": "Player",
+      "Text": "Who's this?! How do you know me?"
+    },
+    {
+      "Character": "Rival",
+      "Text": "You can ask your parents, I'm sure they will remember me."
+    },
+    {
+      "Character": "Player",
+      "Text": "Why? Do you want anything from them?"
+    },
+    {
+      "Character": "Rival",
+      "Text": "Have they not talked to you about me? Did they think I would have forgotten about your dear restaurant after all these years?"
+    },
+    {
+      "Character": "Player",
+      "Text": "I know you; I know the type of guy you are. My parents have told me everything about you."
+    },
+    {
+      "Character": "Rival",
+      "Text": "You know what I want then. I'm also sure you know I'll do anything to get my hands on it, wether you give it to me willingly or not."
+    },
+    {
+      "Character": "Player",
+      "Text": "You have really underestimated me if you think you'll break me the same way you broke my parents. I will never yield to the likes of you! I will never close this place down!"
+    },
+    {
+      "Character": "Rival",
+      "Text": "That is exactly what your parents said at first, look at how that worked out for them."
+    },
+    {
+      "Character": "Player",
+      "Text": "Come for me then! You do not scare me! Come a...-!"
+    },
+    {
+      "Character": "none",
+      "Text": "(RIVAL RESTAURANT'S OWNER hangs up the phone)"
+    },
+    {
+      "Character": "Player",
+      "Text": "Who does he think he is!? How dare he try to mess with ME! Whatever, I need to calm down. Mom, Dad, I hope I don't do anything I'll regret later..."
+    },
+    {
+      "Character": "Player",
+      "Text": "What was that noise?! What's going on in the pantry?"
+    },
+    {
+      "Character": "Player",
+      "Text": "What are you doing here!? Get out!"
+    },
+    {
+      "Character": "Player",
+      "Text": "You too! Go away!"
+    },
+    {
+      "Character": "Player",
+      "Text": "Mom, Dad, I don't think I'll be able to control myself. I need to breathe."
+    },
+    {
+      "Character": "Player",
+      "Text": "What are you doing here!? I thought I told you to never come back! (THE PROTAGONIST slams the intruder into the ground and starts hitting him until he goes away) Mom, Dad! I'm not sure I'll be able to tolerate this any longer."
+    },
+    {
+      "Character": "Player",
+      "Text": "YOU ARE NOW GOING TO LEARN THE CONSEQUENCES TO YOUR ACTIONS, YOU SHOULD HAVE NEVER COME HERE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Huff, huff... What have I done!? I killed him... What am I going to do now?  The freezer. Yeah. I'll hide him there. Wait, maybe I could... No, no. That would be madness. I don't know what to do... The restaurant comes first... The intruders will be the main dish."
+    }
+  ]
+}

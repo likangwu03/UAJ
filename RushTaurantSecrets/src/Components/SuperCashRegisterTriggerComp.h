@@ -20,11 +20,13 @@ private:
 	SDLUtils* sdl;
 	Music* restaurantMusic;
 
+	void sendToClien();
 public:
 	SuperCashRegisterTriggerComp(GameObject* parent, Vector pos_, float width_, float height_);
 
 	virtual void isOverlapping();
 	virtual void onTriggerExit();
+	virtual void receive(const Message& message);
 
 private:
 	void payAndLeave();

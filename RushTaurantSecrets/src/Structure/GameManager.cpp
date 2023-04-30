@@ -23,15 +23,15 @@
 #include "../Scenes/Menus/CoopMenu.h"
 
 #include "../Scenes/TransitionScene.h"
-#include "../Scenes/Cutscenes/IntroScene.h"
-#include "../scenes/Cutscenes/IntroDay3ScareScene.h"
+#include "../scenes/Cutscenes/Day3IntroNoKill.h"
+#include "../Scenes/Cutscenes/Day1IntroScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
 #include "../Scenes/Cutscenes/BadEnding4Scene.h"
-#include "../Scenes/Cutscenes/EndingDay2NoKillScene.h"
-#include "../Scenes/Cutscenes/Day2KillEndingScene.h"
-#include "../Scenes/Cutscenes/EndingDay1Scene.h"
+#include "../Scenes/Cutscenes/Day2EndingNoKillScene.h"
+#include "../Scenes/Cutscenes/Day2EndingKillScene.h"
+#include "../Scenes/Cutscenes/Day1EndingScene.h"
 
 #include <sstream>
 #include <fstream>
@@ -87,16 +87,15 @@ void GameManager::initialize() {
 	
 	days->nextDay();
 
-	allScenes.insert({ _ecs::sc_INTRO1, new IntroScene() });
-	allScenes.insert({ _ecs::sc_INTRO_NO_KILL_3 , new IntroDay3ScareScene() });
-	allScenes.insert({ _ecs::sc_ENDINGDAY1, new EndingDay1Scene() });
-	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new EndingDay2NoKillScene() });
-	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2KillEndingScene() });
+	allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });
+	allScenes.insert({ _ecs::sc_INTRO3NOKILL, new Day3IntroNoKill() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY1, new Day1EndingScene() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new Day2EndingNoKillScene() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2EndingKillScene() });
 	allScenes.insert({ _ecs::sc_FIRSTDAYAFTERKILL, new FirstDayAfterKillScene() });
 	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });
 	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });
-
 
 	changeScene(allScenes.at(_ecs::sc_MAINMENU));
 }
@@ -255,7 +254,7 @@ void GameManager::load() {
 	load.open(file.str());
 	if (!load.is_open()) {}
 	load >> aux;
-	days->setDay(aux);
+	days->setDay(aux, true);
 
 	load >> aux;
 	money->addMoney(aux - money->getMoney());
@@ -265,8 +264,6 @@ void GameManager::load() {
 	hasKilled = aux;
 	load >> killedNum;
 	load.close();
-
-	resetScenes();
 }
 
 bool GameManager::checkload() {
@@ -284,14 +281,12 @@ bool GameManager::checkload() {
 }
 
 void GameManager::newGame() {
-	days->setDay(1);
+	days->setDay(1, true);
 	hasKilled = false;
 	killedNum = 0;
 	money->newGame();
 	reputation->newGame();
 	save();
-
-	resetScenes();
 }
 
 

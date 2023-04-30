@@ -10,7 +10,7 @@
 #include "../../GameObjects/Dialogue.h"
 
 void BadEnding1Scene::addPath(const vector<Vector>& points) {
-	straightMovementP->addPath(RelativeToGlobal::pointsRestaurant(points));
+	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
 BadEnding1Scene::BadEnding1Scene() {
@@ -21,9 +21,7 @@ BadEnding1Scene::BadEnding1Scene() {
 	client1Points = { {Vector(40, 14)} };
 	client2Points = { {Vector(40, 15)} };
 
-	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
-	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
-	nightAmbience->setVolume(60);
+	dramaticMusic = &sdlutils().musics().at("DRAMATIC_MUSIC");
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
@@ -50,13 +48,24 @@ BadEnding1Scene::BadEnding1Scene() {
 	auto anim = new CharacterAnimator(player, "Player_1", ap);
 
 	//Scene* scene, string sprite, Vector origin, float speed
+	phonecall = &sdlutils().soundEffects().at("PHONECALL");
+	
 	client1 = new CinematicNPC(this, "Client_3", RelativeToGlobal::pointRestaurant({ 25, 14 }), 1);
 	straightMovementc1 = new StraightMovement(client1, 3);
 	client2 = new CinematicNPC(this, "Client_5", RelativeToGlobal::pointRestaurant({ 25, 15 }), 1);
 	straightMovementc2 = new StraightMovement(client2, 3);
+
+	auto clAnim = client1->getComponent<CharacterAnimator>();
+	clAnim->setW(48 * RESIZEFACTOR);
+	clAnim->setH(96 * RESIZEFACTOR);
+
+	clAnim = client2->getComponent<CharacterAnimator>();
+	clAnim->setW(48 * RESIZEFACTOR);
+	clAnim->setH(96 * RESIZEFACTOR);
 }
 
 void BadEnding1Scene::reset() {
+	dialogueBox = nullptr;
 	state = START;
 	transition = nullptr;
 	cont = 0;
@@ -64,8 +73,21 @@ void BadEnding1Scene::reset() {
 	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
 	transform->setMovState(walking);
 
-	transition = new ShowSkipTransitionScene(this, 3);
-	GameManager::get()->pushScene(transition, true);
+	anim->setW(48 * RESIZEFACTOR);
+	anim->setH(96 * RESIZEFACTOR);
+
+	auto tr = client1->getComponent<Transform>();
+	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 14 }));
+	tr = client2->getComponent<Transform>();
+	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 15 }));
+
+	straightMovement->stop();
+
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
+
 }
 
 void BadEnding1Scene::renderCinematic()
@@ -77,13 +99,13 @@ void BadEnding1Scene::renderCinematic()
 	top->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 }
 
-void BadEnding1Scene::finishScene()
-{
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+void BadEnding1Scene::finishScene() {
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->getScene(sc_BEFOREDAYSTART)->reset();
-	GameManager::get()->getScene(_ecs::sc_DAILYMENU)->reset();
+	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+
+	dramaticMusic->haltMusic();
 }
 
 void BadEnding1Scene::update()
@@ -92,19 +114,18 @@ void BadEnding1Scene::update()
 	switch (state)
 	{
 	case BadEnding1Scene::START:
-		nightAmbience->play(-1);
-		nightMusic->play(-1);
+		dramaticMusic->play(-1);
 		addPath(playerPoints);
 		straightMovementc1->addPath(RelativeToGlobal::pointsRestaurant(client1Points));
 		straightMovementc2->addPath(RelativeToGlobal::pointsRestaurant(client2Points));
 		state = ARRIVE;
 		break;
 	case BadEnding1Scene::ARRIVE:
-		if (straightMovementP->hasFinishedPath()) {
+		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 		}
 		if (straightMovementc1->hasFinishedPath() && straightMovementc2->hasFinishedPath()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			client1->setAlive(false);
 			client2->setAlive(false);
@@ -120,54 +141,57 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[2].portrait, dialogues[2].text);
 			state = RESTAURANT_FADEOUT;
 		}
 		break;
 	case BadEnding1Scene::RESTAURANT_FADEOUT:
 		if (Text::isTextFinished()) {
-			if (transition != nullptr)
-				delete transition;
 			transition = new TransitionScene(this, START_TIME, true);
 			GameManager::get()->pushScene(transition, true);
-			state = BEDROOM_FADEIN;
-			cont = 0;
-		}
-		break;
-	case BadEnding1Scene::BEDROOM_FADEIN:
-		cont += frameTime;
-		if (cont > START_TIME * 1000) {
-			cont = 0;
 			state = D3;
+			cont = 0;
 		}
 		break;
 	case BadEnding1Scene::D3:
 		cont += frameTime;
-		if (cont > START_TIME * 1000) {
+		if (cont > START_TIME * 1000 * 2) {
+
 			transform->setPos(Vector(624, 672));
+			anim->setW(48);
+			anim->setH(96);
+
 			bg = &sdlutils().images().at("CINEMATIC_BG_HOUSE");
 			top->setOpacity(0.0f);
 			addPath(playerPoints2);
 			transform->setOrientation(north);
-			dialogueBox = new Dialogue(this, Vector(145, 420), 700, 0.01 * 1000,
+			state = PHONECALL;
+		}
+		break;
+	case BadEnding1Scene::PHONECALL:
+		if (straightMovement->hasFinishedPath()) {
+			transform->setMovState(idle);
+			dialogueBox = new Dialogue(this, Vector(145, 550), 700, 0.01 * 1000,
 				font, dialogues[3].portrait, dialogues[3].text);
+			phonecall->play(-1);
 			state = D4;
 		}
 		break;
 	case BadEnding1Scene::D4:
-		if (straightMovementP->hasFinishedPath()) {
-			transform->setMovState(idle);
-		}
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[4].portrait, dialogues[4].text);
-			state = D5;
+		cont += frameTime;
+		if (cont > START_TIME * 1000) {
+			if (Text::isTextFinished()) {
+				dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+					font, dialogues[4].portrait, dialogues[4].text);
+				phonecall->haltChannel();
+				state = D5;
+			}
 		}
 		break;
 	case BadEnding1Scene::D5:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[5].portrait, dialogues[5].text);
 			state = D6;
 		}
@@ -181,7 +205,7 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D7:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[7].portrait, dialogues[7].text);
 			state = D8;
 		}
@@ -195,7 +219,7 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D9:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[9].portrait, dialogues[9].text);
 			state = D10;
 		}
@@ -223,7 +247,7 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D13:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[13].portrait, dialogues[13].text);
 			state = D14;
 		}
@@ -237,14 +261,14 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D15:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[15].portrait, dialogues[15].text);
 			state = D16;
 		}
 		break;
 	case BadEnding1Scene::D16:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[16].portrait, dialogues[16].text);
 			state = D17;
 		}
@@ -256,11 +280,18 @@ void BadEnding1Scene::update()
 			state = D18;
 		}
 		break;
-		//aqui
 	case BadEnding1Scene::D18:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
 				font, dialogues[18].portrait, dialogues[18].text);
+			state = D19;
+		}
+		break;
+		//aqui
+	case BadEnding1Scene::D19:
+		if (Text::isTextFinished()) {
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
+				font, dialogues[19].portrait, dialogues[19].text);
 			state = BEDROOM_FADEOUT;
 		}
 		break;
@@ -278,23 +309,19 @@ void BadEnding1Scene::update()
 		cont += frameTime;
 		if (cont > START_TIME * 1000) {
 			cont = 0;
-			state = D19;
-		}
-		break;
-	case BadEnding1Scene::D19:
-		cont += frameTime;
-		if (cont > START_TIME * 1000) {
-			transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
-			transform->setOrientation(south);
-			dialogueBox = new Dialogue(this, Vector(145, 420), 700, 0.01 * 1000,
-				font, dialogues[19].portrait, dialogues[19].text);
 			state = D20;
 		}
 		break;
 	case BadEnding1Scene::D20:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+		cont += frameTime;
+		if (cont > START_TIME * 1000) {
+			anim->setW(48 * RESIZEFACTOR);
+			anim->setH(96 * RESIZEFACTOR);
+
+			transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
+			transform->setOrientation(south);
+			dialogueBox = new Dialogue(this, Vector(145, 500), 700, 0.01 * 1000,
 				font, dialogues[20].portrait, dialogues[20].text);
 			state = D21;
 		}
@@ -308,7 +335,7 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D22:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[22].portrait, dialogues[22].text);
 			state = D23;
 		}
@@ -322,7 +349,7 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::D24:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[24].portrait, dialogues[24].text);
 			state = D25;
 		}
@@ -338,6 +365,13 @@ void BadEnding1Scene::update()
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
 				font, dialogues[26].portrait, dialogues[26].text);
+			state = D27;
+		}
+		break;
+	case BadEnding1Scene::D27:
+		if (Text::isTextFinished()) {
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
+				font, dialogues[27].portrait, dialogues[27].text);
 			state = OUT;
 		}
 		break;

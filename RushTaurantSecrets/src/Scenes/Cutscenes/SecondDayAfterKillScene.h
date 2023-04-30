@@ -8,6 +8,7 @@ using namespace std;
 struct dialogueInfo;
 class SecondDayAfterKillScene : public CinematicBaseScene
 {
+private:
 	const vector<Vector> secondDayAfterKillPath[4] = {
 		{ Vector(20, 10),Vector(16,10),Vector(18, 10)},
 		{ Vector(20, 10),Vector(16,10),Vector(18, 10)},
@@ -38,15 +39,10 @@ class SecondDayAfterKillScene : public CinematicBaseScene
 	Texture* top;
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
-	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
 	float cont;
 	const float STOP_TIME = 1.5;
-
-private:
-	GameObject* player;
-	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
 

@@ -22,8 +22,8 @@ public:
 	DayManager();
 	~DayManager();
 	void checkDayFinished();
-	void nextDay();
-	void setDay(int x);
+	void nextDay(bool loading = false);
+	void setDay(int x, bool loading = false);
 	void newDay();
 
 	SoundEffect* getSound() { return timeUpSound; }

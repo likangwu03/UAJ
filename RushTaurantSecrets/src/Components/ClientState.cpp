@@ -55,7 +55,7 @@ void ClientState::update() {
 #ifdef _DEBUG
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(EATING);	// TAKEYMYORDER
+			setState(TAKEMYORDER);	// TAKEYMYORDER
 			
 			takeNote->play();
 			render->renderTakingNoteState();

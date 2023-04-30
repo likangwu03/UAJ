@@ -13,7 +13,7 @@
 #include "../../Components/Transform.h"
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
-#include "../Cutscenes/IntroScene.h"
+#include "../Cutscenes/Day1IntroScene.h"
 #include "../../Structure/GameObject.h"
 //#include "FirstDayAfterKillScene.h"
 
@@ -27,17 +27,17 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	new Image(bg, image);
 
 	button = 0;
-	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
+	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
 		[&]() { 
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_CONTINUEMENU), true);
 		});
 
 	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
-	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, 
+	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, 
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_COOPMENU), true);
 		});
-	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, 
+	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, 
 		[&]() {
 			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
 		});
@@ -78,13 +78,13 @@ void MainMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

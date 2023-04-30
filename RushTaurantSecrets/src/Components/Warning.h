@@ -20,7 +20,7 @@ public:
 	}
 
 	virtual void update() {
-		if (thiefsManager->isThereThieves()) {
+		if (thiefsManager->areThereThieves()) {
 			elapsedTime += deltaTime;
 			if (elapsedTime > TIMER) {
 				elapsedTime = 0;

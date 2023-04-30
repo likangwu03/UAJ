@@ -42,9 +42,9 @@ UIRestaurant::UIRestaurant() : Scene() {
 
 	// Fuente
 	font = new Font(FONT_PATH, FONTSIZE);
-	font1 = new Font(FONT_PATH, FONTSIZE + 10);
+	font1 = new Font(FONT_PATH, FONTSIZE - 5);
 	outline = new Font(FONT_PATH, FONTSIZE);
-	outline1 = new Font(FONT_PATH, FONTSIZE + 10);
+	outline1 = new Font(FONT_PATH, FONTSIZE - 5);
 	TTF_SetFontOutline(outline->getTTFFont(), 2);
 	TTF_SetFontOutline(outline1->getTTFFont(), 2);
 
@@ -98,7 +98,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
 
 	accDay = 1;
-	dayText = "DAY: " + to_string(accDay);
+	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 }
@@ -233,13 +233,14 @@ void UIRestaurant::render() {
 	objectiveOutline->render(objectiveOutlineRect);
 	objectiveTexture->render(objectiveRect);
 	
-	dayOutline->render({ 1100 - 2, 15 - 2, dayOutline->width(), dayOutline->height() });
-	dayTexture->render({ 1100, 15, dayTexture->width(), dayTexture->height() });
+	dayOutline->render({ sdl->width() - 25 - dayTexture->width() - 2, 120 - 2, dayOutline->width(), dayOutline->height() });
+	dayTexture->render({ sdl->width() - 25 - dayTexture->width(), 120, dayTexture->width(), dayTexture->height() });
 	
 	Scene::render();
 	checkRenderStar();
 	ClockComponent::get()->render();
 }
+
 
 void UIRestaurant::reset() {
 	startingMoney = moneyTxt->getMoney();
@@ -250,7 +251,7 @@ void UIRestaurant::reset() {
 	delete dayOutline;
 
 	accDay = GameManager::get()->getDayManager()->getDay();
-	dayText = "DAY: " + to_string(accDay);
+	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 }
@@ -272,7 +273,7 @@ void UIRestaurant::nextDay() {
 	delete dayOutline;
 
 	accDay = GameManager::get()->getDayManager()->getDay();
-	dayText = "DAY: " + to_string(accDay);
+	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 

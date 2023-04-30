@@ -1,13 +1,22 @@
 #include "CinematicBaseScene.h"
+
 #include "../../Utilities/InputHandler.h"
 #include "../../Structure/GameObject.h"
+#include "../../Components/StraightMovement.h"
+#include "../../Components/CharacterAnimator.h"
 
-
-CinematicBaseScene::CinematicBaseScene() :Scene(), cont(0), sdl(SDLUtils::instance()), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), dialogueBox(nullptr) {
+CinematicBaseScene::CinematicBaseScene() : Scene(), cont(0), sdl(SDLUtils::instance()), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), dialogueBox(nullptr) {
 	font = new Font(FONT_PATH, FONTSIZE);
 	if (ih->joysticksInitialised())
 		skipText = new Texture(sdlutils().renderer(), "Press B to skip", *font, build_sdlcolor(0xffffffFF));
 	else skipText = new Texture(sdlutils().renderer(), "Press ESC to skip", *font, build_sdlcolor(0xffffffFF));
+
+	player = new GameObject(this);
+	transform = new Transform(player, Vector(0, 0), 0, 48, 96, 0);
+	straightMovement = new StraightMovement(player, 5);
+
+	anim = new CharacterAnimator(player, &sdlutils().images().at("Player_1"), ANIMATIONSPARAMS);
+	anim->setframeRate(10);
 }
 
 CinematicBaseScene::~CinematicBaseScene() {

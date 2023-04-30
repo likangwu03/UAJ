@@ -4,7 +4,7 @@
 #include "../../Components/Transform.h"
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
-#include "../Cutscenes/IntroScene.h"
+#include "../Cutscenes/Day1IntroScene.h"
 #include "../../Utilities/checkML.h"
 
 
@@ -14,27 +14,25 @@ ContinueMenu::ContinueMenu() {
 	image = &(sdlutils().images().at("CONTINUE_BG"));
 	new Image(bg, image);
 
-	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
-			GameManager::get()->newGame();
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1), true);
-			GameManager::get()->getCurrentScene()->callAfterCreating();
+			GameManager::get()->newGame();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
 
-	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), true);
 
 		});
 
-	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonContinue = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->load();
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 		});
 	button = 0;
 }
@@ -61,13 +59,13 @@ void ContinueMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDL_SCANCODE_W)) {
+		if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_S)) {
+		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

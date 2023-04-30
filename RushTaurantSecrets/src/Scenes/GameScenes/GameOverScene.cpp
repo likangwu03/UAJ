@@ -11,7 +11,7 @@ GameOverScene::GameOverScene() {
 	new Image(bg, image);
 
 
-	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
