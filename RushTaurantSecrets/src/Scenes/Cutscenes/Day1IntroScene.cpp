@@ -13,11 +13,9 @@ Day1IntroScene::Day1IntroScene() {
 	
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
-	nightAmbience->setVolume(60);
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM");
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
-	filter->setOpacity(80);
 	black = &sdlutils().images().at("Filter_Black");
 }
 
@@ -32,6 +30,9 @@ void Day1IntroScene::reset() {
 	anim->setW(48 * 1.7);
 	anim->setH(96 * 1.7);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+
+	nightAmbience->setVolume(60);
+	filter->setOpacity(80);
 
 	straightMovement->stop();
 	addPath(introPath[START]);

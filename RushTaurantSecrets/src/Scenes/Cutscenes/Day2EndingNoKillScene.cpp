@@ -13,11 +13,9 @@ Day2EndingNoKillScene::Day2EndingNoKillScene() {
 	
 	bg = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL");
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
-	filter->setOpacity(80);
 
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
-	nightAmbience->setVolume(60);
 }
 
 void Day2EndingNoKillScene::addPath(const vector<Vector>& points) {
@@ -40,6 +38,9 @@ void Day2EndingNoKillScene::reset() {
 	straightMovement->changeSpeed(6);
 	straightMovement->stop();
 	addPath(paths[START]);
+
+	filter->setOpacity(80);
+	nightAmbience->setVolume(60);
 
 	nightAmbience->play(-1);
 	nightMusic->play(-1);

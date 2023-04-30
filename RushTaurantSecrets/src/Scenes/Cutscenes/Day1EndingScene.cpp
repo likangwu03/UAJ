@@ -16,7 +16,6 @@ Day1EndingScene::Day1EndingScene() {
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL");
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
-	filter->setOpacity(80);
 }
 
 void Day1EndingScene::reset() {
@@ -29,6 +28,8 @@ void Day1EndingScene::reset() {
 	anim->setH(96 * 1.3);
 	anim->setW(48 * 1.3);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+
+	filter->setOpacity(80);
 
 	straightMovement->changeSpeed(3);
 	straightMovement->stop();

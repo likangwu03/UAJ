@@ -10,15 +10,12 @@
 
 SecondDayAfterKillScene::SecondDayAfterKillScene() {
 	dialogues = GameManager::get()->getDialogueInfo("SecondDayAfterKill.json");
-	cont = 0;
-	state = START;
+
 	nightMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
-	nightAmbience->setVolume(60);
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM");
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
-	filter->setOpacity(80);
 }
 
 void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
@@ -26,6 +23,8 @@ void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void SecondDayAfterKillScene::reset() {
+	dialogueBox = nullptr;
+	cont = 0;
 	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(15, 10)));
 	transform->setMovState(walking);
 	straightMovement->changeSpeed(2);
@@ -33,6 +32,9 @@ void SecondDayAfterKillScene::reset() {
 	anim->setH(96 * 1.7);
 	anim->setW(48 * 1.7);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+
+	nightAmbience->setVolume(60);
+	filter->setOpacity(80);
 
 	straightMovement->stop();
 	state = START;

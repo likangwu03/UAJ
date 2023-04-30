@@ -18,7 +18,6 @@ Day3IntroNoKill::Day3IntroNoKill() {
 
 	creepyMusic = &sdlutils().musics().at("ATMOSPHERE_CREEPY_MUSIC");
 	rainAmbience = &sdlutils().soundEffects().at("RAIN_AMBIENCE");
-	rainAmbience->setVolume(50);
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_RAINY");
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
@@ -37,6 +36,8 @@ void Day3IntroNoKill::reset() {
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 	(&sdlutils().images().at("Filter_White"))->setOpacity(60);
 	filter->setOpacity(80);
+	
+	rainAmbience->setVolume(50);
 
 	straightMovement->changeSpeed(5);
 	state = START;

@@ -10,15 +10,12 @@
 
 FirstDayAfterKillScene::FirstDayAfterKillScene() {
 	dialogues = GameManager::get()->getDialogueInfo("FirstDayAfterKill.json");
-	cont = 0;
-	state = INIT;
+	
 	nightMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
-	nightAmbience->setVolume(60);
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM");
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
-	filter->setOpacity(80);
 }
 
 void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
@@ -27,6 +24,7 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 
 void FirstDayAfterKillScene::reset() {
 	dialogueBox = nullptr;
+	cont = 0;
 
 	transform->setPos(Vector(576, 230));
 	transform->setMovState(idle);
@@ -36,9 +34,12 @@ void FirstDayAfterKillScene::reset() {
 	anim->setH(96 * 1.7);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 
+	nightAmbience->setVolume(60);
+	filter->setOpacity(80);
+
 	straightMovement->changeSpeed(3);
 	straightMovement->stop();
-	state = START;
+	state = INIT;
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, START_TIME);
