@@ -9,7 +9,7 @@
 #include "../../GameObjects/Dialogue.h"
 
 Day1IntroScene::Day1IntroScene() {
-	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
+	dialogues = GameManager::get()->getDialogueInfo("Day1Intro.json");
 	
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
@@ -19,10 +19,6 @@ Day1IntroScene::Day1IntroScene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	filter->setOpacity(80);
 	black = &sdlutils().images().at("Filter_Black");
-
-	anim->setW(48 * 1.7);
-	anim->setH(96 * 1.7);
-	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
 void Day1IntroScene::addPath(const vector<Vector>& points) {
@@ -32,6 +28,10 @@ void Day1IntroScene::addPath(const vector<Vector>& points) {
 void Day1IntroScene::reset() {
 	dialogueBox = nullptr;
 	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+
+	anim->setW(48 * 1.7);
+	anim->setH(96 * 1.7);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 
 	straightMovement->stop();
 	addPath(introPath[START]);

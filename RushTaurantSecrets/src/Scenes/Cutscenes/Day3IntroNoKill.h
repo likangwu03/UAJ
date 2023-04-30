@@ -7,8 +7,9 @@
 using namespace std;
 struct dialogueInfo;
 
-class IntroDay3ScareScene : public CinematicBaseScene
+class Day3IntroNoKill : public CinematicBaseScene
 {
+private:
 	int THUNDER_TIMER = 5;
 	const vector<Vector> playerPaths[2] = {
 	{Vector(40, 14), Vector(28, 14)},
@@ -36,18 +37,13 @@ class IntroDay3ScareScene : public CinematicBaseScene
 	Texture* black;
 	SoundEffect* rainAmbience;
 	Music* creepyMusic;
-	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
-
-private:
-	GameObject* player;
-	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
 
 public:
-	IntroDay3ScareScene();
+	Day3IntroNoKill();
 	void reset() override;
 	void renderCinematic() override;
 	void finishScene()override;

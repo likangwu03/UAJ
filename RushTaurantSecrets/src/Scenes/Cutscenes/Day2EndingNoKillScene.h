@@ -6,20 +6,23 @@
 using namespace std;
 struct dialogueInfo;
 
-class EndingDay2NoKillScene : public CinematicBaseScene {
+class Day2EndingNoKillScene : public CinematicBaseScene {
 private:
 	const int TURNAROUNDTIME = 500;
 	const Vector BOXPOS = Vector(150, 20);
 	const float BOXW = 700, LETTERFREQ = 0.01f * 1000;
 
-	const vector<Vector> paths[1] = {
-		{ Vector(19.5, 25), Vector(19.5, 15) }
+	const Animator::AnimParams AP = { 18,18,1 };
+
+	const vector<Vector> paths[2] = {
+		{ Vector(19.5, 25), Vector(19.5, 22) },
+		{ Vector(19.5, 21), Vector(19.5, 15) }
 	};
 
 	enum States {
 		START,
-		TURN1,
-		TURN2,
+		ENTERING,
+		TURN,
 		D1DELAY,
 		D1,
 		D2,
@@ -28,7 +31,6 @@ private:
 		NONE
 	};
 
-	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
 	
@@ -37,16 +39,13 @@ private:
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
 
-	GameObject* player;
-	StraightMovement* straightMovement;
-
 	vector<dialogueInfo> dialogues;
 	int timer;
 	int dialogueN;
 
 public:
-	EndingDay2NoKillScene();
-	void callAfterCreating() override;
+	Day2EndingNoKillScene();
+	void reset() override;
 	void renderCinematic () override;
 	void finishScene()override;
 	void update()override;

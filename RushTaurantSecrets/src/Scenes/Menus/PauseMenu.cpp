@@ -12,18 +12,18 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 	new Image(bg, image);
 
 	button = 0;
-	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->popScene();
 		});
 	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
-	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON2_HIGHLIGHT",
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height()*2 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
 		});
-	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON2_HIGHLIGHT",
+	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height()*3 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
@@ -56,13 +56,13 @@ void PauseMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDLK_UP)) {
+		if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_DOWN)) {
+		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

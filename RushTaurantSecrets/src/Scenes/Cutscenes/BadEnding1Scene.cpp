@@ -27,11 +27,8 @@ BadEnding1Scene::BadEnding1Scene() {
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
-
-
-	anim->setW(48 * RESIZEFACTOR);
-	anim->setH(96 * RESIZEFACTOR);
-
+	phonecall = &sdlutils().soundEffects().at("PHONECALL");
+	
 	client1 = new CinematicNPC(this, "Client_3", RelativeToGlobal::pointRestaurant({ 25, 14 }), 1);
 	straightMovementc1 = new StraightMovement(client1, 3);
 	client2 = new CinematicNPC(this, "Client_5", RelativeToGlobal::pointRestaurant({ 25, 15 }), 1);
@@ -52,20 +49,18 @@ void BadEnding1Scene::reset() {
 	transition = nullptr;
 	cont = 0;
 
-	phonecall = &sdlutils().soundEffects().at("PHONECALL");
+	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+	transform->setMovState(walking);
 
 	anim->setW(48 * RESIZEFACTOR);
 	anim->setH(96 * RESIZEFACTOR);
-	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-	transform->setMovState(walking);
-	straightMovement->stop();
 
 	auto tr = client1->getComponent<Transform>();
 	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 14 }));
 	tr = client2->getComponent<Transform>();
 	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 15 }));
 
-
+	straightMovement->stop();
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);

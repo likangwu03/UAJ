@@ -1,4 +1,4 @@
-#include "EndingDay1Scene.h"
+#include "Day1EndingScene.h"
 #include "ShowSkipTransitionScene.h"
 #include "../GameScenes/BeforeDayStartScene.h"
 
@@ -6,32 +6,31 @@
 #include "../../GameObjects/Dialogue.h"
 #include "../../Utilities/checkML.h"
 
-void EndingDay1Scene::addPath(const vector<Vector>& points)
+void Day1EndingScene::addPath(const vector<Vector>& points)
 {
 	straightMovement->addPath(RelativeToGlobal::pointsHouse(points));
 }
 
-EndingDay1Scene::EndingDay1Scene() {
-	dialogues = GameManager::get()->getDialogueInfo("EndingDay1.json");
+Day1EndingScene::Day1EndingScene() {
+	dialogues = GameManager::get()->getDialogueInfo("Day1Ending.json");
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL");
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	filter->setOpacity(80);
+}
 
+void Day1EndingScene::reset() {
+	dialogueBox = nullptr;
 
+	transform->setPos(RelativeToGlobal::pointHouse(Vector(12.5, 15)));
+	transform->setMovState(walking);
+	transform->setOrientation(north);
+	
 	anim->setH(96 * 1.3);
 	anim->setW(48 * 1.3);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 
-}
-
-void EndingDay1Scene::reset() {
-	dialogueBox = nullptr;
-	transform->setPos(RelativeToGlobal::pointHouse(Vector(12.5, 15)));
-	transform->setMovState(walking);
-	transform->setOrientation(north);
 	straightMovement->changeSpeed(3);
-
 	straightMovement->stop();
 	addPath(paths[START]);
 	state = START;
@@ -42,24 +41,24 @@ void EndingDay1Scene::reset() {
 	}
 }
 
-void EndingDay1Scene::renderCinematic() {
+void Day1EndingScene::renderCinematic() {
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	player->render();
 	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 }
 
-void EndingDay1Scene::update()
+void Day1EndingScene::update()
 {
 	CinematicBaseScene::update();
 	switch (state) {
-	case EndingDay1Scene::START:
+	case Day1EndingScene::START:
 		if (straightMovement->hasFinishedPath()) {
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 			addPath(paths[ENTERING]);
 			state = ENTERING;
 		}
 		break;
-	case EndingDay1Scene::ENTERING:
+	case Day1EndingScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 			transform->setOrientation(south);
@@ -67,20 +66,20 @@ void EndingDay1Scene::update()
 			state = D1;
 		}
 		break;
-	case EndingDay1Scene::D1:
+	case Day1EndingScene::D1:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
 			state = OUT;
 		}
 		break;
-	case EndingDay1Scene::OUT:
+	case Day1EndingScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
 			transition = new TransitionScene(this, 3, true, true);
 			GameManager::get()->pushScene(transition, true);
 		}
-	case EndingDay1Scene::NONE:
+	case Day1EndingScene::NONE:
 
 		break;
 
@@ -89,7 +88,7 @@ void EndingDay1Scene::update()
 
 
 
-void EndingDay1Scene::finishScene()
+void Day1EndingScene::finishScene()
 {
 	dialogueBox = nullptr;
 	if (transition != nullptr)

@@ -10,6 +10,7 @@ struct dialogueInfo;
 
 class BadEnding4Scene: public CinematicBaseScene
 {
+private:
 	const vector<Vector> BE4PathPlayer[1] = {
 		{Vector(20, 15), Vector(20, 12)}
 	};
@@ -25,16 +26,14 @@ class BadEnding4Scene: public CinematicBaseScene
 		NONE
 	};
 
-private:
-	GameObject* player;
+
 	GameObject* thief;
-	StraightMovement* straightMovement;
+
 	vector<dialogueInfo> dialogues;
 	Texture* bg;
 	States state;
 	void addPathPantry(const vector<Vector>& points);
 	vector<Vector> playerPoints;
-	Transform* transform;
 
 public:
 	BadEnding4Scene();

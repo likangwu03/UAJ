@@ -78,13 +78,13 @@ void MainMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDLK_UP)) {
+		if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_DOWN)) {
+		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

@@ -15,28 +15,27 @@ void Day2EndingKillScene::addPath(const vector<Vector>& points) {
 }
 
 Day2EndingKillScene::Day2EndingKillScene() {
-	dialogues = GameManager::get()->getDialogueInfo("EndingDay2Kill.json");
+	dialogues = GameManager::get()->getDialogueInfo("Day2EndingKill.json");
 
 	state = START;
 	bg = &sdlutils().images().at("CINEMATIC_BG_HOUSE");
 	black = &sdlutils().images().at("Filter_Black");
 	phonecall = &sdlutils().soundEffects().at("PHONECALL");
-
-	
-	anim->setW(48);
-	anim->setH(96);
-	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
 void Day2EndingKillScene::reset() {
 	dialogueBox = nullptr;
-	state = START;
 
 	transform->setPos(RelativeToGlobal::pointHouse({ 13, 14 }));
 	transform->setMovState(walking);
 
+	anim->setW(48);
+	anim->setH(96);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+
 	straightMovement->stop();
 	addPath(ENTERPATH);
+	state = START;
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);

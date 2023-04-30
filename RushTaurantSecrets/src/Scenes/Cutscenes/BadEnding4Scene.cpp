@@ -6,20 +6,25 @@
 BadEnding4Scene::BadEnding4Scene() {
 	dialogues = GameManager::get()->getDialogueInfo("BadEnding4.json");
 	bg = &sdlutils().images().at("CINEMATIC_BG_PANTRY");
-	player = new Player(this, 0);
-	player->getComponent<PlayerMovementController>()->setActive(false);
+
 	thief = new CinematicNPC(this, "Thief_2", RelativeToGlobal::pointPantry({ 19, 5 }), 1); // CAMBIAR
 	straightMovement = new StraightMovement(player, 5);
 
 	playerPoints = { {Vector(20, 15)} };
-	transform = player->getComponent<Transform>();
-	
 }
 
 void BadEnding4Scene::reset() {
 	dialogueBox = nullptr;
-	transform->setMovState(idle);
 	state = START;
+
+	//transform->setPos(RelativeToGlobal::pointsPantry({Vector(20, 15)}));
+	transform->setMovState(idle);
+
+	anim->setH(96 * 1.3);
+	anim->setW(48 * 1.3);
+
+	straightMovement->changeSpeed(6);
+	straightMovement->stop();
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);

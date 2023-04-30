@@ -9,7 +9,7 @@
 #include "../../GameObjects/Dialogue.h"
 
 FirstDayAfterKillScene::FirstDayAfterKillScene() {
-	dialogues = GameManager::get()->getDialogueInfo("ConversationDay3Kill.json");
+	dialogues = GameManager::get()->getDialogueInfo("FirstDayAfterKill.json");
 	cont = 0;
 	state = INIT;
 	nightMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
@@ -19,12 +19,6 @@ FirstDayAfterKillScene::FirstDayAfterKillScene() {
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	filter->setOpacity(80);
-
-
-	straightMovement->changeSpeed(3);
-	anim->setW(48 * 1.7);
-	anim->setH(96 * 1.7);
-	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
 void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
@@ -33,10 +27,16 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 
 void FirstDayAfterKillScene::reset() {
 	dialogueBox = nullptr;
+
 	transform->setPos(Vector(576, 230));
 	transform->setMovState(idle);
 	transform->setOrientation(north);
 
+	anim->setW(48 * 1.7);
+	anim->setH(96 * 1.7);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+
+	straightMovement->changeSpeed(3);
 	straightMovement->stop();
 	state = START;
 

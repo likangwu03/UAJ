@@ -6,7 +6,7 @@
 
 struct dialogueInfo;
 class TransitionScene;
-class EndingDay1Scene : public CinematicBaseScene
+class Day1EndingScene : public CinematicBaseScene
 {
 private:
 	const vector<Vector> paths[2] = {
@@ -33,7 +33,7 @@ private:
 	vector<Vector> playerPoints;
 
 public:
-	EndingDay1Scene();
+	Day1EndingScene();
 	void reset() override;
 	void renderCinematic() override;
 	void finishScene()override;
