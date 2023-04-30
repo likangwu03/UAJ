@@ -2,8 +2,18 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "What have I done!? What are mom and dad going to think of me? I'm sure they'll get angry, but it's not like I can lie to them. That would disappoint them. I'm sure they'll understand I'm doing this for them.",
-      "Portrait": "PROTA_CASUAL_SIGH"
+      "Text": "What have I done!? What are mom and dad going to think of me?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I'm sure they'll get angry, but it's not like I can lie to them.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "That would disappoint them. I'm sure they'll understand I'm doing this for them.",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
     },
     {
       "Character": "Phone",
@@ -12,7 +22,17 @@
     },
     {
       "Character": "Rival",
-      "Text": "One of my employees hasn't come back yet. I don't know what you've done with him, but I'll make sure you pay the price if you've hurt him. Watch your step, you will not be safe in that 'restaurant' of yours.",
+      "Text": "One of my employees hasn't come back yet.",
+      "Portrait": "OWNER"
+    },
+    {
+      "Character": "Rival",
+      "Text": "I don't know what you've done with him, but I'll make sure you pay the price if you've hurt him.",
+      "Portrait": "OWNER"
+    },
+    {
+      "Character": "Rival",
+      "Text": "Watch your step, you will not be safe in that 'restaurant' of yours.",
       "Portrait": "OWNER"
     }
   ]

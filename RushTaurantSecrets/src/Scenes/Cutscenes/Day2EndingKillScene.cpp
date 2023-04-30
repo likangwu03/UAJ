@@ -1,4 +1,4 @@
-#include "Day2KillEndingScene.h"
+#include "Day2EndingKillScene.h"
 
 #include "../Menus/MainMenu.h"
 #include "../../Utilities/checkML.h"
@@ -10,40 +10,33 @@
 #include "../../GameObjects/Dialogue.h"
 
 
-void Day2KillEndingScene::addPath(const vector<Vector>& points) {
+void Day2EndingKillScene::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsHouse(points));
 }
 
-Day2KillEndingScene::Day2KillEndingScene() {
+Day2EndingKillScene::Day2EndingKillScene() {
 	dialogues = GameManager::get()->getDialogueInfo("EndingDay2Kill.json");
-	enterPoints = { {Vector(13, 6)} };
-	phonePoints = { {Vector(13, 13)}, {Vector(12, 13)} };
 
 	state = START;
 	bg = &sdlutils().images().at("CINEMATIC_BG_HOUSE");
 	black = &sdlutils().images().at("Filter_Black");
 	phonecall = &sdlutils().soundEffects().at("PHONECALL");
 
-	player = new Player(this, 0);
-	player->getComponent<PlayerMovementController>()->setActive(false);
-	straightMovement = new StraightMovement(player, 5);
-
-	transform = player->getComponent<Transform>();
-
-	auto anim = player->getComponent<CharacterAnimator>();
-	anim->setH(96);
+	
 	anim->setW(48);
-	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(18);
+	anim->setH(96);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
-void Day2KillEndingScene::reset() {
+void Day2EndingKillScene::reset() {
 	dialogueBox = nullptr;
 	state = START;
 
 	transform->setPos(RelativeToGlobal::pointHouse({ 13, 14 }));
 	transform->setMovState(walking);
-	addPath(enterPoints);
+
+	straightMovement->stop();
+	addPath(ENTERPATH);
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
@@ -51,14 +44,13 @@ void Day2KillEndingScene::reset() {
 	}
 }
 
-void Day2KillEndingScene::renderCinematic()
+void Day2EndingKillScene::renderCinematic()
 {
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	player->render();
 }
 
-void Day2KillEndingScene::finishScene()
-{
+void Day2EndingKillScene::finishScene() {
 	black->setOpacity(100);
 	black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
 	if (transition != nullptr)
@@ -66,62 +58,83 @@ void Day2KillEndingScene::finishScene()
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
 }
 
-void Day2KillEndingScene::update()
+void Day2EndingKillScene::update()
 {
 	CinematicBaseScene::update();
 	switch (state)
 	{
-	case Day2KillEndingScene::START:
+	case Day2EndingKillScene::START:
 		//transform->setOrientation(north);
 		(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 		state = D1;
 		break;
-	case Day2KillEndingScene::D1:
+	case Day2EndingKillScene::D1:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
+			state = D2;
+		}
+		break;
+	case Day2EndingKillScene::D2:
+		if (Text::isTextFinished()) {
+			transform->setMovState(idle);
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
+			state = D3;
+		}
+		break;
+	case Day2EndingKillScene::D3:
+		if (Text::isTextFinished()) {
+			transform->setMovState(idle);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text);
 			state = PHONE;
 		}
 		break;
-	case Day2KillEndingScene::PHONE:
+	case Day2EndingKillScene::PHONE:
 		if (Text::isTextFinished()) {
 			phonecall->play(-1);
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox = new Dialogue(this, Vector(150, 570), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text);
 			cont = 0;
 			state = PATHING;
 		}
 		break; 
-	case Day2KillEndingScene::PATHING:
+	case Day2EndingKillScene::PATHING:
 		cont += frameTime;
 		if (cont > START_TIME * 1000) {
-			addPath(phonePoints);
-			state = D2;
+			addPath(PHONEPATH);
+			state = D4;
 		}
 		break;
-	case Day2KillEndingScene::D2:
+	case Day2EndingKillScene::D4:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 			if (Text::isTextFinished()) {
 				phonecall->haltChannel();
-				dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-					font, dialogues[2].portrait, dialogues[2].text);
-				state = OUT;
+				dialogueBox = new Dialogue(this, Vector(150, 570), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text);
+				state = D5;
 			}
 		}
 		break;
-	case Day2KillEndingScene::OUT:
+	case Day2EndingKillScene::D5:
+		if (Text::isTextFinished()) {
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text);
+			state = D6;
+		}
+		break;
+	case Day2EndingKillScene::D6:
+		if (Text::isTextFinished()) {
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text);
+			state = OUT;
+		}
+		break;
+	case Day2EndingKillScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			if (transition != nullptr)
-				delete transition;
 			transition = new TransitionScene(this, 3, true, true);
 			GameManager::get()->pushScene(transition, true);
 		}
 		break;
-	case Day2KillEndingScene::NONE:
+	case Day2EndingKillScene::NONE:
 		break;
 	}
 }

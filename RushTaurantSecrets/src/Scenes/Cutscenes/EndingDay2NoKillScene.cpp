@@ -19,14 +19,9 @@ EndingDay2NoKillScene::EndingDay2NoKillScene() {
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
 	nightAmbience->setVolume(60);
 
-	player = new GameObject(this);
-	transform = new Transform(player, Vector(0, 0), 0, 48, 96, 0);
-	straightMovement = new StraightMovement(player, 7);
-
-	auto anim = new CharacterAnimator(player, &sdlutils().images().at("Player_1"), AP);
-	anim->setH(96 * 1.4);
-	anim->setW(48 * 1.4);
-	anim->setframeRate(10);
+	straightMovement->changeSpeed(6);
+	anim->setH(96 * 1.3);
+	anim->setW(48 * 1.3);
 }
 
 void EndingDay2NoKillScene::addPath(const vector<Vector>& points) {
@@ -38,12 +33,15 @@ void EndingDay2NoKillScene::reset() {
 	state = START;
 	timer = 0;
 	dialogueN = 0;
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(19.5, 20)));
+	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(19.5, 25)));
 	transform->setMovState(walking);
 	transform->setOrientation(north);
 
 	nightAmbience->play(-1);
 	nightMusic->play(-1);
+
+	straightMovement->stop();
+	addPath(paths[START]);
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
@@ -55,21 +53,24 @@ void EndingDay2NoKillScene::update() {
 	CinematicBaseScene::update();
 	switch (state) {
 	case EndingDay2NoKillScene::START:
-		addPath(paths[START]);
-		state = TURN1;
+		if (straightMovement->hasFinishedPath()) {
+			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
+			addPath(paths[ENTERING]);
+			state = ENTERING;
+		}
 		break;
-	case EndingDay2NoKillScene::TURN1:
+	case EndingDay2NoKillScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 			if (timer >= TURNAROUNDTIME) {
 				transform->setOrientation(west);
-				state = TURN2;
+				state = TURN;
 				timer = 0;
 			}
 			else timer += frameTime;
 		}
 		break;
-	case EndingDay2NoKillScene::TURN2:
+	case EndingDay2NoKillScene::TURN:
 		if (timer >= TURNAROUNDTIME) {
 			transform->setOrientation(south);
 			state = D1DELAY;

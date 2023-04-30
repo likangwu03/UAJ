@@ -3,53 +3,41 @@
 #include "../../GameObjects/Player.h"
 #include "../../Components/StraightMovement.h"
 #include <vector>
+
 using namespace std;
 struct dialogueInfo;
-class IntroScene : public CinematicBaseScene
-{
-	const vector<Vector> introPath[2] = {
-		{Vector(40, 14), Vector(28, 14)},
-		{Vector(18, 14),Vector(18,10)}
-	};
-
+class Day2EndingKillScene : public CinematicBaseScene {
+private:
 	enum States {
-		START, 
-		ENTERING,//sonido puerta
-		ARRIVE,//1
+		START,
 		D1,
 		D2,
-		D3, 
-		D31,
+		D3,
+		PHONE,
+		PATHING,
 		D4,
 		D5,
-		D51,
 		D6,
 		OUT,
-		D71,
-		D72,
-		WAITD7,
 		NONE
 	};
 	Texture* bg;
-	Texture* filter;
-	Texture* top;
 	Texture* black;
-	SoundEffect* nightAmbience;
-	Music* nightMusic;
-	Transform* transform;
+	SoundEffect* phonecall;
+
 	void addPath(const vector<Vector>& points);
 	States state;
-	
-private:
-	GameObject* player;
-	StraightMovement* straightMovement;
+
+	const int START_TIME = 3;
 
 	vector<dialogueInfo> dialogues;
+	const vector<Vector> ENTERPATH = { {Vector(13, 6)} };
+	const vector<Vector> PHONEPATH = { {Vector(13, 12.7)}, {Vector(11.5, 12.7)} };
 
 public:
-	IntroScene();
+	Day2EndingKillScene();
 	void reset() override;
-	void renderCinematic () override;
+	void renderCinematic() override;
 	void finishScene()override;
 	void update()override;
 };

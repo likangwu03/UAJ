@@ -18,22 +18,21 @@ EndingDay1Scene::EndingDay1Scene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	filter->setOpacity(80);
 
-	player = new Player(this, 0);
-	straightMovement = new StraightMovement(player, 3);
-	player->getComponent<PlayerMovementController>()->setActive(false);
 
-	transform = player->getComponent<Transform>();
-	auto anim = player->getComponent<CharacterAnimator>();
-	anim->setH(96 * 1.4);
-	anim->setW(48 * 1.4);
-	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(10);
+	anim->setH(96 * 1.3);
+	anim->setW(48 * 1.3);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+
 }
 
 void EndingDay1Scene::reset() {
-	transform->setPos(RelativeToGlobal::pointHouse(Vector(12, 13)));
+	dialogueBox = nullptr;
+	transform->setPos(RelativeToGlobal::pointHouse(Vector(12.5, 15)));
 	transform->setMovState(walking);
 	transform->setOrientation(north);
+	straightMovement->changeSpeed(3);
+
+	straightMovement->stop();
 	addPath(paths[START]);
 	state = START;
 
@@ -55,9 +54,16 @@ void EndingDay1Scene::update()
 	switch (state) {
 	case EndingDay1Scene::START:
 		if (straightMovement->hasFinishedPath()) {
+			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
+			addPath(paths[ENTERING]);
+			state = ENTERING;
+		}
+		break;
+	case EndingDay1Scene::ENTERING:
+		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 			transform->setOrientation(south);
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}
 		break;
@@ -71,8 +77,6 @@ void EndingDay1Scene::update()
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = NONE;
-			if (transition != nullptr)
-				delete transition;
 			transition = new TransitionScene(this, 3, true, true);
 			GameManager::get()->pushScene(transition, true);
 		}

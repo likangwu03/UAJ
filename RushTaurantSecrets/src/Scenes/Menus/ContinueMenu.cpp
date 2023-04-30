@@ -4,7 +4,7 @@
 #include "../../Components/Transform.h"
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
-#include "../Cutscenes/IntroScene.h"
+#include "../Cutscenes/Day1IntroScene.h"
 #include "../../Utilities/checkML.h"
 
 
@@ -33,7 +33,6 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->load();
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 		});
 	button = 0;
 }

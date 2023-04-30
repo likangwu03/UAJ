@@ -13,7 +13,7 @@
 #include "../../Components/Transform.h"
 #include "../../Components/Image.h"
 #include "../GameScenes/BeforeDayStartScene.h"
-#include "../Cutscenes/IntroScene.h"
+#include "../Cutscenes/Day1IntroScene.h"
 #include "../../Structure/GameObject.h"
 //#include "FirstDayAfterKillScene.h"
 

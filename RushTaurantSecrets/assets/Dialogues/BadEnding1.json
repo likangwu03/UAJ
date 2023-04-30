@@ -62,7 +62,12 @@
     },
     {
       "Character": "Rival",
-      "Text": "Somebody told me your restaurant sucks. People who try eating there never come twice, and your reputation is just getting worse.",
+      "Text": "Somebody told me your restaurant sucks.",
+      "Portrait": "OWNER"
+    },
+    {
+      "Character": "Rival",
+      "Text": "People who try eating there never come twice, and your reputation is just getting worse.",
       "Portrait": "OWNER"
     },
     {

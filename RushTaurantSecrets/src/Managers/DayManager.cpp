@@ -84,57 +84,65 @@ void DayManager::newDay() {
 	nextDay();
 }
 
-void DayManager::nextDay() {
-	// Activar final, ya que no hay más días
-	if (day > maxDays) {
-		// Normal ending (si ha superado todos los días y ha matado)
-		if (GameManager::get()->getHasEverKilled().first) {
-		
+void DayManager::nextDay(bool loading) {
+	if (!loading) {
+		// Activar final, ya que no hay más días
+		if (day > maxDays) {
+			// Normal ending (si ha superado todos los días y ha matado)
+			if (GameManager::get()->getHasEverKilled().first) {
+
+			}
+			// Happy ending
+			else {
+
+			}
+			return;
 		}
-		// Happy ending
+		// Bad ending 1
+		else if (GameManager::get()->getReputation()->getReputation() < 0) {
+			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
+		}
+		// Bad ending 2
+		// else if (){
+
+		// }
+		// Bad ending 3
+		// else if (){
+
+		// }
+		// Bad ending 4
+		// else if (){
+
+		// }
+		// Final día 1 (en la propia escena del final del día 1 se pasa a la intro del día 2)
+		else if (day == 1) {
+			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_ENDINGDAY1), true);
+		}
+		// Finales de día si ha matado
+		else if (GameManager::get()->getHasEverKilled().first) {
+			// Escena inicial tras el primer día de haber matado
+			if (day - GameManager::get()->getHasEverKilled().second == 0) {
+				GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_FIRSTDAYAFTERKILL), true);
+			}
+			// Escena inicial tras el segundo día de haber matado
+			else if (day - GameManager::get()->getHasEverKilled().second == 1) {
+				GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SECONDDAYAFTERKILL), true);
+			}
+		}
+		// Finales de día si no ha matado
 		else {
+			// Escena final del día 2 si no ha matado (en la propia escena se pasa a la intro del día 3 si no se ha matado)
+			if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
+			else if (day > 0 && day != 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 
 		}
-		return;
 	}
-	// Bad ending 1
-	else if (GameManager::get()->getReputation()->getReputation() < 0) {
-		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
-	}
-	// Bad ending 2
-	// else if (){
-
-	// }
-	// Bad ending 3
-	// else if (){
-
-	// }
-	// Bad ending 4
-	// else if (){
-
-	// }
-	// Final día 1 (en la propia escena del final del día 1 se pasa a la intro del día 2)
-	else if (day == 1) {
-		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_ENDINGDAY1), true);
-	}
-	// Finales de día si ha matado
-	else if (GameManager::get()->getHasEverKilled().first) {
-		// Escena inicial tras el primer día de haber matado
-		if (day - GameManager::get()->getHasEverKilled().second == 0) {
-			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_FIRSTDAYAFTERKILL), true);
-		}
-		// Escena inicial tras el segundo día de haber matado
-		else if (day - GameManager::get()->getHasEverKilled().second == 1) {
-			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SECONDDAYAFTERKILL), true);
-		}
-	}
-	// Finales de día si no ha matado
 	else {
-		// Escena final del día 2 si no ha matado (en la propia escena se pasa a la intro del día 3 si no se ha matado)
-		if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
-		else if (day > 0 && day != 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
-
+		if (day == 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
+		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
+		else if (day == 3) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3));
 	}
+	
 
 	day++;
 	if (day > 0)
@@ -172,7 +180,7 @@ void DayManager::nextDay() {
 
 }
 
-void DayManager::setDay(int x) {
+void DayManager::setDay(int x, bool loading) {
 	if (file.is_open()) file.close();
 
 	file.open("assets/dayConfig.rsdat");
@@ -186,7 +194,7 @@ void DayManager::setDay(int x) {
 		}
 	}
 	day = x - 1;
-	nextDay();
+	nextDay(loading);
 }
 
 int DayManager::getDay() { return day; }

@@ -1,4 +1,4 @@
-#include "IntroScene.h"
+#include "Day1IntroScene.h"
 #include "../Menus/MainMenu.h"
 #include "../../Utilities/checkML.h"
 #include "../GameScenes/BeforeDayStartScene.h"
@@ -8,7 +8,7 @@
 #include "../../Structure/GameManager.h"
 #include "../../GameObjects/Dialogue.h"
 
-IntroScene::IntroScene() {
+Day1IntroScene::Day1IntroScene() {
 	dialogues = GameManager::get()->getDialogueInfo("Intro.json");
 	
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
@@ -20,46 +20,20 @@ IntroScene::IntroScene() {
 	filter->setOpacity(80);
 	black = &sdlutils().images().at("Filter_Black");
 
-	player = new GameObject(this, _ecs::grp_PLAYER);
-	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(50, 14)), Vector(0, 0), WIDTH, HEIGHT);
-	//player = new Player(this, 0);
-	straightMovement = new StraightMovement(player, 5);
-	//player->getComponent<PlayerMovementController>()->setActive(false);
-
-	/*
-	transform = player->getComponent<Transform>();
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
-	transform->setPos(Vector(1658, 772));
-	transform->setMovState(walking);
-	*/
-
-	Animator::AnimParams ap;
-	ap.initFrame = 18;
-	ap.endFrame = 10;
-	ap.currAnim = 1;
-	ap.width = 48 * 1.8;
-	ap.height = 96 * 1.8;
-	ap.frameRate = 10;
-	auto anim = new CharacterAnimator(player, "Player_Casual", ap);
-	
-	/*
-	auto anim = player->getComponent<CharacterAnimator>();
-	anim->setH(96 * 1.8);
-	anim->setW(48 * 1.8);
-	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(10);
-	*/
-
+	anim->setW(48 * 1.7);
+	anim->setH(96 * 1.7);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
-void IntroScene::addPath(const vector<Vector>& points) {
+void Day1IntroScene::addPath(const vector<Vector>& points) {
 	straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-void IntroScene::reset() {
+void Day1IntroScene::reset() {
 	dialogueBox = nullptr;
 	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
 
+	straightMovement->stop();
 	addPath(introPath[START]);
 	state = START;
 
@@ -69,78 +43,78 @@ void IntroScene::reset() {
 	}
 }
 
-void IntroScene::update() {
+void Day1IntroScene::update() {
 	CinematicBaseScene::update();
 	switch (state)
 	{
-	case IntroScene::START:
+	case Day1IntroScene::START:
 		nightAmbience->play(-1);
 		nightMusic->play(-1);
 		state = ENTERING;
 		break;
-	case IntroScene::ENTERING:
+	case Day1IntroScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
 			addPath(introPath[ENTERING]);
 			state = ARRIVE;
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 		}
 		break;
-	case IntroScene::ARRIVE:
+	case Day1IntroScene::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}
 		break;
-	case IntroScene::D1:
+	case Day1IntroScene::D1:
 		if (Text::isTextFinished()) {
 			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
 			state = D2;
 		}
 		break;
-	case IntroScene::D2:
+	case Day1IntroScene::D2:
 		if (Text::isTextFinished()) {
 			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text);
 			state = D3;
 		}
 		break;
-	case IntroScene::D3:
+	case Day1IntroScene::D3:
 		if (Text::isTextFinished()) {
 			dialogueBox= new Dialogue(this, Vector(150,430), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text);
 			state = D31;
 		}
 		break;
-	case IntroScene::D31:
+	case Day1IntroScene::D31:
 		if (Text::isTextFinished()) {
 			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text);
 			state = D4;
 		}
 		break;
-	case IntroScene::D4:
+	case Day1IntroScene::D4:
 		if (Text::isTextFinished()) {
 			dialogueBox=new Dialogue(this, Vector(150, 440), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text);
 			state = D5;
 		}
 		break;
-	case IntroScene::D5:
+	case Day1IntroScene::D5:
 		if (Text::isTextFinished()) {
  			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text);
 			state = D51;
 		}
 		break;
-	case IntroScene::D51:
+	case Day1IntroScene::D51:
 		if (Text::isTextFinished()) {
 			dialogueBox=new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[7].portrait, dialogues[7].text);
 			state = D6;
 		}
 		break;
-	case IntroScene::D6:
+	case Day1IntroScene::D6:
 		if (Text::isTextFinished()) {
 			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[8].portrait, dialogues[8].text);
 			state = OUT;
 		}
 		break;
-	case IntroScene::OUT:
+	case Day1IntroScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			state = D71;
@@ -148,20 +122,20 @@ void IntroScene::update() {
 			GameManager::get()->pushScene(transition, true);
 		}
 		break;
-	case IntroScene::D71:
+	case Day1IntroScene::D71:
 		if (Text::isTextFinished() && GameManager::get()->getCurrentScene() != transition) {
 			dialogueBox = new Dialogue(this, Vector(150, 400), 700, 0.01 * 1000, font, dialogues[9].portrait, dialogues[9].text);
 			state = D72;
 		}
 		break;
-	case IntroScene::D72:
+	case Day1IntroScene::D72:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[10].portrait, dialogues[10].text);
 			state = WAITD7;
 		}
 		break;
-	case IntroScene::WAITD7:
+	case Day1IntroScene::WAITD7:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			transition = new TransitionScene(this, 1, true, true);
@@ -170,7 +144,7 @@ void IntroScene::update() {
 		}
 		break;
 
-	case IntroScene::NONE:
+	case Day1IntroScene::NONE:
 		
 		break;
 	
@@ -178,7 +152,7 @@ void IntroScene::update() {
 	
 }
 
-void IntroScene::renderCinematic() {
+void Day1IntroScene::renderCinematic() {
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	player->render();
 	top->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
@@ -191,7 +165,7 @@ void IntroScene::renderCinematic() {
 }
 
 
-void IntroScene::finishScene() {
+void Day1IntroScene::finishScene() {
 	black->setOpacity(100);
 	black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
 	if(transition != nullptr)

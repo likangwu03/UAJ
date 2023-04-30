@@ -23,13 +23,13 @@
 #include "../Scenes/Menus/CoopMenu.h"
 
 #include "../Scenes/TransitionScene.h"
-#include "../Scenes/Cutscenes/IntroScene.h"
+#include "../Scenes/Cutscenes/Day1IntroScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
 #include "../Scenes/Cutscenes/BadEnding4Scene.h"
 #include "../Scenes/Cutscenes/EndingDay2NoKillScene.h"
-#include "../Scenes/Cutscenes/Day2KillEndingScene.h"
+#include "../Scenes/Cutscenes/Day2EndingKillScene.h"
 #include "../Scenes/Cutscenes/EndingDay1Scene.h"
 
 #include <sstream>
@@ -86,17 +86,17 @@ void GameManager::initialize() {
 	
 	days->nextDay();
 
-	allScenes.insert({ _ecs::sc_INTRO1, new IntroScene() });
+	allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY1, new EndingDay1Scene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new EndingDay2NoKillScene() });
-	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2KillEndingScene() });
+	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2EndingKillScene() });
 	allScenes.insert({ _ecs::sc_FIRSTDAYAFTERKILL, new FirstDayAfterKillScene() });
 	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });
 	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });
 
-
-	changeScene(allScenes.at(_ecs::sc_MAINMENU));
+	changeScene(allScenes.at(_ecs::sc_BADENDING1));
+	resetScenes();
 }
 
 GameManager::~GameManager() {
@@ -253,7 +253,7 @@ void GameManager::load() {
 	load.open(file.str());
 	if (!load.is_open()) {}
 	load >> aux;
-	days->setDay(aux);
+	days->setDay(aux, true);
 
 	load >> aux;
 	money->addMoney(aux - money->getMoney());
@@ -263,8 +263,6 @@ void GameManager::load() {
 	hasKilled = aux;
 	load >> killedNum;
 	load.close();
-
-	resetScenes();
 }
 
 bool GameManager::checkload() {

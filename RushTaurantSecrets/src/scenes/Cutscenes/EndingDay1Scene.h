@@ -8,12 +8,15 @@ struct dialogueInfo;
 class TransitionScene;
 class EndingDay1Scene : public CinematicBaseScene
 {
-	const vector<Vector> paths[1] = {
-		{ Vector(12,13), Vector(12, 5) }
+private:
+	const vector<Vector> paths[2] = {
+		{ Vector(12.5,14), Vector(12.5,14) },
+		{ Vector(12.5,12), Vector(12.5, 5) }
 	};
 
 	enum States {
 		START,
+		ENTERING,
 		D1,
 		OUT,
 		NONE
@@ -22,12 +25,9 @@ class EndingDay1Scene : public CinematicBaseScene
 	Texture* bg;
 	Texture* filter;
 	Texture* top;
-	Transform* transform;
+	
 	void addPath(const vector<Vector>& points);
 	States state;
-private:
-	GameObject* player;
-	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
 	vector<Vector> playerPoints;

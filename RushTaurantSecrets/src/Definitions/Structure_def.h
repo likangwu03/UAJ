@@ -110,6 +110,7 @@ namespace _ecs {
 		sc_INTRO1,
 		sc_INTRO2,
 		sc_INTRO3,
+
 		sc_ENDINGDAY1,
 		sc_ENDINGDAY2KILL,
 		sc_ENDINGDAY2NOKILL,

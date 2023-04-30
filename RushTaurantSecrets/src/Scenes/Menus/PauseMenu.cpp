@@ -26,7 +26,7 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.8 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&]() {
-			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU), true);
+			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
 		});
 
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
