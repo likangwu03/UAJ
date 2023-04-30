@@ -17,7 +17,7 @@ Day3IntroNoKill::Day3IntroNoKill() {
 	dialogues = GameManager::get()->getDialogueInfo("Day3IntroNoKill.json");
 
 	creepyMusic = &sdlutils().musics().at("ATMOSPHERE_CREEPY_MUSIC");
-	rainAmbience = &sdlutils().soundEffects().at("RAIN_AMBIENCE");
+	rainAmbience = &sdlutils().soundEffects().at("THUNDERSTORM");
 	bg = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_RAINY");
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
@@ -28,23 +28,20 @@ void Day3IntroNoKill::reset() {
 	dialogueBox = nullptr;
 
 	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
-	transform->setMovState(walking);
-	transform->setOrientation(north);
 
 	anim->setH(96 * 1.7);
 	anim->setW(48 * 1.7);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
-	(&sdlutils().images().at("Filter_White"))->setOpacity(60);
-	filter->setOpacity(80);
 	
+	filter->setOpacity(80);
 	rainAmbience->setVolume(50);
 
 	straightMovement->changeSpeed(5);
+	addPath(playerPaths[START]);
 	state = START;
 	cont = 0;
 
 	straightMovement->stop();
-	addPath(playerPaths[START]);
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
@@ -74,12 +71,6 @@ void Day3IntroNoKill::finishScene()
 void Day3IntroNoKill::update()
 {
 	CinematicBaseScene::update();
-	cont += frameTime;
-	if (cont >= THUNDER_TIMER * 1000) {
-		(&sdlutils().soundEffects().at("THUNDER"))->play();
-		THUNDER_TIMER = sdlutils().rand().nextInt(20, 30);
-		cont = 0;
-	}
 	switch (state)
 	{
 	case Day3IntroNoKill::START:
@@ -138,6 +129,12 @@ void Day3IntroNoKill::update()
 		}
 		break;
 	case Day3IntroNoKill::D6:
+		if (Text::isTextFinished()) {
+			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
+				font, dialogues[6].portrait, dialogues[6].text);
+			state = D7;
+		}
+		break;	case Day3IntroNoKill::D7:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[6].portrait, dialogues[6].text);

@@ -1153,12 +1153,12 @@
       "file": "assets/Sound/cinematic/smartphone_vibrating.mp3"
     },
     {
-      "id": "RAIN_AMBIENCE",
-      "file": "assets/Sound/cinematic/rain.mp3"
+      "id": "TELEPHONE",
+      "file": "assets/Sound/cinematic/telephone_ring.mp3"
     },
     {
-      "id": "THUNDER",
-      "file": "assets/Sound/cinematic/thunder.mp3"
+      "id": "THUNDERSTORM",
+      "file": "assets/Sound/cinematic/thunderstorm.mp3"
     }
 
   ],

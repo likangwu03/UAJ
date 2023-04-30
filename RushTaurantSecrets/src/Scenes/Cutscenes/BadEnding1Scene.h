@@ -21,6 +21,7 @@ private:
 		D2,
 		RESTAURANT_FADEOUT,
 		BEDROOM_FADEIN,
+		PHONECALL,
 		D3,
 		D4,
 		D5,
@@ -55,10 +56,9 @@ private:
 	Texture* bg;
 	Texture* filter;
 	Texture* top;
-	SoundEffect* nightAmbience;
 	SoundEffect* phonecall;
 
-	Music* nightMusic;
+	Music* dramaticMusic;
 	void addPath(const vector<Vector>& points);
 	States state;
 	const float START_TIME = 3;

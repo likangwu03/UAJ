@@ -2,8 +2,13 @@
   "dialogues": [
     {
       "Character": "Player",
-      "Text": "Mom, dad, today was a tough day. Our rivals have threatened me. I wanted to hurt them so badly, but I held back, for you. I promised I would never hurt anyone or anything again.",
+      "Text": "Mom, dad, today was a tough day. Our rivals have threatened me.",
       "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "I wanted to hurt them so badly, but I held back, for you. I promised I would never hurt anyone or anything again.",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Parents",

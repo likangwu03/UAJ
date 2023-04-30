@@ -88,7 +88,7 @@ void GameManager::initialize() {
 	days->nextDay();
 
 	allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });
-	allScenes.insert({ _ecs::sc_INTRO3NOKILL , new Day3IntroNoKill() });
+	allScenes.insert({ _ecs::sc_INTRO3NOKILL, new Day3IntroNoKill() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY1, new Day1EndingScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new Day2EndingNoKillScene() });
 	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2EndingKillScene() });

@@ -27,6 +27,7 @@ private:
 		D5,
 		D6,
 		D7,
+		D8,
 		OUT,
 		NONE
 	};

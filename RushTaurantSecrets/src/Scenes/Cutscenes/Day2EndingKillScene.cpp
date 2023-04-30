@@ -20,7 +20,7 @@ Day2EndingKillScene::Day2EndingKillScene() {
 	state = START;
 	bg = &sdlutils().images().at("CINEMATIC_BG_HOUSE");
 	black = &sdlutils().images().at("Filter_Black");
-	phonecall = &sdlutils().soundEffects().at("PHONECALL");
+	phonecall = &sdlutils().soundEffects().at("TELEPHONE");
 }
 
 void Day2EndingKillScene::reset() {
