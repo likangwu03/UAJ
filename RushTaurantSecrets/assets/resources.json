@@ -387,10 +387,15 @@
       "file": "assets/Sprites/Restaurant/freezer3.png"
     },
     {
-      "id": "Heart",
+      "id": "HEART",
       "file": "assets/Sprites/UI/HUD/heart.png"
     },
-
+    {
+      "id": "HEARTS",
+      "file": "assets/Sprites/UI/HUD/hearts2.png",
+      "cols": 14,
+      "rows": 1
+    },
     {
       "id": "SHOP_MENU",
       "file": "assets/Sprites/UI/HUD/shoppingMenu.png",

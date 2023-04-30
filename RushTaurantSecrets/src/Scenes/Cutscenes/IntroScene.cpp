@@ -22,17 +22,8 @@ IntroScene::IntroScene() {
 	black = &sdlutils().images().at("Filter_Black");
 
 	player = new GameObject(this, _ecs::grp_PLAYER);
-	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(50, 14)), Vector(0, 0), WIDTH, HEIGHT);
-	//player = new Player(this, 0);
+	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(50, 14)), Vector(0, 0), 48, 96);
 	straightMovement = new StraightMovement(player, 5);
-	//player->getComponent<PlayerMovementController>()->setActive(false);
-
-	/*
-	transform = player->getComponent<Transform>();
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
-	transform->setPos(Vector(1658, 772));
-	transform->setMovState(walking);
-	*/
 
 	Animator::AnimParams ap;
 	ap.initFrame = 18;
@@ -42,14 +33,6 @@ IntroScene::IntroScene() {
 	ap.height = 96 * 1.8;
 	ap.frameRate = 10;
 	auto anim = new CharacterAnimator(player, "Player_Casual", ap);
-	
-	/*
-	auto anim = player->getComponent<CharacterAnimator>();
-	anim->setH(96 * 1.8);
-	anim->setW(48 * 1.8);
-	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(10);
-	*/
 
 	addPath(introPath[START]);
 }

@@ -25,9 +25,7 @@ class Client : public GameObject {
 	const int UI_CURR_ANIM = 0;
 	const int UI_FRAME_RATE = 80;
 
-	const int HEART_WIDTH = 15;
-	const int HEART_HEIGHT = 15;
-	const int HEART_OFFSET_X = -7;
+	const int HEART_SIZE = 25;
 	const int HEART_OFFSET_Y = 20;
 
 public:
@@ -57,6 +55,6 @@ public:
 		// se guarda en clientMovement la referencia a ClientState
 		mov->initState();
 		new ClientTrigger(this, Vector(0, 0), CHAR_WIDTH, CHAR_HEIGHT);
-		new HeartRender(this, &sdlutils().images().at("Heart"), HEART_WIDTH, HEART_HEIGHT, HEART_OFFSET_X, HEART_OFFSET_Y);
+		new HeartRender(this, &sdlutils().images().at("HEARTS"), HEART_SIZE, HEART_SIZE, HEART_OFFSET_Y);
 	}
 };
