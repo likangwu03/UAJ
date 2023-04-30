@@ -392,7 +392,7 @@
     },
     {
       "id": "HEARTS",
-      "file": "assets/Sprites/UI/HUD/hearts2.png",
+      "file": "assets/Sprites/UI/HUD/hearts.png",
       "cols": 14,
       "rows": 1
     },

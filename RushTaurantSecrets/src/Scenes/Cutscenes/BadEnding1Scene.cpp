@@ -40,7 +40,7 @@ BadEnding1Scene::BadEnding1Scene() {
 
 	player = new GameObject(this, _ecs::grp_PLAYER);
 	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(20, 11)), Vector(0, 0), 48, 96);
-	straightMovementP = new StraightMovement(player, 5);
+	straightMovement = new StraightMovement(player, 5);
 	Animator::AnimParams ap;
 	ap.initFrame = 18;
 	ap.endFrame = 18;
