@@ -15,8 +15,8 @@ BeforeDayStartScene::BeforeDayStartScene() {
 	ih = InputHandler::instance();
 
 	//string con texto correspondiente
-	wordDay = "DAY: " + std::to_string(accDay);
-	press = "PRESS ANY BUTTON TO CONTINUE...";
+	wordDay = "DAY " + std::to_string(accDay);
+	press = "PRESS ANY BUTTON TO CONTINUE";
 	mnyTarget = "TODAY'S GOAL IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
 
 	//background
@@ -64,7 +64,7 @@ void BeforeDayStartScene::reset() {
 	//beginSound->play();
 	accDay = day->getDay();
 	accGoal = day->getDailyObjective();
-	wordDay = "DAY: " + std::to_string(accDay);
+	wordDay = "DAY " + std::to_string(accDay);
 	mnyTarget = "TODAY'S GOAL IS TO ACHIEVE: " + std::to_string(accGoal) + " DOLLARS";
 	delete dayTxt;
 	delete moneyTarget;

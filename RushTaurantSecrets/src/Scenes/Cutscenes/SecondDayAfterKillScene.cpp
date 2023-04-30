@@ -20,21 +20,9 @@ SecondDayAfterKillScene::SecondDayAfterKillScene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	filter->setOpacity(80);
 
-	player = new Player(this, 0);
-	straightMovement = new StraightMovement(player, 5);
-
-	transform = player->getComponent<Transform>();
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(15, 10)));
-	transform->setMovState(walking);
-	straightMovement->changeSpeed(2);
-	player->getComponent<PlayerMovementController>()->setActive(false);
-
-	auto anim = player->getComponent<CharacterAnimator>();
-	anim->setH(96 * 1.8);
-	anim->setW(48 * 1.8);
-	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(10);
-	//Scene::initRender();
+	anim->setH(96 * 1.7);
+	anim->setW(48 * 1.7);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
 void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
@@ -42,9 +30,17 @@ void SecondDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void SecondDayAfterKillScene::reset() {
+	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(15, 10)));
+	transform->setMovState(walking);
+	straightMovement->changeSpeed(2);
+
+	straightMovement->stop();
 	state = START;
-	transition = new ShowSkipTransitionScene(this, 3, false);
-	GameManager::get()->pushScene(transition, true);
+
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, 3);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void SecondDayAfterKillScene::update() {
@@ -141,7 +137,7 @@ void SecondDayAfterKillScene::update() {
 		break;
 	case SecondDayAfterKillScene::M6:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[8].portrait, dialogues[8].text);
 			state = M7;
 

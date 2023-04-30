@@ -44,7 +44,7 @@ private:
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;
 
-	bool isThereThieves() const {
+	bool areThereThieves() const {
 		return !thiefs->empty();
 	}
 

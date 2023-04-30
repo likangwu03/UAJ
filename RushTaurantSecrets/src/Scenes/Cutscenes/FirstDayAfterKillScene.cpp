@@ -20,21 +20,11 @@ FirstDayAfterKillScene::FirstDayAfterKillScene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	filter->setOpacity(80);
 
-	player = new Player(this, 0);
-	straightMovement = new StraightMovement(player, 0);
 
-	player->getComponent<PlayerMovementController>()->setActive(false);
-
-	transform = player->getComponent<Transform>();
-	transform->setPos(Vector(576, 230));
-	transform->setMovState(idle);
-	transform->setOrientation(north);
-
-	auto anim = player->getComponent<CharacterAnimator>();
-	anim->setH(96 * 1.8);
-	anim->setW(48 * 1.8);
-	anim->setTexture("Player_Casual", 18, 10, 1);
-	anim->setframeRate(10);
+	straightMovement->changeSpeed(3);
+	anim->setW(48 * 1.7);
+	anim->setH(96 * 1.7);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 }
 
 void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
@@ -42,9 +32,18 @@ void FirstDayAfterKillScene::addPath(const vector<Vector>& points) {
 }
 
 void FirstDayAfterKillScene::reset() {
+	dialogueBox = nullptr;
+	transform->setPos(Vector(576, 230));
+	transform->setMovState(idle);
+	transform->setOrientation(north);
+
+	straightMovement->stop();
 	state = START;
-	transition = new ShowSkipTransitionScene(this, START_TIME);
-	GameManager::get()->pushScene(transition, true);
+
+	if (GameManager::instance()->getCurrentScene() == this) {
+		transition = new ShowSkipTransitionScene(this, START_TIME);
+		GameManager::get()->pushScene(transition, true);
+	}
 }
 
 void FirstDayAfterKillScene::update() {

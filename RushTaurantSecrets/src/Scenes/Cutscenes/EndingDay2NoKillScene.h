@@ -14,14 +14,15 @@ private:
 
 	const Animator::AnimParams AP = { 18,18,1 };
 
-	const vector<Vector> paths[1] = {
-		{ Vector(19.5, 25), Vector(19.5, 15) }
+	const vector<Vector> paths[2] = {
+		{ Vector(19.5, 25), Vector(19.5, 22) },
+		{ Vector(19.5, 21), Vector(19.5, 15) }
 	};
 
 	enum States {
 		START,
-		TURN1,
-		TURN2,
+		ENTERING,
+		TURN,
 		D1DELAY,
 		D1,
 		D2,
@@ -30,7 +31,6 @@ private:
 		NONE
 	};
 
-	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
 	
@@ -38,9 +38,6 @@ private:
 	Texture* bg;
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
-
-	GameObject* player;
-	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
 	int timer;

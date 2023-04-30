@@ -1,13 +1,19 @@
-
 #pragma once
+
 #include "../../Structure/Scene.h"
 #include "../../Utilities/Texture.h"
 #include "../../Utilities/SDLUtils.h"
 #include "../../Definitions/Paths_def.h"
 #include <vector>
 using namespace std;
-class CinematicBaseScene : public Scene
-{
+
+class Player;
+class Transform;
+class StraightMovement;
+#include "../../Components/Animator.h"
+class CharacterAnimator;
+
+class CinematicBaseScene : public Scene {
 protected:
 	Font* font;
 	const string FONT_PATH = "assets/Fonts/chary___.ttf";
@@ -24,6 +30,12 @@ protected:
 	SDLUtils* sdl;
 
 	Scene* transition;
+
+	const Animator::AnimParams ANIMATIONSPARAMS = { 18,18,1 };
+	GameObject* player;
+	Transform* transform;
+	StraightMovement* straightMovement;
+	CharacterAnimator* anim;
 
 public:
 	CinematicBaseScene();

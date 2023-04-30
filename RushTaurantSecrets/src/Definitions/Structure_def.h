@@ -5,7 +5,7 @@ namespace _ecs {
 	using id_type = uint8_t;
 
 	// Components
-	// EL ORDEN DE EJECUCIÓN DE LOS COMPONENTES ESTA DETERMINADO POR COMO SE AÑADEN
+	// EL ORDEN DE EJECUCIï¿½N DE LOS COMPONENTES ESTA DETERMINADO POR COMO SE Aï¿½ADEN
 	enum _cmp_id : id_type {
 		cmp_MAPCREATOR,
 		cmp_MANAGER,
@@ -109,8 +109,7 @@ namespace _ecs {
 
 		sc_INTRO1,
 		sc_INTRO2,
-		sc_INTRO3,
-		sc_INTRO_NO_KILL_3,
+		sc_INTRO3NOKILL,
 		sc_ENDINGDAY1,
 		sc_ENDINGDAY2KILL,
 		sc_ENDINGDAY2NOKILL,

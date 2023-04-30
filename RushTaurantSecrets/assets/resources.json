@@ -411,7 +411,7 @@
     },
     {
       "id": "CHANGE_ICON",
-      "file": "assets/Sprites/UI/HUD/change_plate.png",
+      "file": "assets/Sprites/UI/Controls/change_plate.png",
       "cols": 1,
       "rows": 1
     },
@@ -447,13 +447,13 @@
     },
     {
       "id": "KILL_ICON",
-      "file": "assets/Sprites/UI/HUD/KillIcon.png",
+      "file": "assets/Sprites/UI/Controls/KillIcon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "RUN_ICON",
-      "file": "assets/Sprites/UI/HUD/RunIcon.png",
+      "file": "assets/Sprites/UI/Controls/RunIcon.png",
       "cols": 1,
       "rows": 1
     },
@@ -567,13 +567,7 @@
     },
     {
       "id": "BUTTON_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Menu/button_highlight.png",
-      "cols": 1,
-      "rows": 1
-    },
-    {
-      "id": "BUTTON2_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Menu/button2_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/button_highlight.png",
       "cols": 1,
       "rows": 1
     },
@@ -633,43 +627,43 @@
     },
     {
       "id": "CARTEL_HIGHLIGHT",
-      "file": "assets/Sprites/UI/cartel_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/cartel_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "INGREDIENT_HIGHLIGHT",
-      "file": "assets/Sprites/UI/ingredient_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/ingredient_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CASH_HIGHLIGHT",
-      "file": "assets/Sprites/UI/cash_Regis_higlight.png",
+      "file": "assets/Sprites/UI/Highlights/cash_Regis_higlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "DOOR_HIGHLIGHT",
-      "file": "assets/Sprites/UI/door_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/door_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "COOK_HIGHLIGHT",
-      "file": "assets/Sprites/UI/kitchen_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/kitchen_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BIN_HIGHLIGHT",
-      "file": "assets/Sprites/UI/bin_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/bin_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "ISLAND_HIGHLIGHT",
-      "file": "assets/Sprites/UI/island_highlight.png",
+      "file": "assets/Sprites/UI/Highlights/island_highlight.png",
       "cols": 1,
       "rows": 1
     },
@@ -681,7 +675,7 @@
     },
     {
       "id": "SUPER_CASHREGISTER",
-      "file": "assets/Sprites/UI/super_cashregister.png",
+      "file": "assets/Sprites/UI/Highlights/super_cashregister.png",
       "cols": 1,
       "rows": 1
     },
@@ -705,13 +699,13 @@
     },
     {
       "id": "CLOCK",
-      "file": "assets/Sprites/UI/HUD/clock_2.png",
+      "file": "assets/Sprites/UI/HUD/clock.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "ARROW",
-      "file": "assets/Sprites/UI/HUD/arrow_2.png",
+      "file": "assets/Sprites/UI/HUD/arrow.png",
       "cols": 1,
       "rows": 1
     },
@@ -771,13 +765,13 @@
     },
     {
       "id": "RETURN_ICON",
-      "file": "assets/Sprites/UI/HUD/return_ing.png",
+      "file": "assets/Sprites/UI/Controls/return_ing.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CLEAN_ICON",
-      "file": "assets/Sprites/UI/HUD/clean_ing.png",
+      "file": "assets/Sprites/UI/Controls/clean_ing.png",
       "cols": 1,
       "rows": 1
     },
@@ -947,29 +941,29 @@
     },
     {
       "id": "DAILY_MENU_HIGHLIGHT",
-      "file": "assets/Sprites/UI/dailymenu_highlight.png"
+      "file": "assets/Sprites/UI/Highlights/dailymenu_highlight.png"
     },
     {
       "id": "KEYBOARD_KEYS",
-      "file": "assets/Sprites/UI/Keyboard_Letters_and_Symbols.png",
+      "file": "assets/Sprites/UI/Controls/Keyboard_Letters_and_Symbols.png",
       "cols": 8,
       "rows": 14
     },
     {
       "id": "KEYBOARD_KEYS_2",
-      "file": "assets/Sprites/UI/Keyboard Extras.png",
+      "file": "assets/Sprites/UI/Controls/Keyboard Extras.png",
       "cols": 4,
       "rows": 8
     },
     {
       "id": "PLAYSTATION_KEYS",
-      "file": "assets/Sprites/UI/gdb-playstation-2.png",
+      "file": "assets/Sprites/UI/Controls/gdb-playstation-2.png",
       "cols": 35,
       "rows": 40
     },
     {
       "id": "XBOX_KEYS",
-      "file": "assets/Sprites/UI/gdb-xbox-2.png",
+      "file": "assets/Sprites/UI/Controls/gdb-xbox-2.png",
       "cols": 35,
       "rows": 40
     },

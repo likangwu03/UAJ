@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../../Scenes/Cutscenes/CinematicBaseScene.h"
 #include "../../GameObjects/Player.h"
@@ -6,50 +5,49 @@
 #include <vector>
 using namespace std;
 struct dialogueInfo;
-class SecondDayAfterKillScene : public CinematicBaseScene
+class Day1IntroScene : public CinematicBaseScene
 {
 private:
-	const vector<Vector> secondDayAfterKillPath[4] = {
-		{ Vector(20, 10),Vector(16,10),Vector(18, 10)},
-		{ Vector(20, 10),Vector(16,10),Vector(18, 10)},
-		{ Vector(18, 14),Vector(25, 14),Vector(30,14)},
-		{ Vector(40, 14)}
+	const vector<Vector> introPath[2] = {
+		{Vector(40, 14), Vector(28, 14)},
+		{Vector(18, 14),Vector(18,10)}
 	};
 
 	enum States {
-		START,
-		PAUSE,
-		START2,
-		M1,
-		M2,
-		P1,
-		M3,
-		P2,
-		M4,
-		P3,
-		WALKING,
-		M5,
-		M6,
-		M7,
+		START, 
+		ENTERING,//sonido puerta
+		ARRIVE,//1
+		D1,
+		D2,
+		D3, 
+		D31,
+		D4,
+		D5,
+		D51,
+		D6,
 		OUT,
+		D71,
+		D72,
+		WAITD7,
 		NONE
 	};
+
 	Texture* bg;
 	Texture* filter;
 	Texture* top;
+	Texture* black;
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
+
 	void addPath(const vector<Vector>& points);
 	States state;
-	float cont;
-	const float STOP_TIME = 1.5;
 
 	vector<dialogueInfo> dialogues;
 
 public:
-	SecondDayAfterKillScene();
+	Day1IntroScene();
 	void reset() override;
-	void renderCinematic() override;
+	void renderCinematic () override;
 	void finishScene()override;
 	void update()override;
 };

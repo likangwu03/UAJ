@@ -10,6 +10,7 @@ struct dialogueInfo;
 class TransitionScene;
 class BadEnding1Scene : public CinematicBaseScene
 {
+private:
 	const float RESIZEFACTOR = 0.6666666667;
 
 	//26 DIALOGOS XDDD
@@ -46,6 +47,7 @@ class BadEnding1Scene : public CinematicBaseScene
 		D24,
 		D25,
 		D26,
+		D27,
 		OUT,
 		NONE
 	};
@@ -54,16 +56,15 @@ class BadEnding1Scene : public CinematicBaseScene
 	Texture* filter;
 	Texture* top;
 	SoundEffect* nightAmbience;
+	SoundEffect* phonecall;
+
 	Music* nightMusic;
-	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
 	const float START_TIME = 3;
-private:
-	GameObject* player;
+
 	GameObject* client1;
 	GameObject* client2;
-	StraightMovement* straightMovementP;
 	StraightMovement* straightMovementc1;
 	StraightMovement* straightMovementc2;
 
@@ -73,6 +74,7 @@ private:
 	vector<Vector> playerPoints2;
 	vector<Vector> client1Points;
 	vector<Vector> client2Points;
+
 public:
 	BadEnding1Scene();
 	void reset() override;

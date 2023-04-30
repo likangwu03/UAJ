@@ -7,6 +7,7 @@ using namespace std;
 struct dialogueInfo;
 class FirstDayAfterKillScene : public CinematicBaseScene
 {
+private:
 	enum States {
 		INIT,
 		START,
@@ -28,14 +29,10 @@ class FirstDayAfterKillScene : public CinematicBaseScene
 	Texture* top;
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
-	Transform* transform;
 	void addPath(const vector<Vector>& points);
 	States state;
 	float cont;
 	const float START_TIME = 3;
-private:
-	GameObject* player;
-	StraightMovement* straightMovement;
 
 	vector<dialogueInfo> dialogues;
 

@@ -68,7 +68,7 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	toggleDailyMenu();
 	
 	accDay = 1;
-	dayText = "DAY: " + to_string(accDay);
+	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,0);
@@ -106,7 +106,7 @@ void UIMarket::reset() {
 	delete dayOutline;
 
 	accDay = GameManager::get()->getDayManager()->getDay();
-	dayText = "DAY: " + to_string(accDay);
+	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 
@@ -168,7 +168,7 @@ void UIMarket::render() {
 	targetOutline->render(targetOutlineRect);
 	targetTexture->render(targetRect);
 
-	dayOutline->render({ sdl->width() - 25 - dayTexture->width() -2, 15 - 2, dayOutline->width(), dayOutline->height()});
+	dayOutline->render({ sdl->width() - 25 - dayTexture->width() - 2, 15 - 2, dayOutline->width(), dayOutline->height()});
 	dayTexture->render({ sdl->width() - 25 - dayTexture->width(), 15, dayTexture->width(), dayTexture->height()});
 
 	if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON()) {
