@@ -64,6 +64,7 @@ namespace _ecs {
 		grp_COLLISIONS,
 		grp_THIEFS,
 		grp_DESK,
+		grp_OBJECTS,
 
 		// Do not erase pls
 		grp_INVALID

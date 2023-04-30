@@ -3,6 +3,7 @@
 #include "../../GameObjects/Player.h"
 #include "../../Components/StraightMovement.h"
 #include "../../GameObjects/CinematicNPC.h"
+#include "../../GameObjects/CinematicObject.h"
 #include <vector>
 
 using namespace std;
@@ -13,6 +14,9 @@ class BadEnding4Scene: public CinematicBaseScene
 private:
 	const vector<Vector> BE4PathPlayer[1] = {
 		{Vector(20, 14), Vector(20, 12)}
+	};
+	const vector<Vector> BE4PathThief[4] = {
+		{Vector(23, 5)}, {Vector(7, 5)}, {Vector(7, 12)}, {Vector(-2, 12)}
 	};
 
 	enum States {
@@ -64,17 +68,17 @@ private:
 		NONE
 	};
 
-
 	GameObject* thief;
+	GameObject* book;
 
 	vector<dialogueInfo> dialogues;
 	Texture* bg;
+	Texture* top;
 	States state;
 	void addPathPantry(const vector<Vector>& points);
 	vector<Vector> playerPoints;
-	vector<Vector> thiefPoints;
-	vector<Vector> thiefPoints2;
 	StraightMovement* straightMovementThief;
+	bool reading;
 
 public:
 	BadEnding4Scene();
