@@ -3,7 +3,6 @@
 #include "../../GameObjects/Player.h"
 #include "../../Components/StraightMovement.h"
 #include "../../GameObjects/CinematicNPC.h"
-#include "../../GameObjects/CinematicObject.h"
 #include <vector>
 
 using namespace std;

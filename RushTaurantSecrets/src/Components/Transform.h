@@ -8,7 +8,7 @@ enum GOOrientation {
 };
 
 enum movementState {
-	walking, idle, sitting, dead, noMov, book
+	walking, idle, sitting, dead, noMov
 };
 
 class Transform : public Component {
