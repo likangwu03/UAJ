@@ -21,13 +21,13 @@ class ClockComponent : public Manager<ClockComponent> {
 	friend Manager<ClockComponent>;
 private:
 	// parametrizable: 1000 (cada segundo) / 10000 (cada diez segundos)
-	const int TIME_CLOCK_REFRESH = 3000, ANGLE = 90, ANGLE_UPDATE = 5;
+	const int TIME_CLOCK_REFRESH = 10000, ANGLE = 90, ANGLE_UPDATE = 5;
 	const int ICONX = 20, ICONY = 15, ICONSIZE = 48;
 	const int MAX_LAPS = 1;
 
 	SDLUtils* sdl;
 	float elapsedTime;
-	int numFullClock; // número de vueltas que ha dado el reloj
+	int numFullClock; // nÃºmero de vueltas que ha dado el reloj
 	Data clock;
 	Data arrow;
 
@@ -38,7 +38,7 @@ private:
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;
 
-	// devuelve cuántas vueltas ha dado reloj cuando se llama al método
+	// devuelve cuÃ¡ntas vueltas ha dado reloj cuando se llama al mÃ©todo
 	inline int getNumFullClock() const {
 		return numFullClock;
 	}

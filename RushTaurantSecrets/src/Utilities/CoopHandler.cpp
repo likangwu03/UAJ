@@ -132,7 +132,7 @@ void CoopHandler::closeConnection() {
 
 // Mensajes
 
-bool CoopHandler::send(Message& message) {
+bool CoopHandler::send(const Message& message) {
 	if (!connectionSocket)return false;
 	Uint8* end = message.code(data);
 	Uint16 size = end - data;
@@ -177,8 +177,7 @@ bool CoopHandler::Receive(Message& v) {
 void CoopHandler::receive() {
 	while (SDLNet_CheckSockets(set, 0) > 0) {
 		Message m;
-		bool c = Receive(m);
-		if (!c) { // Desconexión
+		if (!Receive(m)) { // Desconexión
 			GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER)
 				->getComponent<Transform>()->setPos(Vector(-100, -100));
 			SDLNet_TCP_DelSocket(set, connectionSocket);

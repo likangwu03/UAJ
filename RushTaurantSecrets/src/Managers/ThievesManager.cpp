@@ -1,19 +1,18 @@
 #include "ThievesManager.h"
 #include "DayManager.h"
+#include "../Structure/Game.h"
 
 #include "../Utilities/checkML.h"
 
 
-void ThievesManager::createThief() {
-	string sprite = "Thief_" + to_string(sdl->rand().nextInt(1, 9));
-
-	int pos = randomPos();
+void ThievesManager::createThief(int sprite, int pos) {
+	string spriteStr = "Thief_" + to_string(sprite);
 
 	// posición de cada ladrón respecto de la puerta
 	Vector aux = _ecs::DOOR;
 	aux.setY(_ecs::DOOR.getY() - pos);
 
-	new Thief(scene, RelativeToGlobal::pointPantry(aux), sprite, generalSpeed, escapeSpeed, canGetFreezer, pos);
+	new Thief(scene, RelativeToGlobal::pointPantry(aux), spriteStr, generalSpeed, escapeSpeed, canGetFreezer, pos);
 
 	warningSound->play(-1);
 	played = true;
@@ -31,9 +30,15 @@ void ThievesManager::addFrequently() {
 			timer = sdl->rand().nextInt(minFrec, maxFrec);
 			allFalse();
 			int auxNum = sdl->rand().nextInt(2, numThiefs + 1);
+			Message m(Message::msg_THIEF_SPAWN);
+			m.thief_spawn.number = auxNum;
 			for (int i = 0; i < auxNum; ++i) {
-				createThief();
+				uint8_t sprite = sdl->rand().nextInt(1, 9), pos = randomPos();
+				createThief(sprite, pos);
+				m.thief_spawn.skins.push_back(sprite);
+				m.thief_spawn.positions.push_back(pos);
 			}
+			Game::get()->getCoopHandler()->send(m);
 		}
 	}
 }
@@ -60,7 +65,7 @@ ThievesManager::ThievesManager(GameObject* parent, float generalSpeed, float esc
 }
 
 void ThievesManager::update() {
-	addFrequently();
+	if(!Game::get()->getCoopHandler()->isClient()) addFrequently();
 }
 
 void ThievesManager::stopSound() {
@@ -75,4 +80,12 @@ void ThievesManager::nextDay() {
 
 	minFrec = GameManager::get()->getDayManager()->getMinThiefFrequency();
 	maxFrec = GameManager::get()->getDayManager()->getMaxThiefFrequency();
+}
+
+void ThievesManager::receive(const Message& message) {
+	if(message.id == Message::msg_THIEF_SPAWN) {
+		for(int i = 0; i < message.thief_spawn.number; i++) {
+			createThief(message.thief_spawn.skins[i], message.thief_spawn.positions[i]);
+		}
+	}
 }

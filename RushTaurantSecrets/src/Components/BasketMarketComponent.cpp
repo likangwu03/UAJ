@@ -280,14 +280,17 @@ void BasketMarketComponent::cleanEmptyBasket() {
 }
 
 void BasketMarketComponent::receive(const Message& message) {
-	if (message.id == Message::msg_BASKET) {
+	if(message.id == Message::msg_BASKET) {
 		auto it = ingredients.find(message.basket.ing);
-		if (it != ingredients.end()) {
+		if(it != ingredients.end()) {
 			totalPrize -= _ecs::MarketIngs[message.basket.ing - FLOUR].price * it->second;
 			it->second = message.basket.n;
-			if (message.basket.n == 0) cleanEmptyBasket();
-		}
-		else {
+			if(message.basket.n == 0) {
+				if(selectedIngr == it) selectedIngr = ingredients.begin();
+				ingredients.erase(it);
+				totalDifIngr--;
+			}
+		} else {
 			ingredients.insert({ message.basket.ing, message.basket.n });
 			totalDifIngr++; //num de dif ing
 		}

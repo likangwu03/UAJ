@@ -31,19 +31,19 @@ public:
 
     bool isClient() { return client; }
 
-    // Métodos de servidor
+    // MÃ©todos de servidor
 
     void openServer();
     bool connectClient();
 
-    // Métodos de cliente
+    // MÃ©todos de cliente
 
     bool openClient(std::string ip);
     std::pair<bool, bool> connectServer();
 
-    // Métodos conjuntos
+    // MÃ©todos conjuntos
     void closeServer();
     void closeConnection();
     void receive();
-    bool send(Message& message);
+    bool send(const Message& message);
 };

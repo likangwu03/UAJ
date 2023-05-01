@@ -18,6 +18,8 @@ struct Message {
 		msg_TO_DAILY_MENU,
 		msg_TO_SUPERMARKET,
 		msg_TO_RESTAURANT,
+		msg_THIEF_SPAWN,
+		msg_THIEF_INTERACT,
 
 		// Do not erase pls
 		msg_INVALID
@@ -43,7 +45,13 @@ struct Message {
 		uint8_t menu;
 	} daily_menu;
 
+	struct data_thief_spawn {
+		uint8_t number;
+		std::vector<uint8_t> skins, positions; // Skin IDs & positions
+	} thief_spawn;
 
+	Message(_msg_id id = msg_INVALID) : id(id) { }
+	~Message() { }
 
 #pragma region code_decode
 
@@ -55,17 +63,23 @@ struct Message {
    /// Para float: indefinido
    /// </summary>
 	template<typename T>
-	Uint8* code8(T input, Uint8* msg) {
+	Uint8* code8(T input, Uint8* msg) const {
 		*reinterpret_cast<Uint8*>(msg) = input;
 		return msg + sizeof(Uint8);
 	}
 	template<typename T>
-	Uint8* decode8(Uint8& v, Uint8* msg) {
+	Uint8* decode8(T& v, Uint8* msg) const {
 		v =msg[0];
 		return msg + sizeof(Uint8);
 	}
 
-	Uint8* code8(int input, Uint8* msg) { return code8<int8_t>(input, msg); }
+	Uint8* code8(int input, Uint8* msg) const { return code8<int8_t>(input, msg); }
+	Uint8* decode8(int& v, Uint8* msg) const {
+		int8_t output = v;
+		msg = decode8<int8_t>(output, msg);
+		v = output;
+		return msg;
+	}
 
 	/// <summary>
 	/// Para int: desde el -32768 hasta el 32767 /
@@ -73,7 +87,7 @@ struct Message {
 	/// Para float: desde el -3276.8 hasta el 3276.7
 	/// </summary>
 	template<typename T>
-	Uint8* code16(T input, Uint8* msg) {
+	Uint8* code16(T input, Uint8* msg) const {
 		doubleByte output{};
 		output.first = output.second = 0;
 		for (uint8_t i = 0; i < 8; i++, input >>= 1) {
@@ -88,7 +102,7 @@ struct Message {
 		return msg;
 	}
 	template<typename T>
-	Uint8* decode16(T& v, Uint8* msg) {
+	Uint8* decode16(T& v, Uint8* msg) const {
 		Uint16 output{}; std::pair<char, char> input;
 		input.first = msg[0]; input.second = msg[1];
 		for (uint8_t i = 0; i < 8; i++, input.first >>= 1) {
@@ -112,18 +126,49 @@ struct Message {
 		}*/
 		return msg+sizeof(Uint16);
 	};
-	Uint8* code16(int input, Uint8* msg) { return code16<int16_t>(input, msg); };
-	Uint8* decode16(int& v, Uint8* msg) {
-		uint16_t aux;
+	Uint8* code16(int input, Uint8* msg) const { return code16<int16_t>(input, msg); };
+	Uint8* decode16(int& v, Uint8* msg) const {
+		int16_t aux;
 		msg = decode16(aux, msg);
 		v = aux;
 		return msg;
 	};
-	Uint8* code16(float input, Uint8* msg) { return code16<int16_t>(roundf(input * 10), msg); };
-	Uint8* decode16(float& v, Uint8* msg) {
-		uint16_t aux;
+	Uint8* code16(float input, Uint8* msg) const { return code16<int16_t>(roundf(input * 10), msg); };
+	Uint8* decode16(float& v, Uint8* msg) const {
+		int16_t aux;
 		msg = decode16(aux, msg);
 		v = aux / 10.0f;
+		return msg;
+	};
+
+
+
+	template<typename T>
+	Uint8* code8vector(std::vector<T> input, Uint8* msg) const {
+		for(T item : input) msg = code8(item, msg);
+		return msg;
+	}
+	template<typename T>
+	Uint8* decode8vector(std::vector<T>& v, Uint8* msg, uint16_t length) const {
+		T item;
+		for(uint16_t i = 0; i < length; i++) {
+			msg = decode8(item, msg);
+			v.push_back(item);
+		}
+		return msg;
+	}
+	template<typename T>
+	Uint8* code16vector(std::vector<T> input, Uint8* msg) const {
+		for(T item : input) msg = code16(item, msg);
+		return msg;
+	}
+	template<typename T>
+	Uint8* decode16vector(std::vector<T>& v, Uint8* msg, uint16_t length) const {
+		T item;
+		for(uint16_t i = 0; i < length; i++) {
+			msg = decode16(item, msg);
+			v.push_back(item);
+		}
 		return msg;
 	};
 #pragma endregion
@@ -131,10 +176,10 @@ struct Message {
 
 
 public:
-	Uint8* code(Uint8* msg) {
+	Uint8* code(Uint8* msg) const {
 		msg = code8(id, msg);
 		switch (id) {
-		case Message::msg_PLAYER:
+		case msg_PLAYER:
 			msg=code16(player.pos.getX(),msg);
 			msg=code16(player.pos.getY(),msg);
 			if (player.vel.getX() < 0) {
@@ -144,11 +189,11 @@ public:
 			msg=code16(player.vel.getY(),msg);
 			msg=code8(player.scene,msg);
 			break;
-		case Message::msg_BASKET:
+		case msg_BASKET:
 			msg=code8(basket.ing,msg);
 			msg=code8(basket.n,msg);
 			break;
-		case Message::msg_TO_DAILY_MENU:
+		case msg_TO_DAILY_MENU:
 			for (uint8_t d : daily_menus.menu1) {
 				msg=code8(d,msg);
 			}
@@ -156,8 +201,13 @@ public:
 				msg=code8(d,msg);
 			}
 			break;
-		case Message::msg_TO_SUPERMARKET:
+		case msg_TO_SUPERMARKET:
 			msg = code8(daily_menu.menu, msg);
+			break;
+		case msg_THIEF_SPAWN:
+			msg = code8(thief_spawn.number, msg);
+			msg = code8vector(thief_spawn.skins, msg);
+			msg = code8vector(thief_spawn.positions, msg);
 			break;
 		}
 	
@@ -170,7 +220,7 @@ public:
 		msg = decode8< uint8_t>(id_, msg);
 		id = (_msg_id)id_;
 		switch (id) {
-		case Message::msg_PLAYER:
+		case msg_PLAYER:
 			float aux;
 			msg = decode16(aux, msg);
 			player.pos.setX(aux);
@@ -182,14 +232,14 @@ public:
 			player.vel.setY(aux);
 			msg = decode8< uint8_t>(player.scene, msg);
 			break;
-		case Message::msg_BASKET:
+		case msg_BASKET:
 			uint8_t aux2;
 			msg = decode8<uint8_t>(aux2, msg);
 			basket.ing =(_ecs::_ingredients_id) aux2;
 			msg = decode8<uint8_t>(aux2, msg);
 			basket.n = aux2;
 			
-		case Message::msg_TO_DAILY_MENU:
+		case msg_TO_DAILY_MENU:
 			for (int i = 0; i < 4; ++i) {
 				uint8_t aux;
 				msg = decode8<uint8_t>(aux, msg);
@@ -201,8 +251,13 @@ public:
 				daily_menus.menu2.push_back((_ecs::_ingredients_id)aux);
 			}
 			break;
-		case Message::msg_TO_SUPERMARKET:
+		case msg_TO_SUPERMARKET:
 			msg= decode8<uint8_t>(daily_menu.menu, msg);
+			break;
+		case msg_THIEF_SPAWN:
+			msg = decode8(thief_spawn.number, msg);
+			msg = decode8vector(thief_spawn.skins, msg, thief_spawn.number);
+			msg = decode8vector(thief_spawn.positions, msg, thief_spawn.number);
 			break;
 		}
 		return msg;

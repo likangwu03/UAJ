@@ -27,7 +27,7 @@ private:
 	// array que se utiliza para saber que posición de las puerta han sido ocupadas y cuales no
 	array<bool, _ecs::MAX_THIEFS> selectedPosition;
 
-	void createThief();
+	void createThief(int sprite, int pos);
 
 	void addFrequently();
 
@@ -54,7 +54,8 @@ public:
 	}
 
 	virtual void update();
-	void stopSound();
-
 	void nextDay()override;
+	void receive(const Message&);
+
+	void stopSound();
 };
