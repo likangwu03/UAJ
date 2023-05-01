@@ -931,6 +931,10 @@
       "file": "assets/Sprites/Cutscenes/Restaurant_top.png"
     },
     {
+      "id": "CINEMATIC_BG_RESTAURANT_ISLAND",
+      "file": "assets/Sprites/Cutscenes/Restaurant_island.png"
+    },
+    {
       "id": "CINEMATIC_BG_PANTRY_TOP",
       "file": "assets/Sprites/Cutscenes/pantry_top.png"
     },
@@ -965,6 +969,14 @@
     {
       "id": "CINEMATIC_PANTRY_LECTERN",
       "file": "assets/Sprites/Cutscenes/pantry_lectern.png"
+    },
+    {
+      "id": "CINEMATIC_BG_PROTA_ROOM_WALL",
+      "file": "assets/Sprites/Cutscenes/Prota_Room_Wall.png"
+    },
+    {
+      "id": "CINEMATIC_BG_ROOM_DOOR",
+      "file": "assets/Sprites/Cutscenes/animated_door_big_5_48x48.png"
     },
     {
 

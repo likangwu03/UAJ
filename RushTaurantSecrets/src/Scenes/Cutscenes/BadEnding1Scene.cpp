@@ -83,6 +83,9 @@ void BadEnding1Scene::reset() {
 
 	straightMovement->stop();
 
+	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
+	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
+
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
 		GameManager::get()->pushScene(transition, true);

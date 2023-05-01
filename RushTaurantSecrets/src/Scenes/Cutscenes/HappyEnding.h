@@ -8,19 +8,44 @@ struct dialogueInfo;
 
 class HappyEnding : public CinematicBaseScene {
 private:
-	const int TURNAROUNDTIME = 500;
+	const int DELAY = 1000;
 	const Vector BOXPOS = Vector(150, 20);
 	const float BOXW = 700, LETTERFREQ = 0.01f * 1000;
-
+	const int DOORFRAMES = 5, DOORFREQ = 1;
+	const float DOORW = 48, DOORH = 144;
+	const SDL_Rect DOORPOS = build_sdlrect(554, 240, DOORW * 2, DOORH * 2);
 	const Animator::AnimParams AP = { 18,18,1 };
 
-	const vector<Vector> paths[2] = {
-		{ Vector(19.5, 25), Vector(19.5, 22) },
-		{ Vector(19.5, 21), Vector(19.5, 15) }
+	const vector<Vector> paths[5] = {
+		{ Vector(8.8, 2), Vector(14.5, 2), Vector(14.5, 1) },
+		{ Vector(14.5, 1), Vector(14.5, 5), Vector(22, 5) },
+		{ Vector(22, 5), Vector(22, 10),  Vector(17.8, 10), },
+		{ Vector(17.8, 10), Vector(17.8, 16), Vector(10, 16) },
+		{ Vector(10, 16), Vector(10, 21) }
 	};
 
 	enum States {
 		START,
+		WAKE,
+		SIT,
+		STAND,
+		WINDOW,
+		D2,
+		CLOSET,
+		FADEIN1,
+		FADEOUT1,
+		D3,
+		D4,
+		WALKDOOR,
+		OPENDOOR,
+		D5,
+		WALKOUT,
+		D6,
+		D7,
+		FADEIN2,
+		FADEOUT2,
+		RESTAURANT,
+
 
 		OUT,
 		NONE
@@ -31,12 +56,17 @@ private:
 	
 	Texture* filter;
 	Texture* bg;
+	Texture* black;
+	Texture* door;
+	Texture* top;
+
 	SoundEffect* nightAmbience;
 	Music* nightMusic;
 
 	vector<dialogueInfo> dialogues;
 	int timer;
 	int dialogueN;
+	int doorFrame;
 
 public:
 	HappyEnding();

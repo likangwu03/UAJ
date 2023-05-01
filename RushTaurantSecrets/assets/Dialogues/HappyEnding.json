@@ -12,33 +12,28 @@
     },
     {
       "Character": "Player",
-      "Text": "...",
-      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
-    },
-    {
-      "Character": "Player",
       "Text": "If I'm right, I should already have enough money to improve the restaurant...",
-      "Portrait": "PROTA_CASUAL_SURPRISED"
+      "Portrait": "PROTA_CHEF_SURPRISED"
     },
     {
       "Character": "Player",
       "Text": "Luckily, I will be able to hire waiters!",
-      "Portrait": "PROTA_CASUAL_SMILE"
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
       "Text": "I still cannot believe I'm fulfilling my dream...",
-      "Portrait": "PROTA_CASUAL_SMILE"
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
       "Text": "Mom! Dad! Did you hear that?",
-      "Portrait": "PROTA_CASUAL_SMILE"
+      "Portrait": "PROTA_CHEF_SMILE"
     },
     {
       "Character": "Player",
       "Text": "I knew I would make it... Hahaha!",
-      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
+      "Portrait": "PROTA_CHEF_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Player",
@@ -53,7 +48,7 @@
     {
       "Character": "Player",
       "Text": "I wouldn't have been able to make it without your help.",
-      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
+      "Portrait": "PROTA_CHEF_SMILE_CLOSE_EYE"
     },
     {
       "Character": "Player",
