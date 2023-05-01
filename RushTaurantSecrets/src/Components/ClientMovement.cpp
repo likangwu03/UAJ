@@ -38,7 +38,7 @@ void ClientMovement::goOut(ClientState::States currentState) {
 		// cuando se hayan marchado, por si uno de sus compañeros ha sido eliminado y quiere acceder a él
 		if (mates[i] != nullptr) {
 			if (mates[i]->getComponent<ClientState>()->getState() == ClientState::OUT) {
-				clientState->unHappy();
+				clientState->unhappy();
 				found = true;
 			}
 		}
@@ -85,12 +85,10 @@ void ClientMovement::abandonPay() {
 	// se calcula el camino de salida
 	vector<Vector> leave;
 
-	// primer punto
-	int fWidth = sdl->width() / 40;
-	// la x del primer punto se saca a partir de la x del último punto a donde llegue
-	int xExit = straightMovement->getLastPoint().getX() / fWidth;
-	int yExit = _ecs::OUT_PAY.getY();
-	Vector firstPoint = Vector(xExit, yExit);
+	Vector lastPoint = straightMovement->getLastPoint();
+	Vector lastPointRest = RelativeToGlobal::unconvertPointRest(lastPoint);
+
+	Vector firstPoint = Vector(lastPointRest.getX(), _ecs::OUT_PAY.getY());
 	leave.push_back(firstPoint);
 
 	// se añade el punto de afuera
@@ -173,14 +171,7 @@ void ClientMovement::update() {
 	case ClientState::START:
 		if (straightMovement->hasFinishedPath()) {
 			clientState->setState(ClientState::ENTRANCE);
-			transform->setMovState(idle);
 			arriveSound->play();
-		}
-		break;
-	case ClientState::ENTRANCE:
-		// hacer que al recolocarse se active la animación idle
-		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
 		}
 		break;
 	case ClientState::ASSIGNED:
@@ -223,7 +214,6 @@ void ClientMovement::update() {
 		if (straightMovement->hasFinishedPath()) {
 			placedPay = true;
 			transform->setOrientation(west);
-			transform->setMovState(idle);
 		}
 		break;
 	case ClientState::OUT:

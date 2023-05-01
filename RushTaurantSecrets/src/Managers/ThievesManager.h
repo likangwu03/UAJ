@@ -26,12 +26,14 @@ private:
 	SoundEffect* warningSound;
 	// array que se utiliza para saber que posición de las puerta han sido ocupadas y cuales no
 	array<bool, _ecs::MAX_THIEFS> selectedPosition;
+	// ladrón con el que está interactuando el jugador
+	GameObject* thiefInteractWith;
 
 	void createThief(int sprite, int pos);
 
 	void addFrequently();
 
-	void allFalse() {
+	inline void allFalse() {
 		for (int i = 0; i < selectedPosition.size(); ++i) {
 			selectedPosition[i] = false;
 		}
@@ -44,17 +46,29 @@ private:
 public:
 	static constexpr _ecs::_cmp_id id = _ecs::cmp_MANAGER;
 
-	bool areThereThieves() const {
+	inline bool areThereThieves() const {
 		return !thiefs->empty();
 	}
 
-	void setFrec(float min, float max) {
+	inline void setFrec(float min, float max) {
 		minFrec = min;
 		maxFrec = max;
 	}
 
+	inline GameObject* getThiefInteractWith() const {
+		return thiefInteractWith;
+	}
+
+	inline void setThiefInteractWith(GameObject* thief) {
+		thiefInteractWith = thief;
+	}
+
+	vector<GameObject*> canInteractWith();
+
 	virtual void update();
+
 	void nextDay()override;
+
 	void receive(const Message&);
 
 	void stopSound();

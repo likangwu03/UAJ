@@ -66,7 +66,6 @@ void Animator::update() {
 		lastTic = 0;
 		updateAnim();
 	}
-
 }
 
 void Animator::render() {

@@ -7,10 +7,12 @@
 #include "../GameObjects/Client.h"
 #include "../Utilities/checkML.h"
 
-DeskComp::DeskComp(GameObject* parent, float width, float height, int id) : TriggerComp(parent, Vector(0, 0), width, height, DeskComp::id),
-sucia(false), num(id), 
-cleanSound(&sdlutils().soundEffects().at("CLEAN_TABLE")),
-assignSound(&sdlutils().soundEffects().at("ASSIGN_TABLE"))
+DeskComp::DeskComp(GameObject* parent, float width, float height, int id) :
+	TriggerComp(parent, Vector(0, 0), width, height, DeskComp::id),
+	sucia(false), num(id),
+	inventory(GameManager::get()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()),
+	cleanSound(&sdlutils().soundEffects().at("CLEAN_TABLE")),
+	assignSound(&sdlutils().soundEffects().at("ASSIGN_TABLE"))
 {
 	assignSound->setVolume(10);
 	trans = parent->getComponent<Transform>();
@@ -27,9 +29,19 @@ void DeskComp::assignClients(const std::vector<Client*>& clients) {
 	assigned = clients;
 }
 
-void DeskComp::spreadOverlap() {
-	for (auto obj : assigned) {
-		obj->getComponent<ClientTrigger>()->isOverlapping();
+void DeskComp::serveTable() {
+	for (auto client : assigned) {
+		ClientState* clientState = client->getComponent<ClientState>();
+		switch (clientState->getState()) {
+		case ClientState::TAKEMYORDER:
+			clientState->takeOrder();
+			break;
+		case ClientState::ORDERED:
+			if (inventory->serveDish(clientState->getOrderedDish())) {
+				clientState->getServed();
+			}
+			break;
+		}
 	}
 }
 
@@ -46,7 +58,7 @@ void DeskComp::isOverlapping() {
 	if (!ih->isKeyDown(SDLK_SPACE)) return;
 
 	if (sucia) cleanDesk();
-	else spreadOverlap();
+	else serveTable();//spreadOverlap();
 }
 
 void DeskComp::update() {
@@ -62,8 +74,6 @@ void DeskComp::update() {
 			assigned.clear();
 		}
 	}
-	
-
 }
 
 void DeskComp::render() {

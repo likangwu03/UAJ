@@ -11,17 +11,20 @@ class Animator : public Component
 public:
 	struct AnimParams
 	{
+		// primer punto de la columna
 		int initFrame;
+		// último punto de la columna + 1
 		int endFrame;
-		//fila de la anim
+		// fila
 		int currAnim = 0;
+		// velocidad de la animación
 		int frameRate = FRAMERATE;
+		// tamaño y ancho del sprite
+		// si no se indica, se coge del transform
 		float width = 0;
 		float height = 0;
-	//public:
-	//	AnimParams(int inFr, int enFr, int crAnim = 0, int fr = FRAMERATE, float w = 0, float h = 0) 
-	//		: initFrame(inFr), endFrame(enFr), currAnim(crAnim), width(w), height(h) {}
 	};
+
 protected:
 	static const int FRAMERATE = 7;
 	Texture* texture;

@@ -1,6 +1,5 @@
 #pragma once
 #include "../Structure/TriggerComp.h"
-#include "InventoryComp.h"
 #include "../Scenes/HUD/UIRestaurant.h"
 #include "Ingredients.h"
 #include "ClientState.h"
@@ -13,7 +12,6 @@
 class ClientTrigger : public TriggerComp
 {
 	ClientState* clientState;
-	InventoryComp* inventory;
 	bool selected;
 	ShowControlAuto* showControl;
 	Texture* changeIcon;
@@ -23,7 +21,6 @@ public:
 		TriggerComp(parent, pos_, width_, height_), selected(false),
 		//clientManager(ClientsManager::get()),
 		clientState(parent->getComponent<ClientState>()),
-		inventory(GameManager::get()->getRestaurant()->getUI()->getInventory()->getComponent<InventoryComp>()),
 		showControl(new ShowControlAuto(parent, { {ControlsType::key_C,ControlsType::play_Cross,ControlsType::xbox_A,Vector(50, 0),30,30} }, transform_)),
 		changeIcon(&sdlutils().images().at("CHANGE_ICON"))
 	{ };

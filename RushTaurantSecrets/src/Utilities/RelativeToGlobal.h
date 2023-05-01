@@ -10,7 +10,7 @@ namespace RelativeToGlobal {
 	// Si no se añaden casillas extras, los personajes quedan
 	// dos casillas por debajo de lo previsto
 	// Cada casilla extra supone que se suben 1
-	
+
 	// En este caso, hay 1 sola casilla extra añadida respecto al tilemap
 	const int tilesWRest = 39;
 	const int tilesHRest = 23;
@@ -27,7 +27,6 @@ namespace RelativeToGlobal {
 		int fHeight = SDLUtils::instance()->height() / tilesH;
 		return Vector(point.getX() * fWidth, point.getY() * fHeight);
 	}
-
 	// convertir una serie de puntos relativos en globales
 	inline static vector<Vector> points(const vector<Vector>& points, int tilesW, int tilesH) {
 		vector<Vector> aux;
@@ -35,6 +34,12 @@ namespace RelativeToGlobal {
 			aux.push_back(point(points[i], tilesW, tilesH));
 		}
 		return aux;
+	}
+	// desconvertir un punto de global a relativo
+	inline static Vector unconvert(const Vector& point, int tilesW, int tilesH) {
+		int fWidth = SDLUtils::instance()->width() / tilesW;
+		int fHeight = SDLUtils::instance()->height() / tilesH;
+		return Vector(point.getX() / fWidth, point.getY() / fHeight);
 	}
 
 	// restaurante
@@ -44,6 +49,9 @@ namespace RelativeToGlobal {
 	inline static vector<Vector> pointsRestaurant(const vector<Vector>& _points) {
 		return points(_points, tilesWRest, tilesHRest);
 	}
+	inline static Vector unconvertPointRest(const Vector& point) {
+		return unconvert(point, tilesWRest, tilesHRest);
+	}
 
 	// despensa
 	inline static Vector pointPantry(const Vector& _point) {
@@ -52,6 +60,9 @@ namespace RelativeToGlobal {
 	inline static vector<Vector> pointsPantry(const vector<Vector>& _points) {
 		return points(_points, tilesWPantry, tilesHPantry);
 	}
+	inline static Vector unconvertPointPantry(const Vector& point) {
+		return unconvert(point, tilesWPantry, tilesHPantry);
+	}
 
 	// casa
 	inline static Vector pointHouse(const Vector& _point) {
@@ -59,5 +70,8 @@ namespace RelativeToGlobal {
 	}
 	inline static vector<Vector> pointsHouse(const vector<Vector>& _points) {
 		return points(_points, tilesWHouse, tilesHHouse);
+	}
+	inline static Vector unconvertPointHouse(const Vector& point) {
+		return unconvert(point, tilesWHouse, tilesHHouse);
 	}
 };

@@ -1,28 +1,13 @@
 #include "ClientTrigger.h"
 #include "../Managers/ClientsManager.h"
-
 #include "../Utilities/checkML.h"
 
-void ClientTrigger::isOverlapping()
-{
+void ClientTrigger::isOverlapping() {
 	ClientState::States state = clientState->getState();
+
 	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_SPACE)) {
-		switch (state)
-		{
-		case ClientState::ENTRANCE:
+		if (state == ClientState::ENTRANCE) {
 			ClientsManager::get()->assignFirstGroup(randomTable());
-			break;
-		case ClientState::TAKEMYORDER:
-			clientState->takeOrder();
-			break;
-		case ClientState::ORDERED:
-			//temporal, no comprueba si esta el plato que quiere, solo comprueba que el jugador tenga platos
-			if (inventory->serveDish(clientState->getOrderedDish())) {
-				clientState->getServed();
-			}
-			break;
-		default:
-			break;
 		}
 	}
 	else if (state == ClientState::ORDERED) {
@@ -34,8 +19,6 @@ void ClientTrigger::isOverlapping()
 			clientState->changeDish();
 		}
 	}
-
-
 }
 
 void ClientTrigger::onTriggerExit() {

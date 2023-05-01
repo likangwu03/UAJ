@@ -387,6 +387,10 @@
       "file": "assets/Sprites/Restaurant/freezer3.png"
     },
     {
+      "id": "SHOPPING_CART",
+      "file": "assets/Sprites/Restaurant/ShoppingCart.png"
+    },
+    {
       "id": "HEART",
       "file": "assets/Sprites/UI/HUD/heart.png"
     },
@@ -953,7 +957,7 @@
       "file": "assets/Sprites/Cutscenes/Player_Room.png"
     },
     {
-      
+
       "id": "DAILY_MENU",
       "file": "assets/Sprites/UI/dailymenu.png"
     },

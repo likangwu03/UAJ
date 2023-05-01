@@ -9,7 +9,7 @@
 #include "../Utilities/InputHandler.h"
 #include "Transform.h"
 #include <string>
-#include <sstream>	// se usa para poder convertir string en stringstreams
+#include <sstream>	// se usa para poder convertir string en stringstream
 #include <vector>
 #include <deque>
 
@@ -97,11 +97,6 @@ public:
 
 	inline static bool isTextFinished() {
 		return hasFinished;
-	}
-
-	inline bool getTextFinished() const {
-		parent->setAlive(false);
-		return textFinished;
 	}
 
 	inline void addText(string text) {

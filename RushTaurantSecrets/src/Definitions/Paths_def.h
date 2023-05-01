@@ -56,38 +56,28 @@ namespace _ecs {
 	};
 
 	static Route introPath[2] = {
-	
 		{{Vector(40, 14), Vector(28, 14)}, west},
 		{{ Vector(18, 14),Vector(18,10)}, west},
-
-	
 	};
-	static Route secondDayAfterKillPath[4] = {
 
+	static Route secondDayAfterKillPath[4] = {
 		{{ Vector(20, 10),Vector(16,10),Vector(18, 10)}, east},
 		{{ Vector(20, 10),Vector(16,10),Vector(18, 10)}, east},
 		{{ Vector(18, 14),Vector(25, 14),Vector(30,14)}, east},
 		{{ Vector(40, 14)}, east},
-
 	};
 
 	static Route BadEnding1PlayerPath[2] = {
-
 		{{Vector(27, 15), Vector(40, 15)}, east}
 	};
 
 	static Route BadEnding1Client1Path[1] = {
-
 		{{ Vector(25, 16),Vector(40, 16)}, east }
-
 	};
 
 	static Route BadEnding1Client2Path[1] = {
-
 		{{ Vector(24, 13),Vector(28, 13)}, east}
-
 	};
-
 
 	// CLIENTES
 	const int NUM_TABLES = 7;
@@ -335,7 +325,7 @@ namespace _ecs {
 		// mesa 1 silla abajo
 		{{Vector(27, 17), Vector(22, 17)}, north },	// mesa
 		{{Vector(19, 17), Vector(19, 11), CASH_REGISTER}},	// pagar
-		{{Vector(28, 17), PAY, OUT_PAY}},	// marcharse mesa
+		{{Vector(19, 17), Vector(19,13), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 1 silla arriba
 		{{Vector(22, 13)}, south },	// mesa
 		{{Vector(22, 11), CASH_REGISTER}},	// pagar
@@ -350,7 +340,7 @@ namespace _ecs {
 		{{Vector(17, 12), Vector(21, 12), Vector(21, 11), CASH_REGISTER}},	// pagar
 		{{Vector(17, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 2 silla abajo
-		{{Vector(27, 18), Vector(20, 18), Vector(20,17), Vector(15, 17)}, north },	// mesa
+		{{Vector(27, 12), Vector(18, 12), Vector(18, 17), Vector(15, 17)}, north },	// mesa
 		{{Vector(19, 17), Vector(19, 11), CASH_REGISTER}},	// pagar
 		{{Vector(19, 17), Vector(19, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 2 silla arriba
@@ -363,11 +353,11 @@ namespace _ecs {
 		{{Vector(6, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
 		{{Vector(6, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 3 silla derecha
-		{{Vector(27, 18), Vector(20, 18), Vector(20, 17), Vector(18, 17), Vector(18, 18), Vector(10, 18), Vector(10, 15)}, west },	// mesa
+		{{Vector(27, 12), Vector(10, 12), Vector(10, 15)}, west },	// mesa
 		{{Vector(10, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
 		{{Vector(10, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 3 silla abajo
-		{{Vector(27, 18), Vector(20, 18), Vector(20, 17), Vector(18, 17), Vector(18, 18), Vector(8, 18), Vector(8, 17)}, north },	// mesa
+		{{Vector(27, 12), Vector(11, 12), Vector(11, 17), Vector(8, 17)}, north },	// mesa
 		{{Vector(12, 17), Vector(12, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
 		{{Vector(12, 17), Vector(12, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 3 silla arriba
@@ -389,8 +379,8 @@ namespace _ecs {
 		{{Vector(28, 11), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 4 silla arriba
 		{{Vector(27, 12), Vector(20, 12), Vector(20, 7), Vector(17, 7)}, south},	// mesa
-		{{Vector(20, 7), Vector(20, 11), CASH_REGISTER}},	// pagar
-		{{Vector(20, 7), Vector(20, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
+		{{Vector(21, 7), Vector(21, 11), CASH_REGISTER}},	// pagar
+		{{Vector(21, 7), Vector(21, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 
 		// mesa 5 silla izquierda
 		{{Vector(27, 12), Vector(8, 12), Vector(8, 9)}, east },	// mesa
@@ -405,18 +395,18 @@ namespace _ecs {
 		{{Vector(10, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
 		{{Vector(10, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 5 silla arriba
-		{{Vector(27, 12), Vector(14, 12), Vector(14, 7), Vector(10, 7)}, south},	// mesa
-		{{Vector(10, 6), Vector(20, 6), Vector(20, 11), CASH_REGISTER}},	// pagar
-		{{Vector(13, 7), Vector(13, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
+		{{Vector(27, 12), Vector(13, 12), Vector(13, 7), Vector(10, 7)}, south},	// mesa
+		{{Vector(14, 7), Vector(14, 12), Vector(26, 12), CASH_REGISTER}},	// pagar
+		{{Vector(14, 7), Vector(14, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 
 		// mesa 6 silla izquierda abajo
 		{{Vector(27, 12), Vector(20, 12), Vector(20, 6), Vector(12, 6), Vector(12, 5)}, east},	// mesa
-		{{Vector(12, 6), Vector(20, 6), Vector(20, 11), CASH_REGISTER}},	// pagar
-		{{Vector(12, 6), Vector(20, 6), Vector(20, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
+		{{Vector(12, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER}},	// pagar
+		{{Vector(12, 6), Vector(21, 6), Vector(21, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 6 silla izquierda arriba
 		{{Vector(27, 12), Vector(20, 12), Vector(20, 6), Vector(11, 6), Vector(11, 4), Vector(12, 4)}, east},	// mesa
-		{{Vector(11, 4), Vector(11, 6), Vector(20, 6), Vector(20, 11), CASH_REGISTER}},	// pagar
-		{{Vector(11, 4), Vector(11, 6), Vector(20, 6), Vector(20, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
+		{{Vector(11, 4), Vector(11, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER}},	// pagar
+		{{Vector(11, 4), Vector(11, 6), Vector(21, 6), Vector(21, 12), Vector(28, 12), PAY, OUT_PAY}},	// marcharse mesa
 		// mesa 6 silla derecha abajo
 		{{Vector(27, 12), Vector(20, 12), Vector(20, 5), Vector(16, 5)}, west },	// mesa
 		{{Vector(16, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER}},	// pagar
@@ -428,8 +418,8 @@ namespace _ecs {
 
 		// mesa 7 silla izquierda abajo
 		{ {Vector(27, 12), Vector(5, 12), Vector(5, 5)}, east },	// mesa
-		{ {Vector(5, 6), Vector(20, 6), Vector(20, 11), CASH_REGISTER} },	// pagar
-		{ {Vector(5, 6), Vector(20, 6), Vector(20, 12), Vector(28, 12), PAY, OUT_PAY} },	// marcharse mesa
+		{ {Vector(5, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER} },	// pagar
+		{ {Vector(5, 6), Vector(21, 6), Vector(21, 12), Vector(28, 12), PAY, OUT_PAY} },	// marcharse mesa
 		// mesa 7 silla izquierda arriba
 		{ {Vector(27, 12), Vector(5, 12), Vector(5, 7), Vector(4, 7), Vector(4, 4), Vector(5, 4)}, east },	// mesa
 		{ {Vector(4, 4), Vector(4, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER} },	// pagar
@@ -439,9 +429,9 @@ namespace _ecs {
 		{ {Vector(9, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER} },	// pagar
 		{ {Vector(9, 6), Vector(21, 6), Vector(21, 12), Vector(28, 12), PAY, OUT_PAY} },	// marcharse mesa
 		// mesa 7 silla derecha arriba
-		{ {Vector(27, 12), Vector(13, 12), Vector(13, 6), Vector(10, 6), Vector(10, 4), Vector(9, 4)}, west },	// mesa
-		{ {Vector(10, 4), Vector(10, 6), Vector(14, 6), Vector(14, 12), Vector(26, 12), CASH_REGISTER} },	// pagar
-		{ {Vector(10, 4), Vector(10, 6), Vector(14, 6), Vector(14, 12), Vector(28, 12), PAY, OUT_PAY} },	// marcharse mesa
+		{ {Vector(27, 12), Vector(6, 12), Vector(6, 6), Vector(10, 6), Vector(10, 4), Vector(9, 4)}, west },	// mesa
+		{ {Vector(10, 4), Vector(10, 6), Vector(21, 6), Vector(21, 11), CASH_REGISTER} },	// pagar
+		{ {Vector(10, 4), Vector(10, 6), Vector(21, 6), Vector(21, 12), Vector(28, 12), PAY, OUT_PAY} },	// marcharse mesa
 
 		// marcharse después de haber pagado la comida
 		{{Vector(26, 13), OUT_PAY}}

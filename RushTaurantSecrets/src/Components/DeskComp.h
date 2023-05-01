@@ -5,11 +5,13 @@
 #include <vector>
 class Transform;
 class Client;
+class InventoryComp;
 
 class DeskComp : public TriggerComp {
 private:
 	Transform* trans;
 	std::vector<Client*> assigned;
+	InventoryComp* inventory;
 	bool sucia;
 	int num;
 	const float
@@ -22,6 +24,7 @@ private:
 	Texture* dirtyPlate;
 	SoundEffect* cleanSound;
 	SoundEffect* assignSound;
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DESK;
 
@@ -31,10 +34,11 @@ public:
 
 	void assignClients(const std::vector<Client*>& clients);
 
+	// ¿?
 	// Se pasa como parámetro el plato que se quiera servir a los clientes asignados a la mesa.
 	// Devuelve true si un cliente ha recibido el plato que quería,
 	// o false si nadie ha aceptado el plato (no lo pedían o ya lo han recibido) 
-	void spreadOverlap();
+	void serveTable();
 
 	// Se llama cuando se quiere limpiar la mesa.
 	void cleanDesk();

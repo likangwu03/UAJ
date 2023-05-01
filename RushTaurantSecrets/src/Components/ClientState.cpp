@@ -55,7 +55,7 @@ void ClientState::update() {
 #ifdef _DEBUG
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(TAKEMYORDER);	// TAKEMYORDER
+			setState(EATING);	// TAKEMYORDER
 			
 			takeNote->play();
 			render->renderTakingNoteState();
@@ -125,7 +125,7 @@ void ClientState::changeDish() {
 		render->renderThinkingState();
 	}
 	else {
-		setState(OUT);
+		unhappy();
 		render->renderFinishEatState();
 	}
 }

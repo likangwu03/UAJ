@@ -2,7 +2,7 @@
 #include "Animator.h"
 using namespace std;
 
-/*pos seguir¨¢ la del transform, pero se puede definir independientemente w y h*/
+/*pos sigue la del transform, pero se puede definir independientemente w y h*/
 class CharacterAnimator :public Animator {
 protected:
 	GOOrientation parentOrientation;

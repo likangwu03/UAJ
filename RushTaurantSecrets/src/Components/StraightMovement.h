@@ -18,6 +18,9 @@ struct Path {
 	int cont;
 };
 
+// Se pierde memoria del camino que ha recorrido cuando:
+// - Se ha recorrido un camino entero y se ha añade otro
+// - Se da media vuelta
 class StraightMovement : public Component {
 private:
 	Transform* transform;
@@ -26,14 +29,25 @@ private:
 	float speed;	// velocidad en ir de un punto a otro
 	float offsetZone;	// tiene que ser un número pequeño
 
+	// activar/desactivar la ida y vuelta
 	bool roundTrip;
+	// si roundTripTime es -1, pero numLaps no, se trata de un recorrido por vueltas
+	// si numLaps es -1, pero roundTripTime no, se trata de un recorrido por timepo
+	// si ambos son -1, se trata de una ida y vuelta infinita
 	float roundTripTime;
-	float elapsedTime1;
+	// número de vueltas a dar
 	int numLaps;
+	// cuántas vueltas ha dado de momento
 	int actNumLaps;
 
+	// activar/desactivar loop
 	bool loop;
+	// -1 si el loop es infinito
 	float loopTime;
+
+	float elapsedTime;
+	bool isWalking;
+	movementState walkingState;
 
 	// recorrer recta
 	Vector pointStraight(float t);
@@ -49,6 +63,9 @@ private:
 
 	// se establece un nuevo camino a partir de una serie de puntos
 	void newPath(const vector<Vector>& newPath);
+
+	// temporizador del recorrido
+	void tripTimer(bool& trip, float& timer);
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_STRAIGHT_MOVEMENT;
@@ -73,24 +90,38 @@ public:
 		return path.points.back();
 	}
 
-	inline void enableRoundTrip(int numLaps) {
+	// activar ida y vuelta por número de vueltas
+	inline void enableRoundTripByLaps(int numLaps) {
 		roundTrip = true;
 		this->numLaps = numLaps * 2;
 	}
-
-	// en segundos
-	inline void enableRoundTrip(float time) {
+	// activar ida y vuelta por tiempo
+	inline void enableRoundTripByTime(float time) {
 		roundTrip = true;
 		roundTripTime = time * 1000;
 	}
-
+	inline void enableInfiniteRoundTrip() {
+		roundTrip = true;
+	}
 	inline bool roundTripEnded() const {
 		return roundTrip;
 	}
 
+	// activar loop por tiempo
 	inline void enableLoop(float time) {
 		loop = true;
-		loopTime = time * 1000;
+		loopTime = time;
+	}
+	inline void enableInfiniteLoop() {
+		loop = true;
+	}
+	inline bool loopEnded() {
+		return loop;
+	}
+
+	inline void setWalkingState(movementState newWalkingState) {
+		walkingState = newWalkingState;
+		transform->setMovState(walkingState);
 	}
 
 	virtual void update();

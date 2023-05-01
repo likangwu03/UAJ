@@ -57,15 +57,38 @@ int ThievesManager::randomPos() {
 
 ThievesManager::ThievesManager(GameObject* parent, float generalSpeed, float escapeSpeed, bool canGetFreezer, int numThiefs, float min, float max) :
 	Manager(parent), sdl(SDLUtils::instance()), warningSound(&sdl->soundEffects().at("ALERT")), played(false),
-	generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), minFrec(0), maxFrec(5), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
+	generalSpeed(generalSpeed), escapeSpeed(escapeSpeed), canGetFreezer(canGetFreezer), thiefInteractWith(nullptr),
+	minFrec(0), maxFrec(5), numThiefs(numThiefs), elapsedTime(0), selectedPosition() {
 	scene = parent->getScene();
 	thiefs = scene->getGroup(_ecs::grp_THIEFS);
 	timer = sdl->rand().nextInt(minFrec, maxFrec);
 	warningSound->setVolume(30);
 }
 
+vector<GameObject*> ThievesManager::canInteractWith() {
+	vector<GameObject*> thievesCanInteract;
+	thievesCanInteract.reserve(_ecs::MAX_THIEFS);
+
+	// vector con los ladrones con los que puede interactuar
+	// son los que están de camino al congelador o a la fórmula secreta
+	// y con los que está haciendo overlap
+	for (auto thief : *thiefs) {
+		ThiefState* thiefState = thief->getComponent<ThiefState>();
+		ThiefTrigger* thiefTrigger = thief->getComponent<ThiefTrigger>();
+		ThiefState::States currentState = thiefState->getState();
+		if ((currentState == ThiefState::OBJECTIVE_FREEZER || currentState == ThiefState::OBJECTIVE_SECRET)
+			&& thiefTrigger->IsOverLap()) {
+			thievesCanInteract.push_back(thief);
+		}
+	}
+
+	return thievesCanInteract;
+}
+
 void ThievesManager::update() {
-	if(!Game::get()->getCoopHandler()->isClient()) addFrequently();
+	if (!Game::get()->getCoopHandler()->isClient()) {
+		addFrequently();
+	}
 }
 
 void ThievesManager::stopSound() {

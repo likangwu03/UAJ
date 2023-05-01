@@ -43,29 +43,45 @@ bool StraightMovement::hasArrivedPoint() const {
 void StraightMovement::newStraight(const Vector& end) {
 	this->end = end;
 	calculateDir();
-	// animación de moverse
-	transform->setMovState(walking);
+	//transform->setMovState(walking);
 }
 
 void StraightMovement::newPath(const vector<Vector>& newPath) {
+	// se añaden los puntos a recorrer
 	path.points.reserve(newPath.size());
 	path.points = newPath;
 	path.cont = 0;
+
+	// se establece la recta a recorrer
 	newStraight(path.points[path.cont]);
+
+	// se cambia la animación y se indica que se está moviendo
+	transform->setMovState(walkingState);
+	isWalking = true;
+}
+
+void StraightMovement::tripTimer(bool& trip, float& timer) {
+	if (timer > 0 && trip) {
+		elapsedTime += deltaTime;
+		if (elapsedTime > timer) {
+			elapsedTime = 0;
+			trip = false;
+			timer = -1;
+			stop();
+		}
+	}
 }
 
 StraightMovement::StraightMovement(GameObject* parent, float speed) :
 	Component(parent, id), offsetZone(3), speed(speed), roundTrip(false),
-	roundTripTime(-1), elapsedTime1(0), numLaps(-1), actNumLaps(0),
-	loop(false), loopTime(0) {
-	path.cont = 0;
-	transform = parent->getComponent<Transform>();
-	Vector pos = transform->getPos();
-	// se quedan quietos cuando se crean
-	end = pos;
+	roundTripTime(-1), numLaps(-1), actNumLaps(0), loop(false), loopTime(-1), 
+	elapsedTime(0), walkingState(walking), isWalking(), path() {
 
-	// se guarda el punto inicial
-	path.points.push_back(transform->getPos());
+	transform = parent->getComponent<Transform>();
+	// se crea un camino con el punto inicial de modo que se consigue que:
+	// - se queden quietos cuando se crean si no se añaden más caminos
+	// - se guarde el punto inicial por si se quiere dar media vuelta
+	newPath({ transform->getPos() });
 }
 
 void StraightMovement::addPath(const vector<Vector>& points) {
@@ -85,7 +101,6 @@ void StraightMovement::addPath(const vector<Vector>& points) {
 void StraightMovement::stop() {
 	end = transform->getPos();
 	path.cont = path.points.size();
-	//path.points.clear();
 }
 
 void StraightMovement::goBack() {
@@ -112,9 +127,11 @@ void StraightMovement::update() {
 		if (!hasFinishedPath()) {
 			newStraight(path.points[path.cont]);
 		}
+		// si ha terminado de recorrer el camino y esta en ida y vuelta, da media vuelta
 		else if (roundTrip) {
 			goBack();
- 			if (numLaps != -1) {
+			// media vuelta por número de vueltas
+			if (numLaps != -1) {
 				actNumLaps += 1;
 				if (actNumLaps >= numLaps - 1) {
 					numLaps = -1;
@@ -122,31 +139,20 @@ void StraightMovement::update() {
 				}
 			}
 		}
+		// si ha terminado de recorrer el camino y está en loop, vuelve a recorrerlo
 		else if (loop) {
- 			path.cont = 0;
+			path.cont = 0;
 			newStraight(path.points[path.cont]);
 		}
 		else {
-			transform->setMovState(idle);
+			if (isWalking) {
+				transform->setMovState(idle);
+				isWalking = false;
+			}
 		}
 	}
 
-	if (roundTripTime > 0 && roundTrip) {
-		elapsedTime1 += deltaTime;
-		if (elapsedTime1 > roundTripTime) {
-			elapsedTime1 = 0;
-			roundTrip = false;
-			roundTripTime = -1;
-			stop();
-		}
-	}
+	tripTimer(roundTrip, roundTripTime);
 
-	if (loop) {
-		elapsedTime1 += deltaTime;
-		if (elapsedTime1 > loopTime) {
-			elapsedTime1 = 0;
-			loop = false;
-			stop();
-		}
-	}
+	tripTimer(loop, loopTime);
 }

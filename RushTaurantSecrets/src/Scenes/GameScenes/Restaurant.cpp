@@ -47,16 +47,19 @@ void Restaurant::callAfterCreating() {
 	pantry = GameManager::get()->getPantry();
 
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 1);
+	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 3);
 
-	/*
 	GameObject* prueba = new GameObject(this, _ecs::grp_CLIENTS);
 	new Transform(prueba, RelativeToGlobal::pointRestaurant(Vector(30, 18)), Vector(0, 0), 48, 96);
-	new CharacterAnimator(prueba, "Client_1", 18, 24, 1);
+	Animator::AnimParams aP;
+	aP.initFrame = 18;
+	aP.endFrame = 24;
+	aP.initFrame = 1;
+	new CharacterAnimator(prueba, "Client_1", aP);
 	StraightMovement* s = new StraightMovement(prueba, 3);
 	s->addPath(RelativeToGlobal::pointsRestaurant({ Vector(25, 18), Vector(25, 15), Vector(30,15) }));
-	s->enableLoop(10.0f);
-	*/
+	s->enableLoop(10000.0f);
+	s->setWalkingState(sleeping);
 
 	dm = GameManager::get()->getDayManager();
 
