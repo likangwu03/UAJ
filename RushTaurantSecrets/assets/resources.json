@@ -914,7 +914,7 @@
     },
     {
       "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
-      "file": "assets/Sprites/Cinematic/Prota_Room_Night.png"
+      "file": "assets/Sprites/Cutscenes/Prota_Room_Night.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_RAINY",
@@ -930,7 +930,7 @@
     },
     {
       "id": "CINEMATIC_BG_PANTRY_TOP",
-      "file": "assets/Sprites/Cinematic/pantry_top.png"
+      "file": "assets/Sprites/Cutscenes/pantry_top.png"
     },
     {
       "id": "CINEMATIC_BG_HOUSE",

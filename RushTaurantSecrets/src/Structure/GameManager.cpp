@@ -100,7 +100,7 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEnding() });
 
 
-	changeScene(allScenes.at(_ecs::sc_ENDINGDAY2KILL));
+	changeScene(allScenes.at(_ecs::sc_MAINMENU));
 }
 
 GameManager::~GameManager() {
