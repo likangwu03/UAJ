@@ -152,4 +152,7 @@ public:
 
 
 	virtual void update();
+
+	int getAssignedTable() { return assignedTable; }
+	int getPosGroup() { return posGroup; }
 };

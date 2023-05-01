@@ -20,6 +20,7 @@ struct Message {
 		msg_TO_RESTAURANT,
 		msg_ASSIGN_CLIENT,
 		msg_ADD_CLINETS,
+		msg_CLIENT,
 		msg_THIEF_SPAWN,
 		msg_THIEF_INTERACT,
 		// Do not erase pls
@@ -57,9 +58,10 @@ struct Message {
 	struct data_CLIENT
 	{
 		uint8_t state;
+		uint8_t dish;
 		uint8_t desk;
 		uint8_t nClinet;
-	};
+	}client;
 
 	struct data_thief_spawn {
 		uint8_t number;
@@ -219,6 +221,13 @@ public:
 			msg = code8vector(thief_spawn.skins, msg);
 			msg = code8vector(thief_spawn.positions, msg);
 			break;
+
+		case msg_CLIENT:
+			msg = code8(client.state, msg);
+			msg = code8(client.nClinet, msg);
+			msg = code8(client.desk, msg);
+			msg = code8(client.dish, msg);
+			break;
 		}
 
 	
@@ -279,6 +288,12 @@ public:
 			msg = decode8(thief_spawn.number, msg);
 			msg = decode8vector(thief_spawn.skins, msg, thief_spawn.number);
 			msg = decode8vector(thief_spawn.positions, msg, thief_spawn.number);
+			break;
+		case msg_CLIENT:
+			msg = decode8(client.state, msg);
+			msg = decode8(client.nClinet, msg);
+			msg = decode8(client.desk, msg);
+			msg = decode8(client.dish, msg);
 			break;
 		}
 		return msg;

@@ -53,9 +53,12 @@ public:
 
 	void update();
 	void takeOrder();
+	void takeOrder(int dish);
 	_ecs::_dish_id getOrderedDish();
-	void getServed();
-	void changeDish();
+	void getServed(bool send=true);
+	void changeDish(bool send=true);
 	float getHappiness();
 
+
+	void receive(const Message& message) override;
 };

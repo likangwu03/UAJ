@@ -4,6 +4,8 @@
 #include "../Managers/Reputation.h"
 #include "../Managers/DayManager.h"
 #include "../Utilities/checkML.h"
+#include "ClientMovement.h"
+#include "../Structure/Game.h"
 
 ClientState::ClientState(GameObject* parent, vector<_ecs::DishInfo>* menu) :
 	Component(parent, id), state(START), happiness(60), timer(0), availableDishes(menu), 
@@ -55,7 +57,7 @@ void ClientState::update() {
 #ifdef _DEBUG
 			cout << "I know what I want to eat" << endl;
 #endif
-			setState(EATING);	// TAKEMYORDER
+			setState(TAKEMYORDER);	// TAKEMYORDER
 			
 			takeNote->play();
 			render->renderTakingNoteState();
@@ -98,7 +100,17 @@ void ClientState::takeOrder() {
 #endif
 	setState(ORDERED);
 	render->renderOrderingState();
+
+	Message m;
+	m.id = Message::msg_CLIENT;
+	m.client.state = ORDERED;
+	m.client.nClinet = parent->getComponent<ClientMovement>()->getPosGroup();
+	m.client.desk= parent->getComponent<ClientMovement>()->getAssignedTable();
+	m.client.dish = rndDish;
+	Game::get()->getCoopHandler()->send(m);
 }
+
+
 
 
 // Funci�n que devuelve el plato que se ha pedido
@@ -106,18 +118,27 @@ _ecs::_dish_id ClientState::getOrderedDish() { return orderedDish; }
 
 
 // Funci�n que informa que ha sido servido y cambia el estado a EATING
-void ClientState::getServed() {
+void ClientState::getServed(bool send) {
 #ifdef _DEBUG
 	cout << "Thanks for the food" << endl;
 #endif
 	setState(EATING);
 	render->renderEatingState();
+	if (send) {
+		Message m;
+		m.id = Message::msg_CLIENT;
+		m.client.state = EATING;
+		m.client.nClinet = parent->getComponent<ClientMovement>()->getPosGroup();
+		m.client.desk = parent->getComponent<ClientMovement>()->getAssignedTable();
+		m.client.dish = 0;
+		Game::get()->getCoopHandler()->send(m);
+	}
 }
 
 
 // Funci�n que hace que el cliente vuelva al estado de pensar si no se le ha 
 // cambiado y le baja la felicidad o hace que se vaya si se le ha cambiado antes 
-void ClientState::changeDish() {
+void ClientState::changeDish(bool send) {
 	if (!dishChanged) {
 		dishChanged = true;
 		happiness -= 20;
@@ -128,10 +149,50 @@ void ClientState::changeDish() {
 		unhappy();
 		render->renderFinishEatState();
 	}
+	if (send) {
+		Message m;
+		m.id = Message::msg_CLIENT;
+		m.client.state = TAKEMYORDER;
+		m.client.nClinet = parent->getComponent<ClientMovement>()->getPosGroup();
+		m.client.desk = parent->getComponent<ClientMovement>()->getAssignedTable();
+		m.client.dish = 0;
+		Game::get()->getCoopHandler()->send(m);
+	}
+	
 }
 
 
 // Funci�n que devuelve la felicidad del cliente
 float ClientState::getHappiness() {
 	return happiness;
+}
+
+
+// Funci�n que asigna al plato pedido uno dado de entre los
+// disponibles en el men?del d�a y cambia el estado a ORDERED
+void ClientState::takeOrder(int dish) {
+	orderedDish = availableDishes->at(dish).id;
+	setState(ORDERED);
+	render->renderOrderingState();
+}
+
+
+void ClientState::receive(const Message& message)  {
+	if (message.id == Message::msg_CLIENT) {
+		int group= parent->getComponent<ClientMovement>()->getPosGroup();
+		int table = parent->getComponent<ClientMovement>()->getAssignedTable();
+		if (message.client.nClinet != group || message.client.desk != table) return;
+
+		if (message.client.state == ORDERED) {
+			takeOrder(message.client.dish);
+		}
+		else if(message.client.state==TAKEMYORDER)
+		{
+			changeDish(false);
+		}
+		else if (message.client.state == EATING) {
+			getServed(false);
+		}
+		
+	}
 }
