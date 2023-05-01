@@ -58,8 +58,8 @@ void Restaurant::callAfterCreating() {
 	new CharacterAnimator(prueba, "Client_1", aP);
 	StraightMovement* s = new StraightMovement(prueba, 3);
 	s->addPath(RelativeToGlobal::pointsRestaurant({ Vector(25, 18), Vector(25, 15), Vector(30,15) }));
-	s->enableLoop(10000.0f);
-	s->setWalkingState(sleeping);
+	s->enableInfiniteLoop();
+	s->setWalkingState(pushing);
 
 	dm = GameManager::get()->getDayManager();
 

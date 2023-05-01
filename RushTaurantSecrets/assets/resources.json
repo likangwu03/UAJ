@@ -388,7 +388,9 @@
     },
     {
       "id": "SHOPPING_CART",
-      "file": "assets/Sprites/Restaurant/ShoppingCart.png"
+      "file": "assets/Sprites/Restaurant/ShoppingCart.png",
+      "cols": 12,
+      "rows": 1
     },
     {
       "id": "HEART",
