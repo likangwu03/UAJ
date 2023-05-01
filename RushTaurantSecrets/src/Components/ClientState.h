@@ -47,7 +47,6 @@ private:
 	vector<_ecs::DishInfo>* availableDishes;
 	ClientStateRender* render;
 	_ecs::_dish_id orderedDish;
-	_ecs::_dish_id orderedDish2;    //........................................
 	bool dishChanged;
 	SoundEffect* takeNote;
 public:

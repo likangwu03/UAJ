@@ -17,6 +17,21 @@ Day1IntroScene::Day1IntroScene() {
 	top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	black = &sdlutils().images().at("Filter_Black");
+
+	player = new GameObject(this, _ecs::grp_PLAYER);
+	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(50, 14)), Vector(0, 0), 48, 96);
+	straightMovement = new StraightMovement(player, 5);
+
+	Animator::AnimParams ap;
+	ap.initFrame = 18;
+	ap.endFrame = 10;
+	ap.currAnim = 1;
+	ap.width = 48 * 1.8;
+	ap.height = 96 * 1.8;
+	ap.frameRate = 10;
+	auto anim = new CharacterAnimator(player, "Player_Casual", ap);
+
+	addPath(introPath[START]);
 }
 
 void Day1IntroScene::addPath(const vector<Vector>& points) {

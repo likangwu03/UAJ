@@ -47,7 +47,7 @@ void Restaurant::callAfterCreating() {
 	pantry = GameManager::get()->getPantry();
 
 	GameObject* managerContainer = new GameObject(this);
-	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 5);
+	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 1);
 
 	/*
 	GameObject* prueba = new GameObject(this, _ecs::grp_CLIENTS);

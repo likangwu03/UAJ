@@ -26,6 +26,8 @@ class ClientsManager : public Manager<ClientsManager> {
 	friend Manager<ClientsManager>;
 
 private:
+	// para hacer cosas si eres Server
+	bool active_; 
 	// cola con la entrada
 	list<vector<Client*>> entrance;
 	// cola con la caja de pagar
@@ -63,9 +65,11 @@ private:
 
 	// crear un grupo de clientes
 	void createGroupClients();
+	// para cliente 
+	void createGroupClients(const Message& message);
 
 	// crear un cliente
-	Client* createClient(int posGroup);
+	Client* createClient(int posGroup,int sprite_);
 
 	// comprobar si alg�n cliente ha llegado a la caja registradora y a�adirlo a la cola de pagar
 	// se a�aden todos los clientes, sin importar del grupo que sean, en fila
@@ -94,7 +98,7 @@ private:
 	bool checkFirstTableEmpty(int& table);
 
 	// asignar una mesa al primer grupo de clientes
-	void assignTable(int table, vector<Client*> firstGroup);
+	void assignTable(int table, vector<Client*> firstGroup, bool send=true); 
 
 	// comprobar si un cliente si un cliente est� de camino a pagar o pagando
 	bool isPaying(GameObject* client);
@@ -129,7 +133,7 @@ public:
 
 	// se llama cuando se quiera asignar una mesa al primer grupo de clientes
 	// se le pasa la mesa que se le desea asignar
-	void assignFirstGroup(int table);
+	void assignFirstGroup(int table);//..............................................................
 
 	static bool notAllGroupPaying(Client* client);
 
@@ -152,4 +156,8 @@ public:
 	void initComponent();
 
 	void nextDay();
+
+	void receive(const Message& message) override;
+
+	void setNetActive(bool s) { active_ = s; }
 };

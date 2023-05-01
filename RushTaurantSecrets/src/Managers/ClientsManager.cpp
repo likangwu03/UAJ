@@ -6,8 +6,10 @@
 #include "DayManager.h"
 
 #include "../Utilities/checkML.h"
+#include "../Structure/Game.h"
 
 void ClientsManager::addFrequently() {
+	if (!active_) return;
 	// se crea un grupo si: el día no ha terminado y el restaurante y la cola de entrada no están llenas
 	if (!ClockComponent::get()->dayHasFinished() && clientsGroups.size() < maxClients && entrance.size() < MAX_ENTRANCE) {
 		elapsedTime += deltaTime;
@@ -38,14 +40,35 @@ void ClientsManager::recolocatePayAll(std::list<Client*>::iterator it) {
 }
 
 void ClientsManager::createGroupClients() {
+	Message m;
+	m.id = Message::msg_ADD_CLINETS;
 	vector<Client*> group;
-
 	// número de clientes que hay en el grupo
 	int num = sdl->rand().nextInt(1, 5);
-	for (int i = num - 1; i >= 0; --i) {
-		group.push_back(createClient(i));
-	}
+	m.grp_clients.num = num;
 
+	for (int i = num - 1; i >= 0; --i) {
+		int aux = sdl->rand().nextInt(1, 15);
+		group.push_back(createClient(i, aux));
+		m.grp_clients.clients.push_back(aux);
+	
+	}
+	entrance.push_back(group);
+	clientsGroups.push_back(group);
+
+	for (auto client : group) {
+		client->getComponent<ClientMovement>()->setGroup(group);
+	}
+	Game::get()->getCoopHandler()->send(m);
+}
+
+void ClientsManager::createGroupClients(const Message& message) {
+	vector<Client*> group;
+	auto it = message.grp_clients.clients.cbegin();
+	for (int i = message.grp_clients.num - 1; i >= 0; --i) {
+		group.push_back(createClient(i, *it));
+		++it;
+	}
 	entrance.push_back(group);
 	clientsGroups.push_back(group);
 
@@ -54,15 +77,16 @@ void ClientsManager::createGroupClients() {
 	}
 }
 
-Client* ClientsManager::createClient(int posGroup) {
-	string sprite = "Client_" + to_string(sdl->rand().nextInt(1, 15));
-
+Client* ClientsManager::createClient(int posGroup,int sprite_) {
+	string sprite = "Client_" + to_string(sprite_);
 	// a partir de la posición el grupo se calcula donde empieza
 	Vector origin = _ecs::OUT_ENTRY;
 	origin.setY(origin.getY() - posGroup);
 
 	return new Client(scene, sprite, RelativeToGlobal::pointRestaurant(origin), GameManager::instance()->getTodaysMenu(), entrance.size(), speed, posGroup);
 }
+
+
 
 void ClientsManager::checkCashRegister() {
 	// lista de grupos
@@ -145,7 +169,7 @@ bool ClientsManager::checkFirstTableEmpty(int& table) {
 	return false;
 }
 
-void ClientsManager::assignTable(int table, vector<Client*> firstGroup) {
+void ClientsManager::assignTable(int table, vector<Client*> firstGroup,bool send) {
 	// se le asigna la mesa a cada miembro del grupo
 	for (auto client : firstGroup) {
 		client->getComponent<ClientMovement>()->assignTable(table);
@@ -153,8 +177,14 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup) {
 
 	// se asigna el grupo de clientes a la mesa
 	tables[table - 1]->assignClients(firstGroup);
-
 	assignedClient = true;
+
+	if (send) {
+		Message m;
+		m.id = Message::msg_ASSIGN_CLIENT;
+		m.assignClients.table = table;
+		Game::get()->getCoopHandler()->send(m);
+	}
 }
 
 // comprobar si un cliente si un cliente est?de camino a pagar o pagando
@@ -207,7 +237,7 @@ ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, 
 		throw new string("Error conversión Scene en UIRestaurant");
 	}
 	GameObject* c = uiRest->getGameObject(_ecs::hdr_CLOCK);
-
+	active_ = true;
 	sdl = SDLUtils::instance();
 }
 
@@ -232,6 +262,8 @@ void ClientsManager::assignFirstGroup(int table) {
 		}
 	}
 }
+
+
 
 bool ClientsManager::notAllGroupPaying(Client* client) {
 	return !client->getComponent<ClientMovement>()->isEveryonePaying();
@@ -305,4 +337,15 @@ void ClientsManager::update() {
 
 void ClientsManager::nextDay() {
 	timer = GameManager::get()->getDayManager()->getClientFrequency();
+}
+
+
+void ClientsManager::receive(const Message& message) {
+	if (message.id == Message::msg_ASSIGN_CLIENT) {
+		vector<Client*> firstGroup = getFirstEntrance();
+		assignTable(message.assignClients.table,firstGroup, false);
+	}
+	else if (message.id == Message::msg_ADD_CLINETS) {
+		createGroupClients(message);
+	}
 }

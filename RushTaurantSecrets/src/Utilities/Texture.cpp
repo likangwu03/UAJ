@@ -12,11 +12,13 @@ Texture& Texture::operator=(Texture &&other) noexcept {
 	height_ = other.height_;
 	fw_ = other.fw_;
 	fh_ = other.fh_;
+	numCols_ = other.numCols_;
+	numRows_ = other.numRows_;
 
 	return *this;
 }
 
-Texture::Texture(Texture &&other) noexcept {
+Texture::Texture(Texture&& other) noexcept {
 	texture_ = other.texture_;
 	other.texture_ = nullptr;
 	renderer_ = other.renderer_;
@@ -25,6 +27,8 @@ Texture::Texture(Texture &&other) noexcept {
 	height_ = other.height_;
 	fw_ = other.fw_;
 	fh_ = other.fh_;
+	numCols_ = other.numCols_;
+	numRows_ = other.numRows_;
 }
 
 Texture::Texture(SDL_Renderer *renderer, const std::string &fileName, int numCols, int numRows) {
@@ -42,6 +46,11 @@ Texture::Texture(SDL_Renderer *renderer, const std::string &fileName, int numCol
 
 	width_ = surface->w;
 	height_ = surface->h;
+
+	// número de columnas y filas del spritesheet
+	numCols_ = numCols;
+	numRows_ = numRows;
+
 	// tamaños frames
 	fw_ = width_ / numCols;
 	fh_ = height_ / numRows;

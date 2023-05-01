@@ -387,10 +387,15 @@
       "file": "assets/Sprites/Restaurant/freezer3.png"
     },
     {
-      "id": "Heart",
+      "id": "HEART",
       "file": "assets/Sprites/UI/HUD/heart.png"
     },
-
+    {
+      "id": "HEARTS",
+      "file": "assets/Sprites/UI/HUD/hearts.png",
+      "cols": 14,
+      "rows": 1
+    },
     {
       "id": "SHOP_MENU",
       "file": "assets/Sprites/UI/HUD/shoppingMenu.png",
@@ -906,8 +911,8 @@
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_NIGHT",
       "file": "assets/Sprites/Cinematic/Parent_Room_Night.png"
-    }, 
-     {
+    },
+    {
       "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
       "file": "assets/Sprites/Cinematic/Prota_Room_Night.png"
     },
@@ -922,6 +927,10 @@
     {
       "id": "CINEMATIC_BG_RESTAURANT_TOP",
       "file": "assets/Sprites/Cinematic/Restaurant_top.png"
+    },
+    {
+      "id": "CINEMATIC_BG_PANTRY_TOP",
+      "file": "assets/Sprites/Cinematic/pantry_top.png"
     },
     {
       "id": "CINEMATIC_BG_HOUSE",

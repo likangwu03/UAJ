@@ -5,7 +5,7 @@
 #include <iostream>
 #include <SDL_net.h>
 #include <cassert>
-// Mensajes para enviar a través de internet
+// Mensajes para enviar a travï¿½s de internet
 
 struct Message {
 	typedef char byte;
@@ -18,9 +18,10 @@ struct Message {
 		msg_TO_DAILY_MENU,
 		msg_TO_SUPERMARKET,
 		msg_TO_RESTAURANT,
+		msg_ASSIGN_CLIENT,
+		msg_ADD_CLINETS,
 		msg_THIEF_SPAWN,
 		msg_THIEF_INTERACT,
-
 		// Do not erase pls
 		msg_INVALID
 	};
@@ -45,6 +46,21 @@ struct Message {
 		uint8_t menu;
 	} daily_menu;
 
+	struct data_ASSIGN_CLIENT
+	{
+		uint8_t table;
+	}assignClients;
+	struct data_Grp_CLIENTS {
+		uint8_t num;
+		vector<uint8_t> clients;
+	}grp_clients;
+	struct data_CLIENT
+	{
+		uint8_t state;
+		uint8_t desk;
+		uint8_t nClinet;
+	};
+
 	struct data_thief_spawn {
 		uint8_t number;
 		std::vector<uint8_t> skins, positions; // Skin IDs & positions
@@ -52,14 +68,12 @@ struct Message {
 
 	Message(_msg_id id = msg_INVALID) : id(id) { }
 	~Message() { }
-
+	
 #pragma region code_decode
-
-
 	/// <summary>
    /// Para int: desde el -128 hasta el 127 /
    /// Para uint: desde el 0 hasta el 255 /
-   /// Para char: todos los carácteres /
+   /// Para char: todos los carï¿½cteres /
    /// Para float: indefinido
    /// </summary>
 	template<typename T>
@@ -112,18 +126,6 @@ struct Message {
 			output = (output << 1) + (input.second & 1);
 		}
 		v = output;
-	/*	Uint8 input[2];*/
-		/*msg = decode8<int8_t>(input[0], msg);
-		msg = decode8<int8_t>(input[1], msg);*/
-
-		//v = *reinterpret_cast<Uint16*>(input);
-		/*v = *reinterpret_cast<Uint16*>(input);*/
-		/*for (uint8_t i = 0; i < 8; i++, input[0] >>= 1) {
-			v = (v << 1) + (input[0] & 1);
-		}
-		for (uint8_t i = 0; i < 8; i++, input[1] >>= 1) {
-			v = (v << 1) + (input[1] & 1);
-		}*/
 		return msg+sizeof(Uint16);
 	};
 	Uint8* code16(int input, Uint8* msg) const { return code16<int16_t>(input, msg); };
@@ -173,8 +175,6 @@ struct Message {
 	};
 #pragma endregion
 
-
-
 public:
 	Uint8* code(Uint8* msg) const {
 		msg = code8(id, msg);
@@ -204,17 +204,27 @@ public:
 		case msg_TO_SUPERMARKET:
 			msg = code8(daily_menu.menu, msg);
 			break;
+		case msg_ADD_CLINETS:
+			uint8_t aux3;
+			msg = code8(grp_clients.num, msg);
+			for (uint8_t c : grp_clients.clients) {
+				msg = code8(c, msg);
+			}		
+			break;
+		case msg_ASSIGN_CLIENT:
+			msg = code8(assignClients.table, msg);
+			break;
 		case msg_THIEF_SPAWN:
 			msg = code8(thief_spawn.number, msg);
 			msg = code8vector(thief_spawn.skins, msg);
 			msg = code8vector(thief_spawn.positions, msg);
 			break;
 		}
+
 	
 		return msg;
 	}
 
-	// Recoge la información del buffer y ejecuta las acciones pertinentes
 	Uint8* decode(Uint8* msg) {
 		Uint8 id_;
 		msg = decode8< uint8_t>(id_, msg);
@@ -253,6 +263,17 @@ public:
 			break;
 		case msg_TO_SUPERMARKET:
 			msg= decode8<uint8_t>(daily_menu.menu, msg);
+			break;
+		case Message::msg_ADD_CLINETS:
+			uint8_t aux3;
+			msg = decode8<uint8_t>(grp_clients.num, msg);
+			for (int i = 0; i < grp_clients.num; i++) {
+				msg = decode8<uint8_t>(aux3, msg);
+				grp_clients.clients.push_back(aux3);
+			}
+			break;
+		case Message::msg_ASSIGN_CLIENT:
+			msg=decode8<uint8_t>(assignClients.table, msg);
 			break;
 		case msg_THIEF_SPAWN:
 			msg = decode8(thief_spawn.number, msg);

@@ -54,6 +54,14 @@ public:
 		return fh_;
 	}
 
+	inline int numCols() const {
+		return numCols_;
+	}
+
+	inline int numRows() const {
+		return numRows_;
+	}
+
 	void setHeigth(int h) {
 		height_ = h;
 	}
@@ -112,7 +120,7 @@ public:
 	}
 
 
-	inline void renderFrame(const SDL_Rect& dest, int col, int row, float angle) {
+	inline void renderFrame(const SDL_Rect& dest, int col, int row, float angle = 0) {
 		SDL_Rect src;
 		src.x = fw_ * col;
 		src.y = fh_ * row;
@@ -137,4 +145,6 @@ private:
 	int height_;
 	int fw_;
 	int fh_;
+	int numCols_;
+	int numRows_;
 };

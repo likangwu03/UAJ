@@ -25,6 +25,29 @@ BadEnding1Scene::BadEnding1Scene() {
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
+
+	transition = nullptr;
+	cont = 0;
+
+	/*
+	player = new Player(this, 0);
+	player->getComponent<PlayerMovementController>()->setActive(false);
+	straightMovementP = new StraightMovement(player, 5);
+	transform = player->getComponent<Transform>();
+	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+	transform->setMovState(walking);
+	*/
+
+	player = new GameObject(this, _ecs::grp_PLAYER);
+	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(20, 11)), Vector(0, 0), 48, 96);
+	straightMovement = new StraightMovement(player, 5);
+	Animator::AnimParams ap;
+	ap.initFrame = 18;
+	ap.endFrame = 18;
+	ap.currAnim = 1;
+	auto anim = new CharacterAnimator(player, "Player_1", ap);
+
+	//Scene* scene, string sprite, Vector origin, float speed
 	phonecall = &sdlutils().soundEffects().at("PHONECALL");
 	
 	client1 = new CinematicNPC(this, "Client_3", RelativeToGlobal::pointRestaurant({ 25, 14 }), 1);
