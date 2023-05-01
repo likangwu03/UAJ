@@ -19,6 +19,7 @@ class ClientMovement : public Component {
 	enum typePath {ARRIVE, PAY, OUT};
 
 private:
+
 	ClientState* clientState;
 	StraightMovement* straightMovement;
 	Transform* transform;

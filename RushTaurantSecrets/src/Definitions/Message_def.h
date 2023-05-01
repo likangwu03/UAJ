@@ -18,7 +18,8 @@ struct Message {
 		msg_TO_DAILY_MENU,
 		msg_TO_SUPERMARKET,
 		msg_TO_RESTAURANT,
-
+		msg_ASSIGN_CLIENT,
+		msg_ADD_CLINETS,
 		// Do not erase pls
 		msg_INVALID
 	};
@@ -42,12 +43,21 @@ struct Message {
 	struct data_DAILY_MENU {
 		uint8_t menu;
 	} daily_menu;
-
-
-
+	struct data_ASSIGN_CLIENT
+	{
+		uint8_t table;
+	}assignClients;
+	struct data_Grp_CLIENTS {
+		uint8_t num;
+		vector<uint8_t> clients;
+	}grp_clients;
+	struct data_CLIENT
+	{
+		uint8_t state;
+		uint8_t desk;
+		uint8_t nClinet;
+	};
 #pragma region code_decode
-
-
 	/// <summary>
    /// Para int: desde el -128 hasta el 127 /
    /// Para uint: desde el 0 hasta el 255 /
@@ -89,7 +99,7 @@ struct Message {
 	}
 	template<typename T>
 	Uint8* decode16(T& v, Uint8* msg) {
-		Uint16 output{}; std::pair<char, char> input;
+		int16_t output{}; std::pair<char, char> input;
 		input.first = msg[0]; input.second = msg[1];
 		for (uint8_t i = 0; i < 8; i++, input.first >>= 1) {
 			output = (output << 1) + (input.first & 1);
@@ -98,18 +108,6 @@ struct Message {
 			output = (output << 1) + (input.second & 1);
 		}
 		v = output;
-	/*	Uint8 input[2];*/
-		/*msg = decode8<int8_t>(input[0], msg);
-		msg = decode8<int8_t>(input[1], msg);*/
-
-		//v = *reinterpret_cast<Uint16*>(input);
-		/*v = *reinterpret_cast<Uint16*>(input);*/
-		/*for (uint8_t i = 0; i < 8; i++, input[0] >>= 1) {
-			v = (v << 1) + (input[0] & 1);
-		}
-		for (uint8_t i = 0; i < 8; i++, input[1] >>= 1) {
-			v = (v << 1) + (input[1] & 1);
-		}*/
 		return msg+sizeof(Uint16);
 	};
 	Uint8* code16(int input, Uint8* msg) { return code16<int16_t>(input, msg); };
@@ -121,14 +119,12 @@ struct Message {
 	};
 	Uint8* code16(float input, Uint8* msg) { return code16<int16_t>(roundf(input * 10), msg); };
 	Uint8* decode16(float& v, Uint8* msg) {
-		uint16_t aux;
+		int16_t aux;
 		msg = decode16(aux, msg);
 		v = aux / 10.0f;
 		return msg;
 	};
 #pragma endregion
-
-
 
 public:
 	Uint8* code(Uint8* msg) {
@@ -159,12 +155,22 @@ public:
 		case Message::msg_TO_SUPERMARKET:
 			msg = code8(daily_menu.menu, msg);
 			break;
+		case Message::msg_ADD_CLINETS:
+			uint8_t aux3;
+			msg = code8(grp_clients.num, msg);
+			for (uint8_t c : grp_clients.clients) {
+				msg = code8(c, msg);
+			}		
+			break;
+		case Message::msg_ASSIGN_CLIENT:
+			msg = code8(assignClients.table, msg);
+			break;
 		}
+
 	
 		return msg;
 	}
 
-	// Recoge la información del buffer y ejecuta las acciones pertinentes
 	Uint8* decode(Uint8* msg) {
 		Uint8 id_;
 		msg = decode8< uint8_t>(id_, msg);
@@ -204,6 +210,17 @@ public:
 		case Message::msg_TO_SUPERMARKET:
 			msg= decode8<uint8_t>(daily_menu.menu, msg);
 			break;
+		case Message::msg_ADD_CLINETS:
+			uint8_t aux3;
+			msg = decode8<uint8_t>(grp_clients.num, msg);
+			for (int i = 0; i < grp_clients.num; i++) {
+				msg = decode8<uint8_t>(aux3, msg);
+				grp_clients.clients.push_back(aux3);
+			}
+			break;
+			break;
+		case Message::msg_ASSIGN_CLIENT:
+			msg=decode8<uint8_t>(assignClients.table, msg);
 		}
 		return msg;
 	}
