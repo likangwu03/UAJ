@@ -116,6 +116,7 @@ void UIMarket::reset() {
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 
+	basketMarket->nextDay();
 }
 
 
