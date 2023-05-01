@@ -919,10 +919,6 @@
       "file": "assets/Sprites/Cutscenes/Parent_Room_Night.png"
     },
     {
-      "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
-      "file": "assets/Sprites/Cutscenes/Prota_Room_Night.png"
-    },
-    {
       "id": "CINEMATIC_BG_PARENTS_ROOM_RAINY",
       "file": "assets/Sprites/Cutscenes/Parent_Room_Rainy.png"
     },
@@ -955,8 +951,12 @@
       "file": "assets/Sprites/Cutscenes/Pantry.png"
     },
     {
-      "id": "CINEMATIC_BG_PLAYER_ROOM",
-      "file": "assets/Sprites/Cutscenes/Player_Room.png"
+      "id": "CINEMATIC_BG_PROTA_ROOM",
+      "file": "assets/Sprites/Cutscenes/Prota_Room.png"
+    },
+    {
+      "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
+      "file": "assets/Sprites/Cutscenes/Prota_Room_Night.png"
     },
     {
 

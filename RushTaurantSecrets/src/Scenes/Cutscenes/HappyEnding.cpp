@@ -9,10 +9,10 @@
 #include "../../GameObjects/Dialogue.h"
 
 HappyEnding::HappyEnding() {
-	//dialogues = GameManager::get()->getDialogueInfo("HappyEnding.json");
+	dialogues = GameManager::get()->getDialogueInfo("HappyEnding.json");
 	
-	bg = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL");
-	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
+	bg = &sdlutils().images().at("CINEMATIC_BG_PROTA_ROOM");
+	filter = &sdlutils().images().at("CINEMATIC_BG_PROTA_ROOM_NIGHT");
 
 	nightMusic = &sdlutils().musics().at("GOOD_DAY_MUSIC");
 	nightAmbience = &sdlutils().soundEffects().at("NIGHT_AMBIENCE");
@@ -28,22 +28,25 @@ void HappyEnding::reset() {
 	timer = 0;
 	dialogueN = 0;
 
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(19.5, 25)));
-	transform->setMovState(walking);
-	transform->setOrientation(north);
+	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(8.8, 2)));
+	transform->setMovState(sleeping);
+	transform->setOrientation(south);
 
-	anim->setH(96 * 1.3);
-	anim->setW(48 * 1.3);
+	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+	anim->setH(96 * 1.63);
+	anim->setW(48 * 1.63);
 
 	straightMovement->changeSpeed(6);
 	straightMovement->stop();
-	addPath(paths[START]);
+	//addPath(paths[START]);
 
 	filter->setOpacity(80);
 	nightAmbience->setVolume(60);
 
-	nightAmbience->play(-1);
-	nightMusic->play(-1);
+	//nightAmbience->play(-1);
+	//nightMusic->play(-1);
+	nightAmbience->haltChannel();
+	nightMusic->haltMusic();
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
@@ -53,14 +56,10 @@ void HappyEnding::reset() {
 
 void HappyEnding::update() {
 	CinematicBaseScene::update();
-	//switch (state) {
-	//case HappyEnding::START:
-	//	if (straightMovement->hasFinishedPath()) {
-	//		(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
-	//		addPath(paths[ENTERING]);
-	//		state = ENTERING;
-	//	}
-	//	break;
+	switch (state) {
+	case HappyEnding::START:
+		state = OUT;
+		break;
 	//case HappyEnding::ENTERING:
 	//	if (straightMovement->hasFinishedPath()) {
 	//		transform->setMovState(idle);
@@ -81,7 +80,7 @@ void HappyEnding::update() {
 	//	}
 	//	break;
 
-	//}
+	}
 	
 }
 
