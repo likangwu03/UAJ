@@ -73,6 +73,12 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,0);
 	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
+
+	buybutton = new ButtonGO(this, "BUY_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H,
+		[&]() {
+			
+		});
+	buybutton->setActives(false);
 }
 
 UIMarket::~UIMarket() {
@@ -159,6 +165,15 @@ void UIMarket::handleEvents() {
 	}
 	else
 		Scene::handleEvents();
+
+	if (buybutton->isActive()) {
+		if (ih->isKeyDown(SDL_SCANCODE_DOWN)) {
+			buybutton->getComponent<ButtonComp>()->setHighlighted(true);
+		}
+		else if (ih->isKeyDown(SDL_SCANCODE_UP)) {
+			buybutton->getComponent<ButtonComp>()->setHighlighted(false);
+		}
+	}
 }
 
 void UIMarket::render() {
@@ -186,3 +201,6 @@ BasketMarket* UIMarket::basketM() {
 	return basketMarket;
 }
 
+ButtonGO* UIMarket::BuyButton() {
+	return buybutton;
+}
