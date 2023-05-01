@@ -280,7 +280,11 @@
   <object id="50" x="919.333" y="948.577" width="36" height="38.8468"/>
  </objectgroup>
  <objectgroup id="20" name="obj">
-  <object id="38" name="CookingMachine" x="1346.56" y="200.197" width="44.6667" height="67.8333"/>
+  <object id="38" name="CookingMachine" x="1346.56" y="200.197" width="44.6667" height="67.8333">
+   <properties>
+    <property name="id" type="int" value="0"/>
+   </properties>
+  </object>
   <object id="40" name="Bin" x="1054.66" y="345.667" width="49.3333" height="52.3333"/>
   <object id="51" name="CashRegister" x="1226.95" y="440.667" width="66.375" height="23.3333"/>
   <object id="53" name="KitchenIsland" x="1202.67" y="290" width="283.333" height="92.6667"/>
@@ -387,9 +391,21 @@
     <property name="orient" type="int" value="3"/>
    </properties>
   </object>
-  <object id="78" name="CookingMachine" x="1394.67" y="200.417" width="44.6667" height="67.8333"/>
-  <object id="79" name="CookingMachine" x="1442" y="200.083" width="44.6667" height="67.8333"/>
-  <object id="80" name="CookingMachine" x="1488.78" y="200.932" width="44.6667" height="67.8333"/>
+  <object id="78" name="CookingMachine" x="1394.67" y="200.417" width="44.6667" height="67.8333">
+   <properties>
+    <property name="id" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="79" name="CookingMachine" x="1442" y="200.083" width="44.6667" height="67.8333">
+   <properties>
+    <property name="id" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="80" name="CookingMachine" x="1488.78" y="200.932" width="44.6667" height="67.8333">
+   <properties>
+    <property name="id" type="int" value="3"/>
+   </properties>
+  </object>
   <object id="81" name="goToPantry" x="962" y="175.333" width="44" height="75"/>
   <object id="83" name="table" x="452.25" y="427" width="102.5" height="118">
    <properties>

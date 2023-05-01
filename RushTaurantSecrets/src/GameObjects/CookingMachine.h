@@ -18,7 +18,7 @@ private:
 	const int OFFSETY = 0;
 	const int OFFSETX = -7;
 public:
-	CookingMachine(Scene* scene, Vector pos, float w, float h) :GameObject(scene, _ecs::grp_INTERACTABLE) {
+	CookingMachine(Scene* scene, Vector pos, float w, float h,int id) :GameObject(scene, _ecs::grp_INTERACTABLE) {
 		new Transform(this, pos, Vector(0, 0), w, h,0,true); //para saber en qu¨¦ posici¨®n renderizar el bocadillo 
 		Animator::AnimParams ap;
 		ap.initFrame = 0;
@@ -28,7 +28,7 @@ public:
 		ap.width = THINKING_WIDTH;
 		ap.height = THINKING_HEIGHT;
 		new UIAnimator(this, "KITCHEN_PROCESSING_ICON_ANIM", ap, Vector(pos.getX(), pos.getY()+ THINKING_OFFSETY));
-		new CookingMachineComp(this);
+		new CookingMachineComp(this,id);
 		new Image(this, "COOK_HIGHLIGHT"); //renderizar el highlight  Vector(pos.getX() + OFFSETX, pos.getY() + OFFSETY), w + OFFSETW, h + OFFSETH
 		new CookingMachineTrigger(this, Vector(0,OFFSET_Y), w, h);
 	};

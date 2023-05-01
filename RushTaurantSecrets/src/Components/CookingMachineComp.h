@@ -42,6 +42,8 @@ private:
 	_ecs::_dish_id dish; // plato que lleva cocinando,none si no hay
 	float cookingTime; //tiempo de cocción del plato
 
+	int num;
+
 	Vector renderPos;
 	SDLUtils* sdl;
 	Uint32 cont; //contador para cocinar
@@ -58,7 +60,7 @@ private:
 	void finishCooking();
 
 public:
-	CookingMachineComp(GameObject* parent);
+	CookingMachineComp(GameObject* parent,int num_);
 
 	//consultar el plato que tiene
 	_ecs::_dish_id getDish() { return dish; }
@@ -77,5 +79,9 @@ public:
 	virtual void update(); //para cocinar
 	virtual void render();
 	void nextDay()override;
+
+	int getNum() { return num; }
+
+	void receive(const Message& message) override;
 };
 

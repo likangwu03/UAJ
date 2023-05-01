@@ -77,7 +77,7 @@ private:
 	int dialogueN;
 	int doorFrame;
 
-	vector<
+
 
 public:
 	HappyEnding();

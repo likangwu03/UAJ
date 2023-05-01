@@ -2,7 +2,7 @@
 
 #include "../Structure/Scene.h"
 #include "Ingredients.h"
-
+#include "../Structure/Game.h"
 #include "../Utilities/checkML.h"
 
 
@@ -44,8 +44,18 @@ void KitchenIslandComp::render() {
 	
 }
 
-void KitchenIslandComp::pickIngredient(int i) {
-	if (i < ing.size() && ing[auxID[i]].n > 0  && ingCloud->addIngredient(auxID[i]) ) {
+void KitchenIslandComp::pickIngredient(int i, bool send) {
+	if (send&&i < ing.size() && ing[auxID[i]].n > 0  && ingCloud->addIngredient(auxID[i]) ) {
+		--ing[auxID[i]].n;
+		delete ing[auxID[i]].f;
+		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(ing[auxID[i]].n), *font, build_sdlcolor(0xFAF2E6ff));
+		Message m;
+		m.id = Message::msg_PICK_INGREDIENT;
+		m.ingredinet.n = i;
+		Game::get()->getCoopHandler()->send(m);
+	}
+	else if(!send)
+	{
 		--ing[auxID[i]].n;
 		delete ing[auxID[i]].f;
 		ing[auxID[i]].f = new Texture(sdl->renderer(), to_string(ing[auxID[i]].n), *font, build_sdlcolor(0xFAF2E6ff));
@@ -87,13 +97,29 @@ void KitchenIslandComp::setIngredients(vector<pair<_ecs::_ingredients_id, int>> 
 	}
 }
 
-void KitchenIslandComp::returnIngredient(_ecs::_ingredients_id id) {
+void KitchenIslandComp::returnIngredient(_ecs::_ingredients_id id,bool send) {
 	++ing[id].n;
 	delete ing[id].f;
 	ing[id].f = new Texture(sdl->renderer(), to_string(ing[id].n), *font, build_sdlcolor(0xFAF2E6ff));
+	if (send) {
+		Message m;
+		m.id = Message::msg_RETURN_INGREDIENT;
+		m.ingredinet.n = id;
+		Game::get()->getCoopHandler()->send(m);
+	}
 }
 
 
 void KitchenIslandComp::nextDay() {
 	unselectIng(selected);
+}
+
+
+void KitchenIslandComp::receive(const Message& message) {
+	if (message.id == Message::msg_PICK_INGREDIENT) {
+		pickIngredient(message.ingredinet.n, false);
+	}
+	else if (message.id == Message::msg_RETURN_INGREDIENT) {
+		returnIngredient((_ecs::_ingredients_id)message.ingredinet.n, false);
+	}
 }

@@ -1,5 +1,6 @@
 #include "CookingMachineTrigger.h"
 #include "../Utilities/checkML.h"
+#include "../Structure/Game.h"
 
 void CookingMachineTrigger::isOverlapping() {
 	float auxPos = p->getPos().getX() + p->getW() / 2;
@@ -21,14 +22,26 @@ void CookingMachineTrigger::isOverlapping() {
 		if (aux.second) {
 			cook->cook(aux.first); // cocina si se puede formar un plato
 			other_->getComponent<Ingredients>()->cookingIngredients();
+
+			Message m;
+			m.id = Message::msg_COOKING_DISH;
+			m.cooking_machine.id = cook->getNum();
+			m.cooking_machine.dish = aux.first;
+			Game::get()->getCoopHandler()->send(m);
 		}
 		else cook->informCannotCook();
 		break;
 	case CookingMachineComp::cooking: //no hace nada
 		break;
 	case CookingMachineComp::finished:
-		if (!inventory->isFull())
+		if (!inventory->isFull()) {
+			Message m2;
+			m2.id = Message::msg_PICK_DISH;
+			m2.cooking_machine.id = cook->getNum();
+			m2.cooking_machine.dish = 0;
+			Game::get()->getCoopHandler()->send(m2);
 			inventory->takeDish(cook->pickDish());
+		}
 		break;
 	}
 }

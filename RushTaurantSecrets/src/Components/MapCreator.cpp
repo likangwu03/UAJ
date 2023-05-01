@@ -179,7 +179,7 @@ void MapCreator::createObject() {
 					new CollisionObject(scene, pos,width_,height_);
 				}
 				else if (name == "CookingMachine") {
-					new CookingMachine(scene, pos, width_, height_);
+					new CookingMachine(scene, pos, width_, height_,p[0].getIntValue());
 				}
 				else if (name == "Bin") {
 					new Bin(scene, pos, width_, height_);

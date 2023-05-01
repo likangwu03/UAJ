@@ -47,13 +47,15 @@ public:
 	virtual ~KitchenIslandComp();
 
 	virtual void render();
-	void pickIngredient(int i);
-	void returnIngredient(_ecs::_ingredients_id id);
+	void pickIngredient(int i,bool send=true);
+	void returnIngredient(_ecs::_ingredients_id id, bool send = true);
 	void selectedIng(int i);
 	void unselectIng(int i);
 
 	void setIngredients(vector<pair<_ecs::_ingredients_id, int>> _ing);
 
 	void nextDay()override;
+
+	void receive(const Message& message) override;
 };
 

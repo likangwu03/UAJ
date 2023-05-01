@@ -41,7 +41,7 @@ public:
 	void serveTable();
 
 	// Se llama cuando se quiere limpiar la mesa.
-	void cleanDesk();
+	void cleanDesk(bool send=true);
 
 	bool isOccupied();
 
@@ -49,4 +49,6 @@ public:
 
 	void update() override;
 	void render() override;
+
+	void receive(const Message& message) override;
 };

@@ -3,6 +3,7 @@
 #include "../Managers/Reputation.h"
 #include "../Utilities/SoundEffect.h"
 #include "../Utilities/checkML.h"
+#include "../Structure/Game.h"
 
 CashRegisterTrigger::CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_), money(GameManager::get()->getMoney()),
@@ -40,6 +41,13 @@ void CashRegisterTrigger::isOverlapping() {
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 
+	charge();
+	Message m;
+	m.id = Message::msg_CHARGE;
+	Game::get()->getCoopHandler()->send(m);
+
+}
+void CashRegisterTrigger::charge() {
 	if (cM->canCollect()) {
 		int totalPayment = 0;
 
@@ -76,7 +84,7 @@ void CashRegisterTrigger::isOverlapping() {
 			bgRect.y += OUT_OFFSET;
 			tipped = true;
 		}
-		
+
 
 		// RACHA
 		money->addMoney(streak->getMoneyStreak() * list->size());
@@ -87,7 +95,6 @@ void CashRegisterTrigger::isOverlapping() {
 
 	}
 }
-
 void CashRegisterTrigger::onTriggerExit() {
 	 highlight->setActive(false);
 }
@@ -104,4 +111,10 @@ void CashRegisterTrigger::render() {
 		}
 	}
 
+}
+
+void CashRegisterTrigger::receive(const Message& message) {
+	if (message.id == Message::msg_CHARGE) {
+		charge();
+	}
 }

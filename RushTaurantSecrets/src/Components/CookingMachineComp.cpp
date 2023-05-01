@@ -3,7 +3,7 @@
 
 #include "../Utilities/checkML.h"
 
-CookingMachineComp::CookingMachineComp(GameObject* _parent) : Component(_parent, id),
+CookingMachineComp::CookingMachineComp(GameObject* _parent,int num_) : Component(_parent, id),num(num_),
 state(available), dish(_ecs::_dish_id::NONE_DISH), cont(0), cookingTime(0), transform(parent->getComponent<Transform>()),
 anim(parent->getComponent<UIAnimator>()), dishComb(DishCombinator::instance()), sdl(SDLUtils::instance()),
 cookSound(&sdl->soundEffects().at("COOK")),
@@ -92,8 +92,16 @@ void CookingMachineComp::render() {
 	}
 }
 
-
 void CookingMachineComp::nextDay() {
 	state = available;
 	dish = _ecs::NONE_DISH;
+}
+
+void CookingMachineComp::receive(const Message& message) {
+	if (message.id == Message::msg_COOKING_DISH && message.cooking_machine.id == num) {
+		cook((_ecs::_dish_id)message.cooking_machine.dish);
+	}
+	else if (message.id == Message::msg_PICK_DISH && message.cooking_machine.id == num) {
+		pickDish();
+	}
 }

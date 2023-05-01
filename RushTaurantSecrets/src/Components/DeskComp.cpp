@@ -6,6 +6,7 @@
 #include "../Managers/ClientsManager.h"
 #include "../GameObjects/Client.h"
 #include "../Utilities/checkML.h"
+#include "../Structure/Game.h"
 
 DeskComp::DeskComp(GameObject* parent, float width, float height, int id) :
 	TriggerComp(parent, Vector(0, 0), width, height, DeskComp::id),
@@ -45,9 +46,15 @@ void DeskComp::serveTable() {
 	}
 }
 
-void DeskComp::cleanDesk() {
+void DeskComp::cleanDesk(bool send) {
 	sucia = false;
 	cleanSound->play();
+	if (send) {
+		Message m;
+		m.id = Message::msg_CLEAN_DESK;
+		m.desk.id = getID();
+		Game::get()->getCoopHandler()->send(m);
+	}
 }
 
 bool DeskComp::isOccupied() {
@@ -80,5 +87,10 @@ void DeskComp::render() {
 	if (sucia) {
 		dirtyIcon->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - ICON_WIDTH / 2, trans->getPos().getY() +ICON_OFFSETY, ICON_WIDTH, ICON_HEIGHT));
 		dirtyPlate->render(build_sdlrect(trans->getPos().getX() + trans->getW() / 2 - PLATE_WIDTH / 2, trans->getPos().getY() + trans->getH() / 2 - PLATE_HEIGHT / 2, PLATE_WIDTH, PLATE_HEIGHT));
+	}
+}
+void DeskComp::receive(const Message& message) {
+	if (message.id == Message::msg_CLEAN_DESK && message.desk.id == num) {
+		cleanDesk(false);
 	}
 }

@@ -23,6 +23,12 @@ struct Message {
 		msg_CLIENT,
 		msg_THIEF_SPAWN,
 		msg_THIEF_INTERACT,
+		msg_CLEAN_DESK,
+		msg_PICK_INGREDIENT,
+		msg_RETURN_INGREDIENT,
+		msg_COOKING_DISH,
+		msg_PICK_DISH,
+		msg_CHARGE,
 		// Do not erase pls
 		msg_INVALID
 	};
@@ -37,6 +43,11 @@ struct Message {
 		_ecs::_ingredients_id ing;
 		int n;
 	} basket;
+
+	struct data_ingredinet
+	{
+		int n;
+	}ingredinet;
 
 	struct data_DAILY_MENUS {
 		vector<uint8_t> menu1;
@@ -66,7 +77,15 @@ struct Message {
 	struct data_thief_spawn {
 		uint8_t number;
 		std::vector<uint8_t> skins, positions; // Skin IDs & positions
-	} thief_spawn;
+	}thief_spawn;
+
+	struct data_desk {
+		uint8_t id;
+	}desk;
+	struct data_cooking_machine {
+		uint8_t dish;
+		uint8_t id;
+	}cooking_machine;
 
 	Message(_msg_id id = msg_INVALID) : id(id) { }
 	~Message() { }
@@ -228,8 +247,20 @@ public:
 			msg = code8(client.desk, msg);
 			msg = code8(client.dish, msg);
 			break;
-		}
+		case msg_CLEAN_DESK:
+			msg = code8(desk.id, msg);
+			break;
+		case msg_PICK_INGREDIENT:
+		case msg_RETURN_INGREDIENT:
+			msg = code8(ingredinet.n, msg);
+			break;
+		case msg_COOKING_DISH:
+		case msg_PICK_DISH:
+			msg = code8(cooking_machine.id, msg);
+			msg = code8(cooking_machine.dish, msg);
+			break;
 
+		}
 	
 		return msg;
 	}
@@ -294,6 +325,18 @@ public:
 			msg = decode8(client.nClinet, msg);
 			msg = decode8(client.desk, msg);
 			msg = decode8(client.dish, msg);
+			break;
+		case msg_CLEAN_DESK:
+			msg = decode8(desk.id, msg);
+			break;
+		case msg_PICK_INGREDIENT:
+		case msg_RETURN_INGREDIENT:
+			msg = decode8(ingredinet.n, msg);
+			break;
+		case msg_COOKING_DISH:
+		case msg_PICK_DISH:
+			msg = decode8(cooking_machine.id, msg);
+			msg = decode8(cooking_machine.dish, msg);
 			break;
 		}
 		return msg;

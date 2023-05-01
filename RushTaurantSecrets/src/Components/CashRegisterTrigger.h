@@ -40,6 +40,9 @@ public:
 
 	virtual void isOverlapping();
 	virtual void onTriggerExit();
+	void charge();
 	void render();
+
+	void receive(const Message& message) override;
 };
 
