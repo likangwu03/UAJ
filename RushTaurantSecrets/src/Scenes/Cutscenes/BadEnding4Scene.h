@@ -11,8 +11,8 @@ struct dialogueInfo;
 class BadEnding4Scene: public CinematicBaseScene
 {
 private:
-	const vector<Vector> BE4PathPlayer[1] = {
-		{Vector(20, 14), Vector(20, 12)}
+	const vector<Vector> BE4PathPlayer[6] = {
+		{Vector(20, 14)}, {Vector(20, 12)}, {Vector(20, 20)}, {Vector(23, 8)}, {Vector(21, 7)}, {Vector(21, 5)}
 	};
 	const vector<Vector> BE4PathThief[4] = {
 		{Vector(23, 5)}, {Vector(7, 5)}, {Vector(7, 12)}, {Vector(-2, 12)}
@@ -39,6 +39,7 @@ private:
 		D17,
 		D18,
 		D19,
+		D20,
 		D21,
 		D22,
 		D23,
@@ -64,6 +65,12 @@ private:
 		D43,
 		D44,
 		D45,
+		D46,
+		D47,
+		D48,
+		D49,
+		D50,
+		LAST,
 		NONE
 	};
 
@@ -73,11 +80,16 @@ private:
 	vector<dialogueInfo> dialogues;
 	Texture* bg;
 	Texture* top;
+	Texture* filter;
+	Texture* tvFilter;
+	Texture* lectern;
 	States state;
 	void addPathPantry(const vector<Vector>& points);
 	vector<Vector> playerPoints;
 	StraightMovement* straightMovementThief;
-	bool reading;
+	bool reading, night, stolenBook;
+	Animator::AnimParams apNight;
+	Animator::AnimParams ap;
 
 public:
 	BadEnding4Scene();

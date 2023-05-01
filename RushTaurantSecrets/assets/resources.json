@@ -959,6 +959,14 @@
       "file": "assets/Sprites/Cutscenes/Prota_Room_Night.png"
     },
     {
+      "id": "CINEMATIC_TV_FILTER",
+      "file": "assets/Sprites/Cutscenes/tv_filter.png"
+    },
+    {
+      "id": "CINEMATIC_PANTRY_LECTERN",
+      "file": "assets/Sprites/Cutscenes/pantry_lectern.png"
+    },
+    {
 
       "id": "DAILY_MENU",
       "file": "assets/Sprites/UI/dailymenu.png"
