@@ -32,6 +32,7 @@
 #include "../Scenes/Cutscenes/Day2EndingNoKillScene.h"
 #include "../Scenes/Cutscenes/Day2EndingKillScene.h"
 #include "../Scenes/Cutscenes/Day1EndingScene.h"
+#include "../Scenes/Cutscenes/HappyEnding.h"
 
 #include <sstream>
 #include <fstream>
@@ -96,8 +97,10 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });
 	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });
+	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEnding() });
 
-	changeScene(allScenes.at(_ecs::sc_MAINMENU));
+
+	changeScene(allScenes.at(_ecs::sc_ENDINGDAY2KILL));
 }
 
 GameManager::~GameManager() {
@@ -165,11 +168,11 @@ void GameManager::popScene(Scene* transitionScene, Scene* scene) {
 		if (!scenes.empty()) sdlutils().setResizeFactor(scenes.top()->getResizeFactor());
 	}
 }
-void GameManager::pushScene(Scene* scene, bool longerTransition) {
+void GameManager::pushScene(Scene* scene, bool isTransition) {
 	sdlutils().setResizeFactor(scene->getResizeFactor());
 	scenes.push(scene);
 
-	if(longerTransition)
+	if(isTransition)
 		deleteScene = scene;
 }
 void GameManager::skipfromTransition() {

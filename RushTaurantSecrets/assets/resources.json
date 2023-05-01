@@ -2,11 +2,11 @@
   "images": [
     {
       "id": "Filter_Black",
-      "file": "assets/Sprites/Cinematic/Filter_black.png"
+      "file": "assets/Sprites/Cutscenes/Filter_black.png"
     },
     {
       "id": "Filter_White",
-      "file": "assets/Sprites/Cinematic/Filter_white.png"
+      "file": "assets/Sprites/Cutscenes/Filter_white.png"
     },
     {
       "id": "Player_1",
@@ -902,15 +902,15 @@
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
-      "file": "assets/Sprites/Cinematic/Parent_Room.png"
+      "file": "assets/Sprites/Cutscenes/Parent_Room.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_TOP",
-      "file": "assets/Sprites/Cinematic/Parent_Room_top.png"
+      "file": "assets/Sprites/Cutscenes/Parent_Room_top.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_NIGHT",
-      "file": "assets/Sprites/Cinematic/Parent_Room_Night.png"
+      "file": "assets/Sprites/Cutscenes/Parent_Room_Night.png"
     },
     {
       "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
@@ -918,15 +918,15 @@
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_RAINY",
-      "file": "assets/Sprites/Cinematic/Parent_Room_Rainy.png"
+      "file": "assets/Sprites/Cutscenes/Parent_Room_Rainy.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT",
-      "file": "assets/Sprites/Cinematic/Restaurant.png"
+      "file": "assets/Sprites/Cutscenes/Restaurant.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT_TOP",
-      "file": "assets/Sprites/Cinematic/Restaurant_top.png"
+      "file": "assets/Sprites/Cutscenes/Restaurant_top.png"
     },
     {
       "id": "CINEMATIC_BG_PANTRY_TOP",
@@ -934,21 +934,26 @@
     },
     {
       "id": "CINEMATIC_BG_HOUSE",
-      "file": "assets/Sprites/Cinematic/house.png"
+      "file": "assets/Sprites/Cutscenes/house.png"
     },
     {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL",
-      "file": "assets/Sprites/Cinematic/Entrance_General.png"
+      "file": "assets/Sprites/Cutscenes/Entrance_General.png"
     },
     {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT",
-      "file": "assets/Sprites/Cinematic/Entrance_General_Night.png"
+      "file": "assets/Sprites/Cutscenes/Entrance_General_Night.png"
     },
     {
       "id": "CINEMATIC_BG_PANTRY",
-      "file": "assets/Sprites/Cinematic/Pantry.png"
+      "file": "assets/Sprites/Cutscenes/Pantry.png"
     },
     {
+      "id": "CINEMATIC_BG_PLAYER_ROOM",
+      "file": "assets/Sprites/Cutscenes/Player_Room.png"
+    },
+    {
+      
       "id": "DAILY_MENU",
       "file": "assets/Sprites/UI/dailymenu.png"
     },
@@ -1155,19 +1160,27 @@
     },
     {
       "id": "NIGHT_AMBIENCE",
-      "file": "assets/Sound/cinematic/night.mp3"
+      "file": "assets/Sound/Cutscenes/night.mp3"
     },
     {
       "id": "PHONECALL",
-      "file": "assets/Sound/cinematic/smartphone_vibrating.mp3"
+      "file": "assets/Sound/Cutscenes/smartphone_vibrating.mp3"
     },
     {
       "id": "TELEPHONE",
-      "file": "assets/Sound/cinematic/telephone_ring.mp3"
+      "file": "assets/Sound/Cutscenes/telephone_ring.mp3"
     },
     {
       "id": "THUNDERSTORM",
-      "file": "assets/Sound/cinematic/thunderstorm.mp3"
+      "file": "assets/Sound/Cutscenes/thunderstorm.mp3"
+    },
+    {
+      "id": "RAIN_AMBIENCE",
+      "file": "assets/Sound/Cutscenes/rain.mp3"
+    },
+    {
+      "id": "THUNDER",
+      "file": "assets/Sound/Cutscenes/thunder.mp3"
     }
 
   ],
