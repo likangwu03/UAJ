@@ -59,7 +59,6 @@ void HappyEnding::reset() {
 		transition = new ShowSkipTransitionScene(this, 3);
 		GameManager::get()->pushScene(transition, true);
 	}
-
 }
 
 void HappyEnding::update() {
@@ -192,6 +191,7 @@ void HappyEnding::update() {
 		break;
 	case HappyEnding::FADEIN2:
 		if (Text::isTextFinished()) {
+			dialogueBox = nullptr;
 			transition = new ShowSkipTransitionScene(this, 1, true);
 			GameManager::get()->pushScene(transition, true);
 			state = FADEOUT2;
@@ -200,14 +200,25 @@ void HappyEnding::update() {
 		break;
 	case HappyEnding::FADEOUT2:
 		if (GameManager::get()->getCurrentScene() != transition) {
-			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
+			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_HAPPY_ENDING");
 			top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_ISLAND");
+
+			transform->setPos(RelativeToGlobal::pointRestaurant(Vector(29,4.5)));
+			anim->setH(96 * RESTSIZE);
+			anim->setW(48 * RESTSIZE);
+			
+			straightMovement->stop();
+			addPath(paths[5]);
+
 			transition = new ShowSkipTransitionScene(this, 1);
 			GameManager::get()->pushScene(transition, true);
 			state = RESTAURANT;
 		}
 		break;
-
+	case HappyEnding::RESTAURANT:
+		addPath(paths[5]);
+		state = OUT;
+		break;
 
 	//case HappyEnding::OUT:
 	//	if (Text::isTextFinished()) {
@@ -224,18 +235,22 @@ void HappyEnding::update() {
 
 void HappyEnding::renderCinematic() {
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
-	if (state < WALKOUT) {
-		player->render();
-		door->render(build_sdlrect(DOORW * doorFrame, 0, DOORW, DOORH), DOORPOS);
+	if (state < RESTAURANT) {
+		if (state < WALKOUT) {
+			player->render();
+			door->render(build_sdlrect(DOORW * doorFrame, 0, DOORW, DOORH), DOORPOS);
+		}
+		else {
+			door->render(build_sdlrect(DOORW * doorFrame, 0, DOORW, DOORH), DOORPOS);
+			player->render();
+		}
+		top->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
+		filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	}
 	else {
-		door->render(build_sdlrect(DOORW * doorFrame, 0, DOORW, DOORH), DOORPOS);
 		player->render();
+		top->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	}
-	top->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
-
-
-	filter->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 
 	if ((state == FADEOUT1 || state == FADEOUT2) && GameManager::get()->getCurrentScene() != transition) {
 		black->setOpacity(100);
