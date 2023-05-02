@@ -17,7 +17,6 @@ ContinueMenu::ContinueMenu() {
 	buttonNewGame = new ButtonGO(this, "NEWGAME_BUTTON", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1), true);
 			GameManager::get()->newGame();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);

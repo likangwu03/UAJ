@@ -1,6 +1,5 @@
 #include "Day1EndingScene.h"
 #include "ShowSkipTransitionScene.h"
-#include "../GameScenes/BeforeDayStartScene.h"
 
 #include "../../Structure/GameManager.h"
 #include "../../GameObjects/Dialogue.h"

@@ -159,6 +159,30 @@
       "rows": 20
     },
     {
+      "id": "Waiter_1",
+      "file": "assets/Sprites/Cutscenes/NPCs/Waiter_sprite_1.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Waiter_2",
+      "file": "assets/Sprites/Cutscenes/NPCs/Waiter_sprite_2.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Guard_1",
+      "file": "assets/Sprites/Cutscenes/NPCs/Guard_sprite_1.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Guard_2",
+      "file": "assets/Sprites/Cutscenes/NPCs/Guard_sprite_2.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
       "id": "0",
       "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
     },
@@ -990,6 +1014,10 @@
       "file": "assets/Sprites/Cutscenes/Restaurant_island.png"
     },
     {
+      "id": "CINEMATIC_BG_PANTRY_HAPPY_ENDING",
+      "file": "assets/Sprites/Cutscenes/Pantry_happy_ending.png"
+    },
+    {
 
       "id": "DAILY_MENU",
       "file": "assets/Sprites/UI/dailymenu.png"
@@ -1218,6 +1246,22 @@
     {
       "id": "THUNDER",
       "file": "assets/Sound/Cutscenes/thunder.mp3"
+    },
+    {
+      "id": "BIRDS",
+      "file": "assets/Sound/Cutscenes/birds.mp3"
+    },
+    {
+      "id": "CROWD",
+      "file": "assets/Sound/Cutscenes/crowd.mp3"
+    },
+    {
+      "id": "CHEER",
+      "file": "assets/Sound/Cutscenes/cheer.mp3"
+    },
+    {
+      "id": "CLOTHES",
+      "file": "assets/Sound/Cutscenes/clothes.mp3"
     }
 
   ],
@@ -1249,6 +1293,10 @@
     {
       "id": "ATMOSPHERE_CREEPY_MUSIC",
       "file": "assets/Music/NDKG_CreepyAtmosphere_Looped.wav"
+    },
+    {
+      "id": "HAPPY_MORNING_MUSIC",
+      "file": "assets/Music/happy_morning.mp3"
     }
   ]
 }

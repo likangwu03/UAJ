@@ -18,10 +18,14 @@ void TransitionScene::render() {
 void TransitionScene::update() {
 	cont += frameTime;
 	scene->update();
-	filter->setOpacity(abs(fadeOutInverter - (cont / duration)*100));
+	int opac = abs(fadeOutInverter - (cont / duration) * 100);
+	if (opac > 100) opac = 100;
+	else if (opac < 0) opac = 0;
+	filter->setOpacity(opac);
 	if (cont > duration) {
 		if (!skipScene) {
 			GameManager::get()->popScene(this, scene); //fade in, delete de transici¨®n
+			scene->render();
 		}
 		else GameManager::get()->skipfromTransition();//fade out,delete de 2 escenas seguidas
 	}

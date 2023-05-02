@@ -21,7 +21,12 @@ private:
 	
 	const float RESTSIZE = 0.6666666667;
 
-	//struct 
+	struct NPCInfo {
+		CinematicNPC* npc;
+		Vector pos;
+		movementState state;
+		GOOrientation orientation;
+	};
 
 	const vector<Vector> paths[6] = {
 		{ Vector(8.8, 2), Vector(14.5, 2), Vector(14.5, 1) },
@@ -29,7 +34,12 @@ private:
 		{ Vector(22, 5), Vector(22, 10),  Vector(17.8, 10), },
 		{ Vector(17.8, 10), Vector(17.8, 16), Vector(10, 16) },
 		{ Vector(10,16), Vector(10,20) },
-		{ Vector(29,4.5), Vector(28,4.5), Vector(31,4.5) },
+		{ Vector(27,4.5), Vector(31,4.5), Vector(31,7.5), Vector(31,4.5), Vector(27,4.5) },
+
+	};
+	const vector<Vector> waiterPaths[2] = {
+		{ Vector(27, 11), Vector(30,11), Vector(30,9), Vector(30,12), Vector(24,12), Vector(24,13.5) },
+		{ Vector(20, 7), Vector(20,12), Vector(12,12), Vector(12,10) },
 
 	};
 
@@ -54,13 +64,22 @@ private:
 		FADEIN2,
 		FADEOUT2,
 		RESTAURANT,
-
-
+		FADEIN3,
+		FADEOUT3,
+		PANTRY,
+		FADEIN4,
+		FADEOUT4,
+		CELEBRATE,
+		D8,
+		D9,
+		D10,
+		D11,
+		D12,
 		OUT,
 		NONE
 	};
 
-	void addPath(const vector<Vector>& points);
+	void addPath(const vector<Vector>& points, GameObject* object);
 	States state;
 	
 	Texture* filter;
@@ -69,15 +88,21 @@ private:
 	Texture* door;
 	Texture* top;
 
-	SoundEffect* nightAmbience;
-	Music* nightMusic;
+	SoundEffect* ambience;
+	Music* music;
+	SoundEffect* cheer;
 
 	vector<dialogueInfo> dialogues;
 	int timer;
 	int dialogueN;
 	int doorFrame;
+	int musicVol;
 
-
+	vector<NPCInfo> npcs;
+	CinematicNPC* waiter1;
+	CinematicNPC* waiter2;
+	CinematicNPC* guard1;
+	CinematicNPC* guard2;
 
 public:
 	HappyEnding();
@@ -85,5 +110,8 @@ public:
 	void renderCinematic () override;
 	void finishScene()override;
 	void update()override;
+
+private:
+	void addClient(string txt, Vector pos, GOOrientation orientation);
 };
 
