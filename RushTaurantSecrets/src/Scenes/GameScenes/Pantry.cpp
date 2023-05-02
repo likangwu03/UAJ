@@ -105,3 +105,11 @@ void Pantry::receive(const Message& m) {
 	rest->_receive(m);
 	Scene::receive(m);
 }
+
+void Pantry::initCoopMode(bool server) {
+	ThievesManager::get()->setActive(server);
+}
+
+void Pantry::quitCoopMode() {
+	ThievesManager::get()->setActive(true);
+}

@@ -86,9 +86,7 @@ vector<GameObject*> ThievesManager::canInteractWith() {
 }
 
 void ThievesManager::update() {
-	if (!Game::get()->getCoopHandler()->isClient()) {
-		addFrequently();
-	}
+	addFrequently();
 }
 
 void ThievesManager::haltSound() {
@@ -118,5 +116,22 @@ void ThievesManager::receive(const Message& message) {
 		for(int i = 0; i < message.thief_spawn.number; i++) {
 			createThief(message.thief_spawn.skins[i], message.thief_spawn.positions[i]);
 		}
+	} else if(message.id == Message::msg_THIEF_INTERACT) {
+		thiefs->operator[](message.thief_interact.id)->getComponent<ThiefTrigger>()->escapeOrDie(message.thief_interact.escape);
+	}
+}
+
+void ThievesManager::send(GameObject* thief, Message& m) {
+	int i = 0; bool found = false;
+	// Finds thief
+	for(auto t : *thiefs) {
+		if(t == thief) {
+			found = true; break;
+		}
+		else i++;
+	}
+	if(found) {
+		m.thief_interact.id = i;
+		Game::get()->getCoopHandler()->send(m);
 	}
 }

@@ -42,4 +42,7 @@ public:
 	void resumeMusic()override;
 	void resumeSound()override;
 	void haltSound()override;
+
+	virtual void initCoopMode(bool server);
+	virtual void quitCoopMode();
 };

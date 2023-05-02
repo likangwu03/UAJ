@@ -47,6 +47,7 @@ class ThiefTrigger : public TriggerComp
 
 	void interactWithNextThief();
 
+	void send(bool escape);
 public:
 	ThiefTrigger(GameObject* parent, Vector pos_, float width_, float height_);
 
@@ -56,4 +57,6 @@ public:
 	virtual void onTriggerEnter();
 	virtual void onTriggerExit();
 	virtual void render();
+
+	void escapeOrDie(bool escape);
 };

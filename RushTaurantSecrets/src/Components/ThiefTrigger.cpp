@@ -43,6 +43,7 @@ bool ThiefTrigger::escape(bool keyPressed) {
 		escapeSound->play();
 		hideButtons();
 		interactWithNextThief();
+		send(true);
 		return true;
 	}
 	return false;
@@ -55,6 +56,7 @@ bool ThiefTrigger::die(bool keyPressed) {
 		hideButtons();
 		// si había overlap con más de un ladrón, se pasa a interactuar con el siguiente
 		interactWithNextThief();
+		send(false);
 		return true;
 	}
 	return false;
@@ -134,3 +136,22 @@ void ThiefTrigger::render() {
 	}
 }
 
+void ThiefTrigger::send(bool escape) {
+	Message m(Message::msg_THIEF_INTERACT);
+	m.thief_interact.escape = escape;
+	thievesManager->send(parent, m);
+}
+
+void ThiefTrigger::escapeOrDie(bool escape) {
+	if(escape) {
+		thiefMovement->escape();
+		escapeSound->play();
+	} else {
+		thiefMovement->die();
+		dieSound->play();
+	}
+	if(thievesManager->getThiefInteractWith() == parent) {
+		hideButtons();
+		interactWithNextThief();
+	}
+}

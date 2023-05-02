@@ -82,6 +82,11 @@ struct Message {
 		std::vector<uint8_t> skins, positions; // Skin IDs & positions
 	}thief_spawn;
 
+	struct {
+		uint8_t id;
+		bool escape;
+	} thief_interact;
+
 	struct data_desk {
 		uint8_t id;
 	}desk;
@@ -248,7 +253,10 @@ public:
 			msg = code8vector(thief_spawn.skins, msg);
 			msg = code8vector(thief_spawn.positions, msg);
 			break;
-
+		case msg_THIEF_INTERACT:
+			msg = code8(thief_interact.id, msg);
+			msg = code8(thief_interact.escape, msg);
+			break;
 		case msg_CLIENT:
 			msg = code8(client.state, msg);
 			msg = code8(client.nClinet, msg);
@@ -332,6 +340,10 @@ public:
 			msg = decode8(thief_spawn.number, msg);
 			msg = decode8vector(thief_spawn.skins, msg, thief_spawn.number);
 			msg = decode8vector(thief_spawn.positions, msg, thief_spawn.number);
+			break;
+		case msg_THIEF_INTERACT:
+			msg = decode8(thief_interact.id, msg);
+			msg = decode8(thief_interact.escape, msg);
 			break;
 		case msg_CLIENT:
 			msg = decode8(client.state, msg);

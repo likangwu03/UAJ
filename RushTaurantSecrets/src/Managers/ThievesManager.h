@@ -74,4 +74,6 @@ public:
 	void haltSound();
 	void pauseSound();
 	void resumeSound();
+
+	void send(GameObject* thief, Message& m);
 };
