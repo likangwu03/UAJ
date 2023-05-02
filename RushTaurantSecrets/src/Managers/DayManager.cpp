@@ -86,22 +86,16 @@ void DayManager::newDay() {
 
 void DayManager::nextDay(bool loading) {
 	if (!loading) {
+		// Game over (el bad ending 3 y 4 se comprueban en thievesState
+
 		// Bad ending 1
-		if (GameManager::get()->getReputation()->getReputation() < 0) {
+		if (GameManager::get()->getReputation()->getReputation() < 0)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
-		}
 		// Bad ending 2
-		// else if (){
+		else if (GameManager::get()->getMoney()->getMoney() < 0)
+			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING2), true);
 
-		// }
-		// Bad ending 3
-		// else if (){
 
-		// }
-		// Bad ending 4
-		// else if (){
-
-		// }
 		// Final día 1 (en la propia escena del final del día 1 se pasa a la intro del día 2)
 		else if (day == 1) {
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_ENDINGDAY1), true);
