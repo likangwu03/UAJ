@@ -5,7 +5,7 @@
 #include "../../Managers/Money.h"
 #include "../Menus/MainMenu.h"
 #include "BeforeDayStartScene.h"
-
+#include "../../Structure/Game.h"
 #include "../../Utilities/checkML.h"
 
 
@@ -66,20 +66,33 @@ EndOfDayScene::EndOfDayScene() {
 	gameOverOutline = new Texture(sdlutils().renderer(), gameOverText, *font2, build_sdlcolor(0xFFFFFFFF));
 
 	//botones
-	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H, 
+	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H,
 		[&]() {
+			if (net) {
+				Message m;
+				m.id = Message::msg_CONTINUE;
+				Game::get()->getCoopHandler()->send(m);
+			}
 			dayM->newDay();
 		});
 	continueButton->setAlive(false);
 	continueButton->getComponent<ButtonComp>()->setHighlighted(true);
 
-	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H, 
+	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H,
 		[&]() {
-		   gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));
+			if (net) {
+				Game::get()->setExitCoop();
+				Message m;
+				m.id = Message::msg_TO_MAINMENU;
+				Game::get()->getCoopHandler()->send(m);
+			}
+			gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));
 		});
 	mainMenuButton->setAlive(false);
-	
+
 	button = 0;
+
+	net = false;
 }
 
 EndOfDayScene::~EndOfDayScene() {
@@ -106,7 +119,7 @@ void EndOfDayScene::reset() {
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
 	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$ OUT OF " + to_string(moneyGoal) + "$";
-	
+
 	delete reputationTexture;
 	delete moneyTexture;
 	delete reputationOutline;
@@ -122,8 +135,8 @@ void EndOfDayScene::reset() {
 void EndOfDayScene::render() {
 	Scene::render();
 
-	reputationTexture->render({250, 225, reputationTexture->width(), reputationTexture->height()});
-	moneyTexture->render({250, 325, moneyTexture->width(), moneyTexture->height()});
+	reputationTexture->render({ 250, 225, reputationTexture->width(), reputationTexture->height() });
+	moneyTexture->render({ 250, 325, moneyTexture->width(), moneyTexture->height() });
 
 	reputationOutline->render({ 250, 225, reputationTexture->width(), reputationTexture->height() });
 	moneyOutline->render({ 250, 325, moneyTexture->width(), moneyTexture->height() });
@@ -135,12 +148,12 @@ void EndOfDayScene::render() {
 	else { //el juego se ha perdido
 		if ((playerMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
 		{
-			bankruptTexture->render({50, 450, bankruptTexture->width(), bankruptTexture->height()});
+			bankruptTexture->render({ 50, 450, bankruptTexture->width(), bankruptTexture->height() });
 			bankruptOutline->render({ 50, 450, bankruptTexture->width(), bankruptTexture->height() });
 
-			gameOverTexture->render({50, 550, gameOverTexture->width(), gameOverTexture->height()});
+			gameOverTexture->render({ 50, 550, gameOverTexture->width(), gameOverTexture->height() });
 			gameOverOutline->render({ 50, 550, gameOverTexture->width(), gameOverTexture->height() });
-			
+
 		}
 		else if (playerMoney < moneyGoal || playerMoney <= 0) {
 			bankruptTexture->render({ 200, 450, bankruptTexture->width(), bankruptTexture->height() });
@@ -158,12 +171,12 @@ void EndOfDayScene::render() {
 }
 
 void EndOfDayScene::gameOver() {
-	if (playerReputation <= 0 || playerMoney < moneyGoal) _gameOver = true; 
+	if (playerReputation <= 0 || playerMoney < moneyGoal) _gameOver = true;
 }
 
 
 void EndOfDayScene::handleEvents() {
-	
+
 	if (ih->isKeyDown(SDL_SCANCODE_A)) {
 		button = (button - 1) % NUM_BUTTON;
 		if (button < 0)
@@ -188,5 +201,28 @@ void EndOfDayScene::selectedButton(int selected) {
 	case 1:
 		mainMenuButton->getComponent<ButtonComp>()->setHighlighted(true);
 		break;
+	}
+}
+
+
+
+void EndOfDayScene::initCoopMode(bool server) {
+	continueButton->setActives(server);
+	mainMenuButton->setActives(server);
+	net = server;
+}
+
+void EndOfDayScene::quitCoopMode() {
+	continueButton->setActives(true);
+	mainMenuButton->setActives(true);
+	net = false;
+}
+
+void EndOfDayScene::receive(const Message& message) {
+	if (message.id == Message::msg_CONTINUE) {
+		dayM->newDay();
+	}
+	else if (message.id == Message::msg_TO_MAINMENU) {
+		Game::get()->setExitCoop();
 	}
 }

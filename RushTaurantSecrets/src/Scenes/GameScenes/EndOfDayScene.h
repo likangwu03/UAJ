@@ -69,6 +69,8 @@ private:
 
 	bool _gameOver;
 
+	bool net;
+
 	void gameOver();
 
 public:
@@ -79,4 +81,10 @@ public:
 	virtual void handleEvents();
 	
 	void selectedButton(int selected);
+
+
+	void initCoopMode(bool server)override;
+	void quitCoopMode() override;
+
+	void receive(const Message& message);
 };
