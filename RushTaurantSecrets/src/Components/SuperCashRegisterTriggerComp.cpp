@@ -82,9 +82,9 @@ void SuperCashRegisterTriggerComp::sendToClien() {
 }
 
 void SuperCashRegisterTriggerComp::receive(const Message& message) { 
-	if (message.id == Message::msg_TO_RESTAURANT) {
+	/*if(message.id == Message::msg_TO_RESTAURANT) {
 		money->subtractMoney(money->getPrize());
 		money->setPrize(0);
 		payAndLeave();
-	}
+	}*/
 }
