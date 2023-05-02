@@ -10,7 +10,8 @@ BadEnding4Scene::BadEnding4Scene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	tvFilter = &sdlutils().images().at("CINEMATIC_TV_FILTER");
 	lectern = &sdlutils().images().at("CINEMATIC_PANTRY_LECTERN");
-	black = &sdlutils().images().at("Filter_Black");
+	black = &sdlutils().images().at("Filter_Black"); 
+	warningSound = &sdlutils().soundEffects().at("ALERT");
 
 	pantryMusic = &sdlutils().musics().at("PANTRY_MUSIC");
 	homeMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
@@ -78,6 +79,7 @@ void BadEnding4Scene::update() {
 	switch (state)
 	{
 	case BadEnding4Scene::START:
+		warningSound->haltChannel();
 		pantryMusic->play(-1);
 		straightMovement->addPath(RelativeToGlobal::pointsPantry(BE4PathPlayer[0]));
 		straightMovementThief->addPath(RelativeToGlobal::pointsPantry(BE4PathThief[0]));

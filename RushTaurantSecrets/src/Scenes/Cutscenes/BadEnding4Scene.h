@@ -91,6 +91,7 @@ private:
 	bool reading, night, stolenBook;
 	Music* pantryMusic;
 	Music* homeMusic;
+	SoundEffect* warningSound;
 
 public:
 	BadEnding4Scene();
