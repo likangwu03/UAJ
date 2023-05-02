@@ -125,7 +125,6 @@ void Day2EndingNoKillScene::finishScene() {
 		delete transition;
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
-//	GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3), false);
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL), false);
 
 }

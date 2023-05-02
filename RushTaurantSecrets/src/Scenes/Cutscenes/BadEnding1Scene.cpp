@@ -80,8 +80,8 @@ void BadEnding1Scene::renderCinematic()
 void BadEnding1Scene::finishScene() {
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
-	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
 
 	dramaticMusic->haltMusic();
 }
