@@ -63,13 +63,17 @@ bool ThiefTrigger::die(bool keyPressed) {
 }
 
 void ThiefTrigger::interactWithNextThief() {
+	vector<GameObject*> interactiveThieves = thievesManager->canInteractWith();
 	// vector con los ladrones con los que puede interactuar
-	if (!thievesManager->canInteractWith().empty()) {
+	if (!interactiveThieves.empty()) {
 		// se coge el primero
-		GameObject* thief = thievesManager->canInteractWith().front();
+		GameObject* thief = interactiveThieves.front();
 		ThiefTrigger* thiefTrigger = thief->getComponent<ThiefTrigger>();
 		// se indica que está interactuando con ese
 		thiefTrigger->isInteractingWith();
+	}
+	else {
+		thievesManager->setThiefInteractWith(nullptr);
 	}
 }
 
