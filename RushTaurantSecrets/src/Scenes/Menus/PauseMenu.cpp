@@ -37,8 +37,6 @@ PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::handleEvents() {
-	//if (ih->isKeyDown(SDLK_p)) 	GameManager::get()->popScene();
-
 	Scene::handleEvents();
 
 	if (ih->joysticksInitialised()) {

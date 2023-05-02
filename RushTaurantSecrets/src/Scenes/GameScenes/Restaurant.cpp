@@ -130,7 +130,7 @@ void Restaurant::_update() {
 }
 
 void Restaurant::handleEvents() {
-	if (ih->isKeyDown(SDLK_p)) {
+	if (ih->isKeyDown(SDLK_ESCAPE)) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
 		ThievesManager::get()->pauseSound();
