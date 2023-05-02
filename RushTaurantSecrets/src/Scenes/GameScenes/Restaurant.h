@@ -56,5 +56,6 @@ public:
 
 	void resumeMusic()override;
 	void resumeSound()override;
+	void haltSound()override;
 
 };

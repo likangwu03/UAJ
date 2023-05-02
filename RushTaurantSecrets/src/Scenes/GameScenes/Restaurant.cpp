@@ -181,3 +181,7 @@ void Restaurant::resumeMusic() {
 void Restaurant::resumeSound() {
 	ThievesManager::get()->resumeSound();
 }
+void Restaurant::haltSound() {
+	restaurantMusic->haltMusic();
+	ThievesManager::get()->haltSound();
+}

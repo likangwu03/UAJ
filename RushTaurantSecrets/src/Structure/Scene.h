@@ -52,7 +52,7 @@ public:
 	virtual void nextDay();
 	virtual void receive(const Message& message);
 	virtual void finishScene() { };
-	virtual void pauseSound() { };
+	virtual void haltSound() { };
 	virtual void resumeSound() { };
 	virtual void resumeMusic() { };
 

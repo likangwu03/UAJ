@@ -71,11 +71,15 @@ void Pantry::_update() {
 	Scene::update();
 }
 
+void Pantry::haltSound() {
+	pantryMusic->haltMusic();
+	ThievesManager::get()->haltSound();
+}
 
 void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_ESCAPE)) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
-		restaurantMusic->pauseMusic();
+		pantryMusic->pauseMusic();
 		ThievesManager::get()->pauseSound();
 	}
 }

@@ -41,4 +41,5 @@ public:
 	void callAfterCreating();
 	void resumeMusic()override;
 	void resumeSound()override;
+	void haltSound()override;
 };
