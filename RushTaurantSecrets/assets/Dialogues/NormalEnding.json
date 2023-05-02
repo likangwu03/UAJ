@@ -1,0 +1,124 @@
+{
+  "dialogues": [
+    {
+      "Character": "Player",
+      "Text": "Sigh...",
+      "Portrait": "PROTA_CASUAL_SIGH"
+    },
+    {
+      "Character": "Player",
+      "Text": "AHAHAHAHAHAHAHHAHAHAHAAHAH!!!",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "Mom, dad... I've finally done it. After all...",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "I'm proud of myself, everything's fine now.",
+      "Portrait": "PROTA_CASUAL_SMILE_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "I can now tell that those ENVIOUS and CRUEL thieves, who worked for the ones that wanted our precious and perfectly-preserved secret formula, are ALL dead.",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Parents",
+      "Text": "...",
+      "Portrait": "PARENTS"
+    },
+    {
+      "Character": "Player",
+      "Text": "And because of that, I'm now able to show you that this formula we've been talking about is just blank. It's not the same formula you used to know... that was trash, a mere useless piece of paper so I threw it away before the great reopening of the restaurant.",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I burned it into ashes!!!",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "I fooled everyone into thinking it was important so they would come for it and then...",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "I would KILL them and use them as a secret ingredient.",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "That is the real secret.",
+      "Portrait": "PROTA_CASUAL_MANIC"
+    },
+    {
+      "Character": "Parents",
+      "Text": "...",
+      "Portrait": "PARENTS"
+    },
+    {
+      "Character": "Parents",
+      "Text": "......",
+      "Portrait": "PARENTS"
+    },
+    {
+      "Character": "Player",
+      "Text": "Why aren't you saying anything?",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
+    },
+    {
+      "Character": "Player",
+      "Text": "Are you mad with me??",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
+    },
+    {
+      "Character": "Player",
+      "Text": "Did I do something wrong? Do you not love me anymore?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "...Do you mean you are disappointed with me? But... WHY???",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I don't get it. Should I have killed more people? ",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "Or...",
+      "Portrait": "PROTA_CASUAL_SURPRISED"
+    },
+    {
+      "Character": "Player",
+      "Text": "Are you saying you are no longer by my side?",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I thought I could trust you. I guess I was wrong.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Stupid mannequins.",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
+    },
+    {
+      "Character": "Player",
+      "Text": "I should have made you not just to resemble my parents but to talk just like them.",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
+    },
+    {
+      "Character": "Player",
+      "Text": "Mom, Dad, I miss you so much. I wish you were here now.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    }
+  ]
+}

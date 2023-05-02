@@ -80,8 +80,8 @@ void BadEnding1Scene::renderCinematic()
 void BadEnding1Scene::finishScene() {
 	if (transition != nullptr)
 		delete transition;
-	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
+	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 
 	dramaticMusic->haltMusic();
 }
@@ -352,11 +352,9 @@ void BadEnding1Scene::update()
 	case BadEnding1Scene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
-			state = NONE;
-			if (transition != nullptr)
-				delete transition;
-			transition = new TransitionScene(this, 3, true, true);
+			transition = new TransitionScene(this, 1, true, true);
 			GameManager::get()->pushScene(transition, true);
+			state = NONE;
 		}
 		break;
 	case BadEnding1Scene::NONE:

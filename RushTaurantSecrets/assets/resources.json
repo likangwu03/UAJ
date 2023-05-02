@@ -970,6 +970,10 @@
       "file": "assets/Sprites/Cutscenes/house.png"
     },
     {
+      "id": "CINEMATIC_BG_HOUSE_TOP",
+      "file": "assets/Sprites/Cutscenes/house_top.png"
+    },
+    {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL",
       "file": "assets/Sprites/Cutscenes/Entrance_General.png"
     },
@@ -1262,6 +1266,18 @@
     {
       "id": "CLOTHES",
       "file": "assets/Sound/Cutscenes/clothes.mp3"
+    },
+    {
+      "id": "CAR_HORN",
+      "file": "assets/Sound/Cutscenes/car_horn.mp3"
+    },
+    {
+      "id": "TYRE_SCREECH",
+      "file": "assets/Sound/Cutscenes/tyre_screech.mp3"
+    },
+    {
+      "id": "BUMP",
+      "file": "assets/Sound/Cutscenes/bump.mp3"
     }
 
   ],

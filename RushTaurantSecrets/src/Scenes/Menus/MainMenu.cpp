@@ -29,7 +29,8 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	button = 0;
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
 		[&]() { 
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_CONTINUEMENU), true);
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_NORMALENDING), true);
+			GameManager::get()->getScene(sc_NORMALENDING)->reset();
 		});
 
 	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
