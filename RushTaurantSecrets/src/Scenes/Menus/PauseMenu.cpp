@@ -5,7 +5,8 @@
 
 #include "../../Utilities/checkML.h"
 
-PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
+PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")),
+restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = &(sdlutils().images().at("CONTINUE_BG"));
@@ -16,6 +17,12 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->music
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->popScene();
+			if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_SUPERMARKET))
+				supermarketMusic->resumeMusic();
+			else if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_PANTRY))
+				pantryMusic->resumeMusic();
+			else if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_RESTAURANT))
+				restaurantMusic->resumeMusic();
 		});
 	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",

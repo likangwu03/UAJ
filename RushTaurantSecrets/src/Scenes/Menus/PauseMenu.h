@@ -20,6 +20,8 @@ private:
 
 	SDLUtils* sdl;
 	Music* supermarketMusic;
+	Music* restaurantMusic;
+	Music* pantryMusic;
 public:
 	PauseMenu();
 	~PauseMenu();

@@ -33,7 +33,7 @@ void PantryExitTrigger::isOverlapping() {
 		gm->changeScene(gm->getScene(_ecs::sc_RESTAURANT));
 		doorSound->play();
 		pantryMusic->pauseMusic();
-		restaurantMusic->play();
+		restaurantMusic->play(-1);
 		// se activa el jugador del restaurante y se recoloca
 		playerRestaurant->setActives(true);
 		otherPRest->setActives(true);

@@ -25,7 +25,7 @@ void DailyMenuScene::buttonPress(int menu) {
 	GameManager::get()->getRestaurant()->getUI()->setDailyMenu();
 	GameManager::get()->getSupermarket()->getUI()->setDailyMenu();
 	GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SUPERMARKET));
-	supermarketMusic->play();
+	supermarketMusic->play(-1);
 }
 
 void DailyMenuScene::init() {

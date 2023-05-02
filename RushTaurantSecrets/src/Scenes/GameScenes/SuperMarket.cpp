@@ -24,7 +24,7 @@ void SuperMarket::handleEvents() {
 	
 	if (ih->isKeyDown(SDLK_p)) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
-		//->pauseMusic();
+		restaurantMusic->pauseMusic();
 	}
 }
 
@@ -76,7 +76,7 @@ void SuperMarket::receive(const Message& message) {
 		GameManager::get()->setIngredients(ing);
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_RESTAURANT));
 		GameManager::get()->getScene(_ecs::sc_RESTAURANT)->reset();
-		restaurantMusic->play();
+		restaurantMusic->play(-1);
 	}
 	Scene::receive(message);
 	uiMarket->receive(message);

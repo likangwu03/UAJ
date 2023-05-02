@@ -39,7 +39,7 @@ void GoToPantryTrigger::isOverlapping() {
 		// se cambia a la escena de la despensa
 		gm->changeScene(gm->getScene(_ecs::sc_PANTRY));
 		restaurantMusic->pauseMusic();
-		pantryMusic->play();
+		pantryMusic->play(-1);
 	}
 }
 

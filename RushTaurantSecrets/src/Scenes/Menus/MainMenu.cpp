@@ -56,7 +56,7 @@ void MainMenu::handleEvents() {
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SUPERMARKET));
-		supermarketMusic->play();
+		supermarketMusic->play(-1);
 	}
 	else {
 		Scene::handleEvents();

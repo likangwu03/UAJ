@@ -72,7 +72,7 @@ void SuperCashRegisterTriggerComp::payAndLeave() {
 	GameManager::get()->setIngredients(ing);
 	GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_RESTAURANT));
 	GameManager::get()->getScene(_ecs::sc_RESTAURANT)->reset();
-	restaurantMusic->play();
+	restaurantMusic->play(-1);
 }
 
 void SuperCashRegisterTriggerComp::sendToClien() {
