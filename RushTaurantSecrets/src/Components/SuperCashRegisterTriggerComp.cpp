@@ -35,7 +35,7 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 	// cleon: mejor en 1 if
 	if (ih->joysticksInitialised()) {
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-			if (buybutton->getComponent<ButtonComp>()->isHighlighted()) {
+			if ((money->getMoney() - money->getPrize() >= 0)) {
 				sendToClien();
 				money->subtractMoney(money->getPrize());
 				money->setPrize(0);
@@ -45,10 +45,12 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 	}
  	else if (ih->isKeyDown(SDLK_SPACE)) {
 		if (buybutton->getComponent<ButtonComp>()->isHighlighted()) {
-			sendToClien();
-			money->subtractMoney(money->getPrize());
-			money->setPrize(0);
-			payAndLeave();
+			if ((money->getMoney() - money->getPrize() >= 0)) {
+				sendToClien();
+				money->subtractMoney(money->getPrize());
+				money->setPrize(0);
+				payAndLeave();
+			}			
 		}		
 	}
 }

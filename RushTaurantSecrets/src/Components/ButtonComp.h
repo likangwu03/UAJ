@@ -36,5 +36,7 @@ public:
 	bool isHighlighted();
 	void setHighlighted(bool isH);
 	void render();
+
+	void moveHighlighted();
 };
 

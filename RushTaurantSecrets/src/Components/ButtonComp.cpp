@@ -71,3 +71,8 @@ void ButtonComp::render() {
 void ButtonComp::playSound() {
 	buttonSound->play();
 }
+
+void ButtonComp::moveHighlighted() {
+	dest.x = tf->getPos().getX();
+	dest.y = tf->getPos().getY();
+}
