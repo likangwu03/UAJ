@@ -84,6 +84,7 @@ private:
 	Texture* filter;
 	Texture* tvFilter;
 	Texture* lectern;
+	Texture* black;
 	States state;
 	void addPathPantry(const vector<Vector>& points);
 	StraightMovement* straightMovementThief;

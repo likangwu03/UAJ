@@ -10,6 +10,7 @@ BadEnding4Scene::BadEnding4Scene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	tvFilter = &sdlutils().images().at("CINEMATIC_TV_FILTER");
 	lectern = &sdlutils().images().at("CINEMATIC_PANTRY_LECTERN");
+	black = &sdlutils().images().at("Filter_Black");
 
 	pantryMusic = &sdlutils().musics().at("PANTRY_MUSIC");
 	homeMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
@@ -63,7 +64,13 @@ void BadEnding4Scene::renderCinematic() {
 }
 
 void BadEnding4Scene::finishScene() {
-
+	black->setOpacity(100);
+	black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
+	if (transition != nullptr)
+		delete transition;
+	pantryMusic->haltMusic();
+	homeMusic->haltMusic();
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER), false);
 }
 
 void BadEnding4Scene::update() {
