@@ -75,3 +75,15 @@ void SuperMarket::receive(const Message& message) {
 	Scene::receive(message);
 	uiMarket->receive(message);
 }
+
+
+void SuperMarket::initCoopMode(bool server) {
+	if (!server) {
+		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2",18,18);
+		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	}
+}
+void SuperMarket::quitCoopMode() {
+	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
+}

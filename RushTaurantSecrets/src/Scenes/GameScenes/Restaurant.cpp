@@ -187,10 +187,15 @@ void Restaurant::haltSound() {
 	ThievesManager::get()->haltSound();
 }
 
-
 void Restaurant::initCoopMode(bool server) {
+	if (!server) {
+		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
+		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	}
 	ClientsManager::get()->setActive(server);
 }
 void Restaurant::quitCoopMode() {
 	ClientsManager::get()->setActive(true);
+	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
 }

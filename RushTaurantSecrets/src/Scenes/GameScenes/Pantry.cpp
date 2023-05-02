@@ -105,3 +105,16 @@ void Pantry::receive(const Message& m) {
 	rest->_receive(m);
 	Scene::receive(m);
 }
+
+
+void Pantry::initCoopMode(bool server) {
+	if (!server) {
+		
+		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture(&((*sdl).images().at("Player_2")), 18, 18);
+		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	}
+}
+void Pantry::quitCoopMode() {
+	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
+}
