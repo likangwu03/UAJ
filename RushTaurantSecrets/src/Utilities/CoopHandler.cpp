@@ -101,10 +101,10 @@ std::pair<bool, bool> CoopHandler::connectServer() {
 	if (SDLNet_CheckSockets(set, 0) > 0) {
 		int dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
 
-		/*if (dataLength != __CONNECTED_LENGTH) {
+		if (dataLength != __CONNECTED_LENGTH) {
 			dataLength = 0;
 			return { true, false };
-		}*/
+		}
 		dataLength = 0;
 		bool achieved = true;
 		for (int i = 0; achieved && i < __CONNECTED_LENGTH; i++) {

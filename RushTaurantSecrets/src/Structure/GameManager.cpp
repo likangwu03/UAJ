@@ -43,7 +43,7 @@
 
 GameManager::GameManager() : scenes(), allScenes(), deleteScene(nullptr), deleteTransition(false),
 	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0) 
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0)
 	{ };
 
 
@@ -332,4 +332,18 @@ vector<dialogueInfo> GameManager::getDialogueInfo(std::string d) {
 	}
 
 	return dialogues;
+}
+
+
+void GameManager::initCoopMode(bool server) {
+	twoPlayers = true;
+	for (auto s : allScenes) {
+		s.second->initCoopMode(server);
+	}
+}
+void GameManager::quitCoopMode() {
+	twoPlayers = true;
+	for (auto s : allScenes) {
+		s.second->quitCoopMode();
+	}
 }

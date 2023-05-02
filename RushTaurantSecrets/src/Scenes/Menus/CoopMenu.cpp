@@ -127,14 +127,18 @@ void CoopMenu::update() {
 		if (server && coop->connectClient()) {
 			GameManager::get()->newGame();
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+			GameManager::get()->initCoopMode(server);
 			Game::instance()->runCoop();
+			GameManager::get()->quitCoopMode();
 		}
 		else if (!server) {
 			pair<bool, bool> connect = coop->connectServer();
 			if (connect.first && connect.second) {
 				GameManager::get()->newGame();
 				GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+				GameManager::get()->initCoopMode(server);
 				Game::instance()->runCoop();
+				GameManager::get()->quitCoopMode();
 			}
 			else if (connect.first || connect.second) {
 				// CAMBIAR

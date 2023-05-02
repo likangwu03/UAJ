@@ -49,8 +49,8 @@ public:
 	void init();
 	void reset();
 
-	virtual void initCoopMode(bool server);
-	virtual void quitCoopMode(bool server);
+	void initCoopMode(bool server)override;
+	void quitCoopMode() override;
 
 	virtual void receive(const Message& message);
 };

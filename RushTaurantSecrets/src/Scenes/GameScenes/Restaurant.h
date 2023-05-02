@@ -58,4 +58,7 @@ public:
 	void resumeSound()override;
 	void haltSound()override;
 
+	void initCoopMode(bool server)override;
+	void quitCoopMode() override;
+
 };

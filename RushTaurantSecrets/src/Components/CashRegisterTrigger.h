@@ -41,6 +41,9 @@ public:
 	virtual void isOverlapping();
 	virtual void onTriggerExit();
 	void charge();
+
+	void charge(int rep, int m, int tip);
+
 	void render();
 
 	void receive(const Message& message) override;

@@ -7,7 +7,7 @@
 
 CashRegisterTrigger::CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_), money(GameManager::get()->getMoney()),
-	cM(ClientsManager::get()), highlight(parent->getComponent<Image>()), 
+	cM(ClientsManager::get()), highlight(parent->getComponent<Image>()),
 	addSound(&sdlutils().soundEffects().at("GAIN_REPUTATION")),
 	tipSound(&sdlutils().soundEffects().at("TIP")),
 	cashSound1(&sdlutils().soundEffects().at("CASH_REGISTER1")),
@@ -21,7 +21,7 @@ CashRegisterTrigger::CashRegisterTrigger(GameObject* parent, Vector pos_, float 
 	tipped = false;
 	font = new Font(FONT_PATH, FONTSIZE);
 	tipTexture = bgTexture = nullptr;
-	
+
 }
 
 CashRegisterTrigger::~CashRegisterTrigger() {
@@ -42,15 +42,11 @@ void CashRegisterTrigger::isOverlapping() {
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 
 	charge();
-	Message m;
-	m.id = Message::msg_CHARGE;
-	Game::get()->getCoopHandler()->send(m);
 
 }
 void CashRegisterTrigger::charge() {
 	if (cM->canCollect()) {
 		int totalPayment = 0;
-
 		// SONIDO CAJA REGISTRADORA
 		if (sdlutils().rand().nextInt(0, 2) == 0) cashSound1->play(0);
 		else cashSound2->play(0);
@@ -66,9 +62,10 @@ void CashRegisterTrigger::charge() {
 		}
 
 		// PROPINAS
+		int tip = 0;
 		int rep = GameManager::get()->getReputation()->getReputation() / 20;
 		if (rep >= sdlutils().rand().nextInt(0, 5)) {
-			int tip = totalPayment / 10;
+			tip = totalPayment / 10;
 			money->addMoney(tip);
 			tipSound->play(0);
 #ifdef _DEBUG
@@ -93,10 +90,48 @@ void CashRegisterTrigger::charge() {
 		// CLIENTES ABANDONAN CAJA
 		cM->collectAndLeave();
 
+
+		Message m;
+		m.id = Message::msg_CHARGE;
+		m.charge.money = money->getMoney();
+		m.charge.rep = GameManager::get()->getReputation()->getReputation();
+		m.charge.tip = tip;
+		Game::get()->getCoopHandler()->send(m);
+
 	}
 }
+
+void CashRegisterTrigger::charge(int rep, int m,int tip) {
+
+	if (sdlutils().rand().nextInt(0, 2) == 0) cashSound1->play(0);
+	else cashSound2->play(0);
+
+	for (auto it : *list) {
+		addSound->play(0);
+	}
+
+	// PROPINAS
+	if (tip > 0) {
+		tipSound->play(0);
+		delete tipTexture;
+		tipTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x129008FF));
+		bgTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x054400FF));
+		currRect = bgRect = INITRECT;
+		currRect.w = bgRect.w = tipTexture->width();
+		currRect.h = bgRect.h = tipTexture->height();
+		bgRect.x += OUT_OFFSET;
+		bgRect.y += OUT_OFFSET;
+		tipped = true;
+	}
+	GameManager::get()->getReputation()->addReputatiton(rep- GameManager::get()->getReputation()->getReputation());
+	money->addMoney(m-money->getMoney());
+
+	streak->setStreak(list->size());
+	// CLIENTES ABANDONAN CAJA
+	cM->collectAndLeave();
+}
 void CashRegisterTrigger::onTriggerExit() {
-	 highlight->setActive(false);
+	highlight->setActive(false);
 }
 
 
@@ -115,6 +150,6 @@ void CashRegisterTrigger::render() {
 
 void CashRegisterTrigger::receive(const Message& message) {
 	if (message.id == Message::msg_CHARGE) {
-		charge();
+		charge(message.charge.rep, message.charge.money, message.charge.tip);
 	}
 }

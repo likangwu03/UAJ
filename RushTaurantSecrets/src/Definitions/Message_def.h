@@ -86,6 +86,11 @@ struct Message {
 		uint8_t dish;
 		uint8_t id;
 	}cooking_machine;
+	struct data_charge {
+		uint8_t rep;
+		uint8_t money;
+		uint8_t tip;
+	}charge;
 
 	Message(_msg_id id = msg_INVALID) : id(id) { }
 	~Message() { }
@@ -259,6 +264,11 @@ public:
 			msg = code8(cooking_machine.id, msg);
 			msg = code8(cooking_machine.dish, msg);
 			break;
+		case msg_CHARGE:
+			msg = code8(charge.money, msg);
+			msg = code8(charge.rep, msg);
+			msg = code8(charge.tip, msg);
+			break;
 
 		}
 	
@@ -338,6 +348,12 @@ public:
 			msg = decode8(cooking_machine.id, msg);
 			msg = decode8(cooking_machine.dish, msg);
 			break;
+		case msg_CHARGE:
+			msg = decode8(charge.money, msg);
+			msg = decode8(charge.rep, msg);
+			msg = decode8(charge.tip, msg);
+			break;
+
 		}
 		return msg;
 	}

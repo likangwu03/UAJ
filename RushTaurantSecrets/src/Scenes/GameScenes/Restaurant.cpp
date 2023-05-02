@@ -186,3 +186,11 @@ void Restaurant::haltSound() {
 	restaurantMusic->haltMusic();
 	ThievesManager::get()->haltSound();
 }
+
+
+void Restaurant::initCoopMode(bool server) {
+	ClientsManager::get()->setActive(server);
+}
+void Restaurant::quitCoopMode() {
+	ClientsManager::get()->setActive(true);
+}

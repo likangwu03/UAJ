@@ -115,7 +115,7 @@ void BeforeDayStartScene::initCoopMode(bool server) {
 	active = server;
 }
 
-void BeforeDayStartScene::quitCoopMode(bool server) {
+void BeforeDayStartScene::quitCoopMode() {
 	active = true;
 }
 

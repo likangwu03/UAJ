@@ -36,8 +36,8 @@ public:
 	void handleEvents();
 	void selectedButton(int selected);
 
-	virtual void initCoopMode(bool server);
-	virtual void quitCoopMode(bool server);
+	void initCoopMode(bool server)override;
+	void quitCoopMode()override;
 	virtual void receive(const Message& message);
 
 	void setMenus(const vector<uint8_t>& menu1,const vector<uint8_t>& menu2);

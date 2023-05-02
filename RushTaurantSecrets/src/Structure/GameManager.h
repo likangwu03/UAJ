@@ -121,4 +121,7 @@ public:
 	void newGame();
 
 	vector<dialogueInfo> getDialogueInfo(string d);
+
+	virtual void initCoopMode(bool server);
+	virtual void quitCoopMode();
 };

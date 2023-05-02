@@ -98,7 +98,7 @@ void DailyMenuScene::initCoopMode(bool server) {
 	active = server;
 }
 
-void DailyMenuScene::quitCoopMode(bool server) {
+void DailyMenuScene::quitCoopMode() {
 	active = true;
 }
 

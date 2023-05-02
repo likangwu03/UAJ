@@ -180,7 +180,7 @@ void DailyMenuComp::initMenu(const vector<uint8_t>& menu_) {
 	menu->clear();
 	for (uint8_t d : menu_) {
 		if (d <= _ecs::NUM_DISH)menu->push_back(_ecs::Dishes[d]);
-		else menu->push_back(_ecs::MeatDishes[d- _ecs::NUM_DISH-1]);
+		else menu->push_back(_ecs::MeatDishes[d- _ecs::NUM_DISH]);
 	}
 	//se borran los platos anteriores y se indica que ya se han asignado platos
 	//if (!initialized)return;
