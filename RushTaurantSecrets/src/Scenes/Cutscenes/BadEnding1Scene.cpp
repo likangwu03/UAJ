@@ -27,15 +27,7 @@ BadEnding1Scene::BadEnding1Scene() {
 	cont = 0;
 
 	/*
-	player = new Player(this, 0);
-	player->getComponent<PlayerMovementController>()->setActive(false);
-	straightMovementP = new StraightMovement(player, 5);
-	transform = player->getComponent<Transform>();
-	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-	transform->setMovState(walking);
-	*/
-
-	player = new GameObject(this, _ecs::grp_PLAYER);
+	player = new GameObject(this);
 	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(20, 11)), Vector(0, 0), 48, 96);
 	straightMovement = new StraightMovement(player, 5);
 	Animator::AnimParams ap;
@@ -43,13 +35,13 @@ BadEnding1Scene::BadEnding1Scene() {
 	ap.endFrame = 18;
 	ap.currAnim = 1;
 	auto anim = new CharacterAnimator(player, "Player_1", ap);
+	*/
 
-	//Scene* scene, string sprite, Vector origin, float speed
 	phonecall = &sdlutils().soundEffects().at("PHONECALL");
 	
-	client1 = new CinematicNPC(this, "Client_3", RelativeToGlobal::pointRestaurant({ 25, 14 }), 1);
+	client1 = new CinematicNPC(this, "Client_3", Vector(0, 0), 1);
 	straightMovementc1 = new StraightMovement(client1, 3);
-	client2 = new CinematicNPC(this, "Client_5", RelativeToGlobal::pointRestaurant({ 25, 15 }), 1);
+	client2 = new CinematicNPC(this, "Client_5", Vector(0,0), 1);
 	straightMovementc2 = new StraightMovement(client2, 3);
 
 	auto clAnim = client1->getComponent<CharacterAnimator>();
@@ -67,18 +59,25 @@ void BadEnding1Scene::reset() {
 	transition = nullptr;
 	cont = 0;
 
-	transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-	transform->setMovState(walking);
+	straightMovement->reset(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+	//transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+	//transform->setMovState(walking);
 
 	anim->setW(48 * RESIZEFACTOR);
 	anim->setH(96 * RESIZEFACTOR);
 
+	StraightMovement* s1 = client1->getComponent<StraightMovement>();
+	s1->reset(RelativeToGlobal::pointRestaurant({ 25, 14 }));
+	StraightMovement* s2 = client2->getComponent<StraightMovement>();
+	s2->reset(RelativeToGlobal::pointRestaurant({ 25, 15 }));
+	/*
 	auto tr = client1->getComponent<Transform>();
 	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 14 }));
 	tr = client2->getComponent<Transform>();
 	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 15 }));
+	*/
 
-	straightMovement->stop();
+	//straightMovement->stop();
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
@@ -121,9 +120,11 @@ void BadEnding1Scene::update()
 		state = ARRIVE;
 		break;
 	case BadEnding1Scene::ARRIVE:
+		/*
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(idle);
 		}
+		*/
 		if (straightMovementc1->hasFinishedPath() && straightMovementc2->hasFinishedPath()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
@@ -158,7 +159,8 @@ void BadEnding1Scene::update()
 		cont += frameTime;
 		if (cont > START_TIME * 1000 * 2) {
 
-			transform->setPos(Vector(624, 672));
+			straightMovement->reset(Vector(RelativeToGlobal::pointRestaurant(Vector(19, 22))));
+			//transform->setPos(Vector(RelativeToGlobal::pointRestaurant(Vector(19, 22))));
 			anim->setW(48);
 			anim->setH(96);
 
@@ -171,7 +173,7 @@ void BadEnding1Scene::update()
 		break;
 	case BadEnding1Scene::PHONECALL:
 		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
+			transform->setMovState(phone);
 			dialogueBox = new Dialogue(this, Vector(145, 550), 700, 0.01 * 1000,
 				font, dialogues[3].portrait, dialogues[3].text);
 			phonecall->play(-1);
@@ -318,7 +320,8 @@ void BadEnding1Scene::update()
 			anim->setW(48 * RESIZEFACTOR);
 			anim->setH(96 * RESIZEFACTOR);
 
-			transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+			straightMovement->reset(RelativeToGlobal::pointRestaurant({ 20, 11 }));
+			//transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 			transform->setOrientation(south);
 			dialogueBox = new Dialogue(this, Vector(145, 500), 700, 0.01 * 1000,

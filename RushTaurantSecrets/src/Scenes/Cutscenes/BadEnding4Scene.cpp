@@ -26,11 +26,12 @@ BadEnding4Scene::BadEnding4Scene() {
 	new UIAnimator(book, "Player_1", ap, Vector(RelativeToGlobal::pointPantry({ 25, 5 })));
 
 	thief = new CinematicNPC(this, "Thief_2", RelativeToGlobal::pointPantry({ 17, 5 }), 1);
-	straightMovementThief = new StraightMovement(thief, 3);
+	thief->getComponent<StraightMovement>()->changeSpeed(3);
+	straightMovementThief = thief->getComponent<StraightMovement>();
+	straightMovementThief->changeSpeed(3);
 
-	straightMovement = new StraightMovement(player, 2);
-
-	playerPoints = { {Vector(20, 14)} };
+	// straightMovement->changeSpeed(2);
+	//straightMovement = new StraightMovement(player, 2);
 
 	apNight.initFrame = 18;
 	apNight.endFrame = 10;
@@ -44,10 +45,11 @@ void BadEnding4Scene::reset() {
 	dialogueBox = nullptr;
 	state = START;
 
-	transform->setPos(RelativeToGlobal::pointPantry({ 20, 14 }));
-	transform->setMovState(walking);
+	straightMovement->reset(RelativeToGlobal::pointPantry({ 20, 14 }));
+	//transform->setPos(RelativeToGlobal::pointPantry({ 20, 14 }));
+	//transform->setMovState(walking);
 	straightMovement->changeSpeed(2);
-	straightMovement->stop();
+	//straightMovement->stop();
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 1);
@@ -82,13 +84,13 @@ void BadEnding4Scene::update() {
 	{
 	case BadEnding4Scene::START:
 		pantryMusic->play(-1);
-		straightMovement->addPath(RelativeToGlobal::pointsPantry(BE4PathPlayer[1]));
+		straightMovement->addPath(RelativeToGlobal::pointsPantry(BE4PathPlayer[0]));
 		straightMovementThief->addPath(RelativeToGlobal::pointsPantry(BE4PathThief[0]));
 		state = D1;
 		break;
 	case BadEnding4Scene::D1:
 		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
+			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = D2;
@@ -110,9 +112,10 @@ void BadEnding4Scene::update() {
 			straightMovementThief->addPath(RelativeToGlobal::pointsPantry(BE4PathThief[1]));
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[2].portrait, dialogues[2].text);
-			state = D4;
+			state = D6;
 		}
 		break;
+	/*
 	case BadEnding4Scene::D4:
 		if (straightMovementThief->hasFinishedPath()) {
 			straightMovementThief->addPath(RelativeToGlobal::pointsPantry(BE4PathThief[2]));
@@ -126,6 +129,7 @@ void BadEnding4Scene::update() {
 			state = D6;
 		}
 		break;
+	*/
 	case BadEnding4Scene::D6:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
@@ -161,17 +165,21 @@ void BadEnding4Scene::update() {
 			pantryMusic->pauseMusic();
 			homeMusic->play(-1);
 			night = true; stolenBook = false;
-			auto anim = new CharacterAnimator(player, "Player_Casual", apNight);
+			anim->setTexture("Player_Casual", 6, 11, 1, 10);
+			anim->setW(48);
+			anim->setH(96);
+			//auto anim = new CharacterAnimator(player, "Player_Casual", apNight);
 			bg = &sdlutils().images().at("CINEMATIC_BG_HOUSE");
 			transform->setOrientation(north);
-			transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+			straightMovement->reset(RelativeToGlobal::pointHouse({ 23, 7 }));
+			//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[6].portrait, dialogues[6].text);
 			state = D11;
 		}
 		break;
 	case BadEnding4Scene::D11:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
 				font, dialogues[7].portrait, dialogues[7].text);
@@ -179,7 +187,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D12:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[8].portrait, dialogues[8].text);
@@ -187,7 +195,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D13:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[9].portrait, dialogues[9].text);
@@ -195,7 +203,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D14:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[10].portrait, dialogues[10].text);
@@ -203,91 +211,91 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D15:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[11].portrait, dialogues[11].text);
 			state = D16;
 		}
 	case BadEnding4Scene::D16:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[12].portrait, dialogues[12].text);
 			state = D17;
 		}
 	case BadEnding4Scene::D17:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
 				font, dialogues[13].portrait, dialogues[13].text);
 			state = D18;
 		}
 	case BadEnding4Scene::D18:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[14].portrait, dialogues[14].text);
 			state = D19;
 		}
 	case BadEnding4Scene::D19:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[15].portrait, dialogues[15].text);
 			state = D20;
 		}
 	case BadEnding4Scene::D20:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[16].portrait, dialogues[16].text);
 			state = D21;
 		}
 	case BadEnding4Scene::D21:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[17].portrait, dialogues[17].text);
 			state = D22;
 		}
 	case BadEnding4Scene::D22:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[18].portrait, dialogues[18].text);
 			state = D23;
 		}
 	case BadEnding4Scene::D23:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[19].portrait, dialogues[19].text);
 			state = D24;
 		}
 	case BadEnding4Scene::D24:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[20].portrait, dialogues[20].text);
 			state = D25;
 		}
 	case BadEnding4Scene::D25:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[21].portrait, dialogues[21].text);
 			state = D26;
 		}
 	case BadEnding4Scene::D26:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[22].portrait, dialogues[22].text);
 			state = D27;
 		}
 	case BadEnding4Scene::D27:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[23].portrait, dialogues[23].text);
@@ -295,7 +303,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D28:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
 				font, dialogues[24].portrait, dialogues[24].text);
@@ -303,7 +311,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D29:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[25].portrait, dialogues[25].text);
@@ -311,7 +319,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D30:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[26].portrait, dialogues[26].text);
@@ -319,7 +327,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D31:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[27].portrait, dialogues[27].text);
@@ -327,7 +335,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D32:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
 				font, dialogues[28].portrait, dialogues[28].text);
@@ -335,7 +343,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D33:
-		transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[29].portrait, dialogues[29].text);
@@ -343,7 +351,7 @@ void BadEnding4Scene::update() {
 		}
 		break; 
 	case BadEnding4Scene::D34:
-			transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+			//transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
 			if (Text::isTextFinished()) {
 				dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 					font, dialogues[30].portrait, dialogues[30].text);
@@ -352,28 +360,32 @@ void BadEnding4Scene::update() {
 			break;
 	case BadEnding4Scene::D35:
 		if (Text::isTextFinished()) {
-			straightMovement->addPath(RelativeToGlobal::pointsHouse(BE4PathPlayer[4]));
-			state = D36;
+			straightMovement->addPath(RelativeToGlobal::pointsHouse(BE4PathPlayer[1]));
+			state = D37;
 		}
+		/*
 		else
-			transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+ 			transform->setPos(RelativeToGlobal::pointHouse({ 23,7 }));
+			*/
 		break;
+	/*
 	case BadEnding4Scene::D36:
 		if (straightMovement->hasFinishedPath()) {
 			straightMovement->addPath(RelativeToGlobal::pointsHouse(BE4PathPlayer[5]));
 			state = D37;
 		}
 		break;
+	*/
 	case BadEnding4Scene::D37:
 		if (straightMovement->hasFinishedPath()) {
-			transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+			//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[31].portrait, dialogues[31].text);
 			state = D38;
 		}
 		break;
 	case BadEnding4Scene::D38:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[32].portrait, dialogues[32].text);
@@ -381,7 +393,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D39:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
 				font, dialogues[33].portrait, dialogues[33].text);
@@ -389,7 +401,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D40:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[34].portrait, dialogues[34].text);
@@ -397,7 +409,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D41:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[35].portrait, dialogues[35].text);
@@ -405,7 +417,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D42:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[36].portrait, dialogues[36].text);
@@ -413,7 +425,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D43:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[37].portrait, dialogues[37].text);
@@ -421,16 +433,15 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D44:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[38].portrait, dialogues[38].text);
 			state = D45;
 		}
 		break;
-		//
 	case BadEnding4Scene::D45:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[39].portrait, dialogues[39].text);
@@ -438,7 +449,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D46:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[40].portrait, dialogues[40].text);
@@ -446,7 +457,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D47:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[41].portrait, dialogues[41].text);
@@ -454,7 +465,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D48:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[42].portrait, dialogues[42].text);
@@ -462,7 +473,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D49:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[43].portrait, dialogues[43].text);
@@ -470,7 +481,7 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D50:
-		transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
+		//transform->setPos(RelativeToGlobal::pointHouse({ 21,5 }));
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[44].portrait, dialogues[44].text);

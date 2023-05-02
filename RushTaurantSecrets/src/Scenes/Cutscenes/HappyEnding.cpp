@@ -64,16 +64,21 @@ HappyEnding::HappyEnding() {
 	guard1 = new CinematicNPC(this, "Guard_1", Vector(0, 0), 0);
 	guard1->getComponent<CharacterAnimator>()->setW(48 * 1.5);
 	guard1->getComponent<CharacterAnimator>()->setH(96 * 1.5);
+	/*
 	guard1->getComponent<Transform>()->setPos( RelativeToGlobal::pointRestaurant({ 30, 4 }));
 	guard1->getComponent<Transform>()->setMovState(idle);
+	*/
+	guard1->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant({ 30,4 }));
 	guard1->getComponent<Transform>()->setOrientation(west);
-
 
 	guard2 = new CinematicNPC(this, "Guard_2", Vector(0, 0), 0);
 	guard2->getComponent<CharacterAnimator>()->setW(48 * 1.5);
 	guard2->getComponent<CharacterAnimator>()->setH(96 * 1.5);
+	/*
 	guard2->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant({ 34, 6 }));
 	guard2->getComponent<Transform>()->setMovState(idle);
+	*/
+	guard2->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant({ 34,6 }));
 	guard2->getComponent<Transform>()->setOrientation(south);
 
 }
@@ -89,16 +94,18 @@ void HappyEnding::reset() {
 	dialogueN = 0;
 	doorFrame = 0;
 
-	transform->setPos(RelativeToGlobal::pointRestaurant(paths[0][0]));
+	//transform->setPos(RelativeToGlobal::pointRestaurant(paths[0][0]));
+	straightMovement->reset(RelativeToGlobal::pointRestaurant(paths[0][0]));
+	straightMovement->setIsWalking(false);
 	transform->setMovState(sleeping);
-	transform->setOrientation(south);
+	//transform->setOrientation(south);
 
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 	anim->setH(96 * 1.6);
 	anim->setW(48 * 1.6);
 
 	straightMovement->changeSpeed(5);
-	straightMovement->stop();
+	//straightMovement->stop();
 
 	filter->setOpacity(80);
 	
@@ -117,15 +124,23 @@ void HappyEnding::reset() {
 	top = &sdlutils().images().at("CINEMATIC_BG_PROTA_ROOM_WALL");
 
 	for (auto c : npcs) {
+		/*
 		c.npc->getComponent<StraightMovement>()->stop();
 		c.npc->getComponent<Transform>()->setPos(c.pos);
+		*/
+		c.npc->getComponent<StraightMovement>()->reset(c.pos);
+		c.npc->getComponent<StraightMovement>()->setIsWalking(false);
 		c.npc->getComponent<Transform>()->setOrientation(c.orientation);
 		c.npc->getComponent<Transform>()->setMovState(c.state);
 	}
+	waiter1->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant(waiterPaths[0][0]));
+	waiter2->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant(waiterPaths[1][0]));
+	/*
 	waiter1->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant(waiterPaths[0][0]));
 	waiter2->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant(waiterPaths[1][0]));
 	waiter1->getComponent<StraightMovement>()->stop();
 	waiter2->getComponent<StraightMovement>()->stop();
+	*/
 
 
 	if (GameManager::instance()->getCurrentScene() == this) {
@@ -183,7 +198,7 @@ void HappyEnding::update() {
 		break;
 	case HappyEnding::FADEIN1:
 		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
+			//transform->setMovState(idle);
 			transform->setOrientation(north);
 			transition = new ShowSkipTransitionScene(this, 1, true);
 			GameManager::get()->pushScene(transition, true);
@@ -194,7 +209,7 @@ void HappyEnding::update() {
 		if (GameManager::get()->getCurrentScene() != transition) {
 			(&sdlutils().soundEffects().at("CLOTHES"))->play();
 			anim->setTexture("Player_1", 6, 11, 1, 10);
-			transform->setMovState(idle);
+			//transform->setMovState(idle);
 			transform->setOrientation(north);
 			transition = new ShowSkipTransitionScene(this, 1);
 			GameManager::get()->pushScene(transition, true);
@@ -280,12 +295,14 @@ void HappyEnding::update() {
 			top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_ISLAND");
 
 			straightMovement->changeSpeed(2);
-			transform->setPos(RelativeToGlobal::pointRestaurant(paths[5][0]));
+			straightMovement->reset(RelativeToGlobal::pointRestaurant(paths[5][0]));
+			//transform->setPos(RelativeToGlobal::pointRestaurant(paths[5][0]));
 			anim->setH(96 * RESTSIZE);
 			anim->setW(48 * RESTSIZE);
 			
-			straightMovement->stop();
+			//straightMovement->stop();
 			addPath(paths[5], player);
+			straightMovement->enableRoundTripByLaps(1);
 			addPath(waiterPaths[0], waiter1);
 			addPath(waiterPaths[1], waiter2);
 
@@ -337,17 +354,20 @@ void HappyEnding::update() {
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_HAPPY_ENDING");
 			transition = new ShowSkipTransitionScene(this, 1);
 
-			transform->setPos(RelativeToGlobal::pointRestaurant({ 28,14 }));
-			straightMovement->stop();
+			straightMovement->reset(RelativeToGlobal::pointRestaurant({ 28,14 }));
+			//transform->setPos(RelativeToGlobal::pointRestaurant({ 28,14 }));
+			//straightMovement->stop();
 			transform->setOrientation(west);
 
-			waiter1->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant({ 28, 13 }));
+			waiter1->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant({ 28,13 }));
+			//waiter1->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant({ 28, 13 }));
 			waiter1->getComponent<Transform>()->setOrientation(west);
-			waiter1->getComponent<StraightMovement>()->stop();
+			//waiter1->getComponent<StraightMovement>()->stop();
 
-			waiter2->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant({ 28, 15 }));
+			waiter2->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant({ 28,15 }));
+			//waiter2->getComponent<Transform>()->setPos(RelativeToGlobal::pointRestaurant({ 28, 15 }));
 			waiter2->getComponent<Transform>()->setOrientation(west);
-			waiter2->getComponent<StraightMovement>()->stop();
+			//waiter2->getComponent<StraightMovement>()->stop();
 
 			ambience->setVolume(80);
 

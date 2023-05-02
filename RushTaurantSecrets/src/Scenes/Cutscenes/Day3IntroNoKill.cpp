@@ -24,7 +24,8 @@ Day3IntroNoKill::Day3IntroNoKill() {
 void Day3IntroNoKill::reset() {
 	dialogueBox = nullptr;
 
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+	straightMovement->reset(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+	//transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
 
 	anim->setH(96 * 1.7);
 	anim->setW(48 * 1.7);
@@ -38,7 +39,7 @@ void Day3IntroNoKill::reset() {
 	state = START;
 	cont = 0;
 
-	straightMovement->stop();
+	//straightMovement->stop();
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
@@ -84,7 +85,7 @@ void Day3IntroNoKill::update()
 		break;
 	case Day3IntroNoKill::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
+			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;

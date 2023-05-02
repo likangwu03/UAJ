@@ -13,7 +13,7 @@ class BadEnding1Scene : public CinematicBaseScene
 private:
 	const float RESIZEFACTOR = 0.6666666667;
 
-	//26 DIALOGOS XDDD
+	// 26 DIALOGOS XDDD
 	enum States {
 		START,
 		ARRIVE,//1

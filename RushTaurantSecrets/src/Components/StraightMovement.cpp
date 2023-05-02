@@ -43,7 +43,7 @@ bool StraightMovement::hasArrivedPoint() const {
 void StraightMovement::newStraight(const Vector& end) {
 	this->end = end;
 	calculateDir();
-	//transform->setMovState(walking);
+	// transform->setMovState(walking);
 }
 
 void StraightMovement::newPath(const vector<Vector>& newPath) {
@@ -129,14 +129,18 @@ void StraightMovement::update() {
 		}
 		// si ha terminado de recorrer el camino y esta en ida y vuelta, da media vuelta
 		else if (roundTrip) {
-			goBack();
 			// media vuelta por número de vueltas
 			if (numLaps != -1) {
 				actNumLaps += 1;
-				if (actNumLaps >= numLaps - 1) {
+
+				if (actNumLaps >= numLaps) {
 					numLaps = -1;
 					roundTrip = false;
 				}
+			}
+
+			if (roundTrip) {
+				goBack();
 			}
 		}
 		// si ha terminado de recorrer el camino y está en loop, vuelve a recorrerlo

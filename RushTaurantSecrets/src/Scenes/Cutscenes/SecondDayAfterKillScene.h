@@ -9,14 +9,16 @@ struct dialogueInfo;
 class SecondDayAfterKillScene : public CinematicBaseScene
 {
 private:
-	const vector<Vector> secondDayAfterKillPath[4] = {
-		{ Vector(20, 10),Vector(16,10),Vector(18, 10)},
+	const vector<Vector> secondDayAfterKillPath[5] = {
+		{ Vector(20, 10) },
+		{ Vector(18, 10) },
 		{ Vector(20, 10),Vector(16,10),Vector(18, 10)},
 		{ Vector(18, 14),Vector(25, 14),Vector(30,14)},
 		{ Vector(40, 14)}
 	};
 
 	enum States {
+		MUSIC,
 		START,
 		PAUSE,
 		START2,

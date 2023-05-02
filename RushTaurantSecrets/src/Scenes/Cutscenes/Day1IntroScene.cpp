@@ -15,10 +15,10 @@ Day1IntroScene::Day1IntroScene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_NIGHT");
 	black = &sdlutils().images().at("Filter_Black");
 
+	/*
 	player = new GameObject(this, _ecs::grp_PLAYER);
 	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(50, 14)), Vector(0, 0), 48, 96);
 	straightMovement = new StraightMovement(player, 5);
-
 	Animator::AnimParams ap;
 	ap.initFrame = 18;
 	ap.endFrame = 10;
@@ -29,6 +29,7 @@ Day1IntroScene::Day1IntroScene() {
 	auto anim = new CharacterAnimator(player, "Player_Casual", ap);
 
 	addPath(introPath[START]);
+	*/
 }
 
 void Day1IntroScene::addPath(const vector<Vector>& points) {
@@ -37,7 +38,8 @@ void Day1IntroScene::addPath(const vector<Vector>& points) {
 
 void Day1IntroScene::reset() {
 	dialogueBox = nullptr;
-	transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+	straightMovement->reset(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+	//transform->setPos(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
 
 	anim->setW(48 * 1.7);
 	anim->setH(96 * 1.7);
@@ -46,7 +48,7 @@ void Day1IntroScene::reset() {
 	nightAmbience->setVolume(60);
 	filter->setOpacity(80);
 
-	straightMovement->stop();
+	//straightMovement->stop();
 	addPath(introPath[START]);
 	state = START;
 
@@ -74,7 +76,7 @@ void Day1IntroScene::update() {
 		break;
 	case Day1IntroScene::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
+			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;
 		}
@@ -158,9 +160,7 @@ void Day1IntroScene::update() {
 		break;
 
 	case Day1IntroScene::NONE:
-		
 		break;
-	
 	}
 	
 }

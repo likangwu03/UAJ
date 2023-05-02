@@ -12,10 +12,14 @@ class BadEnding4Scene: public CinematicBaseScene
 {
 private:
 	const vector<Vector> BE4PathPlayer[6] = {
-		{Vector(20, 14)}, {Vector(20, 12)}, {Vector(20, 20)}, {Vector(23, 8)}, {Vector(21, 7)}, {Vector(21, 5)}
+		//{Vector(20, 14)}, 
+		{Vector(20, 12)}, 
+		//{Vector(20, 20)}, {Vector(23, 8)}, 
+		{Vector(21, 7), Vector(21, 5)}
 	};
-	const vector<Vector> BE4PathThief[4] = {
-		{Vector(23, 5)}, {Vector(7, 5)}, {Vector(7, 12)}, {Vector(-2, 12)}
+	const vector<Vector> BE4PathThief[2] = {
+		{Vector(23, 5)},
+		{Vector(7, 5), Vector(7, 12), Vector(-2, 12)}
 	};
 
 	enum States {
@@ -85,7 +89,6 @@ private:
 	Texture* lectern;
 	States state;
 	void addPathPantry(const vector<Vector>& points);
-	vector<Vector> playerPoints;
 	StraightMovement* straightMovementThief;
 	bool reading, night, stolenBook;
 	Animator::AnimParams apNight;

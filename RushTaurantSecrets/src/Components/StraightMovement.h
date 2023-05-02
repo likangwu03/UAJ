@@ -104,7 +104,7 @@ public:
 		roundTrip = true;
 	}
 	inline bool roundTripEnded() const {
-		return roundTrip;
+		return !roundTrip;
 	}
 
 	// activar loop por tiempo
@@ -116,12 +116,21 @@ public:
 		loop = true;
 	}
 	inline bool loopEnded() {
-		return loop;
+		return !loop;
 	}
 
 	inline void setWalkingState(movementState newWalkingState) {
 		walkingState = newWalkingState;
 		transform->setMovState(walkingState);
+	}
+
+	inline void reset(Vector initPos) {
+		transform->setPos(initPos);
+		newPath({ initPos });
+	}
+
+	inline void setIsWalking(bool enabled) {
+		isWalking = enabled;
 	}
 
 	virtual void update();
