@@ -49,6 +49,7 @@ void Restaurant::callAfterCreating() {
 	GameObject* managerContainer = new GameObject(this);
 	ClientsManager::init(managerContainer, menu(), 6 * 1000, 2, 3);
 
+	/*
 	GameObject* prueba = new GameObject(this, _ecs::grp_CLIENTS);
 	new Transform(prueba, RelativeToGlobal::pointRestaurant(Vector(30, 18)), Vector(0, 0), 48, 96);
 	Animator::AnimParams aP;
@@ -60,6 +61,7 @@ void Restaurant::callAfterCreating() {
 	s->addPath(RelativeToGlobal::pointsRestaurant({ Vector(25, 18), Vector(25, 15), Vector(30,15) }));
 	s->enableInfiniteLoop();
 	s->setWalkingState(pushing);
+	*/
 
 	dm = GameManager::get()->getDayManager();
 
