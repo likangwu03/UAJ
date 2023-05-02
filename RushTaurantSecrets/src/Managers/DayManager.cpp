@@ -130,7 +130,7 @@ void DayManager::nextDay(bool loading) {
 	}
 	// Intros si se está cargando partida
 	else {
-		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BADENDING4));
+		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
 		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
 		else if (day == 3) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
 	}

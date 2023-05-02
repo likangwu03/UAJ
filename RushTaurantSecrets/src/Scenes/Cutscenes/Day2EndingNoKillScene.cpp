@@ -26,15 +26,11 @@ void Day2EndingNoKillScene::reset() {
 	dialogueN = 0;
 
 	straightMovement->reset(RelativeToGlobal::pointRestaurant(Vector(19.5, 25)));
-	//transform->setPos(RelativeToGlobal::pointRestaurant(Vector(19.5, 25)));
-	//transform->setMovState(walking);
-	//transform->setOrientation(north);
 
 	anim->setH(96 * 1.3);
 	anim->setW(48 * 1.3);
 
 	straightMovement->changeSpeed(6);
-	//straightMovement->stop();
 	addPath(paths[START]);
 
 	filter->setOpacity(80);
@@ -61,7 +57,6 @@ void Day2EndingNoKillScene::update() {
 		break;
 	case Day2EndingNoKillScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
-			//transform->setMovState(idle);
 			if (timer >= TURNAROUNDTIME) {
 				transform->setOrientation(west);
 				state = TURN;

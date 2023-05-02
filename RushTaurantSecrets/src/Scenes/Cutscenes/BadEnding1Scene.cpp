@@ -26,17 +26,6 @@ BadEnding1Scene::BadEnding1Scene() {
 	transition = nullptr;
 	cont = 0;
 
-	/*
-	player = new GameObject(this);
-	transform = new Transform(player, RelativeToGlobal::pointRestaurant(Vector(20, 11)), Vector(0, 0), 48, 96);
-	straightMovement = new StraightMovement(player, 5);
-	Animator::AnimParams ap;
-	ap.initFrame = 18;
-	ap.endFrame = 18;
-	ap.currAnim = 1;
-	auto anim = new CharacterAnimator(player, "Player_1", ap);
-	*/
-
 	phonecall = &sdlutils().soundEffects().at("PHONECALL");
 	
 	client1 = new CinematicNPC(this, "Client_3", Vector(0, 0), 1);
@@ -60,8 +49,6 @@ void BadEnding1Scene::reset() {
 	cont = 0;
 
 	straightMovement->reset(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-	//transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-	//transform->setMovState(walking);
 
 	anim->setW(48 * RESIZEFACTOR);
 	anim->setH(96 * RESIZEFACTOR);
@@ -70,14 +57,6 @@ void BadEnding1Scene::reset() {
 	s1->reset(RelativeToGlobal::pointRestaurant({ 25, 14 }));
 	StraightMovement* s2 = client2->getComponent<StraightMovement>();
 	s2->reset(RelativeToGlobal::pointRestaurant({ 25, 15 }));
-	/*
-	auto tr = client1->getComponent<Transform>();
-	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 14 }));
-	tr = client2->getComponent<Transform>();
-	tr->setPos(RelativeToGlobal::pointRestaurant({ 25, 15 }));
-	*/
-
-	//straightMovement->stop();
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 	top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP");
@@ -120,11 +99,6 @@ void BadEnding1Scene::update()
 		state = ARRIVE;
 		break;
 	case BadEnding1Scene::ARRIVE:
-		/*
-		if (straightMovement->hasFinishedPath()) {
-			transform->setMovState(idle);
-		}
-		*/
 		if (straightMovementc1->hasFinishedPath() && straightMovementc2->hasFinishedPath()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
@@ -160,7 +134,6 @@ void BadEnding1Scene::update()
 		if (cont > START_TIME * 1000 * 2) {
 
 			straightMovement->reset(Vector(RelativeToGlobal::pointRestaurant(Vector(19, 22))));
-			//transform->setPos(Vector(RelativeToGlobal::pointRestaurant(Vector(19, 22))));
 			anim->setW(48);
 			anim->setH(96);
 
@@ -289,7 +262,6 @@ void BadEnding1Scene::update()
 			state = D19;
 		}
 		break;
-		//aqui
 	case BadEnding1Scene::D19:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
@@ -321,7 +293,6 @@ void BadEnding1Scene::update()
 			anim->setH(96 * RESIZEFACTOR);
 
 			straightMovement->reset(RelativeToGlobal::pointRestaurant({ 20, 11 }));
-			//transform->setPos(RelativeToGlobal::pointRestaurant({ 20, 11 }));
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 			transform->setOrientation(south);
 			dialogueBox = new Dialogue(this, Vector(145, 500), 700, 0.01 * 1000,

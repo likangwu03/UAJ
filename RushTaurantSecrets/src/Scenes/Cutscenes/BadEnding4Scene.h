@@ -27,8 +27,6 @@ private:
 		D1,
 		D2,
 		D3,
-		D4,
-		D5,
 		D6,
 		D7,
 		D8,
@@ -59,7 +57,6 @@ private:
 		D33,
 		D34,
 		D35,
-		D36,
 		D37,
 		D38,
 		D39,
@@ -91,8 +88,6 @@ private:
 	void addPathPantry(const vector<Vector>& points);
 	StraightMovement* straightMovementThief;
 	bool reading, night, stolenBook;
-	Animator::AnimParams apNight;
-	Animator::AnimParams ap;
 	Music* pantryMusic;
 	Music* homeMusic;
 

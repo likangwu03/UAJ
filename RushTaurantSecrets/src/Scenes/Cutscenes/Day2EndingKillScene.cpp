@@ -24,14 +24,11 @@ void Day2EndingKillScene::reset() {
 	dialogueBox = nullptr;
 
 	straightMovement->reset(RelativeToGlobal::pointHouse({ 13, 14 }));
-	//transform->setPos(RelativeToGlobal::pointHouse({ 13, 14 }));
-	//transform->setMovState(walking);
 
 	anim->setW(48);
 	anim->setH(96);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 
-	//straightMovement->stop();
 	addPath(ENTERPATH);
 	state = START;
 
@@ -61,27 +58,23 @@ void Day2EndingKillScene::update()
 	switch (state)
 	{
 	case Day2EndingKillScene::START:
-		//transform->setOrientation(north);
 		(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 		state = D1;
 		break;
 	case Day2EndingKillScene::D1:
 		if (straightMovement->hasFinishedPath()) {
-			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
 			state = D2;
 		}
 		break;
 	case Day2EndingKillScene::D2:
 		if (Text::isTextFinished()) {
-			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
 			state = D3;
 		}
 		break;
 	case Day2EndingKillScene::D3:
 		if (Text::isTextFinished()) {
-			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text);
 			state = PHONE;
 		}
@@ -104,7 +97,6 @@ void Day2EndingKillScene::update()
 	case Day2EndingKillScene::D4:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setMovState(phone);
-			//transform->setMovState(idle);
 			if (Text::isTextFinished()) {
 				phonecall->haltChannel();
 				dialogueBox = new Dialogue(this, Vector(150, 570), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text);

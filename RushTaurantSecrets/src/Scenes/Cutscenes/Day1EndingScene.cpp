@@ -21,9 +21,6 @@ void Day1EndingScene::reset() {
 	dialogueBox = nullptr;
 
 	straightMovement->reset(RelativeToGlobal::pointHouse(Vector(12.5, 15)));
-	//transform->setPos(RelativeToGlobal::pointHouse(Vector(12.5, 15)));
-	//transform->setMovState(walking);
-	//transform->setOrientation(north);
 	
 	anim->setH(96 * 1.3);
 	anim->setW(48 * 1.3);
@@ -32,7 +29,6 @@ void Day1EndingScene::reset() {
 	filter->setOpacity(80);
 
 	straightMovement->changeSpeed(3);
-	//straightMovement->stop();
 	addPath(paths[START]);
 	state = START;
 
@@ -61,7 +57,6 @@ void Day1EndingScene::update()
 		break;
 	case Day1EndingScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
-			//transform->setMovState(idle);
 			transform->setOrientation(south);
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
 			state = D1;

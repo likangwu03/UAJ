@@ -88,16 +88,16 @@ void GameManager::initialize() {
 	
 	days->nextDay();
 
-	allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_INTRO3NOKILL, new Day3IntroNoKill() });	// REVISADA
-	allScenes.insert({ _ecs::sc_ENDINGDAY1, new Day1EndingScene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new Day2EndingNoKillScene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2EndingKillScene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_FIRSTDAYAFTERKILL, new FirstDayAfterKillScene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });	// REVISADA
-	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });
-	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEnding() });	// REVISADA
+	allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_INTRO3NOKILL, new Day3IntroNoKill() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_ENDINGDAY1, new Day1EndingScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new Day2EndingNoKillScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_ENDINGDAY2KILL, new Day2EndingKillScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_FIRSTDAYAFTERKILL, new FirstDayAfterKillScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEnding() });	// REVISADA 2
 
 
 	changeScene(allScenes.at(_ecs::sc_MAINMENU));

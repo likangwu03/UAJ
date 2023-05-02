@@ -24,8 +24,6 @@ void FirstDayAfterKillScene::reset() {
 	cont = 0;
 
 	straightMovement->reset(Vector(576, 230));
-	//transform->setPos(Vector(576, 230));
-	//transform->setMovState(idle);
 	transform->setOrientation(north);
 
 	anim->setW(48 * 1.7);
@@ -36,7 +34,6 @@ void FirstDayAfterKillScene::reset() {
 	filter->setOpacity(80);
 
 	straightMovement->changeSpeed(3);
-	//straightMovement->stop();
 	state = INIT;
 
 	if (GameManager::instance()->getCurrentScene() == this) {
@@ -103,7 +100,6 @@ void FirstDayAfterKillScene::update() {
 
 	case FirstDayAfterKillScene::M3:
 		if (straightMovement->hasFinishedPath()) {
-			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
 				font, dialogues[5].portrait, dialogues[5].text);
 			state = M4;
@@ -129,7 +125,6 @@ void FirstDayAfterKillScene::update() {
 		if (straightMovement->hasFinishedPath()) {
 			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
 				font, dialogues[7].portrait, dialogues[7].text);
-			//transform->setMovState(idle);
 
 			state = OUT;
 		}

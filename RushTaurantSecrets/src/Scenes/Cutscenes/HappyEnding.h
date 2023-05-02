@@ -34,7 +34,7 @@ private:
 		{ Vector(22, 5), Vector(22, 10),  Vector(17.8, 10), },
 		{ Vector(17.8, 10), Vector(17.8, 16), Vector(10, 16) },
 		{ Vector(10,16), Vector(10,20) },
-		{ Vector(27,4.5), Vector(31,4.5), Vector(31,7.5) }//, Vector(31,4.5), Vector(27,4.5) },
+		{ Vector(27,4.5), Vector(31,4.5), Vector(31,7.5) }
 
 	};
 	const vector<Vector> waiterPaths[2] = {

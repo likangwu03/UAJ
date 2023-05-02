@@ -23,7 +23,6 @@ void SecondDayAfterKillScene::reset() {
 	dialogueBox = nullptr;
 	cont = 0;
 	straightMovement->reset(RelativeToGlobal::pointRestaurant(Vector(16, 10)));
-	//transform->setPos(RelativeToGlobal::pointRestaurant(Vector(15, 10)));
 	transform->setMovState(walking);
 	straightMovement->changeSpeed(2);
 
@@ -34,7 +33,6 @@ void SecondDayAfterKillScene::reset() {
 	nightAmbience->setVolume(60);
 	filter->setOpacity(80);
 
-	//straightMovement->stop();
 	state = MUSIC;
 	addPath(secondDayAfterKillPath[0]);
 	straightMovement->enableRoundTripByLaps(1);
@@ -59,12 +57,10 @@ void SecondDayAfterKillScene::update() {
 			addPath(secondDayAfterKillPath[1]);
 			state = PAUSE;
 		}
-		// state = PAUSE;
 		break;
 	case SecondDayAfterKillScene::PAUSE:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(north);
-			//transform->setMovState(idle);
 			state = START2;
 		}
 		break;
@@ -78,7 +74,6 @@ void SecondDayAfterKillScene::update() {
 	case SecondDayAfterKillScene::M1:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(north);
-			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = M2;
@@ -136,7 +131,6 @@ void SecondDayAfterKillScene::update() {
 		break;
 	case SecondDayAfterKillScene::M5:
 		if (straightMovement->hasFinishedPath()) {
-			//transform->setMovState(idle);
 			transform->setOrientation(east);
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[7].portrait, dialogues[7].text);
@@ -170,7 +164,6 @@ void SecondDayAfterKillScene::update() {
 	default:
 		break;
 	}
-
 }
 
 void SecondDayAfterKillScene::renderCinematic() {
