@@ -3,14 +3,14 @@
 #include "../../Structure/GameManager.h"
 #include "ShowSkipTransitionScene.h"
 
-BadEnding4Scene::BadEnding4Scene() {
+BadEnding4Scene::BadEnding4Scene() : finish(false), contText(7) {
 	dialogues = GameManager::get()->getDialogueInfo("BadEnding4.json");
 	bg = &sdlutils().images().at("CINEMATIC_BG_PANTRY");
 	top = &sdlutils().images().at("CINEMATIC_BG_PANTRY_TOP");
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	tvFilter = &sdlutils().images().at("CINEMATIC_TV_FILTER");
 	lectern = &sdlutils().images().at("CINEMATIC_PANTRY_LECTERN");
-	black = &sdlutils().images().at("Filter_Black"); 
+	black = &sdlutils().images().at("Filter_Black");
 
 	pantryMusic = &sdlutils().musics().at("PANTRY_MUSIC");
 	homeMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
@@ -18,7 +18,7 @@ BadEnding4Scene::BadEnding4Scene() {
 	reading = false; night = false; stolenBook = false;
 
 	book = new GameObject(this);
-	new Transform(book, Vector(RelativeToGlobal::pointPantry({ 23, 5 })), Vector(0,0), 48, 96);
+	new Transform(book, Vector(RelativeToGlobal::pointPantry({ 23, 5 })), Vector(0, 0), 48, 96);
 	Animator::AnimParams ap;
 	ap.height = 96;
 	ap.width = 48;
@@ -87,7 +87,6 @@ void BadEnding4Scene::update() {
 		break;
 	case BadEnding4Scene::D1:
 		if (straightMovement->hasFinishedPath()) {
-			//transform->setMovState(idle);
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text);
 			state = D2;
@@ -165,6 +164,19 @@ void BadEnding4Scene::update() {
 		}
 		break;
 	case BadEnding4Scene::D11:
+		finish = false;
+		while (Text::isTextFinished() && !finish) {
+			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
+				font, dialogues[contText].portrait, dialogues[contText].text);
+			++contText;
+
+			if (contText >= 30) {
+				state = D35;
+				finish = true;
+			}
+		}
+		break;
+		/*
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
 				font, dialogues[7].portrait, dialogues[7].text);
@@ -320,6 +332,7 @@ void BadEnding4Scene::update() {
 			state = D35;
 		}
 		break;
+		*/
 	case BadEnding4Scene::D35:
 		if (Text::isTextFinished()) {
 			straightMovement->addPath(RelativeToGlobal::pointsHouse(BE4PathPlayer[1]));
@@ -328,12 +341,27 @@ void BadEnding4Scene::update() {
 		break;
 	case BadEnding4Scene::D37:
 		if (straightMovement->hasFinishedPath()) {
+			contText = 31;
+
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[31].portrait, dialogues[31].text);
+				font, dialogues[contText].portrait, dialogues[contText].text);
 			state = D38;
 		}
 		break;
 	case BadEnding4Scene::D38:
+		finish = false;
+		while (Text::isTextFinished() && !finish) {
+			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
+				font, dialogues[contText].portrait, dialogues[contText].text);
+			++contText;
+
+			if (contText >= 44) {
+				state = LAST;
+				finish = true;
+			}
+		}
+		break;
+		/*
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
 				font, dialogues[32].portrait, dialogues[32].text);
@@ -424,6 +452,7 @@ void BadEnding4Scene::update() {
 			state = LAST;
 		}
 		break;
+		*/
 	case BadEnding4Scene::LAST:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;

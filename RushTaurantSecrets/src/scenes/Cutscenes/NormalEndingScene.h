@@ -16,7 +16,7 @@ private:
 	const vector<Vector> path[8] = {
 		{Vector(13, 13)}, // ENTERING
 		{Vector(13, 5), Vector(6, 5), Vector(6, 4)}, //ROOM
-		{Vector(2, 4), Vector(6, 4)}, //MOVE
+		{Vector(2, 4)}, //MOVE
 		{Vector(6, 5)}, //MOVE2
 		{Vector(6, 2)}, //MOVE3
 		{Vector(5, 2), Vector(5, 1)}, //MOVE4

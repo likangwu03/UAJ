@@ -33,6 +33,7 @@ private:
 		D9,
 		D10,
 		D11,
+		/*
 		D12,
 		D13,
 		D14,
@@ -56,9 +57,11 @@ private:
 		D32,
 		D33,
 		D34,
+		*/
 		D35,
 		D37,
 		D38,
+		/*
 		D39,
 		D40,
 		D41,
@@ -71,6 +74,7 @@ private:
 		D48,
 		D49,
 		D50,
+		*/
 		LAST,
 		NONE
 	};
@@ -91,6 +95,8 @@ private:
 	bool reading, night, stolenBook;
 	Music* pantryMusic;
 	Music* homeMusic;
+	int contText;
+	bool finish;
 
 public:
 	BadEnding4Scene();

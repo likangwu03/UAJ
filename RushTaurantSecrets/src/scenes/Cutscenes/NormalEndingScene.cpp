@@ -167,12 +167,14 @@ void NormalEndingScene::update()
 		break;
 	case NormalEndingScene::MOVE:
 		if (Text::isTextFinished()) {
+			straightMovement->reset(RelativeToGlobal::pointHouse(path[1][2]));
 			addPath(path[2]);
+			straightMovement->enableRoundTripByLaps(1);
 			state = D15;
 		}
 		break;
 	case NormalEndingScene::D15:
-		if (straightMovement->hasFinishedPath()) {
+		if (straightMovement->roundTripEnded()) {
 			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[15].portrait, dialogues[15].text);
 			state = MOVE2;
 		}
