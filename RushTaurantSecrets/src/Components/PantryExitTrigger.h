@@ -1,6 +1,7 @@
 #pragma once
 #include "../Structure/TriggerComp.h"
 #include "../Utilities/SDLUtils.h"
+#include "OtherPlayerComp.h"
 
 class GameManager;
 class Transform;
@@ -11,12 +12,13 @@ private:
 	const int MUSIC_VOL = 30;
 
 	const Vector RESTAURANT_POS = { 640, 130 };
-	GameObject* playerPantry, *otherPPantry;
-	GameObject* playerRestaurant, *otherPRest;
+	GameObject* playerPantry, *otherPPantryObj;
+	GameObject* playerRestaurant, *otherPRestObj;
 	GameManager* gm;
 	Transform* playerRestaurantTransform;
 	Image* image;
 	SoundEffect* doorSound;
+	OtherPlayerComp* otherPPantryComp;
 
 	SDLUtils* sdl;
 	Music* pantryMusic;

@@ -11,14 +11,17 @@ OtherPlayerComp::OtherPlayerComp(GameObject* parent, uint8_t scene) : Component(
 }
 
 void OtherPlayerComp::update() {
-	//timer += deltaTime;
+	timer += deltaTime;
 
-	Message m{ };
-	m.id = Message::msg_PLAYER;
-	m.player.pos = theirTrans->getPos();
-	m.player.vel = theirTrans->getVel();
-	m.player.scene = scene;
-	Game::get()->getCoopHandler()->send(m);
+	if(timer > 40) {
+		Message m{ };
+		m.id = Message::msg_PLAYER;
+		m.player.pos = theirTrans->getPos();
+		m.player.vel = theirTrans->getVel();
+		m.player.scene = scene;
+		Game::get()->getCoopHandler()->send(m);
+		timer = 0;
+	}
 }
 
 void OtherPlayerComp::receive(const Message& message) {
@@ -31,4 +34,13 @@ void OtherPlayerComp::receive(const Message& message) {
 		if(message.player.vel.getY() > 0) myTrans->setOrientation(south);
 		if(message.player.vel.getY() < 0) myTrans->setOrientation(north);
 	}
+}
+
+void OtherPlayerComp::sceneOut() {
+	Message m{ };
+	m.id = Message::msg_PLAYER;
+	m.player.pos = Vector(-100, -100);
+	m.player.vel = Vector::zero;
+	m.player.scene = scene;
+	Game::get()->getCoopHandler()->send(m);
 }

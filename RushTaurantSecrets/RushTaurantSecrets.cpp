@@ -17,22 +17,22 @@ int main(int argc, char* argv[]) {
 #ifdef _DEBUG
 		std::cout << e.what();
 #endif // _DEBUG
-		std::string path = "crashes/" + std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		std::string path = std::string("crashes/") + to_string(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 		std::ofstream file(path);
 		file << "Exception caught: " << e.what();
 		file.close();
 	} catch(std::string str) {
-		std::string path = "crashes/" + std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		std::string path = std::string("crashes/") + to_string(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 		std::ofstream file(path);
 		file << "String caught: " << str;
 		file.close();
 	} catch(char* c) {
-		std::string path = "crashes/" + std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		std::string path = std::string("crashes/") + to_string(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 		std::ofstream file(path);
 		file << "Char* caught: " << c;
 		file.close();
 	} catch(...) {
-		std::string path = "crashes/" + std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		std::string path = std::string("crashes/") + to_string(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
 		std::ofstream file(path);
 		file << "Couldn't catch anything.";
 		file.close();

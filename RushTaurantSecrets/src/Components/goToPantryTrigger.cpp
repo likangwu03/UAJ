@@ -14,9 +14,10 @@ GoToPantryTrigger::GoToPantryTrigger(GameObject* parent, Vector pos_, float widt
 	sdl(SDLUtils::instance()), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")) {
 	gm = GameManager::get();
 	playerRestaurant = parent->getScene()->getGameObject(_ecs::hdr_PLAYER);
-	otherPRest = parent->getScene()->getGameObject(_ecs::hdr_OTHERPLAYER);
+	otherPRestObj = parent->getScene()->getGameObject(_ecs::hdr_OTHERPLAYER);
+	otherPRestComp = otherPRestObj->getComponent<OtherPlayerComp>();
 	playerPantry = gm->getPantry()->getGameObject(_ecs::hdr_PLAYER);
-	otherPPantry = gm->getPantry()->getGameObject(_ecs::hdr_OTHERPLAYER);
+	otherPPantryObj = gm->getPantry()->getGameObject(_ecs::hdr_OTHERPLAYER);
 	playerPantryTransform = playerPantry->getComponent<Transform>();
 	image = parent->getComponent<Image>();
 	image->setActive(false);
@@ -29,10 +30,11 @@ void GoToPantryTrigger::isOverlapping() {
 	if ((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))) && GameManager::get()->canChangeScene()) {
 		// se desactiva el jugador del restaurant
 		playerRestaurant->setActives(false);
-		otherPRest->setActives(false);
+		otherPRestObj->setActives(false);
+		otherPRestComp->sceneOut();
 		// se activa y recoloca el jugador de la despensa
 		playerPantry->setActives(true);
-		otherPPantry->setActives(true);
+		otherPPantryObj->setActives(true);
 		playerPantryTransform->setPos(PANTRY_POS);
 		playerPantryTransform->setOrientation(north);
 		doorSound->play();

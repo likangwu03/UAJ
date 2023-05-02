@@ -81,6 +81,9 @@ void Pantry::handleEvents() {
 
 void Pantry::reset() {
 	getGameObject(_ecs::hdr_PLAYER)->setActives(false);
+	GameObject* otherPlayer = getGameObject(_ecs::hdr_OTHERPLAYER);
+	otherPlayer->getComponent<OtherPlayerComp>()->sceneOut();
+	otherPlayer->setActives(false);
 }
 
 void Pantry::refresh() {

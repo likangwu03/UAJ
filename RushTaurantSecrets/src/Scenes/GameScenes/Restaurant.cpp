@@ -32,6 +32,7 @@ Restaurant::~Restaurant() {
 
 void Restaurant::reset() {
 	getGameObject(_ecs::hdr_PLAYER)->setActives(true);
+	getGameObject(_ecs::hdr_OTHERPLAYER)->setActives(true);
 	player->getComponent<Transform>()->setPos(INITIAL_POS);
 	player->getComponent<Transform>()->setOrientation(south);
 	ui->reset();

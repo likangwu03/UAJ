@@ -14,4 +14,5 @@ public:
 
 	void update();
 	void receive(const Message& message);
+	void sceneOut();
 };
