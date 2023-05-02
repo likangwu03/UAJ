@@ -73,14 +73,14 @@ void SuperMarket::resumeMusic() {
 }
 void SuperMarket::receive(const Message& message) {
 
-	if (message.id == Message::msg_TO_RESTAURANT) {
+	/*if (message.id == Message::msg_TO_RESTAURANT) {
 		vector<pair<_ecs::_ingredients_id, int>> ing;
 		ing = GameManager::get()->getSupermarket()->getUI()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>()->getIngredients();
 		GameManager::get()->setIngredients(ing);
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_RESTAURANT));
 		GameManager::get()->getScene(_ecs::sc_RESTAURANT)->reset();
 		restaurantMusic->play(-1);
-	}
+	}*/
 	Scene::receive(message);
 	uiMarket->receive(message);
 }
