@@ -32,6 +32,6 @@ public:
 		}
 	}
 	virtual void nextDay() {
-		thiefsManager->stopSound();
+		thiefsManager->haltSound();
 	}
 };

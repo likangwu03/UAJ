@@ -26,7 +26,7 @@ private:
 	SoundEffect* warningSound;
 	// array que se utiliza para saber que posición de las puerta han sido ocupadas y cuales no
 	array<bool, _ecs::MAX_THIEFS> selectedPosition;
-	// ladrón con el que está interactuando el jugador
+	// ladrón con el que est?interactuando el jugador
 	GameObject* thiefInteractWith;
 
 	void createThief(int sprite, int pos);
@@ -71,5 +71,7 @@ public:
 
 	void receive(const Message&);
 
-	void stopSound();
+	void haltSound();
+	void pauseSound();
+	void resumeSound();
 };

@@ -33,7 +33,7 @@ void Pantry::init() {
 	// el update no se ejecuta hasta que se est?en la escena
 	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
 	GameObject* managerContainer = new GameObject(this);
-	//ThievesManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
+	ThievesManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
 
 	initRender();
 	Scene::initComponent();	
@@ -76,9 +76,15 @@ void Pantry::handleEvents() {
 	if (ih->isKeyDown(SDLK_p)) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
+		ThievesManager::get()->pauseSound();
 	}
 }
-
+void Pantry::resumeMusic() {
+	pantryMusic->resumeMusic();
+}
+void Pantry::resumeSound() {
+	ThievesManager::get()->resumeSound();
+}
 void Pantry::reset() {
 	getGameObject(_ecs::hdr_PLAYER)->setActives(false);
 }

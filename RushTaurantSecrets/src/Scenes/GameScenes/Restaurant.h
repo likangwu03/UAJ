@@ -54,5 +54,7 @@ public:
 	float getResizeFactor() { return RESIZEFACTOR; }
 	void createMap();
 
+	void resumeMusic()override;
+	void resumeSound()override;
 
 };

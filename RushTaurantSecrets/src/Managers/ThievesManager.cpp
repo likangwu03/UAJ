@@ -71,7 +71,7 @@ vector<GameObject*> ThievesManager::canInteractWith() {
 
 	// vector con los ladrones con los que puede interactuar
 	// son los que están de camino al congelador o a la fórmula secreta
-	// y con los que está haciendo overlap
+	// y con los que est?haciendo overlap
 	for (auto thief : *thiefs) {
 		ThiefState* thiefState = thief->getComponent<ThiefState>();
 		ThiefTrigger* thiefTrigger = thief->getComponent<ThiefTrigger>();
@@ -91,12 +91,20 @@ void ThievesManager::update() {
 	}
 }
 
-void ThievesManager::stopSound() {
+void ThievesManager::haltSound() {
 	warningSound->haltChannel();
 }
 
+void ThievesManager::pauseSound() {
+	warningSound->pauseChannel();
+}
+
+void ThievesManager::resumeSound() {
+	warningSound->resumeChannel();
+}
+
 void ThievesManager::nextDay() {
-	stopSound();
+	haltSound();
 	for (auto t : *thiefs) {
 		t->setAlive(false);
 	}

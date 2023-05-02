@@ -52,6 +52,9 @@ public:
 	virtual void nextDay();
 	virtual void receive(const Message& message);
 	virtual void finishScene() { };
+	virtual void pauseSound() { };
+	virtual void resumeSound() { };
+	virtual void resumeMusic() { };
 
 	void initRender();
 	virtual void renderLayer();

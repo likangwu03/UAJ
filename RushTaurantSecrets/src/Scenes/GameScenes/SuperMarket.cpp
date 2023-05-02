@@ -68,6 +68,9 @@ ButtonGO* SuperMarket::buyButton() {
 	return uiMarket->BuyButton();
 }
 
+void SuperMarket::resumeMusic() {
+	supermarketMusic->resumeMusic();
+}
 void SuperMarket::receive(const Message& message) {
 
 	if (message.id == Message::msg_TO_RESTAURANT) {

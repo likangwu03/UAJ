@@ -8,18 +8,19 @@
 
 void UIMarket::toggleDailyMenu() {
 	menuToggled = !menuToggled;
+	menuSound->play();
 	menu->getComponent<Transform>()->setActive(menuToggled);
 	menu->getComponent<Image>()->setActive(menuToggled);
 	menu->getComponent<DailyMenuComp>()->setActive(menuToggled);
 }
 
-UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
+UIMarket::UIMarket(Scene* market) : Scene(), market(market) {
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = GameManager::get()->getMoney();
 	ih = InputHandler::instance();
 	basketMarket = new BasketMarket(this);
-
+	menuSound = &sdl->soundEffects().at("OPEN_BASKET");
 	// Fuente
 	font = new Font(FONT_PATH, FONTSIZE);
 	outline = new Font(FONT_PATH, FONTSIZE);
@@ -42,7 +43,7 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	moneyOutlineRect.y -= CENTEROUTLINE / 2; moneyOutlineRect.h += CENTEROUTLINE;
 
 	//objetivo diario
-	createGameObjects(_ecs::grp_ICONS, "TARGET_ICON", Vector(ICONX - 2, ICONY + TARGETOFFSET), ICONSIZE +5, ICONSIZE + 5, 0);
+	createGameObjects(_ecs::grp_ICONS, "TARGET_ICON", Vector(ICONX - 2, ICONY + TARGETOFFSET), ICONSIZE + 5, ICONSIZE + 5, 0);
 	target = GameManager::get()->getDayManager()->getDailyObjective();
 	targetText = to_string(target);
 	targetTexture = new Texture(sdl->renderer(), targetText, *font, build_sdlcolor(0x3a3a50FF));
@@ -53,8 +54,8 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 	targetOutlineRect.y -= CENTEROUTLINE / 2; targetOutlineRect.h += CENTEROUTLINE;
 
 	// icono de cesta
-	GameObject* aux=createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
-	(new ShowControlAuto(aux,{{ControlsType::key_Z,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(70,60),40,40}}))->setActive(true);
+	GameObject* aux = createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
+	(new ShowControlAuto(aux, { {ControlsType::key_Z,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(70,60),40,40} }))->setActive(true);
 
 	//men�� de compra
 	shopMenu = new GameObject(this, _ecs::grp_GENERAL, hdr_SHOP_MENU1);
@@ -66,17 +67,17 @@ UIMarket::UIMarket(Scene* market) : Scene(),market(market) {
 		479.0f, 640.0f, []() {});
 	menu->getComponent<ButtonComp>()->setActive(false);
 	toggleDailyMenu();
-	
+
 	accDay = 1;
 	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
-	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE,0);
+	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0);
 	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
 
 	buybutton = new ButtonGO(this, "BUY_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H,
 		[&]() {
-			
+
 		});
 	buybutton->setActives(false);
 }
@@ -139,7 +140,7 @@ void UIMarket::showMoneyText() {
 	if (intMoney != moneyTxt->getMoney()) {
 		intMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(intMoney);
-		
+
 		delete moneyTexture;
 		delete moneyOutline;
 		moneyTexture = new Texture(sdl->renderer(), strMoney, *font, build_sdlcolor(0x3a3a50FF));
@@ -184,8 +185,8 @@ void UIMarket::render() {
 	targetOutline->render(targetOutlineRect);
 	targetTexture->render(targetRect);
 
-	dayOutline->render({ sdl->width() - 25 - dayTexture->width() - 2, 15 - 2, dayOutline->width(), dayOutline->height()});
-	dayTexture->render({ sdl->width() - 25 - dayTexture->width(), 15, dayTexture->width(), dayTexture->height()});
+	dayOutline->render({ sdl->width() - 25 - dayTexture->width() - 2, 15 - 2, dayOutline->width(), dayOutline->height() });
+	dayTexture->render({ sdl->width() - 25 - dayTexture->width(), 15, dayTexture->width(), dayTexture->height() });
 
 	if (basketMarket->getComponent<BasketMarketComponent>()->getBasketON()) {
 		basketMarket->getComponent<BasketMarketComponent>()->renderBasket();

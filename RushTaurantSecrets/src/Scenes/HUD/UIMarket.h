@@ -41,7 +41,7 @@ private:
 	string targetText;
 	SDL_Rect targetRect;
 	SDL_Rect targetOutlineRect;
-
+	SoundEffect* menuSound;
 
 	InputHandler* ih;
 	BasketMarket* basketMarket;
