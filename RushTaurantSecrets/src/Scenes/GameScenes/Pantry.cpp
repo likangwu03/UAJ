@@ -30,8 +30,8 @@ void Pantry::init() {
 	player = new Player(this, 0);
 	new OtherPlayer(this, 1);
 	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("pantryAfternoon"), sdlutils().getLoadedTilesets().at("pantryNight"));
-	// el update no se ejecuta hasta que se est?en la escena
-	// por lo que no se crean ni se destruyen ladrones cuandon no se est?en la despensa
+	// el update no se ejecuta hasta que se esté en la escena
+	// por lo que no se crean ni se destruyen ladrones cuando no se está la despensa
 	GameObject* managerContainer = new GameObject(this);
 	ThievesManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
 
@@ -108,8 +108,14 @@ void Pantry::receive(const Message& m) {
 
 void Pantry::initCoopMode(bool server) {
 	ThievesManager::get()->setActive(server);
+	if (!server) {
+		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture(&((*sdl).images().at("Player_2")), 18, 18);
+		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	}
 }
 
 void Pantry::quitCoopMode() {
 	ThievesManager::get()->setActive(true);
+	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
+	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
 }

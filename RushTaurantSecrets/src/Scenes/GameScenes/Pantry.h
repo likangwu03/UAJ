@@ -43,6 +43,6 @@ public:
 	void resumeSound()override;
 	void haltSound()override;
 
-	virtual void initCoopMode(bool server);
-	virtual void quitCoopMode();
+	void initCoopMode(bool server) override;
+	void quitCoopMode() override;
 };

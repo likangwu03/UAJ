@@ -22,12 +22,6 @@ serveDishSound(&sdl->soundEffects().at("SERVE_CLIENT"))
 	cellSelected = -1;
 	cellsOcuppied = 0;
 	highlight = &sdl->images().at("INVENTORY_HIGHLIGHT");
-
-	// prueba--borrar luego
-	/*dishesBool[0] = true;
-	dishesBool[1] = true;
-	cellsOcuppied = 2;
-	dishesBool[2] = true;*/
 }
 
 // si hay espacio en el inventario, recoge el plato (suponiendo que previamente ya se ha comprobado si cookingMachine est�� listo en otra clase)
@@ -122,10 +116,13 @@ void InventoryComp::setPosition(int i, int& x, int& y) {
 
 void InventoryComp::handleEvents() {
 	//  hacia arriba
-	if (cellSelected > -1 &&(ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_LEFT))) )
+	if (cellSelected > -1 &&
+		(	(ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER) 
+			|| (!ih->joysticksInitialised() && ih->isKeyDown(SDLK_LEFT)) ) ) )
 		prevDish();
 	//  hacia abajo
-	else if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_RIGHT)) )
+	else if ((ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) || 
+		(!ih->joysticksInitialised() && ih->isKeyDown(SDLK_RIGHT))))
 		nextDish();
 }
 
