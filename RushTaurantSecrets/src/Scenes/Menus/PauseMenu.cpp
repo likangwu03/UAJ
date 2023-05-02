@@ -5,46 +5,38 @@
 
 #include "../../Utilities/checkML.h"
 
-PauseMenu::PauseMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")),
-restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
+PauseMenu::PauseMenu() : sdl(SDLUtils::instance()) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = &(sdlutils().images().at("CONTINUE_BG"));
 	new Image(bg, image);
-
 	button = 0;
 	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->popScene();
-			if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_SUPERMARKET))
-				supermarketMusic->resumeMusic();
-			else if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_PANTRY))
-				pantryMusic->resumeMusic();
-			else if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_RESTAURANT))
-				restaurantMusic->resumeMusic();
+			GameManager::get()->getCurrentScene()->resumeSound();
+			GameManager::get()->getCurrentScene()->resumeMusic();
 		});
 	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
 	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height()*2 / 4 - 130 / 2), 385, 130,
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
 		});
 	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height()*3 / 4 - 130 / 2), 385, 130,
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
 		});
 
-	supermarketMusic->setMusicVolume(MUSIC_VOL);
+
 }
 
 PauseMenu::~PauseMenu() {
 }
 
 void PauseMenu::handleEvents() {
-	if (ih->isKeyDown(SDLK_p)) 	GameManager::get()->popScene();
-
 	Scene::handleEvents();
 
 	if (ih->joysticksInitialised()) {
@@ -63,13 +55,13 @@ void PauseMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
+		if (ih->isKeyDown(SDLK_UP)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
+		else if (ih->isKeyDown(SDLK_DOWN)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

@@ -85,6 +85,10 @@ CoopMenu::CoopMenu() {
 				coop->openClient(IP->getComponent<Text2>()->getText_());
 				wait = true;
 				server = false;
+				buttonConfir->setActives(false);
+				IP->setActives(false);
+				buttonResume2->getComponent<ButtonComp>()->setHighlighted(true);
+				button = 2;
 			}
 			catch (exception e) {
 				wait = false;
@@ -160,13 +164,13 @@ void CoopMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
+		if (ih->isKeyDown(SDLK_UP)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
+		else if (ih->isKeyDown(SDLK_DOWN) ) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}
@@ -210,6 +214,7 @@ void CoopMenu::enterIp() {
 	buttonConfir->setActives(true);
 	enterIp_ = true;
 	button = 0;
+	buttonResume2->getComponent<ButtonComp>()->setHighlighted(false);
 }
 
 

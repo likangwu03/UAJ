@@ -19,9 +19,6 @@ private:
 	Texture* image;
 
 	SDLUtils* sdl;
-	Music* supermarketMusic;
-	Music* restaurantMusic;
-	Music* pantryMusic;
 public:
 	PauseMenu();
 	~PauseMenu();

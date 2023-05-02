@@ -11,7 +11,7 @@
 #include "../../GameObjects/TimeOfDayObj.h"
 #include "../../Structure/GameObject.h"
 #include "../../GameObjects/OtherPlayer.h"
-
+#include "../../Managers/ThievesManager.h"
 #include "../../Utilities/checkML.h"
 #include <set>
 
@@ -131,9 +131,10 @@ void Restaurant::_update() {
 }
 
 void Restaurant::handleEvents() {
-	if (ih->isKeyDown(SDLK_p)) {
+	if (ih->isKeyDown(SDLK_ESCAPE)) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
+		ThievesManager::get()->pauseSound();
 	}
 	else if (ih->isKeyDown(SDLK_f)) {
 		vector<pair<_ecs::_ingredients_id, int>> _ing;
@@ -174,4 +175,14 @@ void Restaurant::refresh() {
 	Scene::refresh();
 	ui->refresh();
 	pantry->Scene::refresh();
+}
+void Restaurant::resumeMusic() {
+	restaurantMusic->resumeMusic();
+}
+void Restaurant::resumeSound() {
+	ThievesManager::get()->resumeSound();
+}
+void Restaurant::haltSound() {
+	restaurantMusic->haltMusic();
+	ThievesManager::get()->haltSound();
 }

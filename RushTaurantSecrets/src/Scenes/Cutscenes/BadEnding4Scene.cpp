@@ -10,7 +10,7 @@ BadEnding4Scene::BadEnding4Scene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	tvFilter = &sdlutils().images().at("CINEMATIC_TV_FILTER");
 	lectern = &sdlutils().images().at("CINEMATIC_PANTRY_LECTERN");
-	black = &sdlutils().images().at("Filter_Black");
+	black = &sdlutils().images().at("Filter_Black"); 
 
 	pantryMusic = &sdlutils().musics().at("PANTRY_MUSIC");
 	homeMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");

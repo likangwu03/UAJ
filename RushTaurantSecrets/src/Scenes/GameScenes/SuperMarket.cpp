@@ -22,7 +22,7 @@ void SuperMarket::handleEvents() {
 	Scene::handleEvents();
 	uiMarket->handleEvents();
 	
-	if (ih->isKeyDown(SDLK_p)) {
+	if (ih->isKeyDown(SDLK_ESCAPE)) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
 	}
@@ -68,6 +68,9 @@ ButtonGO* SuperMarket::buyButton() {
 	return uiMarket->BuyButton();
 }
 
+void SuperMarket::resumeMusic() {
+	supermarketMusic->resumeMusic();
+}
 void SuperMarket::receive(const Message& message) {
 	Scene::receive(message);
 	uiMarket->receive(message);

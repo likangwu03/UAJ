@@ -18,7 +18,7 @@
 
 UIRestaurant::UIRestaurant() : Scene() {
 	lastTime = sdl->currRealTime();
-
+	menuSound=&sdl->soundEffects().at("OPEN_BASKET");
 	// instancia manager del dinero
 	GameObject* moneyContainer = new GameObject(this);
 	moneyTxt = GameManager::get()->getMoney();
@@ -74,10 +74,10 @@ UIRestaurant::UIRestaurant() : Scene() {
 	inventory = new Inventory(this);
 
 	// Exclamaci�n de la despensa
-	/*
+	
 	GameObject* thiefExclamation = createIcon("EXCLAMATION", Vector(640, 85), 32, 32);
 	new Warning(thiefExclamation);
-	*/
+	
 	
 	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("PROTA_CHEF_SMILE"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
 
@@ -142,6 +142,7 @@ GameObject* UIRestaurant::createIcon(Texture* texture, Vector position, float wi
 
 void UIRestaurant::toggleDailyMenu()
 {
+	menuSound->play();
 	menuToggled = !menuToggled;
 	menu->getComponent<Transform>()->setActive(menuToggled);
 	menu->getComponent<Image>()->setActive(menuToggled);

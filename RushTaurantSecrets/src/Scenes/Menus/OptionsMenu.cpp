@@ -65,21 +65,21 @@ void OptionsMenu::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDLK_LEFT) || ih->isKeyDown(SDLK_a)) {
+		if (ih->isKeyDown(SDLK_LEFT) ) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_RIGHT) || ih->isKeyDown(SDLK_d)) {
+		else if (ih->isKeyDown(SDLK_RIGHT) ) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_DOWN) || ih->isKeyDown(SDLK_s)) {
+		else if (ih->isKeyDown(SDLK_DOWN) ) {
 			button = 3;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDLK_UP) || ih->isKeyDown(SDLK_w)) {
+		else if (ih->isKeyDown(SDLK_UP)) {
 			button = 0;
 			selectedButton(button);
 		}

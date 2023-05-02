@@ -43,6 +43,7 @@ public:
 	void init();
 	void reset();
 	void receive(const Message& message);
+	void resumeMusic()override;
 
 	UIMarket* getUI() { return uiMarket; }
 	CartelManager* getCartelManager() { return cartelM; }

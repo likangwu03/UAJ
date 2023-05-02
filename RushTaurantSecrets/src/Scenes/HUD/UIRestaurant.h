@@ -65,6 +65,8 @@ private:
 	Texture* dayOutline;
 	string dayText;
 
+	SoundEffect* menuSound;
+
 	GameObject* dataIcon(Texture* texture, Vector position, float width, float height, float rotation,
 		_ecs::_grp_id grp, _ecs::_hdr_id handler);
 
