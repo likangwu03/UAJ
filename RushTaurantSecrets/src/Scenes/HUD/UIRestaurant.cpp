@@ -79,8 +79,6 @@ UIRestaurant::UIRestaurant() : Scene() {
 	new Warning(thiefExclamation);
 	
 	
-	new Dialogue(this, Vector(150, 520), 700, 0.01 * 1000, font, &sdl->images().at("PROTA_CHEF_SMILE"), { "Hi, this a demo of ResTaurant Secrets.", "Have fun cooking and killing people."});
-
 	// Racha de cobros
 	GameObject* streak = new GameObject(this, _ecs::grp_HUD, _ecs::hdr_STREAK);
 	new Streak(streak, 10, Vector(820, 260), 430, 30, 2, font);
