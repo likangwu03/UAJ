@@ -10,6 +10,10 @@ BadEnding4Scene::BadEnding4Scene() {
 	filter = &sdlutils().images().at("CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT");
 	tvFilter = &sdlutils().images().at("CINEMATIC_TV_FILTER");
 	lectern = &sdlutils().images().at("CINEMATIC_PANTRY_LECTERN");
+
+	pantryMusic = &sdlutils().musics().at("PANTRY_MUSIC");
+	homeMusic = &sdlutils().musics().at("SILENT_CREEPY_MUSIC");
+
 	reading = false; night = false; stolenBook = false;
 
 	book = new GameObject(this);
@@ -77,6 +81,7 @@ void BadEnding4Scene::update() {
 	switch (state)
 	{
 	case BadEnding4Scene::START:
+		pantryMusic->play(-1);
 		straightMovement->addPath(RelativeToGlobal::pointsPantry(BE4PathPlayer[1]));
 		straightMovementThief->addPath(RelativeToGlobal::pointsPantry(BE4PathThief[0]));
 		state = D1;
@@ -153,6 +158,8 @@ void BadEnding4Scene::update() {
 	case BadEnding4Scene::D10:
 		cont += frameTime;
 		if (cont > 3 * 1000 * 2) {
+			pantryMusic->pauseMusic();
+			homeMusic->play(-1);
 			night = true; stolenBook = false;
 			auto anim = new CharacterAnimator(player, "Player_Casual", apNight);
 			bg = &sdlutils().images().at("CINEMATIC_BG_HOUSE");
@@ -475,6 +482,7 @@ void BadEnding4Scene::update() {
 			dialogueBox = nullptr;
 			transition = new TransitionScene(this, 1, true, true);
 			GameManager::get()->pushScene(transition, true);
+			homeMusic->pauseMusic();
 			state = NONE;
 		}
 		break;

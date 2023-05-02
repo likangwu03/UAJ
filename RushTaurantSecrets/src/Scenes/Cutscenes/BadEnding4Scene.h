@@ -90,6 +90,8 @@ private:
 	bool reading, night, stolenBook;
 	Animator::AnimParams apNight;
 	Animator::AnimParams ap;
+	Music* pantryMusic;
+	Music* homeMusic;
 
 public:
 	BadEnding4Scene();
