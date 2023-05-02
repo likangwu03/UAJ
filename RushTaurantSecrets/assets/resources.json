@@ -626,19 +626,37 @@
     },
     {
       "id": "SLIDER_BAR",
-      "file": "assets/Sprites/UI/Menu/slider/sliderBar.png",
+      "file": "assets/Sprites/UI/Menu/slider&checkbox/sliderBar.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "SLIDER_BUTTON",
-      "file": "assets/Sprites/UI/Menu/slider/sliderCenter.png",
+      "file": "assets/Sprites/UI/Menu/slider&checkbox/sliderCenter.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "SLIDER_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Menu/slider/sliderCenterHighlight.png",
+      "file": "assets/Sprites/UI/Highlights/sliderCenterHighlight.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "CHECKBOX",
+      "file": "assets/Sprites/UI/Menu/slider&checkbox/checkbox.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "CHECKBOX_CHECK",
+      "file": "assets/Sprites/UI/Menu/slider&checkbox/checkbox_check.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "CHECKBOX_HIGHLIGHT",
+      "file": "assets/Sprites/UI/Highlights/checkbox_highlight.png",
       "cols": 1,
       "rows": 1
     },

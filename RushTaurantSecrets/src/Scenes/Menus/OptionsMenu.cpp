@@ -22,7 +22,14 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 	sliderButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
 		Vector(250, 240), 100, 100,
 		[&]() {
-			SliderHandleEvents();
+			if ((ih->isKeyDown(SDLK_SPACE) && !slider)) slider = true;
+			else if ((ih->isKeyDown(SDLK_SPACE) && slider)) slider = false;
+		});
+
+	fullscreenButton = new ButtonGO(this, "CHECKBOX", "CHECKBOX_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() - 300), 240), 100, 100,
+		[&]() {
+			sdl->toggleFullScreen();
 		});
 	
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
@@ -31,72 +38,84 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 	button = 3;
 }
 
-OptionsMenu::~OptionsMenu() {
-}
+OptionsMenu::~OptionsMenu() { }
 
 void OptionsMenu::handleEvents() {
-	if (ih->isKeyDown(SDLK_p)) 	GameManager::get()->popScene();
 
 	Scene::handleEvents();
 
-	if (ih->joysticksInitialised()) {
-		ih->refresh();
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
-			|| ih->getHatState(LEFT)) {
-			button = (button - 1) % NUM_BUTTON;
-			if (button < 0)
-				button = button + NUM_BUTTON;
-			selectedButton(button);
+	if (ih->isKeyDown(SDLK_p)) 	GameManager::get()->popScene();
+
+	if (!slider) {	
+		if (ih->joysticksInitialised()) {
+			ih->refresh();
+			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
+				|| ih->getHatState(LEFT)) {
+				button = (button - 1) % NUM_BUTTON;
+				if (button < 0)
+					button = button + NUM_BUTTON;
+				selectedButton(button);
+			}
+			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
+				|| ih->getHatState(RIGHT)) {
+				button = (button + 1) % NUM_BUTTON;
+				selectedButton(button);
+			}
+			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_DOWN)
+				|| ih->getHatState(DOWN)) {
+				button = 3;
+				selectedButton(button);
+			}
+			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
+				|| ih->getHatState(UP)) {
+				button = 0;
+				selectedButton(button);
+			}
 		}
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
-			|| ih->getHatState(RIGHT)) {
-			button = (button + 1) % NUM_BUTTON;
-			selectedButton(button);
-		}
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_DOWN)
-			|| ih->getHatState(DOWN)) {
-			button = 3;
-			selectedButton(button);
-		}
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
-			|| ih->getHatState(UP)) {
-			button = 0;
-			selectedButton(button);
+		else {
+			if (ih->isKeyDown(SDLK_LEFT)) {
+				button = (button - 1) % NUM_BUTTON;
+				if (button < 0)
+					button = button + NUM_BUTTON;
+				selectedButton(button);
+			}
+			else if (ih->isKeyDown(SDLK_RIGHT)) {
+				button = (button + 1) % NUM_BUTTON;
+				selectedButton(button);
+			}
+			else if (ih->isKeyDown(SDLK_DOWN)) {
+				button = 3;
+				selectedButton(button);
+			}
+			else if (ih->isKeyDown(SDLK_UP)) {
+				button = 0;
+				selectedButton(button);
+			}
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDLK_LEFT) ) {
-			button = (button - 1) % NUM_BUTTON;
-			if (button < 0)
-				button = button + NUM_BUTTON;
-			selectedButton(button);
-		}
-		else if (ih->isKeyDown(SDLK_RIGHT) ) {
-			button = (button + 1) % NUM_BUTTON;
-			selectedButton(button);
-		}
-		else if (ih->isKeyDown(SDLK_DOWN) ) {
-			button = 3;
-			selectedButton(button);
-		}
-		else if (ih->isKeyDown(SDLK_UP)) {
-			button = 0;
-			selectedButton(button);
-		}
+		SliderHandleEvents();
 	}
+}
+
+void OptionsMenu::update() {
+	updateCheckBox();
 }
 
 void OptionsMenu::selectedButton(int selected) {
 	sliderButton->getComponent<ButtonComp>()->setHighlighted(false);
 	buttonReturn->getComponent<ButtonComp>()->setHighlighted(false);
+	fullscreenButton->getComponent<ButtonComp>()->setHighlighted(false);
 	switch (selected)
 	{
 	case 0:
 		sliderButton->getComponent<ButtonComp>()->setHighlighted(true);
 		break;
 	case 1:
+		
 		break;
 	case 2:
+		fullscreenButton->getComponent<ButtonComp>()->setHighlighted(true);
 		break;
 	case 3:
 		buttonReturn->getComponent<ButtonComp>()->setHighlighted(true);
@@ -111,11 +130,33 @@ void OptionsMenu::createSlider() {
 }
 
 void OptionsMenu::SliderHandleEvents(){
+	int offset = 10;
 	auto t = sliderButton->getComponent<Transform>();
+	auto tSliderBar = sliderBar->getComponent<Transform>();
 	if (ih->isKeyDown(SDLK_LEFT)) {
-		t->setPos(Vector(t->getPos().getX() - 10, t->getPos().getY()));
+		if (t->getPos().getX() - offset > (tSliderBar->getPos().getX() - t->getW() / 2)) {
+			t->setPos(Vector(t->getPos().getX() - offset, t->getPos().getY()));
+			sliderButton->getComponent<ButtonComp>()->moveHighlighted();
+		}
 	}
 	else if (ih->isKeyDown(SDLK_RIGHT)) {
-		t->setPos(Vector(t->getPos().getX() + 10, t->getPos().getY()));
+		if (t->getPos().getX() + offset < (tSliderBar->getPos().getX() + tSliderBar->getW() - t->getW()/2)) {
+			t->setPos(Vector(t->getPos().getX() + offset, t->getPos().getY()));
+			sliderButton->getComponent<ButtonComp>()->moveHighlighted();
+		}
 	}
+}
+
+void OptionsMenu::updateCheckBox() {
+	auto flag = SDL_GetWindowFlags(sdlutils().window());
+	auto is_fullscreen = flag & SDL_WINDOW_FULLSCREEN;
+	if (is_fullscreen == SDL_WINDOW_FULLSCREEN)
+		fullscreen = true;
+	else
+		fullscreen = false;
+
+	if (fullscreen)
+		fullscreenButton->getComponent<Image>()->setTexture("CHECKBOX_CHECK");
+	else
+		fullscreenButton->getComponent<Image>()->setTexture("CHECKBOX");
 }

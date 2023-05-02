@@ -11,6 +11,9 @@ private:
 	const int NUM_BUTTON = 4;
 	int button;
 
+	bool slider = false;
+	bool fullscreen = false;
+
 	GameObject* bg;
 	ButtonGO* buttonReturn;
 	Texture* image;
@@ -18,7 +21,8 @@ private:
 	GameObject* sliderBar;
 	ButtonGO* sliderButton;
 	Image* sliderBarImage;
-	//Image* sliderButtonImage;
+
+	ButtonGO* fullscreenButton;
 
 	SDLUtils* sdl;
 	Music* supermarketMusic;
@@ -27,9 +31,11 @@ public:
 	~OptionsMenu();
 
 	void handleEvents();
+	void update();
 	void selectedButton(int selected);
 
 	void createSlider();
 	void SliderHandleEvents();
+	void updateCheckBox();
 };
 
