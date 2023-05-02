@@ -132,7 +132,7 @@ void DayManager::nextDay(bool loading) {
 	else {
 		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
 		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
-		else if (day == 3) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
+		else if (day == 3 && !GameManager::get()->getHasEverKilled().first) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
 	}
 	
 
