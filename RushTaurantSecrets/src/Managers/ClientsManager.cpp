@@ -341,6 +341,12 @@ void ClientsManager::update() {
 
 void ClientsManager::nextDay() {
 	timer = GameManager::get()->getDayManager()->getClientFrequency();
+	
+	auto clGrp = scene->getGroup(_ecs::grp_CLIENTS);
+	for (auto cl : *clGrp) cl->setAlive(false);
+	entrance.clear();
+	pay.clear();
+	clientsGroups.clear();
 }
 
 
