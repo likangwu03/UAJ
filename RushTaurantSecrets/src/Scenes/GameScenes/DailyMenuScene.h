@@ -34,6 +34,7 @@ public:
 	void reset();
 
 	void handleEvents();
+	void render()override;
 	void selectedButton(int selected);
 
 	void initCoopMode(bool server)override;
