@@ -3,13 +3,17 @@
 #include "../../Utilities/Texture.h"
 #include "../../GameObjects/ButtonGO.h"
 #include "../../Structure/GameManager.h"
+#include "../../GameObjects/Slider.h"
 
 class OptionsMenu : public Scene
 {
 private:
-	const int MUSIC_VOL = GameManager::instance()->getMasterVolume();
 
-	const int NUM_BUTTON = 4;
+	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
+	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15, CENTEROUTLINE = 4;
+	const int TARGETOFFSET = 60;
+
+	const int NUM_BUTTON = 5;
 	int button;
 
 	bool slider = false;
@@ -20,24 +24,39 @@ private:
 	ButtonGO* buttonControls;
 	Texture* image;
 
-	GameObject* sliderBar;
-	ButtonGO* sliderButton;
-	Image* sliderBarImage;
+	Slider* MusicSlider;
+	Slider* SoundsSlider;
+
+	ButtonGO* sliderMusicButton;
+	ButtonGO* sliderSoundsButton;
 
 	ButtonGO* fullscreenButton;
 
 	SDLUtils* sdl;
 	Music* supermarketMusic;
+
+	Font* font;
+
+	Texture* MusicTexture;
+	SDL_Rect MusicRect;
+
+	Texture* SoundTexture;
+	SDL_Rect SoundRect;
+	
+	Texture* FullScreenTexture;
+	SDL_Rect FullScreenRect;
+
 public:
 	OptionsMenu();
 	~OptionsMenu();
 
 	void handleEvents();
 	void update();
+	void render();
+
 	void selectedButton(int selected);
 
-	void createSlider();
-	void SliderHandleEvents();
 	void updateCheckBox();
+	void Texts();
 };
 
