@@ -71,6 +71,7 @@ private:
 	bool twoPlayers;
 	int killedNum; //número de ladrones matados en el día anterior
 
+	int MASTER_VOLUME = 50; // sonido maestro;
 
 	GameManager();
 
@@ -124,4 +125,7 @@ public:
 
 	virtual void initCoopMode(bool server);
 	virtual void quitCoopMode();
+
+	int getMasterVolume();
+	void setMasterVolume(int nVolume);
 };
