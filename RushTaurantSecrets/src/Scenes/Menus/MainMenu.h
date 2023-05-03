@@ -25,11 +25,13 @@ private:
 
 	SDLUtils* sdl;
 	Music* supermarketMusic;
+	Music* mainMenuMusic;
 public:
 	MainMenu();
 	~MainMenu();
 
 	void handleEvents();
-
+	void haltSound()override;
+	void resumeSound()override;
 	void selectedButton(int selected);
 };

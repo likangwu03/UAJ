@@ -464,5 +464,7 @@ void HappyEnding::finishScene() {
 	cheer->haltChannel();
 
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
+
 
 }

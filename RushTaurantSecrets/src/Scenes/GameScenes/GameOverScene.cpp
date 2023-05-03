@@ -15,6 +15,8 @@ GameOverScene::GameOverScene() {
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 2.8 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
+			GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
+
 		});
 }
 

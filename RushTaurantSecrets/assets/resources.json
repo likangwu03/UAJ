@@ -1301,6 +1301,11 @@
   ],
   "musics": [
     {
+      "id": "MAINMENU_MUSIC",
+      "file": "assets/Music/main_menu.mp3"
+    },
+
+    {
       "id": "PANTRY_MUSIC",
       "file": "assets/Music/pantry2.mp3"
     },
