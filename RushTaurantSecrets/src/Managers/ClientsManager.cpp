@@ -177,14 +177,18 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup,bool send
 
 	// se asigna el grupo de clientes a la mesa
 	tables[table - 1]->assignClients(firstGroup);
-	assignedClient = true;
+	assignedClient = true;  //........................NEW
 
 	if (send) {
 		Message m;
 		m.id = Message::msg_ASSIGN_CLIENT;
 		m.assignClients.table = table;
-		Game::get()->getCoopHandler()->send(m);
+		Game::get() ->getCoopHandler()->send(m);
 	}
+
+	entrance.pop_front();      //........................NEW
+	recolocateEntranceAll(entrance.begin());
+	assignedClient = false;
 }
 
 // comprobar si un cliente si un cliente est?de camino a pagar o pagando
@@ -321,7 +325,7 @@ void ClientsManager::update() {
 	addFrequently();
 
 	// se comprueba si se ha asignado el primer grupo a una mesa para quitarlo de la entrada
-	firstClientAssigned();
+	//firstClientAssigned();
 
 	// añadir los clientes que han llegado a la caja registradora a la cola de pago
 	checkCashRegister();
@@ -344,6 +348,7 @@ void ClientsManager::receive(const Message& message) {
 	if (message.id == Message::msg_ASSIGN_CLIENT) {
 		vector<Client*> firstGroup = getFirstEntrance();
 		assignTable(message.assignClients.table,firstGroup, false);
+		/*firstClientAssigned();*/
 	}
 	else if (message.id == Message::msg_ADD_CLINETS) {
 		createGroupClients(message);
