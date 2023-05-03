@@ -279,6 +279,7 @@ void BasketMarketComponent::cleanEmptyBasket() {
 	if (ingredients.size() == 0)selectedIngr = ingredients.end();
 }
 void BasketMarketComponent:: nextDay() {
+	totalDifIngr = 0;
 	totalPrize = 0;
 	basketON = false;
 	chooseHMMode = false;

@@ -21,7 +21,7 @@ void Day2EndingNoKillScene::addPath(const vector<Vector>& points) {
 
 void Day2EndingNoKillScene::reset() {
 	dialogueBox = nullptr;
-	state = START;
+	state = INIT;
 	timer = 0;
 	dialogueN = 0;
 
@@ -31,13 +31,11 @@ void Day2EndingNoKillScene::reset() {
 	anim->setW(48 * 1.3);
 
 	straightMovement->changeSpeed(6);
-	addPath(paths[START]);
+	addPath(paths[0]);
 
 	filter->setOpacity(80);
 	nightAmbience->setVolume(60);
 
-	nightAmbience->play(-1);
-	nightMusic->play(-1);
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);
@@ -48,10 +46,15 @@ void Day2EndingNoKillScene::reset() {
 void Day2EndingNoKillScene::update() {
 	CinematicBaseScene::update();
 	switch (state) {
+	case Day2EndingNoKillScene::INIT:
+		nightAmbience->play(-1);
+		nightMusic->play(-1);
+		state = START;
+		break;
 	case Day2EndingNoKillScene::START:
 		if (straightMovement->hasFinishedPath()) {
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
-			addPath(paths[ENTERING]);
+			addPath(paths[1]);
 			state = ENTERING;
 		}
 		break;

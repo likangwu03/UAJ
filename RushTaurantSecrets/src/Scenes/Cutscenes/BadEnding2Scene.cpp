@@ -57,7 +57,7 @@ void BadEnding2Scene::reset() {
 void BadEnding2Scene::update() {
 	CinematicBaseScene::update();
 	switch (state) {
-	case BadEnding2Scene::SOUND:
+	case BadEnding2Scene::INIT:
 		ambience->play(-1);
 		music->play(-1);
 		break;

@@ -81,7 +81,7 @@ void HappyEndingScene::addPath(const vector<Vector>& points, GameObject* object)
 
 void HappyEndingScene::reset() {
 	dialogueBox = nullptr;
-	state = SOUND;
+	state = INIT;
 	timer = 0;
 	dialogueN = 0;
 	doorFrame = 0;
@@ -130,7 +130,7 @@ void HappyEndingScene::reset() {
 void HappyEndingScene::update() {
 	CinematicBaseScene::update();
 	switch (state) {
-	case HappyEndingScene::SOUND:
+	case HappyEndingScene::INIT:
 		ambience->play(-1);
 		music->play(-1);
 		break;

@@ -9,6 +9,7 @@ struct dialogueInfo;
 class Day2EndingKillScene : public CinematicBaseScene {
 private:
 	enum States {
+		INIT,
 		START,
 		D1,
 		D2,

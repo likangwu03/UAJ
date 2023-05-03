@@ -33,7 +33,7 @@ void SecondDayAfterKillScene::reset() {
 	nightAmbience->setVolume(60);
 	filter->setOpacity(80);
 
-	state = MUSIC;
+	state = INIT;
 	addPath(secondDayAfterKillPath[0]);
 	straightMovement->enableRoundTripByLaps(1);
 
@@ -47,7 +47,7 @@ void SecondDayAfterKillScene::update() {
 	CinematicBaseScene::update();
 	switch (state)
 	{
-	case SecondDayAfterKillScene::MUSIC:
+	case SecondDayAfterKillScene::INIT:
 		nightAmbience->play(-1);
 		nightMusic->play(-1);
 		state = START;

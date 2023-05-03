@@ -20,6 +20,7 @@ private:
 	};
 
 	enum States {
+		INIT,
 		START,
 		ENTERING,
 		TURN,

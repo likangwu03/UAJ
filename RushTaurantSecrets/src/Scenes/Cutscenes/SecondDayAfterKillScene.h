@@ -18,7 +18,7 @@ private:
 	};
 
 	enum States {
-		MUSIC,
+		INIT,
 		START,
 		PAUSE,
 		START2,

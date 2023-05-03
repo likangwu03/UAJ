@@ -44,7 +44,7 @@ private:
 	};
 
 	enum States {
-		SOUND,
+		INIT,
 		START,
 		WAKE,
 		SIT,
