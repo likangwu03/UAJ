@@ -103,8 +103,6 @@ void BadEnding1Scene::update()
 		if (straightMovementc1->hasFinishedPath() && straightMovementc2->hasFinishedPath()) {
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
 				font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
-			client1->setAlive(false);
-			client2->setAlive(false);
 			state = D1;
 		}
 		break;
