@@ -82,6 +82,7 @@ void BadEnding1Scene::finishScene() {
 		delete transition;
 	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
 
 	dramaticMusic->haltMusic();
 }

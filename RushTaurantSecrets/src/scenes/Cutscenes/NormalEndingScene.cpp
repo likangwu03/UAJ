@@ -56,6 +56,8 @@ void NormalEndingScene::finishScene()
 		delete transition;
 	creepyMusic->haltMusic();
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
+
 }
 
 void NormalEndingScene::update()

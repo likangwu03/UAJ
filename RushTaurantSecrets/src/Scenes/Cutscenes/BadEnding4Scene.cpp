@@ -70,8 +70,9 @@ void BadEnding4Scene::finishScene() {
 		delete transition;
 	pantryMusic->haltMusic();
 	homeMusic->haltMusic();
-	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER), false);
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
+
 
 }
 

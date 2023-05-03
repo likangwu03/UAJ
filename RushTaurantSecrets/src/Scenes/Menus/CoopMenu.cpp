@@ -68,6 +68,7 @@ CoopMenu::CoopMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
 		[&]() {
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), true);
+
 		});
 
 
@@ -127,15 +128,18 @@ void CoopMenu::update() {
 		if (server && coop->connectClient()) {
 			GameManager::get()->newGame();
 			GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+			GameManager::get()->getScene(sc_MAINMENU)->haltSound();
+
 			GameManager::get()->initCoopMode(server);
 			Game::instance()->runCoop();
 			GameManager::get()->quitCoopMode();
 		}
 		else if (!server) {
-			pair<bool, bool> connect = coop->connectServer();
+			pair<bool, bool> connect = coop->connectServer();;
 			if (connect.first && connect.second) {
 				GameManager::get()->newGame();
 				GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+				GameManager::get()->getScene(sc_MAINMENU)->haltSound();
 				GameManager::get()->initCoopMode(server);
 				Game::instance()->runCoop();
 				GameManager::get()->quitCoopMode();

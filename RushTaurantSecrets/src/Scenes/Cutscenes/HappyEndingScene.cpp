@@ -1,4 +1,4 @@
-#include "HappyEnding.h"
+#include "HappyEndingScene.h"
 #include "../../Utilities/checkML.h"
 
 #include "ShowSkipTransitionScene.h"
@@ -6,7 +6,7 @@
 #include "../../GameObjects/Dialogue.h"
 #include "../../GameObjects/CinematicNPC.h"
 
-HappyEnding::HappyEnding() {
+HappyEndingScene::HappyEndingScene() {
 	dialogues = GameManager::get()->getDialogueInfo("HappyEnding.json");
 	
 	filter = &sdlutils().images().at("CINEMATIC_BG_PROTA_ROOM_NIGHT");
@@ -75,13 +75,13 @@ HappyEnding::HappyEnding() {
 
 }
 
-void HappyEnding::addPath(const vector<Vector>& points, GameObject* object) {
+void HappyEndingScene::addPath(const vector<Vector>& points, GameObject* object) {
 	object->getComponent<StraightMovement>()->addPath(RelativeToGlobal::pointsRestaurant(points));
 }
 
-void HappyEnding::reset() {
+void HappyEndingScene::reset() {
 	dialogueBox = nullptr;
-	state = START;
+	state = SOUND;
 	timer = 0;
 	dialogueN = 0;
 	doorFrame = 0;
@@ -106,8 +106,7 @@ void HappyEnding::reset() {
 	ambience->setVolume(60);
 	cheer->setVolume(100);
 
-	ambience->play(-1);
-	music->play(-1);
+	
 
 	bg = &sdlutils().images().at("CINEMATIC_BG_PROTA_ROOM");
 	top = &sdlutils().images().at("CINEMATIC_BG_PROTA_ROOM_WALL");
@@ -128,10 +127,14 @@ void HappyEnding::reset() {
 }
 
 
-void HappyEnding::update() {
+void HappyEndingScene::update() {
 	CinematicBaseScene::update();
 	switch (state) {
-	case HappyEnding::START:
+	case HappyEndingScene::SOUND:
+		ambience->play(-1);
+		music->play(-1);
+		break;
+	case HappyEndingScene::START:
 		if (timer >= DELAY * 2) {
 			transform->setMovState(sitting);
 			transform->setOrientation(east);
@@ -140,7 +143,7 @@ void HappyEnding::update() {
 		}
 		else timer += frameTime;
 		break;
-	case HappyEnding::WAKE:
+	case HappyEndingScene::WAKE:
 		if (timer >= DELAY) {
 			transform->setOrientation(east);
 			state = WINDOW;
@@ -149,7 +152,7 @@ void HappyEnding::update() {
 		}
 		else timer += frameTime;
 		break;
-	case HappyEnding::WINDOW:
+	case HappyEndingScene::WINDOW:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(north);
 			if (timer >= DELAY) {
@@ -161,20 +164,20 @@ void HappyEnding::update() {
 			else timer += frameTime;
 		}
 		break;
-	case HappyEnding::D2:
+	case HappyEndingScene::D2:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = CLOSET;
 			dialogueN++;
 		}
 		break;
-	case HappyEnding::CLOSET:
+	case HappyEndingScene::CLOSET:
 		if (Text::isTextFinished()) {
 			addPath(paths[1], player);
 			state = FADEIN1;
 		}
 		break;
-	case HappyEnding::FADEIN1:
+	case HappyEndingScene::FADEIN1:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(north);
 			transition = new ShowSkipTransitionScene(this, 1, true);
@@ -182,7 +185,7 @@ void HappyEnding::update() {
 			state = FADEOUT1;
 		}
 		break;
-	case HappyEnding::FADEOUT1:
+	case HappyEndingScene::FADEOUT1:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			(&sdlutils().soundEffects().at("CLOTHES"))->play();
 			anim->setTexture("Player_1", 6, 11, 1, 10);
@@ -192,27 +195,27 @@ void HappyEnding::update() {
 			state = D3;
 		}
 		break;
-	case HappyEnding::D3:
+	case HappyEndingScene::D3:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = D4;
 		}
 		break;
-	case HappyEnding::D4:
+	case HappyEndingScene::D4:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = WALKDOOR;
 		}
 		break;
-	case HappyEnding::WALKDOOR:
+	case HappyEndingScene::WALKDOOR:
 		if (Text::isTextFinished()) {
 			addPath(paths[2], player);
 			state = OPENDOOR;
 		}
 		break;
-	case HappyEnding::OPENDOOR:
+	case HappyEndingScene::OPENDOOR:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(south);
 			if (timer >= DOORFREQ && doorFrame < DOORFRAMES - 1) {
@@ -227,18 +230,18 @@ void HappyEnding::update() {
 			}
 		}
 		break;
-	case HappyEnding::D5:
+	case HappyEndingScene::D5:
 		dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 		dialogueN++;
 		state = WALKOUT;
 		break;
-	case HappyEnding::WALKOUT:
+	case HappyEndingScene::WALKOUT:
 		if (Text::isTextFinished()) {
 			addPath(paths[3], player);
 			state = D6;
 		}
 		break;
-	case HappyEnding::D6:
+	case HappyEndingScene::D6:
 		if (straightMovement->hasFinishedPath()) {
 			if (timer >= DELAY) {
 				dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
@@ -249,14 +252,14 @@ void HappyEnding::update() {
 			else timer += frameTime;
 		}
 		break;
-	case HappyEnding::D7:
+	case HappyEndingScene::D7:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = FADEIN2;
 		}
 		break;
-	case HappyEnding::FADEIN2:
+	case HappyEndingScene::FADEIN2:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			transition = new ShowSkipTransitionScene(this, 1, true);
@@ -265,7 +268,7 @@ void HappyEnding::update() {
 			addPath(paths[4], player);
 		}
 		break;
-	case HappyEnding::FADEOUT2:
+	case HappyEndingScene::FADEOUT2:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_HAPPY_ENDING");
 			top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_ISLAND");
@@ -290,17 +293,17 @@ void HappyEnding::update() {
 			state = RESTAURANT;
 		}
 		break;
-	case HappyEnding::RESTAURANT:
+	case HappyEndingScene::RESTAURANT:
 		if (waiter2->getComponent<StraightMovement>()->hasFinishedPath()) {
 			state = FADEIN3;
 		}
 		break;
-	case HappyEnding::FADEIN3:
+	case HappyEndingScene::FADEIN3:
 		transition = new ShowSkipTransitionScene(this, 1, true);
 		GameManager::get()->pushScene(transition, true);
 		state = FADEOUT3;
 		break;
-	case HappyEnding::FADEOUT3:
+	case HappyEndingScene::FADEOUT3:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			bg = &sdlutils().images().at("CINEMATIC_BG_PANTRY_HAPPY_ENDING");
 			transition = new ShowSkipTransitionScene(this, 1);
@@ -311,19 +314,19 @@ void HappyEnding::update() {
 			state = PANTRY;
 		}
 		break;
-	case HappyEnding::PANTRY:
+	case HappyEndingScene::PANTRY:
 		if (timer >= DELAY * 2) {
 			timer = 0;
 			state = FADEIN4;
 		}
 		else timer += frameTime;
 		break;
-	case HappyEnding::FADEIN4:
+	case HappyEndingScene::FADEIN4:
 		transition = new ShowSkipTransitionScene(this, 1, true);
 		GameManager::get()->pushScene(transition, true);
 		state = FADEOUT4;
 		break;
-	case HappyEnding::FADEOUT4:
+	case HappyEndingScene::FADEOUT4:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_HAPPY_ENDING");
 			transition = new ShowSkipTransitionScene(this, 1);
@@ -343,40 +346,40 @@ void HappyEnding::update() {
 			state = CELEBRATE;
 		}
 		break;
-	case HappyEnding::CELEBRATE:
+	case HappyEndingScene::CELEBRATE:
 		if (timer >= DELAY * 2) {
 			timer = 0;
 			state = D8;
 		}
 		else timer += frameTime;
 		break;
-	case HappyEnding::D8:
+	case HappyEndingScene::D8:
 		dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 		state = D9;
 		dialogueN++;
 		break;
-	case HappyEnding::D9:
+	case HappyEndingScene::D9:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = D10;
 			dialogueN++;
 		}
 		break;
-	case HappyEnding::D10:
+	case HappyEndingScene::D10:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = D11;
 			dialogueN++;
 		}
 		break;
-	case HappyEnding::D11:
+	case HappyEndingScene::D11:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = D12;
 			dialogueN++;
 		}
 		break;
-	case HappyEnding::D12:
+	case HappyEndingScene::D12:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = OUT;
@@ -384,7 +387,7 @@ void HappyEnding::update() {
 			cheer->play();
 		}
 		break;
-	case HappyEnding::OUT:
+	case HappyEndingScene::OUT:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
 			transition = new TransitionScene(this, 3, true, true);
@@ -392,7 +395,7 @@ void HappyEnding::update() {
 			state = NONE;
 		}
 		break;
-	case HappyEnding::NONE:
+	case HappyEndingScene::NONE:
 		if (musicVol > 0) musicVol-= 0.1;
 		else if (musicVol < 0) musicVol = 0;
 		music->setMusicVolume(musicVol);
@@ -402,7 +405,7 @@ void HappyEnding::update() {
 }
 
 
-void HappyEnding::addClient(string txt, Vector pos, GOOrientation orientation) {
+void HappyEndingScene::addClient(string txt, Vector pos, GOOrientation orientation) {
 	CinematicNPC* cl = new CinematicNPC(this, txt, Vector(0, 0), 0);
 	cl->getComponent<CharacterAnimator>()->setW(48 * RESTSIZE);
 	cl->getComponent<CharacterAnimator>()->setH(96 * RESTSIZE);
@@ -410,7 +413,7 @@ void HappyEnding::addClient(string txt, Vector pos, GOOrientation orientation) {
 	npcs.push_back({ cl, pt[0], sitting, orientation});
 }
 
-void HappyEnding::renderCinematic() {
+void HappyEndingScene::renderCinematic() {
 	bg->render(build_sdlrect(0, 0, WIDTH, HEIGHT));
 	if (state < RESTAURANT) {
 		if (state < WALKOUT) {
@@ -456,7 +459,7 @@ void HappyEnding::renderCinematic() {
 }
 
 
-void HappyEnding::finishScene() {
+void HappyEndingScene::finishScene() {
 	if(transition != nullptr)
 		delete transition;
 	music->haltMusic();
@@ -464,5 +467,7 @@ void HappyEnding::finishScene() {
 	cheer->haltChannel();
 
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
+
 
 }

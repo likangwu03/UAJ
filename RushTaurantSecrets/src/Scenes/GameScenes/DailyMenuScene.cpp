@@ -74,13 +74,13 @@ void DailyMenuScene::handleEvents() {
 		}
 	}
 	else {
-		if (ih->isKeyDown(SDL_SCANCODE_A)) {
+		if (ih->isKeyDown(SDL_SCANCODE_LEFT)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
-		else if (ih->isKeyDown(SDL_SCANCODE_D)) {
+		else if (ih->isKeyDown(SDL_SCANCODE_RIGHT)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

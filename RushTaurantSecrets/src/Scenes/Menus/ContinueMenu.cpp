@@ -18,6 +18,7 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->newGame();
+			GameManager::get()->getScene(sc_MAINMENU)->haltSound();
 		});
 	buttonNewGame->getComponent<ButtonComp>()->setHighlighted(true);
 
@@ -32,6 +33,7 @@ ContinueMenu::ContinueMenu() {
 		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
 		[&] {
 			GameManager::get()->load();
+			GameManager::get()->getScene(sc_MAINMENU)->haltSound();
 		});
 	button = 0;
 }

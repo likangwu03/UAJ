@@ -29,11 +29,12 @@
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/NormalEndingScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
+#include "../Scenes/Cutscenes/BadEnding2Scene.h"
 #include "../Scenes/Cutscenes/BadEnding4Scene.h"
 #include "../Scenes/Cutscenes/Day2EndingNoKillScene.h"
 #include "../Scenes/Cutscenes/Day2EndingKillScene.h"
 #include "../Scenes/Cutscenes/Day1EndingScene.h"
-#include "../Scenes/Cutscenes/HappyEnding.h"
+#include "../Scenes/Cutscenes/HappyEndingScene.h"
 
 #include <sstream>
 #include <fstream>
@@ -98,8 +99,9 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_NORMALENDING, new NormalEndingScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_BADENDING2, new BadEnding2Scene() });
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });	// REVISADA 2
-	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEnding() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEndingScene() });	// REVISADA 2
 
 
 	changeScene(allScenes.at(_ecs::sc_MAINMENU));
@@ -350,4 +352,12 @@ void GameManager::quitCoopMode() {
 	for (auto s : allScenes) {
 		s.second->quitCoopMode();
 	}
+}
+
+int GameManager::getMasterVolume() {
+	return MASTER_VOLUME;
+}
+
+void GameManager::setMasterVolume(int nVolume) {
+	MASTER_VOLUME = nVolume;
 }

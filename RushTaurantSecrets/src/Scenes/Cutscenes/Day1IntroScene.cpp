@@ -28,7 +28,8 @@ void Day1IntroScene::reset() {
 	anim->setH(96 * 1.7);
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 
-	nightAmbience->setVolume(60);
+	nightAmbience->setVolume(GameManager::instance()->getMasterVolume());
+	nightMusic->setMusicVolume(GameManager::instance()->getMasterVolume());
 	filter->setOpacity(80);
 
 	addPath(introPath[START]);
@@ -50,6 +51,8 @@ void Day1IntroScene::update() {
 		state = ENTERING;
 		break;
 	case Day1IntroScene::ENTERING:
+		nightAmbience->setVolume(GameManager::instance()->getMasterVolume());
+		nightMusic->setMusicVolume(GameManager::instance()->getMasterVolume());
 		if (straightMovement->hasFinishedPath()) {
 			addPath(introPath[ENTERING]);
 			state = ARRIVE;

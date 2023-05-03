@@ -20,12 +20,12 @@
 #include "../../Utilities/checkML.h"
 
 
-MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) {
+MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics().at("SUPERMARKET_MUSIC")) , mainMenuMusic(&sdl->musics().at("MAINMENU_MUSIC")) {
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = &(sdlutils().images().at("MAIN_MENU_BG"));
 	new Image(bg, image);
-
+	resumeSound();
 	button = 0;
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
 		[&]() { 
@@ -42,6 +42,7 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
 		});
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
+	mainMenuMusic->setMusicVolume(MUSIC_VOL);
 
 	button = 0;
 
@@ -53,6 +54,7 @@ MainMenu::~MainMenu() { }
 void MainMenu::handleEvents() {
 	if (ih->isKeyDown(SDLK_1)) {
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_DAILYMENU));
+		haltSound();
 	}
 	else if (ih->isKeyDown(SDLK_2)) {
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SUPERMARKET));
@@ -107,4 +109,11 @@ void MainMenu::selectedButton(int selected) {
 		options->getComponent<ButtonComp>()->setHighlighted(true);
 		break;
 	}
+}
+
+void MainMenu::haltSound() {
+	mainMenuMusic->haltMusic();
+}
+void MainMenu::resumeSound() {
+	mainMenuMusic->play(-1);
 }
