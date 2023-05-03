@@ -83,55 +83,55 @@ void Day3IntroNoKill::update()
 	case Day3IntroNoKill::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
-				font, dialogues[0].portrait, dialogues[0].text);
+				font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
 			state = D1;
 		}
 		break;
 	case Day3IntroNoKill::D1:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
-				font, dialogues[1].portrait, dialogues[1].text);
+				font, dialogues[1].portrait, dialogues[1].text, dialogues[1].character);
 			state = D2;
 		}
 		break;
 	case Day3IntroNoKill::D2:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
-				font, dialogues[2].portrait, dialogues[2].text);
+				font, dialogues[2].portrait, dialogues[2].text, dialogues[2].character);
 			state = D3;
 		}
 		break;
 	case Day3IntroNoKill::D3:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
-				font, dialogues[3].portrait, dialogues[3].text);
+				font, dialogues[3].portrait, dialogues[3].text, dialogues[3].character);
 			state = D4;
 		}
 		break;
 	case Day3IntroNoKill::D4:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 440), 700, 0.01 * 1000,
-				font, dialogues[4].portrait, dialogues[4].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[4].portrait, dialogues[4].text, dialogues[4].character);
 			state = D5;
 		}
 		break;
 	case Day3IntroNoKill::D5:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[5].portrait, dialogues[5].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[5].portrait, dialogues[5].text, dialogues[5].character);
 			state = D6;
 		}
 		break;
 	case Day3IntroNoKill::D6:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[6].portrait, dialogues[6].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[6].portrait, dialogues[6].text, dialogues[6].character);
 			state = D7;
 		}
 		break;	case Day3IntroNoKill::D7:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[6].portrait, dialogues[6].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[7].portrait, dialogues[7].text, dialogues[7].character);
 			state = OUT;
 		}
 		break;

@@ -87,8 +87,8 @@ void BadEnding4Scene::update() {
 		break;
 	case BadEnding4Scene::D1:
 		if (straightMovement->hasFinishedPath()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
 			state = D2;
 		}
 		break;
@@ -96,8 +96,8 @@ void BadEnding4Scene::update() {
 		if (Text::isTextFinished() && straightMovementThief->hasFinishedPath()) {
 			thief->getComponent<Transform>()->setOrientation(south);
 			reading = true; stolenBook = true;
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[1].portrait, dialogues[1].text, dialogues[1].character);
 			state = D3;
 		}
 		break;
@@ -106,29 +106,29 @@ void BadEnding4Scene::update() {
 			reading = false;
 			straightMovementThief->changeSpeed(8);
 			straightMovementThief->addPath(RelativeToGlobal::pointsPantry(BE4PathThief[1]));
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[2].portrait, dialogues[2].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[2].portrait, dialogues[2].text, dialogues[2].character);
 			state = D6;
 		}
 		break;
 	case BadEnding4Scene::D6:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[3].portrait, dialogues[3].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[3].portrait, dialogues[3].text, dialogues[3].character);
 			state = D7;
 		}
 		break;
 	case BadEnding4Scene::D7:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[4].portrait, dialogues[4].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[4].portrait, dialogues[4].text, dialogues[4].character);
 			state = D8;
 		}
 		break;
 	case BadEnding4Scene::D8:
 		if (Text::isTextFinished()) {
 			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[5].portrait, dialogues[5].text);
+				font, dialogues[5].portrait, dialogues[5].text, dialogues[5].character);
 			state = D9;
 		}
 		break;
@@ -158,16 +158,16 @@ void BadEnding4Scene::update() {
 			transform->setOrientation(north);
 			straightMovement->reset(RelativeToGlobal::pointHouse({ 23, 7 }));
 
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[6].portrait, dialogues[6].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[6].portrait, dialogues[6].text, dialogues[6].character);
 			state = D11;
 		}
 		break;
 	case BadEnding4Scene::D11:
 		finish = false;
 		while (Text::isTextFinished() && !finish) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[contText].portrait, dialogues[contText].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[contText].portrait, dialogues[contText].text, dialogues[contText].character);
 			++contText;
 
 			if (contText >= 30) {
@@ -176,163 +176,6 @@ void BadEnding4Scene::update() {
 			}
 		}
 		break;
-		/*
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[7].portrait, dialogues[7].text);
-			state = D12;
-		}
-		break;
-	case BadEnding4Scene::D12:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[8].portrait, dialogues[8].text);
-			state = D13;
-		}
-		break;
-	case BadEnding4Scene::D13:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[9].portrait, dialogues[9].text);
-			state = D14;
-		}
-		break;
-	case BadEnding4Scene::D14:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[10].portrait, dialogues[10].text);
-			state = D15;
-		}
-		break;
-	case BadEnding4Scene::D15:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[11].portrait, dialogues[11].text);
-			state = D16;
-		}
-	case BadEnding4Scene::D16:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[12].portrait, dialogues[12].text);
-			state = D17;
-		}
-	case BadEnding4Scene::D17:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[13].portrait, dialogues[13].text);
-			state = D18;
-		}
-	case BadEnding4Scene::D18:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[14].portrait, dialogues[14].text);
-			state = D19;
-		}
-	case BadEnding4Scene::D19:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[15].portrait, dialogues[15].text);
-			state = D20;
-		}
-	case BadEnding4Scene::D20:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[16].portrait, dialogues[16].text);
-			state = D21;
-		}
-	case BadEnding4Scene::D21:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[17].portrait, dialogues[17].text);
-			state = D22;
-		}
-	case BadEnding4Scene::D22:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[18].portrait, dialogues[18].text);
-			state = D23;
-		}
-	case BadEnding4Scene::D23:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[19].portrait, dialogues[19].text);
-			state = D24;
-		}
-	case BadEnding4Scene::D24:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[20].portrait, dialogues[20].text);
-			state = D25;
-		}
-	case BadEnding4Scene::D25:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[21].portrait, dialogues[21].text);
-			state = D26;
-		}
-	case BadEnding4Scene::D26:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[22].portrait, dialogues[22].text);
-			state = D27;
-		}
-	case BadEnding4Scene::D27:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[23].portrait, dialogues[23].text);
-			state = D28;
-		}
-		break;
-	case BadEnding4Scene::D28:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[24].portrait, dialogues[24].text);
-			state = D29;
-		}
-		break;
-	case BadEnding4Scene::D29:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[25].portrait, dialogues[25].text);
-			state = D30;
-		}
-		break;
-	case BadEnding4Scene::D30:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[26].portrait, dialogues[26].text);
-			state = D31;
-		}
-		break;
-	case BadEnding4Scene::D31:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[27].portrait, dialogues[27].text);
-			state = D32;
-		}
-		break;
-	case BadEnding4Scene::D32:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[28].portrait, dialogues[28].text);
-			state = D33;
-		}
-		break;
-	case BadEnding4Scene::D33:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[29].portrait, dialogues[29].text);
-			state = D34;
-		}
-		break;
-	case BadEnding4Scene::D34:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[30].portrait, dialogues[30].text);
-			state = D35;
-		}
-		break;
-		*/
 	case BadEnding4Scene::D35:
 		if (Text::isTextFinished()) {
 			straightMovement->addPath(RelativeToGlobal::pointsHouse(BE4PathPlayer[1]));
@@ -343,16 +186,16 @@ void BadEnding4Scene::update() {
 		if (straightMovement->hasFinishedPath()) {
 			contText = 31;
 
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[contText].portrait, dialogues[contText].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[contText].portrait, dialogues[contText].text, dialogues[contText].character);
 			state = D38;
 		}
 		break;
 	case BadEnding4Scene::D38:
 		finish = false;
 		while (Text::isTextFinished() && !finish) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[contText].portrait, dialogues[contText].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
+				font, dialogues[contText].portrait, dialogues[contText].text, dialogues[contText].character);
 			++contText;
 
 			if (contText >= 44) {
@@ -361,98 +204,6 @@ void BadEnding4Scene::update() {
 			}
 		}
 		break;
-		/*
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[32].portrait, dialogues[32].text);
-			state = D39;
-		}
-		break;
-	case BadEnding4Scene::D39:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000,
-				font, dialogues[33].portrait, dialogues[33].text);
-			state = D40;
-		}
-		break;
-	case BadEnding4Scene::D40:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[34].portrait, dialogues[34].text);
-			state = D41;
-		}
-		break;
-	case BadEnding4Scene::D41:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[35].portrait, dialogues[35].text);
-			state = D42;
-		}
-		break;
-	case BadEnding4Scene::D42:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[36].portrait, dialogues[36].text);
-			state = D43;
-		}
-		break;
-	case BadEnding4Scene::D43:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[37].portrait, dialogues[37].text);
-			state = D44;
-		}
-		break;
-	case BadEnding4Scene::D44:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[38].portrait, dialogues[38].text);
-			state = D45;
-		}
-		break;
-	case BadEnding4Scene::D45:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[39].portrait, dialogues[39].text);
-			state = D46;
-		}
-		break;
-	case BadEnding4Scene::D46:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[40].portrait, dialogues[40].text);
-			state = D47;
-		}
-		break;
-	case BadEnding4Scene::D47:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[41].portrait, dialogues[41].text);
-			state = D48;
-		}
-		break;
-	case BadEnding4Scene::D48:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[42].portrait, dialogues[42].text);
-			state = D49;
-		}
-		break;
-	case BadEnding4Scene::D49:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[43].portrait, dialogues[43].text);
-			state = D50;
-		}
-		break;
-	case BadEnding4Scene::D50:
-		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 600), 700, 0.01 * 1000,
-				font, dialogues[44].portrait, dialogues[44].text);
-			state = LAST;
-		}
-		break;
-		*/
 	case BadEnding4Scene::LAST:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;

@@ -57,7 +57,6 @@ private:
 
 	bool showAllText;	// mostrar todo el texto de una sola vez
 	bool nextText;	// mostrar el siguiente texto
-	bool textFinished;
 
 	SoundEffect* nextTextSound;
 	SoundEffect* nextLetterSound;
@@ -83,7 +82,7 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_TEXT;
 
-	Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos = Vector::zero);
+	Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, float offsetPosX = 0);
 
 	virtual ~Text();
 
@@ -103,7 +102,7 @@ public:
 		texts.push_back(text);
 	}
 
-	virtual void initComponent();
+	virtual void initBoxText();
 
 	virtual void update();
 

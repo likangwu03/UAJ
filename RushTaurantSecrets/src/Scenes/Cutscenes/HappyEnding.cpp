@@ -153,7 +153,7 @@ void HappyEnding::update() {
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(north);
 			if (timer >= DELAY) {
-				dialogueBox = new Dialogue(this, Vector(150, 550), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+				dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 				state = D2;
 				dialogueN++;
 				timer = 0;
@@ -163,7 +163,7 @@ void HappyEnding::update() {
 		break;
 	case HappyEnding::D2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = CLOSET;
 			dialogueN++;
 		}
@@ -194,14 +194,14 @@ void HappyEnding::update() {
 		break;
 	case HappyEnding::D3:
 		if (GameManager::get()->getCurrentScene() != transition) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = D4;
 		}
 		break;
 	case HappyEnding::D4:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = WALKDOOR;
 		}
@@ -228,7 +228,7 @@ void HappyEnding::update() {
 		}
 		break;
 	case HappyEnding::D5:
-		dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+		dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 		dialogueN++;
 		state = WALKOUT;
 		break;
@@ -241,7 +241,7 @@ void HappyEnding::update() {
 	case HappyEnding::D6:
 		if (straightMovement->hasFinishedPath()) {
 			if (timer >= DELAY) {
-				dialogueBox = new Dialogue(this, Vector(150, 550), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+				dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 				dialogueN++;
 				state = D7;
 				timer = 0;
@@ -251,7 +251,7 @@ void HappyEnding::update() {
 		break;
 	case HappyEnding::D7:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = FADEIN2;
 		}
@@ -351,34 +351,34 @@ void HappyEnding::update() {
 		else timer += frameTime;
 		break;
 	case HappyEnding::D8:
-		dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+		dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 		state = D9;
 		dialogueN++;
 		break;
 	case HappyEnding::D9:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = D10;
 			dialogueN++;
 		}
 		break;
 	case HappyEnding::D10:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = D11;
 			dialogueN++;
 		}
 		break;
 	case HappyEnding::D11:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = D12;
 			dialogueN++;
 		}
 		break;
 	case HappyEnding::D12:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, Vector(150, 450), BOXW, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			state = OUT;
 			dialogueN++;
 			cheer->play();

@@ -63,26 +63,26 @@ void Day2EndingKillScene::update()
 		break;
 	case Day2EndingKillScene::D1:
 		if (straightMovement->hasFinishedPath()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
 			state = D2;
 		}
 		break;
 	case Day2EndingKillScene::D2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text, dialogues[1].character);
 			state = D3;
 		}
 		break;
 	case Day2EndingKillScene::D3:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text, dialogues[2].character);
 			state = PHONE;
 		}
 		break;
 	case Day2EndingKillScene::PHONE:
 		if (Text::isTextFinished()) {
 			phonecall->play(-1);
-			dialogueBox = new Dialogue(this, Vector(150, 570), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text, dialogues[3].character);
 			cont = 0;
 			state = PATHING;
 		}
@@ -99,20 +99,20 @@ void Day2EndingKillScene::update()
 			transform->setMovState(phone);
 			if (Text::isTextFinished()) {
 				phonecall->haltChannel();
-				dialogueBox = new Dialogue(this, Vector(150, 570), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text);
+				dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text, dialogues[4].character);
 				state = D5;
 			}
 		}
 		break;
 	case Day2EndingKillScene::D5:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text, dialogues[5].character);
 			state = D6;
 		}
 		break;
 	case Day2EndingKillScene::D6:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text, dialogues[6].character);
 			state = OUT;
 		}
 		break;

@@ -116,9 +116,9 @@ void Text::newText(string newText) {
 	
 }
 
-Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, Vector offsetPos) :
+Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightLetter, float letterFrequency, Font* font, int widthTextBox, float offsetPosX) :
 	Component(parent, id), sdl(SDLUtils::instance()), texts(texts), elapsedTime(0), widthLetter(widthLetter), heightLetter(heightLetter), timer(letterFrequency),
-	font(font), widthTextBox(widthTextBox), offset(10), showAllText(false), nextText(false), state(Writing), boxText(nullptr), textFinished(true),
+	font(font), widthTextBox(widthTextBox), offset(10), showAllText(false), nextText(false), state(Writing), boxText(nullptr), pos(),
 	nextLetterSound(&sdl->soundEffects().at("TEXT_TYPING")), nextTextSound(&sdl->soundEffects().at("NEXT_TEXT")) {
 	nextLetterSound->setVolume(3);
 	nextTextSound->setVolume(50);
@@ -130,16 +130,20 @@ Text::Text(GameObject* parent, deque<string> texts, int widthLetter, int heightL
 	this->texts.pop_front();
 
 	transform = parent->getComponent<Transform>();
-	this->pos.setX(transform->getPos().getX() + (getWidthTextBox() * offsetPos.getX()));
-	this->pos.setY(transform->getPos().getY() + (getNumLines() * offsetPos.getY()));
+	this->pos.setX(transform->getPos().getX() + (getWidthTextBox() * offsetPosX));
 }
 
 Text::~Text() {
 	releaseLetters();
 }
 
-void Text::initComponent() {
+void Text::initBoxText() {
 	boxText = parent->getComponent<BoxText>();
+	// se coloca el texto en la mitad de la caja de texto
+	float halfLines = getNumLines() / 2.0f;
+	float spaceHalfLines = halfLines * (heightLetter + offset);
+	float half = transform->getPos().getY() + boxText->getBoxHeight() / 2 - spaceHalfLines;
+	this->pos.setY(half);
 }
 
 void Text::update() {
@@ -170,9 +174,6 @@ void Text::update() {
 
 				}
 				else {
-					// 1?forma
-					textFinished = true;
-					// 2?forma
 					hasFinished = true;
 					parent->setAlive(false);
 				}

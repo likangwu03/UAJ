@@ -42,5 +42,8 @@ public:
 	void changeOffset(Vector off,int i);
 	void changeHeight(float height,int i);
 	Texture* getTexture(int i);
+	inline vector<showControlInfo>* getControls() {
+		return &controls_;
+	}
 };
 

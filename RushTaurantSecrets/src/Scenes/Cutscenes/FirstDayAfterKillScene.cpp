@@ -54,36 +54,36 @@ void FirstDayAfterKillScene::update() {
 	case FirstDayAfterKillScene::START:
 		cont += frameTime;
 		if (cont > START_TIME * 1000) {
-			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
-				font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
 			state = M1;
 		}
 		break;
 	case FirstDayAfterKillScene::M1:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[1].portrait, dialogues[1].text, dialogues[1].character);
 			state = P1;
 		}
 		break;
 	case FirstDayAfterKillScene::P1:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
-				font, dialogues[2].portrait, dialogues[2].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[2].portrait, dialogues[2].text, dialogues[2].character);
 			state = M2;
 		}
 		break;
 	case FirstDayAfterKillScene::M2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[3].portrait, dialogues[3].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[3].portrait, dialogues[3].text, dialogues[3].character);
 			state = P2;
 		}
 		break;
 	case FirstDayAfterKillScene::P2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[4].portrait, dialogues[4].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[4].portrait, dialogues[4].text, dialogues[4].character);
 			state = MOV1;
 
 		}
@@ -100,15 +100,15 @@ void FirstDayAfterKillScene::update() {
 
 	case FirstDayAfterKillScene::M3:
 		if (straightMovement->hasFinishedPath()) {
-			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
-				font, dialogues[5].portrait, dialogues[5].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[5].portrait, dialogues[5].text, dialogues[5].character);
 			state = M4;
 		}
 		break;
 	case FirstDayAfterKillScene::M4:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000,
-				font, dialogues[6].portrait, dialogues[6].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[6].portrait, dialogues[6].text, dialogues[6].character);
 			state = BACKUP;
 		}
 		break;
@@ -123,8 +123,8 @@ void FirstDayAfterKillScene::update() {
 
 	case FirstDayAfterKillScene::M5:
 		if (straightMovement->hasFinishedPath()) {
-			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000,
-				font, dialogues[7].portrait, dialogues[7].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[7].portrait, dialogues[7].text, dialogues[7].character);
 
 			state = OUT;
 		}

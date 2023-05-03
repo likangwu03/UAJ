@@ -81,20 +81,20 @@ void Day2EndingNoKillScene::update() {
 		else timer += frameTime;
 		break;
 	case Day2EndingNoKillScene::D1:
-		dialogueBox = new Dialogue(this, BOXPOS, 700, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+		dialogueBox = new Dialogue(this, BOXPOS, 700, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 		dialogueN++;
 		state = D2;
 		break;
 	case Day2EndingNoKillScene::D2:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, BOXPOS, 700, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, BOXPOS, 700, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = D3;
 		}
 		break;
 	case Day2EndingNoKillScene::D3:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, BOXPOS, 700, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text);
+			dialogueBox = new Dialogue(this, BOXPOS, 700, LETTERFREQ, font, dialogues[dialogueN].portrait, dialogues[dialogueN].text, dialogues[dialogueN].character);
 			dialogueN++;
 			state = OUT;
 		}

@@ -10,8 +10,8 @@ ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> contro
 
 			controls_[i].col = Controls[controls[i].key].col;
 			controls_[i].row = Controls[controls[i].key].fil;
-			controls_[i].height = controls[i].height;
 			controls_[i].offset = controls[i].offset;
+			controls_[i].height = controls[i].height;
 			controls_[i].proportion = Controls[controls[i].key].proportion;
 			controls_[i].texture = &sdlutils().images().at(Controls[controls[i].key].textureName);
 
@@ -45,7 +45,7 @@ ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> contro
 
 void ShowControlComp::render(Vector pos) {
 	for (auto c : controls_)
-		c.texture->renderFrame(build_sdlrect(pos.getX() + c.offset.getX()-((c.height*c.proportion)/2), pos.getY() + c.offset.getY()-c.height/2, c.height * c.proportion, c.height), c.col, c.row, 0);
+		c.texture->renderFrame(build_sdlrect(pos.getX() + c.offset.getX() - ((c.height * c.proportion) / 2), pos.getY() + c.offset.getY() - c.height / 2, c.height * c.proportion, c.height), c.col, c.row, 0);
 }
 
 void ShowControlComp::changeOffset(Vector off, int i) {

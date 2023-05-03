@@ -58,55 +58,55 @@ void Day1IntroScene::update() {
 		break;
 	case Day1IntroScene::ARRIVE:
 		if (straightMovement->hasFinishedPath()) {
-			dialogueBox = new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
 			state = D1;
 		}
 		break;
 	case Day1IntroScene::D1:
 		if (Text::isTextFinished()) {
-			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox= new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text, dialogues[1].character);
 			state = D2;
 		}
 		break;
 	case Day1IntroScene::D2:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text);
+			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[2].portrait, dialogues[2].text, dialogues[2].character);
 			state = D3;
 		}
 		break;
 	case Day1IntroScene::D3:
 		if (Text::isTextFinished()) {
-			dialogueBox= new Dialogue(this, Vector(150,430), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[3].portrait, dialogues[3].text, dialogues[3].character);
 			state = D31;
 		}
 		break;
 	case Day1IntroScene::D31:
 		if (Text::isTextFinished()) {
-			dialogueBox= new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text);
+			dialogueBox= new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[4].portrait, dialogues[4].text, dialogues[4].character);
 			state = D4;
 		}
 		break;
 	case Day1IntroScene::D4:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 440), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text);
+			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[5].portrait, dialogues[5].text, dialogues[5].character);
 			state = D5;
 		}
 		break;
 	case Day1IntroScene::D5:
 		if (Text::isTextFinished()) {
- 			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text);
+ 			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[6].portrait, dialogues[6].text, dialogues[6].character);
 			state = D51;
 		}
 		break;
 	case Day1IntroScene::D51:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 550), 700, 0.01 * 1000, font, dialogues[7].portrait, dialogues[7].text);
+			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[7].portrait, dialogues[7].text, dialogues[7].character);
 			state = D6;
 		}
 		break;
 	case Day1IntroScene::D6:
 		if (Text::isTextFinished()) {
-			dialogueBox=new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[8].portrait, dialogues[8].text);
+			dialogueBox=new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[8].portrait, dialogues[8].text, dialogues[8].character);
 			state = OUT;
 		}
 		break;
@@ -120,14 +120,14 @@ void Day1IntroScene::update() {
 		break;
 	case Day1IntroScene::D71:
 		if (Text::isTextFinished() && GameManager::get()->getCurrentScene() != transition) {
-			dialogueBox = new Dialogue(this, Vector(150, 400), 700, 0.01 * 1000, font, dialogues[9].portrait, dialogues[9].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000, font, dialogues[9].portrait, dialogues[9].text, dialogues[9].character);
 			state = D72;
 		}
 		break;
 	case Day1IntroScene::D72:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000,
-				font, dialogues[10].portrait, dialogues[10].text);
+			dialogueBox = new Dialogue(this, Vector(150, 430), 700, 0.01 * 1000,
+				font, dialogues[10].portrait, dialogues[10].text, dialogues[10].character);
 			state = WAITD7;
 		}
 		break;

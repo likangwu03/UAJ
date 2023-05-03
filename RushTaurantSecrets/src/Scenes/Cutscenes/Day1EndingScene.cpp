@@ -58,13 +58,13 @@ void Day1EndingScene::update()
 	case Day1EndingScene::ENTERING:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(south);
-			dialogueBox = new Dialogue(this, Vector(150, 450), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text);
+			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000, font, dialogues[0].portrait, dialogues[0].text, dialogues[0].character);
 			state = D1;
 		}
 		break;
 	case Day1EndingScene::D1:
 		if (Text::isTextFinished()) {
-			dialogueBox = new Dialogue(this, Vector(150, 500), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text);
+			dialogueBox = new Dialogue(this, Vector(150, 420), 700, 0.01 * 1000, font, dialogues[1].portrait, dialogues[1].text, dialogues[1].character);
 			state = OUT;
 		}
 		break;
