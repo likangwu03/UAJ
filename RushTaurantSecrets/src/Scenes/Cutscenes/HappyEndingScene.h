@@ -8,7 +8,7 @@ using namespace std;
 struct dialogueInfo;
 class CinematicNPC;
 
-class HappyEnding : public CinematicBaseScene {
+class HappyEndingScene : public CinematicBaseScene {
 private:
 	const int DELAY = 1000;
 	const Vector BOXPOS = Vector(150, 20);
@@ -44,6 +44,7 @@ private:
 	};
 
 	enum States {
+		SOUND,
 		START,
 		WAKE,
 		SIT,
@@ -105,7 +106,7 @@ private:
 	CinematicNPC* guard2;
 
 public:
-	HappyEnding();
+	HappyEndingScene();
 	void reset() override;
 	void renderCinematic () override;
 	void finishScene()override;
