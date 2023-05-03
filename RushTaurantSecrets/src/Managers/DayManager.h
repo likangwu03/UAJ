@@ -18,6 +18,7 @@ private:
 
 	SDLUtils* sdl;
 	Music* restaurantMusic;
+	Music* pantryMusic;
 public:
 	DayManager();
 	~DayManager();

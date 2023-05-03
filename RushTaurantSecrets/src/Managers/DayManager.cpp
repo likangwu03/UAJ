@@ -53,7 +53,7 @@ float DayManager::to_float(std::string str) {
 }
 
 DayManager::DayManager() : day(0), timeUpSound(&sdlutils().soundEffects().at("TIME_UP")),
-sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC"))
+sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")), pantryMusic(&sdl->musics().at("PANTRY_MUSIC"))
 {
 	// file
 	file.open("assets/dayConfig.rsdat");
@@ -74,6 +74,10 @@ void DayManager::checkDayFinished() {
 
 	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients() && !ThievesManager::get()->areThereThieves()) {
 		GameManager::get()->save();
+		if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_RESTAURANT))
+			restaurantMusic->pauseMusic();
+		else if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_PANTRY))
+			pantryMusic->pauseMusic();
 		GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDOFDAY));
 	}
 }
