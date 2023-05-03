@@ -351,3 +351,11 @@ void GameManager::quitCoopMode() {
 		s.second->quitCoopMode();
 	}
 }
+
+int GameManager::getMasterVolume() {
+	return MASTER_VOLUME;
+}
+
+void GameManager::setMasterVolume(int nVolume) {
+	MASTER_VOLUME = nVolume;
+}

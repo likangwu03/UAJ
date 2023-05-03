@@ -2,11 +2,12 @@
 #include "../../Structure/Scene.h"
 #include "../../Utilities/Texture.h"
 #include "../../GameObjects/ButtonGO.h"
+#include "../../Structure/GameManager.h"
 
 class OptionsMenu : public Scene
 {
 private:
-	const int MUSIC_VOL = 30;
+	const int MUSIC_VOL = GameManager::instance()->getMasterVolume();
 
 	const int NUM_BUTTON = 4;
 	int button;
@@ -16,6 +17,7 @@ private:
 
 	GameObject* bg;
 	ButtonGO* buttonReturn;
+	ButtonGO* buttonControls;
 	Texture* image;
 
 	GameObject* sliderBar;

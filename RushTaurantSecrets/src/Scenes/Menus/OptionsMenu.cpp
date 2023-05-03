@@ -13,14 +13,20 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 	createSlider();
 
 	buttonReturn = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3 * SDLUtils::instance()->height() / 5), 385, 130, 
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.3 * SDLUtils::instance()->height() / 5), 385, 130, 
 		[&]() {
 			GameManager::get()->popScene();
 		});
 	buttonReturn->getComponent<ButtonComp>()->setHighlighted(true);
+	
+	buttonControls = new ButtonGO(this, "CONTROLS_BUTTON", "BUTTON_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.55 * SDLUtils::instance()->height() / 5), 385, 130, 
+		[&]() {
+			GameManager::get()->popScene();
+		});
 
 	sliderButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
-		Vector(250, 240), 100, 100,
+		Vector(200, 240), 100, 100,
 		[&]() {
 			if ((ih->isKeyDown(SDLK_SPACE) && !slider)) slider = true;
 			else if ((ih->isKeyDown(SDLK_SPACE) && slider)) slider = false;
@@ -31,9 +37,6 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 		[&]() {
 			sdl->toggleFullScreen();
 		});
-	
-	supermarketMusic->setMusicVolume(MUSIC_VOL);
-
 
 	button = 3;
 }
@@ -106,13 +109,14 @@ void OptionsMenu::selectedButton(int selected) {
 	sliderButton->getComponent<ButtonComp>()->setHighlighted(false);
 	buttonReturn->getComponent<ButtonComp>()->setHighlighted(false);
 	fullscreenButton->getComponent<ButtonComp>()->setHighlighted(false);
+	buttonControls->getComponent<ButtonComp>()->setHighlighted(false);
 	switch (selected)
 	{
 	case 0:
 		sliderButton->getComponent<ButtonComp>()->setHighlighted(true);
 		break;
 	case 1:
-		
+		buttonControls->getComponent<ButtonComp>()->setHighlighted(true);
 		break;
 	case 2:
 		fullscreenButton->getComponent<ButtonComp>()->setHighlighted(true);
@@ -125,7 +129,7 @@ void OptionsMenu::selectedButton(int selected) {
 
 void OptionsMenu::createSlider() {
 	sliderBar = new GameObject(this);
-	new Transform(sliderBar, { 150,250 }, { 0,0 }, 300, 80);
+	new Transform(sliderBar, { 100,250 }, { 0,0 }, 300, 80);
 	sliderBarImage = new Image(sliderBar, &((*SDLUtils::instance()).images().at("SLIDER_BAR")));
 }
 
@@ -137,14 +141,20 @@ void OptionsMenu::SliderHandleEvents(){
 		if (t->getPos().getX() - offset > (tSliderBar->getPos().getX() - t->getW() / 2)) {
 			t->setPos(Vector(t->getPos().getX() - offset, t->getPos().getY()));
 			sliderButton->getComponent<ButtonComp>()->moveHighlighted();
+			GameManager::instance()->setMasterVolume(((t->getPos().getX() + t->getW() / 2  - tSliderBar->getPos().getX()) * 100) / tSliderBar->getW());
+			if(!(t->getPos().getX() - offset > (tSliderBar->getPos().getX() - t->getW() / 2)))
+				GameManager::instance()->setMasterVolume(0);
 		}
 	}
 	else if (ih->isKeyDown(SDLK_RIGHT)) {
 		if (t->getPos().getX() + offset < (tSliderBar->getPos().getX() + tSliderBar->getW() - t->getW()/2)) {
 			t->setPos(Vector(t->getPos().getX() + offset, t->getPos().getY()));
 			sliderButton->getComponent<ButtonComp>()->moveHighlighted();
+			GameManager::instance()->setMasterVolume(((t->getPos().getX() + t->getW() / 2 - tSliderBar->getPos().getX()) * 100) / tSliderBar->getW());
 		}
 	}
+	
+	supermarketMusic->setMusicVolume(GameManager::instance()->getMasterVolume());
 }
 
 void OptionsMenu::updateCheckBox() {

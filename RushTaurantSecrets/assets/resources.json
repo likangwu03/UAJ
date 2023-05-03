@@ -625,6 +625,12 @@
       "rows": 1
     },
     {
+      "id": "CONTROLS_BUTTON",
+      "file": "assets/Sprites/UI/Menu/Controls_Button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "SLIDER_BAR",
       "file": "assets/Sprites/UI/Menu/slider&checkbox/sliderBar.png",
       "cols": 1,
