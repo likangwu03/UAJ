@@ -216,9 +216,6 @@ public:
 		case msg_PLAYER:
 			msg=code16(player.pos.getX(),msg);
 			msg=code16(player.pos.getY(),msg);
-			if (player.vel.getX() < 0) {
-				int algo=1234;
-			}
 			msg=code16(player.vel.getX(),msg);
 			msg=code16(player.vel.getY(),msg);
 			msg=code8(player.scene,msg);
@@ -228,12 +225,9 @@ public:
 			msg=code8(basket.n,msg);
 			break;
 		case msg_TO_DAILY_MENU:
-			for (uint8_t d : daily_menus.menu1) {
-				msg=code8(d,msg);
-			}
-			for (uint8_t d : daily_menus.menu2) {
-				msg=code8(d,msg);
-			}
+			msg = code8vector(daily_menus.menu1, msg);
+			msg = code8vector(daily_menus.menu2, msg);
+
 			break;
 		case msg_TO_SUPERMARKET:
 			msg = code8(daily_menu.menu, msg);
@@ -241,9 +235,7 @@ public:
 		case msg_ADD_CLINETS:
 			uint8_t aux3;
 			msg = code8(grp_clients.num, msg);
-			for (uint8_t c : grp_clients.clients) {
-				msg = code8(c, msg);
-			}		
+			msg = code8vector(grp_clients.clients, msg);
 			break;
 		case msg_ASSIGN_CLIENT:
 			msg = code8(assignClients.table, msg);
@@ -311,27 +303,15 @@ public:
 			basket.n = aux2;
 			
 		case msg_TO_DAILY_MENU:
-			for (int i = 0; i < 4; ++i) {
-				uint8_t aux;
-				msg = decode8<uint8_t>(aux, msg);
-				daily_menus.menu1.push_back((_ecs::_ingredients_id)aux);
-			}
-			for (int i = 0; i < 4; ++i) {
-				uint8_t aux;
-				msg = decode8<uint8_t>(aux, msg);
-				daily_menus.menu2.push_back((_ecs::_ingredients_id)aux);
-			}
+			msg = decode8vector(daily_menus.menu1, msg, 4);
+			msg = decode8vector(daily_menus.menu2, msg, 4);
 			break;
 		case msg_TO_SUPERMARKET:
 			msg= decode8<uint8_t>(daily_menu.menu, msg);
 			break;
 		case Message::msg_ADD_CLINETS:
-			uint8_t aux3;
 			msg = decode8<uint8_t>(grp_clients.num, msg);
-			for (int i = 0; i < grp_clients.num; i++) {
-				msg = decode8<uint8_t>(aux3, msg);
-				grp_clients.clients.push_back(aux3);
-			}
+			msg = decode8vector(grp_clients.clients, msg, grp_clients.num);
 			break;
 		case Message::msg_ASSIGN_CLIENT:
 			msg=decode8<uint8_t>(assignClients.table, msg);
