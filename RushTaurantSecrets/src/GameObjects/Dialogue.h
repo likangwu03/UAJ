@@ -32,7 +32,7 @@ public:
 		Transform* transform = new Transform(this, Vector(pos.getX(), pos.getY()));
 		new Image(this, &sdl->images().at("DIALOG_BOX"));
 		Text* text = new Text(this, texts, widthLetter, heightLetter, letterFrequency, font, widthBox, 1.25 / 4);
-		new ShowControlComp(this, { {ControlsType::key_SPACE,ControlsType::play_Circle,ControlsType::xbox_B, Vector(0,45), 40, 40} });
+		new ShowControlComp(this, { {ControlsType::key_SPACE,ControlsType::play_Circle,ControlsType::xbox_B, Vector(0,0), 40, 40} });
 		new BoxText(this, &sdl->images().at("DIALOG_BOX_PORTRAIT"), portrait, Vector(1.4, 15));
 		text->initBoxText();
 	}

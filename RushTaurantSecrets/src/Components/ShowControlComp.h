@@ -40,7 +40,9 @@ public:
 	ShowControlComp(GameObject* parent, vector<ControlsInfo> controls);
 	void render(Vector pos);
 	void changeOffset(Vector off,int i);
+	float getProportion(int i) { return controls_[i].proportion; };
 	void changeHeight(float height,int i);
+
 	Texture* getTexture(int i);
 	inline vector<showControlInfo>* getControls() {
 		return &controls_;

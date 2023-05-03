@@ -126,7 +126,7 @@ void BoxText::update() {
 
 			enlargeComplement(key, Vector(3.3 * box.actWidth / 4, box.actHeight / 1.2));
 			showControl->changeHeight(key.size.actHeight, 0);
-
+			showControl->changeOffset({ key.size.actHeight * showControl->getProportion(0) / 2 ,  key.size.actHeight},0);
 			enlargeComplement(portraitBorder, Vector(box.actWidth / 10, box.actHeight / 2));
 
 			enlargeComplement(portrait, Vector(box.actWidth / 10, box.actHeight / 2));
@@ -165,14 +165,6 @@ void BoxText::render() {
 		dest.h = name.size.actHeight;
 		nameTexture->render(dest);
 	}
-
-	dest.x = key.pos.getX();
-	dest.y = key.pos.getY();
-	dest.w = key.size.actWidth;
-	dest.h = key.size.actHeight;
-	for (auto c : *(showControl->getControls())) {
-		c.texture->renderFrame(dest, c.col, c.row, 0);
-	}
 	// usando esto la animación del botón SPACE va mal
-	// showControl->render(key.pos);
+	 showControl->render(key.pos);
 }
