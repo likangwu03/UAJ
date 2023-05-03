@@ -16,6 +16,7 @@ class Restaurant;
 class Pantry;
 class SuperMarket;
 class DailyMenuScene;
+class BeforeDayStartScene;
 
 class Reputation;
 class Money;
@@ -57,6 +58,7 @@ private:
 	Pantry* pantry;
 	SuperMarket* supermarket;
 	DailyMenuScene* dailyMenu;
+	BeforeDayStartScene* beforeDayStartScene;
 
 	Reputation* reputation;
 	Money* money;
@@ -99,6 +101,7 @@ public:
 	Pantry* getPantry();
 	SuperMarket* getSupermarket();
 	DailyMenuScene* getDailyMenu();
+	BeforeDayStartScene* getBeforeDayStartScene();
 
 	Reputation* getReputation();
 	Money* getMoney();

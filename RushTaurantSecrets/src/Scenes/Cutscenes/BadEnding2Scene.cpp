@@ -18,39 +18,39 @@ void BadEnding2Scene::addPath(const vector<Vector>& points, GameObject* object) 
 }
 
 void BadEnding2Scene::reset() {
-	dialogueBox = nullptr;
-	state = SOUND;
-	timer = 0;
-	dialogueN = 0;
-
-	straightMovement->reset(RelativeToGlobal::pointRestaurant(paths[0][0]));
-	straightMovement->setIsWalking(false);
-	transform->setMovState(sleeping);
-
-	anim->setTexture("Player_Casual", 0, 0, 0, 10);
-	anim->setH(96 * 1.6);
-	anim->setW(48 * 1.6);
-
-	straightMovement->changeSpeed(5);
-
-	filter->setOpacity(80);
-	
-	music = &sdlutils().musics().at("HAPPY_MORNING_MUSIC");
-	musicVol = 20;
-	music->setMusicVolume(musicVol);
-
-	ambience = &sdlutils().soundEffects().at("BIRDS");
-	ambience->setVolume(60);
-
-
-	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
-	filter = sdlutils().getLoadedTilesets().at("restaurantNight");
-
-
-	if (GameManager::instance()->getCurrentScene() == this) {
-		transition = new ShowSkipTransitionScene(this, 3);
-		GameManager::get()->pushScene(transition, true);
-	}
+//	dialogueBox = nullptr;
+//	state = SOUND;
+//	timer = 0;
+//	dialogueN = 0;
+//
+//	straightMovement->reset(RelativeToGlobal::pointRestaurant(paths[0][0]));
+//	straightMovement->setIsWalking(false);
+//	transform->setMovState(sleeping);
+//
+//	anim->setTexture("Player_Casual", 0, 0, 0, 10);
+//	anim->setH(96 * 1.6);
+//	anim->setW(48 * 1.6);
+//
+//	straightMovement->changeSpeed(5);
+//
+//	filter->setOpacity(80);
+//	
+//	music = &sdlutils().musics().at("HAPPY_MORNING_MUSIC");
+//	musicVol = 20;
+//	music->setMusicVolume(musicVol);
+//
+//	ambience = &sdlutils().soundEffects().at("BIRDS");
+//	ambience->setVolume(60);
+//
+//
+//	bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
+//	filter = sdlutils().getLoadedTilesets().at("restaurantNight");
+//
+//
+//	if (GameManager::instance()->getCurrentScene() == this) {
+//		transition = new ShowSkipTransitionScene(this, 3);
+//		GameManager::get()->pushScene(transition, true);
+//	}
 }
 
 

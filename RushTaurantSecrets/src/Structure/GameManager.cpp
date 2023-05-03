@@ -44,7 +44,7 @@
 #include "../Utilities/checkML.h" 
 
 GameManager::GameManager() : scenes(), allScenes(), deleteScene(nullptr), deleteTransition(false),
-	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr),
+	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr), beforeDayStartScene(nullptr),
 	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0)
 	{ };
 
@@ -72,7 +72,7 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_PAUSEMENU, new PauseMenu() });
 	allScenes.insert({ _ecs::sc_OPTIONSMENU, new OptionsMenu() });
 	allScenes.insert({ _ecs::sc_CONTINUEMENU, new ContinueMenu() });
-	BeforeDayStartScene* beforeDayStartScene = new BeforeDayStartScene();
+	beforeDayStartScene = new BeforeDayStartScene();
 	allScenes.insert({ _ecs::sc_BEFOREDAYSTART, beforeDayStartScene });
 	allScenes.insert({ _ecs::sc_COOPMENU, new CoopMenu() });
 
@@ -198,6 +198,7 @@ Restaurant* GameManager::getRestaurant() { return restaurant; }
 Pantry* GameManager::getPantry() { return pantry; }
 SuperMarket* GameManager::getSupermarket() { return supermarket; }
 DailyMenuScene* GameManager::getDailyMenu() { return dailyMenu; }
+BeforeDayStartScene* GameManager::getBeforeDayStartScene() { return beforeDayStartScene; }
 
 
 Reputation* GameManager::getReputation() { return reputation; }

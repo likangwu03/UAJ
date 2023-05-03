@@ -7,6 +7,7 @@
 #include "BeforeDayStartScene.h"
 #include "../../Structure/Game.h"
 #include "../../Utilities/checkML.h"
+#include "BeforeDayStartScene.h"
 
 
 EndOfDayScene::EndOfDayScene() {
@@ -17,6 +18,8 @@ EndOfDayScene::EndOfDayScene() {
 	moneyGoal = 0;
 	playerReputation = 0;
 	playerMoney = 0;
+	initPlayerMoney = gm->getBeforeDayStartScene()->getInitMoney(); //Dinero con el que ha empezado el día
+	earnedMoney = 0;
 
 	dayM = gm->getDayManager();
 	_gameOver = false;
@@ -30,12 +33,12 @@ EndOfDayScene::EndOfDayScene() {
 
 	//icono reputación
 	reputationObj = new GameObject(this);
-	new Transform(reputationObj, { 150,200 }, { 0,0 }, 75, 75);
+	new Transform(reputationObj, { 150,150 }, { 0,0 }, 75, 75);
 	reputationIconT = &(sdlutils().images().at("REPUTATION_ICON"));
 	new Image(reputationObj, reputationIconT);
 
 	moneyObj = new GameObject(this);
-	new Transform(moneyObj, { 150, 300 }, { 0,0 }, 75, 75);
+	new Transform(moneyObj, { 150, 250 }, { 0,0 }, 75, 75);
 	moneyIconT = &(sdlutils().images().at("MONEY_ICON"));
 	new Image(moneyObj, moneyIconT);
 
@@ -44,12 +47,14 @@ EndOfDayScene::EndOfDayScene() {
 	font2 = new Font("assets/Fonts/light_pixel-7.ttf", 50);
 	TTF_SetFontOutline(font2->getTTFFont(), 1);
 
+	font3 = new Font("assets/Fonts/light_pixel-7.ttf", 50);
+	font4 = new Font("assets/Fonts/light_pixel-7.ttf", 70);
+	TTF_SetFontOutline(font4->getTTFFont(), 1);
+
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
-	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$";
+	moneyText = "TODAY YOU EARNED: " + to_string(earnedMoney) + "$";
 	bankruptText = "GAME OVER. YOU WENT BANKRUPT!";
 	gameOverText = "GAME OVER. CONGRATULATIONS, ALL THE CITY HATES YOU AND YOUR RESTAURANT.";
-	//continueText = ""
-	//progressedSavedText = 
 
 	//texturas que cambian cada dia
 	reputationTexture = new Texture(sdlutils().renderer(), reputationtext, *font1, build_sdlcolor(0x000000FF));
@@ -59,13 +64,14 @@ EndOfDayScene::EndOfDayScene() {
 	moneyOutline = new Texture(sdlutils().renderer(), moneyText, *font2, build_sdlcolor(0xFFFFFFFF));
 
 	//texturas que se mantienen iguales
-	bankruptTexture = new Texture(sdlutils().renderer(), bankruptText, *font1, build_sdlcolor(0x000000FF));
-	gameOverTexture = new Texture(sdlutils().renderer(), gameOverText, *font1, build_sdlcolor(0x000000FF));
+	bankruptTexture = new Texture(sdlutils().renderer(), bankruptText, *font3, build_sdlcolor(0x000000FF));
+	gameOverTexture = new Texture(sdlutils().renderer(), gameOverText, *font3, build_sdlcolor(0x000000FF));
 
-	bankruptOutline = new Texture(sdlutils().renderer(), bankruptText, *font2, build_sdlcolor(0xFFFFFFFF));
-	gameOverOutline = new Texture(sdlutils().renderer(), gameOverText, *font2, build_sdlcolor(0xFFFFFFFF));
+	bankruptOutline = new Texture(sdlutils().renderer(), bankruptText, *font4, build_sdlcolor(0xFFFFFFFF));
+	gameOverOutline = new Texture(sdlutils().renderer(), gameOverText, *font4, build_sdlcolor(0xFFFFFFFF));
 
 	//botones
+	
 	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H,
 		[&]() {
 			if (net) {
@@ -78,6 +84,7 @@ EndOfDayScene::EndOfDayScene() {
 	continueButton->setAlive(false);
 	continueButton->getComponent<ButtonComp>()->setHighlighted(true);
 
+	
 	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H,
 		[&]() {
 			if (net) {
@@ -89,6 +96,7 @@ EndOfDayScene::EndOfDayScene() {
 			gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));
 		});
 	mainMenuButton->setAlive(false);
+	
 
 	button = 0;
 
@@ -106,19 +114,25 @@ EndOfDayScene::~EndOfDayScene() {
 	delete moneyOutline;
 	delete bankruptOutline;
 	delete gameOverOutline;
+	delete font3;
+	delete font4;
 }
 
 void EndOfDayScene::reset() {
 	accDay = dayM->getDay();
 	moneyGoal = dayM->getDailyObjective();
 	playerReputation = gm->getReputation()->getReputation();
-	playerMoney = gm->getMoney()->getEarnedMoney();
+	playerMoney = gm->getMoney()->getMoney();
+	if (initPlayerMoney <= playerMoney) earnedMoney = playerMoney - initPlayerMoney;
+	else earnedMoney = 0;
 
-	//gameOver();
-	_gameOver = false; //PARA PRUEBAS SOLAMENTE
+	continueButton->setAlive(false);
+	mainMenuButton->setAlive(false);
+	
+	gameOver();
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
-	moneyText = "TODAY YOU EARNED: " + to_string(playerMoney) + "$ OUT OF " + to_string(moneyGoal) + "$";
+	moneyText = "TODAY YOU EARNED: " + to_string(earnedMoney) + "$ OUT OF " + to_string(moneyGoal) + "$";
 
 	delete reputationTexture;
 	delete moneyTexture;
@@ -135,43 +149,49 @@ void EndOfDayScene::reset() {
 void EndOfDayScene::render() {
 	Scene::render();
 
-	reputationTexture->render({ 250, 225, reputationTexture->width(), reputationTexture->height() });
-	moneyTexture->render({ 250, 325, moneyTexture->width(), moneyTexture->height() });
+	reputationTexture->render({ 250, 175, reputationTexture->width(), reputationTexture->height() });
+	moneyTexture->render({ 250, 275, moneyTexture->width(), moneyTexture->height() });
 
-	reputationOutline->render({ 250, 225, reputationTexture->width(), reputationTexture->height() });
-	moneyOutline->render({ 250, 325, moneyTexture->width(), moneyTexture->height() });
+	reputationOutline->render({ 250, 175, reputationTexture->width(), reputationTexture->height() });
+	moneyOutline->render({ 250, 275, moneyTexture->width(), moneyTexture->height() });
+
+	gameOver();
 
 	if (!_gameOver) { //el juego no se ha perdido
+
+
 		continueButton->setAlive(true);
 		mainMenuButton->setAlive(true);
 	}
 	else { //el juego se ha perdido
-		if ((playerMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
-		{
-			bankruptTexture->render({ 50, 450, bankruptTexture->width(), bankruptTexture->height() });
-			bankruptOutline->render({ 50, 450, bankruptTexture->width(), bankruptTexture->height() });
+		continueButton->setAlive(true);
+		mainMenuButton->setAlive(true);
 
-			gameOverTexture->render({ 50, 550, gameOverTexture->width(), gameOverTexture->height() });
-			gameOverOutline->render({ 50, 550, gameOverTexture->width(), gameOverTexture->height() });
+		if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
+		{
+			bankruptTexture->render({ 50, 400, bankruptTexture->width(), bankruptTexture->height() });
+			bankruptOutline->render({ 50, 400, bankruptTexture->width(), bankruptTexture->height() });
+
+			gameOverTexture->render({ 50, 500, gameOverTexture->width(), gameOverTexture->height() });
+			gameOverOutline->render({ 50, 500, gameOverTexture->width(), gameOverTexture->height() });
 
 		}
-		else if (playerMoney < moneyGoal || playerMoney <= 0) {
-			bankruptTexture->render({ 200, 450, bankruptTexture->width(), bankruptTexture->height() });
-			bankruptOutline->render({ 200, 450, bankruptTexture->width(), bankruptTexture->height() });
+		else if (earnedMoney < moneyGoal || playerMoney <= 0) {
+			bankruptTexture->render({ 100, 400, bankruptTexture->width(), bankruptTexture->height() });
+			bankruptOutline->render({ 100, 400, bankruptTexture->width(), bankruptTexture->height() });
 		}
 		else if (playerReputation <= 0) {
-			gameOverTexture->render({ 50, 450, gameOverTexture->width(), gameOverTexture->height() });
-			gameOverOutline->render({ 50, 450, gameOverTexture->width(), gameOverTexture->height() });
+			gameOverTexture->render({ 50, 400, gameOverTexture->width(), gameOverTexture->height() });
+			gameOverOutline->render({ 50, 400, gameOverTexture->width(), gameOverTexture->height() });
 		}
 
-		gameOver();
 	}
 
 
 }
 
 void EndOfDayScene::gameOver() {
-	if (playerReputation <= 0 || playerMoney < moneyGoal) _gameOver = true;
+	if (playerReputation <= 0 || earnedMoney < moneyGoal) _gameOver = true;
 }
 
 

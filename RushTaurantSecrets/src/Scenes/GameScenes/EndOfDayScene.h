@@ -15,13 +15,13 @@ private:
 
 	//boton continue
 	const int BUTTON1_X = 300;
-	const int BUTTON1_Y = 450;
+	const int BUTTON1_Y = 500;
 	const float BUTTON_W = 96 * 3.2;
 	const float BUTTON_H = 32 * 3.2;
 
 	//boton a main menu
 	const int BUTTON2_X = 700;
-	const int BUTTON2_Y = 450;
+	const int BUTTON2_Y = 500;
 
 	GameObject* reputationObj;
 	GameObject* backgroundObj;
@@ -46,6 +46,8 @@ private:
 	
 	Font* font1;
 	Font* font2;
+	Font* font3;
+	Font* font4;
 
 	DayManager* dayM;
 
@@ -66,6 +68,8 @@ private:
 	int moneyGoal;
 	int playerReputation;
 	int playerMoney;
+	int initPlayerMoney;
+	int earnedMoney;
 
 	bool _gameOver;
 

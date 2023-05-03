@@ -37,6 +37,7 @@ private:
 
 	int accDay;
 	int accGoal;
+	int initMoney;
 	
 	void toDailyMenu();
 
@@ -48,6 +49,7 @@ public:
 	//void update() { };
 	void init();
 	void reset();
+	int getInitMoney();
 
 	void initCoopMode(bool server)override;
 	void quitCoopMode() override;

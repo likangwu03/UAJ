@@ -5,6 +5,7 @@
 #include "../../Utilities/checkML.h"
 #include "../../Utilities/CoopHandler.h"
 #include "../../Structure/Game.h"
+#include "../../Managers/Money.h"
 
 
 BeforeDayStartScene::BeforeDayStartScene() {
@@ -57,6 +58,7 @@ void BeforeDayStartScene::init() {
 	buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF));
 
 	day = gm->getDayManager();
+	initMoney = gm->getMoney()->getMoney(); //Dinero inicial del día
 }
 
 
@@ -125,3 +127,5 @@ void BeforeDayStartScene::receive(const Message& message) {
 		toDailyMenu();
 	}
 }
+
+int BeforeDayStartScene::getInitMoney() { return initMoney; }
