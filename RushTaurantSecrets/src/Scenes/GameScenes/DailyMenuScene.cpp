@@ -3,6 +3,7 @@
 #include "Restaurant.h"
 #include "../HUD/UIRestaurant.h"
 #include "../../Structure/GameManager.h"
+#include "../../Components/ShowControlAuto.h"
 #include "../../Structure/Game.h"
 #include "../../Utilities/checkML.h"
 
@@ -42,6 +43,8 @@ void DailyMenuScene::init() {
 			buttonPress(1);
 		});
 	dailyMenu2->getComponent<DailyMenuComp>()->initMenu();
+	(new ShowControlAuto(dailyMenu1, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(0,640.0f),100,60} }))->setActive(true);
+	(new ShowControlAuto(dailyMenu2, { {ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(479.0f,640.0f),100,60} }))->setActive(true);
 
 	selectedButton(0);
 	button = 0;
@@ -88,6 +91,11 @@ void DailyMenuScene::handleEvents() {
 	if (!active) return;
 	Scene::handleEvents();
 }
+
+void DailyMenuScene::render() {
+	Scene::render();
+}
+
 
 void DailyMenuScene::selectedButton(int selected) {
 	dailyMenu1->getComponent<ButtonComp>()->setHighlighted(selected==0);
