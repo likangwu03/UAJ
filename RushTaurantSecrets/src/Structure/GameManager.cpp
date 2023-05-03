@@ -24,6 +24,7 @@
 
 #include "../Scenes/TransitionScene.h"
 #include "../scenes/Cutscenes/Day3IntroNoKill.h"
+#include "../scenes/Cutscenes/Day2IntroScene.h"
 #include "../Scenes/Cutscenes/Day1IntroScene.h"
 #include "../Scenes/Cutscenes/FirstDayAfterKillScene.h"
 #include "../Scenes/Cutscenes/SecondDayAfterKillScene.h"
@@ -91,6 +92,7 @@ void GameManager::initialize() {
 	days->nextDay();
 
 	allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });	// REVISADA 2
+	allScenes.insert({ _ecs::sc_INTRO2, new Day2IntroScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_INTRO3NOKILL, new Day3IntroNoKill() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_ENDINGDAY1, new Day1EndingScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_ENDINGDAY2NOKILL, new Day2EndingNoKillScene() });	// REVISADA 2

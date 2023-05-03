@@ -1002,6 +1002,10 @@
       "file": "assets/Sprites/Cutscenes/Entrance_General.png"
     },
     {
+      "id": "CINEMATIC_BG_ENTRANCE_GENERAL_TOP",
+      "file": "assets/Sprites/Cutscenes/Entrance_General_top.png"
+    },
+    {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT",
       "file": "assets/Sprites/Cutscenes/Entrance_General_Night.png"
     },

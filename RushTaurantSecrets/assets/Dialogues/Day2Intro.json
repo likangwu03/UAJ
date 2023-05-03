@@ -1,88 +1,74 @@
 {
   "dialogues": [
     {
-      "Character": "none",
-      "Text": "(The phone is ringing; the protagonist picks it up)"
+      "Character": "Phone",
+      "Text": "(RINGGGG, RINGGG, RINGGG, RI-)",
+      "Portrait": "PHONE"
     },
     {
       "Character": "Player",
-      "Text": "Hello? Who's this?"
+      "Text": "Hello? Who's this?",
+      "Portrait": "PROTA_CASUAL_SMILE"
     },
     {
       "Character": "Rival",
-      "Text": "Hi, my darling."
+      "Text": "Hi, my darling.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "Who's this?! How do you know me?"
+      "Text": "Who's this?! How do you know me?",
+      "Portrait": "PROTA_CASUAL_SURPRISED"
     },
     {
       "Character": "Rival",
-      "Text": "You can ask your parents, I'm sure they will remember me."
+      "Text": "You can ask your parents, I'm sure they will remember me.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "Why? Do you want anything from them?"
+      "Text": "Why? Do you want anything from them?",
+      "Portrait": "PROTA_CASUAL_SURPRISED"
     },
     {
       "Character": "Rival",
-      "Text": "Have they not talked to you about me? Did they think I would have forgotten about your dear restaurant after all these years?"
+      "Text": "Have they not talked to you about me? Did they think I would have forgotten about your dear restaurant after all these years?",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "I know you; I know the type of guy you are. My parents have told me everything about you."
+      "Text": "I know you; I know the type of guy you are. My parents have told me everything about you.",
+      "Portrait": "PROTA_CASUAL_ANGRY_CLOSE_EYE"
     },
     {
       "Character": "Rival",
-      "Text": "You know what I want then. I'm also sure you know I'll do anything to get my hands on it, wether you give it to me willingly or not."
+      "Text": "You know what I want then. I'm also sure you know I'll do anything to get my hands on it, wether you give it to me willingly or not.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "You have really underestimated me if you think you'll break me the same way you broke my parents. I will never yield to the likes of you! I will never close this place down!"
+      "Text": "You have really underestimated me if you think you'll break me the same way you broke my parents. I will never yield to the likes of you! I will never close this place down!",
+      "Portrait": "PROTA_CASUAL_ANGRY_CLOSE_EYE"
     },
     {
       "Character": "Rival",
-      "Text": "That is exactly what your parents said at first, look at how that worked out for them."
+      "Text": "That is exactly what your parents said at first, look at how that worked out for them.",
+      "Portrait": "OWNER"
     },
     {
       "Character": "Player",
-      "Text": "Come for me then! You do not scare me! Come a...-!"
-    },
-    {
-      "Character": "none",
-      "Text": "(RIVAL RESTAURANT'S OWNER hangs up the phone)"
+      "Text": "Come for me then! You do not scare me! Come a...-!",
+      "Portrait": "PROTA_CASUAL_ANGRY_CLOSE_EYE"
     },
     {
       "Character": "Player",
-      "Text": "Who does he think he is!? How dare he try to mess with ME! Whatever, I need to calm down. Mom, Dad, I hope I don't do anything I'll regret later..."
+      "Text": "Who does he think he is!? How dare he try to mess with ME! Whatever, I need to calm down.",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
     },
     {
       "Character": "Player",
-      "Text": "What was that noise?! What's going on in the pantry?"
-    },
-    {
-      "Character": "Player",
-      "Text": "What are you doing here!? Get out!"
-    },
-    {
-      "Character": "Player",
-      "Text": "You too! Go away!"
-    },
-    {
-      "Character": "Player",
-      "Text": "Mom, Dad, I don't think I'll be able to control myself. I need to breathe."
-    },
-    {
-      "Character": "Player",
-      "Text": "What are you doing here!? I thought I told you to never come back! (THE PROTAGONIST slams the intruder into the ground and starts hitting him until he goes away) Mom, Dad! I'm not sure I'll be able to tolerate this any longer."
-    },
-    {
-      "Character": "Player",
-      "Text": "YOU ARE NOW GOING TO LEARN THE CONSEQUENCES TO YOUR ACTIONS, YOU SHOULD HAVE NEVER COME HERE"
-    },
-    {
-      "Character": "Player",
-      "Text": "Huff, huff... What have I done!? I killed him... What am I going to do now?  The freezer. Yeah. I'll hide him there. Wait, maybe I could... No, no. That would be madness. I don't know what to do... The restaurant comes first... The intruders will be the main dish."
+      "Text": "Mom, Dad, I hope I don't do anything I'll regret later...",
+      "Portrait": "PROTA_CASUAL_SIGH"
     }
   ]
 }
