@@ -15,7 +15,7 @@ private:
 	};
 
 	enum States {
-		INIT,
+		/*INIT,*/
 		START,
 		ENTERING,
 		D1,

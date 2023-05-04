@@ -58,6 +58,7 @@ void Day2IntroScene::finishScene()
 	dayMusic->haltMusic();
 	phonecall->haltChannel();
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
+	CinematicBaseScene::finishScene();
 }
 
 void Day2IntroScene::update()

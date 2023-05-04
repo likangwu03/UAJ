@@ -129,5 +129,5 @@ void BadEnding2Scene::finishScene() {
 	ambience->haltChannel();
 
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
-
+	CinematicBaseScene::finishScene();
 }

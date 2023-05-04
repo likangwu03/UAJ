@@ -181,5 +181,5 @@ void SecondDayAfterKillScene::finishScene() {
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
-
+	CinematicBaseScene::finishScene();
 }

@@ -91,5 +91,5 @@ void Day1EndingScene::finishScene()
 		delete transition;
 	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), false);
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
-
+	CinematicBaseScene::finishScene();
 }

@@ -37,6 +37,7 @@ protected:
 	StraightMovement* straightMovement;
 	CharacterAnimator* anim;
 
+	bool net_active;
 public:
 	CinematicBaseScene();
 	~CinematicBaseScene();
@@ -45,6 +46,12 @@ public:
 	virtual void renderUI(); //texto skip, dialog box,...
 	virtual void renderCinematic(){}; //escena
 	void handleEvents()override;
-	virtual void finishScene(){}; //lo que se ejecuta al terminar la escena
+	virtual void finishScene(); //lo que se ejecuta al terminar la escena
 	void transitionEnded() { transition = nullptr; }
+
+
+	virtual void initCoopMode(bool server) { net_active = server; };
+	virtual void quitCoopMode() { net_active = false; };
+
+	virtual void receive(const Message& message);
 };

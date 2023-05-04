@@ -44,6 +44,7 @@ void CashRegisterTrigger::isOverlapping() {
 	charge();
 
 }
+
 void CashRegisterTrigger::charge() {
 	if (cM->canCollect()) {
 		int totalPayment = 0;
@@ -101,7 +102,7 @@ void CashRegisterTrigger::charge() {
 	}
 }
 
-void CashRegisterTrigger::charge(int rep, int m,int tip) {
+void CashRegisterTrigger::charge(float rep, int m,int tip) {
 
 	if (sdlutils().rand().nextInt(0, 2) == 0) cashSound1->play(0);
 	else cashSound2->play(0);

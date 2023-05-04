@@ -61,6 +61,7 @@ void Day3IntroNoKill::finishScene()
 	creepyMusic->haltMusic();
 	rainAmbience->haltChannel();
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
+	CinematicBaseScene::finishScene();
 }
 
 void Day3IntroNoKill::update()

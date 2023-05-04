@@ -468,6 +468,6 @@ void HappyEndingScene::finishScene() {
 
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
 	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
-
+	CinematicBaseScene::finishScene();
 
 }

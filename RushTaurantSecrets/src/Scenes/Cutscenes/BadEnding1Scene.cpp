@@ -85,6 +85,7 @@ void BadEnding1Scene::finishScene() {
 	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
 
 	dramaticMusic->haltMusic();
+	CinematicBaseScene::finishScene();
 }
 
 void BadEnding1Scene::update()

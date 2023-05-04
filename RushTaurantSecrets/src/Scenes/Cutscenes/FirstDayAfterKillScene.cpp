@@ -160,5 +160,6 @@ void FirstDayAfterKillScene::finishScene() {
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
 	GameManager::get()->pushScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+	CinematicBaseScene::finishScene();
 
 }

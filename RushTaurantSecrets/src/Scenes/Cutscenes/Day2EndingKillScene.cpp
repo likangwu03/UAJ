@@ -50,6 +50,7 @@ void Day2EndingKillScene::finishScene() {
 	if (transition != nullptr)
 		delete transition;
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_FIRSTDAYAFTERKILL), false);
+	CinematicBaseScene::finishScene();
 }
 
 void Day2EndingKillScene::update()

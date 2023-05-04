@@ -42,7 +42,7 @@ public:
 	virtual void onTriggerExit();
 	void charge();
 
-	void charge(int rep, int m, int tip);
+	void charge(float rep, int m, int tip);
 
 	void render();
 

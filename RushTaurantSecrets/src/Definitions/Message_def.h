@@ -32,6 +32,7 @@ struct Message {
 		msg_COOKING_DISH,
 		msg_PICK_DISH,
 		msg_CHARGE,
+		msg_FINISH_CINEMATIC,
 		// Do not erase pls
 		msg_INVALID
 	};
@@ -95,7 +96,7 @@ struct Message {
 		uint8_t id;
 	}cooking_machine;
 	struct data_charge {
-		uint8_t rep;
+		float rep;
 		uint8_t money;
 		uint8_t tip;
 	}charge;
@@ -269,7 +270,7 @@ public:
 			break;
 		case msg_CHARGE:
 			msg = code8(charge.money, msg);
-			msg = code8(charge.rep, msg);
+			msg = code16(charge.rep, msg);
 			msg = code8(charge.tip, msg);
 			break;
 
@@ -345,7 +346,7 @@ public:
 			break;
 		case msg_CHARGE:
 			msg = decode8(charge.money, msg);
-			msg = decode8(charge.rep, msg);
+			msg = decode16(charge.rep, msg);
 			msg = decode8(charge.tip, msg);
 			break;
 

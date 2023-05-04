@@ -4,6 +4,7 @@
 #include "../../Structure/GameObject.h"
 #include "../../Components/StraightMovement.h"
 #include "../../Components/CharacterAnimator.h"
+#include "../../Structure/Game.h"
 
 CinematicBaseScene::CinematicBaseScene() : Scene(), cont(0), sdl(SDLUtils::instance()), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), dialogueBox(nullptr) {
 	font = new Font(FONT_PATH, FONTSIZE);
@@ -17,6 +18,8 @@ CinematicBaseScene::CinematicBaseScene() : Scene(), cont(0), sdl(SDLUtils::insta
 
 	anim = new CharacterAnimator(player, &sdlutils().images().at("Player_1"), ANIMATIONSPARAMS);
 	anim->setframeRate(10);
+
+	net_active = false;
 }
 
 CinematicBaseScene::~CinematicBaseScene() {
@@ -43,6 +46,14 @@ void CinematicBaseScene::update() {
 	cont += frameTime;
 }
 
+void CinematicBaseScene::finishScene() {
+	if (net_active) {
+		Message m;
+		m.id = Message::msg_FINISH_CINEMATIC;
+		Game::get()->getCoopHandler()->send(m);
+	}
+
+}
 
 void CinematicBaseScene::handleEvents() {
 	//Scene::handleEvents();
@@ -51,4 +62,10 @@ void CinematicBaseScene::handleEvents() {
 	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
 		finishScene();
 
+}
+
+void CinematicBaseScene::receive(const Message& message) {
+	if (message.id == Message::msg_FINISH_CINEMATIC) {
+		finishScene();
+	}
 }
