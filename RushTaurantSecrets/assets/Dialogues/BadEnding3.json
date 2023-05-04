@@ -12,13 +12,18 @@
     },
     {
       "Character": "Player",
-      "Text": "I'M GOING TO KIKLL YOU!!!",
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "I'M GOING TO KILL YOU!!!",
       "Portrait": "PROTA_CHEF_STRESSED_OUT"
     },
     {
-      "Character": "Police officer",
+      "Character": "Officer",
       "Text": "Hands up! The whole building is sorrounded, so don't even try to run!",
-      "Portrait": "MAN"
+      "Portrait": "POLICE"
     },
     {
       "Character": "Player",

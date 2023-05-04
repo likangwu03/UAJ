@@ -971,6 +971,10 @@
       "file": "assets/Sprites/UI/icons/man.png"
     },
     {
+      "id": "POLICE",
+      "file": "assets/Sprites/UI/icons/police.png"
+    },
+    {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
       "file": "assets/Sprites/Cutscenes/Parent_Room.png"
     },
@@ -1022,6 +1026,10 @@
     {
       "id": "CINEMATIC_BG_PANTRY",
       "file": "assets/Sprites/Cutscenes/Pantry.png"
+    },
+    {
+      "id": "CINEMATIC_BG_PANTRY_FREEZER",
+      "file": "assets/Sprites/Cutscenes/Pantry_freezer.png"
     },
     {
       "id": "CINEMATIC_BG_PROTA_ROOM",
@@ -1324,6 +1332,10 @@
     {
       "id": "START_FIRE",
       "file": "assets/Sound/Cutscenes/start_fire.mp3"
+    },
+    {
+      "id": "SIREN",
+      "file": "assets/Sound/Cutscenes/siren.mp3"
     }
 
   ],

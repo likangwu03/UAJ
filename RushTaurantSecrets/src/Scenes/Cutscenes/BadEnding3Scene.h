@@ -17,21 +17,49 @@ private:
 
 	const float PANTRYSIZE = 0.8333333333;
 
-
-	const vector<Vector> paths[7] = {
-
+	const vector<Vector> paths[2] = {
+		{ Vector(19.5, 19), Vector(19.5, 14) },
+		{ Vector(19.5, 14), Vector(15, 14), Vector(15, 14), Vector(15,7), Vector(10,7), Vector(10,8),  Vector(6,8), Vector(6,12) }
 	};
+	const vector<Vector> thiefPaths[3] = {
+		{ Vector(15, 6), Vector(15,7) },
+		{ Vector(15,7), Vector(10,7) },
+		{ Vector(10,7), Vector(10,8),  Vector(6,8), Vector(6,12), Vector(-1,12) }
+	};
+	const vector<Vector> policePaths[1] = {
+		{ Vector(-1,12), Vector(4,12) }
+	};
+
 
 	enum States {
 		INIT,
 		START,
-		D1,
+		WALK,
+		ENTER,
+		D2,
+		D3,
+		D4,
+		RUN,
+		FALL,
+		GETUP,
+		GETOUT,
+		D5,
+		D6,
+		D7,
+		GUN,
+		D8,
+		D9,
+		D10,
+		D11,
+		D12,
+		D13,
+		D14,
 
 		OUT,
 		NONE
 	};
 
-	void addPath(const vector<Vector>& points);
+	void addPath(const vector<Vector>& points, GameObject* object);
 	States state;
 	
 	Texture* bg;
@@ -40,9 +68,10 @@ private:
 
 
 	Music* music;
-	SoundEffect* phonecall;
+	SoundEffect* siren;
 
 	GameObject* thief;
+	GameObject* police;
 
 	vector<dialogueInfo> dialogues;
 	int timer;
