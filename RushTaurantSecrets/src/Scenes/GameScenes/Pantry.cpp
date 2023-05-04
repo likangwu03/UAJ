@@ -76,7 +76,7 @@ void Pantry::haltSound() {
 }
 
 void Pantry::handleEvents() {
-	if (ih->isKeyDown(SDLK_ESCAPE)) {
+	if (ih->isKeyDown(SDLK_ESCAPE) &&!net) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		pantryMusic->pauseMusic();
 		ThievesManager::get()->pauseSound();
@@ -106,6 +106,7 @@ void Pantry::receive(const Message& m) {
 }
 
 void Pantry::initCoopMode(bool server) {
+	net = true;
 	ThievesManager::get()->setActive(server);
 	if (!server) {
 		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture(&((*sdl).images().at("Player_2")), 18, 18);
@@ -114,6 +115,7 @@ void Pantry::initCoopMode(bool server) {
 }
 
 void Pantry::quitCoopMode() {
+	net = false;
 	ThievesManager::get()->setActive(true);
 	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
 	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);

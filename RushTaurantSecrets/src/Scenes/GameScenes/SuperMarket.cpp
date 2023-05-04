@@ -25,7 +25,7 @@ void SuperMarket::handleEvents() {
 	Scene::handleEvents();
 	uiMarket->handleEvents();
 	
-	if (ih->isKeyDown(SDLK_ESCAPE)) {
+	if (ih->isKeyDown(SDLK_ESCAPE) && !net) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
 	}
@@ -91,12 +91,14 @@ void SuperMarket::receive(const Message& message) {
 
 
 void SuperMarket::initCoopMode(bool server) {
+	net = true;
 	if (!server) {
 		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2",18,18);
 		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
 	}
 }
 void SuperMarket::quitCoopMode() {
+	net = false;
 	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
 	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
 }

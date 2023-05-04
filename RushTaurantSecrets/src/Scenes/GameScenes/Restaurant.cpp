@@ -119,39 +119,10 @@ void Restaurant::_update() {
 }
 
 void Restaurant::handleEvents() {
-	if (ih->isKeyDown(SDLK_ESCAPE)) {
+	if (ih->isKeyDown(SDLK_ESCAPE) && !net) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
 		ThievesManager::get()->pauseSound();
-	}
-	else if (ih->isKeyDown(SDLK_f)) {
-		vector<pair<_ecs::_ingredients_id, int>> _ing;
-		_ing.push_back({ CHICKEN, 3 });
-		_ing.push_back({ EGG,8 });
-		_ing.push_back({ FLOUR,11 });
-		//_ing.push_back({ AJO,32 });
-		//_ing.push_back({ MEAT,4 });
-		//_ing.push_back({ STRAWBERRY,4 });
-		//_ing.push_back({ MANZANA,7 });
-		//_ing.push_back({ SALMON,1 });
-		//_ing.push_back({ GAMBAS,99 });
-
-		GameManager::get()->setIngredients(_ing);
-	}
-	else if (ih->isKeyDown(SDLK_g)) {
-		vector<pair<_ecs::_ingredients_id, int>> _ing;
-		_ing.push_back({ CORN, 3 });
-		_ing.push_back({ FLOUR,8 });
-		_ing.push_back({ MUSTARD,11 });
-		_ing.push_back({ POTATO,32 });
-		_ing.push_back({ CURRY,4 });
-		_ing.push_back({ RICE,4 });
-		_ing.push_back({ GARLIC,7 });
-		_ing.push_back({ SAUSAGE,1 });
-		_ing.push_back({ CHEESE,99 });
-		_ing.push_back({ EGG,19 });
-
-		GameManager::get()->setIngredients(_ing);
 	}
 	else {
 		Scene::handleEvents();
@@ -176,6 +147,7 @@ void Restaurant::haltSound() {
 }
 
 void Restaurant::initCoopMode(bool server) {
+	net = true;
 	if (!server) {
 		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
 		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
@@ -183,6 +155,7 @@ void Restaurant::initCoopMode(bool server) {
 	ClientsManager::get()->setNetActive(server);
 }
 void Restaurant::quitCoopMode() {
+	net = false;
 	ClientsManager::get()->setNetActive(true);
 	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
 	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
