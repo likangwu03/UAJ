@@ -69,7 +69,12 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 	button = 4;
 }
 
-OptionsMenu::~OptionsMenu() { }
+OptionsMenu::~OptionsMenu() {
+	delete font;
+	delete MusicTexture;
+	delete FullScreenTexture;
+	delete SoundTexture;
+}
 
 void OptionsMenu::handleEvents() {
 
