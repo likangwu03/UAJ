@@ -183,6 +183,12 @@
       "rows": 20
     },
     {
+      "id": "Police_1",
+      "file": "assets/Sprites/Cutscenes/NPCs/Police_sprite_1.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
       "id": "0",
       "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
     },
