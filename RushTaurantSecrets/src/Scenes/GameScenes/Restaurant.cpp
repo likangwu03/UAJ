@@ -15,7 +15,8 @@
 #include "../../Utilities/checkML.h"
 #include <set>
 
-Restaurant::Restaurant(): dc(DishCombinator::init()), pantry(nullptr), sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")),
+Restaurant::Restaurant() : dc(DishCombinator::init()), pantry(nullptr), dm(nullptr),
+sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")),
 pantryMusic(&sdl->musics().at("PANTRY_MUSIC")) {
 	ui = new UIRestaurant();
 	cm = new CollisionsManager(this);

@@ -85,7 +85,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	// Reloj
 	clock = new Clock(this);
 
-	// icono de men?del d�a
+	// Icono de menú del día
 	menuToggled = true;
 	menu = new DailyMenu(this, "DAILY_MENU", Vector((sdlutils().width() / 2) - 239.5f, 30),
 		479.0f, 640.0f, []() {});
@@ -181,13 +181,13 @@ void UIRestaurant::update() {
 	ClockComponent::get()->update();
 }
 
-
 void UIRestaurant::handleEvents() {
 	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_X) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_v)) {
 		toggleDailyMenu();
 	}
 	else Scene::handleEvents();
 }
+
 void UIRestaurant::renderStar(int x, int y) {
 	SDL_Rect dest;
 	dest.x = x;

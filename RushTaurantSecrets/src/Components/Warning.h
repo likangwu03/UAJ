@@ -9,7 +9,7 @@ private:
 	Image* image;
 	ThievesManager* thiefsManager;
 	float elapsedTime;
-	const float TIMER=400;
+	const float TIMER = 400;
 
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_WARNING;
@@ -19,19 +19,7 @@ public:
 		image = parent->getComponent<Image>();
 	}
 
-	virtual void update() {
-		if (thiefsManager->areThereThieves()) {
-			elapsedTime += deltaTime;
-			if (elapsedTime > TIMER) {
-				elapsedTime = 0;
-				image->setActive(!image->isActive());
-			}
-		}
-		else {
-			image->setActive(false);
-		}
-	}
-	virtual void nextDay() {
-		thiefsManager->haltSound();
-	}
+	virtual void update();
+
+	virtual void nextDay();
 };

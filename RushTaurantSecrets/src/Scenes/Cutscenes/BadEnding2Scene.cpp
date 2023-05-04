@@ -24,9 +24,9 @@ void BadEnding2Scene::reset() {
 	dialogueN = 0;
 
 	straightMovement->reset(RelativeToGlobal::pointRestaurant(paths[0][0]));
-	straightMovement->setIsWalking(false);
-	transform->setMovState(idle);
-	transform->setOrientation(south);
+	//straightMovement->setIsWalking(false);
+	//transform->setMovState(idle);
+	//transform->setOrientation(south);
 
 
 	anim->setTexture("Player_1", 0, 0, 0, 10);
@@ -140,8 +140,8 @@ void BadEnding2Scene::update() {
 			top = &sdlutils().images().at("CINEMATIC_BG_PARENTS_ROOM_TOP");
 
 			anim->setTexture("Player_Casual", 0, 0, 0, 10);
-			transform->setMovState(idle);
-			transform->setOrientation(west);
+			//transform->setMovState(idle);
+			//transform->setOrientation(west);
 
 			anim->setH(96 * 1.7);
 			anim->setW(48 * 1.7);
@@ -212,8 +212,8 @@ void BadEnding2Scene::update() {
 			ambience->play(-1);
 
 			anim->setTexture("Player_1", 0, 0, 0, 10);
-			transform->setMovState(idle);
-			transform->setOrientation(west);
+			//transform->setMovState(idle);
+			//transform->setOrientation(west);
 
 			anim->setH(96 * 1.3);
 			anim->setW(48 * 1.3);
@@ -374,8 +374,8 @@ void BadEnding2Scene::update() {
 
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT");
 			top = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_TOP_BAD_ENDING_2");
-			transform->setMovState(idle);
-			transform->setOrientation(west);
+			//transform->setMovState(idle);
+			//transform->setOrientation(west);
 
 			straightMovement->reset(RelativeToGlobal::pointRestaurant(paths[6][0]));
 			addPath(paths[6]);

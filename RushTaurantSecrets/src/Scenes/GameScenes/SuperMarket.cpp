@@ -1,8 +1,9 @@
 #include "SuperMarket.h"
 #include "../../Structure/GameManager.h"
 #include "../../GameObjects/OtherPlayer.h"
-
+#include "../../GameObjects/ClientMarket.h"
 #include "../../Utilities/checkML.h"
+#include "../../Components/Route1.h"
 
  void SuperMarket::initComponent() {
 	 Scene::initComponent();
@@ -32,6 +33,9 @@ void SuperMarket::init() {
 	cm = new CollisionsManager(this);
 	player = new Player(this, 0);
 	new OtherPlayer(this, 2);
+
+	ClientMarket* clientMarket = new ClientMarket(this);
+	new Route1(clientMarket);
 }
 
 void SuperMarket::callAfterCreating() {
@@ -40,6 +44,8 @@ void SuperMarket::callAfterCreating() {
 	initRender();
 	initComponent();
 	player->getComponent<PlayerMovementController>()->initP();
+
+
 }
 
 void SuperMarket::createMap() {
