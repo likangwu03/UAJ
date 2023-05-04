@@ -51,4 +51,5 @@ public:
 	void cookingIngredients();
 	void render();
 	void nextDay()override;
+	void initComponent()override;
 };

@@ -53,9 +53,7 @@ UIMarket::UIMarket(Scene* market) : Scene(), market(market) {
 	targetOutlineRect.x -= CENTEROUTLINE / 2; targetOutlineRect.w += CENTEROUTLINE;
 	targetOutlineRect.y -= CENTEROUTLINE / 2; targetOutlineRect.h += CENTEROUTLINE;
 
-	// icono de cesta
-	GameObject* aux = createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
-	(new ShowControlAuto(aux, { {ControlsType::key_Z,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(70,60),40,40} }))->setActive(true);
+	
 
 	//men�� de compra
 	shopMenu = new GameObject(this, _ecs::grp_GENERAL, hdr_SHOP_MENU1);
@@ -72,8 +70,7 @@ UIMarket::UIMarket(Scene* market) : Scene(), market(market) {
 	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
-	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0);
-	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
+	
 
 	buybutton = new ButtonGO(this, "BUY_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H,
 		[&]() {
@@ -82,6 +79,15 @@ UIMarket::UIMarket(Scene* market) : Scene(), market(market) {
 	buybutton->setActives(false);
 }
 
+void UIMarket::initComponent() {
+	Scene::initComponent();
+	// icono de cesta
+	GameObject* aux = createGameObjects(_ecs::grp_ICONS, "BASKET_YELLOW", Vector(20, sdl->height() - 90), 68, 70, 0);
+	(new ShowControlAuto(aux, { {ControlsType::key_Z,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(70,60),40,40} }))->setActive(true);
+	aux = createGameObjects(_ecs::grp_ICONS, "DAILY_MENU_BUTTON", Vector(sdl->width() - 70, sdl->height() - 70), ICONSIZE, ICONSIZE, 0);
+	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
+
+}
 UIMarket::~UIMarket() {
 	delete font;
 	delete outline;

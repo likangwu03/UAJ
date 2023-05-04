@@ -65,9 +65,7 @@ UIRestaurant::UIRestaurant() : Scene() {
 	objectiveTexture = new Texture(sdl->renderer(), "a", *font, build_sdlcolor(0x3a3a50FF));
 	objectiveOutline = new Texture(sdl->renderer(), "a", *outline, build_sdlcolor(0xFFFFFFFF));
 
-	// inventario (fondo)
-	GameObject* aux = createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
-	(new ShowControlAuto(aux, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(25,-10),40,40},{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-10),40,40} }))->setActive(true);
+	
 
 	// inventario (platos)
 	inventory = new Inventory(this);
@@ -91,17 +89,22 @@ UIRestaurant::UIRestaurant() : Scene() {
 		479.0f, 640.0f, []() {});
 	menu->getComponent<ButtonComp>()->setActive(false);
 	toggleDailyMenu();
-    aux = new GameObject(this, _ecs::grp_ICONS);
-	new Transform(aux, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), ICONSIZE, ICONSIZE);
-	new Image(aux, "DAILY_MENU_BUTTON");
-	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
+    
 
 	accDay = 1;
 	dayText = "DAY " + to_string(accDay);
 	dayTexture = new Texture(sdl->renderer(), dayText, *font1, build_sdlcolor(0x3a3a50FF));
 	dayOutline = new Texture(sdl->renderer(), dayText, *outline1, build_sdlcolor(0xFFFFFFFF));
 }
-
+void UIRestaurant::initComponent() {
+	// inventario (fondo)
+	GameObject* aux = createIcon("INVENTORY_ICON", Vector(ICONX, sdl->height() - 302 - ICONX), 82, 302, 0, grp_ICONS);
+	(new ShowControlAuto(aux, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(25,-10),40,40},{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-10),40,40} }))->setActive(true);
+	aux = new GameObject(this, _ecs::grp_ICONS);
+	new Transform(aux, Vector(sdl->width() - 70, sdl->height() - 70), Vector(0, 0), ICONSIZE, ICONSIZE);
+	new Image(aux, "DAILY_MENU_BUTTON");
+	(new ShowControlAuto(aux, { {ControlsType::key_V,ControlsType::play_Rectangle,ControlsType::xbox_X,Vector(-10,40),40,40} }))->setActive(true);
+}
 UIRestaurant::~UIRestaurant() {
 	delete font;
 	delete outline;
