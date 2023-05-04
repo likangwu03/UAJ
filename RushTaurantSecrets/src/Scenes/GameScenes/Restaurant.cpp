@@ -119,7 +119,7 @@ void Restaurant::_update() {
 }
 
 void Restaurant::handleEvents() {
-	if (ih->isKeyDown(SDLK_ESCAPE) && !net) {
+	if (ih->isKeyDown(SDLK_ESCAPE) && active) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
 		ThievesManager::get()->pauseSound();
@@ -147,7 +147,7 @@ void Restaurant::haltSound() {
 }
 
 void Restaurant::initCoopMode(bool server) {
-	net = true;
+	active = false;
 	if (!server) {
 		getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);
 		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
@@ -155,7 +155,7 @@ void Restaurant::initCoopMode(bool server) {
 	ClientsManager::get()->setNetActive(server);
 }
 void Restaurant::quitCoopMode() {
-	net = false;
+	active = true;
 	ClientsManager::get()->setNetActive(true);
 	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
 	getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_2", 18, 18);

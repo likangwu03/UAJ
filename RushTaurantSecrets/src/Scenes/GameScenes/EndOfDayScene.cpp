@@ -74,7 +74,7 @@ EndOfDayScene::EndOfDayScene() {
 	
 	continueButton = new ButtonGO(this, "CONTINUE_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTON1_X, BUTTON1_Y), BUTTON_W, BUTTON_H,
 		[&]() {
-			if (net) {
+			if (active) {
 				Message m;
 				m.id = Message::msg_CONTINUE;
 				Game::get()->getCoopHandler()->send(m);
@@ -87,7 +87,7 @@ EndOfDayScene::EndOfDayScene() {
 	
 	mainMenuButton = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT", Vector(BUTTON2_X, BUTTON2_Y), BUTTON_W, BUTTON_H,
 		[&]() {
-			if (net) {
+			if (active) {
 				Game::get()->setExitCoop();
 				Message m;
 				m.id = Message::msg_TO_MAINMENU;
@@ -99,8 +99,6 @@ EndOfDayScene::EndOfDayScene() {
 	
 
 	button = 0;
-
-	net = false;
 }
 
 EndOfDayScene::~EndOfDayScene() {
@@ -229,13 +227,13 @@ void EndOfDayScene::selectedButton(int selected) {
 void EndOfDayScene::initCoopMode(bool server) {
 	continueButton->setActives(server);
 	mainMenuButton->setActives(server);
-	net = server;
+	active = server;
 }
 
 void EndOfDayScene::quitCoopMode() {
 	continueButton->setActives(true);
 	mainMenuButton->setActives(true);
-	net = false;
+	active = false;
 }
 
 void EndOfDayScene::receive(const Message& message) {
@@ -244,5 +242,6 @@ void EndOfDayScene::receive(const Message& message) {
 	}
 	else if (message.id == Message::msg_TO_MAINMENU) {
 		Game::get()->setExitCoop();
+		gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));
 	}
 }

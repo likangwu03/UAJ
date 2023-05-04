@@ -29,7 +29,6 @@ protected:
 	InputHandler* ih;
 	std::array<std::vector<GameObject*>, _ecs::grpNum> objGroups;
 	bool active;
-	bool net;
 
 	// se utiliza para conectar objetos de una misma escena
 	std::array<GameObject*, _ecs::hdrNum> handlers;

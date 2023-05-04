@@ -72,9 +72,6 @@ private:
 	int earnedMoney;
 
 	bool _gameOver;
-
-	bool net;
-
 	void gameOver();
 
 public:

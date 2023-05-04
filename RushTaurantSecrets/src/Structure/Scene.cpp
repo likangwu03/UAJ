@@ -15,7 +15,6 @@ Scene::Scene():frameTime(Game::instance()->getframeTime()) {
 	ih = InputHandler::instance();
 	handlers = {};
 	active = true;
-	net = false;
 }
 
 Scene::~Scene() {
