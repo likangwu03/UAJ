@@ -37,7 +37,7 @@ public:
 		Animator::AnimParams aP;
 		aP.initFrame = CHAR_INIT_FRAME;
 		aP.endFrame = CHAR_END_FRAME;
-		aP.initFrame = CHAR_CURRENT_ANIM;
+		aP.currAnim = CHAR_CURRENT_ANIM;
 		new CharacterAnimator(this, sprite, aP);
 
 		aP.initFrame = UI_INIT_FRAME;

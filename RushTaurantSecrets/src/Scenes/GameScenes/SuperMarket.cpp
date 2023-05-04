@@ -4,6 +4,8 @@
 #include "../../GameObjects/ClientMarket.h"
 #include "../../Utilities/checkML.h"
 #include "../../Components/Route1.h"
+#include "../../GameObjects/DancingClient.h"
+#include "../../Components/Route2.h"
 
  void SuperMarket::initComponent() {
 	 Scene::initComponent();
@@ -36,6 +38,11 @@ void SuperMarket::init() {
 
 	ClientMarket* clientMarket = new ClientMarket(this);
 	new Route1(clientMarket);
+
+	for (int i = 0; i < 3; ++i) {
+		DancingClient* dancingClient = new DancingClient(this);
+		new Route2(dancingClient, Vector(10 + i, 14));
+	}
 }
 
 void SuperMarket::callAfterCreating() {
