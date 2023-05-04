@@ -116,7 +116,6 @@ namespace _ecs {
 		sc_FIRSTDAYAFTERKILL,
 		sc_SECONDDAYAFTERKILL,
 
-
 		sc_BADENDING1,
 		sc_BADENDING2,
 		sc_BADENDING3,

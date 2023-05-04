@@ -31,6 +31,7 @@
 #include "../Scenes/Cutscenes/NormalEndingScene.h"
 #include "../Scenes/Cutscenes/BadEnding1Scene.h"
 #include "../Scenes/Cutscenes/BadEnding2Scene.h"
+#include "../Scenes/Cutscenes/BadEnding3Scene.h"
 #include "../Scenes/Cutscenes/BadEnding4Scene.h"
 #include "../Scenes/Cutscenes/Day2EndingNoKillScene.h"
 #include "../Scenes/Cutscenes/Day2EndingKillScene.h"
@@ -102,6 +103,7 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_NORMALENDING, new NormalEndingScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_BADENDING2, new BadEnding2Scene() });
+	allScenes.insert({ _ecs::sc_BADENDING3, new BadEnding3Scene() });
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEndingScene() });	// REVISADA 2
 

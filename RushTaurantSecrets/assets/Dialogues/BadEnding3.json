@@ -1,0 +1,64 @@
+{
+  "dialogues": [
+    {
+      "Character": "Player",
+      "Text": "Oh no...",
+      "Portrait": "PROTA_CHEF_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "You saw nothing, right?",
+      "Portrait": "PROTA_CHEF_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "I'M GOING TO KIKLL YOU!!!",
+      "Portrait": "PROTA_CHEF_STRESSED_OUT"
+    },
+    {
+      "Character": "Police officer",
+      "Text": "Hands up! The whole building is sorrounded, so don't even try to run!",
+      "Portrait": "MAN"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_STRESSED_OUT"
+    },
+    {
+      "Character": "Player",
+      "Text": "Ha...",
+      "Portrait": "PROTA_CHEF_SMILE_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "HAHAHAHAHA!!!",
+      "Portrait": "PROTA_CHEF_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_SIGH"
+    },
+    {
+      "Character": "Player",
+      "Text": "I knew this day would come sooner or later...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Mom, dad... I failed you...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Sorry... For not being able to return your restaurant to its old days glory...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "And for being the one who ended your lives to live an impossible dream.",
+      "Portrait": "PROTA_CHEF_SMILE_CLOSE_EYE"
+    }
+  ]
+}
