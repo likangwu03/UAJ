@@ -33,7 +33,7 @@ HappyEndingScene::HappyEndingScene() {
 	addClient("Client_12", Vector(10, 10.5), north);
 
 	addClient("Client_13", Vector(15, 8.6), east);
-	addClient("Client_14", Vector(19, 8.6), west);
+	addClient("Client_1", Vector(19, 8.6), west);
 	addClient("Client_8", Vector(17, 7), south);
 	addClient("Client_4", Vector(17, 10.5), north);
 
@@ -42,14 +42,14 @@ HappyEndingScene::HappyEndingScene() {
 	addClient("Client_13", Vector(8, 13), south);
 	addClient("Client_11", Vector(8, 16.5), north);
 
-	addClient("Client_10", Vector(13, 14.6), east);
-	addClient("Client_4", Vector(17, 14.6), west);
-	addClient("Client_1", Vector(15, 13), south);
-	addClient("Client_8", Vector(15, 16.5), north);
+	addClient("Client_14", Vector(13, 14.6), east);
+	addClient("Client_15", Vector(17, 14.6), west);
+	addClient("Client_16", Vector(15, 13), south);
+	addClient("Client_17", Vector(15, 16.5), north);
 
-	addClient("Client_14", Vector(20, 14.6), east);
-	addClient("Client_12", Vector(24, 14.6), west);
-	addClient("Client_11", Vector(22, 13), south);
+	addClient("Client_10", Vector(20, 14.6), east);
+	addClient("Client_4", Vector(24, 14.6), west);
+	addClient("Client_1", Vector(22, 13), south);
 	addClient("Client_8", Vector(22, 16.5), north);
 
 
@@ -72,6 +72,7 @@ HappyEndingScene::HappyEndingScene() {
 	guard2->getComponent<CharacterAnimator>()->setH(96 * 1.5);
 	guard2->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointRestaurant({ 34,6 }));
 	guard2->getComponent<Transform>()->setOrientation(south);
+
 
 }
 

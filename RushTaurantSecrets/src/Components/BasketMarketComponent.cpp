@@ -20,7 +20,7 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 	basketPosX = 10;
 
 	font = new Font(FONT_PATH, 50);
-	totalPrize = 0;
+	totalPrice = 0;
 	basketON = false;
 	menu = &((*sdl).images().at("BASKET_BUY_MENU"));
 
@@ -28,15 +28,18 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 
 	money = GameManager::get()->getMoney();
 
-
 	selectedIngr = ingredients.end();
+	isOnRegister = false;
 }
 
 BasketMarketComponent::~BasketMarketComponent() {
 	delete font;
 }
 void BasketMarketComponent::initComponent() {
-	showControl = new ShowControlComp(parent, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -60),40,40} });
+	showControl = new ShowControlComp(parent, { 
+		{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,
+		{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,
+		{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -60),40,40} });
 
 }
 void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int addPrice) {
@@ -54,9 +57,9 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int ad
 				totalDifIngr++; //num de dif ing
 				delete texture;
 			}
-			totalPrize += addPrice;
+			totalPrice += addPrice;
 			selectedIngr = ingredients.find(ing);
-			setTotalPrize();
+			setTotalPrice();
 			Message m;
 			m.id = Message::msg_BASKET;
 			m.basket.ing = ing; m.basket.n = it->second;
@@ -71,7 +74,7 @@ void BasketMarketComponent::renderBasket() {
 	SDL_Rect dest;
 
 	// render de precio total
-	string totalP = to_string(totalPrize);
+	string totalP = to_string(totalPrice);
 	totalP += "$";
 	Texture* textureTotal = new Texture(sdl->renderer(), totalP, *font, build_sdlcolor(0x504631ff));
 	dest.x = basketPosX + ING_SIZE * 1.75;
@@ -245,9 +248,15 @@ vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients()
 	return aux;
 }
 
+void BasketMarketComponent::enterRegister(bool enter) {
+	isOnRegister = enter;
+}
+
 void BasketMarketComponent::setBasketON(bool value) {
-	basketON = value;
-	basketSound->play();
+	if (!isOnRegister) {
+		basketON = value;
+		basketSound->play();
+	}
 }
 
 bool BasketMarketComponent::getBasketON() {
@@ -259,20 +268,24 @@ void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
 		if (selectedIngr->second > 0) {
 			selectedIngr->second--;
 			int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
-			totalPrize -= cost;
+			totalPrice -= cost;
 			selectNum->play();
+			setTotalPrice();
+
 		}
 	}
 	else if (key == SDLK_RIGHT && selectedIngr->second < 99) {
 		selectedIngr->second++;
 		int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
-		totalPrize += cost;
+		totalPrice += cost;
 		selectNum->play();
+		setTotalPrice();
+
 	}
 }
 
-void BasketMarketComponent::setTotalPrize() {
-	money->setPrize(totalPrize);
+void BasketMarketComponent::setTotalPrice() {
+	money->setPrice(totalPrice);
 }
 
 void BasketMarketComponent::cleanEmptyBasket() {
@@ -282,17 +295,18 @@ void BasketMarketComponent::cleanEmptyBasket() {
 }
 void BasketMarketComponent:: nextDay() {
 	totalDifIngr = 0;
-	totalPrize = 0;
+	totalPrice = 0;
 	basketON = false;
 	chooseHMMode = false;
 	money = GameManager::get()->getMoney();
 	selectedIngr = ingredients.end();
+	isOnRegister = false;
 }
 void BasketMarketComponent::receive(const Message& message) {
 	if(message.id == Message::msg_BASKET) {
 		auto it = ingredients.find(message.basket.ing);
 		if(it != ingredients.end()) {
-			totalPrize -= _ecs::MarketIngs[message.basket.ing - FLOUR].price * it->second;
+			totalPrice -= _ecs::MarketIngs[message.basket.ing - FLOUR].price * it->second;
 			it->second = message.basket.n;
 			if(message.basket.n == 0) {
 				if(selectedIngr == it) {
@@ -308,7 +322,7 @@ void BasketMarketComponent::receive(const Message& message) {
 			totalDifIngr++; //num de dif ing
 			if(selectedIngr == ingredients.end()) selectedIngr = aux.first;
 		}
-		totalPrize += _ecs::MarketIngs[message.basket.ing - FLOUR].price * message.basket.n;
-		setTotalPrize();
+		totalPrice += _ecs::MarketIngs[message.basket.ing - FLOUR].price * message.basket.n;
+		setTotalPrice();
 	}
 }

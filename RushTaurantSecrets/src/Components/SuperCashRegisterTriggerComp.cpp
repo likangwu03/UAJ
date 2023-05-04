@@ -26,29 +26,33 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 		auto scene = dynamic_cast<SuperMarket*>(parent->getScene());
 		bM = scene->getBM();
 		bMC = bM->getComponent<BasketMarketComponent>();
-		if (!bMC->getBasketON())
+		if (!bMC->getBasketON()) {
 			bMC->setBasketON(true);
+		}
 		buybutton = scene->buyButton();
 		buybutton->setActives(true);
+
+		bMC->enterRegister(true);
+
 	}
 
 	// cleon: mejor en 1 if
 	if (ih->joysticksInitialised()) {
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
-			if ((money->getMoney() - money->getPrize() >= 0)) {
+			if ((money->getMoney() - money->getPrice() >= 0)) {
 				sendToClien();
-				money->subtractMoney(money->getPrize());
-				money->setPrize(0);
+				money->subtractMoney(money->getPrice());
+				money->setPrice(0);
 				payAndLeave();
 			}
 		}
 	}
  	else if (ih->isKeyDown(SDLK_SPACE)) {
 		if (buybutton->getComponent<ButtonComp>()->isHighlighted()) {
-			if ((money->getMoney() - money->getPrize() >= 0)) {
+			if ((money->getMoney() - money->getPrice() >= 0)) {
 				sendToClien();
-				money->subtractMoney(money->getPrize());
-				money->setPrize(0);
+				money->subtractMoney(money->getPrice());
+				money->setPrice(0);
 				payAndLeave();
 			}			
 		}		
@@ -57,6 +61,7 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 
 void SuperCashRegisterTriggerComp::onTriggerExit() {
 	highlight->setActive(false);
+	bMC->enterRegister(false);
 	bMC->setBasketON(false);
 	bM = nullptr;
 	bMC = nullptr;
@@ -67,8 +72,8 @@ void SuperCashRegisterTriggerComp::onTriggerExit() {
 }
 
 void SuperCashRegisterTriggerComp::payAndLeave() {
-	money->subtractMoney(money->getPrize());
-	money->setPrize(0);
+	money->subtractMoney(money->getPrice());
+	money->setPrice(0);
 	vector<pair<_ecs::_ingredients_id, int>> ing;
 	ing = GameManager::get()->getSupermarket()->getUI()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>()->getIngredients();
 	GameManager::get()->setIngredients(ing);

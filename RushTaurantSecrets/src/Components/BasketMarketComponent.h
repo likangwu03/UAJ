@@ -34,7 +34,7 @@ private:
 	Font* font;
 	int basketPosY;
 	int basketPosX;
-	int totalPrize;
+	int totalPrice;
 	bool basketON;
 	Texture* menu;
 	bool chooseHMMode;
@@ -47,6 +47,9 @@ private:
 
 	Money* money;
 	ShowControlComp* showControl;
+
+	bool isOnRegister;
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SM_INVENTORY;
 	BasketMarketComponent(GameObject* parent);
@@ -60,7 +63,7 @@ public:
 	void setBasketON(bool value);
 	bool getBasketON();
 	void changeAmount(SDL_KeyCode key);
-	void setTotalPrize();
+	void setTotalPrice();
 	void cleanEmptyBasket();
 	void nextDay()override;
 	virtual void handleEvents();
@@ -68,4 +71,6 @@ public:
 	void addToBasketOnline(_ecs::_ingredients_id ing, int n);
 	void initComponent()override;
 	vector<pair<_ecs::_ingredients_id, int>> getIngredients();
+
+	void enterRegister(bool enter);
 };
