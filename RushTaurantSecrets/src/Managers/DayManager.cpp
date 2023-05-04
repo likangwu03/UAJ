@@ -73,11 +73,7 @@ DayManager::~DayManager() {
 void DayManager::checkDayFinished() {
 
 	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients() && !ThievesManager::get()->areThereThieves()) {
-		GameManager::get()->save();
-		if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_RESTAURANT))
-			restaurantMusic->pauseMusic();
-		else if (GameManager::get()->getCurrentScene() == GameManager::get()->getScene(sc_PANTRY))
-			pantryMusic->pauseMusic();
+		GameManager::get()->getCurrentScene()->haltSound();
 		GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDOFDAY));
 	}
 }
@@ -132,7 +128,7 @@ void DayManager::nextDay(bool loading) {
 			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
 		}
 	}
-	// Intros si se está cargando partida
+	// Intros si se est?cargando partida
 	else {
 		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
 		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
