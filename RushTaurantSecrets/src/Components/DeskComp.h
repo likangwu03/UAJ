@@ -12,7 +12,7 @@ private:
 	Transform* trans;
 	std::vector<Client*> assigned;
 	InventoryComp* inventory;
-	bool sucia;
+	bool dirty;
 	int num;
 	const float
 		ICON_WIDTH = 40,
@@ -51,4 +51,6 @@ public:
 	void render() override;
 
 	void receive(const Message& message) override;
+
+	void nextDay() override;
 };

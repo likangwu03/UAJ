@@ -13,7 +13,6 @@ private:
 	Texture* afternoonTxt;
 	Texture* nightTxt;
 	bool isAfternoon, isNight;
-	int lastDeg;
 	float aftOpac, nightOpac;
 
 public:

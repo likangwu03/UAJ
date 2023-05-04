@@ -22,7 +22,9 @@ void Day1IntroScene::addPath(const vector<Vector>& points) {
 
 void Day1IntroScene::reset() {
 	dialogueBox = nullptr;
+	
 	straightMovement->reset(RelativeToGlobal::pointRestaurant(Vector(50, 14)));
+	transform->setOrientation(west);
 
 	anim->setW(48 * 1.7);
 	anim->setH(96 * 1.7);

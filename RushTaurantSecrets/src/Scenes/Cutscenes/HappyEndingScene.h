@@ -29,7 +29,7 @@ private:
 	};
 
 	const vector<Vector> paths[6] = {
-		{ Vector(8.8, 2), Vector(14.5, 2), Vector(14.5, 1) },
+		{ Vector(8.9, 2.2), Vector(14.5, 2), Vector(14.5, 1) },
 		{ Vector(14.5, 1), Vector(14.5, 5), Vector(22, 5) },
 		{ Vector(22, 5), Vector(22, 10),  Vector(17.8, 10), },
 		{ Vector(17.8, 10), Vector(17.8, 16), Vector(10, 16) },

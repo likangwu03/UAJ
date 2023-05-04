@@ -288,32 +288,32 @@
   <object id="40" name="Bin" x="1054.66" y="345.667" width="49.3333" height="52.3333"/>
   <object id="51" name="CashRegister" x="1226.95" y="440.667" width="66.375" height="23.3333"/>
   <object id="53" name="KitchenIsland" x="1202.67" y="290" width="283.333" height="92.6667"/>
-  <object id="54" name="table" x="298" y="220.5" width="122" height="107.5">
+  <object id="54" name="table" x="288.667" y="220.5" width="142" height="115.5">
    <properties>
     <property name="ID" type="int" value="7"/>
    </properties>
   </object>
-  <object id="56" name="table" x="634" y="219" width="124" height="108">
+  <object id="56" name="table" x="620.667" y="219" width="148" height="117.333">
    <properties>
     <property name="ID" type="int" value="6"/>
    </properties>
   </object>
-  <object id="58" name="table" x="789" y="427" width="100.5" height="118">
+  <object id="58" name="table" x="778.333" y="416.333" width="123.167" height="140.667">
    <properties>
     <property name="ID" type="int" value="4"/>
    </properties>
   </object>
-  <object id="60" name="table" x="1026" y="715.5" width="105" height="112.5">
+  <object id="60" name="table" x="1019.33" y="702.167" width="121" height="136.5">
    <properties>
     <property name="ID" type="int" value="1"/>
    </properties>
   </object>
-  <object id="61" name="table" x="355.5" y="714.5" width="103" height="118">
+  <object id="61" name="table" x="350.167" y="706.5" width="113.667" height="132.667">
    <properties>
     <property name="ID" type="int" value="3"/>
    </properties>
   </object>
-  <object id="62" name="table" x="692" y="715" width="103" height="112">
+  <object id="62" name="table" x="684" y="704.333" width="115" height="133.333">
    <properties>
     <property name="ID" type="int" value="2"/>
    </properties>
@@ -407,7 +407,7 @@
    </properties>
   </object>
   <object id="81" name="goToPantry" x="962" y="175.333" width="44" height="75"/>
-  <object id="83" name="table" x="452.25" y="427" width="102.5" height="118">
+  <object id="83" name="table" x="442.917" y="417.667" width="123.833" height="138">
    <properties>
     <property name="ID" type="int" value="5"/>
    </properties>

@@ -51,7 +51,7 @@ void Day1EndingScene::update()
 	case Day1EndingScene::START:
 		if (straightMovement->hasFinishedPath()) {
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
-			addPath(paths[ENTERING]);
+			addPath(paths[1]);
 			state = ENTERING;
 		}
 		break;
@@ -84,12 +84,10 @@ void Day1EndingScene::update()
 
 
 
-void Day1EndingScene::finishScene()
-{
+void Day1EndingScene::finishScene() {
 	dialogueBox = nullptr;
 	if (transition != nullptr)
 		delete transition;
-	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), false);
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
-	CinematicBaseScene::finishScene();
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), false);
+
 }

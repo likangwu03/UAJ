@@ -1,0 +1,149 @@
+{
+  "dialogues": [
+    {
+      "Character": "Player",
+      "Text": "Oh, no. This is bad...",
+      "Portrait": "PROTA_CHEF_SURPRISED"
+    },
+    {
+      "Character": "Player",
+      "Text": "This is not enough money. I won't be able to pay my mortgage.",
+      "Portrait": "PROTA_CHEF_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I failed...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "After all the work and effort I've put on rescuing my beloved restaurant...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Is this the end?",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Even though I had to sell my kidney it wasn't enough!!!",
+      "Portrait": "PROTA_CHEF_STRESSED_OUT"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "Well... There's little I can do now. I'll go home by now.",
+      "Portrait": "PROTA_CHEF_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "I'm so sorry, mom, dad... I couldn't afford to pay the loan to the bank.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Parents",
+      "Text": "...",
+      "Portrait":"PARENTS"
+    },
+    {
+      "Character": "Player",
+      "Text": "Despite selling my kidney and some of your organs too, I failed.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "... I'm going to rest. Good night.",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Phone",
+      "Text": "(RING, RING, RING, RING)",
+      "Portrait": "PHONE"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "SHUT UP!!!",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
+    },
+    {
+      "Character": "Lender",
+      "Text": "I beg your pardon?",
+      "Portrait": "MAN"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_BAD_MOOD"
+    },   
+    {
+      "Character": "Lender",
+      "Text": "We remind you of your past due loan. We may proceed with the foreclosure of your establishment.",
+      "Portrait": "MAN"
+    },
+    {
+      "Character": "Lender",
+      "Text": "Good morning, miss.",
+      "Portrait": "MAN"
+    },
+    {
+      "Character": "Phone",
+      "Text": "(Beep)",
+      "Portrait": "PHONE"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "NOOOO!!!",
+      "Portrait": "PROTA_CASUAL_STRESSED_OUT"
+    },
+    {
+      "Character": "Player",
+      "Text": "My restaurant, my beloved restaurant. ",
+      "Portrait": "PROTA_CASUAL_SAD_CLOSE_EYE"
+    },
+    {
+      "Character": "Player",
+      "Text": "...",
+      "Portrait": "PROTA_CASUAL_SURPRISED"
+    },
+    {
+      "Character": "Player",
+      "Text": "THE CORPSES! THEY'LL FIND ALL OF THEM!!!",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I'm doomed...",
+      "Portrait": "PROTA_CASUAL_ENRAGED"
+    },
+    {
+      "Character": "Player",
+      "Text": "I must hurry or I will lose everything that's important to me.",
+      "Portrait": "PROTA_CHEF_FURIOUS"
+    },
+    {
+      "Character": "Player",
+      "Text": "If it can't be mine, it won't be anyone else's...",
+      "Portrait": "PROTA_CHEF_MANIC"
+    },
+    {
+      "Character": "Player",
+      "Text": "HAHAHAHAHA!!",
+      "Portrait": "PROTA_CHEF_MANIC"
+    }
+  ]
+}

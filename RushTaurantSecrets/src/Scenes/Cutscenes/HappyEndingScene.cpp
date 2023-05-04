@@ -133,6 +133,7 @@ void HappyEndingScene::update() {
 	case HappyEndingScene::INIT:
 		ambience->play(-1);
 		music->play(-1);
+		state = START;
 		break;
 	case HappyEndingScene::START:
 		if (timer >= DELAY * 2) {
@@ -180,7 +181,7 @@ void HappyEndingScene::update() {
 	case HappyEndingScene::FADEIN1:
 		if (straightMovement->hasFinishedPath()) {
 			transform->setOrientation(north);
-			transition = new ShowSkipTransitionScene(this, 1, true);
+			transition = new TransitionScene(this, 1, true);
 			GameManager::get()->pushScene(transition, true);
 			state = FADEOUT1;
 		}
@@ -190,7 +191,7 @@ void HappyEndingScene::update() {
 			(&sdlutils().soundEffects().at("CLOTHES"))->play();
 			anim->setTexture("Player_1", 6, 11, 1, 10);
 			transform->setOrientation(north);
-			transition = new ShowSkipTransitionScene(this, 1);
+			transition = new TransitionScene(this, 1);
 			GameManager::get()->pushScene(transition, true);
 			state = D3;
 		}
@@ -262,7 +263,7 @@ void HappyEndingScene::update() {
 	case HappyEndingScene::FADEIN2:
 		if (Text::isTextFinished()) {
 			dialogueBox = nullptr;
-			transition = new ShowSkipTransitionScene(this, 1, true);
+			transition = new TransitionScene(this, 1, true);
 			GameManager::get()->pushScene(transition, true);
 			state = FADEOUT2;
 			addPath(paths[4], player);
@@ -288,7 +289,7 @@ void HappyEndingScene::update() {
 			ambience->setVolume(80);
 			ambience->play();
 
-			transition = new ShowSkipTransitionScene(this, 1);
+			transition = new TransitionScene(this, 1);
 			GameManager::get()->pushScene(transition, true);
 			state = RESTAURANT;
 		}
@@ -299,14 +300,14 @@ void HappyEndingScene::update() {
 		}
 		break;
 	case HappyEndingScene::FADEIN3:
-		transition = new ShowSkipTransitionScene(this, 1, true);
+		transition = new TransitionScene(this, 1, true);
 		GameManager::get()->pushScene(transition, true);
 		state = FADEOUT3;
 		break;
 	case HappyEndingScene::FADEOUT3:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			bg = &sdlutils().images().at("CINEMATIC_BG_PANTRY_HAPPY_ENDING");
-			transition = new ShowSkipTransitionScene(this, 1);
+			transition = new TransitionScene(this, 1);
 			
 			ambience->setVolume(60);
 
@@ -322,14 +323,14 @@ void HappyEndingScene::update() {
 		else timer += frameTime;
 		break;
 	case HappyEndingScene::FADEIN4:
-		transition = new ShowSkipTransitionScene(this, 1, true);
+		transition = new TransitionScene(this, 1, true);
 		GameManager::get()->pushScene(transition, true);
 		state = FADEOUT4;
 		break;
 	case HappyEndingScene::FADEOUT4:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			bg = &sdlutils().images().at("CINEMATIC_BG_RESTAURANT_HAPPY_ENDING");
-			transition = new ShowSkipTransitionScene(this, 1);
+			transition = new TransitionScene(this, 1);
 
 			straightMovement->reset(RelativeToGlobal::pointRestaurant({ 28,14 }));
 			transform->setOrientation(west);

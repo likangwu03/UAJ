@@ -91,12 +91,11 @@ void DayManager::newDay() {
 void DayManager::nextDay(bool loading) {
 	if (!loading) {
 		// Game over (el bad ending 3 y 4 se comprueban en thievesState
-
-		// Bad ending 1
+		// Bad ending 1 (si la reputación es negativa)
 		if (GameManager::get()->getReputation()->getReputation() < 0)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
-		// Bad ending 2
-		else if (GameManager::get()->getMoney()->getMoney() < 0)
+		// Bad ending 2 (si no se ha alcanzado el objetivo diario)
+		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() != dailyObjective)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING2), true);
 
 
@@ -104,7 +103,6 @@ void DayManager::nextDay(bool loading) {
 		else if (day == 1) {
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_ENDINGDAY1), true);
 		}
-
 		
 		// Finales si ha matado
 		else if (GameManager::get()->getHasEverKilled().first) {
@@ -115,13 +113,13 @@ void DayManager::nextDay(bool loading) {
 			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2KILL));
 			
 			// Escena inicial tras el primer día de haber matado (si mata después del día 2)
-			else if (day - GameManager::get()->getHasEverKilled().second == 0) {
+			else if (day - GameManager::get()->getHasEverKilled().second == 0)
 				GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_FIRSTDAYAFTERKILL), true);
-			}
+
 			// Escena inicial tras el segundo día de haber matado
-			else if (day - GameManager::get()->getHasEverKilled().second == 1) {
+			else if (day - GameManager::get()->getHasEverKilled().second == 1)
 				GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SECONDDAYAFTERKILL), true);
-			}
+
 		}
 		// Si no hay ninguna cinemática ese dia
 		else if (day >= 3) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
@@ -132,10 +130,9 @@ void DayManager::nextDay(bool loading) {
 
 			// Escena final del día 2 si no ha matado (en la propia escena se pasa a la intro del día 3 si no se ha matado)
 			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
-;
 		}
 	}
-	// Intros si se est?cargando partida
+	// Intros si se está cargando partida
 	else {
 		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
 		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));

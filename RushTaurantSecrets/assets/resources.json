@@ -961,6 +961,10 @@
       "file": "assets/Sprites/UI/icons/phone.png"
     },
     {
+      "id": "MAN",
+      "file": "assets/Sprites/UI/icons/man.png"
+    },
+    {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
       "file": "assets/Sprites/Cutscenes/Parent_Room.png"
     },
@@ -1036,6 +1040,10 @@
     {
       "id": "CINEMATIC_BG_ROOM_DOOR",
       "file": "assets/Sprites/Cutscenes/animated_door_big_5_48x48.png"
+    },
+    {
+      "id": "CINEMATIC_BG_RESTAURANT_TOP_BAD_ENDING_2",
+      "file": "assets/Sprites/Cutscenes/Restaurant_top_bad_ending_2.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT_HAPPY_ENDING",
@@ -1265,7 +1273,7 @@
     },
     {
       "id": "TELEPHONE",
-      "file": "assets/Sound/Cutscenes/telephone_ring.mp3"
+      "file": "assets/Sound/Cutscenes/phone_ring.mp3"
     },
     {
       "id": "THUNDERSTORM",
@@ -1306,6 +1314,10 @@
     {
       "id": "BUMP",
       "file": "assets/Sound/Cutscenes/bump.mp3"
+    },
+    {
+      "id": "START_FIRE",
+      "file": "assets/Sound/Cutscenes/start_fire.mp3"
     }
 
   ],
