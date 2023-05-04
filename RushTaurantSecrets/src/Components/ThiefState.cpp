@@ -17,7 +17,7 @@ void ThiefState::update() {
 		formulaSound->play();
 		parent->setAlive(false);
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING4));
-		GameManager::get()->getCurrentScene()->haltSound();
+		GameManager::get()->getScene(_ecs::sc_PANTRY)->haltSound();
 		break;
 
 	case ThiefState::FREEZER:
@@ -27,7 +27,7 @@ void ThiefState::update() {
 		if (gm->getHasKill()) {
 			parent->setAlive(false);
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING3));
-			GameManager::get()->getCurrentScene()->haltSound();
+			GameManager::get()->getScene(_ecs::sc_PANTRY)->haltSound();
 		}
 		else {
 			currentState = ESCAPE;

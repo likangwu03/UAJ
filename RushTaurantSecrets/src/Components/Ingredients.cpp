@@ -3,17 +3,26 @@
 
 
 Ingredients::Ingredients(GameObject* parent) : Component(parent, id), sdl(SDLUtils::instance()), coord(),
-returnIng(&sdlutils().soundEffects().at("RETURN_ING")),
-pickIng(&sdlutils().soundEffects().at("PICK_ING")), return_icon(&sdlutils().images().at("RETURN_ICON")), clean_icon(&sdlutils().images().at("CLEAN_ICON"))
+	returnIng(&sdlutils().soundEffects().at("RETURN_ING")),
+	pickIng(&sdlutils().soundEffects().at("PICK_ING")), 
+	return_icon(&sdlutils().images().at("RETURN_ICON")), 
+	clean_icon(&sdlutils().images().at("CLEAN_ICON"))
 {												  
 	bubble_tex = &((*sdl).images().at("BUBBLE")); 
 	dest_bubble = { BUBBLE_X, BUBBLE_Y, BUBBLE_W, BUBBLE_H };
 	dest.w = dest.h = ING_SIZE;
-}
-void Ingredients::initComponent() {
-	showControl = new ShowControlComp(parent, { {ControlsType::key_R,ControlsType::play_Cross,ControlsType::xbox_A,Vector(15,20),30,30} ,{ControlsType::key_X,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(15,50),30,30}});
 
+	showCross = false;
+	cross = &sdlutils().images().at("CROSS");
+	cannotPickSound = (&sdl->soundEffects().at("CANNOT_COOK"));
 }
+
+void Ingredients::initComponent() {
+	showControl = new ShowControlComp(parent, { 
+		{ControlsType::key_R,ControlsType::play_Cross,ControlsType::xbox_A,Vector(15,20),30,30} ,
+		{ControlsType::key_X,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(15,50),30,30} });
+}
+
 bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	// si el iterador llega al final, es que el iterador no est�
 	if (ingredients.size() < MAX_INGREDIENTS && std::find(ingredients.begin(), ingredients.end(), ingr) == ingredients.end()) {
@@ -27,13 +36,22 @@ bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 				coords.first -= ING_OFFSET / 2;
 			}
 			//Nuevas coordenadas del nuevo ingrediente
-			coord.push_back({ coord.back().first, ING_Y});
+			coord.push_back({ coord.back().first, ING_Y });
 			coord.back().first += ING_OFFSET;
 		}
 		pickIng->play();
 		return true;
 	}
-	else return false;
+	else {
+		informCannotPick();
+		return false;
+	}
+}
+
+void Ingredients::informCannotPick() {
+	cannotPickSound->play();
+	showCross = true;
+	timer = 0;
 }
 
 void Ingredients::removeLastIngredient() {
@@ -86,8 +104,20 @@ void Ingredients::render() {
 		}
 	}
 	
+	if (showCross && !coord.empty()) {
+		cross->render(build_sdlrect(coord[0].first - ING_OFFSET, ING_Y, ING_SIZE, ING_SIZE));
+	}
+}
+
+void Ingredients::update() {
+	if (showCross) { 
+		timer += deltaTime; 
+		if (timer >= CROSS_TIME) showCross = false;
+	}
+
 }
 
 void Ingredients::nextDay() {
-	ingredients.clear();
+	removeAllIngredients();
+	showCross = false;
 }

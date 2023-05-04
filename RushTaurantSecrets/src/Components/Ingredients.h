@@ -16,12 +16,18 @@ using namespace _ecs;
 
 class KitchenIslandComp;
 class Ingredients: public Component {
+private:
 	const int BUBBLE_X = 780, BUBBLE_Y = 10, BUBBLE_W = 252, BUBBLE_H = 65;
 	const float ING_SIZE = 30, ING_Y = 33, ING_OFFSET = 48, ING_CENTER = 19;
-	const pair<float,float> STARTING_COORDS = { BUBBLE_X + BUBBLE_W / 2 - ING_CENTER, ING_Y };
+	const pair<float, float> STARTING_COORDS = { BUBBLE_X + BUBBLE_W / 2 - ING_CENTER, ING_Y };
+
+	const float CROSS_TIME = 500;
+	int timer = 0;
+	bool showCross;
+	Texture* cross;
+	SoundEffect* cannotPickSound;
 
 
-private:
 	const int MAX_INGREDIENTS = 5;
 	// vector de ingredientes
 	vector<_ecs::_ingredients_id> ingredients;
@@ -38,6 +44,11 @@ private:
 	SoundEffect* pickIng;
 	SoundEffect* returnIng;
 	ShowControlComp* showControl;
+
+
+	void informCannotPick();
+
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_INGREDIENTS;
 	Ingredients(GameObject* parent);
@@ -50,6 +61,8 @@ public:
 	void removeAllIngredients();
 	void cookingIngredients();
 	void render();
+	void update();
+
 	void nextDay()override;
 	void initComponent()override;
 };
