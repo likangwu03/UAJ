@@ -102,6 +102,7 @@ void ClientsManager::checkCashRegister() {
 	}
 }
 
+/*
 void ClientsManager::firstClientAssigned() {
 	if (assignedClient) {
 		entrance.pop_front();
@@ -109,6 +110,7 @@ void ClientsManager::firstClientAssigned() {
 		assignedClient = false;
 	}
 }
+*/
 
 bool ClientsManager::notAbandonedEntrance(Client* client) {
 	return !client->getComponent<ClientMovement>()->hasAbandonedEntrance();
@@ -177,7 +179,7 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup,bool send
 
 	// se asigna el grupo de clientes a la mesa
 	tables[table - 1]->assignClients(firstGroup);
-	assignedClient = true;  //........................NEW
+	// assignedClient = true;  //........................NEW
 
 	if (send) {
 		Message m;
@@ -186,9 +188,10 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup,bool send
 		Game::get() ->getCoopHandler()->send(m);
 	}
 
+	// se elimina al primer grupo porque ya se ha asignado
 	entrance.pop_front();      //........................NEW
 	recolocateEntranceAll(entrance.begin());
-	assignedClient = false;
+	// assignedClient = false;
 }
 
 // comprobar si un cliente si un cliente est?de camino a pagar o pagando
@@ -233,7 +236,8 @@ void ClientsManager::initTables() {
 }
 
 ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
-	: Manager(parent), menu(GameManager::instance()->getTodaysMenu()), timer(frequencyClients), speed(speedClients), assignedClient(false), maxClients(maxClients), elapsedTime(0), tables() {
+	: Manager(parent), menu(GameManager::instance()->getTodaysMenu()), timer(frequencyClients), speed(speedClients),
+	maxClients(maxClients), elapsedTime(0), tables() {//, assignedClient(false) {
 	scene = parent->getScene();
 
 	UIRestaurant* uiRest = GameManager::get()->getRestaurant()->getUI();
@@ -268,14 +272,13 @@ void ClientsManager::assignFirstGroup(int table) {
 }
 
 
-
 bool ClientsManager::notAllGroupPaying(Client* client) {
 	return !client->getComponent<ClientMovement>()->isEveryonePaying();
 }
 
 bool ClientsManager::canCollect() const {
 	// se comprueba si:
-	// - la cola de pagar no est?vacía
+	// - la cola de pagar no esta vacía
 	// - todos los integrantes de cada grupo están en colocados en la cola listos para pagar
 	return !pay.empty() && std::find_if(pay.begin(), pay.end(), notAllGroupPaying) == pay.end();
 }

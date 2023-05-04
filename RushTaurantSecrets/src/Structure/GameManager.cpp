@@ -102,7 +102,7 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_SECONDDAYAFTERKILL, new SecondDayAfterKillScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_NORMALENDING, new NormalEndingScene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_BADENDING1, new BadEnding1Scene() });	// REVISADA 2
-	allScenes.insert({ _ecs::sc_BADENDING2, new BadEnding2Scene() });
+	allScenes.insert({ _ecs::sc_BADENDING2, new BadEnding2Scene() });	// REVISADA
 	allScenes.insert({ _ecs::sc_BADENDING3, new BadEnding3Scene() });
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEndingScene() });	// REVISADA 2

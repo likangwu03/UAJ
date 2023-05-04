@@ -42,9 +42,6 @@ void CharacterAnimator::update() {
 		else if (currMov == pushing) {
 			animationParameters.currAnim = 8;
 		}
-		else if (currMov == cart) {
-			animationParameters.currAnim = 0;
-		}
 		else if (currMov == sitting) {
 			if (parentOrientation == west || parentOrientation == east) {
 				animationParameters.currAnim = 4;
@@ -61,6 +58,9 @@ void CharacterAnimator::update() {
 			// se cambia el ángulo para que se tumbe el sprite
 			angle = 90;
 		}
+		else if (currMov == shooting) {
+			animationParameters.currAnim = 17;
+		}
 	}
 
 	// si no ha cambiado, se comprueba si la dirección ha cambiado
@@ -74,15 +74,11 @@ void CharacterAnimator::update() {
 			if (currMov == dead) {
 				setCurrentAnim(3, 5, animationParameters.currAnim);
 			}
-			// carro de la compra
-			else if (currMov == cart) {
-				setCurrentAnim(0, 3, animationParameters.currAnim);
-			}
 			// móvil
 			else if (currMov == phone) {
 				setCurrentAnim(3, 9, animationParameters.currAnim);
 			}
-			// idle, corriendo, durmiendo, empujando y sentado
+			// idle, corriendo, durmiendo, empujando, sentado y disparando
 			else {
 				setCurrentAnim(0, 6, animationParameters.currAnim);
 			}
@@ -96,15 +92,11 @@ void CharacterAnimator::update() {
 			else if (currMov == sleeping) {
 				setCurrentAnim(0, 6, animationParameters.currAnim);
 			}
-			// carro de la compra
-			else if (currMov == cart) {
-				setCurrentAnim(3, 6, animationParameters.currAnim);
-			}
 			// móvil
 			else if (currMov == phone) {
 				setCurrentAnim(3, 9, animationParameters.currAnim);
 			}
-			// idle, corriendo, empujando y sentado
+			// idle, corriendo, empujando, sentado y disparando
 			else {
 				setCurrentAnim(6, 12, animationParameters.currAnim);
 			}
@@ -122,15 +114,11 @@ void CharacterAnimator::update() {
 			else if (currMov == sleeping) {
 				setCurrentAnim(0, 6, animationParameters.currAnim);
 			}
-			// carro de la compra
-			else if (currMov == cart) {
-				setCurrentAnim(6, 9, animationParameters.currAnim);
-			}
 			// móvil
 			else if (currMov == phone) {
 				setCurrentAnim(3, 9, animationParameters.currAnim);
 			}
-			// idle, corriendo, empujando
+			// idle, corriendo, empujando y disparando
 			else {
 				setCurrentAnim(12, 18, animationParameters.currAnim);
 			}
@@ -144,19 +132,16 @@ void CharacterAnimator::update() {
 			else if (currMov == sleeping) {
 				setCurrentAnim(0, 6, animationParameters.currAnim);
 			}
-			// carro de la compra
-			else if (currMov == cart) {
-				setCurrentAnim(9, 12, animationParameters.currAnim);
-			}
 			// móvil
 			else if (currMov == phone) {
 				setCurrentAnim(3, 9, animationParameters.currAnim);
 			}
-			// idle, corriendo, empujando y sentado
+			// idle, corriendo, empujando, sentado y disparando
 			else {
 				setCurrentAnim(18, 24, animationParameters.currAnim);
 			}
 		}
 	}
+
 	Animator::update();
 }

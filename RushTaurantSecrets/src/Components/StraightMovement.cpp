@@ -104,14 +104,23 @@ void StraightMovement::stop() {
 }
 
 void StraightMovement::goBack() {
+	// dos opciones
 	vector<Vector> aux;
-	aux.reserve(path.cont);
-
-	// se guardan en un vector auxiliar los puntos que ya se han recorrido
-	for (int i = path.cont - 1; i >= 0; --i) {
-		aux.push_back(path.points[i]);
+	// se ha recorrido todo el camino, por lo tanto, se vuelve a dar media vuelta
+	if (hasFinishedPath()) {
+		aux.reserve(path.points.size());
+		for (int i = path.points.size() - 1; i >= 0; --i) {
+			aux.push_back(path.points[i]);
+		}
 	}
-
+	// no se ha recorrido todo el camino
+	else {
+		aux.reserve(path.cont);
+		// se guardan en un vector auxiliar los puntos que ya se han recorrido
+		for (int i = path.cont - 1; i >= 0; --i) {
+			aux.push_back(path.points[i]);
+		}
+	}
 	newPath(aux);
 }
 

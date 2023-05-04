@@ -44,7 +44,7 @@ private:
 	float speed;
 	int maxClients;
 	// indica si el primer cliente en la entra se ha asignado o no
-	bool assignedClient;
+	// bool assignedClient;
 	// se utiliza para indicar si la mesas est�n ocupadas o no 
 	// pasandole el grupo que se sienta en ella
 	array<DeskComp*, _ecs::NUM_TABLES> tables;
@@ -76,7 +76,7 @@ private:
 	void checkCashRegister();
 
 	// eliminar al primer grupo de clientes si se le ha asignado una mesa
-	void firstClientAssigned();
+	// void firstClientAssigned();
 
 	// comprueba si un cliente no ha abandonado la entrada
 	static bool notAbandonedEntrance(Client* client);

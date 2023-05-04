@@ -47,6 +47,8 @@ namespace _ecs {
 		cmp_SHOWCONTROL,
 		cmp_TEXT2,
 		cmp_TEXTBOX,
+		cmp_CLIENT_CART,
+		cmp_ROUTE,
 		// Do not erase pls
 		cmp_INVALID
 	};

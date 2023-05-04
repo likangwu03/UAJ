@@ -42,7 +42,7 @@ namespace RelativeToGlobal {
 		return Vector(point.getX() / fWidth, point.getY() / fHeight);
 	}
 
-	// restaurante
+	// restaurante / supermercado
 	inline static Vector pointRestaurant(const Vector& _point) {
 		return point(_point, tilesWRest, tilesHRest);
 	}
