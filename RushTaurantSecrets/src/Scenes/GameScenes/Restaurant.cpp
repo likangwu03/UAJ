@@ -57,11 +57,11 @@ void Restaurant::callAfterCreating() {
 
 	initRender();
 
-	initComponent();
-
 	ui->callAfterCreating();
 	player->getComponent<PlayerMovementController>()->initP();
 	player->getComponent<Transform>()->setPos(PANTRY_POS);
+	
+	initComponent();
 }
 
 

@@ -91,6 +91,7 @@ public:
 	void setDailyMenu();
 	Clock* getClock() const { return clock; }
 	void handleEvents()override;
+	void initComponent()override;
 	void update();
 	void render();
 	void reset();

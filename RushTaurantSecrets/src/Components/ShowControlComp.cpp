@@ -1,6 +1,7 @@
 #include "ShowControlComp.h"
 #include "../Utilities/checkML.h"
 #include "../Structure/Scene.h"
+#include "../Structure/GameManager.h"
 #include "../Components/PlayerMovementController.h"
 ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> controls): Component(parent, id)
 {
@@ -18,7 +19,7 @@ ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> contro
 		}
 	}
 	else {
-		if (parent->getScene()->getGameObject(hdr_PLAYER)->getComponent<PlayerMovementController>()->isXbox()) {
+		if (GameManager::get()->getScene(sc_PANTRY)->getGameObject(hdr_PLAYER)->getComponent<PlayerMovementController>()->isXbox()) {
 			for (int i = 0; i < controls.size(); ++i) {
 				controls_[i].col = Controls[controls[i].xbox].col;
 				controls_[i].row = Controls[controls[i].xbox].fil;

@@ -69,6 +69,7 @@ public:
 		float width, float height, float rotation, _ecs::_hdr_id handler = _ecs::hdr_INVALID);
 	void update();
 	void handleEvents() override;
+	void initComponent() override;
 	void render();
 	void setDailyMenu();
 	void reset();

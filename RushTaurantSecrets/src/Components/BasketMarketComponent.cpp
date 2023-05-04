@@ -28,7 +28,6 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 
 	money = GameManager::get()->getMoney();
 
-	showControl = new ShowControlComp(parent, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -60),40,40} });
 
 	selectedIngr = ingredients.end();
 }
@@ -36,7 +35,10 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 BasketMarketComponent::~BasketMarketComponent() {
 	delete font;
 }
+void BasketMarketComponent::initComponent() {
+	showControl = new ShowControlComp(parent, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -60),40,40} });
 
+}
 void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int addPrice) {
 	//addPrice es el dinero total según n cantidades del ingrediente ing añadida a la cesta
 

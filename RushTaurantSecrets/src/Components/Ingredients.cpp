@@ -9,9 +9,11 @@ pickIng(&sdlutils().soundEffects().at("PICK_ING")), return_icon(&sdlutils().imag
 	bubble_tex = &((*sdl).images().at("BUBBLE")); 
 	dest_bubble = { BUBBLE_X, BUBBLE_Y, BUBBLE_W, BUBBLE_H };
 	dest.w = dest.h = ING_SIZE;
-	showControl = new ShowControlComp(parent, { {ControlsType::key_R,ControlsType::play_Cross,ControlsType::xbox_A,Vector(15,20),30,30} ,{ControlsType::key_X,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(15,50),30,30}});
 }
+void Ingredients::initComponent() {
+	showControl = new ShowControlComp(parent, { {ControlsType::key_R,ControlsType::play_Cross,ControlsType::xbox_A,Vector(15,20),30,30} ,{ControlsType::key_X,ControlsType::play_Triangle,ControlsType::xbox_Y,Vector(15,50),30,30}});
 
+}
 bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 	// si el iterador llega al final, es que el iterador no est�
 	if (ingredients.size() < MAX_INGREDIENTS && std::find(ingredients.begin(), ingredients.end(), ingr) == ingredients.end()) {

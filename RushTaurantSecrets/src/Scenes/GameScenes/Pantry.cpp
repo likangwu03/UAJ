@@ -36,7 +36,6 @@ void Pantry::init() {
 	ThievesManager::init(managerContainer, 2, 6, GameManager::get()->getHasKill(), 2, 20, 30);
 
 	initRender();
-	Scene::initComponent();	
 }
 
 void Pantry::createMap() {

@@ -28,7 +28,7 @@ void BadEnding3Scene::reset() {
 	timer = 0;
 	dialogueN = 0;
 
-	straightMovement->reset(RelativeToGlobal::pointPantry(paths[0][0]));
+	//straightMovement->reset(RelativeToGlobal::pointPantry(paths[0][0]));
 	straightMovement->setIsWalking(false);
 	transform->setMovState(idle);
 	transform->setOrientation(south);

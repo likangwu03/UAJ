@@ -69,7 +69,7 @@ void GameManager::initialize() {
 	UIPantry* pantryUI = new UIPantry();
 	pantry = new Pantry(pantryUI);
 	allScenes.insert({ _ecs::sc_PANTRY, pantry });
-
+	pantry->initComponent();
 	sdlutils().setResizeFactor(RESTSUPERSIZE);
 	allScenes.insert({ _ecs::sc_PAUSEMENU, new PauseMenu() });
 	allScenes.insert({ _ecs::sc_OPTIONSMENU, new OptionsMenu() });

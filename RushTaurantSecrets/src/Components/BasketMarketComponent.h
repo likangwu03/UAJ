@@ -66,6 +66,6 @@ public:
 	virtual void handleEvents();
 	void receive(const Message& message);
 	void addToBasketOnline(_ecs::_ingredients_id ing, int n);
-
+	void initComponent()override;
 	vector<pair<_ecs::_ingredients_id, int>> getIngredients();
 };

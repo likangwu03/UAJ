@@ -55,7 +55,7 @@ void StraightMovement::newPath(const vector<Vector>& newPath) {
 	// se establece la recta a recorrer
 	newStraight(path.points[path.cont]);
 
-	// se cambia la animación y se indica que se está moviendo
+	// se cambia la animación y se indica que se est?moviendo
 	transform->setMovState(walkingState);
 	isWalking = true;
 }
@@ -143,7 +143,7 @@ void StraightMovement::update() {
 				goBack();
 			}
 		}
-		// si ha terminado de recorrer el camino y está en loop, vuelve a recorrerlo
+		// si ha terminado de recorrer el camino y est?en loop, vuelve a recorrerlo
 		else if (loop) {
 			path.cont = 0;
 			newStraight(path.points[path.cont]);
