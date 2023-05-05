@@ -81,7 +81,6 @@ void BadEnding1Scene::renderCinematic()
 void BadEnding1Scene::finishScene() {
 	if (transition != nullptr)
 		delete transition;
-	//GameManager::get()->changeScene(GameManager::get()->getScene(sc_GAMEOVER));
 	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
 	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
 
