@@ -78,7 +78,21 @@ A continuación se presenta una tabla con las conclusiones extraídas a partir d
 
 | Tipo de conclusión | Conclusiones | Soluciones |
 |--------------------|--------------|------------|
-| Confusiones        | - No sabe con qué controles se elige el menú del día
-- Botones para matar/ahuyentar ladrones    | Cell 3   |
-| Balance            | Cell 5   | Cell 6   |
-| Bugs               | Cell 8   | Cell 9   |
+| Confusiones        | - No sabe con qué controles se elige el menú del día | Mostrar el input en el juego |
+|                    | - Botones para matar/ahuyentar ladrones | Mostrar el dibujo junto con el input |
+|                    | - No sabe con qué tecla se abre la cesta  | Mostrar el input en el juego |
+|                    | - Resulta confusa la combinación de controles de enter y space | Mostrar en pantalla cuándo se necesita pulsar enter   |
+|                    | - Vaciar el inventario de ingredientes en cocina es poco intuitivo | Mostrar en pantalla la capacidad de poder vaciar el inventario |
+|                    | - La mecánica de pagar en el supermercado no es suficientemente intuitiva  | Mejorar la interfaz   |
+|                    | - La mecánica de rachas resulta confusa  | Mejorar la claridad visual para indicar que se recibe más dinero |
+|                    | - No se sabe que se puede consultar el menú diario  | Mostrar el input sobre el icono |
+|                    | - Resulta confusa la mecánica de cocinar, el usuario cree que hay varias formas de hacerlo  | Añadir tutorial en página web |
+|                    | - No sabe cuando usar espacio y cuando usar enter  | Mostrar en pantalla cuándo se necesita pulsar enter |
+|                    | - Resulta confusa la interacción con el cliente para tomarle nota   | Aumetar un poco el tamaño del trigger para que sea más sencillo de interactuar |
+|                    | - El usuario ha tenido problemas al interactuar con las mesas para tomar nota y servir platos  | Ajustar el trigger de las mesas |
+|                    | - El usuario confunde cocinar con cambiar de plato  | Añadir tutorial en página web |
+|Balance             | - Desequilibrio entre gestión de cocina y ladrones (llegada de ladrones y de clientes es demasiado frecuente   | Disminur la frecuencia de los ladrones y la probabilidad de que llegue un grupo grande de clientes |
+|                    | - El tiempo del día pasa muy rápido  | Aumentar la duración del día  |
+|   Bugs             | - Triggers desajustados en el supermercado | Ajustar triggers   |
+|                    | - Trigger desajustados de las mesas  | Ajustar trigger de las mesas |
+|                    | - No se pueden añadir ingredientes a la cesta  | Revisar y arreglar código |
