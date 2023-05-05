@@ -18,7 +18,6 @@
 
 ------------
 ### QA:
-(Pasar QA a md) (En proceso)
 Con el fin de mejorar la jugabilidad, el equipo de desarrollo ha ideado y llevado a cabo un plan de pruebas con usuarios. Tras redactar los parámetros a comprobar, algunos miembros del equipo han seguido las pautas ingeniadas, examinando así a potenciales clientes. A lo largo de este proceso se han notificado multitud de detalles y problemas en los que los integrantes del grupo no habían reparado. Para arreglar esto, se redactaron los errores y contratiempos y se propusieron nuevas soluciones para mejorar el desarrollo del proyecto. Poco a poco, todo se ha ido ajustando. Se presenta a continuación la documentación pertinente.
 
 En primer lugar, el plan de pruebas que se ha seguido para evaluar la jugabilidad con usuarios reales:
