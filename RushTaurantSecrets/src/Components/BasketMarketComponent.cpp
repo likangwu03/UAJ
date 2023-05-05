@@ -112,7 +112,6 @@ void BasketMarketComponent::renderBasket() {
 			if (chooseHMMode) {
 				menu->render(x * col - ING_SIZE, y * fil + ING_SIZE + 5);
 				int cost = _ecs::MarketIngs[it->first - _ecs::FLOUR].price;
-				showControl->render({ (float)(x * col - ING_SIZE + 25),(float) (y * fil + ING_SIZE + 80) });
 				Texture* textureAmount = new Texture(sdl->renderer(), to_string(it->second), *font, build_sdlcolor(0xf3e5c2ff));
 				dest.x = x * col;
 				dest.y = y * fil + (3 * ING_SIZE) / 2;
@@ -121,6 +120,7 @@ void BasketMarketComponent::renderBasket() {
 				if (it->second < 10) dest.x += textureAmount->width() / 3;
 				textureAmount->render(dest);
 				delete textureAmount;
+				showControl->render({ (float)(x * col - ING_SIZE + 25),(float) (y * fil + ING_SIZE + 80) });
 			}
 			else {
 				showControl->render({ (float)(x * col - ING_SIZE+30),(float)(y * fil + ING_SIZE - 10) });

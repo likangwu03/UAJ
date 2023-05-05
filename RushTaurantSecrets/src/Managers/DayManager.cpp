@@ -90,10 +90,10 @@ void DayManager::nextDay(bool loading) {
 	if (!loading) {
 		// Game over (el bad ending 3 y 4 se comprueban en thievesState
 		// Bad ending 1 (si la reputación es negativa)
-		if (GameManager::get()->getReputation()->getReputation() < 0)
+  		if (GameManager::get()->getReputation()->getReputation() < 0)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
 		// Bad ending 2 (si no se ha alcanzado el objetivo diario)
-		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() != dailyObjective)
+		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() < dailyObjective)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING2), true);
 
 

@@ -155,7 +155,7 @@ void UIRestaurant::toggleDailyMenu()
 void UIRestaurant::showMoneyText() {
 	// si la cantidad de dinero ha variado, lo muestra por pantalla
 	if (currentMoney != moneyTxt->getMoney()) {
-		moneyDiff += moneyTxt->getMoney() - startingMoney;
+		moneyDiff = moneyTxt->getMoney() - startingMoney;
 		currentMoney = moneyTxt->getMoney();
 		std::string strMoney = std::to_string(currentMoney);
 
