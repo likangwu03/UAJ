@@ -31,6 +31,7 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 		}
 		buybutton = scene->buyButton();
 		buybutton->setActives(true);
+		buybutton->getComponent<ButtonComp>()->setHighlighted(true);
 
 		bMC->enterRegister(true);
 

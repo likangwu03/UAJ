@@ -62,7 +62,7 @@ void DailyMenuScene::reset() {
 
 void DailyMenuScene::handleEvents() {
 	if (ih->joysticksInitialised()) {
-		ih->refresh();
+		//ih->refresh();
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
 			|| ih->getHatState(LEFT) || (ih->xvalue(0, 1) < 0)) {
 			button = (button - 1) % NUM_BUTTON;
