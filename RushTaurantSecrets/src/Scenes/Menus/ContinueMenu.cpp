@@ -45,7 +45,7 @@ ContinueMenu::~ContinueMenu() {
 void ContinueMenu::handleEvents() {
 
 	if (ih->joysticksInitialised()) {
-		ih->refresh();
+		//ih->refresh();
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
 			|| ih->getHatState(UP) || (ih->yvalue(0, 1) < 0)) {
 			button = (button - 1) % NUM_BUTTON;

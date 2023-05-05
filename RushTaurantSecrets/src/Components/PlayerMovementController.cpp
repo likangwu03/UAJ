@@ -19,7 +19,7 @@ void PlayerMovementController::handleEvents() {
 	std::cout << SDL_GameControllerMapping(gamecont) << std::endl;*/
 	if (!keyboard)
 	{
-		input->refresh();
+		//input->refresh();
 		// eje x mando 1
 		if ((input->xvalue(0, 1) > 0 || input->xvalue(0, 1) < 0) && !input->keyDownEvent()) {
 			speed.setX(offset * input->xvalue(0, 1));

@@ -28,8 +28,6 @@ void ButtonComp::handleEvents()
 	SDL_Rect dest = { transform->getPos().getX(), transform->getPos().getY(), transform->getW(), transform->getH() };
 
 	 if (ih().joysticksInitialised()) {
-		//ih().refresh();
-		//buttonHoverSound->play();
 		if (highlighted) {
 			if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 				playSound();
@@ -45,7 +43,6 @@ void ButtonComp::handleEvents()
 			 }
 		 }
 	}
-	//else {
 }
 
 bool ButtonComp::isHighlighted() {

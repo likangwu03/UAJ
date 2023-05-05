@@ -95,11 +95,13 @@ void OptionsMenu::handleEvents() {
 
 	Scene::handleEvents();
 
-	if (ih->isKeyDown(SDLK_p)) 	GameManager::get()->popScene();
+	if (ih->isKeyDown(SDLK_ESCAPE)) 	GameManager::get()->popScene();
 
-	if (!slider) {	
+	if (!slider && !controls->isActive()) {	
 		if (ih->joysticksInitialised()) {
-			ih->refresh();
+			ih->clearState();
+
+			//ih->refresh();
 			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
 				|| ih->getHatState(LEFT)) {
 				button = (button - 1) % NUM_BUTTON;
@@ -153,15 +155,14 @@ void OptionsMenu::handleEvents() {
 				else if (button == 4)
 					button = 1;
 				selectedButton(button);
-			}
-
-			if (ih->isKeyDown(SDL_SCANCODE_ESCAPE)) {
-				controls->setActives(false);
-				auto t = buttonControls->getComponent<Transform>();
-				t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
-				buttonControls->getComponent<ButtonComp>()->moveHighlighted();
-			}
+			}		
 		}
+	}
+	if (controls->isActive() && ih->isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		controls->setActives(false);
+		auto t = buttonControls->getComponent<Transform>();
+		t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
+		buttonControls->getComponent<ButtonComp>()->moveHighlighted();
 	}
 
 	supermarketMusic->setMusicVolume(GameManager::instance()->getMasterVolume());

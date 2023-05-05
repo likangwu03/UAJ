@@ -25,6 +25,7 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	image = &(sdlutils().images().at("MAIN_MENU_BG"));
 	new Image(bg, image);
 	resumeSound();
+
 	button = 0;
 	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
 		[&]() { 
@@ -64,7 +65,6 @@ void MainMenu::handleEvents() {
 	}
 
 	if (ih->joysticksInitialised()) {
-		ih->refresh();
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
 			|| ih->getHatState(UP) || (ih->yvalue(0, 1) < 0)) {
 			button = (button - 1) % NUM_BUTTON;

@@ -162,7 +162,7 @@ public:
 	}
 
 	inline bool joyButtonUp() {
-		isControllerButtonDown;
+		return isControllerButtonDown;
 	}
 
 	int numButtons() {
@@ -293,6 +293,11 @@ public:
 	bool getXBox() {
 		return xbox;
 	}
+
+	inline SDL_Joystick* rJoystick() {
+		return joys[0];
+	}
+
 private:
 
 	InputHandler() {
