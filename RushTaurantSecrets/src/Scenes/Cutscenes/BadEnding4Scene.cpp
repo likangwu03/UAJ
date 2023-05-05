@@ -71,7 +71,7 @@ void BadEnding4Scene::finishScene() {
 	pantryMusic->haltMusic();
 	homeMusic->haltMusic();
 
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
 	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
 
 	CinematicBaseScene::finishScene();

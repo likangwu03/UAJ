@@ -88,6 +88,6 @@ void Day1EndingScene::finishScene() {
 	dialogueBox = nullptr;
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), false);
-
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), true); 
+	GameManager::get()->getScene(sc_INTRO2)->reset();
 }

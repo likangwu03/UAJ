@@ -47,7 +47,7 @@
 
 GameManager::GameManager() : scenes(), allScenes(), deleteScene(nullptr), deleteTransition(false),
 	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr), beforeDayStartScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0)
+	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0), gameOver(false)
 	{ };
 
 
@@ -232,6 +232,9 @@ void GameManager::killed() { ++killedNum; }
 void GameManager::setHasKill(bool hKill) { hasKilled = hKill; if (!hasEverKilled.first) hasEverKilled={ true,days->getDay() }; }
 
 
+void GameManager::setGameOver(bool gO) { gameOver = gO; }
+bool GameManager::getGameOver() { return gameOver; }
+
 void GameManager::resetScenes() {
 	for (auto& sc : allScenes) {
 		sc.second->reset();
@@ -248,7 +251,7 @@ void GameManager::save() {
 	ofstream write(file.str());
 
 	// información
-	write << days->getDay()+1 << endl;//n dia
+	write << days->getDay() << endl;//n dia
 	write << money->getMoney() << endl;
 	write << reputation->getReputation() << endl;
 	write << hasKilled << endl;
@@ -259,7 +262,7 @@ void GameManager::save() {
 }
 
 void GameManager::load() {
-	ifstream load;
+ 	ifstream load;
 	int aux;
 	stringstream file;
 	file << "assets/savegame" << twoPlayers << ".rsdat";
@@ -298,6 +301,7 @@ void GameManager::newGame() {
 	hasEverKilled.first = false;
 	hasEverKilled.second = 0;
 	killedNum = 0;
+	gameOver = false;
 	money->newGame();
 	reputation->newGame();
 	save();

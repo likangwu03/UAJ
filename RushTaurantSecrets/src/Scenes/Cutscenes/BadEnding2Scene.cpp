@@ -452,7 +452,7 @@ void BadEnding2Scene::finishScene() {
 	music->haltMusic();
 	ambience->haltChannel();
 
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
 	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
 	CinematicBaseScene::finishScene();
 }

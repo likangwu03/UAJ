@@ -78,6 +78,8 @@ private:
 
 	GameManager();
 
+	bool gameOver;
+
 public:
 	void initialize();
 	~GameManager();
@@ -118,6 +120,9 @@ public:
 	bool getHasKill();
 	void setHasKill(bool hKill);
 	void killed();
+
+	void setGameOver(bool gO);
+	bool getGameOver();
 
 	void resetScenes();
 	void save();

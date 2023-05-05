@@ -16,7 +16,8 @@ void ThiefState::update() {
 		// se cambia al final en el que los ladrones han descubierto la fórmula secreta
 		formulaSound->play();
 		parent->setAlive(false);
-		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING4));
+		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING4), true);
+		GameManager::get()->setGameOver(true);
 		GameManager::get()->getScene(_ecs::sc_PANTRY)->haltSound();
 		break;
 
@@ -26,7 +27,8 @@ void ThiefState::update() {
 		fridgeSound->play();
 		if (gm->getHasKill()) {
 			parent->setAlive(false);
-			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING3));
+			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING3), true);
+			GameManager::get()->setGameOver(true);
 			GameManager::get()->getScene(_ecs::sc_PANTRY)->haltSound();
 		}
 		else {

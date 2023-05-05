@@ -49,7 +49,9 @@ void Day2EndingKillScene::finishScene() {
 	black->render(build_sdlrect(0, 0, sdlutils().width(), sdlutils().height()));
 	if (transition != nullptr)
 		delete transition;
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_FIRSTDAYAFTERKILL), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_FIRSTDAYAFTERKILL), true);
+	GameManager::get()->getScene(sc_FIRSTDAYAFTERKILL)->reset();
+
 	CinematicBaseScene::finishScene();
 }
 

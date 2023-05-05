@@ -172,6 +172,6 @@ void Day1IntroScene::finishScene() {
 		delete transition;
 	nightMusic->haltMusic();
 	nightAmbience->haltChannel();
-	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), false);
+	GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
 	CinematicBaseScene::finishScene();
 }

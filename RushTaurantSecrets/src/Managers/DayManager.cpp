@@ -71,12 +71,10 @@ DayManager::~DayManager() {
 }
 
 void DayManager::checkDayFinished() {
-
 	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients() && !ThievesManager::get()->areThereThieves()) {
 		GameManager::get()->getCurrentScene()->haltSound();
 		GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDOFDAY));
 		GameManager::get()->getScene(sc_ENDOFDAY)->reset();
-
 	}
 }
 
@@ -90,12 +88,15 @@ void DayManager::nextDay(bool loading) {
 	if (!loading) {
 		// Game over (el bad ending 3 y 4 se comprueban en thievesState
 		// Bad ending 1 (si la reputación es negativa)
-  		if (GameManager::get()->getReputation()->getReputation() < 0)
+		if (GameManager::get()->getReputation()->getReputation() < 0) {
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
+			GameManager::get()->setGameOver(true);
+		}
 		// Bad ending 2 (si no se ha alcanzado el objetivo diario)
-		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() < dailyObjective)
+		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() < dailyObjective) {
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING2), true);
-
+			GameManager::get()->setGameOver(true);
+		}
 
 		// Final día 1 (en la propia escena del final del día 1 se pasa a la intro del día 2)
 		else if (day == 1) {
@@ -105,10 +106,10 @@ void DayManager::nextDay(bool loading) {
 		// Finales si ha matado
 		else if (GameManager::get()->getHasEverKilled().first) {
 			// Final normal
-			if (day > maxDays) GameManager::get()->changeScene(GameManager::get()->getScene(sc_NORMALENDING));
+			if (day > maxDays) GameManager::get()->changeScene(GameManager::get()->getScene(sc_NORMALENDING), true);
 
 			// Escena final del día 2 si ha matado (en la propia escena se pasa a la intro del día 3 si no se ha matado)
-			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2KILL));
+			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2KILL), true);
 			
 			// Escena inicial tras el primer día de haber matado (si mata después del día 2)
 			else if (day - GameManager::get()->getHasEverKilled().second == 0)
@@ -120,24 +121,30 @@ void DayManager::nextDay(bool loading) {
 
 		}
 		// Si no hay ninguna cinemática ese dia
-		else if (day >= 3) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+		else if (day >= 3) GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART), true);
 		// Finales si no ha matado
 		else {
 			// Final bueno
-			if (day > maxDays) GameManager::get()->changeScene(GameManager::get()->getScene(sc_HAPPYENDING));
+			if (day > maxDays) GameManager::get()->changeScene(GameManager::get()->getScene(sc_HAPPYENDING), true);
 
 			// Escena final del día 2 si no ha matado (en la propia escena se pasa a la intro del día 3 si no se ha matado)
-			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
+			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL), true);
 		}
-	}
-	// Intros si se est?cargando partida
-	else {
-		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
-		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
-		else if (day == 3 && !GameManager::get()->getHasEverKilled().first) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
-	}
 
-	day++;
+		day++;
+		// Si no se ha perdido, guarda
+		if (day - 1 > 0 && !GameManager::get()->getGameOver())
+			GameManager::get()->save();
+
+	}
+	// Intros si se está cargando partida
+	else {
+		if (day == 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1), true);
+		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2), true);
+		else if (day == 3 && !GameManager::get()->getHasEverKilled().first)
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL), true);
+		else GameManager::get()->changeScene(GameManager::get()->getScene(sc_BEFOREDAYSTART));
+	}
 
 	// Leer dayConfig
 	std::string line = "";
@@ -169,16 +176,8 @@ void DayManager::nextDay(bool loading) {
 		}
 	}
 
-	// Intros si se está cargando partida
-	if (loading) {
-		if (day == 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
-		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
-		else if (day == 3 && !GameManager::get()->getHasEverKilled().first) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
-	}
 
-	if (day > 0)
-		GameManager::get()->resetScenes();
-
+	GameManager::get()->resetScenes();
 }
 
 void DayManager::setDay(int x, bool loading) {
@@ -188,13 +187,13 @@ void DayManager::setDay(int x, bool loading) {
 	if (file.fail()) throw std::exception("Data for days not found.\n");
 	file >> maxDays;
 
-	string line = "";
 	for (int i = 0; i < x - 1; i++) {
+		string line = "";
 		while (!file.eof() && line != "end") {
 			readLine(line);
 		}
 	}
-	day = x - 1;
+	day = x;
 	nextDay(loading);
 }
 
