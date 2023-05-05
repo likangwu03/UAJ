@@ -33,8 +33,9 @@ CashRegisterTrigger::~CashRegisterTrigger() {
 }
 
 void CashRegisterTrigger::isOverlapping() {
-	if (other_->getComponent<Transform>()->getOrientation() != south)
+	if (other_->getComponent<Transform>()->getOrientation() != south) {
 		highlight->setActive(false); return;
+	}
 
 	highlight->setActive(true);
 
