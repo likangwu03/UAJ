@@ -15,6 +15,12 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 	image = &(sdlutils().images().at("OPTIONS_BG"));
 	new Image(bg, image);
 
+	controls = new GameObject(this);
+	new Transform(controls, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
+	imageControls = &(sdlutils().images().at("CONTROLS"));
+	new Image(controls, imageControls);
+	controls->setActives(false);
+
 
 	buttonReturn = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
 		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.3 * SDLUtils::instance()->height() / 5), 385, 130, 
@@ -24,9 +30,18 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 	buttonReturn->getComponent<ButtonComp>()->setHighlighted(true);
 	
 	buttonControls = new ButtonGO(this, "CONTROLS_BUTTON", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.55 * SDLUtils::instance()->height() / 5), 385, 130, 
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.55 * SDLUtils::instance()->height() / 5), 385, 130,
 		[&]() {
-			GameManager::get()->popScene();
+			auto t = buttonControls->getComponent<Transform>();
+			if (controls->isActive()) {
+				controls->setActives(false);
+				t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
+			}
+			else {
+				controls->setActives(true);
+				t->setPos(Vector(t->getPos().getX(), t->getPos().getY() + 365));
+			}
+			buttonControls->getComponent<ButtonComp>()->moveHighlighted();
 		});
 
 	sliderMusicButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
@@ -139,6 +154,13 @@ void OptionsMenu::handleEvents() {
 					button = 1;
 				selectedButton(button);
 			}
+
+			if (ih->isKeyDown(SDL_SCANCODE_ESCAPE)) {
+				controls->setActives(false);
+				auto t = buttonControls->getComponent<Transform>();
+				t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
+				buttonControls->getComponent<ButtonComp>()->moveHighlighted();
+			}
 		}
 	}
 
@@ -155,6 +177,11 @@ void OptionsMenu::render() {
 	MusicTexture->render(MusicRect);
 	SoundTexture->render(SoundRect);
 	FullScreenTexture->render(FullScreenRect);
+
+	if (controls->isActive()) {
+		controls->render();
+		buttonControls->render();
+	}
 }
 
 void OptionsMenu::selectedButton(int selected) {

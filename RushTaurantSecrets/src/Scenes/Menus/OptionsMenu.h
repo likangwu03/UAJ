@@ -22,9 +22,12 @@ private:
 	bool fullscreen = false;
 
 	GameObject* bg;
+	Texture* image;
+	GameObject* controls;
+	Texture* imageControls;
+
 	ButtonGO* buttonReturn;
 	ButtonGO* buttonControls;
-	Texture* image;
 
 	Slider* MusicSlider;
 	Slider* SoundsSlider;
@@ -47,6 +50,8 @@ private:
 	
 	Texture* FullScreenTexture;
 	SDL_Rect FullScreenRect;
+
+
 
 public:
 	OptionsMenu();
