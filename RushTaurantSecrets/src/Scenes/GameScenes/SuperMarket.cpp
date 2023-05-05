@@ -72,7 +72,7 @@ void SuperMarket::callAfterCreating() {
 void SuperMarket::createMap() {
 	Scene::createMap("assets/tilemaps/supermarket.tmx", Down, Vector());
 	Scene::createMap("assets/tilemaps/supermarket_top_walls.tmx", Top, Vector());
-	Scene::createMap("assets/tilemaps/supermarket_top_bottom.tmx", Middle, Vector(0, 23*48 * RESIZEFACTOR));
+	Scene::createMap("assets/tilemaps/supermarket_top_bottom.tmx", Middle, Vector(0, 16*48 * RESIZEFACTOR));
 	Scene::createMap("assets/tilemaps/supermarket_top_middle.tmx", Middle, Vector(0, 11*48 * RESIZEFACTOR));
 }
 
