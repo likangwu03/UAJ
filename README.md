@@ -78,6 +78,7 @@ A continuación se presenta una tabla con las conclusiones extraídas a partir d
 
 | Tipo de conclusión | Conclusiones | Soluciones |
 |--------------------|--------------|------------|
-| Confusiones        | - No sabe con qué controles se elige el menú del día   | Cell 3   |
+| Confusiones        | - No sabe con qué controles se elige el menú del día
+- Botones para matar/ahuyentar ladrones    | Cell 3   |
 | Balance            | Cell 5   | Cell 6   |
 | Bugs               | Cell 8   | Cell 9   |
