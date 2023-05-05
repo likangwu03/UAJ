@@ -3,9 +3,15 @@
 #include "../Structure/Scene.h"
 #include "../Structure/GameManager.h"
 #include "../Components/PlayerMovementController.h"
-ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> controls): Component(parent, id)
+ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> controls): Component(parent, id),controls(controls)
 {
 	controls_ = vector<showControlInfo>(controls.size());
+	changeInput();
+	setActive(false);
+
+}
+
+void ShowControlComp::changeInput() {
 	if (!ih().joysticksInitialised()) {
 		for (int i = 0; i < controls.size(); ++i) {
 
@@ -41,10 +47,13 @@ ShowControlComp::ShowControlComp(GameObject* parent, vector<ControlsInfo> contro
 			}
 		}
 	}
-	setActive(false);
 }
 
+void ShowControlComp::initComponent() {
+	
+}
 void ShowControlComp::render(Vector pos) {
+	changeInput();
 	for (auto c : controls_)
 		c.texture->renderFrame(build_sdlrect(pos.getX() + c.offset.getX() - ((c.height * c.proportion) / 2), pos.getY() + c.offset.getY() - c.height / 2, c.height * c.proportion, c.height), c.col, c.row, 0);
 }

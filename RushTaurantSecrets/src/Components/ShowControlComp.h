@@ -34,7 +34,8 @@ public:
 	};
 protected:
 	vector<showControlInfo> controls_;
-	
+	vector<ControlsInfo> controls;
+	int type;
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_SHOWCONTROL;
 	ShowControlComp(GameObject* parent, vector<ControlsInfo> controls);
@@ -42,6 +43,8 @@ public:
 	void changeOffset(Vector off,int i);
 	float getProportion(int i) { return controls_[i].proportion; };
 	void changeHeight(float height,int i);
+	void initComponent()override;
+	void changeInput();
 
 	Texture* getTexture(int i);
 	inline vector<showControlInfo>* getControls() {

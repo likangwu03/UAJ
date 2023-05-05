@@ -39,7 +39,8 @@ void BasketMarketComponent::initComponent() {
 	showControl = new ShowControlComp(parent, { 
 		{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,
 		{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,
-		{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -60),40,40} });
+		{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -65),40,40} });
+	showControl->initComponent();
 
 }
 void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int addPrice) {
@@ -180,7 +181,7 @@ void BasketMarketComponent::handleEvents() {
 				}
 				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) && ingredients.size() > 0) {
 					chooseHMMode = true;
-					showControl->changeOffset(Vector(165, 0), 2);
+					showControl->changeOffset(Vector(165, -5), 2);
 					confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 					confirmSound->play();
 				}
@@ -191,7 +192,7 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->isKeyDown(SDLK_RETURN) && ingredients.size() > 0) {
 					chooseHMMode = true;
 					
-					showControl->changeOffset(Vector(165, 0), 2);
+					showControl->changeOffset(Vector(165, -5), 2);
 					confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 					confirmSound->play();
 				}
@@ -212,7 +213,7 @@ void BasketMarketComponent::handleEvents() {
 				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 					chooseHMMode = false;
 					
-					showControl->changeOffset(Vector(45, -60), 2);
+					showControl->changeOffset(Vector(45, -65), 2);
 					Message m;
 					m.id = Message::msg_BASKET;
 					m.basket.ing = selectedIngr->first;
@@ -235,7 +236,7 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->isKeyDown(SDLK_RIGHT)) changeAmount(SDLK_RIGHT);
 				else if (ih->isKeyDown(SDLK_RETURN)) {
 					chooseHMMode = false;
-					showControl->changeOffset(Vector(45, -60), 2);
+					showControl->changeOffset(Vector(45, -65), 2);
 
 					Message m;
 					m.id = Message::msg_BASKET;
