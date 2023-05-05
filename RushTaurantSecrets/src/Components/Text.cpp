@@ -196,7 +196,7 @@ void Text::render() {
 }
 
 void Text::handleEvents() {
-	if (ih->isKeyDown(SDLK_SPACE)) {
+	if (!ih->joysticksInitialised() && ih->isKeyDown(SDLK_SPACE) || ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 		switch (state) {
 		case Writing:
 			showAllText = true;

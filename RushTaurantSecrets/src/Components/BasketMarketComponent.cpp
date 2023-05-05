@@ -36,10 +36,10 @@ BasketMarketComponent::~BasketMarketComponent() {
 	delete font;
 }
 void BasketMarketComponent::initComponent() {
-	showControl = new ShowControlComp(parent, { 
+	showControl = new ShowControlComp(parent, {
 		{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(5,0),40,40} ,
 		{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(90,0),40,40} ,
-		{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -65),40,40} });
+		{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(45, -65),35,35} });
 	showControl->initComponent();
 
 }
@@ -121,10 +121,10 @@ void BasketMarketComponent::renderBasket() {
 				if (it->second < 10) dest.x += textureAmount->width() / 3;
 				textureAmount->render(dest);
 				delete textureAmount;
-				showControl->render({ (float)(x * col - ING_SIZE + 25),(float) (y * fil + ING_SIZE + 80) });
+				showControl->render({ (float)(x * col - ING_SIZE + 25),(float)(y * fil + ING_SIZE + 80) });
 			}
 			else {
-				showControl->render({ (float)(x * col - ING_SIZE+30),(float)(y * fil + ING_SIZE - 10) });
+				showControl->render({ (float)(x * col - ING_SIZE + 30),(float)(y * fil + ING_SIZE - 10) });
 			}
 		}
 
@@ -175,11 +175,11 @@ void BasketMarketComponent::handleEvents() {
 					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_BACK)) selectIngredientInBasket(SDLK_LEFT);
 					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_GUIDE))selectIngredientInBasket(SDLK_RIGHT);
 				}
-				else if(!ih->joysticksInitialised()){
+				else
 					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) selectIngredientInBasket(SDLK_LEFT);
 					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))selectIngredientInBasket(SDLK_RIGHT);
-				}
-				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) && ingredients.size() > 0) {
+				
+				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) && ingredients.size() > 0) {
 					chooseHMMode = true;
 					showControl->changeOffset(Vector(165, -5), 2);
 					confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
@@ -191,28 +191,28 @@ void BasketMarketComponent::handleEvents() {
 				else if (ih->isKeyDown(SDLK_RIGHT)) selectIngredientInBasket(SDLK_RIGHT);
 				else if (ih->isKeyDown(SDLK_RETURN) && ingredients.size() > 0) {
 					chooseHMMode = true;
-					
+
 					showControl->changeOffset(Vector(165, -5), 2);
 					confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 					confirmSound->play();
 				}
 
 			}
-
 		}
+
 		else { // (chooseHMMode)
 			if (ih->joysticksInitialised()) {
 				if (ih->getXBox()) {
 					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_BACK)) changeAmount(SDLK_LEFT);
 					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_GUIDE)) changeAmount(SDLK_RIGHT);
 				}
-				else if (!ih->joysticksInitialised()) {
+				else
 					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) changeAmount(SDLK_LEFT);
 					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) changeAmount(SDLK_RIGHT);
-				}
-				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
+
+				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
 					chooseHMMode = false;
-					
+
 					showControl->changeOffset(Vector(45, -65), 2);
 					Message m;
 					m.id = Message::msg_BASKET;
@@ -255,12 +255,12 @@ void BasketMarketComponent::handleEvents() {
 					}
 				}
 
-			}
 
+
+			}
 		}
 	}
 }
-
 vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients() {
 	vector<pair<_ecs::_ingredients_id, int>> aux;
 
@@ -318,7 +318,7 @@ void BasketMarketComponent::cleanEmptyBasket() {
 	if (selectedIngr == ingredients.end())selectedIngr = ingredients.begin();
 	if (ingredients.size() == 0)selectedIngr = ingredients.end();
 }
-void BasketMarketComponent:: nextDay() {
+void BasketMarketComponent::nextDay() {
 	totalDifIngr = 0;
 	totalPrice = 0;
 	basketON = false;
@@ -328,24 +328,26 @@ void BasketMarketComponent:: nextDay() {
 	isOnRegister = false;
 }
 void BasketMarketComponent::receive(const Message& message) {
-	if(message.id == Message::msg_BASKET) {
+	if (message.id == Message::msg_BASKET) {
 		auto it = ingredients.find(message.basket.ing);
-		if(it != ingredients.end()) {
+		if (it != ingredients.end()) {
 			totalPrice -= _ecs::MarketIngs[message.basket.ing - FLOUR].price * it->second;
 			it->second = message.basket.n;
-			if(message.basket.n == 0) {
-				if(selectedIngr == it) {
+			if (message.basket.n == 0) {
+				if (selectedIngr == it) {
 					ingredients.erase(it);
 					selectedIngr = ingredients.begin();
-				} else {
+				}
+				else {
 					ingredients.erase(it);
 				}
 				totalDifIngr--;
 			}
-		} else {
+		}
+		else {
 			auto aux = ingredients.insert({ message.basket.ing, message.basket.n });
 			totalDifIngr++; //num de dif ing
-			if(selectedIngr == ingredients.end()) selectedIngr = aux.first;
+			if (selectedIngr == ingredients.end()) selectedIngr = aux.first;
 		}
 		totalPrice += _ecs::MarketIngs[message.basket.ing - FLOUR].price * message.basket.n;
 		setTotalPrice();

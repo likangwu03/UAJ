@@ -4,14 +4,14 @@
 #include "../../Structure/GameObject.h"
 #include "../../Components/StraightMovement.h"
 #include "../../Components/CharacterAnimator.h"
+#include "../../Components/PlayerMovementController.h"
 #include "../../Structure/Game.h"
 
 CinematicBaseScene::CinematicBaseScene() : Scene(), cont(0), sdl(SDLUtils::instance()), WIDTH(sdlutils().width()), HEIGHT(sdlutils().height()), dialogueBox(nullptr) {
 	font = new Font(FONT_PATH, FONTSIZE);
-	if (ih->joysticksInitialised())
-		skipText = new Texture(sdlutils().renderer(), "Press B to skip", *font, build_sdlcolor(0xffffffFF));
-	else skipText = new Texture(sdlutils().renderer(), "Press ESC to skip", *font, build_sdlcolor(0xffffffFF));
-
+	
+    skipText = new Texture(sdlutils().renderer(), " ", *font, build_sdlcolor(0xffffffFF));
+	
 	player = new GameObject(this);
 	transform = new Transform(player, Vector(0, 0), 0, 48, 96, 0);
 	straightMovement = new StraightMovement(player, 5);
@@ -28,6 +28,13 @@ CinematicBaseScene::~CinematicBaseScene() {
 }
 
 void CinematicBaseScene::render() {
+	if (ih->joysticksInitialised()) {
+		if(ih->getXBox())
+		skipText = new Texture(sdlutils().renderer(), "Press Y to skip", *font, build_sdlcolor(0xffffffFF));
+		else skipText = new Texture(sdlutils().renderer(), "Press Triangle to skip", *font, build_sdlcolor(0xffffffFF));
+
+	}
+	else skipText = new Texture(sdlutils().renderer(), "Press ESC to skip", *font, build_sdlcolor(0xffffffFF));
 	Scene::render();
 	renderCinematic();
 	renderUI();
@@ -44,6 +51,8 @@ void CinematicBaseScene::renderUI() {
 void CinematicBaseScene::update() {
 	Scene::update();
 	cont += frameTime;
+	delete skipText;
+	
 }
 
 void CinematicBaseScene::finishScene() {
@@ -59,7 +68,7 @@ void CinematicBaseScene::handleEvents() {
 	//Scene::handleEvents();
 	if (dialogueBox != nullptr)
 		dialogueBox->handleEvents();
-	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
+	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_Y) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
 		finishScene();
 
 }

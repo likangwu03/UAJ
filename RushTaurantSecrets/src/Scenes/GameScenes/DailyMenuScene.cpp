@@ -43,8 +43,8 @@ void DailyMenuScene::init() {
 			buttonPress(1);
 		});
 	dailyMenu2->getComponent<DailyMenuComp>()->initMenu();
-	(new ShowControlAuto(dailyMenu1, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(0,640.0f),100,60} }))->setActive(true);
-	(new ShowControlAuto(dailyMenu2, { {ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(479.0f,640.0f),100,60} }))->setActive(true);
+	(new ShowControlAuto(dailyMenu1, { {ControlsType::key_LEFT,ControlsType::key_LEFT,ControlsType::key_LEFT,Vector(0,640.0f),100,60} }))->setActive(true);
+	(new ShowControlAuto(dailyMenu2, { {ControlsType::key_RIGHT,ControlsType::key_RIGHT,ControlsType::key_RIGHT,Vector(479.0f,640.0f),100,60} }))->setActive(true);
 
 	selectedButton(0);
 	button = 0;

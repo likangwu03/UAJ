@@ -10,7 +10,7 @@ sdl(SDLUtils::instance()), ih(InputHandler::instance()),
 priceTex(nullptr), numberTex(nullptr), totalPriceTex(nullptr), ingTex(nullptr), ing(_ecs::NONE_ING),
 menuSound(&sdl->soundEffects().at("OPEN_SHOPMENU")),
 selectNum(&sdl->soundEffects().at("SELECT_NUM")),
-addIng (&sdl->soundEffects().at("ADD_ING")),
+addIng(&sdl->soundEffects().at("ADD_ING")),
 confirmSound(&sdl->soundEffects().at("ADD_ING"))
 {
 	menuSound->setVolume(7);
@@ -23,7 +23,8 @@ confirmSound(&sdl->soundEffects().at("ADD_ING"))
 void ShoppingMenuComp::initComponent() {
 	basket = parent->getScene()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>();
 	playerTransform = GameManager::get()->getSupermarket()->getGameObject(hdr_PLAYER)->getComponent<Transform>();
-	showControl = new ShowControlAuto(parent,{{ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-5,-5),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-5),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(145,-5),40,40}}, playerTransform);
+	showControl = new ShowControlAuto(parent, { {ControlsType::key_LEFT,ControlsType::play_LS,ControlsType::xbox_LS,Vector(-5,-5),40,40} ,{ControlsType::key_RIGHT,ControlsType::play_RS,ControlsType::xbox_RS,Vector(60,-5),40,40} ,{ControlsType::key_ENTER,ControlsType::play_Cross,ControlsType::xbox_A,Vector(145,-5),40,40} }, playerTransform);
+	showControl->initComponent();
 }
 
 ShoppingMenuComp::~ShoppingMenuComp() {
@@ -38,28 +39,30 @@ ShoppingMenuComp::~ShoppingMenuComp() {
 void ShoppingMenuComp::handleEvents() {
 	if (basket->getBasketON())return;
 	if (ih->joysticksInitialised()) {
-		if (ih->getXBox()){
+		if (ih->getXBox()) {
 			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_BACK)) decreaseN();
 			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_GUIDE)) increaseN();
 		}
-		else if (!ih->getXBox()) {
+		else{
 			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) decreaseN();
 			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) increaseN();
-		}	
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B && ing != NONE_ING)) {
+		}
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A && ing != NONE_ING)) {
 			addIng->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			addIng->play();
 			basket->addToBasket(ing, number, totalPrice);
 			closeMenu();
 		}
 	}
-	else if (ih->isKeyDown(SDLK_LEFT)) decreaseN(); //aumentar cantidad
-	else if (ih->isKeyDown(SDLK_RIGHT)) increaseN(); //disminuir cantidad
-	else if (ih->isKeyDown(SDLK_RETURN) && ing != NONE_ING) { //añadir a la cesta
-		basket->addToBasket(ing, number, totalPrice);
-		confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
-		confirmSound->play();
-		closeMenu();
+	else {
+		if (ih->isKeyDown(SDLK_LEFT)) decreaseN(); //aumentar cantidad
+		else if (ih->isKeyDown(SDLK_RIGHT)) increaseN(); //disminuir cantidad
+		else if (ih->isKeyDown(SDLK_RETURN) && ing != NONE_ING) { //añadir a la cesta
+			basket->addToBasket(ing, number, totalPrice);
+			confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
+			confirmSound->play();
+			closeMenu();
+		}
 	}
 
 }

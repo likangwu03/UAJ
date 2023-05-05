@@ -25,7 +25,7 @@ void ShowControlComp::changeInput() {
 		}
 	}
 	else {
-		if (GameManager::get()->getScene(sc_PANTRY)->getGameObject(hdr_PLAYER)->getComponent<PlayerMovementController>()->isXbox()) {
+		if (ih().getXBox()) {
 			for (int i = 0; i < controls.size(); ++i) {
 				controls_[i].col = Controls[controls[i].xbox].col;
 				controls_[i].row = Controls[controls[i].xbox].fil;
@@ -49,9 +49,6 @@ void ShowControlComp::changeInput() {
 	}
 }
 
-void ShowControlComp::initComponent() {
-	
-}
 void ShowControlComp::render(Vector pos) {
 	changeInput();
 	for (auto c : controls_)

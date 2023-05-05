@@ -19,9 +19,8 @@ void ShowSkipTransitionScene::update() {
 }
 
 void ShowSkipTransitionScene::handleEvents() {
-	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
+	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_Y) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
 	{
-		//cinematicScene->finishScene();
 		GameManager::get()->skipfromTransition();
 
 	}
