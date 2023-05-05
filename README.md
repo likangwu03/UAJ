@@ -4,7 +4,7 @@
 ###### Gameplay del juego:
 [![Gameplay](https://imgur.com/LPyujLi.png)](https://drive.google.com/file/d/10_YlJI0IKXg_S6E_47FBobYrS6awHKzf/view?usp=sharing)
 ### [¡Descarga el juego aquí!](https://ucm-fdi-disia.github.io/Nightmare-Dogs/ "Página web")
-- [Release del juego](Enlace al release "Release del juego")
+- [Release del juego](github.com/UCM-FDI-DISIA/Nightmare-Dogs/releases/latest/ "Release del juego")
 
 
 ------------
