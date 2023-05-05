@@ -27,8 +27,6 @@ public:
     CoopHandler();
     ~CoopHandler();
 
-    void update();
-
     bool isClient() { return client; }
 
     // Métodos de servidor

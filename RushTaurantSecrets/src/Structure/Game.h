@@ -26,7 +26,7 @@ public:
 	CoopHandler* getCoopHandler() { return coop; }
 
 	void init();
-	void setExitCoop() { exitCoop = true; }
+	void setExitCoop() { exitCoop = true; coop->closeConnection(); }
 	void runCoop();
 private:
 	Game();

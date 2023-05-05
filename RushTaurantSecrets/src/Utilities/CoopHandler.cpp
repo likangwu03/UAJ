@@ -30,9 +30,6 @@ CoopHandler::~CoopHandler() {
 	SDLNet_Quit();
 }
 
-void CoopHandler::update() {
-
-}
 
 // Conexiones
 
@@ -97,14 +94,14 @@ std::pair<bool, bool> CoopHandler::connectServer() {
 }
 
 void CoopHandler::closeConnection() {
+	
 	if (connectionSocket) {
-		SDLNet_TCP_Send(connectionSocket, "Close", 6);
 		SDLNet_TCP_DelSocket(set, connectionSocket);
 		SDLNet_TCP_Close(connectionSocket);
 		connectionSocket = NULL;
 		client = false;
-		Game::get()->setExitCoop();
 	}
+	closeServer();
 }
 
 // Mensajes
