@@ -10,8 +10,14 @@ body, html {
     height: 100%
 }
 
-body, h1, h2, h3, h4, h5, h6 {
+body, h1, h3, h4, h5, h6 {
     font-family: "Charybdis", "Amatic SC", sans-serif
+}
+
+h2 {
+    font-family: "Charybdis", "Amatic SC", sans-serif;
+    font-weight: bold;
+    font-size: 50;
 }
 
 ol {
