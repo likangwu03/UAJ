@@ -38,7 +38,7 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 
 	// cleon: mejor en 1 if
 	if (ih->joysticksInitialised()) {
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) {
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 			if ((money->getMoney() - money->getPrice() >= 0)) {
 				sendToClien();
 				money->subtractMoney(money->getPrice());
@@ -79,6 +79,7 @@ void SuperCashRegisterTriggerComp::payAndLeave() {
 	GameManager::get()->setIngredients(ing);
 	GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_RESTAURANT));
 	GameManager::get()->getScene(_ecs::sc_RESTAURANT)->reset();
+	GameManager::get()->getMoney()->reset();
 	restaurantMusic->play(-1);
 }
 

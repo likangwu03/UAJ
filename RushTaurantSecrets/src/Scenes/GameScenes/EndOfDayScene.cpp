@@ -18,8 +18,8 @@ EndOfDayScene::EndOfDayScene() {
 	moneyGoal = 0;
 	playerReputation = 0;
 	playerMoney = 0;
-	initPlayerMoney = gm->getBeforeDayStartScene()->getInitMoney(); //Dinero con el que ha empezado el día
 	earnedMoney = 0;
+
 
 	dayM = gm->getDayManager();
 	_gameOver = false;
@@ -51,8 +51,8 @@ EndOfDayScene::EndOfDayScene() {
 	font4 = new Font("assets/Fonts/light_pixel-7.ttf", 70);
 	TTF_SetFontOutline(font4->getTTFFont(), 1);
 
-	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
-	moneyText = "TODAY YOU EARNED: " + to_string(earnedMoney) + "$";
+	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(gm->getReputation()->getReputation());
+	moneyText = "TODAY YOU EARNED: " + to_string(gm->getMoney()->getEarnedMoney()) + "$";
 	bankruptText = "YOU WENT BANKRUPT!";
 	noRepText = "THE WHOLE CITY HATES YOUR RESTAURANT...";
 
@@ -122,15 +122,12 @@ EndOfDayScene::~EndOfDayScene() {
 void EndOfDayScene::reset() {
 	accDay = dayM->getDay();
 	moneyGoal = dayM->getDailyObjective();
-	playerReputation = gm->getReputation()->getReputation();
-	playerMoney = gm->getMoney()->getMoney();
-	if (initPlayerMoney <= playerMoney) earnedMoney = playerMoney - initPlayerMoney;
-	else earnedMoney = 0;
-	initPlayerMoney = gm->getBeforeDayStartScene()->getInitMoney(); //Dinero con el que ha empezado el día
-
 	continueButton->setAlive(false);
 	mainMenuButton->setAlive(false);
 	
+	playerReputation = gm->getReputation()->getReputation();
+	playerMoney = gm->getMoney()->getMoney();
+	earnedMoney = gm->getMoney()->getEarnedMoney();
 	gameOver();
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
@@ -160,8 +157,6 @@ void EndOfDayScene::render() {
 	gameOver();
 
 	if (!_gameOver) { //el juego no se ha perdido
-
-
 		continueButton->setAlive(true);
 		mainMenuButton->setAlive(true);
 	}
@@ -169,8 +164,7 @@ void EndOfDayScene::render() {
 		continueButton->setAlive(true);
 		mainMenuButton->setAlive(true);
 
-		if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0) 
-		{
+		if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)  {
 			bankruptTexture->render(bankruptRect);
 			bankruptOutline->render(bankruptRect);
 

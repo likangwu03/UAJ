@@ -37,5 +37,5 @@ void ClientTrigger::render() {
 
 bool ClientTrigger::inputMando() {
 
-	return ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A);
+	return ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B);
 }

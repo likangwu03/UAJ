@@ -38,9 +38,16 @@ ShoppingMenuComp::~ShoppingMenuComp() {
 void ShoppingMenuComp::handleEvents() {
 	if (basket->getBasketON())return;
 	if (ih->joysticksInitialised()) {
-		if(ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) decreaseN();
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) decreaseN();
-		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A && ing != NONE_ING)) {
+		if (ih->getXBox()){
+			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_BACK)) decreaseN();
+			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_GUIDE)) increaseN();
+		}
+		else if (!ih->getXBox()) {
+			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) decreaseN();
+			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) increaseN();
+		}	
+		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B && ing != NONE_ING)) {
+			addIng->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			addIng->play();
 			basket->addToBasket(ing, number, totalPrice);
 			closeMenu();
@@ -50,6 +57,7 @@ void ShoppingMenuComp::handleEvents() {
 	else if (ih->isKeyDown(SDLK_RIGHT)) increaseN(); //disminuir cantidad
 	else if (ih->isKeyDown(SDLK_RETURN) && ing != NONE_ING) { //añadir a la cesta
 		basket->addToBasket(ing, number, totalPrice);
+		confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		confirmSound->play();
 		closeMenu();
 	}
@@ -71,12 +79,16 @@ void ShoppingMenuComp::render() {
 void  ShoppingMenuComp::increaseN() {
 	if (number >= 99)return;
 	++number;
+
+	selectNum->setVolume(GameManager::instance()->getSoundEffectsVolume());
 	selectNum->play();
 	changePrice();
 }
 void  ShoppingMenuComp::decreaseN() {
 	if (number <= 0)return;
 	--number;
+
+	selectNum->setVolume(GameManager::instance()->getSoundEffectsVolume());
 	selectNum->play();
 	changePrice();
 }
@@ -92,6 +104,7 @@ void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
 		priceTex = new Texture(sdl->renderer(), to_string(price), *font, build_sdlcolor(0x504631ff));
 		ingTex = &((*sdl).images().at(to_string(ing)));
 		changePrice();
+		menuSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		menuSound->play();
 		showControl->setActive(true);
 	}

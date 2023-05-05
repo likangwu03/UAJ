@@ -37,7 +37,7 @@ void CashRegisterTrigger::isOverlapping() {
 	};
 	highlight->setActive(true);
 	if (ih->joysticksInitialised()) {
-		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
+		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 
@@ -48,7 +48,10 @@ void CashRegisterTrigger::isOverlapping() {
 void CashRegisterTrigger::charge() {
 	if (cM->canCollect()) {
 		int totalPayment = 0;
+
 		// SONIDO CAJA REGISTRADORA
+		cashSound1->setVolume(GameManager::instance()->getSoundEffectsVolume());
+		cashSound2->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		if (sdlutils().rand().nextInt(0, 2) == 0) cashSound1->play(0);
 		else cashSound2->play(0);
 
@@ -59,6 +62,7 @@ void CashRegisterTrigger::charge() {
 			totalPayment += price;
 			money->addMoney(price);
 			GameManager::get()->getReputation()->addReputatiton(it->getComponent<ClientState>()->getHappiness() / 100);
+			addSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			addSound->play(0);
 		}
 
@@ -68,6 +72,7 @@ void CashRegisterTrigger::charge() {
 		if (rep >= sdlutils().rand().nextInt(0, 5)) {
 			tip = totalPayment / 10;
 			money->addMoney(tip);
+			tipSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			tipSound->play(0);
 #ifdef _DEBUG
 			cout << "You got " << totalPayment / 10 << " coins from tips" << endl;
@@ -104,15 +109,19 @@ void CashRegisterTrigger::charge() {
 
 void CashRegisterTrigger::charge(float rep, int m,int tip) {
 
+	cashSound1->setVolume(GameManager::instance()->getSoundEffectsVolume());
+	cashSound2->setVolume(GameManager::instance()->getSoundEffectsVolume());
 	if (sdlutils().rand().nextInt(0, 2) == 0) cashSound1->play(0);
 	else cashSound2->play(0);
 
 	for (auto it : *list) {
+		addSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		addSound->play(0);
 	}
 
 	// PROPINAS
 	if (tip > 0) {
+		tipSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		tipSound->play(0);
 		delete tipTexture;
 		tipTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x129008FF));

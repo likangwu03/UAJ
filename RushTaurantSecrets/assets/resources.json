@@ -709,6 +709,12 @@
       "rows": 1
     },
     {
+      "id": "CONTROLS",
+      "file": "assets/Sprites/UI/Controls/Controls.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
       "id": "BASKET_YELLOW",
       "file": "assets/Sprites/UI/HUD/basket_yellow.png",
       "cols": 1,

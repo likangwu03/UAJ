@@ -11,7 +11,7 @@ begin
 	# "clientFrequency" es un float
 	clientFrequency 11000
 	# "happinessFrequency" es un float
-	happinessFrequency 1070
+	happinessFrequency 2100
 	# "reputationDecrease" es un float
 	reputationDecrease 3
 	# "minimumThiefFrequency" es un float
@@ -24,7 +24,7 @@ end
 begin
 	objective 60
 	clientFrequency 10500
-	happinessFrequency 1060
+	happinessFrequency 2000
 	reputationDecrease 4.4
 	minimumThiefFrequency 23
 	maximumThiefFrequency 36
@@ -34,7 +34,7 @@ end
 begin
 	objective 80
 	clientFrequency 10000
-	happinessFrequency 1050
+	happinessFrequency 1900
 	reputationDecrease 4.6
 	minimumThiefFrequency 22.5
 	maximumThiefFrequency 35
@@ -44,7 +44,7 @@ end
 begin
 	objective 110
 	clientFrequency 9500
-	happinessFrequency 1040
+	happinessFrequency 1800
 	reputationDecrease 4.8
 	minimumThiefFrequency 22
 	maximumThiefFrequency 34
@@ -54,7 +54,7 @@ end
 begin
 	objective 130
 	clientFrequency 9000
-	happinessFrequency 1030
+	happinessFrequency 1700
 	reputationDecrease 5
 	minimumThiefFrequency 21.5
 	maximumThiefFrequency 33
@@ -64,7 +64,7 @@ end
 begin
 	objective 150
 	clientFrequency 8500
-	happinessFrequency 1020
+	happinessFrequency 1600
 	reputationDecrease 5.1
 	minimumThiefFrequency 21
 	maximumThiefFrequency 32
@@ -74,7 +74,7 @@ end
 begin
 	objective 200
 	clientFrequency 8000
-	happinessFrequency 1010
+	happinessFrequency 1500
 	reputationDecrease 5.2
 	minimumThiefFrequency 20.5
 	maximumThiefFrequency 31
@@ -84,7 +84,7 @@ end
 begin
 	objective 225
 	clientFrequency 7500
-	happinessFrequency 1000
+	happinessFrequency 1400
 	reputationDecrease 5.3
 	minimumThiefFrequency 20
 	maximumThiefFrequency 30
@@ -94,7 +94,7 @@ end
 begin
 	objective 263
 	clientFrequency 7000
-	happinessFrequency 990
+	happinessFrequency 1300
 	reputationDecrease 5.4
 	minimumThiefFrequency 19.75
 	maximumThiefFrequency 29.5
@@ -104,7 +104,7 @@ end
 begin
 	objective 300
 	clientFrequency 6500
-	happinessFrequency 980
+	happinessFrequency 1200
 	reputationDecrease 5.5
 	minimumThiefFrequency 19.5
 	maximumThiefFrequency 29

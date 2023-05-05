@@ -1,6 +1,7 @@
 #include "ButtonComp.h"
 
 #include "../Utilities/InputHandler.h"
+#include "../Structure/GameManager.h"
 
 #include "../Utilities/checkML.h"
 
@@ -27,14 +28,10 @@ void ButtonComp::handleEvents()
 	SDL_Rect dest = { transform->getPos().getX(), transform->getPos().getY(), transform->getW(), transform->getH() };
 
 	 if (ih().joysticksInitialised()) {
-		ih().refresh();
-		/*if (!selected) buttonHoverSound->play();*/
-
+		//ih().refresh();
 		//buttonHoverSound->play();
 		if (highlighted) {
 			if (ih().getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
-				//ih().clean();
-				//ih().setControls(false);
 				playSound();
 				_callback();
 			}
@@ -42,10 +39,8 @@ void ButtonComp::handleEvents()
 	}
 	else {
 		 if (ih().isKeyDown(SDL_SCANCODE_SPACE)) {
-			 //if (!highlighted) buttonHoverSound->play();
 			 if (highlighted) {
 				 playSound();
-				 //ih().setControls(true);
 				 _callback();
 			 }
 		 }
@@ -69,6 +64,7 @@ void ButtonComp::render() {
 
 
 void ButtonComp::playSound() {
+	buttonSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 	buttonSound->play();
 }
 

@@ -70,7 +70,6 @@ private:
 	int moneyGoal;
 	int playerReputation;
 	int playerMoney;
-	int initPlayerMoney;
 	int earnedMoney;
 
 	bool _gameOver;

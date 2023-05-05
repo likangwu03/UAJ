@@ -49,6 +49,11 @@ void BadEnding2Scene::reset() {
 		transition = new ShowSkipTransitionScene(this, 3);
 		GameManager::get()->pushScene(transition, true);
 	}
+
+	ambience->setVolume(GameManager::instance()->getSoundEffectsVolume());
+	(&sdlutils().soundEffects().at("OPEN_DOOR"))->setVolume(GameManager::instance()->getSoundEffectsVolume());
+	phonecall->setVolume(GameManager::instance()->getSoundEffectsVolume());
+	(&sdlutils().soundEffects().at("START_FIRE"))->setVolume(GameManager::instance()->getSoundEffectsVolume());
 }
 
 

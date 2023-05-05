@@ -31,7 +31,7 @@ void Day1IntroScene::reset() {
 	anim->setTexture("Player_Casual", 0, 0, 0, 10);
 
 	nightAmbience->setVolume(GameManager::instance()->getMasterVolume());
-	nightMusic->setMusicVolume(GameManager::instance()->getMasterVolume());
+	nightMusic->setMusicVolume(GameManager::instance()->getSoundEffectsVolume());
 	filter->setOpacity(80);
 
 	addPath(introPath[START]);
@@ -58,6 +58,7 @@ void Day1IntroScene::update() {
 		if (straightMovement->hasFinishedPath()) {
 			addPath(introPath[ENTERING]);
 			state = ARRIVE;
+			(&sdlutils().soundEffects().at("OPEN_DOOR"))->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 		}
 		break;

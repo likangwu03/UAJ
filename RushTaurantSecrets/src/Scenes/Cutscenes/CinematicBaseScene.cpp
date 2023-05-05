@@ -59,7 +59,7 @@ void CinematicBaseScene::handleEvents() {
 	//Scene::handleEvents();
 	if (dialogueBox != nullptr)
 		dialogueBox->handleEvents();
-	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
+	if (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) || !ih->joysticksInitialised() && ih->isKeyDown(SDLK_ESCAPE))
 		finishScene();
 
 }

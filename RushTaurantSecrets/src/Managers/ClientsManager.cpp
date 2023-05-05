@@ -43,8 +43,15 @@ void ClientsManager::createGroupClients() {
 	Message m;
 	m.id = Message::msg_ADD_CLINETS;
 	vector<Client*> group;
+
+	int prob = sdl->rand().nextInt(0, 100);
 	// número de clientes que hay en el grupo
-	int num = sdl->rand().nextInt(1, 5);
+	int num;
+	if (prob < 45) num = 1;
+	else if (prob >= 45 && prob < 75) num = 2;
+	else if (prob >= 75 && prob < 90) num = 3;
+	else num = 4;
+
 	m.grp_clients.num = num;
 
 	for (int i = num - 1; i >= 0; --i) {

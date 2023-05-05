@@ -39,6 +39,7 @@ void Restaurant::reset() {
 	ui->reset();
 	ui->nextDay();
 	refresh();
+	player->getComponent<PlayerMovementController>()->initP();
 }
 
 void Restaurant::callAfterCreating() {
@@ -59,7 +60,6 @@ void Restaurant::callAfterCreating() {
 	initRender();
 
 	ui->callAfterCreating();
-	player->getComponent<PlayerMovementController>()->initP();
 	player->getComponent<Transform>()->setPos(PANTRY_POS);
 	
 	initComponent();

@@ -90,10 +90,10 @@ void DayManager::nextDay(bool loading) {
 	if (!loading) {
 		// Game over (el bad ending 3 y 4 se comprueban en thievesState
 		// Bad ending 1 (si la reputación es negativa)
-		if (GameManager::get()->getReputation()->getReputation() < 0)
+  		if (GameManager::get()->getReputation()->getReputation() < 0)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING1), true);
 		// Bad ending 2 (si no se ha alcanzado el objetivo diario)
-		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() != dailyObjective)
+		else if (day > 0 && GameManager::get()->getMoney()->getEarnedMoney() < dailyObjective)
 			GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_BADENDING2), true);
 
 
@@ -167,6 +167,13 @@ void DayManager::nextDay(bool loading) {
 		else if (line.substr(0, 21) == "maximumThiefFrequency") {
 			maximumThiefFrequency = to_float(line.substr(22));
 		}
+	}
+
+	// Intros si se está cargando partida
+	if (loading) {
+		if (day == 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
+		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
+		else if (day == 3 && !GameManager::get()->getHasEverKilled().first) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
 	}
 
 	if (day > 0)

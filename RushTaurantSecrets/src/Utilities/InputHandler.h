@@ -259,7 +259,7 @@ public:
 
 			m_bJoysticksInitialised = joyInit;
 
-			control = true;
+			control = false;
 			
 			std::cout << "Initialised " << m_joysticks.size() << " joystick(s)\n";
 		}
@@ -286,6 +286,13 @@ public:
 		m_bJoysticksInitialised = false;
 	}
 
+	void setXBox(bool _xbox) {
+		xbox = _xbox;
+	}
+
+	bool getXBox() {
+		return xbox;
+	}
 private:
 
 	InputHandler() {
@@ -305,7 +312,6 @@ private:
 		isMouseMotionEvent_ = true;
 		mousePos_.first = event.motion.x;
 		mousePos_.second = event.motion.y;
-
 	}
 
 	inline void onMouseButtonChange(const SDL_Event& event, bool isDown) {
@@ -443,6 +449,8 @@ private:
 	std::array<bool, 3> mbState_;
 	const Uint8* kbState_;
 	char currentKey;
+
+	bool xbox = false;
 };
 
 // This macro defines a compact way for using the singleton InputHandler, instead of

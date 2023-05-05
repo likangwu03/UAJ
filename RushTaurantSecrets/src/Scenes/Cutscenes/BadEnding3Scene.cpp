@@ -63,9 +63,9 @@ void BadEnding3Scene::reset() {
 	police->getComponent<StraightMovement>()->setIsWalking(false);
 	*/
 
-	musicVol = 20;
-	music->setMusicVolume(musicVol);
-	siren->setVolume(musicVol);
+	music->setMusicVolume(GameManager::instance()->getMasterVolume());
+	siren->setVolume(GameManager::instance()->getSoundEffectsVolume());
+	(&sdlutils().soundEffects().at("OPEN_DOOR"))->setVolume(GameManager::instance()->getSoundEffectsVolume());
 
 	if (GameManager::instance()->getCurrentScene() == this) {
 		transition = new ShowSkipTransitionScene(this, 3);

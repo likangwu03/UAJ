@@ -1,4 +1,5 @@
 #include "InventoryComp.h"
+#include "../Structure/GameManager.h"
 
 #include "../Utilities/checkML.h"
 
@@ -68,6 +69,7 @@ bool InventoryComp::serveDish(_ecs::_dish_id dish) {
 	if (cellsOcuppied > 0) {
 		if (dishes[cellSelected] == dish) {
 			freeDish();
+			serveDishSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			serveDishSound->play();
 			return true;
 		}

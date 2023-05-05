@@ -26,6 +26,7 @@ DeskComp::DeskComp(GameObject* parent, float width, float height, int id) :
 }
 
 void DeskComp::assignClients(const std::vector<Client*>& clients) {
+	assignSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 	assignSound->play();
 	assigned = clients;
 }
@@ -48,6 +49,7 @@ void DeskComp::serveTable() {
 
 void DeskComp::cleanDesk(bool send) {
 	dirty = false;
+	cleanSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 	cleanSound->play();
 	if (send) {
 		Message m;
@@ -62,7 +64,10 @@ bool DeskComp::isOccupied() {
 }
 
 void DeskComp::isOverlapping() {
-	if (!ih->isKeyDown(SDLK_SPACE)) return;
+	if (ih->joysticksInitialised()) {
+		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
+	}
+	else if (!ih->isKeyDown(SDLK_SPACE)) return;
 
 	if (dirty) cleanDesk();
 	else serveTable();//spreadOverlap();

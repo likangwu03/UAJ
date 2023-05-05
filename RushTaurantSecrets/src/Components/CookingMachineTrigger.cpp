@@ -9,7 +9,7 @@ void CookingMachineTrigger::isOverlapping() {
 	}
 	highlight->setActive(true);
 	if (ih->joysticksInitialised()) {
-		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)) return;
+		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
 	}
 	else if (!ih->isKeyDown(SDLK_SPACE)) return;
 

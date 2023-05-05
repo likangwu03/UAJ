@@ -64,9 +64,6 @@ void SuperMarket::callAfterCreating() {
 	createMap();
 	initRender();
 	initComponent();
-	player->getComponent<PlayerMovementController>()->initP();
-
-
 }
 
 void SuperMarket::createMap() {
@@ -85,6 +82,7 @@ void SuperMarket::reset() {
 	Transform* playerTransform = player->getComponent<Transform>();
 	playerTransform->setPos(INITIAL_POS);
 	playerTransform->setOrientation(west);
+	player->getComponent<PlayerMovementController>()->initP();
 }
 
 BasketMarket* SuperMarket::getBM() {
