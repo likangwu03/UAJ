@@ -43,21 +43,25 @@ void BadEnding3Scene::reset() {
 	dialogueN = 0;
 
 	straightMovement->reset(RelativeToGlobal::pointPantry(paths[0][0]));
+	/*
 	straightMovement->setIsWalking(false);
 	transform->setMovState(idle);
 	transform->setOrientation(south);
+	*/
 
 	straightMovement->changeSpeed(3);
 
 	thief->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointPantry(thiefPaths[0][0]));
-	thief->getComponent<StraightMovement>()->setIsWalking(false);
+	// thief->getComponent<StraightMovement>()->setIsWalking(false);
 	thief->getComponent<StraightMovement>()->changeSpeed(1);
-	thief->getComponent<Transform>()->setMovState(idle);
-	thief->getComponent<Transform>()->setOrientation(north);
+	// thief->getComponent<Transform>()->setMovState(idle);
+	// thief->getComponent<Transform>()->setOrientation(north);
 
 	police->getComponent<StraightMovement>()->reset(RelativeToGlobal::pointPantry(policePaths[0][0]));
+	/*
 	police->getComponent<Transform>()->setMovState(idle);
 	police->getComponent<StraightMovement>()->setIsWalking(false);
+	*/
 
 	musicVol = 20;
 	music->setMusicVolume(musicVol);
@@ -84,7 +88,7 @@ void BadEnding3Scene::update() {
 	case BadEnding3Scene::START:
 		if (GameManager::get()->getCurrentScene() != transition) {
 			addPath(thiefPaths[0], thief);
-			thief->getComponent<StraightMovement>()->setIsWalking(true);
+			//thief->getComponent<StraightMovement>()->setIsWalking(true);
 			state = WALK;
 		}
 		break;
@@ -93,7 +97,7 @@ void BadEnding3Scene::update() {
 		if (thief->getComponent<StraightMovement>()->hasFinishedPath()){
 			state = ENTER;
 			addPath(paths[0], player);
-			straightMovement->setIsWalking(true);
+			//straightMovement->setIsWalking(true);
 			(&sdlutils().soundEffects().at("OPEN_DOOR"))->play();
 		}
 		break;
@@ -143,13 +147,27 @@ void BadEnding3Scene::update() {
 		break;
 	case BadEnding3Scene::FALL:
 		if (thief->getComponent<StraightMovement>()->hasFinishedPath()) {
-			// * c cae *
+			// se cae
+			thief->getComponent<Transform>()->setMovState(fallen);
+
+			// corregir la posición
+			thief->getComponent<StraightMovement>()->setActive(false);
+			Transform* thiefTransform = thief->getComponent<Transform>();
+			Vector thiefPos = thiefTransform->getPos();
+			thiefTransform->setPos(Vector(thiefPos.getX(), thiefPos.getY() + thiefTransform->getW() / 2));
+
 			state = GETUP;
 		}
 		break;
 	case BadEnding3Scene::GETUP:
 		if (timer >= DELAY) {
-			// * c levanta *
+			// se levanta
+			// devolver a la posición original
+			Transform* thiefTransform = thief->getComponent<Transform>();
+			Vector thiefPos = thiefTransform->getPos();
+			thiefTransform->setPos(Vector(thiefPos.getX(), thiefPos.getY() - thiefTransform->getW() / 2));
+			thief->getComponent<StraightMovement>()->setActive(true);
+			
 			state = GETOUT;
 			timer = 0;
 			addPath(thiefPaths[2], thief);

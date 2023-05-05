@@ -152,7 +152,7 @@ void StraightMovement::update() {
 				goBack();
 			}
 		}
-		// si ha terminado de recorrer el camino y est?en loop, vuelve a recorrerlo
+		// si ha terminado de recorrer el camino y esta en loop, vuelve a recorrerlo
 		else if (loop) {
 			path.cont = 0;
 			newStraight(path.points[path.cont]);

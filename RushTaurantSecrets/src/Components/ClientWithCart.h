@@ -35,6 +35,7 @@ private:
 	float heightCart;
 	GOOrientation oldOrientation;
 	bool changeToIdle;
+	bool changeToPhone;
 
 	inline void setAnim(Animation& anim, int row, int initCol, int endCol) {
 		anim.row = row;
@@ -104,9 +105,9 @@ private:
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_CLIENT_CART;
 
-	ClientWithCart(GameObject* parent) : Component(parent, id), offset(),
+	ClientWithCart(GameObject* parent, string sprite) : Component(parent, id), offset(),
 		nearEast(-23), nearWest(41), nearNorth(100), nearSouth(-60),
-		oldOrientation(none), changeToIdle(false) {
+		oldOrientation(none), changeToIdle(false), changeToPhone(false) {
 
 		sdl = SDLUtils::instance();
 
@@ -114,7 +115,7 @@ public:
 		straightMovement = parent->getComponent<StraightMovement>();
 		client = { nullptr, 0 ,0, 0, 0, 0, FRAME_RATE };
 		int aux = sdl->rand().nextInt(1, 15);
-		client.texture = &sdl->images().at("Client_" + to_string(aux));
+		client.texture = &sdl->images().at(sprite);
 
 		cart = { nullptr, 0 ,0, 0, 0, 0, FRAME_RATE };
 		cart.elapsedTime = sdl->currRealTime();
@@ -130,8 +131,8 @@ public:
 		if (transform->getMovState() == pushing) {
 			// después de estar parado, si vuelve a caminar en la misma orientación
 			// hay que forzar a que se cambie la dirección
-			if (changeToIdle) {
-				changeToIdle = false;
+			if (changeToIdle || changeToPhone) {
+				changeToIdle = changeToPhone = false;
 				setDirection(oldOrientation);
 			}
 			changeDirection();
@@ -142,6 +143,14 @@ public:
 				changeToIdle = true;
 				setAnim(cart, 0, cart.initCol, cart.initCol);
 				setAnim(client, 1, 18, 23);
+			}
+		}
+		else if (transform->getMovState() == phone) {
+			// se cambia solo una vez la animación a idle del personaje y se para el carrito
+			if (!changeToPhone) {
+				changeToPhone = true;
+				setAnim(cart, 0, cart.initCol, cart.initCol);
+				setAnim(client, 6, 3, 8);
 			}
 		}
 

@@ -10,7 +10,7 @@ void CharacterAnimator::init() {
 	// mov anterior y actual
 	parentMov = plTf->getMovState();
 	currMov = noMov;
-};
+}
 
 
 void CharacterAnimator::update() {
@@ -32,15 +32,20 @@ void CharacterAnimator::update() {
 
 		if (currMov == idle) {
 			animationParameters.currAnim = 1;
+			hasOrientation = true;
 		}
 		else if (currMov == walking) {
 			animationParameters.currAnim = 2;
+			hasOrientation = true;
 		}
 		else if (currMov == sleeping) {
 			animationParameters.currAnim = 3;
+			setCurrentAnim(0, 6, animationParameters.currAnim);
+			hasOrientation = false;
 		}
 		else if (currMov == pushing) {
 			animationParameters.currAnim = 8;
+			hasOrientation = true;
 		}
 		else if (currMov == sitting) {
 			if (parentOrientation == west || parentOrientation == east) {
@@ -49,95 +54,59 @@ void CharacterAnimator::update() {
 			else if (parentOrientation == north || parentOrientation == south) {
 				animationParameters.currAnim = 1;
 			}
+			hasOrientation = true;
 		}
 		else if (currMov == phone) {
 			animationParameters.currAnim = 6;
+			setCurrentAnim(3, 9, animationParameters.currAnim);
+			hasOrientation = false;
 		}
 		else if (currMov == dead) {
 			animationParameters.currAnim = 19;
 			// se cambia el ángulo para que se tumbe el sprite
 			angle = 90;
+			setCurrentAnim(3, 5, animationParameters.currAnim);
+			hasOrientation = false;
 		}
 		else if (currMov == shooting) {
 			animationParameters.currAnim = 17;
+			hasOrientation = false;
+		}
+		else if (currMov == fallen) {
+			animationParameters.currAnim = 0;
+			angle = -90;
+			setCurrentAnim(1, 1, animationParameters.currAnim);
+			hasOrientation = false;
 		}
 	}
 
-	// si no ha cambiado, se comprueba si la dirección ha cambiado
-	// si es asi se cogen los frames oportunos
-	if (currOrientation != parentOrientation || movHaveChanged) {
+	if (hasOrientation) {
+		// si no ha cambiado, se comprueba si la dirección ha cambiado
+		// si es asi se cogen los frames oportunos
+		if (currOrientation != parentOrientation || movHaveChanged) {
 
-		currOrientation = parentOrientation;
+			currOrientation = parentOrientation;
 
-		if (currOrientation == east) {
-			// muerto
-			if (currMov == dead) {
-				setCurrentAnim(3, 5, animationParameters.currAnim);
-			}
-			// móvil
-			else if (currMov == phone) {
-				setCurrentAnim(3, 9, animationParameters.currAnim);
-			}
-			// idle, corriendo, durmiendo, empujando, sentado y disparando
-			else {
+			if (currOrientation == east) {
+				// idle, corriendo, durmiendo, empujando, sentado y disparando
 				setCurrentAnim(0, 6, animationParameters.currAnim);
 			}
-		}
-		else if (currOrientation == north) {
-			// muerto
-			if (currMov == dead) {
-				setCurrentAnim(3, 5, animationParameters.currAnim);
-			}
-			// durmiendo
-			else if (currMov == sleeping) {
-				setCurrentAnim(0, 6, animationParameters.currAnim);
-			}
-			// móvil
-			else if (currMov == phone) {
-				setCurrentAnim(3, 9, animationParameters.currAnim);
-			}
-			// idle, corriendo, empujando, sentado y disparando
-			else {
+			else if (currOrientation == north) {
+				// idle, corriendo, empujando, sentado y disparando
 				setCurrentAnim(6, 12, animationParameters.currAnim);
 			}
-		}
-		else if (currOrientation == west) {
-			// sentado
-			if (currMov == sitting) {
-				setCurrentAnim(6, 12, animationParameters.currAnim);
+			else if (currOrientation == west) {
+				// sentado
+				if (currMov == sitting) {
+					setCurrentAnim(6, 12, animationParameters.currAnim);
+				}
+				// idle, corriendo, empujando y disparando
+				else {
+					setCurrentAnim(12, 18, animationParameters.currAnim);
+				}
 			}
-			// muerto
-			else if (currMov == dead) {
-				setCurrentAnim(3, 5, animationParameters.currAnim);
-			}
-			// durmiendo
-			else if (currMov == sleeping) {
-				setCurrentAnim(0, 6, animationParameters.currAnim);
-			}
-			// móvil
-			else if (currMov == phone) {
-				setCurrentAnim(3, 9, animationParameters.currAnim);
-			}
-			// idle, corriendo, empujando y disparando
-			else {
-				setCurrentAnim(12, 18, animationParameters.currAnim);
-			}
-		}
-		else if (plTf->getOrientation() == south) {
-			// muerto
-			if (currMov == dead) {
-				setCurrentAnim(3, 5, animationParameters.currAnim);
-			}
-			// durmiendo
-			else if (currMov == sleeping) {
-				setCurrentAnim(0, 6, animationParameters.currAnim);
-			}
-			// móvil
-			else if (currMov == phone) {
-				setCurrentAnim(3, 9, animationParameters.currAnim);
-			}
-			// idle, corriendo, empujando, sentado y disparando
-			else {
+			else if (plTf->getOrientation() == south) {
+				// idle, corriendo, empujando, sentado y disparando
 				setCurrentAnim(18, 24, animationParameters.currAnim);
 			}
 		}

@@ -11,12 +11,16 @@ protected:
 		straightMovement->addPath(RelativeToGlobal::pointsRestaurant(points));
 	}
 
+	void reset(Vector point) {
+		straightMovement->reset(RelativeToGlobal::pointRestaurant(point));
+	}
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_ROUTE;
 
 	Route(GameObject* parent, Vector initPos) : Component(parent, id) {
 		straightMovement = parent->getComponent<StraightMovement>();
-		straightMovement->reset(RelativeToGlobal::pointRestaurant(initPos));
+		reset(initPos);
 
 		transform = parent->getComponent<Transform>();
 	}

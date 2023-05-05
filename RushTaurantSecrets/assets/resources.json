@@ -213,6 +213,18 @@
       "rows": 20
     },
     {
+      "id": "Staff_1",
+      "file": "assets/Sprites/Restaurant/Staff_sprite_1.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
+      "id": "Staff_2",
+      "file": "assets/Sprites/Restaurant/Staff_sprite_2.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
       "id": "0",
       "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
     },

@@ -4,8 +4,11 @@
 #include "../../GameObjects/ClientMarket.h"
 #include "../../Utilities/checkML.h"
 #include "../../Components/Route1.h"
-#include "../../GameObjects/DancingClient.h"
 #include "../../Components/Route2.h"
+#include "../../Components/Route3.h"
+#include "../../Components/Route4.h"
+#include "../../GameObjects/ClientCart.h"
+#include "../../Managers/DayManager.h"
 
  void SuperMarket::initComponent() {
 	 Scene::initComponent();
@@ -36,13 +39,24 @@ void SuperMarket::init() {
 	player = new Player(this, 0);
 	new OtherPlayer(this, 2);
 
-	ClientMarket* clientMarket = new ClientMarket(this);
-	new Route1(clientMarket);
+	ClientCart* clientCart = new ClientCart(this, "Client_10", 2.5);
+	new Route1(clientCart, 10000, { Vector(10, 5), Vector(10, 9), Vector(19, 9) });
 
-	for (int i = 0; i < 3; ++i) {
-		DancingClient* dancingClient = new DancingClient(this);
-		new Route2(dancingClient, Vector(10 + i, 14));
+	if (GameManager::get()->getDayManager()->getDay() == 3) {
+		for (int i = 0; i < 3; ++i) {
+			string sprite = "Client_" + to_string(8 + i);
+			ClientMarket* dancingClient = new ClientMarket(this, sprite, _ecs::Top, 4.5);
+			new Route2(dancingClient, Vector(19 + 0.8 * i, 20), 8);
+		}
 	}
+
+	new ClientMarket(this, "Staff_1", _ecs::Down, 0, Vector(31, 3));
+
+	ClientMarket* fishStaff = new ClientMarket(this, "Staff_2", _ecs::Down, 2);
+	new Route3(fishStaff, Vector(5, 9), Vector(5, 13), 7000);
+
+	ClientCart* clientCart2 = new ClientCart(this, "Client_5", 2.5);
+	new Route4(clientCart2, 12000);
 }
 
 void SuperMarket::callAfterCreating() {
