@@ -4,7 +4,7 @@
 
 Game::Game() {
 	srand(time(NULL));
-	sdl = SDLUtils::init("Rush Taurant Secrets", 1280, 720, "assets/resources.json");
+	sdl = SDLUtils::init("RushTaurant Secrets", 1280, 720, "assets/resources.json");
 	exit = exitCoop = false;
 	gameManager = GameManager::get();
 	ih = InputHandler::instance();

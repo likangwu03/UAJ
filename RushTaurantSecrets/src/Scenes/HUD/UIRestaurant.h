@@ -52,6 +52,7 @@ private:
 	SDL_Rect objectiveRect;
 	SDL_Rect objectiveOutlineRect;
 
+	GameObject* inventoryBg;
 	Inventory* inventory;
 
 	Clock* clock;

@@ -160,8 +160,9 @@ void InventoryComp::nextDish() {
 }
 
 void InventoryComp::nextDay() {
-	cellSelected = -1;
-	for (auto b : dishesBool) {
-		b = false;
+	for (int i = 0; i < MAX_DISHES; i++) {
+		cellSelected = i;
+		if (dishesBool[i]) freeDish();
 	}
+	cellSelected = -1;
 }
