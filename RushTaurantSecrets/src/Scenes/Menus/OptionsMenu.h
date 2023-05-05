@@ -9,6 +9,8 @@ class OptionsMenu : public Scene
 {
 private:
 
+	enum SLIDERS {MUSIC, SOUNDEFFECTS};
+
 	const string FONT_PATH = "assets/Fonts/Arcadepix Plus.ttf";
 	const int FONTSIZE = 50, ICONSIZE = 48, ICONX = 20, ICONY = 15, CENTEROUTLINE = 4;
 	const int TARGETOFFSET = 60;

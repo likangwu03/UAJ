@@ -26,13 +26,14 @@ sdl(SDLUtils::instance()), pantryMusic(&sdl->musics().at("PANTRY_MUSIC")), resta
 
 void PantryExitTrigger::isOverlapping() {
 	image->setActive(true);
-	if ((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A))) && GameManager::get()->canChangeScene()) {
+	if ((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && GameManager::get()->canChangeScene()) {
 		// se desactiva el jugador de la despensa
 		playerPantry->setActives(false);
 		otherPPantryObj->setActives(false);
 		otherPPantryComp->sceneOut();
 		// se cambia al restaurant
 		gm->changeScene(gm->getScene(_ecs::sc_RESTAURANT));
+		doorSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		doorSound->play();
 		pantryMusic->pauseMusic();
 		restaurantMusic->play(-1);

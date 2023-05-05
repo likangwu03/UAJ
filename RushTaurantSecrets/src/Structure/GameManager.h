@@ -74,6 +74,7 @@ private:
 	int killedNum; //número de ladrones matados en el día anterior
 
 	int MASTER_VOLUME = 50; // sonido maestro;
+	int SOUND_EFFECTS = 50; // efectos de sonido
 
 	GameManager();
 
@@ -131,4 +132,6 @@ public:
 
 	int getMasterVolume();
 	void setMasterVolume(int nVolume);
+	int getSoundEffectsVolume();
+	void setSoundEffectsVolume(int nVolume);
 };

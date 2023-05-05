@@ -66,6 +66,7 @@ void BadEnding1Scene::reset() {
 		GameManager::get()->pushScene(transition, true);
 	}
 
+	phonecall->setVolume(GameManager::instance()->getSoundEffectsVolume());
 }
 
 void BadEnding1Scene::renderCinematic()

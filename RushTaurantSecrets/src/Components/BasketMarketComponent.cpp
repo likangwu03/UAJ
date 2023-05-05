@@ -150,6 +150,7 @@ void BasketMarketComponent::selectIngredientInBasket(SDL_KeyCode key) {
 	if (key == SDLK_LEFT) {
 		if (selectedIngr != ingredients.begin() && selectedIngr != ingredients.end()) {
 			selectedIngr--;
+			selectSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			selectSound->play();
 		}
 	}
@@ -159,6 +160,7 @@ void BasketMarketComponent::selectIngredientInBasket(SDL_KeyCode key) {
 		it++;
 		if (it != ingredients.end()) {
 			selectedIngr++;
+			selectSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			selectSound->play();
 		}
 	}
@@ -168,11 +170,18 @@ void BasketMarketComponent::handleEvents() {
 	if (basketON) {
 		if (!chooseHMMode) {
 			if (ih->joysticksInitialised()) {
-				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) selectIngredientInBasket(SDLK_LEFT);
-				else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))selectIngredientInBasket(SDLK_RIGHT);
-				else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A) && ingredients.size() > 0) {
+				if (ih->getXBox()) {
+					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_BACK)) selectIngredientInBasket(SDLK_LEFT);
+					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_GUIDE))selectIngredientInBasket(SDLK_RIGHT);
+				}
+				else if(!ih->joysticksInitialised()){
+					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) selectIngredientInBasket(SDLK_LEFT);
+					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER))selectIngredientInBasket(SDLK_RIGHT);
+				}
+				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B) && ingredients.size() > 0) {
 					chooseHMMode = true;
 					showControl->changeOffset(Vector(165, 0), 2);
+					confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 					confirmSound->play();
 				}
 			}
@@ -183,19 +192,24 @@ void BasketMarketComponent::handleEvents() {
 					chooseHMMode = true;
 					
 					showControl->changeOffset(Vector(165, 0), 2);
+					confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 					confirmSound->play();
 				}
 
 			}
 
 		}
-
 		else { // (chooseHMMode)
-
 			if (ih->joysticksInitialised()) {
-				if (ih->isKeyDown(SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) changeAmount(SDLK_LEFT);
-				else if (ih->isKeyDown(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) changeAmount(SDLK_RIGHT);
-				else if (ih->isKeyDown(SDL_CONTROLLER_BUTTON_A)) {
+				if (ih->getXBox()) {
+					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_BACK)) changeAmount(SDLK_LEFT);
+					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_GUIDE)) changeAmount(SDLK_RIGHT);
+				}
+				else if (!ih->joysticksInitialised()) {
+					if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) changeAmount(SDLK_LEFT);
+					else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) changeAmount(SDLK_RIGHT);
+				}
+				if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
 					chooseHMMode = false;
 					
 					showControl->changeOffset(Vector(45, -60), 2);
@@ -207,11 +221,14 @@ void BasketMarketComponent::handleEvents() {
 
 					if (selectedIngr->second == 0) {
 						cleanEmptyBasket();
+						quitIng->setVolume(GameManager::instance()->getSoundEffectsVolume());
 						quitIng->play();
 					}
-					else confirmSound->play();
+					else {
+						confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
+						confirmSound->play();
+					}
 				}
-
 			}
 			else {
 				if (ih->isKeyDown(SDLK_LEFT)) changeAmount(SDLK_LEFT);
@@ -228,9 +245,13 @@ void BasketMarketComponent::handleEvents() {
 
 					if (selectedIngr->second == 0) {
 						cleanEmptyBasket();
+						quitIng->setVolume(GameManager::instance()->getSoundEffectsVolume());
 						quitIng->play();
 					}
-					else confirmSound->play();
+					else {
+						confirmSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
+						confirmSound->play();
+					}
 				}
 
 			}
@@ -255,6 +276,7 @@ void BasketMarketComponent::enterRegister(bool enter) {
 void BasketMarketComponent::setBasketON(bool value) {
 	if (!isOnRegister) {
 		basketON = value;
+		basketSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		basketSound->play();
 	}
 }
@@ -269,6 +291,7 @@ void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
 			selectedIngr->second--;
 			int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
 			totalPrice -= cost;
+			selectNum->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			selectNum->play();
 			setTotalPrice();
 
@@ -278,6 +301,7 @@ void BasketMarketComponent::changeAmount(SDL_KeyCode key) {
 		selectedIngr->second++;
 		int cost = _ecs::MarketIngs[selectedIngr->first - _ecs::FLOUR].price;
 		totalPrice += cost;
+		selectNum->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		selectNum->play();
 		setTotalPrice();
 

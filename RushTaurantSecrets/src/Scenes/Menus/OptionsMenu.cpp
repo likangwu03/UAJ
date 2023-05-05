@@ -35,9 +35,9 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 			auto sliderComp = MusicSlider->getComponent<SliderComponent>();
 			slider = sliderComp->getSlider();
 
-			if ((ih->isKeyDown(SDLK_SPACE) && !slider)) 
+			if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && !slider))
 				sliderComp->setSlider(true);			
-			else if ((ih->isKeyDown(SDLK_SPACE) && slider)) 
+			else if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && slider))
 				sliderComp->setSlider(false);
 
 			slider = sliderComp->getSlider();
@@ -49,9 +49,9 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 			auto sliderComp = SoundsSlider->getComponent<SliderComponent>();
 			slider = sliderComp->getSlider();
 
-			if ((ih->isKeyDown(SDLK_SPACE) && !slider))
+			if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && !slider))
 				sliderComp->setSlider(true);
-			else if ((ih->isKeyDown(SDLK_SPACE) && slider))
+			else if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && slider))
 				sliderComp->setSlider(false);
 
 			slider = sliderComp->getSlider();
@@ -63,8 +63,8 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 			sdl->toggleFullScreen();
 		});
 
-	MusicSlider = new Slider(this, 100, 200, sliderMusicButton);
-	SoundsSlider = new Slider(this, 100, 400, sliderSoundsButton);
+	MusicSlider = new Slider(this, 100, 200, sliderMusicButton, MUSIC);
+	SoundsSlider = new Slider(this, 100, 400, sliderSoundsButton, SOUNDEFFECTS);
 
 	button = 4;
 }

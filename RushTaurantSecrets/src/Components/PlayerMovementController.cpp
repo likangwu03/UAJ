@@ -89,16 +89,6 @@ void PlayerMovementController::handleEvents() {
 				transform->setOrientation(south);
 			}
 		}
-		//// eje x mando 2
-		//else if (input->xvalue(0, 2) > 0 || input->xvalue(0, 2) < 0)
-		//{
-		//	speed.setX(offset * input->xvalue(0,2));
-		//}
-		//// eje y mando 2
-		//else if (input->yvalue(0, 2) > 0 || input->yvalue(0, 2) < 0)
-		//{
-		//	speed.setY(offset * input->yvalue(0,2));
-		//}
 	}
 	else if (input->keyDownEvent()) {
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
@@ -161,7 +151,6 @@ bool PlayerMovementController::nonKeyPressed() {
 			moveUp();
 			pressed = true;
 		}		
-		//return (currentKeyStates[SDL_SCANCODE_W] || currentKeyStates[SDL_SCANCODE_A] || currentKeyStates[SDL_SCANCODE_S] || currentKeyStates[SDL_SCANCODE_D]);
 		return pressed;
 	}
 	if (!keyboard) {
@@ -204,10 +193,11 @@ void PlayerMovementController::initP() {
 			input->initialiseJoysticks();
 		_joy = input->getPlayerController(player);
 		controller = SDL_JoystickName(_joy);
-		if (std::string(controller) == "Controller (Xbox One For Windows)")
+		if (std::string(controller) == "Controller (Xbox One For Windows)") 
 			xbox = true;
-		else
+		else 
 			xbox = false;
+		input->setXBox(xbox);
 	}
 }
 

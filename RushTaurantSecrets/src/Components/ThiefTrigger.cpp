@@ -40,6 +40,7 @@ void ThiefTrigger::hideButtons() {
 bool ThiefTrigger::escape(bool keyPressed) {
 	if (keyPressed) {
 		thiefMovement->escape();
+		escapeSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		escapeSound->play();
 		hideButtons();
 		interactWithNextThief();
@@ -52,6 +53,7 @@ bool ThiefTrigger::escape(bool keyPressed) {
 bool ThiefTrigger::die(bool keyPressed) {
 	if (keyPressed) {
 		thiefMovement->die();
+		dieSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		dieSound->play();
 		hideButtons();
 		// si había overlap con más de un ladrón, se pasa a interactuar con el siguiente
@@ -149,9 +151,11 @@ void ThiefTrigger::send(bool escape) {
 void ThiefTrigger::escapeOrDie(bool escape) {
 	if(escape) {
 		thiefMovement->escape();
+		escapeSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		escapeSound->play();
 	} else {
 		thiefMovement->die();
+		dieSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 		dieSound->play();
 	}
 	if(thievesManager->getThiefInteractWith() == parent) {

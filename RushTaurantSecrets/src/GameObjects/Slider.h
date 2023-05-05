@@ -12,7 +12,7 @@ private:
 
 	SliderComponent* sliderComp;
 public:
-	Slider(Scene* scene, int x, int y, ButtonGO* _sliderButton) : GameObject(scene, _ecs::grp_GENERAL, _ecs::hdr_PLAYER) {
-		sliderComp = new SliderComponent(this, Vector(x,y), WIDTH, HEIGHT, _sliderButton);
+	Slider(Scene* scene, int x, int y, ButtonGO* _sliderButton, int numSlider) : GameObject(scene, _ecs::grp_GENERAL, _ecs::hdr_PLAYER) {
+		sliderComp = new SliderComponent(this, Vector(x,y), WIDTH, HEIGHT, _sliderButton, numSlider);
 	}
 };

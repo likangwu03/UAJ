@@ -28,6 +28,7 @@ void Pantry::init() {
 	collisionsManager = new CollisionsManager(this);
 
 	player = new Player(this, 0);
+	player->getComponent<PlayerMovementController>()->initP();
 	new OtherPlayer(this, 1);
 	new TimeOfDayObj(this, { 0,100 }, sdlutils().getLoadedTilesets().at("pantryAfternoon"), sdlutils().getLoadedTilesets().at("pantryNight"));
 	// el update no se ejecuta hasta que se esté en la escena
@@ -51,8 +52,6 @@ void Pantry::callAfterCreating() {
 	rest = GameManager::get()->getRestaurant();
 	createMap();
 	initRender();
-	player->getComponent<PlayerMovementController>()->initP();
-
 }
 
 void Pantry::render() {
@@ -93,6 +92,7 @@ void Pantry::reset() {
 	GameObject* otherPlayer = getGameObject(_ecs::hdr_OTHERPLAYER);
 	otherPlayer->getComponent<OtherPlayerComp>()->sceneOut();
 	otherPlayer->setActives(false);
+	player->getComponent<PlayerMovementController>()->initP();
 }
 
 void Pantry::refresh() {

@@ -366,3 +366,11 @@ int GameManager::getMasterVolume() {
 void GameManager::setMasterVolume(int nVolume) {
 	MASTER_VOLUME = nVolume;
 }
+
+int GameManager::getSoundEffectsVolume() {
+	return SOUND_EFFECTS;
+}
+
+void GameManager::setSoundEffectsVolume(int nVolume) {
+	SOUND_EFFECTS = nVolume;
+}
