@@ -28,6 +28,7 @@ CinematicBaseScene::~CinematicBaseScene() {
 }
 
 void CinematicBaseScene::render() {
+	delete skipText;
 	if (ih->joysticksInitialised()) {
 		if(ih->getXBox())
 		skipText = new Texture(sdlutils().renderer(), "Press Y to skip", *font, build_sdlcolor(0xffffffFF));
@@ -51,7 +52,6 @@ void CinematicBaseScene::renderUI() {
 void CinematicBaseScene::update() {
 	Scene::update();
 	cont += frameTime;
-	delete skipText;
 	
 }
 

@@ -43,7 +43,6 @@ public:
 	void changeOffset(Vector off,int i);
 	float getProportion(int i) { return controls_[i].proportion; };
 	void changeHeight(float height,int i);
-	void initComponent()override;
 	void changeInput();
 
 	Texture* getTexture(int i);
