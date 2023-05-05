@@ -22,8 +22,8 @@ SuperCashRegisterTriggerComp::SuperCashRegisterTriggerComp(GameObject* parent, V
 void SuperCashRegisterTriggerComp::isOverlapping() {
 	highlight->setActive(true);
 
+	auto scene = dynamic_cast<SuperMarket*>(parent->getScene());
 	if (bM == nullptr) {
-		auto scene = dynamic_cast<SuperMarket*>(parent->getScene());
 		bM = scene->getBM();
 		bMC = bM->getComponent<BasketMarketComponent>();
 		if (!bMC->getBasketON()) {
@@ -38,25 +38,13 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 	}
 
 	// cleon: mejor en 1 if
-	if (ih->joysticksInitialised()) {
-		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) {
-			if ((money->getMoney() - money->getPrice() >= 0)) {
-				sendToClien();
-				money->subtractMoney(money->getPrice());
-				money->setPrice(0);
-				payAndLeave();
-			}
+	if (scene->getBuy()) {
+		if ((money->getMoney() - money->getPrice() >= 0)) {
+			sendToClien();
+			money->subtractMoney(money->getPrice());
+			money->setPrice(0);
+			payAndLeave();
 		}
-	}
- 	else if (ih->isKeyDown(SDLK_SPACE)) {
-		if (buybutton->getComponent<ButtonComp>()->isHighlighted()) {
-			if ((money->getMoney() - money->getPrice() >= 0)) {
-				sendToClien();
-				money->subtractMoney(money->getPrice());
-				money->setPrice(0);
-				payAndLeave();
-			}			
-		}		
 	}
 }
 

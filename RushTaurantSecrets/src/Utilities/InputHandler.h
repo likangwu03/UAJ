@@ -171,7 +171,10 @@ public:
 
 	bool getButtonState(int joy, int buttonNumber)
 	{
-		return m_buttonStates[joy][buttonNumber];
+		bool state = m_buttonStates[joy][buttonNumber];
+		if (m_buttonStates[joy][buttonNumber])
+			m_buttonStates[joy][buttonNumber] = false;
+		return state;
 	}
 
 	bool getHatState(int i) {
@@ -268,6 +271,7 @@ public:
 			m_bJoysticksInitialised = false;
 		}
 	}
+
 	bool joysticksInitialised() {
 		return m_bJoysticksInitialised;
 	}

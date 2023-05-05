@@ -56,6 +56,7 @@ private:
 
 	ButtonGO* buybutton;
 	bool buying = false;
+	bool buy = false;
 
 	void toggleDailyMenu();
 
@@ -78,5 +79,7 @@ public:
 
 	BasketMarket* basketM();
 	ButtonGO* BuyButton();
+	void setBuy(bool _buy);
+	bool getBuy();
 };
 

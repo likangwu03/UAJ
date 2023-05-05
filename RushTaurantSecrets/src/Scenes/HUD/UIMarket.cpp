@@ -74,7 +74,7 @@ UIMarket::UIMarket(Scene* market) : Scene(), market(market) {
 
 	buybutton = new ButtonGO(this, "BUY_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H,
 		[&]() {
-
+			buy = true;
 		});
 	buybutton->setActives(false);
 }
@@ -211,4 +211,12 @@ BasketMarket* UIMarket::basketM() {
 
 ButtonGO* UIMarket::BuyButton() {
 	return buybutton;
+}
+
+void UIMarket::setBuy(bool _buy) {
+	buy = _buy;
+}
+
+bool UIMarket::getBuy() {
+	return buy;
 }

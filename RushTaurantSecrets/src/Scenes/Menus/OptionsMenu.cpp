@@ -50,9 +50,9 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 			auto sliderComp = MusicSlider->getComponent<SliderComponent>();
 			slider = sliderComp->getSlider();
 
-			if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && !slider))
+			if (!slider)
 				sliderComp->setSlider(true);			
-			else if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && slider))
+			else if (slider)
 				sliderComp->setSlider(false);
 
 			slider = sliderComp->getSlider();
@@ -64,9 +64,9 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 			auto sliderComp = SoundsSlider->getComponent<SliderComponent>();
 			slider = sliderComp->getSlider();
 
-			if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && !slider))
+			if (!slider)
 				sliderComp->setSlider(true);
-			else if (((ih->isKeyDown(SDLK_SPACE) || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))) && slider))
+			else if (slider)
 				sliderComp->setSlider(false);
 
 			slider = sliderComp->getSlider();

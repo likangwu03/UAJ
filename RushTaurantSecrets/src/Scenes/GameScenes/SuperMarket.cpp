@@ -93,6 +93,13 @@ ButtonGO* SuperMarket::buyButton() {
 	return uiMarket->BuyButton();
 }
 
+void SuperMarket::setBuy(bool _buy) {
+	uiMarket->setBuy(_buy);
+}
+bool SuperMarket::getBuy() {
+	return uiMarket->getBuy();
+}
+
 void SuperMarket::resumeMusic() {
 	supermarketMusic->resumeMusic();
 }

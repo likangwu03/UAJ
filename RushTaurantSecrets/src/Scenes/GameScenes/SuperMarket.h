@@ -53,6 +53,8 @@ public:
 
 	BasketMarket* getBM();
 	ButtonGO* buyButton();
+	void setBuy(bool _buy);
+	bool getBuy();
 
 	void initCoopMode(bool server)override;
 	void quitCoopMode() override;
