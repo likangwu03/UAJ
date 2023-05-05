@@ -159,14 +159,14 @@ void CoopMenu::handleEvents() {
 	if (ih->joysticksInitialised()) {
 		//ih->refresh();
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
-			|| ih->getHatState(UP)) {
+			|| ih->getHatStateMenu(UP)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
 		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_DOWN)
-			|| ih->getHatState(DOWN)) {
+			|| ih->getHatStateMenu(DOWN)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}

@@ -177,6 +177,13 @@ public:
 		return state;
 	}
 
+	bool getHatStateMenu(int i) {
+		bool state = m_joyhat[i];
+		if (m_joyhat[i])
+			m_joyhat[i] = false;
+		return state;
+	}
+
 	bool getHatState(int i) {
 		return m_joyhat[i];
 	}

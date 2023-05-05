@@ -103,19 +103,19 @@ void OptionsMenu::handleEvents() {
 
 			//ih->refresh();
 			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
-				|| ih->getHatState(LEFT)) {
+				|| ih->getHatStateMenu(LEFT)) {
 				button = (button - 1) % NUM_BUTTON;
 				if (button < 0)
 					button = button + NUM_BUTTON;
 				selectedButton(button);
 			}
 			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
-				|| ih->getHatState(RIGHT)) {
+				|| ih->getHatStateMenu(RIGHT)) {
 				button = (button + 1) % NUM_BUTTON;
 				selectedButton(button);
 			}
 			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_DOWN)
-				|| ih->getHatState(DOWN)) {
+				|| ih->getHatStateMenu(DOWN)) {
 				if (button == 0)
 					button = 1;
 				else
@@ -123,7 +123,7 @@ void OptionsMenu::handleEvents() {
 				selectedButton(button);
 			}
 			else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)
-				|| ih->getHatState(UP)) {
+				|| ih->getHatStateMenu(UP)) {
 				if (button == 1)
 					button = 0;
 				else if (button == 4)

@@ -64,14 +64,14 @@ void DailyMenuScene::handleEvents() {
 	if (ih->joysticksInitialised()) {
 		//ih->refresh();
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
-			|| ih->getHatState(LEFT) || (ih->xvalue(0, 1) < 0)) {
+			|| ih->getHatStateMenu(LEFT) || (ih->xvalue(0, 1) < 0)) {
 			button = (button - 1) % NUM_BUTTON;
 			if (button < 0)
 				button = button + NUM_BUTTON;
 			selectedButton(button);
 		}
 		else if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
-			|| ih->getHatState(RIGHT) || (ih->xvalue(0, 1) > 0)) {
+			|| ih->getHatStateMenu(RIGHT) || (ih->xvalue(0, 1) > 0)) {
 			button = (button + 1) % NUM_BUTTON;
 			selectedButton(button);
 		}
