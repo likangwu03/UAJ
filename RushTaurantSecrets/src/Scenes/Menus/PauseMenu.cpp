@@ -11,27 +11,8 @@ PauseMenu::PauseMenu() : sdl(SDLUtils::instance()) {
 	image = &(sdlutils().images().at("CONTINUE_BG"));
 	new Image(bg, image);
 	button = 0;
-	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
-		[&]() {
-			GameManager::get()->popScene();
-			GameManager::get()->getCurrentScene()->resumeSound();
-			GameManager::get()->getCurrentScene()->resumeMusic();
-		});
-	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
-	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
-		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
-			GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
-		});
-	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
-		[&]() {
-			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
-		});
-
-
+	
+	createButtons();
 }
 
 PauseMenu::~PauseMenu() {
@@ -86,4 +67,27 @@ void PauseMenu::selectedButton(int selected) {
 		break;
 	}
 }
+
+void PauseMenu::createButtons() {
+	buttonResume = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() / 4 - 130 / 2), 385, 130,
+		[&]() {
+			GameManager::get()->popScene();
+	GameManager::get()->getCurrentScene()->resumeSound();
+	GameManager::get()->getCurrentScene()->resumeMusic();
+		});
+	buttonResume->getComponent<ButtonComp>()->setHighlighted(true);
+	buttonMainMenu = new ButtonGO(this, "MAINM_BUTTON_UP", "BUTTON_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 2 / 4 - 130 / 2), 385, 130,
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_MAINMENU));
+	GameManager::get()->getScene(sc_MAINMENU)->resumeSound();
+		});
+	buttonOptions = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - 385 / 2, SDLUtils::instance()->height() * 3 / 4 - 130 / 2), 385, 130,
+		[&]() {
+			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
+		});
+}
+
 

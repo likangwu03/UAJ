@@ -34,4 +34,6 @@ public:
 	void haltSound()override;
 	void resumeSound()override;
 	void selectedButton(int selected);
+
+	void createButtons();
 };

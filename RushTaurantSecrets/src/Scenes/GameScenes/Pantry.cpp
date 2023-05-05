@@ -75,7 +75,7 @@ void Pantry::haltSound() {
 }
 
 void Pantry::handleEvents() {
-	if (ih->isKeyDown(SDLK_ESCAPE) &&active) {
+	if (ih->isKeyDown(SDLK_ESCAPE) && active || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_START))) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		pantryMusic->pauseMusic();
 		ThievesManager::get()->pauseSound();

@@ -10,74 +10,23 @@ OptionsMenu::OptionsMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->m
 
 	Texts();
 
+	//fondo
 	bg = new GameObject(this);
 	new Transform(bg, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	image = &(sdlutils().images().at("OPTIONS_BG"));
 	new Image(bg, image);
 
+	//panel de controles
 	controls = new GameObject(this);
 	new Transform(controls, { 0,0 }, { 0,0 }, sdlutils().width(), sdlutils().height());
 	imageControls = &(sdlutils().images().at("CONTROLS"));
 	new Image(controls, imageControls);
 	controls->setActives(false);
 
-
-	buttonReturn = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.3 * SDLUtils::instance()->height() / 5), 385, 130, 
-		[&]() {
-			GameManager::get()->popScene();
-		});
-	buttonReturn->getComponent<ButtonComp>()->setHighlighted(true);
+	//crear botones
+	createButtons();
 	
-	buttonControls = new ButtonGO(this, "CONTROLS_BUTTON", "BUTTON_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.55 * SDLUtils::instance()->height() / 5), 385, 130,
-		[&]() {
-			auto t = buttonControls->getComponent<Transform>();
-			if (controls->isActive()) {
-				controls->setActives(false);
-				t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
-			}
-			else {
-				controls->setActives(true);
-				t->setPos(Vector(t->getPos().getX(), t->getPos().getY() + 365));
-			}
-			buttonControls->getComponent<ButtonComp>()->moveHighlighted();
-		});
-
-	sliderMusicButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
-		Vector(200, 190), 100, 100,
-		[&]() {
-			auto sliderComp = MusicSlider->getComponent<SliderComponent>();
-			slider = sliderComp->getSlider();
-
-			if (!slider)
-				sliderComp->setSlider(true);			
-			else if (slider)
-				sliderComp->setSlider(false);
-
-			slider = sliderComp->getSlider();
-		});
-
-	sliderSoundsButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
-		Vector(200, 390), 100, 100,
-		[&]() {
-			auto sliderComp = SoundsSlider->getComponent<SliderComponent>();
-			slider = sliderComp->getSlider();
-
-			if (!slider)
-				sliderComp->setSlider(true);
-			else if (slider)
-				sliderComp->setSlider(false);
-
-			slider = sliderComp->getSlider();
-		});
-
-	fullscreenButton = new ButtonGO(this, "CHECKBOX", "CHECKBOX_HIGHLIGHT",
-		Vector((SDLUtils::instance()->width() - 300), 240), 100, 100,
-		[&]() {
-			sdl->toggleFullScreen();
-		});
-
+	//slider para sonido
 	MusicSlider = new Slider(this, 100, 200, sliderMusicButton, MUSIC);
 	SoundsSlider = new Slider(this, 100, 400, sliderSoundsButton, SOUNDEFFECTS);
 
@@ -95,13 +44,13 @@ void OptionsMenu::handleEvents() {
 
 	Scene::handleEvents();
 
-	if (ih->isKeyDown(SDLK_ESCAPE)) 	GameManager::get()->popScene();
+	if (!controls->isActive() && (ih->isKeyDown(SDLK_ESCAPE) || ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)))
+		GameManager::get()->popScene();
 
 	if (!slider && !controls->isActive()) {	
 		if (ih->joysticksInitialised()) {
 			ih->clearState();
 
-			//ih->refresh();
 			if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_LEFT)
 				|| ih->getHatStateMenu(LEFT)) {
 				button = (button - 1) % NUM_BUTTON;
@@ -158,7 +107,9 @@ void OptionsMenu::handleEvents() {
 			}		
 		}
 	}
-	if (controls->isActive() && ih->isKeyDown(SDL_SCANCODE_ESCAPE)) {
+
+	if (controls->isActive() && (ih->isKeyDown(SDL_SCANCODE_ESCAPE)
+		|| (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_A)))) {
 		controls->setActives(false);
 		auto t = buttonControls->getComponent<Transform>();
 		t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
@@ -236,4 +187,66 @@ void OptionsMenu::Texts() {
 	FullScreenTexture = new Texture(sdl->renderer(), strFullScreen, *font, build_sdlcolor(0xB68962ff));
 	FullScreenRect = { 870, 160, int(1.3*FullScreenTexture->width()), int(1.3*FullScreenTexture->height()) };
 
+}
+
+void OptionsMenu::createButtons() {
+
+	buttonReturn = new ButtonGO(this, "RESUME_BUTTON_UP", "BUTTON_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 3.3 * SDLUtils::instance()->height() / 5), 385, 130,
+		[&]() {
+			GameManager::get()->popScene();
+		});
+	buttonReturn->getComponent<ButtonComp>()->setHighlighted(true);
+
+	buttonControls = new ButtonGO(this, "CONTROLS_BUTTON", "BUTTON_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() / 2) - (192 * 2 / 2), 1.55 * SDLUtils::instance()->height() / 5), 385, 130,
+		[&]() {
+			auto t = buttonControls->getComponent<Transform>();
+	if (controls->isActive()) {
+		controls->setActives(false);
+		t->setPos(Vector(t->getPos().getX(), t->getPos().getY() - 365));
+	}
+	else {
+		controls->setActives(true);
+		t->setPos(Vector(t->getPos().getX(), t->getPos().getY() + 365));
+	}
+	buttonControls->getComponent<ButtonComp>()->moveHighlighted();
+		});
+
+	//slider música
+	sliderMusicButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
+		Vector(200, 190), 100, 100,
+		[&]() {
+			auto sliderComp = MusicSlider->getComponent<SliderComponent>();
+	slider = sliderComp->getSlider();
+
+	if (!slider)
+		sliderComp->setSlider(true);
+	else if (slider)
+		sliderComp->setSlider(false);
+
+	slider = sliderComp->getSlider();
+		});
+
+	//slider efectos de sonido
+	sliderSoundsButton = new ButtonGO(this, "SLIDER_BUTTON", "SLIDER_HIGHLIGHT",
+		Vector(200, 390), 100, 100,
+		[&]() {
+			auto sliderComp = SoundsSlider->getComponent<SliderComponent>();
+	slider = sliderComp->getSlider();
+
+	if (!slider)
+		sliderComp->setSlider(true);
+	else if (slider)
+		sliderComp->setSlider(false);
+
+	slider = sliderComp->getSlider();
+		});
+
+	//checkbox pantalla completa
+	fullscreenButton = new ButtonGO(this, "CHECKBOX", "CHECKBOX_HIGHLIGHT",
+		Vector((SDLUtils::instance()->width() - 300), 240), 100, 100,
+		[&]() {
+			sdl->toggleFullScreen();
+		});
 }

@@ -26,21 +26,8 @@ MainMenu::MainMenu() : sdl(SDLUtils::instance()), supermarketMusic(&sdl->musics(
 	new Image(bg, image);
 	resumeSound();
 
-	button = 0;
-	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H, 
-		[&]() { 
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_CONTINUEMENU), true);
-		});
+	createButtons();
 
-	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
-	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H, 
-		[&]() {
-			GameManager::get()->changeScene(GameManager::get()->getScene(sc_COOPMENU), true);
-		});
-	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H, 
-		[&]() {
-			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
-		});
 	supermarketMusic->setMusicVolume(MUSIC_VOL);
 	mainMenuMusic->setMusicVolume(MUSIC_VOL);
 
@@ -115,4 +102,21 @@ void MainMenu::haltSound() {
 }
 void MainMenu::resumeSound() {
 	mainMenuMusic->play(-1);
+}
+
+void MainMenu::createButtons() {
+	oneplayer = new ButtonGO(this, "1_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y), BUTTONS_W, BUTTONS_H,
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_CONTINUEMENU), true);
+		});
+
+	oneplayer->getComponent<ButtonComp>()->setHighlighted(true);
+	twoplayer = new ButtonGO(this, "2_PLAYER_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + BUTTONS_H), BUTTONS_W, BUTTONS_H,
+		[&]() {
+			GameManager::get()->changeScene(GameManager::get()->getScene(sc_COOPMENU), true);
+		});
+	options = new ButtonGO(this, "OPTIONS_BUTTON", "BUTTON_HIGHLIGHT", Vector(BUTTONS_X, BUTTONS_Y + 2 * BUTTONS_H), BUTTONS_W, BUTTONS_H,
+		[&]() {
+			GameManager::get()->pushScene(GameManager::get()->getScene(sc_OPTIONSMENU));
+		});
 }

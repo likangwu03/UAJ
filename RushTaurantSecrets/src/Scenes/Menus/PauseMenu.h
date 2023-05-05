@@ -25,5 +25,7 @@ public:
 
 	void handleEvents();
 	void selectedButton(int selected);
+
+	void createButtons();
 };
 
