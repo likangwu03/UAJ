@@ -130,13 +130,6 @@ void DayManager::nextDay(bool loading) {
 			else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDINGDAY2NOKILL));
 		}
 	}
-	// Intros si se est?cargando partida
-	else {
-		if (day <= 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
-		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
-		else if (day == 3 && !GameManager::get()->getHasEverKilled().first) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
-	}
-	
 
 	day++;
 	
@@ -169,6 +162,13 @@ void DayManager::nextDay(bool loading) {
 		else if (line.substr(0, 21) == "maximumThiefFrequency") {
 			maximumThiefFrequency = to_float(line.substr(22));
 		}
+	}
+
+	// Intros si se está cargando partida
+	if (loading) {
+		if (day == 1) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO1));
+		else if (day == 2) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO2));
+		else if (day == 3 && !GameManager::get()->getHasEverKilled().first) GameManager::get()->changeScene(GameManager::get()->getScene(sc_INTRO3NOKILL));
 	}
 
 	if (day > 0)

@@ -25,8 +25,8 @@ class Client : public GameObject {
 	const int UI_CURR_ANIM = 0;
 	const int UI_FRAME_RATE = 80;
 
-	const int HEART_SIZE = 24;
-	const int HEART_OFFSET_Y = 20;
+	const int HEART_SIZE = 20;
+	const int HEART_OFFSET_Y = 15;
 
 public:
 
