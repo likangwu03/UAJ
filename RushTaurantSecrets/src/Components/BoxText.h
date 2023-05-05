@@ -56,11 +56,7 @@ public:
 
 	BoxText(GameObject* parent, Texture* portraitBorder, Texture* portrait, Vector offsetSize);
 
-	virtual ~BoxText() {
-		if (nameTexture != nullptr) {
-			delete nameTexture;
-		}
-	}
+	virtual ~BoxText();
 
 	inline float getBoxHeight() const {
 		return box.desiredHeight;

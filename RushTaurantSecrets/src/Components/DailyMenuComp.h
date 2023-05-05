@@ -26,9 +26,12 @@ private:
 		Texture* tex;
 		float x;
 		float y;
+		
 	public:
+
 		rend(Texture* t, float _x, float _y) : tex(t), x(_x), y(_y) { };
 	};
+
 	vector<rend> dishTextures;
 	vector<rend> textTextures;
 	vector<rend> textOutlines;
@@ -40,6 +43,7 @@ private:
 	Font* fontOutline;
 
 	void init();
+
 public:
 	constexpr static _ecs::_cmp_id id = _ecs::cmp_DAILYMENU;
 	DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id id);

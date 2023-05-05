@@ -261,6 +261,7 @@ void BasketMarketComponent::handleEvents() {
 		}
 	}
 }
+
 vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients() {
 	vector<pair<_ecs::_ingredients_id, int>> aux;
 
@@ -318,6 +319,7 @@ void BasketMarketComponent::cleanEmptyBasket() {
 	if (selectedIngr == ingredients.end())selectedIngr = ingredients.begin();
 	if (ingredients.size() == 0)selectedIngr = ingredients.end();
 }
+
 void BasketMarketComponent::nextDay() {
 	totalDifIngr = 0;
 	totalPrice = 0;
@@ -327,6 +329,7 @@ void BasketMarketComponent::nextDay() {
 	selectedIngr = ingredients.end();
 	isOnRegister = false;
 }
+
 void BasketMarketComponent::receive(const Message& message) {
 	if (message.id == Message::msg_BASKET) {
 		auto it = ingredients.find(message.basket.ing);

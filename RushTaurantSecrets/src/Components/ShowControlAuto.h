@@ -1,6 +1,6 @@
 #pragma once
 #include "ShowControlComp.h"
-//renderiza seg¨²n transform del gameObject
+//renderiza segun transform del gameObject
 class ShowControlAuto : public ShowControlComp
 {
 private:

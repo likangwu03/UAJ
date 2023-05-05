@@ -9,10 +9,6 @@ class CashRegister :public GameObject
 {
 private:
 	const float OFFSETTRI_Y = 50;
-	/*const int OFFSETW = 2;
-	const int OFFSETH = -12;
-	const int OFFSETY= 16;
-	const int OFFSETX= 1;*/
 
 public:
 	CashRegister(Scene* scene, Vector pos, float w, float h) :GameObject(scene, _ecs::grp_INTERACTABLE) {

@@ -6,11 +6,13 @@
 class GameManager;
 class Image;
 
+static const int MUSIC_VOL = 30;
+
 class GoToPantryTrigger : public TriggerComp {
 private:
 	const Vector PANTRY_POS = { 800, 580 };
-	// hacer global
-	const int MUSIC_VOL = 30;
+	
+	
 
 	GameManager* gm;
 	GameObject* playerRestaurant, *otherPRestObj;

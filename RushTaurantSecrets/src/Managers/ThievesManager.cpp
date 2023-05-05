@@ -47,7 +47,7 @@ void ThievesManager::addFrequently() {
 int ThievesManager::randomPos() {
 	// posición random
 	int pos = sdl->rand().nextInt(0, _ecs::MAX_THIEFS);
-	// se comprueba si esa posición est?ocupada y si lo est? se coge la siguiente
+	// se comprueba si esa posición esta ocupada y si lo esta se coge la siguiente
 	while (selectedPosition[pos]) {
 		pos = (pos + 1) % _ecs::MAX_THIEFS;
 	}

@@ -30,7 +30,6 @@ MapCreator::MapCreator(GameObject* parent, const string& filePath) : Component(p
 
 	SDL_RenderClear(renderer);
 	SDL_SetTextureBlendMode(bg, SDL_BLENDMODE_BLEND);
-	//SDL_SetRenderTarget(renderer, bg);
 
 	loadTilesets();
 	createObject();
@@ -166,7 +165,6 @@ void MapCreator::createObject() {
 	auto& layers = tileMap->getLayers();
 	for (auto& layer : layers) {
 		if (layer->getType() == Layer::Type::Object) {		
-			//if (layer->getName() == "ignorarlo_espara Trigger")return;
 			auto& objs = static_cast<tmx::ObjectGroup*>(layer.get())->getObjects();
 			for (auto& obj : objs) {
 				auto& aabb = obj.getAABB();
@@ -222,7 +220,7 @@ void MapCreator::createObject() {
 				else if (name == "Caja"){
 					new SuperCashRegister(scene, pos, width_, height_);
 				}
-			};
+			}
 
 		}
 	}

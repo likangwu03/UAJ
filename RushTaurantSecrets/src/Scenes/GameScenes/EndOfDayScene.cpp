@@ -156,33 +156,21 @@ void EndOfDayScene::render() {
 
 	gameOver();
 
-	if (!_gameOver) { //el juego no se ha perdido
-		continueButton->setAlive(true);
-		mainMenuButton->setAlive(true);
+	continueButton->setAlive(true);
+	mainMenuButton->setAlive(true);
+
+	if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0) {
+		bankruptTexture->render(bankruptRect);
+		bankruptOutline->render(bankruptRect);
 	}
-	else { //el juego se ha perdido
-		continueButton->setAlive(true);
-		mainMenuButton->setAlive(true);
-
-		if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)  {
-			bankruptTexture->render(bankruptRect);
-			bankruptOutline->render(bankruptRect);
-
-			noRepTexture->render(noRepRect);
-			noRepOutline->render(noRepRect);
-
-		}
-		else if (earnedMoney < moneyGoal || playerMoney <= 0) {
-			bankruptTexture->render(bankruptRect);
-			bankruptOutline->render(bankruptRect);
-		}
-		else if (playerReputation <= 0) {
-			noRepTexture->render(noRepRect);
-			noRepOutline->render(noRepRect);
-		}
-
+	else if (earnedMoney < moneyGoal || playerMoney <= 0) {
+		bankruptTexture->render(bankruptRect);
+		bankruptOutline->render(bankruptRect);
 	}
-
+	else if (playerReputation <= 0) {
+		noRepTexture->render(noRepRect);
+		noRepOutline->render(noRepRect);
+	}
 
 }
 
@@ -235,9 +223,9 @@ void EndOfDayScene::quitCoopMode() {
 }
 
 void EndOfDayScene::receive(const Message& message) {
-	if (message.id == Message::msg_CONTINUE) {
+	if (message.id == Message::msg_CONTINUE) 
 		dayM->newDay();
-	}
+	
 	else if (message.id == Message::msg_TO_MAINMENU) {
 		Game::get()->setExitCoop();
 		gm->get()->changeScene((gm->get()->getScene(sc_MAINMENU)));

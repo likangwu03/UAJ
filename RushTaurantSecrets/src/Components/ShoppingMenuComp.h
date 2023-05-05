@@ -15,7 +15,7 @@ private:
 		MENU_HEIGHT = 115,
 		PLAYER_OFFSETY = -5,
 
-		PRICE_OFFSETX = 33, //respecto del men¨²
+		PRICE_OFFSETX = 33, //respecto del menu
 		PRICE_OFFSETY = 9,
 		PRICE_WIDTH = 18,
 		PRICE_HEIGHT = 30,

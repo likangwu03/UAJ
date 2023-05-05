@@ -14,9 +14,6 @@ PlayerMovementController::~PlayerMovementController() {
 }
 
 void PlayerMovementController::handleEvents() {
-	// Descomentar si se quiere comprobar el binding de un mando
-	/*gamecont = SDL_GameControllerOpen(0);
-	std::cout << SDL_GameControllerMapping(gamecont) << std::endl;*/
 	if (!keyboard)
 	{
 		//input->refresh();
@@ -120,11 +117,6 @@ void PlayerMovementController::update() {
 	if (!keyboard) {
 		speed = Vector(0, 0);
 	}
-	//time += deltaTime;
-	//if(time > 1000) {
-	//	Message msg; msg.id = Message::msg_PLAYER; msg.data_player.x = transform->getPos().getX(); msg.data_player.y = transform->getPos().getY();
-	//	Game::get()->getCoopHandler()->send(msg);
-	//}
 }
 
 bool PlayerMovementController::nonKeyPressed() {
@@ -233,6 +225,7 @@ const char* PlayerMovementController::getControllerType()
 {
 	return controller;
 }
+
  bool PlayerMovementController::isXbox()
 {
 	return xbox;

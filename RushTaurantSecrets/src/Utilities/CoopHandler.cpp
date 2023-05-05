@@ -8,13 +8,6 @@
 #include "../Components/Transform.h"
 #include "checkML.h"
 
-#ifdef _DEBUG
-#include <iostream>
-#endif
-
-// Codificación de mensajes
-
-
 
 // Constructoras y destructoras
 
@@ -56,16 +49,9 @@ void CoopHandler::openServer() {
 	if (serverSocket == NULL) {
 		throw std::exception("SDLNet: Couldn't open server (TCP_Open).");
 	}
-
-#ifdef _DEBUG
-	std::cout << "Opened server.\n";
-#endif
 }
 
 bool CoopHandler::openClient(std::string ipStr) {
-#ifdef _DEBUG
-	std::cout << "Opening connection with ip \"" << ipStr << ":1882\".\n";
-#endif
 
 	IPaddress ip;
 	if (SDLNet_ResolveHost(&ip, ipStr.c_str(), 1882) < 0) {
@@ -78,10 +64,6 @@ bool CoopHandler::openClient(std::string ipStr) {
 	}
 
 	SDLNet_TCP_AddSocket(set, connectionSocket);
-
-#ifdef _DEBUG
-	std::cout << "Opened connection with server.\n";
-#endif
 	return true;
 }
 
@@ -100,11 +82,6 @@ bool CoopHandler::connectClient() {
 std::pair<bool, bool> CoopHandler::connectServer() {
 	if (SDLNet_CheckSockets(set, 0) > 0) {
 		int dataLength = SDLNet_TCP_Recv(connectionSocket, data, 1024);
-
-	/*	if (dataLength != __CONNECTED_LENGTH) {
-			dataLength = 0;
-			return { true, false };
-		}*/
 		dataLength = 0;
 		bool achieved = true;
 		for (int i = 0; achieved && i < __CONNECTED_LENGTH; i++) {
@@ -181,8 +158,6 @@ void CoopHandler::receive() {
 			GameObject* otherPlayer = GameManager::get()->getCurrentScene()->getGameObject(_ecs::hdr_OTHERPLAYER);
 			if(otherPlayer != nullptr) otherPlayer->getComponent<Transform>()->setPos(Vector(-100, -100));
 			SDLNet_TCP_DelSocket(set, connectionSocket);
-			/*SDLNet_TCP_Close(connectionSocket);
-			connectionSocket = NULL; client = false;*/
 			Game::get()->setExitCoop();
 			return;
 		}

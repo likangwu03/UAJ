@@ -4,7 +4,7 @@
 #include "../Definitions/Food_def.h"
 class Image;
 class CartelManager;
-/*encargada de detectar la entrada del jugador*/
+
 class CartelTrigger :public TriggerComp
 {
 public:
@@ -18,7 +18,7 @@ public:
 	_ecs::_ingredients_id getIngredient() { return ingId; }
 
 private:
-	_ecs::_ingredients_id ingId; //para saber qu¨¦ ingrediente est¨¢ seleccionando
+	_ecs::_ingredients_id ingId; //para saber que ingrediente este seleccionando
 	CartelManager* cartelManager;
 	bool highlighted;
 };

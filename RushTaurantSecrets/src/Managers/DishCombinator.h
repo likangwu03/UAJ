@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 /*
-* Sirve para consultar el plato que puede generar seg¨²n la combinaci¨®n de una serie ingredientes
+* Sirve para consultar el plato que puede generar segun la combinacion de una serie ingredientes
 * Se crea solo una vez en Escena
 */
 class DishCombinator :public Singleton<DishCombinator> {

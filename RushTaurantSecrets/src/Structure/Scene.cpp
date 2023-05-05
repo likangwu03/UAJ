@@ -18,9 +18,9 @@ Scene::Scene():frameTime(Game::instance()->getframeTime()) {
 }
 
 Scene::~Scene() {
-	for (int n = 0; n < _ecs::grpNum; n++) {
+	for (int n = 0; n < _ecs::grpNum; n++) 
 		for (auto obj : objGroups[n]) delete obj;
-	}
+	
 }
 
 void Scene::addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler) {
@@ -31,18 +31,18 @@ void Scene::addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handl
 void Scene::refresh() {
 	// sacar el objeto de los handlers
 	for (int i = 0; i < _ecs::hdrNum; ++i) {
-		if (handlers[i] != nullptr && !handlers[i]->isAlive()) {
+		if (handlers[i] != nullptr && !handlers[i]->isAlive()) 
 			handlers[i] = nullptr;
-		}
+		
 	}
 
 	// sacar el objeto de los grupos y eliminarlo
 	for (int n = 0; n < _ecs::grpNum; n++) {
 		objGroups[n].erase(
 			std::remove_if(objGroups[n].begin(), objGroups[n].end(), [](GameObject* obj) {
-				if (obj->isAlive()) {
+				if (obj->isAlive()) 
 					return false;
-				}
+				
 				else {
 					delete obj;
 					// hacer que el hueco de memoria 
@@ -59,46 +59,46 @@ void Scene::refresh() {
 
 void Scene::initComponent() {
 
-	for (auto& objGroup : objGroups) {
+	for (auto& objGroup : objGroups) 
 		for (auto obj : objGroup) obj->initComponent();
-	}
+	
 }
 
 void Scene::update() {
-	for (auto& objGroup : objGroups) {
+	for (auto& objGroup : objGroups) 
 		for (auto obj : objGroup) obj->update();
-	}
+	
 }
 void Scene::renderLayer() {
 
-	for (auto obj : renderListDown) {
+	for (auto obj : renderListDown) 
 		obj->render();
-	}
+	
 
 	list<GameObject*> aux;
 	aux.insert(aux.end(), renderListMiddle.begin(), renderListMiddle.end());
 	aux.insert(aux.end(), objGroups[_grp_id::grp_CLIENTS].begin(), objGroups[_grp_id::grp_CLIENTS].end());
 	aux.insert(aux.end(), objGroups[_grp_id::grp_THIEFS].begin(), objGroups[_grp_id::grp_THIEFS].end());
 	SortList(aux);
-	for (auto& gameObject : aux) {
+	for (auto& gameObject : aux) 
 		gameObject->render();
-	}
+	
 
-	for (auto obj : renderListTop) {
+	for (auto obj : renderListTop) 
 		obj->render();
-	}
+	
 }
 
 void Scene::render() {
-	for (auto& objGroup : objGroups) {
+	for (auto& objGroup : objGroups) 
 		for (auto obj : objGroup) obj->render();
-	}
+	
 }
 
 void Scene::handleEvents() {
-	for (auto& objGroup : objGroups) {
+	for (auto& objGroup : objGroups) 
 		for (auto obj : objGroup) obj->handleEvents();
-	}
+	
 }
 
 void Scene::nextDay() {
@@ -123,9 +123,9 @@ void Scene::initRender(){
 	{
 		aux = it;
 		it++;
-		if ((*aux)->getComponent<Transform>() == nullptr) {
+		if ((*aux)->getComponent<Transform>() == nullptr) 
 			renderListMiddle.erase(aux);
-		}
+		
 	}
 	
 	SortList(renderListMiddle);

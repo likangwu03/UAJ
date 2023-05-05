@@ -17,10 +17,6 @@ ThiefTrigger::ThiefTrigger(GameObject* parent, Vector pos_, float width_, float 
 	runTexture = &((sdlutils()).images().at("RUN_ICON"));
 	killTexture = &((sdlutils()).images().at("KILL_ICON"));
 	thievesManager = ThievesManager::get();
-
-	//controles encima
-	//showControl = new ShowControlAuto(parent, { {ControlsType::key_E,ControlsType::play_Cross,ControlsType::xbox_A, Vector(0,-16),32,32}, 
-	//	{ControlsType::key_Q,ControlsType::play_Circle, ControlsType::xbox_B,Vector(40,-16),32,32} }, parent->getComponent<Transform>());
 }
 
 inline void ThiefTrigger::isInteractingWith() {
@@ -130,15 +126,6 @@ void ThiefTrigger::render() {
 
 		dest.x = parentTransform->getPos().getX() + KILL_X_OFFSET - 15;
 		killTexture->render(dest);
-
-		//dest.x = parentTransform->getPos().getX() + (X_OFFSET * 1.3);
-		//dest.y = parentTransform->getPos().getY() + RUN_Y_OFFSET - 15;
-		//dest.w = WIDTH;
-		//dest.h = HEIGHT;
-		//runTexture->render(dest);
-
-		//dest.y = parentTransform->getPos().getY() + KILL_Y_OFFSET - 15;
-		//killTexture->render(dest);
 	}
 }
 

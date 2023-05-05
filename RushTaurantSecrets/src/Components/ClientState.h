@@ -4,8 +4,6 @@
 #include "ClientStateRender.h"
 #include <SDL.h>
 
-// Temporal
-#include "../Utilities/InputHandler.h"
 using namespace std;
 using namespace _ecs;
 

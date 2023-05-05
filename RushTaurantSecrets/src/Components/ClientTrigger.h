@@ -19,7 +19,6 @@ class ClientTrigger : public TriggerComp
 public:
 	ClientTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 		TriggerComp(parent, pos_, width_, height_), selected(false),
-		//clientManager(ClientsManager::get()),
 		clientState(parent->getComponent<ClientState>()),
 		showControl(new ShowControlAuto(parent, { {ControlsType::key_C,ControlsType::play_Cross,ControlsType::xbox_A,Vector(50, 0),30,30} }, transform_)),
 		changeIcon(&sdlutils().images().at("CHANGE_ICON"))

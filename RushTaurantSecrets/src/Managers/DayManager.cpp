@@ -16,7 +16,7 @@ void DayManager::readLine(std::string & line) {
 	do {
 		std::getline(file, line);
 		while (!line.empty() && line[0] == '\t') line = line.substr(1);
-	} while (!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee est?vacía o es un comentario (empieza con '#'), se lee la siguiente.
+	} while (!file.eof() && (line.empty() || line[0] == '#')); // Si la línea que se lee esta vacía o es un comentario (empieza con '#'), se lee la siguiente.
 	if (file.eof()) { line = ""; }
 }
 
@@ -60,10 +60,6 @@ sdl(SDLUtils::instance()), restaurantMusic(&sdl->musics().at("RESTAURANT_MUSIC")
 	if (file.fail()) throw std::exception("Data for days not found.\n");
 	file >> maxDays;
 	restaurantMusic->setMusicVolume(MUSIC_VOL);
-
-#ifdef _DEBUG
-	std::cout << "DayManager initiated.\n";
-#endif // _DEBUG
 }
 
 DayManager::~DayManager() {
@@ -156,24 +152,24 @@ void DayManager::nextDay(bool loading) {
 		readLine(line);
 
 		// Recoger los parámetros de este día
-		if (line.substr(0, 9) == "objective") {
+		if (line.substr(0, 9) == "objective") 
 			dailyObjective = to_int(line.substr(10));
-		}
-		else if (line.substr(0, 15) == "clientFrequency") {
+		
+		else if (line.substr(0, 15) == "clientFrequency") 
 			clientFrequency = to_float(line.substr(16));
-		}
-		else if (line.substr(0, 18) == "happinessFrequency") {
+		
+		else if (line.substr(0, 18) == "happinessFrequency") 
 			happinessFrequency = to_float(line.substr(19));
-		}
-		else if (line.substr(0, 18) == "reputationDecrease") {
+		
+		else if (line.substr(0, 18) == "reputationDecrease") 
 			reputationDecrease = to_float(line.substr(19));
-		}
-		else if (line.substr(0, 21) == "minimumThiefFrequency") {
+		
+		else if (line.substr(0, 21) == "minimumThiefFrequency") 
 			minimumThiefFrequency = to_float(line.substr(22));
-		}
-		else if (line.substr(0, 21) == "maximumThiefFrequency") {
+		
+		else if (line.substr(0, 21) == "maximumThiefFrequency") 
 			maximumThiefFrequency = to_float(line.substr(22));
-		}
+		
 	}
 
 

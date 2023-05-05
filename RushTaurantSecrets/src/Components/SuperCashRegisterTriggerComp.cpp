@@ -26,9 +26,9 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 	if (bM == nullptr) {
 		bM = scene->getBM();
 		bMC = bM->getComponent<BasketMarketComponent>();
-		if (!bMC->getBasketON()) {
+		if (!bMC->getBasketON()) 
 			bMC->setBasketON(true);
-		}
+		
 		buybutton = scene->buyButton();
 		buybutton->setActives(true);
 		buybutton->getComponent<ButtonComp>()->setHighlighted(true);
@@ -37,14 +37,11 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 
 	}
 
-	// cleon: mejor en 1 if
-	if (scene->getBuy()) {
-		if ((money->getMoney() - money->getPrice() >= 0)) {
-			sendToClien();
-			money->subtractMoney(money->getPrice());
-			money->setPrice(0);
-			payAndLeave();
-		}
+	if (scene->getBuy() && (money->getMoney() - money->getPrice() >= 0)) {
+		sendToClien();
+		money->subtractMoney(money->getPrice());
+		money->setPrice(0);
+		payAndLeave();
 	}
 }
 
@@ -79,7 +76,7 @@ void SuperCashRegisterTriggerComp::sendToClien() {
 }
 
 void SuperCashRegisterTriggerComp::receive(const Message& message) { 
-	if(message.id == Message::msg_TO_RESTAURANT) {
+	if(message.id == Message::msg_TO_RESTAURANT) 
 		payAndLeave();
-	}
+	
 }

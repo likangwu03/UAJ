@@ -45,8 +45,6 @@ protected:
 	Animator(GameObject* parent, string s, AnimParams aP, _ecs::_cmp_id id);
 
 public:
-	//constexpr static _ecs::_cmp_id id = _ecs::cmp_ANIMATOR;
-
 	/*mover al siguiente frame*/
 	void updateAnim();
 	/*cambiar de frame*/

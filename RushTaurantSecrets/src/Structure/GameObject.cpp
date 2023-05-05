@@ -9,9 +9,9 @@ GameObject::GameObject(Scene* scene, _ecs::_grp_id grp, _ecs::_hdr_id handler) :
 }
 
 GameObject::~GameObject() {
-	for (auto& i : components) {
+	for (auto& i : components) 
 		delete i.second;
-	}
+	
 }
 
 void GameObject::addComponent(Component* comp, _ecs::_cmp_id id) {
@@ -76,9 +76,9 @@ void GameObject::receive(const Message& message) {
 }
 
 void GameObject::setActives(bool b) {
-	for (auto &comp : components) {
+	for (auto &comp : components) 
 		comp.second->setActive(b);
-	}
+	
 }
 
 bool GameObject::isActive() {

@@ -67,8 +67,8 @@ void Restaurant::callAfterCreating() {
 
 
 vector<_ecs::_dish_id> Restaurant::menu() const {
-	// Men?del d�a aleatorio (lo rellena con 4 platos diferentes
-	// entre s?y los pasa a un vector para poder acceder a ellos)
+	// Menu del dia aleatorio (lo rellena con 4 platos diferentes
+	// entre si y los pasa a un vector para poder acceder a ellos)
 	set<int> aux;
 	for (int i = 0; i < 4; i++) {
 		if (!aux.insert(rand() % _ecs::NONE_DISH).second)
@@ -135,12 +135,15 @@ void Restaurant::refresh() {
 	ui->refresh();
 	pantry->Scene::refresh();
 }
+
 void Restaurant::resumeMusic() {
 	restaurantMusic->resumeMusic();
 }
+
 void Restaurant::resumeSound() {
 	ThievesManager::get()->resumeSound();
 }
+
 void Restaurant::haltSound() {
 	restaurantMusic->haltMusic();
 	ThievesManager::get()->haltSound();
@@ -154,6 +157,7 @@ void Restaurant::initCoopMode(bool server) {
 	}
 	ClientsManager::get()->setNetActive(server);
 }
+
 void Restaurant::quitCoopMode() {
 	active = true;
 	ClientsManager::get()->setNetActive(true);

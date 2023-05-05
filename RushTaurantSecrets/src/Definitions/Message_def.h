@@ -354,6 +354,4 @@ public:
 		return msg;
 	}
 
-
-
 };

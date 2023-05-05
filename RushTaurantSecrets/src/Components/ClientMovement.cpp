@@ -36,12 +36,12 @@ void ClientMovement::goOut(ClientState::States currentState) {
 	// si ya se ha ido no se realiza la comprobación
 	while (currentState != ClientState::OUT && i < mates.size() && !found) {
 		// cuando se hayan marchado, por si uno de sus compañeros ha sido eliminado y quiere acceder a él
-		if (mates[i] != nullptr) {
+		if (mates[i] != nullptr) 
 			if (mates[i]->getComponent<ClientState>()->getState() == ClientState::OUT) {
 				clientState->unhappy();
 				found = true;
 			}
-		}
+		
 		++i;
 	}
 }

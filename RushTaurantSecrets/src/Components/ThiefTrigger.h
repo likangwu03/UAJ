@@ -17,12 +17,6 @@ class ThiefTrigger : public TriggerComp
 		KILL_Y_OFFSET = 10,
 		WIDTH = 30, HEIGHT = 30;
 
-	//CONTROLES A LOS LADOS
-	//const float KILL_X_OFFSET = 48,
-	//	KILL_Y_OFFSET = 35,
-	//	RUN_Y_OFFSET = 67,
-	//	WIDTH = 30, HEIGHT = 30;
-
 	Transform* parentTransform;
 	ThiefState* thiefState;
 	ThiefMovement* thiefMovement;

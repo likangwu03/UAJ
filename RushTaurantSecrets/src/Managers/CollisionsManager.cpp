@@ -26,7 +26,6 @@ void CollisionsManager::collision() {
 			SDL_FRect playerRect = objCol->getRect();
 			playerRect.x += dir.getX();
 			playerRect.y += dir.getY();
-			// cleon: recordad la cach <3
 			for (auto col : *grup_Collisions) {
 				Transform* colT = col->getComponent<Transform>();
 				SDL_FRect colRect = { colT->getPos().getX(),colT->getPos().getY(),colT->getW(),colT->getH() };
@@ -34,14 +33,6 @@ void CollisionsManager::collision() {
 					objCol->Collision(col);
 				}
 			}
-			/*for (auto p : *grp_Player) {
-				if (player != p) {
-					SDL_FRect pRect = p->getComponent<CollisionComp>()->getRect();
-					if (SDL_HasIntersectionF(&playerRect, &pRect)) {
-						objCol->Collision(p);
-					}
-				}
-			}*/
 		}
 
 	}
@@ -104,32 +95,3 @@ void CollisionsManager::overlap() {
 		}
 	}
 }
-
-/*
-bool CollisionsManager::hasCollision(GameObject* object) {
-	bool c = false;
-	CollisionComp* objCol = object->getComponent<CollisionComp>();
-	SDL_FRect playerRect = objCol->getRect();
-	int aux = 0;
-
-	while (!c && aux < grup_Collisions->size()) {
-		Transform* colT = (*grup_Collisions)[aux]->getComponent<Transform>();
-		SDL_FRect colRect = { colT->getPos().getX(),colT->getPos().getY(),colT->getW(),colT->getW() };
-		if (SDL_HasIntersectionF(&playerRect, &colRect)) {
-			c = true;
-		}
-	}
-	aux = 0;
-	while (!c && aux < grp_Player->size()) {
-		if (object != (*grp_Player)[aux])
-		Transform* colT2 = (*grp_Player)[aux]->getComponent<Transform>();
-		SDL_FRect colRect2 = { colT2->getPos().getX(),colTP->getPos().getY(),colTP->getW(),colTP->getW() };
-		if (SDL_HasIntersectionF(&playerRect, &colRect2)) {
-			c = true;
-
-		}
-
-
-	}
-
-}*/

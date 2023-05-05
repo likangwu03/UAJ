@@ -79,9 +79,9 @@ void KitchenIslandComp::unselectIng(int i) {
 
 void KitchenIslandComp::setIngredients(vector<pair<_ecs::_ingredients_id, int>> _ing) {
 	auxID.clear();
-	for (auto i : ing) {
+	for (auto i : ing) 
 		delete i.second.f;
-	}
+	
 	ing.clear();
 
 	//cargar info
@@ -116,10 +116,10 @@ void KitchenIslandComp::nextDay() {
 
 
 void KitchenIslandComp::receive(const Message& message) {
-	if (message.id == Message::msg_PICK_INGREDIENT) {
+	if (message.id == Message::msg_PICK_INGREDIENT) 
 		pickIngredient(message.ingredinet.n, false);
-	}
-	else if (message.id == Message::msg_RETURN_INGREDIENT) {
+	
+	else if (message.id == Message::msg_RETURN_INGREDIENT) 
 		returnIngredient((_ecs::_ingredients_id)message.ingredinet.n, false);
-	}
+	
 }

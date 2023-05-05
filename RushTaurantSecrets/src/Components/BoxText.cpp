@@ -168,3 +168,9 @@ void BoxText::render() {
 	// usando esto la animación del botón SPACE va mal
 	 showControl->render(key.pos);
 }
+
+BoxText::~BoxText() {
+	if (nameTexture != nullptr) {
+		delete nameTexture;
+	}
+}

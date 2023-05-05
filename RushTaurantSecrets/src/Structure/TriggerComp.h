@@ -5,13 +5,10 @@
 #include "../Utilities/InputHandler.h"
 class Transform;
 class GameObject;
-//class CollisionsManager;
 
-//hay que definir su posicion, considerando coordenada relativa, 
-//centro es pos de transform
 class TriggerComp :public Component {
 public:
-	constexpr static _ecs::_cmp_id id = _ecs::cmp_TRIGGER; // Si esto es una clase base, no debería tener esto :)
+	constexpr static _ecs::_cmp_id id = _ecs::cmp_TRIGGER; 
 
 protected:
 	Vector pos;
@@ -24,11 +21,9 @@ protected:
 	
 	bool overlap_;
 public:
-	// cambiar a protected
 	TriggerComp(GameObject* parent, Vector pos_, float width_, float height_, _ecs::_cmp_id id = TriggerComp::id);
 	bool IsOverLap() { return overlap_; }
 	SDL_FRect getRect();
-	//llamado por CollisionsManager
 	virtual void Overlap(GameObject* other);
 	
 	virtual void isOverlapping(){} //es llamado mientras haya overlap

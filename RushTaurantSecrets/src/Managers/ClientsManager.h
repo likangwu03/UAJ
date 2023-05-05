@@ -72,7 +72,7 @@ private:
 	Client* createClient(int posGroup,int sprite_);
 
 	// comprobar si alg�n cliente ha llegado a la caja registradora y a�adirlo a la cola de pagar
-	// se a�aden todos los clientes, sin importar del grupo que sean, en fila
+	// se añaden todos los clientes, sin importar del grupo que sean, en fila
 	void checkCashRegister();
 
 	// eliminar al primer grupo de clientes si se le ha asignado una mesa
@@ -105,7 +105,7 @@ private:
 
 	static bool notOutOfLocal(Client* client);
 
-	// comprobar si alg�n grupo ha abandonado el local para quitarlo de la lista
+	// comprobar si algun grupo ha abandonado el local para quitarlo de la lista
 	void refreshClientsGroup();
 
 	ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients);
@@ -133,7 +133,7 @@ public:
 
 	// se llama cuando se quiera asignar una mesa al primer grupo de clientes
 	// se le pasa la mesa que se le desea asignar
-	void assignFirstGroup(int table);//..............................................................
+	void assignFirstGroup(int table);
 
 	static bool notAllGroupPaying(Client* client);
 

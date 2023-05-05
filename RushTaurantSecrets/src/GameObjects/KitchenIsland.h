@@ -9,11 +9,10 @@ using namespace std;
 class KitchenIsland :public GameObject
 {
 public:
-	KitchenIsland(Scene* scene, Vector pos, float w, float h/*, Vector triP, float triW, float triH*/) :
+	KitchenIsland(Scene* scene, Vector pos, float w, float h) :
 		GameObject(scene, _ecs::grp_INTERACTABLE,_ecs::hdr_KITCHENISLAND) 
 	{
-		new Transform(this, pos, Vector(0, 0), w, h, 0, true); //para saber en qu¨¦ posici¨®n renderizar el bocadillo 
-		// new Image(this, "ISLAND_HIGHLIGHT"); 
+		new Transform(this, pos, Vector(0, 0), w, h, 0, true); //para saber en que posicion renderizar el bocadillo 
 		new KitchenIslandComp(this);
 	};
 };

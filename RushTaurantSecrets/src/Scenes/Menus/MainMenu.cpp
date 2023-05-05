@@ -47,9 +47,9 @@ void MainMenu::handleEvents() {
 		GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_SUPERMARKET));
 		supermarketMusic->play(-1);
 	}
-	else {
+	else 
 		Scene::handleEvents();
-	}
+	
 
 	if (ih->joysticksInitialised()) {
 		if (ih->getButtonState(0, SDL_CONTROLLER_BUTTON_DPAD_UP)

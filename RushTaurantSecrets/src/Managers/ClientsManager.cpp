@@ -63,9 +63,9 @@ void ClientsManager::createGroupClients() {
 	entrance.push_back(group);
 	clientsGroups.push_back(group);
 
-	for (auto client : group) {
+	for (auto client : group) 
 		client->getComponent<ClientMovement>()->setGroup(group);
-	}
+	
 	Game::get()->getCoopHandler()->send(m);
 }
 
@@ -79,9 +79,9 @@ void ClientsManager::createGroupClients(const Message& message) {
 	entrance.push_back(group);
 	clientsGroups.push_back(group);
 
-	for (auto client : group) {
+	for (auto client : group) 
 		client->getComponent<ClientMovement>()->setGroup(group);
-	}
+	
 }
 
 Client* ClientsManager::createClient(int posGroup,int sprite_) {
@@ -108,16 +108,6 @@ void ClientsManager::checkCashRegister() {
 		}
 	}
 }
-
-/*
-void ClientsManager::firstClientAssigned() {
-	if (assignedClient) {
-		entrance.pop_front();
-		recolocateEntranceAll(entrance.begin());
-		assignedClient = false;
-	}
-}
-*/
 
 bool ClientsManager::notAbandonedEntrance(Client* client) {
 	return !client->getComponent<ClientMovement>()->hasAbandonedEntrance();
@@ -186,7 +176,6 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup,bool send
 
 	// se asigna el grupo de clientes a la mesa
 	tables[table - 1]->assignClients(firstGroup);
-	// assignedClient = true;  //........................NEW
 
 	if (send) {
 		Message m;
@@ -196,9 +185,8 @@ void ClientsManager::assignTable(int table, vector<Client*> firstGroup,bool send
 	}
 
 	// se elimina al primer grupo porque ya se ha asignado
-	entrance.pop_front();      //........................NEW
+	entrance.pop_front();      
 	recolocateEntranceAll(entrance.begin());
-	// assignedClient = false;
 }
 
 // comprobar si un cliente si un cliente est?de camino a pagar o pagando
@@ -244,7 +232,7 @@ void ClientsManager::initTables() {
 
 ClientsManager::ClientsManager(GameObject* parent, vector<_ecs::_dish_id> menu, float frequencyClients, float speedClients, int maxClients)
 	: Manager(parent), menu(GameManager::instance()->getTodaysMenu()), timer(frequencyClients), speed(speedClients),
-	maxClients(maxClients), elapsedTime(0), tables() {//, assignedClient(false) {
+	maxClients(maxClients), elapsedTime(0), tables() {
 	scene = parent->getScene();
 
 	UIRestaurant* uiRest = GameManager::get()->getRestaurant()->getUI();
@@ -366,7 +354,7 @@ void ClientsManager::receive(const Message& message) {
 		assignTable(message.assignClients.table,firstGroup, false);
 		/*firstClientAssigned();*/
 	}
-	else if (message.id == Message::msg_ADD_CLINETS) {
+	else if (message.id == Message::msg_ADD_CLINETS) 
 		createGroupClients(message);
-	}
+	
 }

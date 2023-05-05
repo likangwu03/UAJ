@@ -38,7 +38,7 @@ private:
 	OrderedDishTex textures;
 #pragma endregion
 
-	Transform* transform; //puede que posteriormente no sea necesario...
+	Transform* transform; 
 	UIAnimator* anim;
 	ClientState* state;
 	SDLUtils* sdl;
@@ -50,7 +50,7 @@ public:
 	virtual void render();
 	
 	//llamado por ClientMovement
-	void renderThinkingState(); //muestra que est¨¢ pensando
+	void renderThinkingState(); //muestra que esta pensando
 	//llamados por ClientState
 	void renderTakingNoteState(); //informa de que quiere pedir algo
 	void renderOrderingState(); //esperando su plato

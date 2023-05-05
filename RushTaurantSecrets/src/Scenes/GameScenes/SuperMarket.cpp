@@ -14,16 +14,19 @@
 	 Scene::initComponent();
 	 uiMarket->initComponent();
 }
+
 void SuperMarket::render() {
 	Scene::renderLayer();
 	if (uiMarket != nullptr)
 		uiMarket->render();
 }
+
 void SuperMarket::update() {
 	Scene::update();
 	cm->update();
 	uiMarket->update();
 }
+
 void SuperMarket::handleEvents() {
 	Scene::handleEvents();
 	uiMarket->handleEvents();
@@ -72,6 +75,7 @@ void SuperMarket::createMap() {
 	Scene::createMap("assets/tilemaps/supermarket_top_bottom.tmx", Middle, Vector(0, 23*48 * RESIZEFACTOR));
 	Scene::createMap("assets/tilemaps/supermarket_top_middle.tmx", Middle, Vector(0, 11*48 * RESIZEFACTOR));
 }
+
 SuperMarket::~SuperMarket() {
 	delete uiMarket;
 	delete cm;
@@ -96,6 +100,7 @@ ButtonGO* SuperMarket::buyButton() {
 void SuperMarket::setBuy(bool _buy) {
 	uiMarket->setBuy(_buy);
 }
+
 bool SuperMarket::getBuy() {
 	return uiMarket->getBuy();
 }
@@ -103,6 +108,7 @@ bool SuperMarket::getBuy() {
 void SuperMarket::resumeMusic() {
 	supermarketMusic->resumeMusic();
 }
+
 void SuperMarket::receive(const Message& message) {
 	Scene::receive(message);
 	uiMarket->receive(message);
@@ -116,6 +122,7 @@ void SuperMarket::initCoopMode(bool server) {
 		getGameObject(_ecs::hdr_OTHERPLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);
 	}
 }
+
 void SuperMarket::quitCoopMode() {
 	active = true;
 	getGameObject(_ecs::hdr_PLAYER)->getComponent<CharacterAnimator>()->setTexture("Player_1", 18, 18);

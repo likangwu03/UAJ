@@ -17,7 +17,6 @@ class Scene {
 private:
 	friend class GameObject;
 	void addObject(GameObject* object, _ecs::_grp_id grp, _ecs::_hdr_id handler);
-	//render
 	std::list<GameObject*> renderListTop;
 	std::list<GameObject*> renderListMiddle;
 	std::list<GameObject*> renderListDown;

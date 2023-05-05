@@ -13,12 +13,12 @@ serveDishSound(&sdl->soundEffects().at("SERVE_CLIENT"))
 	dishes.reserve(MAX_DISHES);
 	dishesBool.reserve(MAX_DISHES);
 	// inicializa el vector de booleanos
-	for (int i = 0; i < MAX_DISHES; i++) {
+	for (int i = 0; i < MAX_DISHES; i++) 
 		dishesBool.push_back(false);
-	}
-	for (int i = 0; i < MAX_DISHES; i++) {
+	
+	for (int i = 0; i < MAX_DISHES; i++) 
 		dishes.push_back(_ecs::MEATBALLS);
-	}
+	
 
 	cellSelected = -1;
 	cellsOcuppied = 0;
@@ -163,7 +163,7 @@ void InventoryComp::nextDish() {
 
 void InventoryComp::nextDay() {
 	cellSelected = -1;
-	for (auto b : dishesBool) {
+	for (auto b : dishesBool) 
 		b = false;
-	}
+	
 }

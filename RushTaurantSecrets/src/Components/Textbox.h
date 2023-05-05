@@ -19,7 +19,7 @@ private:
 
 public:
 	TextBox(GameObject* parent, string hl, int max = 15);
-	void initComponent() override;
+	void initComponent() override{}
 
 	void handleEvents() override;
 	bool isHighlighted();

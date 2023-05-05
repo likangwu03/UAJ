@@ -53,6 +53,6 @@ public:
 
 	void nextDay();
 
-	int getRotation() { return arrow.rotation; }
-	int timeToReachDeg(int deg) { return ((deg - ANGLE) / ANGLE_UPDATE) * TIME_CLOCK_REFRESH; }
+	int getRotation();
+	int timeToReachDeg(int deg);
 };

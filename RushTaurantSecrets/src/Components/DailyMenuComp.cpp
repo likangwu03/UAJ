@@ -87,8 +87,8 @@ void DailyMenuComp::randomMenu() {
 		menu->push_back(_ecs::MeatDishes[dish]);
 		++i;
 	}
-	// Men� del d�a aleatorio (lo rellena con 4 platos diferentes
-	// entre s� y los pasa a un vector para poder acceder a ellos)
+	// Menu del dia aleatorio (lo rellena con 4 platos diferentes
+	// entre si y los pasa a un vector para poder acceder a ellos)
 	// aux sirve para asegurarse de que no se inserta dos veces el mismo plato en el menu
 
 	while (i < MENU_SIZE) {
@@ -159,9 +159,8 @@ vector<_ecs::DishInfo>* DailyMenuComp::getMenu()
 void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 {
 	//se borran los platos anteriores y se indica que ya se han asignado platos
-	//if (!initialized)return;
+	
 	initialized = false;
-	//delete menu;
 	for (auto e : menuText) delete e.tex;
 	for (auto e : textTextures) delete e.tex;
 	for (auto e : textOutlines) delete e.tex;
@@ -183,9 +182,7 @@ void DailyMenuComp::initMenu(const vector<uint8_t>& menu_) {
 		else menu->push_back(_ecs::MeatDishes[d- _ecs::NUM_DISH]);
 	}
 	//se borran los platos anteriores y se indica que ya se han asignado platos
-	//if (!initialized)return;
 	initialized = false;
-	//delete menu;
 	for (auto e : menuText) delete e.tex;
 	for (auto e : textTextures) delete e.tex;
 	for (auto e : textOutlines) delete e.tex;

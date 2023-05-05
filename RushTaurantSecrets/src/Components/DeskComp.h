@@ -34,7 +34,6 @@ public:
 
 	void assignClients(const std::vector<Client*>& clients);
 
-	// ¿?
 	// Se pasa como parámetro el plato que se quiera servir a los clientes asignados a la mesa.
 	// Devuelve true si un cliente ha recibido el plato que quería,
 	// o false si nadie ha aceptado el plato (no lo pedían o ya lo han recibido) 

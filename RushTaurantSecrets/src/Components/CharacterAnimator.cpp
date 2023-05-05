@@ -48,12 +48,12 @@ void CharacterAnimator::update() {
 			hasOrientation = true;
 		}
 		else if (currMov == sitting) {
-			if (parentOrientation == west || parentOrientation == east) {
+			if (parentOrientation == west || parentOrientation == east) 
 				animationParameters.currAnim = 4;
-			}
-			else if (parentOrientation == north || parentOrientation == south) {
+
+			else if (parentOrientation == north || parentOrientation == south)
 				animationParameters.currAnim = 1;
-			}
+
 			hasOrientation = true;
 		}
 		else if (currMov == phone) {
@@ -87,28 +87,28 @@ void CharacterAnimator::update() {
 
 			currOrientation = parentOrientation;
 
-			if (currOrientation == east) {
+			if (currOrientation == east) 
 				// idle, corriendo, durmiendo, empujando, sentado y disparando
 				setCurrentAnim(0, 6, animationParameters.currAnim);
-			}
-			else if (currOrientation == north) {
+
+			else if (currOrientation == north) 
 				// idle, corriendo, empujando, sentado y disparando
 				setCurrentAnim(6, 12, animationParameters.currAnim);
-			}
+			
 			else if (currOrientation == west) {
 				// sentado
-				if (currMov == sitting) {
+				if (currMov == sitting) 
 					setCurrentAnim(6, 12, animationParameters.currAnim);
-				}
+				
 				// idle, corriendo, empujando y disparando
-				else {
+				else 
 					setCurrentAnim(12, 18, animationParameters.currAnim);
-				}
+				
 			}
-			else if (plTf->getOrientation() == south) {
+			else if (plTf->getOrientation() == south) 
 				// idle, corriendo, empujando, sentado y disparando
 				setCurrentAnim(18, 24, animationParameters.currAnim);
-			}
+			
 		}
 	}
 

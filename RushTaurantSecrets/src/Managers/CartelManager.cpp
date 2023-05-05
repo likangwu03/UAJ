@@ -7,8 +7,8 @@ menu(GameManager::get()->getSupermarket()->getUI()->getGameObject(hdr_SHOP_MENU1
 selectSound(&sdlutils().soundEffects().at("SELECT")){ }
 
 void CartelManager::signIn(CartelTrigger* c) {
-	if (c == selectedCartel)return;
-	if (selectedCartel != nullptr) //si ya existi¨¢ un cartel seleccionado
+	if (c == selectedCartel) return;
+	if (selectedCartel != nullptr) //si ya existia un cartel seleccionado
 		selectedCartel->unHighlight(); //se deselecciona
 	selectedCartel = c; //nuevo seleccionado
 	selectedCartel->highlight();

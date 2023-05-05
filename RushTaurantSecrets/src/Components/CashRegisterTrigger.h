@@ -7,11 +7,9 @@
 #include "../Managers/ClientsManager.h"
 #include "Image.h"
 #include "../Structure/GameManager.h"
+#include "../Components/Image.h"
 #include "Streak.h"
 
-/*encargada de detectar la entrada del jugador*/
-class PlayerMovementController;
-class Image;
 class CashRegisterTrigger :public TriggerComp
 {
 private:
@@ -41,11 +39,8 @@ public:
 	virtual void isOverlapping();
 	virtual void onTriggerExit();
 	void charge();
-
 	void charge(float rep, int m, int tip);
-
 	void render();
-
 	void receive(const Message& message) override;
 };
 

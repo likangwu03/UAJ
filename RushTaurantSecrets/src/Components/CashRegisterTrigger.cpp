@@ -4,6 +4,7 @@
 #include "../Utilities/SoundEffect.h"
 #include "../Utilities/checkML.h"
 #include "../Structure/Game.h"
+#include "../Components/PlayerMovementController.h"
 
 CashRegisterTrigger::CashRegisterTrigger(GameObject* parent, Vector pos_, float width_, float height_) :
 	TriggerComp(parent, pos_, width_, height_), money(GameManager::get()->getMoney()),
@@ -32,17 +33,17 @@ CashRegisterTrigger::~CashRegisterTrigger() {
 }
 
 void CashRegisterTrigger::isOverlapping() {
-	if (other_->getComponent<Transform>()->getOrientation() != south) {
+	if (other_->getComponent<Transform>()->getOrientation() != south)
 		highlight->setActive(false); return;
-	};
+
 	highlight->setActive(true);
-	if (ih->joysticksInitialised()) {
+
+	if (ih->joysticksInitialised())
 		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
-	}
+
 	else if (!ih->isKeyDown(SDLK_SPACE)) return; //si no ha interactuado, no hace nada
 
 	charge();
-
 }
 
 void CashRegisterTrigger::charge() {
@@ -74,9 +75,7 @@ void CashRegisterTrigger::charge() {
 			money->addMoney(tip);
 			tipSound->setVolume(GameManager::instance()->getSoundEffectsVolume());
 			tipSound->play(0);
-#ifdef _DEBUG
-			cout << "You got " << totalPayment / 10 << " coins from tips" << endl;
-#endif
+
 			delete tipTexture;
 			tipTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x129008FF));
 			bgTexture = new Texture(sdlutils().renderer(), "+" + to_string(tip), *font, build_sdlcolor(0x054400FF));
@@ -87,7 +86,6 @@ void CashRegisterTrigger::charge() {
 			bgRect.y += OUT_OFFSET;
 			tipped = true;
 		}
-
 
 		// RACHA
 		money->addMoney(streak->getMoneyStreak() * list->size());
@@ -133,6 +131,7 @@ void CashRegisterTrigger::charge(float rep, int m,int tip) {
 		bgRect.y += OUT_OFFSET;
 		tipped = true;
 	}
+
 	GameManager::get()->getReputation()->addReputatiton(rep- GameManager::get()->getReputation()->getReputation());
 	money->addMoney(m-money->getMoney());
 
@@ -140,6 +139,8 @@ void CashRegisterTrigger::charge(float rep, int m,int tip) {
 	// CLIENTES ABANDONAN CAJA
 	cM->collectAndLeave();
 }
+
+
 void CashRegisterTrigger::onTriggerExit() {
 	highlight->setActive(false);
 }
@@ -159,7 +160,6 @@ void CashRegisterTrigger::render() {
 }
 
 void CashRegisterTrigger::receive(const Message& message) {
-	if (message.id == Message::msg_CHARGE) {
+	if (message.id == Message::msg_CHARGE) 
 		charge(message.charge.rep, message.charge.money, message.charge.tip);
-	}
 }

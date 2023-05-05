@@ -31,6 +31,7 @@ bool Ingredients::addIngredient(_ecs::_ingredients_id ingr) {
 
 		if (ingredients.size() == 1)
 			coord.push_back(STARTING_COORDS);
+
 		else {
 			for (auto& coords : coord) {
 				coords.first -= ING_OFFSET / 2;
@@ -104,9 +105,9 @@ void Ingredients::render() {
 		}
 	}
 	
-	if (showCross && !coord.empty()) {
+	if (showCross && !coord.empty())
 		cross->render(build_sdlrect(coord[0].first - ING_OFFSET, ING_Y, ING_SIZE, ING_SIZE));
-	}
+	
 }
 
 void Ingredients::update() {

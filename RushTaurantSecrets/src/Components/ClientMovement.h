@@ -31,7 +31,7 @@ private:
 	ClientsManager* clientsManager;
 	vector<Client*> mates;
 	int posGroup;
-	// colocado en la cola de pagar, es decir, est?quieto
+	// colocado en la cola de pagar, es decir, esta quieto
 	bool placedPay;
 	SoundEffect* arriveSound;
 	SoundEffect* finishEatingSound;

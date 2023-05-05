@@ -38,6 +38,7 @@ void Animator::updateAnim() {
 	if (currFrame >= animationParameters.endFrame)
 		currFrame = animationParameters.initFrame;
 }
+
 /*cambiar de frame*/
 void Animator::setCurrentAnim(int iniFram, int endFram, int currAnim) {
 	animationParameters.currAnim = currAnim;
@@ -45,12 +46,14 @@ void Animator::setCurrentAnim(int iniFram, int endFram, int currAnim) {
 	animationParameters.initFrame = iniFram;
 	currFrame = iniFram;
 }
+
 /*cambiar de textura dada la textura*/
 void Animator::setTexture(Texture* t, int iniFrame, int endFrame, int currAnim, int frRate) {
 	texture = t;
 	animationParameters.frameRate = frRate;
 	setCurrentAnim(iniFrame, endFrame, currAnim);
 }
+
 /*cambiar de textura dado el nombre de textura*/
 void Animator::setTexture(string s, int iniFrame, int endFrame, int currAnim, int frRate) {
 	texture = &((*sdl).images().at(s));

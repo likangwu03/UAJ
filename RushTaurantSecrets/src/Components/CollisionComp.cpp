@@ -14,20 +14,11 @@ CollisionComp::CollisionComp(GameObject* parent, Vector pos_, float width_, floa
 	//other_ = nullptr;
 	//hasCollision_ = false;
 }
+
 void CollisionComp::Collision(GameObject* other) {
 	transform_->setVel({ 0,0 });
-	/*Transform* aux = other->getComponent<Transform>();
-	aux->setVel({ 0,0 });*/
-	/*SDL_FRect targe = {aux->getPos().getX(),aux->getPos().getY(),aux->getW(),aux->getH()};
-	SDL_FRect obj = { transform_->getPos().getX(),transform_->getPos().getY(),transform_->getW(),transform_->getH() };
-	SDL_FRect result;
-	SDL_IntersectFRect(&targe, &obj, &result);
-	Vector dir = transform_->getVel();
-	float s = sqrtf(result.w * result.w + result.h * result.h);
-
-	transform_->setPos(transform_->getPos() - dir);//(dir.getNormalized() * s)*/
 }
 
 SDL_FRect CollisionComp::getRect() {
 	return { pos.getX() + transform_->getPos().getX(), pos.getY() + transform_->getPos().getY(), width, height };
-};
+}

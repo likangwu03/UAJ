@@ -64,9 +64,10 @@ bool DeskComp::isOccupied() {
 }
 
 void DeskComp::isOverlapping() {
-	if (ih->joysticksInitialised()) {
-		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) return;
-	}
+	if (ih->joysticksInitialised()) 
+		if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) 
+			return;
+
 	else if (!ih->isKeyDown(SDLK_SPACE)) return;
 
 	if (dirty) cleanDesk();
@@ -82,9 +83,8 @@ void DeskComp::update() {
 			assigned.clear();
 			// Si los clientes se han quedado sin felicidad no se endirty la mesa.
 		}
-		else if (st == ClientState::OUT) {
+		else if (st == ClientState::OUT)
 			assigned.clear();
-		}
 	}
 }
 

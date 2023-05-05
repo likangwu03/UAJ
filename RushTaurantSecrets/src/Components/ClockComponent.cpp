@@ -41,9 +41,8 @@ void ClockComponent::renderData(const Data& data) const {
 }
 
 void ClockComponent::update() {
-	if (!dayHasFinished()) {
+	if (!dayHasFinished())
 		updateClock();
-	}
 }
 
 void ClockComponent::render() {
@@ -57,3 +56,7 @@ void ClockComponent::nextDay() {
 	fillData(clock, "CLOCK", Vector(sdl->width() - ICONX - ICONSIZE * 2, ICONY), ICONSIZE * 2, ICONSIZE * 2);
 	fillData(arrow, "ARROW", Vector(sdl->width() - ICONX - ICONSIZE - 8, ICONY), ICONSIZE / 3, ICONSIZE * 2);
 }
+
+int ClockComponent::getRotation() { return arrow.rotation; }
+
+int ClockComponent::timeToReachDeg(int deg) { return ((deg - ANGLE) / ANGLE_UPDATE) * TIME_CLOCK_REFRESH; }

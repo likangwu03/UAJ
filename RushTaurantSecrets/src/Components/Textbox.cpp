@@ -12,10 +12,6 @@ TextBox::TextBox(GameObject* parent, string hl, int max) : Component(parent, id)
 	dest.h = tf->getH();
 }
 
-void TextBox::initComponent() {
-	
-}
-
 void TextBox::handleEvents() {
 
 	if (highlighted &&ih_->keyDownEvent()) {

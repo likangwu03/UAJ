@@ -12,18 +12,18 @@ void StraightMovement::calculateDir() {
 	Vector pos = transform->getPos();
 	Vector dir = end - pos;
 
-	if (dir.getX() > 0) {
+	if (dir.getX() > 0) 
 		transform->setOrientation(east);
-	}
-	else if (dir.getX() < 0) {
+	
+	else if (dir.getX() < 0) 
 		transform->setOrientation(west);
-	}
-	else if (dir.getY() > 0) {
+	
+	else if (dir.getY() > 0) 
 		transform->setOrientation(south);
-	}
-	else if (dir.getY() < 0) {
+	
+	else if (dir.getY() < 0) 
 		transform->setOrientation(north);
-	}
+	
 }
 
 bool StraightMovement::hasArrivedPoint() const {

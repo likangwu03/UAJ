@@ -26,6 +26,7 @@ private:
 	// lista de ingredientes en la cesta y su cantidad
 	map<_ecs::_ingredients_id, int> ingredients; // ingredientes y sus cantidades
 	map<_ecs::_ingredients_id, int>::iterator selectedIngr;
+
 	SDLUtils* sdl = SDLUtils::instance();
 	InputHandler* ih;
 	int totalDifIngr;

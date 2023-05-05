@@ -79,6 +79,7 @@ void ShoppingMenuComp::render() {
 	ingTex->render(build_sdlrect(menuPos.getX() + ING_OFFSETX, menuPos.getY() + ING_OFFSETY, ING_WIDTH, ING_HEIGHT));
 
 }
+
 void  ShoppingMenuComp::increaseN() {
 	if (number >= 99)return;
 	++number;
@@ -87,6 +88,7 @@ void  ShoppingMenuComp::increaseN() {
 	selectNum->play();
 	changePrice();
 }
+
 void  ShoppingMenuComp::decreaseN() {
 	if (number <= 0)return;
 	--number;
@@ -95,6 +97,7 @@ void  ShoppingMenuComp::decreaseN() {
 	selectNum->play();
 	changePrice();
 }
+
 void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
 	if (basket->getBasketON())return;
 	if (!active) {
@@ -113,6 +116,7 @@ void  ShoppingMenuComp::openMenu(_ecs::_ingredients_id _id) {
 	}
 	else closeMenu();
 }
+
 void  ShoppingMenuComp::closeMenu() {
 	if (active) {
 		delete priceTex;
@@ -125,6 +129,7 @@ void  ShoppingMenuComp::closeMenu() {
 		showControl->setActive(false);
 	}
 }
+
 void  ShoppingMenuComp::changePrice() {
 	totalPrice = number * price;
 	delete numberTex;

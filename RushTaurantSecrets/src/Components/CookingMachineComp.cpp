@@ -16,16 +16,19 @@ pickDishSound(&sdl->soundEffects().at("PICK_DISH"))
 
 	renderPos = transform->getPos();
 	anim->setActive(false);
-};
+}
+
 pair<_ecs::_dish_id, bool> CookingMachineComp::canFormDish(vector<_ecs::_ingredients_id> ing) {
 	return dishComb->existDish(ing);
 }
+
 void CookingMachineComp::informCannotCook() {
 	cookingTime = CROSS_TIME;
 	cannotCookSound->play();
 	state = informing;
 	cont = 0;
 }
+
 void CookingMachineComp::cook(_ecs::_dish_id d) {
 	cookSound->play();
 	dish = d;

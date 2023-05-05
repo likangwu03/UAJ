@@ -25,17 +25,16 @@ void ClientTrigger::onTriggerExit() {
 	showControl->setActive(false);
 
 }
-int ClientTrigger::randomTable()
-{
+
+int ClientTrigger::randomTable(){
 	return sdlutils().rand().nextInt(1, _ecs::NUM_TABLES);
 }
+
 void ClientTrigger::render() {
 	if (showControl->isActive())
 		changeIcon->render(build_sdlrect(transform_->getPos().getX() + transform_->getW() / 2 + 5, transform_->getPos().getY() + transform_->getH() / 2 - 35, CHANGE_WIDTH, CHANGE_WIDTH));
-
 }
 
 bool ClientTrigger::inputMando() {
-
 	return ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B);
 }

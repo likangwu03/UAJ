@@ -48,7 +48,7 @@ private:
 	SDLUtils* sdl;
 	Uint32 cont; //contador para cocinar
 
-	Transform* transform; //puede que posteriormente no sea necesario...
+	Transform* transform; 
 	UIAnimator* anim;
 
 	SoundEffect* cookSound;

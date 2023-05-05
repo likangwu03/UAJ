@@ -17,7 +17,6 @@ private:
 	SDL_Joystick* _joy;
 	Transform* transform;
 	Texture* highlight;
-	//void (*_callback)(); // std::function<void(void)>
 	std::function<void()> _callback;
 	bool highlighted;
 	SDL_Rect dest;

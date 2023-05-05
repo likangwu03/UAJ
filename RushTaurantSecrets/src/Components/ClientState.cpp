@@ -43,9 +43,6 @@ void ClientState::update() {
 				GameManager::get()->getReputation()->reduceReputation(reputationDecrease);
 			setState(OUT);
 			render->renderFinishEatState();
-#ifdef _DEBUG
-			cout << "Happiness reached 0, leaving restaurant" << endl;
-#endif
 		}
 	}
 	// Si no, si est?pensando o comiendo, se actualiza el temporizador de lo que tarda en realizar la acci�n
@@ -54,9 +51,6 @@ void ClientState::update() {
 
 		// Si est?pensando y termina de pensar, pasa al estado de pedir la comida (reinicia el contador)
 		if (state == THINKING && timer >= THINKINGTIME) {
-#ifdef _DEBUG
-			cout << "I know what I want to eat" << endl;
-#endif
 			setState(TAKEMYORDER);	// TAKEMYORDER
 			
 			takeNote->play();
@@ -65,14 +59,9 @@ void ClientState::update() {
 		// Si est?comiendo y termina de comer, pasa al estado de caminar hacia la caja
 		else if (state == EATING && timer >= EATINGTIME) {
 			setState(FINISH_EAT);
-#ifdef _DEBUG
-			cout << "I'm done eating" << endl;
-#endif
 			render->renderFinishEatState();
 		}
 	}
-
-
 }
 
 
@@ -94,10 +83,6 @@ void ClientState::takeOrder() {
 			orderedDish = availableDishes->at(rndDish).id;
 		}
 	}
-
-#ifdef _DEBUG
-	cout << "Order taken, I want " << rndDish << endl;
-#endif
 	setState(ORDERED);
 	render->renderOrderingState();
 
@@ -119,9 +104,6 @@ _ecs::_dish_id ClientState::getOrderedDish() { return orderedDish; }
 
 // Funci�n que informa que ha sido servido y cambia el estado a EATING
 void ClientState::getServed(bool send) {
-#ifdef _DEBUG
-	cout << "Thanks for the food" << endl;
-#endif
 	setState(EATING);
 	render->renderEatingState();
 	if (send) {
