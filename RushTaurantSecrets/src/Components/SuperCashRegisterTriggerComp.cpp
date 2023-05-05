@@ -38,6 +38,7 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 	}
 
 	if (scene->getBuy() && (money->getMoney() - money->getPrice() >= 0)) {
+		scene->setBuy(false);
 		sendToClien();
 		money->subtractMoney(money->getPrice());
 		money->setPrice(0);
