@@ -9,7 +9,7 @@ begin
 	# "objective" es un int
 	objective 30
 	# "clientFrequency" es un float
-	clientFrequency 6140
+	clientFrequency 11000
 	# "happinessFrequency" es un float
 	happinessFrequency 1070
 	# "reputationDecrease" es un float
@@ -23,7 +23,7 @@ end
 # Día 2
 begin
 	objective 60
-	clientFrequency 6120
+	clientFrequency 10500
 	happinessFrequency 1060
 	reputationDecrease 4.4
 	minimumThiefFrequency 23
@@ -33,7 +33,7 @@ end
 # Día 3
 begin
 	objective 80
-	clientFrequency 6100
+	clientFrequency 10000
 	happinessFrequency 1050
 	reputationDecrease 4.6
 	minimumThiefFrequency 22.5
@@ -43,7 +43,7 @@ end
 # Día 4
 begin
 	objective 110
-	clientFrequency 6080
+	clientFrequency 9500
 	happinessFrequency 1040
 	reputationDecrease 4.8
 	minimumThiefFrequency 22
@@ -53,7 +53,7 @@ end
 # Día 5
 begin
 	objective 130
-	clientFrequency 6060
+	clientFrequency 9000
 	happinessFrequency 1030
 	reputationDecrease 5
 	minimumThiefFrequency 21.5
@@ -63,7 +63,7 @@ end
 # Día 6
 begin
 	objective 150
-	clientFrequency 6040
+	clientFrequency 8500
 	happinessFrequency 1020
 	reputationDecrease 5.1
 	minimumThiefFrequency 21
@@ -73,7 +73,7 @@ end
 # Día 7
 begin
 	objective 200
-	clientFrequency 6020
+	clientFrequency 8000
 	happinessFrequency 1010
 	reputationDecrease 5.2
 	minimumThiefFrequency 20.5
@@ -83,7 +83,7 @@ end
 # Día 8
 begin
 	objective 225
-	clientFrequency 6000
+	clientFrequency 7500
 	happinessFrequency 1000
 	reputationDecrease 5.3
 	minimumThiefFrequency 20
@@ -93,7 +93,7 @@ end
 # Día 9
 begin
 	objective 263
-	clientFrequency 5080
+	clientFrequency 7000
 	happinessFrequency 990
 	reputationDecrease 5.4
 	minimumThiefFrequency 19.75
@@ -103,7 +103,7 @@ end
 # Día 10
 begin
 	objective 300
-	clientFrequency 5060
+	clientFrequency 6500
 	happinessFrequency 980
 	reputationDecrease 5.5
 	minimumThiefFrequency 19.5

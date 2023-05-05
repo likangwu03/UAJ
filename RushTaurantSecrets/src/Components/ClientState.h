@@ -40,7 +40,7 @@ public:
 private:
 	States state;
 
-	const int THINKINGTIME = 5000, EATINGTIME = 5000;
+	const int THINKINGTIME = 5000, EATINGTIME = 5000, DECREASEHAPPINESS = 10;
 	float decreaseFreq, reputationDecrease;
 	float happiness, timer;
 

@@ -74,6 +74,7 @@ void BeforeDayStartScene::reset() {
 	dayTxt = new Texture(sdlutils().renderer(), wordDay, *dayText, build_sdlcolor(0x000000FF));
 	moneyTarget = new Texture(sdlutils().renderer(), mnyTarget, *text, build_sdlcolor(0x000000FF));
 	//buttonTxt = new Texture(sdlutils().renderer(), press, *pressButtonText, build_sdlcolor(0x000000FF)); //???
+	initMoney = gm->getMoney()->getMoney(); //Dinero inicial del día
 
 }
 

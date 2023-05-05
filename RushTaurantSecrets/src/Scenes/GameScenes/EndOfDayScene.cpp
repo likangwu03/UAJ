@@ -53,8 +53,8 @@ EndOfDayScene::EndOfDayScene() {
 
 	reputationtext = "YOUR CURRENT REPUTATION IS: " + to_string(playerReputation);
 	moneyText = "TODAY YOU EARNED: " + to_string(earnedMoney) + "$";
-	bankruptText = "GAME OVER. YOU WENT BANKRUPT!";
-	gameOverText = "GAME OVER. CONGRATULATIONS, ALL THE CITY HATES YOU AND YOUR RESTAURANT.";
+	bankruptText = "YOU WENT BANKRUPT!";
+	noRepText = "THE WHOLE CITY HATES YOUR RESTAURANT...";
 
 	//texturas que cambian cada dia
 	reputationTexture = new Texture(sdlutils().renderer(), reputationtext, *font1, build_sdlcolor(0x000000FF));
@@ -65,10 +65,13 @@ EndOfDayScene::EndOfDayScene() {
 
 	//texturas que se mantienen iguales
 	bankruptTexture = new Texture(sdlutils().renderer(), bankruptText, *font3, build_sdlcolor(0x000000FF));
-	gameOverTexture = new Texture(sdlutils().renderer(), gameOverText, *font3, build_sdlcolor(0x000000FF));
+	noRepTexture = new Texture(sdlutils().renderer(), noRepText, *font3, build_sdlcolor(0x000000FF));
 
 	bankruptOutline = new Texture(sdlutils().renderer(), bankruptText, *font4, build_sdlcolor(0xFFFFFFFF));
-	gameOverOutline = new Texture(sdlutils().renderer(), gameOverText, *font4, build_sdlcolor(0xFFFFFFFF));
+	noRepOutline = new Texture(sdlutils().renderer(), noRepText, *font4, build_sdlcolor(0xFFFFFFFF));
+
+	bankruptRect = build_sdlrect(sdlutils().width() / 2 - bankruptTexture->width() / 2, 400, bankruptTexture->width(), bankruptTexture->height());
+	noRepRect = build_sdlrect(sdlutils().width() / 2 - (0.8 * noRepTexture->width()) / 2, 400, 0.8 * noRepTexture->width(), 0.8 * noRepTexture->height());
 
 	//botones
 	
@@ -107,11 +110,11 @@ EndOfDayScene::~EndOfDayScene() {
 	delete reputationTexture;
 	delete moneyTexture;
 	delete bankruptTexture;
-	delete gameOverTexture;
+	delete noRepTexture;
 	delete reputationOutline;
 	delete moneyOutline;
 	delete bankruptOutline;
-	delete gameOverOutline;
+	delete noRepOutline;
 	delete font3;
 	delete font4;
 }
@@ -123,6 +126,7 @@ void EndOfDayScene::reset() {
 	playerMoney = gm->getMoney()->getMoney();
 	if (initPlayerMoney <= playerMoney) earnedMoney = playerMoney - initPlayerMoney;
 	else earnedMoney = 0;
+	initPlayerMoney = gm->getBeforeDayStartScene()->getInitMoney(); //Dinero con el que ha empezado el día
 
 	continueButton->setAlive(false);
 	mainMenuButton->setAlive(false);
@@ -165,22 +169,22 @@ void EndOfDayScene::render() {
 		continueButton->setAlive(true);
 		mainMenuButton->setAlive(true);
 
-		if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0)
+		if ((earnedMoney < moneyGoal || playerMoney <= 0) && playerReputation <= 0) 
 		{
-			bankruptTexture->render({ 50, 400, bankruptTexture->width(), bankruptTexture->height() });
-			bankruptOutline->render({ 50, 400, bankruptTexture->width(), bankruptTexture->height() });
+			bankruptTexture->render(bankruptRect);
+			bankruptOutline->render(bankruptRect);
 
-			gameOverTexture->render({ 50, 500, gameOverTexture->width(), gameOverTexture->height() });
-			gameOverOutline->render({ 50, 500, gameOverTexture->width(), gameOverTexture->height() });
+			noRepTexture->render(noRepRect);
+			noRepOutline->render(noRepRect);
 
 		}
 		else if (earnedMoney < moneyGoal || playerMoney <= 0) {
-			bankruptTexture->render({ 100, 400, bankruptTexture->width(), bankruptTexture->height() });
-			bankruptOutline->render({ 100, 400, bankruptTexture->width(), bankruptTexture->height() });
+			bankruptTexture->render(bankruptRect);
+			bankruptOutline->render(bankruptRect);
 		}
 		else if (playerReputation <= 0) {
-			gameOverTexture->render({ 50, 400, gameOverTexture->width(), gameOverTexture->height() });
-			gameOverOutline->render({ 50, 400, gameOverTexture->width(), gameOverTexture->height() });
+			noRepTexture->render(noRepRect);
+			noRepOutline->render(noRepRect);
 		}
 
 	}

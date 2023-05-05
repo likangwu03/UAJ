@@ -141,7 +141,7 @@ void ClientState::getServed(bool send) {
 void ClientState::changeDish(bool send) {
 	if (!dishChanged) {
 		dishChanged = true;
-		happiness -= 20;
+		happiness -= DECREASEHAPPINESS;
 		setState(THINKING);
 		render->renderThinkingState();
 	}

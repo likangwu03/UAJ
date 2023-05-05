@@ -75,6 +75,8 @@ void DayManager::checkDayFinished() {
 	if (ClockComponent::get()->dayHasFinished() && ClientsManager::get()->noClients() && !ThievesManager::get()->areThereThieves()) {
 		GameManager::get()->getCurrentScene()->haltSound();
 		GameManager::get()->changeScene(GameManager::get()->getScene(sc_ENDOFDAY));
+		GameManager::get()->getScene(sc_ENDOFDAY)->reset();
+
 	}
 }
 
@@ -137,8 +139,7 @@ void DayManager::nextDay(bool loading) {
 	
 
 	day++;
-	if (day > 0)
-		GameManager::get()->resetScenes();
+	
 
 	// Leer dayConfig
 	std::string line = "";
@@ -169,6 +170,9 @@ void DayManager::nextDay(bool loading) {
 			maximumThiefFrequency = to_float(line.substr(22));
 		}
 	}
+
+	if (day > 0)
+		GameManager::get()->resetScenes();
 
 }
 

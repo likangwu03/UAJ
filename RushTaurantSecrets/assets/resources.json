@@ -129,6 +129,12 @@
       "rows": 20
     },
     {
+      "id": "Client_18",
+      "file": "assets/Sprites/Clients/Client_sprite_18.png",
+      "cols": 56,
+      "rows": 20
+    },
+    {
       "id": "Thief_1",
       "file": "assets/Sprites/Thieves/Thief_sprite_1.png",
       "cols": 56,

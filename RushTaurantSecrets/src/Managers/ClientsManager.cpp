@@ -48,7 +48,7 @@ void ClientsManager::createGroupClients() {
 	m.grp_clients.num = num;
 
 	for (int i = num - 1; i >= 0; --i) {
-		int aux = sdl->rand().nextInt(1, 18);
+		int aux = sdl->rand().nextInt(1, 19);
 		group.push_back(createClient(i, aux));
 		m.grp_clients.clients.push_back(aux);
 	

@@ -46,6 +46,7 @@ HappyEndingScene::HappyEndingScene() {
 	addClient("Client_15", Vector(17, 14.6), west);
 	addClient("Client_16", Vector(15, 13), south);
 	addClient("Client_17", Vector(15, 16.5), north);
+	addClient("Client_18", Vector(17, 16), west, idle);
 
 	addClient("Client_10", Vector(20, 14.6), east);
 	addClient("Client_4", Vector(24, 14.6), west);
@@ -407,12 +408,12 @@ void HappyEndingScene::update() {
 }
 
 
-void HappyEndingScene::addClient(string txt, Vector pos, GOOrientation orientation) {
+void HappyEndingScene::addClient(string txt, Vector pos, GOOrientation orientation, movementState state) {
 	CinematicNPC* cl = new CinematicNPC(this, txt, Vector(0, 0), 0);
 	cl->getComponent<CharacterAnimator>()->setW(48 * RESTSIZE);
 	cl->getComponent<CharacterAnimator>()->setH(96 * RESTSIZE);
 	const vector<Vector> pt = RelativeToGlobal::pointsRestaurant({ pos });
-	npcs.push_back({ cl, pt[0], sitting, orientation});
+	npcs.push_back({ cl, pt[0], state, orientation});
 }
 
 void HappyEndingScene::renderCinematic() {

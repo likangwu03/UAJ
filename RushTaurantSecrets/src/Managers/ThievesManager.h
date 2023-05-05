@@ -6,12 +6,18 @@
 #include "../Utilities/RelativeToGlobal.h"
 #include "../Utilities/checkML.h"
 
+class ClockComponent;
+
 class ThievesManager : public Manager<ThievesManager> {
 
 	friend Manager<ThievesManager>;
 
 private:
-	const int MAX_THIEFS = 2;
+	const int MAX_THIEFS = 2, 
+			  INITDELAY = 45;
+	ClockComponent* clock;
+
+
 	Scene* scene;
 	vector<GameObject*>* thiefs;
 	SDLUtils* sdl;

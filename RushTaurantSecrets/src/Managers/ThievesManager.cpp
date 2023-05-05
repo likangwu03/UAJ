@@ -16,10 +16,11 @@ void ThievesManager::createThief(int sprite, int pos) {
 
 	warningSound->play(-1);
 	played = true;
+
 }
 
 void ThievesManager::addFrequently() {
-	if (thiefs->size() <= 0 && GameManager::get()->getDayManager()->getDay() > 1) {
+	if (thiefs->size() <= 0 && GameManager::get()->getDayManager()->getDay() > 1 && clock->getRotation() >= INITDELAY) {
 		if (played) {
 			played = false;
 			warningSound->haltChannel();
@@ -102,6 +103,8 @@ void ThievesManager::resumeSound() {
 }
 
 void ThievesManager::nextDay() {
+	clock = ClockComponent::get();
+
 	haltSound();
 	for (auto t : *thiefs) {
 		t->setAlive(false);

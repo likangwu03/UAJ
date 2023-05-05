@@ -14,21 +14,6 @@ void ClockComponent::updateClock() {
 		elapsedTime = 0;
 
 		arrow.rotation = arrow.rotation + ANGLE_UPDATE;
-		//Vector posA;
-		//if (arrow.rotation <= ANGLE) {
-		//	posA = arrow.position + Vector(1, 1);
-		//}
-		//else if (arrow.rotation <= ANGLE * 2) {
-		//	posA = arrow.position + Vector(-1, 1);
-		//}
-		//else if (arrow.rotation <= ANGLE * 3) {
-		//	posA = arrow.position + Vector(-1, -1);
-		//}
-		//else {
-		//	posA = arrow.position + Vector(1, -1);
-		//}
-		//arrow.position = posA;
-
 		// se aumenta una vuelta
 		int rot = arrow.rotation;
 		if (rot % 360 == 0) {

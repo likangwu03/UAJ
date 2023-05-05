@@ -113,6 +113,6 @@ public:
 	void update()override;
 
 private:
-	void addClient(string txt, Vector pos, GOOrientation orientation);
+	void addClient(string txt, Vector pos, GOOrientation orientation, movementState state = sitting);
 };
 

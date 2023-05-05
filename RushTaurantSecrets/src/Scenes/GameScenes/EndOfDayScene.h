@@ -36,13 +36,15 @@ private:
 	Texture* reputationTexture;
 	Texture* moneyTexture;
 	Texture* bankruptTexture;
-	Texture* gameOverTexture;
+	Texture* noRepTexture;
 	//texturas para textos con outline
 	Texture* reputationOutline;
 	Texture* moneyOutline;
 	Texture* bankruptOutline;
-	Texture* gameOverOutline;
+	Texture* noRepOutline;
 	
+	SDL_Rect bankruptRect;
+	SDL_Rect noRepRect;
 	
 	Font* font1;
 	Font* font2;
@@ -60,7 +62,7 @@ private:
 	string reputationtext;
 	string moneyText;
 	string bankruptText;
-	string gameOverText;
+	string noRepText;
 	string continueText;
 	string progressSavedtext;
 
