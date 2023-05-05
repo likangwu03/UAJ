@@ -13,10 +13,10 @@ void KitchenIslandTrigger::isOverlapping() {
 	{
 		ki->selectedIng(i);
 
-		if (ih->joysticksInitialised()) 
-			if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B)) 
+		if (ih->joysticksInitialised()) {
+			if (!ih->getButtonState(0, SDL_CONTROLLER_BUTTON_B))
 				return;
-		
+		}	
 		else if (!ih->isKeyDown(SDLK_SPACE)) 
 				return;
 		ki->pickIngredient(i);
