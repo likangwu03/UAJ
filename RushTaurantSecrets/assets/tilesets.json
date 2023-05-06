@@ -2,91 +2,91 @@
   "images": [
     {
       "id": "1_Generic_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/1_Generic_48x48.png"
     },
     {
       "id": "2_LivingRoom_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/2_LivingRoom_48x48.png"
     },
     {
       "id": "3_Bathroom_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/3_Bathroom_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/3_Bathroom_48x48.png"
     },
     {
       "id": "4_Bedroom_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/4_Bedroom_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/4_Bedroom_48x48.png"
     },
     {
       "id": "5_Classroom_and_library_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/5_Classroom_and_library_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/5_Classroom_and_library_48x48.png"
     },
     {
       "id": "6_Music_and_sport_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/6_Music_and_sport_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/6_Music_and_sport_48x48.png"
     },
     {
       "id": "9_Fishing_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/9_Fishing_48x48.png"
     },
     {
       "id": "12_Kitchen_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/12_Kitchen_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/12_Kitchen_48x48.png"
     },
     {
       "id": "14_Basement_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/14_Basement_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/14_Basement_48x48.png"
     },
     {
       "id": "16_Grocery_store_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/16_Grocery_store_48x48.png"
     },
     {
       "id": "21_Clothing_Store_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/21_Clothing_Store_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/21_Clothing_Store_48x48.png"
     },
     {
       "id": "22_Museum_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/22_Museum_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/22_Museum_48x48.png"
     },
     {
       "id": "24_Ice_Cream_Shop_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Theme_Sorter_48x48/24_Ice_Cream_Shop_48x48.png"
     },
     {
       "id": "atlas",
-      "file": "assets/Sprites/Restaurant/atlas.png"
+      "file": "assets/Images/Scenario/atlas.png"
     },
     {
       "id": "Room_Builder_48x48",
-      "file": "assets/Sprites/Restaurant/Interiors/Room_Builder_48x48.png"
+      "file": "assets/Images/Scenario/Interiors/Room_Builder_48x48.png"
     },
     {
       "id": "signs",
-      "file": "assets/Sprites/Restaurant/Signs.png"
+      "file": "assets/Images/Scenario/Signs.png"
     },
     {
       "id": "restaurantAfternoon",
-      "file": "assets/Sprites/Restaurant/restaurantAfternoon.png"
+      "file": "assets/Images/Scenario/restaurantAfternoon.png"
     },
     {
       "id": "restaurantAfternoonTop",
-      "file": "assets/Sprites/Restaurant/restaurantAfternoonTop.png"
+      "file": "assets/Images/Scenario/restaurantAfternoonTop.png"
     },
     {
       "id": "pantryAfternoon",
-      "file": "assets/Sprites/Restaurant/pantryAfternoon.png"
+      "file": "assets/Images/Scenario/pantryAfternoon.png"
     },
     {
       "id": "restaurantNight",
-      "file": "assets/Sprites/Restaurant/restaurantNight.png"
+      "file": "assets/Images/Scenario/restaurantNight.png"
     },
     {
       "id": "restaurantNightTop",
-      "file": "assets/Sprites/Restaurant/restaurantNightTop.png"
+      "file": "assets/Images/Scenario/restaurantNightTop.png"
     },
     {
       "id": "pantryNight",
-      "file": "assets/Sprites/Restaurant/pantryNight.png"
+      "file": "assets/Images/Scenario/pantryNight.png"
     }
   ]
 }

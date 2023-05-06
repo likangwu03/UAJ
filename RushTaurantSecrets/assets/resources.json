@@ -2,1153 +2,1159 @@
   "images": [
     {
       "id": "Filter_Black",
-      "file": "assets/Sprites/Cutscenes/Filter_black.png"
+      "file": "assets/Images/Cutscenes/Filter_black.png"
     },
     {
       "id": "Filter_White",
-      "file": "assets/Sprites/Cutscenes/Filter_white.png"
+      "file": "assets/Images/Cutscenes/Filter_white.png"
     },
     {
       "id": "Player_1",
-      "file": "assets/Sprites/Player/Player_sprite_1.png",
+      "file": "assets/Images/Player/Player_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Player_2",
-      "file": "assets/Sprites/Player/Player_sprite_2.png",
+      "file": "assets/Images/Player/Player_sprite_2.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Player_Casual",
-      "file": "assets/Sprites/Player/Casual_player_sprite.png",
+      "file": "assets/Images/Player/Casual_player_sprite.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_1",
-      "file": "assets/Sprites/Clients/Client_sprite_1.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_2",
-      "file": "assets/Sprites/Clients/Client_sprite_2.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_2.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_3",
-      "file": "assets/Sprites/Clients/Client_sprite_3.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_3.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_4",
-      "file": "assets/Sprites/Clients/Client_sprite_4.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_4.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_5",
-      "file": "assets/Sprites/Clients/Client_sprite_5.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_5.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_6",
-      "file": "assets/Sprites/Clients/Client_sprite_6.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_6.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_7",
-      "file": "assets/Sprites/Clients/Client_sprite_7.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_7.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_8",
-      "file": "assets/Sprites/Clients/Client_sprite_8.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_8.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_9",
-      "file": "assets/Sprites/Clients/Client_sprite_9.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_9.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_10",
-      "file": "assets/Sprites/Clients/Client_sprite_10.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_10.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_11",
-      "file": "assets/Sprites/Clients/Client_sprite_11.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_11.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_12",
-      "file": "assets/Sprites/Clients/Client_sprite_12.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_12.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_13",
-      "file": "assets/Sprites/Clients/Client_sprite_13.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_13.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_14",
-      "file": "assets/Sprites/Clients/Client_sprite_14.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_14.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_15",
-      "file": "assets/Sprites/Clients/Client_sprite_15.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_15.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_16",
-      "file": "assets/Sprites/Clients/Client_sprite_16.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_16.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_17",
-      "file": "assets/Sprites/Clients/Client_sprite_17.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_17.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Client_18",
-      "file": "assets/Sprites/Clients/Client_sprite_18.png",
+      "file": "assets/Images/NPCs/Clients/Client_sprite_18.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_1",
-      "file": "assets/Sprites/Thieves/Thief_sprite_1.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_2",
-      "file": "assets/Sprites/Thieves/Thief_sprite_2.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_2.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_3",
-      "file": "assets/Sprites/Thieves/Thief_sprite_3.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_3.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_4",
-      "file": "assets/Sprites/Thieves/Thief_sprite_4.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_4.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_5",
-      "file": "assets/Sprites/Thieves/Thief_sprite_5.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_5.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_6",
-      "file": "assets/Sprites/Thieves/Thief_sprite_6.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_6.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_7",
-      "file": "assets/Sprites/Thieves/Thief_sprite_7.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_7.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Thief_8",
-      "file": "assets/Sprites/Thieves/Thief_sprite_8.png",
+      "file": "assets/Images/NPCs/Thieves/Thief_sprite_8.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Waiter_1",
-      "file": "assets/Sprites/Cutscenes/NPCs/Waiter_sprite_1.png",
+      "file": "assets/Images/NPCs/Waiter_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Waiter_2",
-      "file": "assets/Sprites/Cutscenes/NPCs/Waiter_sprite_2.png",
+      "file": "assets/Images/NPCs/Waiter_sprite_2.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Guard_1",
-      "file": "assets/Sprites/Cutscenes/NPCs/Guard_sprite_1.png",
+      "file": "assets/Images/NPCs/Guard_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Guard_2",
-      "file": "assets/Sprites/Cutscenes/NPCs/Guard_sprite_2.png",
+      "file": "assets/Images/NPCs/Guard_sprite_2.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Police_1",
-      "file": "assets/Sprites/Cutscenes/NPCs/Police_sprite_1.png",
+      "file": "assets/Images/NPCs/Police_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Staff_1",
-      "file": "assets/Sprites/Restaurant/Staff_sprite_1.png",
+      "file": "assets/Images/NPCs/Staff_sprite_1.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "Staff_2",
-      "file": "assets/Sprites/Restaurant/Staff_sprite_2.png",
+      "file": "assets/Images/NPCs/Staff_sprite_2.png",
       "cols": 56,
       "rows": 20
     },
     {
       "id": "0",
-      "file": "assets/Sprites/Food/Dishes/HUEVO_FRITO.png"
+      "file": "assets/Images/Food/Dishes/FRIED_EGG.png"
     },
     {
       "id": "1",
-      "file": "assets/Sprites/Food/Dishes/PAN.png"
+      "file": "assets/Images/Food/Dishes/BREAD.png"
     },
     {
       "id": "2",
-      "file": "assets/Sprites/Food/Dishes/MERMELADA.png"
+      "file": "assets/Images/Food/Dishes/MARMELADE_TOAST.png"
     },
     {
       "id": "3",
-      "file": "assets/Sprites/Food/Dishes/PAN_AJO.png"
+      "file": "assets/Images/Food/Dishes/GARLIC_BREAD.png"
     },
     {
       "id": "4",
-      "file": "assets/Sprites/Food/Dishes/FRENCH_FRIES.png"
+      "file": "assets/Images/Food/Dishes/FRENCH_FRIES.png"
     },
     {
       "id": "5",
-      "file": "assets/Sprites/Food/Dishes/PANCAKE.png"
+      "file": "assets/Images/Food/Dishes/PANCAKE.png"
     },
     {
       "id": "6",
-      "file": "assets/Sprites/Food/Dishes/TARTA_FRESA.png"
+      "file": "assets/Images/Food/Dishes/STRAWB_CAKE.png"
     },
     {
       "id": "7",
-      "file": "assets/Sprites/Food/Dishes/TARTA_CHOC.png"
+      "file": "assets/Images/Food/Dishes/CHOCO_CAKE.png"
     },
     {
       "id": "8",
-      "file": "assets/Sprites/Food/Dishes/TARTA_FRAM.png"
+      "file": "assets/Images/Food/Dishes/RASP_CAKE.png"
     },
     {
       "id": "9",
-      "file": "assets/Sprites/Food/Dishes/GALLETAS.png"
+      "file": "assets/Images/Food/Dishes/COOKIES.png"
     },
     {
       "id": "10",
-      "file": "assets/Sprites/Food/Dishes/OMELETTE.png"
+      "file": "assets/Images/Food/Dishes/OMELETTE.png"
     },
     {
       "id": "11",
-      "file": "assets/Sprites/Food/Dishes/TARTA_MAN.png"
+      "file": "assets/Images/Food/Dishes/APPLE_PIE.png"
     },
     {
       "id": "12",
-      "file": "assets/Sprites/Food/Dishes/TARTA_QUESO.png"
+      "file": "assets/Images/Food/Dishes/CHEESECAKE.png"
     },
     {
       "id": "13",
-      "file": "assets/Sprites/Food/Dishes/BURRITO.png"
+      "file": "assets/Images/Food/Dishes/BURRITO.png"
     },
     {
       "id": "14",
-      "file": "assets/Sprites/Food/Dishes/PURE.png"
+      "file": "assets/Images/Food/Dishes/PUREE.png"
     },
     {
       "id": "15",
-      "file": "assets/Sprites/Food/Dishes/HELADO.png"
+      "file": "assets/Images/Food/Dishes/ICE_CREAM.png"
     },
     {
       "id": "16",
-      "file": "assets/Sprites/Food/Dishes/NACHOS.png"
+      "file": "assets/Images/Food/Dishes/NACHOS.png"
     },
     {
       "id": "17",
-      "file": "assets/Sprites/Food/Dishes/HOTDOG.png"
+      "file": "assets/Images/Food/Dishes/HOTDOG.png"
     },
     {
       "id": "18",
-      "file": "assets/Sprites/Food/Dishes/SANDWICH.png"
+      "file": "assets/Images/Food/Dishes/SANDWICH.png"
     },
     {
       "id": "19",
-      "file": "assets/Sprites/Food/Dishes/SUSHI.png"
+      "file": "assets/Images/Food/Dishes/SUSHI.png"
     },
     {
       "id": "20",
-      "file": "assets/Sprites/Food/Dishes/CURRY_ARROZ.png"
+      "file": "assets/Images/Food/Dishes/CURRY_RICE.png"
     },
     {
       "id": "21",
-      "file": "assets/Sprites/Food/Dishes/PIZZA.png"
+      "file": "assets/Images/Food/Dishes/PIZZA.png"
     },
     {
       "id": "22",
-      "file": "assets/Sprites/Food/Dishes/POLLO_ASADO.png"
+      "file": "assets/Images/Food/Dishes/ROASTED_CHICKEN.png"
     },
     {
       "id": "23",
-      "file": "assets/Sprites/Food/Dishes/FILETE.png"
+      "file": "assets/Images/Food/Dishes/FISH_FILLET.png"
     },
     {
       "id": "24",
-      "file": "assets/Sprites/Food/Dishes/ALBONDIGAS.png"
+      "file": "assets/Images/Food/Dishes/MEATBALLS.png"
     },
     {
       "id": "25",
-      "file": "assets/Sprites/Food/Dishes/ESPAGUETI.png"
+      "file": "assets/Images/Food/Dishes/SPAGHETTI.png"
     },
     {
       "id": "26",
-      "file": "assets/Sprites/Food/Dishes/BURGUER.png"
+      "file": "assets/Images/Food/Dishes/BURGER.png"
     },
     {
       "id": "27",
-      "file": "assets/Sprites/Food/Dishes/RAMEN.png"
+      "file": "assets/Images/Food/Dishes/RAMEN.png"
     },
     {
       "id": "28",
-      "file": "assets/Sprites/Food/Dishes/NONE_DISH.png"
+      "file": "assets/Images/Food/Dishes/NONE_DISH.png"
     },
     {
       "id": "29",
-      "file": "assets/Sprites/Food/Ingredients/HARINA.png"
+      "file": "assets/Images/Food/Ingredients/FLOUR.png"
     },
     {
       "id": "30",
-      "file": "assets/Sprites/Food/Ingredients/HUEVO.png"
+      "file": "assets/Images/Food/Ingredients/EGG.png"
     },
     {
       "id": "31",
-      "file": "assets/Sprites/Food/Ingredients/PATATA.png"
+      "file": "assets/Images/Food/Ingredients/POTATO.png"
     },
     {
       "id": "32",
-      "file": "assets/Sprites/Food/Ingredients/CHOCOLATE.png"
+      "file": "assets/Images/Food/Ingredients/CHOCOLATE.png"
     },
     {
       "id": "33",
-      "file": "assets/Sprites/Food/Ingredients/LECHUGA.png"
+      "file": "assets/Images/Food/Ingredients/LETTUCE.png"
     },
     {
       "id": "34",
-      "file": "assets/Sprites/Food/Ingredients/MAIZ.png"
+      "file": "assets/Images/Food/Ingredients/CORN.png"
     },
     {
       "id": "35",
-      "file": "assets/Sprites/Food/Ingredients/FRESA.png"
+      "file": "assets/Images/Food/Ingredients/STRAWBERRY.png"
     },
     {
       "id": "36",
-      "file": "assets/Sprites/Food/Ingredients/ZANAHORIA.png"
+      "file": "assets/Images/Food/Ingredients/CARROT.png"
     },
     {
       "id": "37",
-      "file": "assets/Sprites/Food/Ingredients/AJO.png"
+      "file": "assets/Images/Food/Ingredients/GARLIC.png"
     },
     {
       "id": "38",
-      "file": "assets/Sprites/Food/Ingredients/LECHE.png"
+      "file": "assets/Images/Food/Ingredients/MILK.png"
     },
     {
       "id": "39",
-      "file": "assets/Sprites/Food/Ingredients/ARROZ.png"
+      "file": "assets/Images/Food/Ingredients/RICE.png"
     },
     {
       "id": "40",
-      "file": "assets/Sprites/Food/Ingredients/TOMATE.png"
+      "file": "assets/Images/Food/Ingredients/TOMATO.png"
     },
     {
       "id": "41",
-      "file": "assets/Sprites/Food/Ingredients/MANZANA.png"
+      "file": "assets/Images/Food/Ingredients/APPLE.png"
     },
     {
       "id": "42",
-      "file": "assets/Sprites/Food/Ingredients/MANTEQUILLA.png"
+      "file": "assets/Images/Food/Ingredients/BUTTER.png"
     },
     {
       "id": "43",
-      "file": "assets/Sprites/Food/Ingredients/FRAMBUESA.png"
+      "file": "assets/Images/Food/Ingredients/JAM.png"
     },
     {
       "id": "44",
-      "file": "assets/Sprites/Food/Ingredients/MOSTAZA.png"
+      "file": "assets/Images/Food/Ingredients/MUSTARD.png"
     },
     {
       "id": "45",
-      "file": "assets/Sprites/Food/Ingredients/FIDEOS.png"
+      "file": "assets/Images/Food/Ingredients/PASTA.png"
     },
     {
       "id": "46",
-      "file": "assets/Sprites/Food/Ingredients/CURRY.png"
+      "file": "assets/Images/Food/Ingredients/CURRY.png"
     },
     {
       "id": "47",
-      "file": "assets/Sprites/Food/Ingredients/QUESO.png"
+      "file": "assets/Images/Food/Ingredients/CHEESE.png"
     },
     {
       "id": "48",
-      "file": "assets/Sprites/Food/Ingredients/SALCHICHA.png"
+      "file": "assets/Images/Food/Ingredients/SAUSAGE.png"
     },
     {
       "id": "49",
-      "file": "assets/Sprites/Food/Ingredients/POLLO.png"
+      "file": "assets/Images/Food/Ingredients/CHICKEN.png"
     },
     {
       "id": "50",
-      "file": "assets/Sprites/Food/Ingredients/GAMBAS.png"
+      "file": "assets/Images/Food/Ingredients/SHRIMP.png"
     },
     {
       "id": "51",
-      "file": "assets/Sprites/Food/Ingredients/SALMON.png"
+      "file": "assets/Images/Food/Ingredients/RAW_SALMON.png"
     },
     {
       "id": "52",
-      "file": "assets/Sprites/Food/Ingredients/CARNE.png"
+      "file": "assets/Images/Food/Ingredients/MEAT.png"
     },
     {
       "id": "53",
-      "file": "assets/Sprites/Food/Ingredients/NONE_ING.png"
+      "file": "assets/Images/Food/Ingredients/NONE_ING.png"
     },
     {
       "id": "FREEZER_OPEN",
-      "file": "assets/Sprites/Restaurant/freezer1.png"
+      "file": "assets/Images/Scenario/freezer1.png"
     },
     {
       "id": "FREEZER2_CLOSE",
-      "file": "assets/Sprites/Restaurant/freezer2.png"
+      "file": "assets/Images/Scenario/freezer2.png"
     },
     {
       "id": "FREEZER2_OPEN",
-      "file": "assets/Sprites/Restaurant/freezer3.png"
+      "file": "assets/Images/Scenario/freezer3.png"
     },
     {
       "id": "SHOPPING_CART",
-      "file": "assets/Sprites/Restaurant/ShoppingCart.png",
+      "file": "assets/Images/Scenario/ShoppingCart.png",
       "cols": 12,
       "rows": 1
     },
     {
       "id": "HEART",
-      "file": "assets/Sprites/UI/HUD/heart.png"
+      "file": "assets/Images/UI/HUD/heart.png"
     },
     {
       "id": "HEARTS",
-      "file": "assets/Sprites/UI/HUD/hearts.png",
+      "file": "assets/Images/UI/HUD/hearts.png",
       "cols": 14,
       "rows": 1
     },
     {
       "id": "SHOP_MENU",
-      "file": "assets/Sprites/UI/HUD/shoppingMenu.png",
+      "file": "assets/Images/UI/HUD/shoppingMenu.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BASKET_BUY_MENU",
-      "file": "assets/Sprites/UI/HUD/basketBuyMenu.png",
+      "file": "assets/Images/UI/HUD/basketBuyMenu.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "MONEY_ICON",
-      "file": "assets/Sprites/UI/HUD/money_icon.png",
+      "file": "assets/Images/UI/HUD/money_icon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CHANGE_ICON",
-      "file": "assets/Sprites/UI/Controls/change_plate.png",
+      "file": "assets/Images/UI/Controls/change_plate.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "PAUSE_BUTTON",
-      "file": "assets/Sprites/UI/Menu/pause_button.png",
+      "file": "assets/Images/UI/Menu/pause_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "RETURN_BUTTON",
-      "file": "assets/Sprites/UI/Menu/Return_Button.png",
+      "file": "assets/Images/UI/Menu/Return_Button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "HOST_BUTTON",
-      "file": "assets/Sprites/UI/Menu/host_button.png",
+      "file": "assets/Images/UI/Menu/host_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "JOIN_BUTTON",
-      "file": "assets/Sprites/UI/Menu/join_button.png",
+      "file": "assets/Images/UI/Menu/join_button.png",
+      "cols": 1,
+      "rows": 1
+    },
+    {
+      "id": "TEXTBOX",
+      "file": "assets/Images/UI/Menu/textbox.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "KI_ICON",
-      "file": "assets/Sprites/UI/HUD/kitchenIsland_icon.png",
+      "file": "assets/Images/UI/HUD/kitchenIsland_icon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "KILL_ICON",
-      "file": "assets/Sprites/UI/Controls/KillIcon.png",
+      "file": "assets/Images/UI/Controls/KillIcon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "RUN_ICON",
-      "file": "assets/Sprites/UI/Controls/RunIcon.png",
+      "file": "assets/Images/UI/Controls/RunIcon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "MAIN_MENU_BG",
-      "file": "assets/Sprites/Backgrounds/mainMenu_bg.png",
+      "file": "assets/Images/Backgrounds/mainMenu_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "PAUSE_BG",
-      "file": "assets/Sprites/Backgrounds/pauseMenuTemp.png",
+      "file": "assets/Images/Backgrounds/pauseMenuTemp.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "OPTIONS_BG",
-      "file": "assets/Sprites/Backgrounds/options_bg.png",
+      "file": "assets/Images/Backgrounds/options_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "DAILY_MENU_BG",
-      "file": "assets/Sprites/Backgrounds/dailymenu_bg.png",
+      "file": "assets/Images/Backgrounds/dailymenu_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CONTINUE_BG",
-      "file": "assets/Sprites/Backgrounds/continue_bg.png",
+      "file": "assets/Images/Backgrounds/continue_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "MORNING_BG",
-      "file": "assets/Sprites/Backgrounds/morning_bg.png",
+      "file": "assets/Images/Backgrounds/morning_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "NIGHT_BG",
-      "file": "assets/Sprites/Backgrounds/night_bg.png",
+      "file": "assets/Images/Backgrounds/night_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BANNER",
-      "file": "assets/Sprites//UI/UI_Flat_Banner_01_Upward.png",
+      "file": "assets/Images//UI/UI_Flat_Banner_01_Upward.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "DAILY_MENU_BUTTON",
-      "file": "assets/Sprites/UI/HUD/daily_menu_button.png",
+      "file": "assets/Images/UI/HUD/daily_menu_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "RESUME_BUTTON_UP",
-      "file": "assets/Sprites/UI/Menu/ResumeButtonUp.png",
+      "file": "assets/Images/UI/Menu/ResumeButtonUp.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "RESUME_BUTTON_DOWN",
-      "file": "assets/Sprites/UI/Menu/ResumeButtonDown.png",
+      "file": "assets/Images/UI/Menu/ResumeButtonDown.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "MAINM_BUTTON_UP",
-      "file": "assets/Sprites/UI/Menu/MainMenuButtonUp.png",
+      "file": "assets/Images/UI/Menu/MainMenuButtonUp.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "MAINM_BUTTON_DOWN",
-      "file": "assets/Sprites/UI/Menu/MainMenuButtonDown.png",
+      "file": "assets/Images/UI/Menu/MainMenuButtonDown.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "PLAY_BUTTON_UP",
-      "file": "assets/Sprites/UI/Menu/PlayButtonUp.png",
+      "file": "assets/Images/UI/Menu/PlayButtonUp.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "1_PLAYER_BUTTON",
-      "file": "assets/Sprites/UI/Menu/1player_button.png",
+      "file": "assets/Images/UI/Menu/1player_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "2_PLAYER_BUTTON",
-      "file": "assets/Sprites/UI/Menu/2player_button.png",
+      "file": "assets/Images/UI/Menu/2player_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "PLAY_BUTTON_UP",
-      "file": "assets/Sprites/UI/Menu/PlayButtonUp.png",
+      "file": "assets/Images/UI/Menu/PlayButtonUp.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "OPTIONS_BUTTON",
-      "file": "assets/Sprites/UI/Menu/Options_Button.png",
+      "file": "assets/Images/UI/Menu/Options_Button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BUTTON_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/button_highlight.png",
+      "file": "assets/Images/UI/Highlights/button_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CONTINUE_BUTTON",
-      "file": "assets/Sprites/UI/Menu/continue_button.png",
+      "file": "assets/Images/UI/Menu/continue_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "NEWGAME_BUTTON",
-      "file": "assets/Sprites/UI/Menu/newGame_button.png",
+      "file": "assets/Images/UI/Menu/newGame_button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BUY_BUTTON",
-      "file": "assets/Sprites/UI/HUD/Buy_Button.png",
+      "file": "assets/Images/UI/HUD/Buy_Button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CONTROLS_BUTTON",
-      "file": "assets/Sprites/UI/Menu/Controls_Button.png",
+      "file": "assets/Images/UI/Menu/Controls_Button.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "SLIDER_BAR",
-      "file": "assets/Sprites/UI/Menu/slider&checkbox/sliderBar.png",
+      "file": "assets/Images/UI/Menu/slider&checkbox/sliderBar.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "SLIDER_BUTTON",
-      "file": "assets/Sprites/UI/Menu/slider&checkbox/sliderCenter.png",
+      "file": "assets/Images/UI/Menu/slider&checkbox/sliderCenter.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "SLIDER_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/sliderCenterHighlight.png",
+      "file": "assets/Images/UI/Highlights/sliderCenterHighlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CHECKBOX",
-      "file": "assets/Sprites/UI/Menu/slider&checkbox/checkbox.png",
+      "file": "assets/Images/UI/Menu/slider&checkbox/checkbox.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CHECKBOX_CHECK",
-      "file": "assets/Sprites/UI/Menu/slider&checkbox/checkbox_check.png",
+      "file": "assets/Images/UI/Menu/slider&checkbox/checkbox_check.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CHECKBOX_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/checkbox_highlight.png",
+      "file": "assets/Images/UI/Highlights/checkbox_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CONTROLS",
-      "file": "assets/Sprites/UI/Controls/Controls.png",
+      "file": "assets/Images/Backgrounds/controls_bg.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BASKET_YELLOW",
-      "file": "assets/Sprites/UI/HUD/basket_yellow.png",
+      "file": "assets/Images/UI/HUD/basket_yellow.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CLEANTABLE_ICON",
-      "file": "assets/Sprites/UI/HUD/cleanTable_icon.png",
+      "file": "assets/Images/UI/HUD/cleanTable_icon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "DIRT_PLATES",
-      "file": "assets/Sprites/UI/HUD/dirtPlates.png",
+      "file": "assets/Images/UI/HUD/dirtPlates.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BASKET_LIST",
-      "file": "assets/Sprites/UI/basket_list.png",
+      "file": "assets/Images/UI/basket_list.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CARTEL_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/cartel_highlight.png",
+      "file": "assets/Images/UI/Highlights/cartel_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "INGREDIENT_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/ingredient_highlight.png",
+      "file": "assets/Images/UI/Highlights/ingredient_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CASH_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/cash_Regis_higlight.png",
+      "file": "assets/Images/UI/Highlights/cash_Regis_higlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "DOOR_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/door_highlight.png",
+      "file": "assets/Images/UI/Highlights/door_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "COOK_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/kitchen_highlight.png",
+      "file": "assets/Images/UI/Highlights/kitchen_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BIN_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/bin_highlight.png",
+      "file": "assets/Images/UI/Highlights/bin_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "ISLAND_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/island_highlight.png",
+      "file": "assets/Images/UI/Highlights/island_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "TARGET_ICON",
-      "file": "assets/Sprites/UI/HUD/target_icon.png",
+      "file": "assets/Images/UI/HUD/target_icon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "SUPER_CASHREGISTER",
-      "file": "assets/Sprites/UI/Highlights/super_cashregister.png",
+      "file": "assets/Images/UI/Highlights/super_cashregister.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "REPUTATION_ICON",
-      "file": "assets/Sprites/UI/HUD/reputation_icon.png",
+      "file": "assets/Images/UI/HUD/reputation_icon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "INVENTORY_ICON",
-      "file": "assets/Sprites/UI/HUD/inventory.png",
+      "file": "assets/Images/UI/HUD/inventory.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "INVENTORY_HIGHLIGHT",
-      "file": "assets/Sprites/UI/HUD/inventory_highlight.png",
+      "file": "assets/Images/UI/HUD/inventory_highlight.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CLOCK",
-      "file": "assets/Sprites/UI/HUD/clock.png",
+      "file": "assets/Images/UI/HUD/clock.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "ARROW",
-      "file": "assets/Sprites/UI/HUD/arrow.png",
+      "file": "assets/Images/UI/HUD/arrow.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CROSS",
-      "file": "assets/Sprites/UI/UI_Flat_Cross_Medium.png",
+      "file": "assets/Images/UI/UI_Flat_Cross_Medium.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "BUBBLE_ICON",
-      "file": "assets/Sprites/UI/HUD/cocina_nube.png",
+      "file": "assets/Images/UI/HUD/cocina_nube.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "STAR",
-      "file": "assets/Sprites/UI/HUD/star.png",
+      "file": "assets/Images/UI/HUD/star.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "EMPTY_STAR",
-      "file": "assets/Sprites/UI/HUD/empty_star.png",
+      "file": "assets/Images/UI/HUD/empty_star.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "KITCHEN_PROCESSING_ICON_ANIM",
-      "file": "assets/Sprites/UI/HUD/kitchen_processing.png",
+      "file": "assets/Images/UI/HUD/kitchen_processing.png",
       "cols": 8,
       "rows": 1
     },
     {
       "id": "CLIENT_THINKING_ICON_ANIM",
-      "file": "assets/Sprites/UI/HUD/client_thinking.png",
+      "file": "assets/Images/UI/HUD/client_thinking.png",
       "cols": 8,
       "rows": 1
     },
     {
       "id": "CLIENT_EATING_ICON_ANIM",
-      "file": "assets/Sprites/UI/HUD/client_eating.png",
+      "file": "assets/Images/UI/HUD/client_eating.png",
       "cols": 2,
       "rows": 1
     },
     {
       "id": "CLIENT_TAKINGNOTE_ICON_ANIM",
-      "file": "assets/Sprites/UI/HUD/takingNote.png",
+      "file": "assets/Images/UI/HUD/takingNote.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "EXCLAMATION",
-      "file": "assets/Sprites/UI/HUD/exclamation_icon.png",
+      "file": "assets/Images/UI/HUD/exclamation_icon.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "RETURN_ICON",
-      "file": "assets/Sprites/UI/Controls/return_ing.png",
+      "file": "assets/Images/UI/Controls/return_ing.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "CLEAN_ICON",
-      "file": "assets/Sprites/UI/Controls/clean_ing.png",
+      "file": "assets/Images/UI/Controls/clean_ing.png",
       "cols": 1,
       "rows": 1
     },
     {
       "id": "DIALOG_BOX",
-      "file": "assets/Sprites/UI/dialogBox.png"
+      "file": "assets/Images/UI/dialogBox.png"
     },
     {
       "id": "DIALOG_BOX_PORTRAIT",
-      "file": "assets/Sprites/UI/dialogBox_PortraitFrame.png"
+      "file": "assets/Images/UI/dialogBox_PortraitFrame.png"
     },
     {
       "id": "PROTA_CHEF_SMILE",
-      "file": "assets/Sprites/UI/icons/character_chef_smile.png"
+      "file": "assets/Images/UI/icons/character_chef_smile.png"
     },
     {
       "id": "PROTA_CHEF_SURPRISED",
-      "file": "assets/Sprites/UI/icons/character_chef_surprised.png"
+      "file": "assets/Images/UI/icons/character_chef_surprised.png"
     },
     {
       "id": "PROTA_CHEF_ANGRY",
-      "file": "assets/Sprites/UI/icons/character_chef_badMood_angry.png"
+      "file": "assets/Images/UI/icons/character_chef_badMood_angry.png"
     },
     {
       "id": "PROTA_CHEF_ANGRY_CLOSE_EYE",
-      "file": "assets/Sprites/UI/icons/character_chef_angry_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_chef_angry_closingEyes.png"
     },
     {
       "id": "PROTA_CHEF_SAD_CLOSE_EYE",
-      "file": "assets/Sprites/UI/icons/character_chef_sad_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_chef_sad_closingEyes.png"
     },
     {
       "id": "PROTA_CHEF_SMILE_CLOSE_EYE",
-      "file": "assets/Sprites/UI/icons/character_chef_smile_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_chef_smile_closingEyes.png"
     },
     {
       "id": "PROTA_CHEF_SIGH",
-      "file": "assets/Sprites/UI/icons/character_chef_sigh_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_chef_sigh_closingEyes.png"
     },
     {
       "id": "PROTA_CHEF_ENRAGED",
-      "file": "assets/Sprites/UI/icons/character_chef_enraged.png"
+      "file": "assets/Images/UI/icons/character_chef_enraged.png"
     },
     {
       "id": "PROTA_CHEF_STRESSED_OUT",
-      "file": "assets/Sprites/UI/icons/character_chef_stressedOut.png"
+      "file": "assets/Images/UI/icons/character_chef_stressedOut.png"
     },
     {
       "id": "PROTA_CHEF_MANIC",
-      "file": "assets/Sprites/UI/icons/character_chef_manic.png"
+      "file": "assets/Images/UI/icons/character_chef_manic.png"
     },
     {
       "id": "PROTA_CHEF_SHOUTING",
-      "file": "assets/Sprites/UI/icons/character_chef_shouting.png"
+      "file": "assets/Images/UI/icons/character_chef_shouting.png"
     },
     {
       "id": "PROTA_CHEF_FURIOUS",
-      "file": "assets/Sprites/UI/icons/character_chef_furious.png"
+      "file": "assets/Images/UI/icons/character_chef_furious.png"
     },
     {
       "id": "PROTA_CASUAL_SURPRISED",
-      "file": "assets/Sprites/UI/icons/character_casual_surprised.png"
+      "file": "assets/Images/UI/icons/character_casual_surprised.png"
     },
     {
       "id": "PROTA_CASUAL_ANGRY",
-      "file": "assets/Sprites/UI/icons/character_casual_angry.png"
+      "file": "assets/Images/UI/icons/character_casual_angry.png"
     },
     {
       "id": "PROTA_CASUAL_ANGRY_CLOSE_EYE",
-      "file": "assets/Sprites/UI/icons/character_casual_angry_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_casual_angry_closingEyes.png"
     },
     {
       "id": "PROTA_CASUAL_SMILE_CLOSE_EYE",
-      "file": "assets/Sprites/UI/icons/character_casual_smile_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_casual_smile_closingEyes.png"
     },
     {
       "id": "PROTA_CASUAL_SMILE",
-      "file": "assets/Sprites/UI/icons/character_casual_smile.png"
+      "file": "assets/Images/UI/icons/character_casual_smile.png"
     },
     {
       "id": "PROTA_CASUAL_SAD_CLOSE_EYE",
-      "file": "assets/Sprites/UI/icons/character_casual_sad_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_casual_sad_closingEyes.png"
     },
     {
       "id": "PROTA_CASUAL_SIGH",
-      "file": "assets/Sprites/UI/icons/character_casual_sigh_closingEyes.png"
+      "file": "assets/Images/UI/icons/character_casual_sigh_closingEyes.png"
     },
     {
       "id": "PROTA_CASUAL_BAD_SMILE",
-      "file": "assets/Sprites/UI/icons/character_casual_badSmile.png"
+      "file": "assets/Images/UI/icons/character_casual_badSmile.png"
     },
     {
       "id": "PROTA_CASUAL_BAD_MOOD",
-      "file": "assets/Sprites/UI/icons/character_casual_badMood.png"
+      "file": "assets/Images/UI/icons/character_casual_badMood.png"
     },
     {
       "id": "PROTA_CASUAL_ENRAGED",
-      "file": "assets/Sprites/UI/icons/character_casual_enraged.png"
+      "file": "assets/Images/UI/icons/character_casual_enraged.png"
     },
     {
       "id": "PROTA_CASUAL_STRESSED_OUT",
-      "file": "assets/Sprites/UI/icons/character_casual_stressedOut.png"
+      "file": "assets/Images/UI/icons/character_casual_stressedOut.png"
     },
     {
       "id": "PROTA_CASUAL_MANIC",
-      "file": "assets/Sprites/UI/icons/character_casual_manic.png"
+      "file": "assets/Images/UI/icons/character_casual_manic.png"
     },
     {
       "id": "PARENTS",
-      "file": "assets/Sprites/UI/icons/parents.png"
+      "file": "assets/Images/UI/icons/parents.png"
     },
     {
       "id": "OWNER",
-      "file": "assets/Sprites/UI/icons/owner.png"
+      "file": "assets/Images/UI/icons/owner.png"
     },
     {
       "id": "WOMAN2",
-      "file": "assets/Sprites/UI/icons/woman2.png"
+      "file": "assets/Images/UI/icons/woman2.png"
     },
     {
       "id": "PHONE",
-      "file": "assets/Sprites/UI/icons/phone.png"
+      "file": "assets/Images/UI/icons/phone.png"
     },
     {
       "id": "MAN",
-      "file": "assets/Sprites/UI/icons/man.png"
+      "file": "assets/Images/UI/icons/man.png"
     },
     {
       "id": "POLICE",
-      "file": "assets/Sprites/UI/icons/police.png"
+      "file": "assets/Images/UI/icons/police.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM",
-      "file": "assets/Sprites/Cutscenes/Parent_Room.png"
+      "file": "assets/Images/Cutscenes/Parent_Room.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_TOP",
-      "file": "assets/Sprites/Cutscenes/Parent_Room_top.png"
+      "file": "assets/Images/Cutscenes/Parent_Room_top.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_NIGHT",
-      "file": "assets/Sprites/Cutscenes/Parent_Room_Night.png"
+      "file": "assets/Images/Cutscenes/Parent_Room_Night.png"
     },
     {
       "id": "CINEMATIC_BG_PARENTS_ROOM_RAINY",
-      "file": "assets/Sprites/Cutscenes/Parent_Room_Rainy.png"
+      "file": "assets/Images/Cutscenes/Parent_Room_Rainy.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT",
-      "file": "assets/Sprites/Cutscenes/Restaurant.png"
+      "file": "assets/Images/Cutscenes/Restaurant.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT_TOP",
-      "file": "assets/Sprites/Cutscenes/Restaurant_top.png"
+      "file": "assets/Images/Cutscenes/Restaurant_top.png"
     },
 
     {
       "id": "CINEMATIC_BG_PANTRY_TOP",
-      "file": "assets/Sprites/Cutscenes/pantry_top.png"
+      "file": "assets/Images/Cutscenes/pantry_top.png"
     },
     {
       "id": "CINEMATIC_BG_HOUSE",
-      "file": "assets/Sprites/Cutscenes/house.png"
+      "file": "assets/Images/Cutscenes/house.png"
     },
     {
       "id": "CINEMATIC_BG_HOUSE_TOP",
-      "file": "assets/Sprites/Cutscenes/house_top.png"
+      "file": "assets/Images/Cutscenes/house_top.png"
     },
     {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL",
-      "file": "assets/Sprites/Cutscenes/Entrance_General.png"
+      "file": "assets/Images/Cutscenes/Entrance_General.png"
     },
     {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL_TOP",
-      "file": "assets/Sprites/Cutscenes/Entrance_General_top.png"
+      "file": "assets/Images/Cutscenes/Entrance_General_top.png"
     },
     {
       "id": "CINEMATIC_BG_ENTRANCE_GENERAL_NIGHT",
-      "file": "assets/Sprites/Cutscenes/Entrance_General_Night.png"
+      "file": "assets/Images/Cutscenes/Entrance_General_Night.png"
     },
     {
       "id": "CINEMATIC_BG_PANTRY",
-      "file": "assets/Sprites/Cutscenes/Pantry.png"
+      "file": "assets/Images/Cutscenes/Pantry.png"
     },
     {
       "id": "CINEMATIC_BG_PANTRY_FREEZER",
-      "file": "assets/Sprites/Cutscenes/Pantry_freezer.png"
+      "file": "assets/Images/Cutscenes/Pantry_freezer.png"
     },
     {
       "id": "CINEMATIC_BG_PROTA_ROOM",
-      "file": "assets/Sprites/Cutscenes/Prota_Room.png"
+      "file": "assets/Images/Cutscenes/Prota_Room.png"
     },
     {
       "id": "CINEMATIC_BG_PROTA_ROOM_NIGHT",
-      "file": "assets/Sprites/Cutscenes/Prota_Room_Night.png"
+      "file": "assets/Images/Cutscenes/Prota_Room_Night.png"
     },
     {
       "id": "CINEMATIC_TV_FILTER",
-      "file": "assets/Sprites/Cutscenes/tv_filter.png"
+      "file": "assets/Images/Cutscenes/tv_filter.png"
     },
     {
       "id": "CINEMATIC_PANTRY_LECTERN",
-      "file": "assets/Sprites/Cutscenes/pantry_lectern.png"
+      "file": "assets/Images/Cutscenes/pantry_lectern.png"
     },
     {
       "id": "CINEMATIC_BG_PROTA_ROOM_WALL",
-      "file": "assets/Sprites/Cutscenes/Prota_Room_Wall.png"
+      "file": "assets/Images/Cutscenes/Prota_Room_Wall.png"
     },
     {
       "id": "CINEMATIC_BG_ROOM_DOOR",
-      "file": "assets/Sprites/Cutscenes/animated_door_big_5_48x48.png"
+      "file": "assets/Images/Cutscenes/animated_door_big_5_48x48.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT_TOP_BAD_ENDING_2",
-      "file": "assets/Sprites/Cutscenes/Restaurant_top_bad_ending_2.png"
+      "file": "assets/Images/Cutscenes/Restaurant_top_bad_ending_2.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT_HAPPY_ENDING",
-      "file": "assets/Sprites/Cutscenes/Restaurant_happy_ending.png"
+      "file": "assets/Images/Cutscenes/Restaurant_happy_ending.png"
     },
     {
       "id": "CINEMATIC_BG_RESTAURANT_ISLAND",
-      "file": "assets/Sprites/Cutscenes/Restaurant_island.png"
+      "file": "assets/Images/Cutscenes/Restaurant_island.png"
     },
     {
       "id": "CINEMATIC_BG_PANTRY_HAPPY_ENDING",
-      "file": "assets/Sprites/Cutscenes/Pantry_happy_ending.png"
+      "file": "assets/Images/Cutscenes/Pantry_happy_ending.png"
     },
     {
 
       "id": "DAILY_MENU",
-      "file": "assets/Sprites/UI/dailymenu.png"
+      "file": "assets/Images/UI/dailymenu.png"
     },
     {
       "id": "DAILY_MENU_HIGHLIGHT",
-      "file": "assets/Sprites/UI/Highlights/dailymenu_highlight.png"
+      "file": "assets/Images/UI/Highlights/dailymenu_highlight.png"
     },
     {
       "id": "KEYBOARD_KEYS",
-      "file": "assets/Sprites/UI/Controls/Keyboard_Letters_and_Symbols.png",
+      "file": "assets/Images/UI/Controls/Keyboard_Letters_and_Symbols.png",
       "cols": 8,
       "rows": 14
     },
     {
       "id": "KEYBOARD_KEYS_2",
-      "file": "assets/Sprites/UI/Controls/Keyboard Extras.png",
+      "file": "assets/Images/UI/Controls/Keyboard Extras.png",
       "cols": 4,
       "rows": 8
     },
     {
       "id": "PLAYSTATION_KEYS",
-      "file": "assets/Sprites/UI/Controls/gdb-playstation-2.png",
+      "file": "assets/Images/UI/Controls/gdb-playstation-2.png",
       "cols": 35,
       "rows": 40
     },
     {
       "id": "XBOX_KEYS",
-      "file": "assets/Sprites/UI/Controls/gdb-xbox-2.png",
+      "file": "assets/Images/UI/Controls/gdb-xbox-2.png",
       "cols": 35,
       "rows": 40
     },
     {
       "id": "BUBBLE",
-      "file": "assets/Sprites/UI/HUD/ing_bubble.png",
+      "file": "assets/Images/UI/HUD/ing_bubble.png",
       "cols": 1,
       "rows": 5
     }
