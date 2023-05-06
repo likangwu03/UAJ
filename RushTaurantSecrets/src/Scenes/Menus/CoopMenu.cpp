@@ -27,7 +27,7 @@ CoopMenu::CoopMenu() {
 	image = &(sdlutils().images().at("CONTINUE_BG"));
 
 	new Image(bg, image);
-	textBox = new Texture(sdlutils().renderer(), "assets/Sprites/UI/textbox.png");
+	textBox = &(sdlutils().images().at("TEXTBOX"));
 
 	IP = new GameObject(this);
 	new Transform(IP, { (float)(SDLUtils::instance()->width() / 2) - 385 / 2, (float)SDLUtils::instance()->height() / 4 - 130 / 2 }, { 0,0 }, 385, 100);
@@ -107,7 +107,6 @@ CoopMenu::~CoopMenu() {
 	delete waiting;
 	delete waiting2;
 	delete text_ip;
-	delete textBox;
 }
 
 
