@@ -8,11 +8,8 @@ void Warning::update() {
 			image->setActive(!image->isActive());
 		}
 	}
-	else {
-
+	else 
 		image->setActive(false);
-		thiefsManager->haltSound();
-	}
 	
 }
 

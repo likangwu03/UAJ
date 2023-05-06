@@ -13,11 +13,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-<<<<<<<< HEAD:Instalador/RushTaurant Secrets.iss
 AppId={{299778B9-1D70-4D43-86E5-3B1679E1D048}
-========
-AppId={{447B8A11-AED3-4775-B355-2F10EC112A20}
->>>>>>>> 103cd26dabc59715debf0b5a0c5efb43e87902e4:Instalador/Nightmare Dogs.iss
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
