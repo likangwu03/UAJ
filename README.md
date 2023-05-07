@@ -10,9 +10,13 @@
 ------------
 ### Documentación:
 - [Enlace al material de las presentaciones](https://drive.google.com/drive/folders/1a7Z0Bc-AFx-a9P5l2t9r2TmYJNg2jmCD?usp=share_linkhttps://drive.google.com/drive/folders/1a7Z0Bc-AFx-a9P5l2t9r2TmYJNg2jmCD?usp=share_link "Enlace al material de las presentaciones")
-- **UML**  
-![UML](/documents/UML.png "Clicando se redireccion a una página donde hacer zoom")  
-Hay muchos componentes que tienen conexiones con SDLUtils, InputHandler y Transform, por lo tanto, no se han indicado sus conexiones con los mismos.
+
+- **UML:**  
+![UML](/documents/UML%20resumido.jpg "UML resumido")
+ RushTaurant Secrets sigue una arquitectura por componentes, entidades (GameObjects) y un sistema para gestionar el multijugador. Todo el juego está dividido en escenas, siendo las principales el menú del día, el supermercado, el restaurante y la despensa, cada una con GameObjects específicos de ellas, como los carteles para comprar ingredientes, las mesas y las cocinas, o el congelador. Estas escenas tienen, además, otras escenas renderizándose por encima, sirviendo como HUD de cada una de ellas. Por otro lado, cada una tienen dos jugadores, aunque uno de ellos no estará activo si no se está jugando en modo multijugador. De la progresión del juego y los recursos del jugador se encargan el DayManager, Money y Reputation, que guardan la información de los días, el dinero y la reputación, respectivamente. Todos estos elementos están contenidos en el GameManager, que crea y guarda todas las escenas desde el principio del juego, y que se encarga de gestionar el paso entre escenas y de la ejecución del juego.  
+
+
+- [Enlace al UML completo](/documents/UML.png) (Prácticamente todos los componentes tienen conexiones con SDLUtils, InputHandler y/o Transform, por lo que no se han indicado sus conexiones con los mismos.)
 
 ------------
 
