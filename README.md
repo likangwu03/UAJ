@@ -11,7 +11,7 @@
 ### Documentación:
 - [Enlace al material de las presentaciones](https://drive.google.com/drive/folders/1a7Z0Bc-AFx-a9P5l2t9r2TmYJNg2jmCD?usp=share_linkhttps://drive.google.com/drive/folders/1a7Z0Bc-AFx-a9P5l2t9r2TmYJNg2jmCD?usp=share_link "Enlace al material de las presentaciones")
 - **UML**  
-![UML](/documents/UML.png)  
+![UML](/documents/UML.png "Clicando se redireccion a una página donde hacer zoom")  
 Hay muchos componentes que tienen conexiones con SDLUtils, InputHandler y Transform, por lo tanto, no se han indicado sus conexiones con los mismos.
 
 ------------
