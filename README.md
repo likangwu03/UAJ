@@ -282,7 +282,7 @@ Hay muchos componentes que tienen conexiones con SDLUtils, InputHandler y Transf
    7. ##### Recetas <a name="id12"></a>
       | Nombre | Imagen | Ingredientes necesarios | Precio | Ganancia | Tiempo necesario | Dificultad |
       |:------:|:------:|:-----------------------:|:------:|:--------:|:----------------:|:----------:|
-      |**Huevo frito**|![fried_egg](/RushTaurantSecrets/assets/Images/Food/Dishes/FRIED_EGG.png)|Huevos|4|3|0.5s|1|
+      |**Huevo frito**|![fried_egg](/RushTaurantSecrets/assets/Images/Food/Dishes/HUEVO_FRITO.png)|Huevos|4|3|0.5s|1|
       |**Pan**|![bread](/RushTaurantSecrets/assets/Images/Food/Dishes/BREAD.png)|Harina|4|3|0.7s|1|
       |**Mermelada**|![marmelade](/RushTaurantSecrets/assets/Images/Food/Dishes/MARMELADE_TOAST.png)|Frambuesa<br>Harina|8|4|1s|1|
       |**Pan con ajo**|![garlic_bread](/RushTaurantSecrets/assets/Images/Food/Dishes/GARLIC_BREAD.png)|Harina<br>Ajo|7|4|0.7s|1|
@@ -409,7 +409,7 @@ Hay muchos componentes que tienen conexiones con SDLUtils, InputHandler y Transf
 9. #### Contenido <a name="id26"></a>
     1. ##### Videojuegos <a name="id27"></a>
        - Saga Penguin Diner (Bigwig Media)
-       - Saga Delicious Emily
+       - Saga Delicious Emily (Zylom Studios, Gamehouse Studios)
     2. ##### Assets <a name="id28"></a>
        *Comida:*
        - <https://ghostpixxells.itch.io/pixelfood>
