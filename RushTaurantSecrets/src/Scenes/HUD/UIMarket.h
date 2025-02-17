@@ -58,10 +58,10 @@ private:
 	bool buying = false;
 	bool buy = false;
 
-	void toggleDailyMenu();
 
 
 public:
+	void toggleDailyMenu();
 	// constructora
 	UIMarket(Scene* market);
 	~UIMarket();

@@ -24,11 +24,11 @@ class DailyMenuScene : public Scene {
 	uint8_t spriteSize;
 	DailyMenu* dailyMenu1;
 	DailyMenu* dailyMenu2;
-	void buttonPress(int menu);
 
 	Music* supermarketMusic;
 
 public:
+	void buttonPress(int menu);
 	DailyMenuScene(uint8_t msize = 4);
 	void init();
 	void reset();

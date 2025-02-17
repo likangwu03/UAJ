@@ -107,8 +107,9 @@ void GameManager::initialize() {
 	allScenes.insert({ _ecs::sc_BADENDING4, new BadEnding4Scene() });	// REVISADA 2
 	allScenes.insert({ _ecs::sc_HAPPYENDING, new HappyEndingScene() });	// REVISADA 2
 
-
-	changeScene(allScenes.at(_ecs::sc_MAINMENU));
+	dailyMenu->buttonPress(0);
+	changeScene(allScenes.at(_ecs::sc_SUPERMARKET));
+	supermarket->toggleDailyMenu();
 }
 
 GameManager::~GameManager() {

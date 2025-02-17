@@ -58,4 +58,9 @@ public:
 
 	void initCoopMode(bool server)override;
 	void quitCoopMode() override;
+
+	void toggleDailyMenu() {
+		uiMarket->toggleDailyMenu();
+	}
+
 };
