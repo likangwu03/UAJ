@@ -143,6 +143,8 @@ public:
 
 	std::string getCurrentTimeAsString();
 
+	bool testEnd = false;
+
 
 	// Función para convertir _ingredients_id a string
 	std::string ingredientsIdToString(_ecs::_ingredients_id ingredient) {

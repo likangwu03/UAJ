@@ -39,10 +39,15 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 
 	if (scene->getBuy() && (money->getMoney() - money->getPrice() >= 0)) {
 		scene->setBuy(false);
-		sendToClien();
+		
+		//sendToClien();
 		money->subtractMoney(money->getPrice());
 		money->setPrice(0);
-		payAndLeave();
+		buybutton->setActives(false);
+		scene->getGameObject(_ecs::hdr_PLAYER)->getComponent<PlayerMovementController>()->setActive(false);
+		GameManager::get()->testEnd = true;
+
+		//payAndLeave();
 
 	}
 }

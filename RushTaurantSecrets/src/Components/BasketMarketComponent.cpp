@@ -168,6 +168,9 @@ void BasketMarketComponent::selectIngredientInBasket(SDL_KeyCode key) {
 }
 
 void BasketMarketComponent::handleEvents() {
+
+	if (GameManager::get()->testEnd)return;
+
 	if (basketON) {
 		if (!chooseHMMode) {
 			if (ih->joysticksInitialised()) {
