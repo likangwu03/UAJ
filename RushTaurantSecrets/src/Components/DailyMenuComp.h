@@ -54,5 +54,7 @@ public:
 	virtual void render();
 	vector<_ecs::DishInfo>* getMenu();
 	void setMenu(vector<_ecs::DishInfo>* _menu);
+
+	void testMenu();
 };
 

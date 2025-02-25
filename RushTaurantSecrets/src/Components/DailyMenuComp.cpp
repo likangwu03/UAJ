@@ -125,7 +125,8 @@ DailyMenuComp::DailyMenuComp(GameObject* parent, float w, float h, _ecs::_cmp_id
 
 void DailyMenuComp::initMenu() {
 	menu = new vector<_ecs::DishInfo>();
-	randomMenu();
+	//randomMenu();
+	testMenu();
 	init();
 }
 
@@ -174,6 +175,14 @@ void DailyMenuComp::setMenu(vector<_ecs::DishInfo>* _menu)
 	drawDishes();
 }
 
+void DailyMenuComp::testMenu()
+{
+	menu->push_back(_ecs::Dishes[_ecs::ICE_CREAM]);
+	menu->push_back(_ecs::Dishes[_ecs::ROASTED_CHICKEN]);
+	menu->push_back(_ecs::Dishes[_ecs::CURRY_RICE]);
+	menu->push_back(_ecs::Dishes[_ecs::HOTDOG]);
+
+}
 
 void DailyMenuComp::initMenu(const vector<uint8_t>& menu_) {
 	menu->clear();
