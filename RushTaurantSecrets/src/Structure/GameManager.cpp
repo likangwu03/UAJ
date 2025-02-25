@@ -406,7 +406,7 @@ void GameManager::saveTestFile(const std::string& name, const std::vector<std::p
 {
 
 	std::stringstream file;
-	file << "assets/" <<name << getCurrentTimeAsString()<< ".txt";
+	file << "assets/test/" <<name << getCurrentTimeAsString()<< ".txt";
 	std::ofstream write(file.str(), std::ofstream::out);
 	if (write.is_open()) {
 		for (const auto& ingredient : ingredients) {

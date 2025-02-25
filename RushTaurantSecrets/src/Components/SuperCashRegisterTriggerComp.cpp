@@ -39,14 +39,16 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 
 	if (scene->getBuy() && (money->getMoney() - money->getPrice() >= 0)) {
 		scene->setBuy(false);
-		
+		vector<pair<_ecs::_ingredients_id, int>> ing;
+		ing = GameManager::get()->getSupermarket()->getUI()->getGameObject(hdr_SM_INVENTORY)->getComponent<BasketMarketComponent>()->getTestIngredients();
+		GameManager::get()->saveTestFile("Test_", ing);
 		//sendToClien();
 		money->subtractMoney(money->getPrice());
 		money->setPrice(0);
 		buybutton->setActives(false);
 		scene->getGameObject(_ecs::hdr_PLAYER)->getComponent<PlayerMovementController>()->setActive(false);
 		GameManager::get()->testEnd = true;
-
+		
 		//payAndLeave();
 
 	}

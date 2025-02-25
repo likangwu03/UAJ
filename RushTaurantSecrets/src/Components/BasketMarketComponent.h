@@ -72,6 +72,9 @@ public:
 	void addToBasketOnline(_ecs::_ingredients_id ing, int n);
 	void initComponent()override;
 	vector<pair<_ecs::_ingredients_id, int>> getIngredients();
+	vector<pair<_ecs::_ingredients_id, int>> getTestIngredients();
+
+
 
 	void enterRegister(bool enter);
 };

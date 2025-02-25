@@ -274,6 +274,14 @@ vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getIngredients()
 	return aux;
 }
 
+vector<pair<_ecs::_ingredients_id, int>> BasketMarketComponent::getTestIngredients()
+{
+	vector<pair<_ecs::_ingredients_id, int>> aux;
+	for (auto ing : ingredients)
+		aux.push_back({ ing.first, ing.second });
+	return aux;
+}
+
 void BasketMarketComponent::enterRegister(bool enter) {
 	isOnRegister = enter;
 }
