@@ -10,6 +10,7 @@
 #include <unordered_map>
 
 
+
 class Scene;
 
 class Restaurant;
@@ -139,4 +140,44 @@ public:
 	void setMasterVolume(int nVolume);
 	int getSoundEffectsVolume();
 	void setSoundEffectsVolume(int nVolume);
+
+	std::string getCurrentTimeAsString();
+
+
+	// Función para convertir _ingredients_id a string
+	std::string ingredientsIdToString(_ecs::_ingredients_id ingredient) {
+		static const std::unordered_map<_ecs::_ingredients_id, std::string> ingredientNames = {
+			{_ecs::FLOUR, "FLOUR"},
+			{_ecs::EGG, "EGG"},
+			{_ecs::POTATO, "POTATO"},
+			{_ecs::CHOCOLATE, "CHOCOLATE"},
+			{_ecs::LETTUCE, "LETTUCE"},
+			{_ecs::CORN, "CORN"},
+			{_ecs::STRAWBERRY, "STRAWBERRY"},
+			{_ecs::CARROT, "CARROT"},
+			{_ecs::GARLIC, "GARLIC"},
+			{_ecs::MILK, "MILK"},
+			{_ecs::RICE, "RICE"},
+			{_ecs::TOMATO, "TOMATO"},
+			{_ecs::APPLE, "APPLE"},
+			{_ecs::BUTTER, "BUTTER"},
+			{_ecs::RASPBERRY, "RASPBERRY"},
+			{_ecs::MUSTARD, "MUSTARD"},
+			{_ecs::NOODLES, "NOODLES"},
+			{_ecs::CURRY, "CURRY"},
+			{_ecs::CHEESE, "CHEESE"},
+			{_ecs::SAUSAGE, "SAUSAGE"},
+			{_ecs::CHICKEN, "CHICKEN"},
+			{_ecs::PRAWN, "PRAWN"},
+			{_ecs::SALMON, "SALMON"},
+			{_ecs::MEAT, "MEAT"},
+			{_ecs::NONE_ING, "NONE_ING"}
+		};	
+		//std::cout << ingredientNames.at(ingredient) << "\n";
+
+		return ingredientNames.at(ingredient);
+	}
+
+
+	void saveTestFile(const std::string& name, const std::vector<std::pair<_ecs::_ingredients_id, int>>& ingredients);
 };

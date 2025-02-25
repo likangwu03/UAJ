@@ -43,6 +43,7 @@ void SuperCashRegisterTriggerComp::isOverlapping() {
 		money->subtractMoney(money->getPrice());
 		money->setPrice(0);
 		payAndLeave();
+
 	}
 }
 
@@ -67,6 +68,7 @@ void SuperCashRegisterTriggerComp::payAndLeave() {
 	GameManager::get()->changeScene(GameManager::get()->getScene(_ecs::sc_RESTAURANT));
 	GameManager::get()->getScene(_ecs::sc_RESTAURANT)->reset();
 	GameManager::get()->getMoney()->reset();
+	GameManager::get()->saveTestFile("Test_", ing);
 	restaurantMusic->play(-1);
 }
 

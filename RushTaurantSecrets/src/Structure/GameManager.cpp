@@ -45,10 +45,15 @@
 #include "../Utilities/Texture.h"
 #include "../Utilities/checkML.h" 
 
+#include <iostream>
+#include <chrono>
+#include <ctime>
+
+
 GameManager::GameManager() : scenes(), allScenes(), deleteScene(nullptr), deleteTransition(false),
-	restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr), beforeDayStartScene(nullptr),
-	menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0), gameOver(false)
-	{ };
+restaurant(nullptr), supermarket(nullptr), pantry(nullptr), reputation(nullptr), days(nullptr), money(nullptr), beforeDayStartScene(nullptr),
+menu(nullptr), kitchenIsland(nullptr), hasKilled(false), hasEverKilled({ false,0 }), mapsCreated(false), twoPlayers(false), killedNum(0), gameOver(false)
+{ };
 
 
 void GameManager::initialize() {
@@ -56,9 +61,9 @@ void GameManager::initialize() {
 	money = new Money();
 	hasKilled = false;
 	dailyMenu = new DailyMenuScene();
-	
+
 	allScenes.insert({ _ecs::sc_MAINMENU, new MainMenu() });
-	allScenes.insert({ _ecs::sc_DAILYMENU, dailyMenu});
+	allScenes.insert({ _ecs::sc_DAILYMENU, dailyMenu });
 	allScenes.insert({ _ecs::sc_GAMEOVER, new GameOverScene() });
 	try {
 		days = new DayManager();
@@ -89,7 +94,7 @@ void GameManager::initialize() {
 	pantry->callAfterCreating();
 	restaurant->callAfterCreating();
 	supermarket->callAfterCreating();
-	
+
 	days->nextDay();
 
 	//allScenes.insert({ _ecs::sc_INTRO1, new Day1IntroScene() });	// REVISADA 2
@@ -143,14 +148,14 @@ void GameManager::refresh() {
 	if (!scenes.empty())
 		scenes.top()->refresh();
 
-	if (deleteTransition && deleteScene != nullptr){
+	if (deleteTransition && deleteScene != nullptr) {
 		deleteTransition = false;
 		delete deleteScene;
 		deleteScene = nullptr;
 	}
 }
 void GameManager::receive(const Message& message) {
-	if(!scenes.empty())
+	if (!scenes.empty())
 		scenes.top()->receive(message);
 }
 
@@ -181,13 +186,13 @@ void GameManager::pushScene(Scene* scene, bool isTransition) {
 	sdlutils().setResizeFactor(scene->getResizeFactor());
 	scenes.push(scene);
 
-	if(isTransition)
+	if (isTransition)
 		deleteScene = scene;
 }
 void GameManager::skipfromTransition() {
 	deleteScene = scenes.top();
 	popScene();
-	
+
 	scenes.top()->finishScene();
 }
 
@@ -226,11 +231,11 @@ void GameManager::setIngredients(vector<pair<_ecs::_ingredients_id, int>> ing) {
 }
 
 
-pair<bool,int> GameManager::getHasEverKilled() { return hasEverKilled; }
+pair<bool, int> GameManager::getHasEverKilled() { return hasEverKilled; }
 
 bool GameManager::getHasKill() { return hasKilled; }
 void GameManager::killed() { ++killedNum; }
-void GameManager::setHasKill(bool hKill) { hasKilled = hKill; if (!hasEverKilled.first) hasEverKilled={ true,days->getDay() }; }
+void GameManager::setHasKill(bool hKill) { hasKilled = hKill; if (!hasEverKilled.first) hasEverKilled = { true,days->getDay() }; }
 
 
 void GameManager::setGameOver(bool gO) { gameOver = gO; }
@@ -263,7 +268,7 @@ void GameManager::save() {
 }
 
 void GameManager::load() {
- 	ifstream load;
+	ifstream load;
 	int aux;
 	stringstream file;
 	file << "assets/savegame" << twoPlayers << ".rsdat";
@@ -293,7 +298,7 @@ bool GameManager::checkload() {
 		load >> d;
 	}
 	load.close();
-	return aux&&d!=1;
+	return aux && d != 1;
 }
 
 void GameManager::newGame() {
@@ -332,7 +337,7 @@ vector<dialogueInfo> GameManager::getDialogueInfo(std::string d) {
 					std::string prt = vObj["Portrait"]->AsString();
 					deque<std::string> text;
 					text.push_back(txt);
-					dialogueInfo dInfo(chr, text, &sdlutils().images().at(prt) );
+					dialogueInfo dInfo(chr, text, &sdlutils().images().at(prt));
 
 					dialogues.emplace_back(dInfo);
 				}
@@ -378,4 +383,39 @@ int GameManager::getSoundEffectsVolume() {
 
 void GameManager::setSoundEffectsVolume(int nVolume) {
 	SOUND_EFFECTS = nVolume;
+}
+
+std::string GameManager::getCurrentTimeAsString() {
+	// Obtener el tiempo actual
+	auto now = std::chrono::system_clock::now();
+
+	// Convertir a tiempo de sistema
+	std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
+
+	// Convertir a formato legible
+	std::tm localTime;
+	localtime_s(&localTime, &currentTime);
+
+	// Crear un buffer para almacenar la fecha y hora formateadas
+	char buffer[80];
+	std::strftime(buffer, sizeof(buffer), "%Y-%m-%d_%H-%M-%S", &localTime);
+	return std::string(buffer);
+}
+
+void GameManager::saveTestFile(const std::string& name, const std::vector<std::pair<_ecs::_ingredients_id, int>>& ingredients)
+{
+
+	std::stringstream file;
+	file << "assets/" <<name << getCurrentTimeAsString()<< ".txt";
+	std::ofstream write(file.str(), std::ofstream::out);
+	if (write.is_open()) {
+		for (const auto& ingredient : ingredients) {
+			write << ingredientsIdToString(ingredient.first) << ": " << ingredient.second << std::endl;
+		}
+		write.close();
+		std::cout << "Datos guardados en " << file.str() << std::endl;
+	}
+	else {
+		std::cerr << "No se pudo abrir el archivo para escribir." << std::endl;
+	}
 }
