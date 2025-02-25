@@ -31,10 +31,10 @@ void SuperMarket::handleEvents() {
 	Scene::handleEvents();
 	uiMarket->handleEvents();
 	
-	if (ih->isKeyDown(SDLK_ESCAPE) && active || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_START))) {
+	/*if (ih->isKeyDown(SDLK_ESCAPE) && active || (ih->joysticksInitialised() && ih->getButtonState(0, SDL_CONTROLLER_BUTTON_START))) {
 		GameManager::get()->pushScene((GameManager::get()->getScene(sc_PAUSEMENU)));
 		restaurantMusic->pauseMusic();
-	}
+	}*/
 }
 
 void SuperMarket::init() {

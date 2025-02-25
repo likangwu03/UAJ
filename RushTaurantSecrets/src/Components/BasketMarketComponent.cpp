@@ -53,10 +53,10 @@ void BasketMarketComponent::addToBasket(_ecs::_ingredients_id ing, int n, int ad
 				it->second += n;
 			}
 			else {
-				Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
+				//Texture* texture = new Texture(sdl->renderer(), to_string(n), *font, build_sdlcolor(0xFFFFFFFF));
 				it = ingredients.insert({ ing, n }).first;
 				totalDifIngr++; //num de dif ing
-				delete texture;
+				//delete texture;
 			}
 			totalPrice += addPrice;
 			selectedIngr = ingredients.find(ing);
@@ -321,6 +321,7 @@ void BasketMarketComponent::cleanEmptyBasket() {
 	selectedIngr = ingredients.erase(selectedIngr);
 	if (selectedIngr == ingredients.end())selectedIngr = ingredients.begin();
 	if (ingredients.size() == 0)selectedIngr = ingredients.end();
+	totalDifIngr--;
 }
 
 void BasketMarketComponent::nextDay() {
